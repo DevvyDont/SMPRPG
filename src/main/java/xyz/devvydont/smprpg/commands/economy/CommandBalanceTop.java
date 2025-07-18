@@ -97,4 +97,8 @@ public class CommandBalanceTop extends CommandBase {
 
     }
 
+    @Override
+    public Collection<String> getAliases() {
+        return List.of("balancetop", "baltop", "btop", "servereconomy", "serverbalance");
+    }
 }
