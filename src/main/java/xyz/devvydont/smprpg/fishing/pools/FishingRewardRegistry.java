@@ -39,7 +39,7 @@ public class FishingRewardRegistry {
                 new ItemStackFishingLoot.Builder(CustomItemType.COD)
                         .withWeight(10)
                         .withMinecraftExperience(1)
-                        .withSkillExperience(10)
+                        .withSkillExperience(15)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
@@ -54,14 +54,14 @@ public class FishingRewardRegistry {
                 new ItemStackFishingLoot.Builder(CustomItemType.PUFFERFISH)
                         .withWeight(3)
                         .withMinecraftExperience(10)
-                        .withSkillExperience(30)
+                        .withSkillExperience(25)
                         .withRequirement(FishingLootRequirement.quality(25))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.CLOWNFISH)
-                        .withMinecraftExperience(20)
-                        .withSkillExperience(100)
+                        .withMinecraftExperience(30)
+                        .withSkillExperience(75)
                         .withRequirement(FishingLootRequirement.quality(50))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
@@ -69,13 +69,13 @@ public class FishingRewardRegistry {
 
                 new ItemStackFishingLoot.Builder(CustomItemType.BLISTERFISH)
                         .withMinecraftExperience(30)
-                        .withSkillExperience(150)
+                        .withSkillExperience(15)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.VOIDFIN)
-                        .withMinecraftExperience(40)
-                        .withSkillExperience(200)
+                        .withMinecraftExperience(30)
+                        .withSkillExperience(20)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build()
         );
@@ -134,7 +134,7 @@ public class FishingRewardRegistry {
                 // The minnow can always be caught, no matter what. Can't leave a pool potentially empty.
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.MINNOW)
                         .withMinecraftExperience(10)
-                        .withSkillExperience(50)
+                        .withSkillExperience(100)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
@@ -157,13 +157,13 @@ public class FishingRewardRegistry {
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.CINDERLING)
                         .withMinecraftExperience(50)
-                        .withSkillExperience(200)
+                        .withSkillExperience(250)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.ECHO_RAY)
                         .withMinecraftExperience(50)
-                        .withSkillExperience(200)
+                        .withSkillExperience(500)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build()
         );

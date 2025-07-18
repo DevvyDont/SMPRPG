@@ -114,6 +114,15 @@ public class EconomyService implements IService {
      * @param player Player to query balance of
      * @return an int represented rounded balance of a player
      */
+    public int getMoney(Player player) {
+        return (int) Math.round(economy.getBalance(player));
+    }
+
+    /**
+     * See a player's balance, this is represented in "coins" and is always an integer.
+     * @param player Player to query balance of
+     * @return an int represented rounded balance of a player
+     */
     public int getMoney(OfflinePlayer player) {
         return (int) Math.round(economy.getBalance(player));
     }

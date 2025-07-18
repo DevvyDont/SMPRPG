@@ -35,11 +35,11 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      * Randomly fished items are randomly assigned rarities.
      */
     public final static Map<ItemRarity, Integer> DEFAULT_RARITY_WEIGHTS = Map.of(
-            ItemRarity.COMMON,   45,
+            ItemRarity.COMMON,   55,
             ItemRarity.UNCOMMON, 25,
             ItemRarity.RARE,     15,
-            ItemRarity.EPIC,      10,
-            ItemRarity.LEGENDARY, 5
+            ItemRarity.EPIC,      5,
+            ItemRarity.LEGENDARY, 1
     );
 
     /**
@@ -124,7 +124,7 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      */
     @Override
     public int getWorth(ItemStack item) {
-        var rarityFactor = (this.getRarity(item).ordinal() + 1);
+        var rarityFactor = (this.getRarity(item).ordinal() + 1.0) / 2;
         var base = this.getBaseWorth();
         return (int) (Math.pow(rarityFactor, rarityFactor) * base);
     }

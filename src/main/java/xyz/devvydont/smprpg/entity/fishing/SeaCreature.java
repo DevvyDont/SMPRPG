@@ -35,6 +35,6 @@ public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T>
 
     @Override
     public SkillExperienceReward generateSkillExperienceReward() {
-        return SkillExperienceReward.of(SkillType.FISHING, (int) (getLevel() * 500 * getSkillExperienceMultiplier()));
+        return SkillExperienceReward.of(SkillType.FISHING, (int) (getLevel() * 250 * getSkillExperienceMultiplier()));
     }
 }
