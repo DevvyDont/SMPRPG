@@ -4,7 +4,12 @@ plugins {
 }
 
 group = 'xyz.devvydont'
-version = '2.0'
+version = System.getenv("RELEASE_TAG") ?: "dev"
+
+jar {
+    archiveBaseName.set("SMPRPG")
+    archiveVersion.set(version.toString())
+}
 
 repositories {
     mavenCentral()
