@@ -28,11 +28,11 @@ public class BlessedEnchantment extends CustomEnchantment implements Listener {
         return switch (level) {
             case 0 -> 0;
             case 1 -> 10;
-            case 2 -> 25;
-            case 3 -> 40;
-            case 4 -> 65;
-            case 5 -> 80;
-            default -> getPercentageIncrease(5) + 80 * (level-5);
+            case 2 -> 15;
+            case 3 -> 20;
+            case 4 -> 30;
+            case 5 -> 45;
+            default -> getPercentageIncrease(5) + 50 * (level-5);
         };
     }
 

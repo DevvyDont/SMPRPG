@@ -28,13 +28,13 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
           case 1 -> 10;
           case 2 -> 20;
           case 3 -> 30;
-          case 4 -> 45;
-          case 5 -> 60;
-          case 6 -> 75;
-          case 7 -> 100;
-          case 8 -> 125;
-          case 9 -> 150;
-          case 10 -> 200;
+          case 4 -> 40;
+          case 5 -> 55;
+          case 6 -> 70;
+          case 7 -> 85;
+          case 8 -> 100;
+          case 9 -> 125;
+          case 10 -> 150;
           default -> getHealthIncrease(10) + 50*(level - 10);
         };
     }
