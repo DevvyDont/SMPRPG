@@ -363,6 +363,7 @@ public enum CustomItemType {
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
     CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
+    ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
 
     COMET_ROD("Comet Rod", Material.FISHING_ROD, ItemRarity.RARE, VoidRod.class),
     NEBULA_ROD("Nebula Rod", Material.FISHING_ROD, ItemRarity.EPIC, VoidRod.class),

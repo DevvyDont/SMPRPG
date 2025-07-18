@@ -35,7 +35,7 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      * Randomly fished items are randomly assigned rarities.
      */
     public final static Map<ItemRarity, Integer> DEFAULT_RARITY_WEIGHTS = Map.of(
-            ItemRarity.COMMON,   55,
+            ItemRarity.COMMON,   54,
             ItemRarity.UNCOMMON, 25,
             ItemRarity.RARE,     15,
             ItemRarity.EPIC,      5,

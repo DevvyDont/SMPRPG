@@ -823,7 +823,7 @@ public class ItemService implements IService, Listener {
                 lore.add(ComponentUtils.merge(ComponentUtils.create("- "), ComponentUtils.create(flag.Display + " Fishing", flag.Color)));
             lore.add(ComponentUtils.EMPTY);
             lore.add(AbilityUtil.getAbilityComponent("Angler (Passive)"));
-            lore.add(ComponentUtils.merge(ComponentUtils.create("Does "), ComponentUtils.create(IFishingRod.CREATURE_MULTIPLIER + "x damage"), ComponentUtils.create(" to "), ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)));
+            lore.add(ComponentUtils.merge(ComponentUtils.create("Does "), ComponentUtils.create(IFishingRod.CREATURE_MULTIPLIER + "x damage", NamedTextColor.RED), ComponentUtils.create(" to "), ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)));
         }
 
         // If this item holds experience

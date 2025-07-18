@@ -86,7 +86,7 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
                     "s m"
             );
             recipe.setIngredient('m', ItemService.generate(CustomItemType.PREMIUM_STRING));
-            recipe.setIngredient('s', ItemService.generate(CustomItemType.OBSIDIAN_TOOL_ROD));
+            recipe.setIngredient('s', ItemService.generate(Material.NETHERITE_INGOT));
             return recipe;
         }
 

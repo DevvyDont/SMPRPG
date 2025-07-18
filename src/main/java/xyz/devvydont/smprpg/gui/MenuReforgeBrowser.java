@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
+import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.reforge.ReforgeType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -37,6 +38,7 @@ public class MenuReforgeBrowser extends MenuBase {
     @Override
     protected void handleInventoryOpened(InventoryOpenEvent event) {
         super.handleInventoryOpened(event);
+        event.titleOverride(Component.text("Reforges"));
         this.render();
     }
 
@@ -47,7 +49,7 @@ public class MenuReforgeBrowser extends MenuBase {
     }
 
     public ItemStack generateReforgeButton(ReforgeType type) {
-        ItemStack button = createNamedItem(type.getDisplayMaterial(), ComponentUtils.create(type.display()));
+        ItemStack button = createNamedItem(type.getDisplayMaterial(), ComponentUtils.create(type.display(), NamedTextColor.GOLD));
         var reforge = SMPRPG.getService(ItemService.class).getReforge(type);
         if (reforge == null)
             return button;
@@ -60,8 +62,12 @@ public class MenuReforgeBrowser extends MenuBase {
         lore.add(ComponentUtils.EMPTY);
         lore.addAll(reforge.getDescription());
         lore.add(ComponentUtils.EMPTY);
-        lore.add(merge(create("Showing stats for "), create(rarity.name(), rarity.color)));
+        lore.add(merge(create("Showing stats for ", NamedTextColor.GOLD), create(rarity.name(), rarity.color)));
         lore.addAll(reforge.formatAttributeModifiersWithRarity(ItemRarity.RARE));
+        lore.add(ComponentUtils.EMPTY);
+        lore.add(ComponentUtils.create("Valid Equipment:", NamedTextColor.BLUE));
+        for (ItemClassification clazz : type.getAllowedItems())
+            lore.add(ComponentUtils.create("- " + MinecraftStringUtils.getTitledString(clazz.name())));
         button.lore(ComponentUtils.cleanItalics(lore));
         return button;
     }
@@ -71,22 +77,23 @@ public class MenuReforgeBrowser extends MenuBase {
     }
 
     public void render() {
-        setBorderEdge();
+        setBorderBottom();
 
         int reforgeIndex = 0;
         // todo paginate if there are too many reforges
         for (int slot = 0; slot < getInventorySize(); slot++) {
 
             // Already occupied?
-            if (getItem(slot) != null)
+            var item = getItem(slot);
+            if (item != null && item.getType() != Material.AIR)
                 continue;
 
             // No more reforges?
-            if (reforgeIndex >= ReforgeType.values().length)
+            if (reforgeIndex+1 >= ReforgeType.values().length)
                 break;
 
             // Render
-            ReforgeType reforgeType = ReforgeType.values()[reforgeIndex];
+            ReforgeType reforgeType = ReforgeType.values()[reforgeIndex+1];
             setButton(slot, generateReforgeButton(reforgeType), event -> handleButtonClicked(reforgeType));
             reforgeIndex++;
         }

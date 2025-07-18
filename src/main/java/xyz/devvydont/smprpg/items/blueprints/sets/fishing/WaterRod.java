@@ -86,8 +86,8 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
                 "s m"
         );
         var mat = getCraftingMaterial();
-        recipe.setIngredient('s', Material.STICK);
-        recipe.setIngredient('m', mat);
+        recipe.setIngredient('s', mat);
+        recipe.setIngredient('m', Material.STRING);
         return recipe;
     }
 

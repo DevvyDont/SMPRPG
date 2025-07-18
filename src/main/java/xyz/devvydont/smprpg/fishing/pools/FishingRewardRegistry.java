@@ -47,7 +47,7 @@ public class FishingRewardRegistry {
                         .withWeight(7)
                         .withMinecraftExperience(5)
                         .withSkillExperience(20)
-                        .withRequirement(FishingLootRequirement.quality(10))
+                        .withRequirement(FishingLootRequirement.quality(15))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
@@ -55,14 +55,14 @@ public class FishingRewardRegistry {
                         .withWeight(3)
                         .withMinecraftExperience(10)
                         .withSkillExperience(25)
-                        .withRequirement(FishingLootRequirement.quality(25))
+                        .withRequirement(FishingLootRequirement.quality(40))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.CLOWNFISH)
                         .withMinecraftExperience(30)
                         .withSkillExperience(75)
-                        .withRequirement(FishingLootRequirement.quality(50))
+                        .withRequirement(FishingLootRequirement.quality(100))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
@@ -96,7 +96,7 @@ public class FishingRewardRegistry {
                 new ItemStackFishingLoot.Builder(Material.NAUTILUS_SHELL)
                         .withMinecraftExperience(50)
                         .withSkillExperience(500)
-                        .withRequirement(FishingLootRequirement.quality(50))
+                        .withRequirement(FishingLootRequirement.quality(100))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
@@ -108,7 +108,7 @@ public class FishingRewardRegistry {
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.CAVIAR)
-                        .withRequirement(FishingLootRequirement.quality(200))
+                        .withRequirement(FishingLootRequirement.quality(250))
                         .withMinecraftExperience(75)
                         .withSkillExperience(1000)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
@@ -241,16 +241,16 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
-                new ItemStackFishingLoot.Builder(CustomItemType.DRAGON_SCALES)
+                new ItemStackFishingLoot.Builder(Material.CHORUS_FLOWER)
                         .withMinecraftExperience(5)
                         .withSkillExperience(30)
-                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.ENDER_PEARL)
                         .withMinecraftExperience(5)
                         .withSkillExperience(30)
-                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build()
         );
 
