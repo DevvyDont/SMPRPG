@@ -1,19 +1,25 @@
 package xyz.devvydont.smprpg.reforge;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.attribute.AttributeType;
 import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.items.attribute.IAttributeContainer;
 import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.attributes.AttributeUtil;
+import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -70,6 +76,26 @@ public abstract class ReforgeBase implements Keyed, IAttributeContainer {
     }
 
     public abstract Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity);
+
+    public Collection<Component> formatAttributeModifiersWithRarity(ItemRarity rarity) {
+
+        List<Component> lines = new ArrayList<>();
+        for (var entry : this.getAttributeModifiersWithRarity(rarity)){
+            String sign = entry.getAmount() > 0 ? "+" : "";
+            // The number is unchanged if this is an additive operation. If it isn't, x100 to make it show as a percentage.
+            var option = AttributeUtil.getAttributeFormat(entry.getAttribute());
+            var number = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) ? option.format(entry.getAmount()) : option.format(entry.getAmount()*100);
+            // If this is a multiplicative operation, or we need to force the attribute to show as a percent, use percents.
+            String percent = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) && !option.percentage() ? "" : "%";
+            String numberSection = String.format("%s%s%s", sign, number, percent);
+            var wrapper = entry.getAttribute();
+            var numberColor = wrapper.Type.equals(AttributeType.SPECIAL) ? NamedTextColor.LIGHT_PURPLE :
+                    wrapper.Type.equals(AttributeType.HELPFUL) && entry.getAmount() > 0 ? NamedTextColor.GREEN : NamedTextColor.RED;
+            Component numberComponent = ComponentUtils.create(numberSection, numberColor);
+            lines.add(ComponentUtils.create(wrapper.DisplayName + ": ").append(numberComponent));
+        }
+        return lines;
+    }
 
     /**
      * Sets the persistent key on this item to this reforge

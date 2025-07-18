@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.reforge;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bukkit.Material;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.reforge.definitions.*;
@@ -151,6 +152,43 @@ public enum ReforgeType {
         return switch (this) {
             case ERROR, ACCELERATED, WITHERED, OVERHEATING -> false;
             default -> true;
+        };
+    }
+
+
+    public Material getDisplayMaterial() {
+        return switch (this) {
+            case OVERHEATING -> Material.BLAZE_POWDER;
+            case DULL -> Material.STONE_SWORD;
+            case FIRM -> Material.IRON_SWORD;
+            case SLUGGISH -> Material.STONE_AXE;
+            case STINGING -> Material.DIAMOND_AXE;
+            case HASTY -> Material.GOLDEN_PICKAXE;
+            case HEAVY -> Material.IRON_CHESTPLATE;
+            case HEFTY -> Material.DIAMOND_CHESTPLATE;
+            case LIGHT -> Material.SUGAR;
+            case LUCKY -> Material.EMERALD;
+            case RAPID -> Material.RABBIT_FOOT;
+            case SPICY -> Material.GOLDEN_SWORD;
+            case QUICK -> Material.IRON_BOOTS;
+            case SWIFT -> Material.CHAINMAIL_BOOTS;
+            case SHARP -> Material.DIAMOND_AXE;
+            case STRONG -> Material.CHAINMAIL_CHESTPLATE;
+            case COPIOUS -> Material.DIAMOND;
+            case HEALTHY -> Material.APPLE;
+            case HEARTY -> Material.GOLDEN_APPLE;
+            case DURABLE -> Material.IRON_INGOT;
+            case POLISHED -> Material.DIAMOND_BLOCK;
+            case EXTENDED -> Material.SPYGLASS;
+            case REACHING -> Material.SPYGLASS;
+            case SAVAGE -> Material.FIRE_CHARGE;
+            case ACCELERATED -> Material.DIAMOND_PICKAXE;
+            case POWERFUL -> Material.STONE_AXE;
+            case WITHERED -> Material.WITHER_ROSE;
+            case FORTIFIED -> Material.NETHERITE_CHESTPLATE;
+            case AGILE -> Material.LEATHER_BOOTS;
+            case ANCIENT -> Material.LEATHER_CHESTPLATE;
+            default -> Material.BARRIER;
         };
     }
 

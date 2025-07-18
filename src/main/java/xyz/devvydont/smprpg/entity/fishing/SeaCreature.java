@@ -1,13 +1,20 @@
 package xyz.devvydont.smprpg.entity.fishing;
 
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
+import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
+import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
+import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.skills.SkillType;
 import xyz.devvydont.smprpg.skills.utils.SkillExperienceReward;
 
-public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T> {
+public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T> implements Listener {
 
     public static final TextColor NAME_COLOR = TextColor.color(0x3FD6FF);
 
@@ -36,5 +43,30 @@ public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T>
     @Override
     public SkillExperienceReward generateSkillExperienceReward() {
         return SkillExperienceReward.of(SkillType.FISHING, (int) (getLevel() * 250 * getSkillExperienceMultiplier()));
+    }
+
+    /**
+     * When a sea creature takes damage from a fishing rod, 3x the damage.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onTakeDamage(CustomEntityDamageByEntityEvent event) {
+
+        if (!event.getDamaged().equals(this._entity))
+            return;
+
+        if (!(event.getDealer() instanceof LivingEntity dealer))
+            return;
+
+        var equipment = dealer.getEquipment();
+        if (equipment == null)
+            return;
+
+        var mainItem = equipment.getItemInMainHand();
+        if (mainItem.getType() == Material.AIR)
+            return;
+
+        if (ItemService.blueprint(mainItem) instanceof IFishingRod)
+            event.multiplyDamage(IFishingRod.CREATURE_MULTIPLIER);
+
     }
 }

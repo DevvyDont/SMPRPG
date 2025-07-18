@@ -23,7 +23,8 @@ public class ItemSword extends VanillaAttributeItem implements IBreakableEquipme
         return switch (material) {
             case NETHERITE_SWORD -> 80;
             case DIAMOND_SWORD -> 50;
-            case TRIDENT, IRON_SWORD, GOLDEN_SWORD -> 30;
+            case GOLDEN_SWORD -> 35;
+            case TRIDENT, IRON_SWORD -> 30;
             case STONE_SWORD -> 20;
             case WOODEN_SWORD -> 15;
             default -> 0;

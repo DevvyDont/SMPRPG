@@ -18,14 +18,15 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ToolsUtil;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class LavaRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+public class WaterRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
 
-    public LavaRod(ItemService itemService, CustomItemType type) {
+    public WaterRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -48,8 +49,9 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
     @Override
     public int getPowerRating() {
         return switch (getCustomItemType()) {
-            case NETHERITE_ROD -> 25;
-            case SPITFIRE_ROD -> 40;
+            case IRON_ROD -> ToolsUtil.IRON_TOOL_POWER;
+            case GOLD_ROD -> ToolsUtil.GOLD_TOOL_POWER;
+            case DIAMOND_ROD -> ToolsUtil.DIAMOND_TOOL_POWER;
             default -> 0;
         };
     };
@@ -66,7 +68,7 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
 
     @Override
     public Set<FishingFlag> getFishingFlags() {
-        return Set.of(FishingFlag.LAVA);
+        return Set.of(FishingFlag.NORMAL);
     }
 
     @Override
@@ -76,36 +78,26 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
 
     @Override
     public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapedRecipe(getRecipeKey(), generate());
+        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+        recipe.shape(
+                "  s",
+                " sm",
+                "s m"
+        );
+        var mat = getCraftingMaterial();
+        recipe.setIngredient('s', Material.STICK);
+        recipe.setIngredient('m', mat);
+        return recipe;
+    }
 
-        if (this.getCustomItemType() == CustomItemType.NETHERITE_ROD) {
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    "  s",
-                    " sm",
-                    "s m"
-            );
-            recipe.setIngredient('m', ItemService.generate(CustomItemType.PREMIUM_STRING));
-            recipe.setIngredient('s', ItemService.generate(CustomItemType.OBSIDIAN_TOOL_ROD));
-            return recipe;
-        }
-
-        if (this.getCustomItemType() == CustomItemType.SPITFIRE_ROD) {
-
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    "mmm",
-                    "mrm",
-                    "mmm"
-            );
-            recipe.setIngredient('m', ItemService.generate(CustomItemType.CINDERITE));
-            recipe.setIngredient('r', ItemService.generate(CustomItemType.NETHERITE_ROD));
-            return recipe;
-        }
-
-        throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
-
+    private ItemStack getCraftingMaterial() {
+        return switch (this.getCustomItemType()) {
+            case IRON_ROD -> ItemService.generate(Material.IRON_INGOT);
+            case GOLD_ROD -> ItemService.generate(Material.GOLD_INGOT);
+            case DIAMOND_ROD -> ItemService.generate(Material.DIAMOND);
+            default -> throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
+        };
     }
 
     /**
@@ -117,30 +109,33 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                ItemService.generate(Material.NETHERITE_INGOT)
+                ItemService.generate(Material.IRON_INGOT)
         );
     }
 
     private int getFishingRating() {
         return switch (getCustomItemType()) {
-            case NETHERITE_ROD -> 100;
-            case SPITFIRE_ROD -> 200;
+            case IRON_ROD -> 20;
+            case GOLD_ROD -> 35;
+            case DIAMOND_ROD -> 65;
             default -> 0;
         };
     };
 
     private int getStrength() {
         return (int) switch (getCustomItemType()) {
-            case NETHERITE_ROD -> ItemSword.getSwordDamage(Material.NETHERITE_SWORD) / 2;
-            case SPITFIRE_ROD -> ItemSword.getSwordDamage(Material.NETHERITE_SWORD);
+            case IRON_ROD -> ItemSword.getSwordDamage(Material.IRON_SWORD) / 2;
+            case GOLD_ROD -> ItemSword.getSwordDamage(Material.GOLDEN_SWORD) / 2;
+            case DIAMOND_ROD -> ItemSword.getSwordDamage(Material.DIAMOND_SWORD) / 2;
             default -> 0;
         };
     };
 
-    private int getChance() {
+    private double getChance() {
         return switch (getCustomItemType()) {
-            case NETHERITE_ROD -> 2;
-            case SPITFIRE_ROD -> 5;
+            case IRON_ROD -> 0.25;
+            case GOLD_ROD -> 0.5;
+            case DIAMOND_ROD -> 1;
             default -> 0;
         };
     };

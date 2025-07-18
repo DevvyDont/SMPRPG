@@ -37,6 +37,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.SMPItemQuery;
 import xyz.devvydont.smprpg.items.base.ChargedItemBlueprint;
@@ -57,6 +58,7 @@ import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
+import xyz.devvydont.smprpg.util.items.AbilityUtil;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 
 import java.lang.reflect.InvocationTargetException;
@@ -819,6 +821,9 @@ public class ItemService implements IService, Listener {
             lore.add(ComponentUtils.create("This rod is capable of:"));
             for (var flag : rod.getFishingFlags())
                 lore.add(ComponentUtils.merge(ComponentUtils.create("- "), ComponentUtils.create(flag.Display + " Fishing", flag.Color)));
+            lore.add(ComponentUtils.EMPTY);
+            lore.add(AbilityUtil.getAbilityComponent("Angler (Passive)"));
+            lore.add(ComponentUtils.merge(ComponentUtils.create("Does "), ComponentUtils.create(IFishingRod.CREATURE_MULTIPLIER + "x damage"), ComponentUtils.create(" to "), ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)));
         }
 
         // If this item holds experience

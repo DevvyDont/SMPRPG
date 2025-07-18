@@ -3,10 +3,12 @@ package xyz.devvydont.smprpg.items.blueprints.equipment;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.attribute.AttributeModifier;
+import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.attribute.AttributeType;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.ItemRarity;
+import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ReforgeApplicator;
 import xyz.devvydont.smprpg.reforge.ReforgeBase;
@@ -50,31 +52,13 @@ public abstract class ReforgeStone extends CustomItemBlueprint implements Reforg
         // Sample of statistics that get altered for a certain rarity
         // Is this attribute present on this item? If not skip it
         lines.add(ComponentUtils.create("Stat Modifiers", NamedTextColor.BLUE));
-        for (var entry : reforge.getAttributeModifiersWithRarity(DISPLAY_RARITY)){
-
-            // There are three components to the string portion of the attribute number. The +/-, the amount, and percent.
-            // The sign is a + if the amount is above 0. Otherwise, empty since the negative is put there for us.
-            String sign = entry.getAmount() > 0 ? "+" : "";
-            // The number is unchanged if this is an additive operation. If it isn't, x100 to make it show as a percentage.
-            var option = AttributeUtil.getAttributeFormat(entry.getAttribute());
-            var number = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) ? option.format(entry.getAmount()) : option.format(entry.getAmount()*100);
-            // If this is a multiplicative operation, or we need to force the attribute to show as a percent, use percents.
-            String percent = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) && !option.percentage() ? "" : "%";
-            String numberSection = String.format("%s%s%s", sign, number, percent);
-
-            var wrapper = entry.getAttribute();
-            var numberColor = wrapper.Type.equals(AttributeType.SPECIAL) ? NamedTextColor.LIGHT_PURPLE :
-                    wrapper.Type.equals(AttributeType.HELPFUL) && entry.getAmount() > 0 ? NamedTextColor.GREEN : NamedTextColor.RED;
-            Component numberComponent = ComponentUtils.create(numberSection, numberColor);
-            lines.add(ComponentUtils.create(wrapper.DisplayName + ": ").append(numberComponent));
-        }
+        lines.addAll(reforge.formatAttributeModifiersWithRarity(DISPLAY_RARITY));
         lines.add(ComponentUtils.create("Example bonuses for " + DISPLAY_RARITY.name() +" item are shown.", NamedTextColor.DARK_GRAY));
         lines.add(ComponentUtils.create("Results vary based on item rarity!", NamedTextColor.DARK_GRAY));
         lines.add(ComponentUtils.EMPTY);
         lines.add(ComponentUtils.create("Valid Equipment:", NamedTextColor.BLUE));
         for (ItemClassification clazz : getReforgeType().getAllowedItems())
             lines.add(ComponentUtils.create("- " + MinecraftStringUtils.getTitledString(clazz.name())));
-
         return lines;
     }
 

@@ -3,25 +3,32 @@ package xyz.devvydont.smprpg.items.blueprints.equipment;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.fishing.utils.TemperatureReading;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
+import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.items.interfaces.IModelOverridden;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ActionBarService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.items.AbilityUtil;
 
+import java.util.Collection;
 import java.util.List;
 
-public class ThermometerBlueprint extends CustomItemBlueprint implements Listener, IModelOverridden, IHeaderDescribable {
+public class ThermometerBlueprint extends CustomItemBlueprint implements Listener, IModelOverridden, IHeaderDescribable, ICraftable, ISellable {
 
     /**
      * Affects the number display of the temperature. When on, displays real value as well as the fake converted one.
@@ -47,6 +54,18 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
         );
     }
 
+    /**
+     * Given this item stack, how much should it be able to sell for?
+     * Keep in mind that the size of the stack needs to considered as well!
+     *
+     * @param item The item that can be sold.
+     * @return The worth of the item.
+     */
+    @Override
+    public int getWorth(ItemStack item) {
+        return 10000 * item.getAmount();
+    }
+
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.EQUIPMENT;
@@ -55,6 +74,34 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
     @Override
     public Material getDisplayMaterial() {
         return Material.REDSTONE_TORCH;
+    }
+
+    @Override
+    public NamespacedKey getRecipeKey() {
+        return new NamespacedKey(SMPRPG.getInstance(), "thermometer_recipe");
+    }
+
+    @Override
+    public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapedRecipe(getRecipeKey(), generate());
+        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+        recipe.shape("iri", "ihi", "igi")
+                .setIngredient('i', ItemService.generate(Material.IRON_BLOCK))
+                .setIngredient('r', ItemService.generate(CustomItemType.ENCHANTED_REDSTONE))
+                .setIngredient('h', ItemService.generate(Material.HEART_OF_THE_SEA))
+                .setIngredient('g', ItemService.generate(Material.GLASS));
+        return recipe;
+    }
+
+    /**
+     * A collection of items that will unlock the recipe for this item. Typically will be one of the components
+     * of the recipe itself, but can be set to whatever is desired
+     *
+     * @return
+     */
+    @Override
+    public Collection<ItemStack> unlockedBy() {
+        return List.of(ItemService.generate(Material.HEART_OF_THE_SEA));
     }
 
     /**

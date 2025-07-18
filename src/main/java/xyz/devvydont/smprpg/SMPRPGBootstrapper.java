@@ -12,6 +12,7 @@ import xyz.devvydont.smprpg.commands.entity.CommandAttribute;
 import xyz.devvydont.smprpg.commands.entity.CommandSummon;
 import xyz.devvydont.smprpg.commands.inventory.CommandPeek;
 import xyz.devvydont.smprpg.commands.items.CommandGiveItem;
+import xyz.devvydont.smprpg.commands.items.CommandReforges;
 import xyz.devvydont.smprpg.commands.items.CommandSearchItem;
 import xyz.devvydont.smprpg.commands.items.CommandTrashItems;
 import xyz.devvydont.smprpg.commands.player.*;
@@ -39,7 +40,8 @@ public class SMPRPGBootstrapper implements PluginBootstrap {
                 new CommandWhatAmIHolding("whatamiholding"),
                 new CommandPeek("peek"),
                 new CommandTrashItems("trash"),
-                new CommandEnchantments("enchantments")
+                new CommandEnchantments("enchantments"),
+                new CommandReforges("reforges"),
         };
 
         var manager = context.getLifecycleManager();

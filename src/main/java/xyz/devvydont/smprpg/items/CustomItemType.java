@@ -49,10 +49,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.LavaRod;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.MinnowSet;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.MurkySet;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.VoidRod;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumChestplate;
@@ -357,9 +354,15 @@ public enum CustomItemType {
     MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.UNCOMMON, MinnowSet.class),
     MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.UNCOMMON, MinnowSet.class),
     MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.UNCOMMON, MinnowSet.class),
+    MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.UNCOMMON),
 
+    IRON_ROD("Iron Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
+    GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
+    DIAMOND_ROD("Diamond Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
+
+    CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
 
     COMET_ROD("Comet Rod", Material.FISHING_ROD, ItemRarity.RARE, VoidRod.class),
     NEBULA_ROD("Nebula Rod", Material.FISHING_ROD, ItemRarity.EPIC, VoidRod.class),
@@ -467,9 +470,9 @@ public enum CustomItemType {
     LAPIS_SINGULARITY(    "Lapis Lazuli Singularity",        Material.LAPIS_LAZULI, ItemRarity.LEGENDARY, true, LapisFamilyBlueprint.class),
 
     // REDSTONE
-    ENCHANTED_REDSTONE(      "Enchanted Redstone",          Material.REDSTONE,       ItemRarity.EPIC,      true, RedstoneFamilyBlueprint.class),
-    ENCHANTED_REDSTONE_BLOCK("Enchanted Block of Redstone", Material.REDSTONE_BLOCK, ItemRarity.LEGENDARY, true, RedstoneFamilyBlueprint.class),
-    REDSTONE_SINGULARITY(    "Redstone Singularity",        Material.REDSTONE,       ItemRarity.MYTHIC,    true, RedstoneFamilyBlueprint.class),
+    ENCHANTED_REDSTONE(      "Enchanted Redstone",          Material.REDSTONE,       ItemRarity.RARE,      true, RedstoneFamilyBlueprint.class),
+    ENCHANTED_REDSTONE_BLOCK("Enchanted Block of Redstone", Material.REDSTONE_BLOCK, ItemRarity.EPIC, true, RedstoneFamilyBlueprint.class),
+    REDSTONE_SINGULARITY(    "Redstone Singularity",        Material.REDSTONE,       ItemRarity.LEGENDARY,    true, RedstoneFamilyBlueprint.class),
 
     // GLOWSTONE
     ENCHANTED_GLOWSTONE(      "Enchanted Glowstone",          Material.GLOWSTONE_DUST, ItemRarity.RARE,      true, GlowstoneFamilyBlueprint.class),
