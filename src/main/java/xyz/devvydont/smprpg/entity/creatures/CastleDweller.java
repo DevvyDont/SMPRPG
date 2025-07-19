@@ -6,9 +6,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ZombieVillager;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
@@ -49,6 +51,12 @@ public class CastleDweller extends CustomEntityInstance<ZombieVillager> {
 
         if (Math.random() < .33)
             _entity.getEquipment().setChestplate(getAttributelessItem(Material.GOLDEN_CHESTPLATE));
+        
+        // Patch to remove the chance of spawning in w/ the "zombie leader bonus" modifier. This is a vanilla mechanic.
+        var hp = AttributeService.getInstance().getAttribute(_entity, AttributeWrapper.HEALTH);
+        if (hp != null)
+            hp.clearModifiers();
+        hp.save(_entity, AttributeWrapper.HEALTH);
     }
 
 
