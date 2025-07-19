@@ -4,6 +4,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.generator.structure.GeneratedStructure;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
@@ -40,6 +41,17 @@ public class PvPListener extends ToggleableListener {
             if (entityIsInStructure(event.getDealer()) && entityIsInStructure(event.getDamaged()))
                 event.setCancelled(true);
         }
+
+    }
+
+    /**
+     * Make all PVP damage 20% as effective. Not sure how I feel about this fix, but we will see how it goes
+     */
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerPVP(CustomEntityDamageByEntityEvent event) {
+
+        if (event.getDealer() instanceof Player && event.getDamaged() instanceof Player)
+            event.multiplyDamage(.2);
 
     }
 }

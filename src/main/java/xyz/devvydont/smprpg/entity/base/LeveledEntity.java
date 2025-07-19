@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.entity.base;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
@@ -95,6 +96,10 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
         this.updateNametag();
         if (_entity instanceof LivingEntity living)
             living.setMaximumNoDamageTicks(this.getInvincibilityTicks());
+
+        // If this entity is tamed by a player, scale them to their owner. Fails silently if they don't exist.
+        if (_entity instanceof Tameable tameable && tameable.getOwnerUniqueId() != null)
+            this.copyLevel(Bukkit.getEntity(tameable.getOwnerUniqueId()));
     }
 
     /**
@@ -348,6 +353,20 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
         // If the level changed, we should scale their stats to reflect it.
         if (_config.getBaseLevel() != level)
             this.setConfiguration(EntityConfiguration.scale(_config, level));
+
+        updateNametag();
+    }
+
+    /**
+     * Given another entity, copy their level and scale stats accordingly.
+     * If anything goes wrong, this fails silently.
+     * @param entity Entity to copy.
+     */
+    public void copyLevel(@Nullable Entity entity) {
+        if (!(entity instanceof LivingEntity))
+            return;
+        var other = SMPRPG.getService(EntityService.class).getEntityInstance(entity);
+        this.setLevel(other.getLevel());
     }
 
     /**

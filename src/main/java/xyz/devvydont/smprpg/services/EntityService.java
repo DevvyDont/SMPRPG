@@ -37,8 +37,10 @@ import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.entity.vanilla.*;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
+import xyz.devvydont.smprpg.listeners.pets.EntityTamingAttributeFix;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
+import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 import xyz.devvydont.smprpg.util.tasks.PlaytimeTracker;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,6 +54,8 @@ public class EntityService implements IService, Listener {
     private final Map<UUID, LeveledEntity<?>> entityInstances;
     private final Map<String, CustomEntityType> entityResolver;
     private final Map<EntityType, Class<? extends LeveledEntity<?>>> vanillaEntityHandlers;
+
+    private final List<ToggleableListener> listeners = new ArrayList<>();
 
     private BukkitTask wellnessCheckTask = null;
 
@@ -144,6 +148,10 @@ public class EntityService implements IService, Listener {
                     entityInstances.remove(id);
             }
         }.runTaskTimer(plugin, 5*60*20, 5*60*20);
+
+        listeners.add(new EntityTamingAttributeFix());
+        for (var listener : listeners)
+            listener.start();
     }
 
 
@@ -153,6 +161,8 @@ public class EntityService implements IService, Listener {
             entity.cleanup();
         entityInstances.clear();
         wellnessCheckTask.cancel();
+        for (var listener : listeners)
+            listener.stop();
     }
 
     /**
