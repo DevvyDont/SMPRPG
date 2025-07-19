@@ -1,10 +1,13 @@
 package xyz.devvydont.smprpg.items.blueprints.fishing;
 
 import io.papermc.paper.datacomponent.item.Consumable;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
@@ -153,7 +156,7 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
 
     @Override
     public float getSaturation(ItemStack item) {
-        return (getRarity(item).ordinal() + 1.0f) / 2;
+        return (getRarity(item).ordinal() + 1.0f) / 1.5f;
     }
 
     private double getFoodMultiplier() {
@@ -174,9 +177,14 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
 
     @Override
     public Consumable getConsumableComponent(ItemStack item) {
-        return Consumable.consumable()
-                .consumeSeconds(1.6f)
-                .build();
+        var component = Consumable.consumable()
+                .consumeSeconds(1.6f);
+        if (this.getCustomItemType() == CustomItemType.PUFFERFISH)
+            component.addEffect(ConsumeEffect.applyStatusEffects(
+                    List.of(new PotionEffect(PotionEffectType.POISON, 20, 0, false, false)),
+                    1.0f
+            ));
+        return component.build();
     }
 
     /**
