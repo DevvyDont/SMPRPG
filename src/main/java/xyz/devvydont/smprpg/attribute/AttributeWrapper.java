@@ -253,16 +253,16 @@ public enum AttributeWrapper {
                     create(".")
             )),
 
-    FISHING_RATING("Catch Quality",
+    FISHING_RATING("Reeling",
             AttributeCategory.FISHING,
             AttributeType.HELPFUL,
             merge(
-                    create("The quality of normal "),
+                    create("The rating of "),
                     create("fishing", BLUE),
-                    create(" rewards.")
+                    create(" loot rewards able to be found.")
             )),
 
-    FISHING_CREATURE_CHANCE("Sea Creature Chance",
+    FISHING_CREATURE_CHANCE("Angling",
             AttributeCategory.FISHING,
             AttributeType.HELPFUL,
             merge(
@@ -273,7 +273,7 @@ public enum AttributeWrapper {
                     create(".")
             )),
 
-    FISHING_TREASURE_CHANCE("Treasure Chance",
+    FISHING_TREASURE_CHANCE("Piracy",
             AttributeCategory.FISHING,
             AttributeType.HELPFUL,
             merge(

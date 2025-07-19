@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootType;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootTypeSelector;
@@ -86,7 +87,7 @@ public class LootTypeChancesMenu extends MenuBase {
                 ComponentUtils.EMPTY,
                 merge(create("The heart of fishing! These aquatic critters are "), create("quite complex", RED), create(".")),
                 merge(create("Some are common catches in "), create("any pond", AQUA), create(" while others require")),
-                merge(create("specific "), create("biomes", DARK_GREEN), create(", "), create("temperatures", RED), create(", or higher "), create("catch quality", LIGHT_PURPLE), create(" to reel in.")),
+                merge(create("specific "), create("biomes", DARK_GREEN), create(", "), create("temperatures", RED), create(", or higher "), create(AttributeWrapper.FISHING_RATING.DisplayName, LIGHT_PURPLE), create(" to reel in.")),
                 merge(create("Sell them, cook them, or collect them all!")),
                 EMPTY,
                 merge(create("Current fish chance: "), formatOdds(odds.getOrDefault(FishingLootType.FISH, 0d))),
@@ -108,10 +109,10 @@ public class LootTypeChancesMenu extends MenuBase {
                 EMPTY,
                 merge(create("Not everything lurking underwater is friendly.")),
                 merge(create("Sea creatures", SeaCreature.NAME_COLOR), create(" are "), create("hostile", RED), create(" mobs that can be pulled")),
-                merge(create("from the depths when your "), create("Sea Creature Chance", GOLD), create(" gets higher.")),
+                merge(create("from the depths when your "), create(AttributeWrapper.FISHING_CREATURE_CHANCE.DisplayName, GOLD), create(" gets higher.")),
                 merge(create("Defeat them to earn generous "), create("fishing experience", AQUA), create(" and "), create("rare", LIGHT_PURPLE), create(" crafting materials!")),
                 EMPTY,
-                merge(create("Current sea creature chance: "), formatOdds(odds.getOrDefault(FishingLootType.CREATURE, 0d))),
+                merge(create("Current sea creature (angling) chance: "), formatOdds(odds.getOrDefault(FishingLootType.CREATURE, 0d))),
                 EMPTY,
                 create("Click to dive deeper!", YELLOW)
 
@@ -125,10 +126,10 @@ public class LootTypeChancesMenu extends MenuBase {
                 EMPTY,
                 merge(create("Hidden beneath the surface lie "), create("valuable treasures", GOLD)),
                 merge(create("waiting to be uncovered. Treasure is your main source")),
-                merge(create("of "), create("profit", GREEN), create(" and "), create("power", YELLOW), create(" while fishing. "), create("Higher "), create("Treasure Chance", GOLD)),
+                merge(create("of "), create("profit", GREEN), create(" and "), create("power", YELLOW), create(" while fishing. "), create("Higher "), create(AttributeWrapper.FISHING_TREASURE_CHANCE.DisplayName, GOLD)),
                 merge(create("stats can improve your odds of hooking something "), create("special", LIGHT_PURPLE), create(".")),
                 EMPTY,
-                merge(create("Current treasure chance: "), formatOdds(odds.getOrDefault(FishingLootType.TREASURE, 0d))),
+                merge(create("Current treasure (piracy) chance: "), formatOdds(odds.getOrDefault(FishingLootType.TREASURE, 0d))),
                 EMPTY,
                 create("Click to dive deeper!", YELLOW)
 
