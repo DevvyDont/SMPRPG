@@ -78,7 +78,7 @@ public class BlessedEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 29;
+        return 19;
     }
 
     @EventHandler(priority = EventPriority.HIGH)

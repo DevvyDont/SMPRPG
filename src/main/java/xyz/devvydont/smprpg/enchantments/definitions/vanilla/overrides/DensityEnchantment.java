@@ -81,7 +81,7 @@ public class DensityEnchantment extends VanillaEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 60;
+        return 30;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

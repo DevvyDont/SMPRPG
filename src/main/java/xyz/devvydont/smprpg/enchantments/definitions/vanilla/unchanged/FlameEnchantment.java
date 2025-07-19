@@ -41,6 +41,6 @@ public class FlameEnchantment extends UnchangedEnchantment {
 
     @Override
     public int getSkillRequirement() {
-        return 19;
+        return 21;
     }
 }

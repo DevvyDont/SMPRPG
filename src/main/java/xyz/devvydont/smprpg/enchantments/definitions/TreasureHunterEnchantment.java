@@ -15,51 +15,50 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
-import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.Collection;
 import java.util.List;
 
-public class HeartyEnchantment extends CustomEnchantment implements AttributeEnchantment {
+public class TreasureHunterEnchantment extends CustomEnchantment implements AttributeEnchantment {
 
-    public static int getHealthIncrease(int level) {
-        return switch (level) {
-          case 0 -> 0;
-          case 1 -> 10;
-          case 2 -> 20;
-          case 3 -> 30;
-          case 4 -> 40;
-          case 5 -> 55;
-          case 6 -> 70;
-          case 7 -> 85;
-          case 8 -> 100;
-          case 9 -> 125;
-          case 10 -> 150;
-          default -> getHealthIncrease(10) + 50*(level - 10);
-        };
+    public TreasureHunterEnchantment(String id) {
+        super(id);
     }
 
-    public HeartyEnchantment(String id) {
-        super(id);
+    public static double getTreasureChance(int level) {
+        return switch (level) {
+            case 1 -> 0.25;
+            case 2 -> 0.55;
+            case 3 -> 0.95;
+            case 4 -> 1.35;
+            case 5 -> 2.0;
+            default -> 0;
+        };
     }
 
     @Override
     public @NotNull Component getDisplayName() {
-        return ComponentUtils.create("Hearty");
+        return ComponentUtils.create("Treasure Hunter");
     }
 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases max HP by "),
-            ComponentUtils.create("+" + getHealthIncrease(getLevel()), NamedTextColor.GREEN),
-            ComponentUtils.create(Symbols.HEART, NamedTextColor.RED)
+                ComponentUtils.create("Increases "),
+                ComponentUtils.create(AttributeWrapper.FISHING_TREASURE_CHANCE.DisplayName, NamedTextColor.GOLD),
+                ComponentUtils.create(" rating by "),
+                ComponentUtils.create(String.format("+%.2f", getTreasureChance(getLevel())), NamedTextColor.GREEN)
         );
     }
 
     @Override
     public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_ARMOR;
+        return ItemTypeTagKeys.ENCHANTABLE_FISHING;
+    }
+
+    @Override
+    public int getSkillRequirement() {
+        return 10;
     }
 
     @Override
@@ -69,24 +68,25 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
 
     @Override
     public int getMaxLevel() {
-        return 10;
+        return 5;
     }
 
     @Override
     public int getWeight() {
-        return EnchantmentRarity.COMMON.getWeight();
+        return EnchantmentRarity.UNCOMMON.getWeight();
     }
 
     @Override
     public EquipmentSlotGroup getEquipmentSlotGroup() {
-        return EquipmentSlotGroup.ARMOR;
+        return EquipmentSlotGroup.HAND;
     }
 
-    @Override
-    public int getSkillRequirement() {
-        return 1;
-    }
-
+    /**
+     * What kind of attribute container is this? Items can have multiple containers of stats that stack
+     * to prevent collisions
+     *
+     * @return
+     */
     @Override
     public AttributeModifierType getAttributeModifierType() {
         return AttributeModifierType.ENCHANTMENT;
@@ -95,12 +95,17 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealthIncrease(getLevel()))
+                new AdditiveAttributeEntry(AttributeWrapper.FISHING_TREASURE_CHANCE, getTreasureChance(getLevel()))
         );
     }
 
+    /**
+     * How much should we increase the power rating of an item if this container is present?
+     *
+     * @return
+     */
     @Override
     public int getPowerRating() {
-        return getLevel() / 2 + 1;
+        return getLevel() / 2;
     }
 }

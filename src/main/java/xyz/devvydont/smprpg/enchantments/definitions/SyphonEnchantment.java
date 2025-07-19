@@ -79,7 +79,7 @@ public class SyphonEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 39;
+        return 40;
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

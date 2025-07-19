@@ -105,6 +105,12 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment WISDOM = new WisdomEnchantment("wisdom");
     public final static CustomEnchantment VITALITY = new VitalityEnchantment("vitality");
     public final static CustomEnchantment VIGOROUS = new VigorousEnchantment("vigorous");
+    public final static CustomEnchantment INSIGHT = new InsightEnchantment("insight");
+    public final static CustomEnchantment ABYSSAL_INSTINCT = new AbyssalInstinctEnchantment("abyssal_instinct");
+    public final static CustomEnchantment TREASURE_HUNTER = new TreasureHunterEnchantment("treasure_hunter");
+    public final static CustomEnchantment FELLING = new FellingEnchantment("felling");
+    public final static CustomEnchantment HARVESTING = new HarvestingEnchantment("harvesting");
+
 
     public final static CustomEnchantment[] CUSTOM_ENCHANTMENTS = {
 
@@ -140,6 +146,7 @@ public class EnchantmentService implements IService, Listener {
             FIRE_PROTECTION,
             PROJECTILE_PROTECTION,
             HEARTY,
+            INSIGHT,
             VITALITY,
             CALAMITY,
             WISDOM,
@@ -153,6 +160,8 @@ public class EnchantmentService implements IService, Listener {
             FIRE_ASPECT,
             FLAME,
             FORTUNE,
+            HARVESTING,
+            FELLING,
             FROST_WALKER,
             IMPALING,
             KNOCKBACK,
@@ -160,6 +169,8 @@ public class EnchantmentService implements IService, Listener {
             LOYALTY,
             LUCK_OF_THE_SEA,
             LURE,
+            ABYSSAL_INSTINCT,
+            TREASURE_HUNTER,
             MULTISHOT,
             PIERCING,
             PUNCH,

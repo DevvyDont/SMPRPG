@@ -74,7 +74,7 @@ public class SnipeEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 48;
+        return 36;
     }
 
     @EventHandler

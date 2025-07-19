@@ -88,6 +88,6 @@ public class PowerEnchantment extends VanillaEnchantment implements AttributeEnc
 
     @Override
     public int getSkillRequirement() {
-        return 5;
+        return 0;
     }
 }

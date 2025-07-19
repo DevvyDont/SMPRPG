@@ -77,7 +77,7 @@ public class WisdomEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 50;
+        return 29;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

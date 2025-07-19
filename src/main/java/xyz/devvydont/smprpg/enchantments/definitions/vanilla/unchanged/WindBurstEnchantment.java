@@ -38,6 +38,6 @@ public class WindBurstEnchantment extends UnchangedEnchantment {
 
     @Override
     public int getSkillRequirement() {
-        return 62;
+        return 34;
     }
 }

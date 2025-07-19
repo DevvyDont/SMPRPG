@@ -84,7 +84,7 @@ public class SmiteEnchantment extends VanillaEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 1;
+        return 0;
     }
 
     @EventHandler(priority = EventPriority.HIGH)

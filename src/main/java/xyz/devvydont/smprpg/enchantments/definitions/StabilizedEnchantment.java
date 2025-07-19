@@ -70,7 +70,7 @@ public class StabilizedEnchantment extends CustomEnchantment implements Listener
 
     @Override
     public int getSkillRequirement() {
-        return 44;
+        return 39;
     }
 
     @EventHandler(priority = EventPriority.HIGH)

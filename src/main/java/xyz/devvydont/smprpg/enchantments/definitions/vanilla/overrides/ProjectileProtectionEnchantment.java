@@ -73,7 +73,7 @@ public class ProjectileProtectionEnchantment extends VanillaEnchantment implemen
 
     @Override
     public int getSkillRequirement() {
-        return 14;
+        return 0;
     }
 
     @EventHandler(priority = EventPriority.HIGH)

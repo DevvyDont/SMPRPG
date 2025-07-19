@@ -11,49 +11,37 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
+import xyz.devvydont.smprpg.enchantments.definitions.vanilla.overrides.MendingEnchantment;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
-import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.Collection;
 import java.util.List;
 
-public class HeartyEnchantment extends CustomEnchantment implements AttributeEnchantment {
+public class InsightEnchantment extends CustomEnchantment implements AttributeEnchantment {
 
-    public static int getHealthIncrease(int level) {
-        return switch (level) {
-          case 0 -> 0;
-          case 1 -> 10;
-          case 2 -> 20;
-          case 3 -> 30;
-          case 4 -> 40;
-          case 5 -> 55;
-          case 6 -> 70;
-          case 7 -> 85;
-          case 8 -> 100;
-          case 9 -> 125;
-          case 10 -> 150;
-          default -> getHealthIncrease(10) + 50*(level - 10);
-        };
+    public InsightEnchantment(String id) {
+        super(id);
     }
 
-    public HeartyEnchantment(String id) {
-        super(id);
+    public static int getIntelligenceIncrease(int level) {
+        return MendingEnchantment.getRegeneration(level);
     }
 
     @Override
     public @NotNull Component getDisplayName() {
-        return ComponentUtils.create("Hearty");
+        return ComponentUtils.create("Insight");
     }
 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases max HP by "),
-            ComponentUtils.create("+" + getHealthIncrease(getLevel()), NamedTextColor.GREEN),
-            ComponentUtils.create(Symbols.HEART, NamedTextColor.RED)
+                ComponentUtils.create("Increases "),
+                ComponentUtils.create(AttributeWrapper.INTELLIGENCE.DisplayName, NamedTextColor.GOLD),
+                ComponentUtils.create(" by "),
+                ComponentUtils.create("+" + getIntelligenceIncrease(getLevel()), NamedTextColor.AQUA)
         );
     }
 
@@ -69,12 +57,12 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
 
     @Override
     public int getMaxLevel() {
-        return 10;
+        return 5;
     }
 
     @Override
     public int getWeight() {
-        return EnchantmentRarity.COMMON.getWeight();
+        return EnchantmentRarity.UNCOMMON.getWeight();
     }
 
     @Override
@@ -84,7 +72,7 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
 
     @Override
     public int getSkillRequirement() {
-        return 1;
+        return 4;
     }
 
     @Override
@@ -95,7 +83,7 @@ public class HeartyEnchantment extends CustomEnchantment implements AttributeEnc
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealthIncrease(getLevel()))
+                new AdditiveAttributeEntry(AttributeWrapper.INTELLIGENCE, getIntelligenceIncrease(getLevel()))
         );
     }
 

@@ -6,9 +6,6 @@ import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerItemMendEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
@@ -25,46 +22,46 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import java.util.Collection;
 import java.util.List;
 
-public class MendingEnchantment extends VanillaEnchantment implements AttributeEnchantment, Listener {
+public class LuckOfTheSeaEnchantment extends VanillaEnchantment implements AttributeEnchantment {
 
-    public static int getRegeneration(int level) {
-        return switch (level) {
-            case 1 -> 10;
-            case 2 -> 20;
-            case 3 -> 35;
-            case 4 -> 50;
-            case 5 -> 75;
-          default -> 0;
-        };
+    public LuckOfTheSeaEnchantment(TypedKey<Enchantment> key) {
+        super(key);
     }
 
-    public MendingEnchantment(TypedKey<Enchantment> key) {
-        super(key);
+    public static int getRatingIncrease(int level) {
+        return switch (level) {
+            case 1 -> 10;
+            case 2 -> 25;
+            case 3 -> 45;
+            case 4 -> 70;
+            case 5 -> 100;
+            default -> 0;
+        };
     }
 
     @Override
     public @NotNull Component getDisplayName() {
-        return ComponentUtils.create("Mending");
+        return ComponentUtils.create("Luck of the Sea");
     }
 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases "),
-            ComponentUtils.create(AttributeWrapper.REGENERATION.DisplayName, NamedTextColor.GOLD),
-            ComponentUtils.create(" by "),
-            ComponentUtils.create(String.format("+%d", getRegeneration(getLevel())), NamedTextColor.GREEN)
+                ComponentUtils.create("Increases "),
+                ComponentUtils.create(AttributeWrapper.FISHING_RATING.DisplayName, NamedTextColor.GOLD),
+                ComponentUtils.create(" rating by "),
+                ComponentUtils.create(String.format("+%d", getRatingIncrease(getLevel())), NamedTextColor.GREEN)
         );
     }
 
     @Override
     public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_ARMOR;
+        return ItemTypeTagKeys.ENCHANTABLE_FISHING;
     }
 
     @Override
     public int getSkillRequirement() {
-        return 5;
+        return 0;
     }
 
     @Override
@@ -79,12 +76,12 @@ public class MendingEnchantment extends VanillaEnchantment implements AttributeE
 
     @Override
     public int getWeight() {
-        return EnchantmentRarity.UNCOMMON.getWeight();
+        return EnchantmentRarity.COMMON.getWeight();
     }
 
     @Override
     public EquipmentSlotGroup getEquipmentSlotGroup() {
-        return EquipmentSlotGroup.ARMOR;
+        return EquipmentSlotGroup.HAND;
     }
 
     /**
@@ -101,7 +98,7 @@ public class MendingEnchantment extends VanillaEnchantment implements AttributeE
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.REGENERATION, getRegeneration(getLevel()))
+                new AdditiveAttributeEntry(AttributeWrapper.FISHING_RATING, getRatingIncrease(getLevel()))
         );
     }
 
@@ -113,13 +110,5 @@ public class MendingEnchantment extends VanillaEnchantment implements AttributeE
     @Override
     public int getPowerRating() {
         return getLevel() / 2;
-    }
-
-    /**
-     * Completely cancels mend behavior on the server.
-     */
-    @EventHandler
-    private void __onMend(PlayerItemMendEvent event) {
-        event.setRepairAmount(0);
     }
 }

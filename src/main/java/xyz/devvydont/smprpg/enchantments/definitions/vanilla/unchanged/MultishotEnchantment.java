@@ -43,7 +43,7 @@ public class MultishotEnchantment extends UnchangedEnchantment {
 
     @Override
     public int getSkillRequirement() {
-        return 42;
+        return 15;
     }
 
     /**

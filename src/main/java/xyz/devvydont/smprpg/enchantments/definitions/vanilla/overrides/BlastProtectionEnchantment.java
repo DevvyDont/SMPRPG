@@ -81,7 +81,7 @@ public class BlastProtectionEnchantment extends VanillaEnchantment implements At
 
     @Override
     public int getSkillRequirement() {
-        return 12;
+        return 0;
     }
 
     @Override

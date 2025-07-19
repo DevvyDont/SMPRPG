@@ -76,7 +76,7 @@ public class LootingEnchantment extends VanillaEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 15;
+        return 0;
     }
 
     @EventHandler
