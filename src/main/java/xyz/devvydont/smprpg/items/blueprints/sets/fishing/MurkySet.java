@@ -29,8 +29,8 @@ import java.util.List;
 public class MurkySet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable {
 
     public static final int POWER = 5;
-    public static final int CATCH_QUALITY = 20;
-    public static final double CHANCE = 0.5;
+    public static final int CATCH_QUALITY = 15;
+    public static final double CHANCE = 0.25;
 
     public static final int COLOR = 0x5E7C16;
     public static final TrimPattern TRIM = TrimPattern.RIB;
