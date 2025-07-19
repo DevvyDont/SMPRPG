@@ -50,7 +50,7 @@ public class ItemPickaxe extends VanillaAttributeItem implements IBreakableEquip
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.TOOL;
+        return ItemClassification.PICKAXE;
     }
 
     @Override

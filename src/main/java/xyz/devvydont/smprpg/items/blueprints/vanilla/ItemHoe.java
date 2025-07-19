@@ -59,7 +59,7 @@ public class ItemHoe extends VanillaAttributeItem implements IBreakableEquipment
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.TOOL;
+        return ItemClassification.HOE;
     }
 
     @Override

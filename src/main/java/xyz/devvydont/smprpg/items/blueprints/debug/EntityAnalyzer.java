@@ -63,7 +63,7 @@ public class EntityAnalyzer extends CustomItemBlueprint implements IHeaderDescri
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.TOOL;
+        return ItemClassification.EQUIPMENT;
     }
 
     @EventHandler

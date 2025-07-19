@@ -45,7 +45,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.TOOL;
+        return ItemClassification.HOE;
     }
 
     @Override

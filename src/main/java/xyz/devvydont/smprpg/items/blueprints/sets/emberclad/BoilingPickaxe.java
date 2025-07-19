@@ -88,7 +88,7 @@ public class BoilingPickaxe extends CustomAttributeItem implements Listener, IHe
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.TOOL;
+        return ItemClassification.PICKAXE;
     }
 
     @Override
