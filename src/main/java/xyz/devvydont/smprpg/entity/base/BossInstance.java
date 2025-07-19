@@ -101,6 +101,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
             return;
 
         // We do have a time limit, set the timestamp
+        _entity.setRemoveWhenFarAway(false);
         wipeTimestamp = System.currentTimeMillis() + (getTimeLimit() * 1000L);
     }
 
@@ -388,7 +389,6 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         cleanupBrainTickTask();
         entityBrainTask = Bukkit.getScheduler().runTaskTimer(_plugin, this::tick, 1, 1);
         _entity.setPersistent(true);
-        _entity.setRemoveWhenFarAway(false);
     }
 
     @Override
