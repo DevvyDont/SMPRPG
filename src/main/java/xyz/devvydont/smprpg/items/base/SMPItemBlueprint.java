@@ -232,14 +232,6 @@ public abstract class SMPItemBlueprint {
             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         }
 
-        if (this instanceof IEdible edible) {
-            FoodComponent food = FoodUtil.getVanillaFoodComponent(Material.APPLE);
-            food.setNutrition(edible.getNutrition());
-            food.setSaturation(edible.getSaturation());
-            food.setCanAlwaysEat(edible.canAlwaysEat());
-            meta.setFood(food);
-        }
-
         // Apply a color! (if we want them and can actually apply them...)
         if (this instanceof IDyeable && meta instanceof LeatherArmorMeta armorMeta) {
             Color color = ((IDyeable) this).getColor();
@@ -286,6 +278,15 @@ public abstract class SMPItemBlueprint {
         if (!isCustom())
             updateVanillaFoodComponent(itemStack);
 
+        // If it's a custom edible item, do it the preferred way.
+        if (this instanceof IEdible edible) {
+            FoodComponent food = FoodUtil.getVanillaFoodComponent(Material.APPLE);
+            food.setNutrition(edible.getNutrition(itemStack));
+            food.setSaturation(edible.getSaturation(itemStack));
+            food.setCanAlwaysEat(edible.canAlwaysEat(itemStack));
+            itemStack.editMeta(meta -> meta.setFood(food));
+        }
+
         // This is a hack to allow any item as far as vanilla is concerned to be enchanted.
         // Our plugin decides what enchants get rolled and what items can be enchanted in the first place.
         if (this.getItemClassification().isEnchantable())
@@ -318,7 +319,7 @@ public abstract class SMPItemBlueprint {
 
         // If this is a consumable, apply the consumable data to the item stack.
         if (this instanceof IConsumable consumable)
-            itemStack.setData(DataComponentTypes.CONSUMABLE, consumable.getConsumableComponent());
+            itemStack.setData(DataComponentTypes.CONSUMABLE, consumable.getConsumableComponent(itemStack));
 
         // If this item contains attributes, apply them.
         AttributeUtil.applyModifiers(this, itemStack);

@@ -835,10 +835,10 @@ public class ItemService implements IService, Listener {
         // Does this item have consumable properties? First, check for edibility since it is more specific.
         if (blueprint instanceof IEdible edible) {
             lore.add(ComponentUtils.EMPTY);
-            lore.addAll(IEdible.generateEdibilityComponent(edible));
+            lore.addAll(IEdible.generateEdibilityComponent(itemStack, edible));
         } else if (blueprint instanceof IConsumable consumable) {
             lore.add(ComponentUtils.EMPTY);
-            lore.addAll(IConsumable.generateConsumabilityComponent(consumable));
+            lore.addAll(IConsumable.generateConsumabilityComponent(itemStack, consumable));
         }
 
         // Temp hack, get food and consumable properties for vanilla items.
@@ -847,11 +847,11 @@ public class ItemService implements IService, Listener {
             var foodData = itemStack.getData(DataComponentTypes.FOOD);
             var consumableData = itemStack.getData(DataComponentTypes.CONSUMABLE);
             lore.add(ComponentUtils.EMPTY);
-            lore.addAll(IEdible.generateEdibilityComponent(IEdible.fromVanillaData(foodData, consumableData)));
+            lore.addAll(IEdible.generateEdibilityComponent(itemStack, IEdible.fromVanillaData(foodData, consumableData)));
         } else if (!blueprint.isCustom() && itemStack.getData(DataComponentTypes.CONSUMABLE) != null) {
             var consumableData = itemStack.getData(DataComponentTypes.CONSUMABLE);
             lore.add(ComponentUtils.EMPTY);
-            lore.addAll(IConsumable.generateConsumabilityComponent(() -> consumableData));
+            lore.addAll(IConsumable.generateConsumabilityComponent(itemStack, i -> consumableData));
         }
 
         // Is this item compressed?

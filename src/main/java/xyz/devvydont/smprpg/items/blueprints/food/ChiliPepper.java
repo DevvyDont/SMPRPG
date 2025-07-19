@@ -26,12 +26,12 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
     }
 
     @Override
-    public int getNutrition() {
+    public int getNutrition(ItemStack item) {
         return 2;
     }
 
     @Override
-    public float getSaturation() {
+    public float getSaturation(ItemStack item) {
         return 6;
     }
 
@@ -41,7 +41,7 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
     }
 
     @Override
-    public Consumable getConsumableComponent() {
+    public Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(.8f)
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*45, 0, true, true)), .2f))
@@ -49,7 +49,7 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
     }
 
     @Override
-    public boolean canAlwaysEat() {
+    public boolean canAlwaysEat(ItemStack item) {
         return false;
     }
 }

@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.fishing;
 
+import io.papermc.paper.datacomponent.item.Consumable;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
@@ -9,6 +10,7 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
+import xyz.devvydont.smprpg.items.interfaces.IEdible;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.items.interfaces.IModelOverridden;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
@@ -29,7 +31,7 @@ import static xyz.devvydont.smprpg.util.formatting.ComponentUtils.merge;
  * Represents a blueprint for a basic fish that you can fish up. Can come in any rarity from COMMON -> LEGENDARY.
  * Better quality fish have better benefits.
  */
-public class FishBlueprint extends CustomItemBlueprint implements IModelOverridden, IHeaderDescribable, ISellable {
+public class FishBlueprint extends CustomItemBlueprint implements IModelOverridden, IHeaderDescribable, ISellable, IEdible {
 
     /**
      * Randomly fished items are randomly assigned rarities.
@@ -107,12 +109,12 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      */
     public int getBaseWorth() {
         return switch (this.getCustomItemType()) {
-            case SALMON -> 15;
-            case PUFFERFISH -> 25;
-            case CLOWNFISH -> 100;
-            case BLISTERFISH -> 125;
-            case VOIDFIN -> 150;
-            default -> 10;
+            case SALMON -> 30;
+            case PUFFERFISH -> 50;
+            case CLOWNFISH -> 80;
+            case BLISTERFISH -> 110;
+            case VOIDFIN -> 125;
+            default -> 20;
         };
     }
 
@@ -124,7 +126,7 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      */
     @Override
     public int getWorth(ItemStack item) {
-        var rarityFactor = (this.getRarity(item).ordinal() + 1.0) / 2;
+        var rarityFactor = (this.getRarity(item).ordinal() + 1.0);
         var base = this.getBaseWorth();
         return (int) (Math.pow(rarityFactor, rarityFactor) * base);
     }
@@ -142,6 +144,39 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
     @Override
     public ItemRarity getRarity(ItemStack item) {
         return item.getPersistentDataContainer().getOrDefault(KeyStore.ITEM_RARITY_OVERRIDE, PDCAdapters.RARITY, getDefaultRarity());
+    }
+
+    @Override
+    public int getNutrition(ItemStack item) {
+        return (int) ((getRarity(item).ordinal() + 1) * getFoodMultiplier());
+    }
+
+    @Override
+    public float getSaturation(ItemStack item) {
+        return (getRarity(item).ordinal() + 1.0f) / 2;
+    }
+
+    private double getFoodMultiplier() {
+        return switch (this.getCustomItemType()) {
+            case SALMON -> 1.5;
+            case PUFFERFISH -> 0.5;
+            case CLOWNFISH -> 2;
+            case BLISTERFISH -> 2.5;
+            case VOIDFIN -> 3;
+            default -> 1.0;
+        };
+    }
+
+    @Override
+    public boolean canAlwaysEat(ItemStack item) {
+        return false;
+    }
+
+    @Override
+    public Consumable getConsumableComponent(ItemStack item) {
+        return Consumable.consumable()
+                .consumeSeconds(1.6f)
+                .build();
     }
 
     /**

@@ -33,22 +33,22 @@ public class InfinifoodBlueprint extends CustomItemBlueprint implements IEdible,
     }
 
     @Override
-    public int getNutrition() {
+    public int getNutrition(ItemStack item) {
         return 8;
     }
 
     @Override
-    public float getSaturation() {
+    public float getSaturation(ItemStack item) {
         return 8;
     }
 
     @Override
-    public boolean canAlwaysEat() {
+    public boolean canAlwaysEat(ItemStack item) {
         return false;
     }
 
     @Override
-    public Consumable getConsumableComponent() {
+    public Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(1.6f)
                 .build();

@@ -85,7 +85,7 @@ public class NeptunesConch extends CustomItemBlueprint implements IHeaderDescrib
     }
 
     @Override
-    public Consumable getConsumableComponent() {
+    public Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(5)
                 .sound(SoundEventKeys.ITEM_GOAT_HORN_SOUND_6)

@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.items.blueprints.resources.mob;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -36,7 +37,7 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
     }
 
     @Override
-    public int getNutrition() {
+    public int getNutrition(ItemStack item) {
         return switch (getCustomItemType()) {
             case ENCHANTED_PORKCHOP -> 16;
             case PREMIUM_PORKCHOP -> 4;
@@ -45,7 +46,7 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
     }
 
     @Override
-    public float getSaturation() {
+    public float getSaturation(ItemStack item) {
         return switch (getCustomItemType()) {
             case ENCHANTED_SPIDER_EYE -> 16;
             case PREMIUM_SPIDER_EYE -> 6;
@@ -54,12 +55,12 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
     }
 
     @Override
-    public boolean canAlwaysEat() {
+    public boolean canAlwaysEat(ItemStack item) {
         return true;
     }
 
     @Override
-    public Consumable getConsumableComponent() {
+    public Consumable getConsumableComponent(ItemStack item) {
 
         var effects = new ArrayList<ConsumeEffect>();
 

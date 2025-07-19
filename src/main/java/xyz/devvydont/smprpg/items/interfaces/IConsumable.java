@@ -5,6 +5,7 @@ import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface IConsumable {
 
-    Consumable getConsumableComponent();
+    Consumable getConsumableComponent(ItemStack item);
 
     static List<Component> generateEffectComponent(ConsumeEffect effect) {
 
@@ -54,21 +55,21 @@ public interface IConsumable {
         return List.of();
     }
 
-    static List<Component> generateConsumabilityComponent(IConsumable consumable) {
+    static List<Component> generateConsumabilityComponent(ItemStack item, IConsumable consumable) {
         var lore = new ArrayList<Component>();
 
         // Start with the header. Letting them know this is food and how long it takes to eat.
         lore.add(ComponentUtils.merge(
                 ComponentUtils.create("Consumable: ", NamedTextColor.GOLD),
-                ComponentUtils.create(String.format("(%.1fs)", consumable.getConsumableComponent().consumeSeconds()), NamedTextColor.DARK_GRAY)
+                ComponentUtils.create(String.format("(%.1fs)", consumable.getConsumableComponent(item).consumeSeconds()), NamedTextColor.DARK_GRAY)
         ));
 
         // Effects if they are present.
-        if (!consumable.getConsumableComponent().consumeEffects().isEmpty()) {
+        if (!consumable.getConsumableComponent(item).consumeEffects().isEmpty()) {
             lore.add(ComponentUtils.create("Additional Effects: "));
 
             // Loop through every effect. Depending on the type of interface that it implements, explain what it does.
-            for (var effect : consumable.getConsumableComponent().consumeEffects())
+            for (var effect : consumable.getConsumableComponent(item).consumeEffects())
                 lore.addAll(IConsumable.generateEffectComponent(effect));
         }
 
