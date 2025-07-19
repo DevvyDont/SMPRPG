@@ -36,7 +36,8 @@ public abstract class SakuraArmorSet extends CustomAttributeItem implements IBre
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                itemService.getCustomItem(Material.CHERRY_LOG)
+                itemService.getCustomItem(Material.CHERRY_LOG),
+                itemService.getCustomItem(Material.CHERRY_LEAVES)
         );
     }
 

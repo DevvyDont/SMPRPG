@@ -46,25 +46,25 @@ public class ItemArmor extends VanillaAttributeItem implements IBreakableEquipme
             case CHAINMAIL_LEGGINGS -> 14;
             case CHAINMAIL_BOOTS -> 10;
 
-            case GOLDEN_HELMET -> 12;
-            case GOLDEN_CHESTPLATE -> 18;
-            case GOLDEN_LEGGINGS -> 15;
-            case GOLDEN_BOOTS -> 10;
+            case GOLDEN_HELMET -> 11;
+            case GOLDEN_CHESTPLATE -> 15;
+            case GOLDEN_LEGGINGS -> 13;
+            case GOLDEN_BOOTS -> 8;
 
-            case IRON_HELMET -> 20;
-            case IRON_CHESTPLATE -> 30;
-            case IRON_LEGGINGS -> 25;
-            case IRON_BOOTS -> 15;
+            case IRON_HELMET -> 30;
+            case IRON_CHESTPLATE -> 40;
+            case IRON_LEGGINGS -> 35;
+            case IRON_BOOTS -> 20;
 
-            case DIAMOND_HELMET -> 30;
-            case DIAMOND_CHESTPLATE -> 50;
-            case DIAMOND_LEGGINGS -> 40;
-            case DIAMOND_BOOTS -> 25;
+            case DIAMOND_HELMET -> 45;
+            case DIAMOND_CHESTPLATE -> 70;
+            case DIAMOND_LEGGINGS -> 60;
+            case DIAMOND_BOOTS -> 40;
 
-            case NETHERITE_HELMET -> 75;
+            case NETHERITE_HELMET -> 80;
             case NETHERITE_CHESTPLATE -> 120;
-            case NETHERITE_LEGGINGS -> 90;
-            case NETHERITE_BOOTS -> 60;
+            case NETHERITE_LEGGINGS -> 100;
+            case NETHERITE_BOOTS -> 65;
 
             default -> 0;
         };
@@ -107,6 +107,7 @@ public class ItemArmor extends VanillaAttributeItem implements IBreakableEquipme
     public static double getDamageFromMaterial(Material material) {
 
         return switch (material) {
+            case GOLDEN_HELMET, GOLDEN_CHESTPLATE, GOLDEN_LEGGINGS, GOLDEN_BOOTS -> .2;
             case NETHERITE_LEGGINGS, NETHERITE_CHESTPLATE, NETHERITE_BOOTS, NETHERITE_HELMET -> .1;
             default -> 0;
         };

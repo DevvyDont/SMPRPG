@@ -32,13 +32,13 @@ public class SakuraBoots extends SakuraArmorSet implements IDyeable, ITrimmable 
 
     @Override
     public CraftingRecipe getCustomRecipe() {
-        return new BootsRecipe(this, itemService.getCustomItem(Material.CHERRY_LOG), generate()).build();
+        return new BootsRecipe(this, itemService.getCustomItem(Material.CHERRY_LEAVES), generate()).build();
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 15),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 12),
                 new AdditiveAttributeEntry(AttributeWrapper.REGENERATION, 20)
         );
     }

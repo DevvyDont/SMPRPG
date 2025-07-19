@@ -29,7 +29,7 @@ public class SakuraHelmet extends SakuraArmorSet implements IBreakableEquipment,
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 20),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 15),
                 new AdditiveAttributeEntry(AttributeWrapper.REGENERATION, 20)
         );
     }
@@ -51,6 +51,6 @@ public class SakuraHelmet extends SakuraArmorSet implements IBreakableEquipment,
 
     @Override
     public CraftingRecipe getCustomRecipe() {
-        return new HelmetRecipe(this, itemService.getCustomItem(Material.CHERRY_LOG), generate()).build();
+        return new HelmetRecipe(this, itemService.getCustomItem(Material.CHERRY_LEAVES), generate()).build();
     }
 }
