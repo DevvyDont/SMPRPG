@@ -12,10 +12,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.EnchantmentUtil;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.VanillaEnchantment;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
+import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 public class ImpalingEnchantment extends VanillaEnchantment implements Listener {
@@ -36,9 +39,12 @@ public class ImpalingEnchantment extends VanillaEnchantment implements Listener 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases base damage by "),
+            ComponentUtils.create("Increases damage dealt by "),
             ComponentUtils.create("+" + getDamagePercentageMultiplier(getLevel()) + "%", NamedTextColor.GREEN),
-            ComponentUtils.create(" against wet enemies")
+            ComponentUtils.create(" against "),
+            ComponentUtils.create("wet enemies", SeaCreature.NAME_COLOR),
+            ComponentUtils.create(" and "),
+            ComponentUtils.create("sea creatures", SeaCreature.NAME_COLOR)
         );
     }
 
@@ -75,13 +81,21 @@ public class ImpalingEnchantment extends VanillaEnchantment implements Listener 
     @EventHandler
     public void onWaterDamage(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity living))
+        if (!(event.getDealer() instanceof LivingEntity dealer))
             return;
 
-        if (!event.getDamaged().isInWaterOrRain())
+        if (!(event.getDamaged() instanceof LivingEntity damaged))
             return;
 
-        int impalingLevel = EnchantmentUtil.getHoldingEnchantLevel(getEnchantment(), EquipmentSlotGroup.MAINHAND, living.getEquipment());
+        // Check if the damaged entity is either a sea creature or wet.
+        var valid = event.getDamaged().isInWater() || event.getDamaged().isInRain();
+        if (SMPRPG.getService(EntityService.class).getEntityInstance(damaged) instanceof SeaCreature)
+            valid = true;
+
+        if (!valid)
+            return;
+
+        int impalingLevel = EnchantmentUtil.getHoldingEnchantLevel(getEnchantment(), EquipmentSlotGroup.MAINHAND, dealer.getEquipment());
         if (impalingLevel <= 0)
             return;
 
