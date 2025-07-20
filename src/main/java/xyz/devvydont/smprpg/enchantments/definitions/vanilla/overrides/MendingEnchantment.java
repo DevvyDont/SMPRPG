@@ -121,5 +121,6 @@ public class MendingEnchantment extends VanillaEnchantment implements AttributeE
     @EventHandler
     private void __onMend(PlayerItemMendEvent event) {
         event.setRepairAmount(0);
+        event.setCancelled(true);
     }
 }
