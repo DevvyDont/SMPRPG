@@ -126,8 +126,10 @@ public class DifficultyService implements IService, Listener {
 
         // If we don't have a multiplier to give, no reason to add a modifier.
         var multiplier = getDropRateChanceMultiplier(difficulty);
-        if (multiplier == 0)
+        if (multiplier == 0) {
+            luck.save(player, AttributeWrapper.LUCK);
             return;
+        }
 
         // Apply a luck modifier based on the difficulty.
         luck.addModifier(new AttributeModifier(DIFFICULTY_MODIFIER_KEY, getDropRateChanceMultiplier(difficulty), AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY));
