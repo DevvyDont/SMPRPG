@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public interface IEdible extends IConsumable {
         if (edible.getSaturation(item) != 0)
             lore.add(ComponentUtils.merge(
                 ComponentUtils.create("* Saturation: "),
-                ComponentUtils.create("+" + edible.getSaturation(item), NamedTextColor.YELLOW)
+                ComponentUtils.create("+" + MinecraftStringUtils.formatFloat(edible.getSaturation(item)), NamedTextColor.YELLOW)
             ));
 
         // Effects if they are present.

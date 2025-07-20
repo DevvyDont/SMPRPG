@@ -41,16 +41,22 @@ public class MinecraftStringUtils {
 
     public static String getTitledString(String string) {
         String regex = "\\b(.)(.*?)\\b";
-        String result = Pattern.compile(regex).matcher(string.replace("_", " ").toLowerCase()).replaceAll(
+        return Pattern.compile(regex).matcher(string.replace("_", " ").toLowerCase()).replaceAll(
                 matche -> matche.group(1).toUpperCase() + matche.group(2)
         );
-
-        return result;
     }
 
 
     public static String formatNumber(long n) {
         return new DecimalFormat("#,###,###,###,###").format(n);
+    }
+
+    public static String formatDecimal(double d) {
+        return new DecimalFormat("#,###.##").format(d);
+    }
+
+    public static String formatFloat(float f) {
+        return new DecimalFormat("#,###.#").format(f);
     }
 
 }

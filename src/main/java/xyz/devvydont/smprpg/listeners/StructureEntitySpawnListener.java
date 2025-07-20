@@ -128,7 +128,7 @@ public class StructureEntitySpawnListener extends ToggleableListener {
         // Don't do anything if we aren't in a structure
         if (mostDangerousStructure == null || highestLevel < 1)
             return;
-        
+
         SMPRPG.getService(ActionBarService.class).addActionBarComponent(player, ActionBarService.ActionBarSource.STRUCTURE, getStructureComponent(player, mostDangerousStructure, highestLevel), 5);
     }
 
