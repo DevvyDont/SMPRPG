@@ -139,7 +139,6 @@ public class EntityGlobals {
 
             case ENDERMAN -> 35;
             case ENDERMITE -> 35;
-            case SILVERFISH -> 35;
 
             case PIGLIN_BRUTE -> 40;
 
@@ -173,7 +172,7 @@ public class EntityGlobals {
             case WOLF -> 15;
             case HORSE -> 15;
 
-            case SLIME -> 15;
+            case SLIME -> 10;
             case WITCH -> 15;
 
             case IRON_GOLEM -> 25;
@@ -188,6 +187,8 @@ public class EntityGlobals {
 
             case CREAKING -> 15;
             case HAPPY_GHAST -> 30;
+
+            case SILVERFISH -> 5;
 
             default -> 1;
         };
