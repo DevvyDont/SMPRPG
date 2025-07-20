@@ -37,14 +37,15 @@ public class MiningExperienceListener implements Listener {
                     case DEEPSLATE_COAL_ORE -> 7;
 
                     case COPPER_ORE, RAW_COPPER, COPPER_INGOT -> 2;
-                    case DEEPSLATE_COPPER_ORE -> 8;
+                    case DEEPSLATE_COPPER_ORE, RAW_COPPER_BLOCK -> 8;
 
                     case IRON_ORE, RAW_IRON, IRON_INGOT -> 7;
+                    case RAW_IRON_BLOCK -> 8;
                     case IRON_BLOCK -> 9;
                     case DEEPSLATE_IRON_ORE -> 12;
 
                     case GOLD_ORE, RAW_GOLD, GOLD_INGOT -> 12;
-                    case DEEPSLATE_GOLD_ORE -> 14;
+                    case RAW_GOLD_BLOCK, DEEPSLATE_GOLD_ORE -> 14;
 
                     case OBSIDIAN -> 20;
                     case CRYING_OBSIDIAN -> 24;
