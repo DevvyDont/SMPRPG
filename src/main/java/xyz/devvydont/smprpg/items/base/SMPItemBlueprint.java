@@ -288,6 +288,7 @@ public abstract class SMPItemBlueprint {
         else {
             itemStack.unsetData(DataComponentTypes.MAX_DAMAGE);
             itemStack.unsetData(DataComponentTypes.DAMAGE);
+            itemStack.editMeta(meta -> meta.setUnbreakable(true));
         }
 
         // This is a hack to allow any item as far as vanilla is concerned to be enchanted.
