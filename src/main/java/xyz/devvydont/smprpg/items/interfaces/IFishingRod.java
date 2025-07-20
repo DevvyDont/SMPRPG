@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public interface IFishingRod {
 
-    int CREATURE_MULTIPLIER = 5;
+    int CREATURE_MULTIPLIER = 3;
 
     enum FishingFlag {
         NORMAL("Water", SeaCreature.NAME_COLOR),
