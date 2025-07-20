@@ -93,9 +93,12 @@ public class StructureEntitySpawnListener extends ToggleableListener {
                 ComponentUtils.powerLevelPrefix(power)
         );
 
-        var plugin = SMPRPG.getInstance();
         // If the player is underleveled, add a warning label.
-        if (power > SMPRPG.getService(EntityService.class).getPlayerInstance(player).getLevel())
+        var entityService = SMPRPG.getService(EntityService.class);
+        if (!entityService.isTracking(player))
+            return send;
+
+        if (power > entityService.getPlayerInstance(player).getLevel())
             send = ComponentUtils.create("WARNING! ", NamedTextColor.RED).append(send);
 
         return send;
@@ -125,8 +128,7 @@ public class StructureEntitySpawnListener extends ToggleableListener {
         // Don't do anything if we aren't in a structure
         if (mostDangerousStructure == null || highestLevel < 1)
             return;
-
-        var plugin = SMPRPG.getInstance();
+        
         SMPRPG.getService(ActionBarService.class).addActionBarComponent(player, ActionBarService.ActionBarSource.STRUCTURE, getStructureComponent(player, mostDangerousStructure, highestLevel), 5);
     }
 
