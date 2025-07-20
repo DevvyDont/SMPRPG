@@ -1,0 +1,98 @@
+package xyz.devvydont.smprpg.items.blueprints.equipment;
+
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.CraftingRecipe;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.ability.Ability;
+import xyz.devvydont.smprpg.ability.AbilityActivationMethod;
+import xyz.devvydont.smprpg.ability.AbilityCost;
+import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.ItemClassification;
+import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
+import xyz.devvydont.smprpg.items.interfaces.IAbilityCaster;
+import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
+import xyz.devvydont.smprpg.services.ItemService;
+
+import java.util.Collection;
+import java.util.List;
+
+public class CrystallizedSugarBlueprint extends CustomItemBlueprint implements IAbilityCaster, ICraftable, ISellable {
+
+    public final int SPEED_COST = 50;
+
+    public CrystallizedSugarBlueprint(ItemService itemService, CustomItemType type) {
+        super(itemService, type);
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 1);
+    }
+
+    /**
+     * Determine what type of item this is.
+     */
+    @Override
+    public ItemClassification getItemClassification() {
+        return ItemClassification.EQUIPMENT;
+    }
+
+    /**
+     * Get the abilities this item has, and how they can be cast.
+     * @param item The item.
+     * @return A list of abilities.
+     */
+    @Override
+    public Collection<AbilityEntry> getAbilities(ItemStack item) {
+        return List.of(
+                new AbilityEntry(
+                        Ability.SUGAR_RUSH,
+                        AbilityActivationMethod.RIGHT_CLICK,
+                        AbilityCost.of(AbilityCost.Resource.MANA, SPEED_COST)
+                )
+        );
+    }
+
+    @Override
+    public NamespacedKey getRecipeKey() {
+        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+    }
+
+    @Override
+    public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapedRecipe(getRecipeKey(), generate());
+        recipe.shape("aaa", "asa", "aaa");
+        recipe.setIngredient('a', ItemService.generate(CustomItemType.ENCHANTED_AMETHYST));
+        recipe.setIngredient('s', ItemService.generate(CustomItemType.ENCHANTED_SUGAR));
+        return recipe;
+    }
+
+    /**
+     * A collection of items that will unlock the recipe for this item. Typically will be one of the components
+     * of the recipe itself, but can be set to whatever is desired
+     *
+     * @return
+     */
+    @Override
+    public Collection<ItemStack> unlockedBy() {
+        return List.of(ItemService.generate(Material.SUGAR), ItemService.generate(Material.SUGAR_CANE));
+    }
+
+    /**
+     * Given this item stack, how much should it be able to sell for?
+     * Keep in mind that the size of the stack needs to considered as well!
+     *
+     * @param item The item that can be sold.
+     * @return The worth of the item.
+     */
+    @Override
+    public int getWorth(ItemStack item) {
+        return 5_000 * item.getAmount();
+    }
+}

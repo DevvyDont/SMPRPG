@@ -19,6 +19,7 @@ import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DraconicCrystal;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.WarpCatalyst;
+import xyz.devvydont.smprpg.items.blueprints.resources.farming.SugarCaneBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.mining.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.mob.*;
 import xyz.devvydont.smprpg.items.blueprints.reusable.SimpleTexturedItem;
@@ -390,6 +391,7 @@ public enum CustomItemType {
     SQUID_HELMET("Squid Helmet", ItemRarity.RARE, SquidHelmet.class),
     MAGMA_HELMET("Magma Helmet", ItemRarity.RARE, MagmaHelmet.class),
     GRAPPLING_HOOK("Grappling Hook", Material.FISHING_ROD, ItemRarity.RARE, GrapplingHook.class),
+    CRYSTALLIZED_SUGAR("Crystallized Sugar", Material.SUGAR, ItemRarity.RARE, true, CrystallizedSugarBlueprint.class),
 
     SMALL_BACKPACK("Small Backpack", Material.FIREWORK_STAR, ItemRarity.COMMON, SmallBackpack.class),
     MEDIUM_BACKPACK("Medium Backpack", Material.FIREWORK_STAR, ItemRarity.UNCOMMON, MediumBackpack.class),
@@ -619,6 +621,12 @@ public enum CustomItemType {
 
     PREMIUM_FEATHER("Premium Feather", Material.FEATHER, ItemRarity.UNCOMMON, true, FeatherFamilyBlueprint.class),
     ENCHANTED_FEATHER("Enchanted Feather", Material.FEATHER, ItemRarity.RARE, true, FeatherFamilyBlueprint.class),
+
+    PREMIUM_SUGAR("Premium Sugar", Material.SUGAR, ItemRarity.UNCOMMON, true, SugarCaneBlueprintFamily.class),
+    PREMIUM_SUGAR_CANE("Premium Sugar Cane", Material.SUGAR_CANE, ItemRarity.UNCOMMON, true, SugarCaneBlueprintFamily.class),
+    ENCHANTED_SUGAR("Enchanted Sugar", Material.SUGAR, ItemRarity.RARE, true, SugarCaneBlueprintFamily.class),
+    ENCHANTED_SUGAR_CANE("Enchanted Sugar Cane", Material.SUGAR_CANE, ItemRarity.RARE, true, SugarCaneBlueprintFamily.class),
+    SUGAR_SINGULARITY("Sugar Singularity", Material.SUGAR_CANE, ItemRarity.EPIC, true, SugarCaneBlueprintFamily.class),
 
     // SINGULARITY SET
     SINGULARITY_HELMET(    "Singularity Helmet",     Material.CRYING_OBSIDIAN,      ItemRarity.MYTHIC, SingularityHelmet.class),

@@ -157,7 +157,7 @@ public class ItemArmor extends VanillaAttributeItem implements IBreakableEquipme
             case CHAINMAIL_HELMET, CHAINMAIL_CHESTPLATE, CHAINMAIL_LEGGINGS, CHAINMAIL_BOOTS -> ToolsUtil.COPPER_TOOL_DURABILITY;
             case LEATHER_HELMET, LEATHER_CHESTPLATE, LEATHER_LEGGINGS, LEATHER_BOOTS, TURTLE_HELMET -> ToolsUtil.WOOD_TOOL_DURABILITY;
 
-            default -> material.getMaxDurability() * 10;
+            default -> Math.max(1000, material.getMaxDurability() * 10);
         };
     }
 

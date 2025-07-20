@@ -46,6 +46,7 @@ import xyz.devvydont.smprpg.items.base.VanillaItemBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*;
 import xyz.devvydont.smprpg.items.interfaces.*;
+import xyz.devvydont.smprpg.items.listeners.AbilityCastingListener;
 import xyz.devvydont.smprpg.items.listeners.BackpackInteractionListener;
 import xyz.devvydont.smprpg.items.listeners.ExperienceBottleListener;
 import xyz.devvydont.smprpg.items.listeners.ShieldBlockingListener;
@@ -172,6 +173,7 @@ public class ItemService implements IService, Listener {
         listeners.add(new ShieldBlockingListener());
         listeners.add(new ExperienceBottleListener());
         listeners.add(new BackpackInteractionListener());
+        listeners.add(new AbilityCastingListener());
     }
 
     @Override
@@ -861,6 +863,20 @@ public class ItemService implements IService, Listener {
             lore.add(ComponentUtils.EMPTY);
             lore.add(ComponentUtils.create("(1x)  Uncompressed amount: ", NamedTextColor.DARK_GRAY).append(ComponentUtils.create(MinecraftStringUtils.formatNumber(compressable.getCompressedAmount()), NamedTextColor.DARK_GRAY, TextDecoration.BOLD)));
             lore.add(ComponentUtils.create("(64x) Uncompressed amount: ", NamedTextColor.DARK_GRAY).append(ComponentUtils.create(MinecraftStringUtils.formatNumber(compressable.getCompressedAmount() * 64L), NamedTextColor.DARK_GRAY, TextDecoration.BOLD)));
+        }
+
+        // Casts abilities?
+        if (blueprint instanceof IAbilityCaster caster) {
+
+            for (var ability : caster.getAbilities(itemStack)) {
+                lore.add(ComponentUtils.EMPTY);
+                lore.add(ComponentUtils.merge(
+                            AbilityUtil.getAbilityComponent(ability.ability().getName()),
+                            ComponentUtils.create(String.format(" (%s)", ability.activation().getDisplayName()), NamedTextColor.DARK_GRAY)
+                ));
+                lore.addAll(ability.ability().getDescription());
+            }
+
         }
 
         // Is this item reforged?
