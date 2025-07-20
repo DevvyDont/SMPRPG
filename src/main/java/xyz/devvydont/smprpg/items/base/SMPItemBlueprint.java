@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.components.FoodComponent;
@@ -222,16 +221,6 @@ public abstract class SMPItemBlueprint {
         if (wantFakeEnchantGlow())
             meta.setEnchantmentGlintOverride(true);
 
-        // Set durability if desired, handle case where we set durability and the tool can support it
-        if (this instanceof IBreakableEquipment breakable && meta instanceof Damageable damageable && breakable.getMaxDurability() > 0) {
-            damageable.setMaxDamage(breakable.getMaxDurability());
-        }
-        // Handle case where we didn't define a durability (unbreakable)
-        else if (meta instanceof Damageable) {
-            meta.setUnbreakable(true);
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-        }
-
         // Apply a color! (if we want them and can actually apply them...)
         if (this instanceof IDyeable && meta instanceof LeatherArmorMeta armorMeta) {
             Color color = ((IDyeable) this).getColor();
@@ -285,6 +274,17 @@ public abstract class SMPItemBlueprint {
             food.setSaturation(edible.getSaturation(itemStack));
             food.setCanAlwaysEat(edible.canAlwaysEat(itemStack));
             itemStack.editMeta(meta -> meta.setFood(food));
+        }
+
+        // If this is equipment with durability, apply a durability tag on it. Anything without this durability tag is considered unbreakable.
+        if (this instanceof IBreakableEquipment breakable) {
+            var dmg = itemStack.getData(DataComponentTypes.DAMAGE);
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, breakable.getMaxDurability());
+            itemStack.setData(DataComponentTypes.DAMAGE, dmg != null ? dmg : 0);
+        }
+        else {
+            itemStack.unsetData(DataComponentTypes.MAX_DAMAGE);
+            itemStack.unsetData(DataComponentTypes.DAMAGE);
         }
 
         // This is a hack to allow any item as far as vanilla is concerned to be enchanted.

@@ -30,7 +30,6 @@ import org.bukkit.event.world.LootGenerateEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -876,13 +875,15 @@ public class ItemService implements IService, Listener {
             lore.addAll(describable.getFooter(itemStack));
         }
 
-        // Durability if the item has it
-        if (meta instanceof Damageable damageable && damageable.hasMaxDamage() && !meta.isUnbreakable() && !(blueprint instanceof ChargedItemBlueprint)) {
+        // Durability if the item has it. Ignore charged item blueprints since that is handled in its own class.
+        var durabilityComponent = itemStack.getData(DataComponentTypes.MAX_DAMAGE);
+        var durabilityUsed = itemStack.getData(DataComponentTypes.DAMAGE);
+        if (durabilityComponent != null && durabilityUsed != null && !(blueprint instanceof ChargedItemBlueprint)) {
             lore.add(ComponentUtils.EMPTY);
             lore.add(
                     ComponentUtils.create("Durability: ")
-                            .append(ComponentUtils.create(MinecraftStringUtils.formatNumber(damageable.getMaxDamage()-damageable.getDamage()), NamedTextColor.RED))
-                            .append(ComponentUtils.create("/" + MinecraftStringUtils.formatNumber(damageable.getMaxDamage()), NamedTextColor.DARK_GRAY))
+                            .append(ComponentUtils.create(MinecraftStringUtils.formatNumber(durabilityComponent - durabilityUsed), NamedTextColor.RED))
+                            .append(ComponentUtils.create("/" + MinecraftStringUtils.formatNumber(durabilityComponent), NamedTextColor.DARK_GRAY))
             );
         }
 
