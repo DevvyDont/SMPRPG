@@ -23,7 +23,7 @@ public class LuxeChestplate extends LuxeArmorSet implements IDyeable {
 
     @Override
     public int getHealth() {
-        return (int) ItemArmor.getHealthFromMaterial(Material.NETHERITE_HELMET);
+        return 10;
     }
 
     @Override

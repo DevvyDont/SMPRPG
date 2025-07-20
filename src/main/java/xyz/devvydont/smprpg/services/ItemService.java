@@ -875,8 +875,11 @@ public class ItemService implements IService, Listener {
                             ComponentUtils.create(String.format(" (%s)", ability.activation().getDisplayName()), NamedTextColor.DARK_GRAY)
                 ));
                 lore.addAll(ability.ability().getDescription());
+                lore.add(ComponentUtils.merge(
+                        ComponentUtils.create("Usage Cost: ", NamedTextColor.GRAY),
+                        ComponentUtils.create(ability.cost().amount() + ability.cost().resource().getSymbol(), ability.cost().resource().getColor())
+                        ));
             }
-
         }
 
         // Is this item reforged?

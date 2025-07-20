@@ -120,6 +120,7 @@ public final class SMPRPG extends JavaPlugin {
         services.add(new AttributeService());  // Provides custom attribute functionality.
         services.add(new EntityDamageCalculatorService());  // Logic for most damage calculations.
         services.add(new ItemService());  // Provides custom items and handlers for them.
+        services.add(new AbilityService());  // Provides just about anything entity related, attributes, stats, etc.
         services.add(new EntityService());  // Provides just about anything entity related, attributes, stats, etc.
         services.add(new DifficultyService());  // Allows players to tweak their profile experience.
         services.add(new SpecialEffectService());  // Implements the "ailments" system.

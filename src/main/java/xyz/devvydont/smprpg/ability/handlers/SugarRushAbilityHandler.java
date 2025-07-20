@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.ability.AbilityContext;
 import xyz.devvydont.smprpg.ability.AbilityHandler;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
-public class SugarRush implements AbilityHandler {
+public class SugarRushAbilityHandler implements AbilityHandler {
 
     public static final int BOOST = 50;
     public static final int DURATION = 30;

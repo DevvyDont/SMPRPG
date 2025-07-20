@@ -22,7 +22,7 @@ public class LuxeLeggings extends LuxeArmorSet {
 
     @Override
     public int getHealth() {
-        return (int) ItemArmor.getHealthFromMaterial(Material.NETHERITE_LEGGINGS);
+        return 10;
     }
 
     @Override

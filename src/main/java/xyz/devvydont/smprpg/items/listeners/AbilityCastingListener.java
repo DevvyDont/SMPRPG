@@ -49,7 +49,7 @@ public class AbilityCastingListener extends ToggleableListener {
             }
 
             // Execute!
-            var success = ability.ability().getHandler().execute(new AbilityContext(event.getPlayer()));
+            var success = ability.ability().getHandler().execute(new AbilityContext(event.getPlayer(), event.getHand()));
             if (!success)
                 return;
             ability.cost().spend(player);

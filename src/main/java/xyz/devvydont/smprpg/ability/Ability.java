@@ -1,14 +1,17 @@
 package xyz.devvydont.smprpg.ability;
 
 import net.kyori.adventure.text.Component;
-import xyz.devvydont.smprpg.ability.handlers.SugarRush;
+import net.kyori.adventure.text.format.NamedTextColor;
+import xyz.devvydont.smprpg.ability.handlers.HotShotAbilityHandler;
+import xyz.devvydont.smprpg.ability.handlers.InstantTransmissionAbilityHandler;
+import xyz.devvydont.smprpg.ability.handlers.SugarRushAbilityHandler;
+import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static net.kyori.adventure.text.format.NamedTextColor.GOLD;
-import static net.kyori.adventure.text.format.NamedTextColor.GREEN;
+import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static xyz.devvydont.smprpg.util.formatting.ComponentUtils.merge;
 import static xyz.devvydont.smprpg.util.formatting.ComponentUtils.create;
 
@@ -23,11 +26,28 @@ public enum Ability {
                     create("Increases "),
                     create("speed", GOLD),
                     create(" by "),
-                    create("+" + SugarRush.BOOST + "%", GREEN),
+                    create("+" + SugarRushAbilityHandler.BOOST + "%", GREEN),
                     create(" for "),
-                    create(SugarRush.DURATION + "s", GREEN)
+                    create(SugarRushAbilityHandler.DURATION + "s", GREEN)
             )),
-            SugarRush::new)
+            SugarRushAbilityHandler::new),
+
+    INSTANT_TRANSMISSION(
+            "Instant Transmission",
+            List.of(
+                    create("Instantly teleport"),
+                    create("where you're looking!")
+            ),
+            InstantTransmissionAbilityHandler::new),
+
+    HOT_SHOT(
+            "Hot Shot",
+            List.of(
+                    merge(create("Shoot a "), create("fireball", RED), create(" in the direction")),
+                    merge(create("you are looking that")),
+                    merge(create("deals "), create(HotShotAbilityHandler.DAMAGE, RED), create(" damage"))
+            ),
+            HotShotAbilityHandler::new)
 
     ;
 

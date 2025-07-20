@@ -21,7 +21,7 @@ public class LuxeHelmet extends LuxeArmorSet {
 
     @Override
     public int getHealth() {
-        return (int) ItemArmor.getHealthFromMaterial(Material.NETHERITE_CHESTPLATE);
+        return 5;
     }
 
     @Override
