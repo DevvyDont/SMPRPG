@@ -291,6 +291,8 @@ public abstract class SMPItemBlueprint {
             itemStack.editMeta(meta -> meta.setUnbreakable(true));
         }
 
+        itemStack.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
         // This is a hack to allow any item as far as vanilla is concerned to be enchanted.
         // Our plugin decides what enchants get rolled and what items can be enchanted in the first place.
         if (this.getItemClassification().isEnchantable())
