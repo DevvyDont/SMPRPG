@@ -7,11 +7,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.world.LootGenerateEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
@@ -36,7 +40,8 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
     @Override
     protected void tick() {
-        // No need to do anything!
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 2, false, false));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, false, false));
     }
 
     @Override
@@ -46,7 +51,7 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
     @Override
     public void removed() {
-        // No need to do anything!
+        getPlayer().removePotionEffect(PotionEffectType.ABSORPTION);
     }
 
     /*
@@ -69,6 +74,22 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
         // Our player is being targeted.
         event.setCancelled(true);
+    }
+
+    /*
+     * If our player receives damage from another entity while shrouded, don't do any damage.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void __onReceiveDamageWhileShrouded(EntityDamageByEntityEvent event) {
+
+        // Ignore non players
+        if (!(event.getEntity() instanceof Player eventPlayer))
+            return;
+
+        if (!eventPlayer.equals(getPlayer()))
+            return;
+
+        event.setDamage(0);
     }
 
     /*
