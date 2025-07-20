@@ -40,6 +40,16 @@ public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeab
     }
 
     @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return 15_000 * item.getAmount();
+    }
+
+    @Override
     public ItemClassification getItemClassification() {
         return switch (this.getCustomItemType()) {
             case MINNOW_HELMET -> ItemClassification.HELMET;
