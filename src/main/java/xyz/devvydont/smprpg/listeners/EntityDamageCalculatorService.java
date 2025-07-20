@@ -360,6 +360,7 @@ public class EntityDamageCalculatorService implements Listener, IService {
 
         // 95% damage reduction for direct damage with bows.
         var hand = living.getEquipment().getItemInMainHand();
+        var handBlueprint = ItemService.blueprint(hand);
         if (!hand.getType().equals(Material.AIR)) {
             if (SMPRPG.getService(ItemService.class).getBlueprint(hand).getItemClassification().isBow()) {
                 event.setDamage(EntityDamageEvent.DamageModifier.BASE, event.getDamage() * .05);
@@ -369,8 +370,9 @@ public class EntityDamageCalculatorService implements Listener, IService {
             }
         }
 
-        // 95% damage reduction for abusing bow attributes.
-        if (isTryingToBowStackExploit(living)) {
+        // 95% damage reduction for abusing bow attributes or trying to dual wield weapons.
+        var offHandBlueprint = ItemService.blueprint(living.getEquipment().getItemInOffHand());
+        if (isTryingToBowStackExploit(living) || handBlueprint.getItemClassification().isWeapon() && offHandBlueprint.getItemClassification().isWeapon()) {
             event.setDamage(EntityDamageEvent.DamageModifier.BASE, event.getDamage() * .05);
             living.sendMessage(ComponentUtils.error("You seem to be struggling trying to deal damage with the items you are holding..."));
             living.getWorld().playSound(living.getLocation(), Sound.ENTITY_ENDERMAN_HURT, 1f, 1.25f);
@@ -430,7 +432,15 @@ public class EntityDamageCalculatorService implements Listener, IService {
             arrowDamage = getDifficultyAdjustedDamage(event.getEntity().getWorld(), arrowDamage) * AI_BOW_FORCE_FACTOR;
 
         // Punish bow stacking.
-        if (isTryingToBowStackExploit(event.getEntity())) {
+
+        var isDualWieldingWeapons = false;
+        if (event.getEntity().getEquipment() != null) {
+            var handBlueprint = ItemService.blueprint(event.getEntity().getEquipment().getItemInMainHand());
+            var offhandBlueprint = ItemService.blueprint(event.getEntity().getEquipment().getItemInOffHand());
+            isDualWieldingWeapons = handBlueprint.getItemClassification().isWeapon() && offhandBlueprint.getItemClassification().isWeapon();
+        }
+
+        if (isTryingToBowStackExploit(event.getEntity()) || isDualWieldingWeapons) {
             arrowDamage *= .05;
             event.getEntity().sendMessage(ComponentUtils.error("You seem to be struggling shooting arrows correctly with the items you are holding..."));
             event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.ENTITY_ENDERMAN_HURT, 1f, 1.25f);
