@@ -281,6 +281,8 @@ public abstract class SMPItemBlueprint {
             var dmg = itemStack.getData(DataComponentTypes.DAMAGE);
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, breakable.getMaxDurability());
             itemStack.setData(DataComponentTypes.DAMAGE, dmg != null ? dmg : 0);
+        } else if (this instanceof ChargedItemBlueprint){
+            // Don't do anything here. We need the damage data to persist.
         }
         else {
             itemStack.unsetData(DataComponentTypes.MAX_DAMAGE);

@@ -40,7 +40,7 @@ public class EnchantedMilkBucket extends ChargedItemBlueprint implements IHeader
     }
 
     @Override
-    public int maxCharges(ItemMeta meta) {
+    public int getMaxCharges(ItemStack item) {
         return 32;
     }
 

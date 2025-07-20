@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.base;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Sound;
@@ -20,7 +21,7 @@ public abstract class ChargedItemBlueprint extends CustomItemBlueprint implement
         super(itemService, type);
     }
 
-    public abstract int maxCharges(ItemMeta meta);
+    public abstract int getMaxCharges(ItemStack item);
 
     public Sound getBreakSound() {
         return Sound.ENTITY_ITEM_BREAK;
@@ -32,50 +33,46 @@ public abstract class ChargedItemBlueprint extends CustomItemBlueprint implement
     }
 
     public void useCharge(Player player, ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
 
-        int chargesUsed = getChargesUsed(meta);
-        chargesUsed++;
-        setChargesUsed(meta, chargesUsed);
-        item.setItemMeta(meta);
+        var itemDamage = item.getData(DataComponentTypes.DAMAGE);
+        if (itemDamage != null)
+            itemDamage++;
+        setChargesUsed(item, itemDamage != null ? itemDamage : 0);
 
-        chargesUsed = getChargesUsed(meta);
-
-        if (getChargesLeft(meta) <= 0)
+        if (getChargesLeft(item) <= 0)
             breakItem(player, item);
     }
 
-    public void setChargesUsed(ItemMeta meta, int charges) {
-
-        if (!(meta instanceof Damageable damageable))
-            return;
-
-        damageable.setDamage(charges);
-        updateItemData(meta);
+    public void setChargesUsed(ItemStack item, int charges) {
+        item.setData(DataComponentTypes.DAMAGE, charges);
+        updateItemData(item);
     }
 
-    public int getChargesUsed(ItemMeta meta) {
-        if (!(meta instanceof Damageable damageable))
-            return 0;
-
-        return damageable.getDamage();
+    public int getChargesUsed(ItemStack item) {
+        var damage = item.getData(DataComponentTypes.DAMAGE);
+        return damage != null ? damage : 0;
     }
 
-    public int getChargesLeft(ItemMeta meta) {
-
-        if (!(meta instanceof Damageable damageable))
+    public int getChargesLeft(ItemStack item) {
+        var damage = item.getData(DataComponentTypes.DAMAGE);
+        var maxDamage = item.getData(DataComponentTypes.MAX_DAMAGE);
+        if (damage == null || maxDamage == null)
             return 0;
+        return maxDamage - damage;
+    }
 
-        return damageable.getMaxDamage() - damageable.getDamage();
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_DAMAGE, getMaxCharges(itemStack));
+        var damage = itemStack.getData(DataComponentTypes.DAMAGE);
+        if (damage == null)
+            itemStack.setData(DataComponentTypes.DAMAGE, 0);
     }
 
     @Override
     public void updateItemData(ItemMeta meta) {
-        if (meta instanceof Damageable damageable)
-            damageable.setMaxDamage(maxCharges(meta));
-
         super.updateItemData(meta);
-
         meta.setUnbreakable(false);
     }
 
@@ -83,7 +80,7 @@ public abstract class ChargedItemBlueprint extends CustomItemBlueprint implement
     public List<Component> getFooter(ItemStack itemStack) {
         return List.of(
                 ComponentUtils.EMPTY,
-                ComponentUtils.create("Charges left: ").append(ComponentUtils.create(getChargesLeft(itemStack.getItemMeta()) + "", NamedTextColor.GREEN))
+                ComponentUtils.create("Charges left: ").append(ComponentUtils.create(getChargesLeft(itemStack) + "", NamedTextColor.GREEN))
         );
     }
 }
