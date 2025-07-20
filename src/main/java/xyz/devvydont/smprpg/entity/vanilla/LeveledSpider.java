@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.entity.vanilla;
 
+import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Spider;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
@@ -14,6 +15,10 @@ import java.util.List;
 public class LeveledSpider extends VanillaEntity<Spider> {
 
     public LeveledSpider(Spider entity) {
+        super(entity);
+    }
+
+    public LeveledSpider(CaveSpider entity) {
         super(entity);
     }
 
