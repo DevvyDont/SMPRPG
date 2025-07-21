@@ -1,4 +1,4 @@
-﻿package xyz.devvydont.smprpg.items.blueprints.food;
+package xyz.devvydont.smprpg.items.blueprints.food;
 
 import io.papermc.paper.datacomponent.item.Consumable;
 import org.bukkit.inventory.ItemStack;

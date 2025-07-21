@@ -1,11 +1,11 @@
 package xyz.devvydont.smprpg.ability;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import xyz.devvydont.smprpg.ability.handlers.HotShotAbilityHandler;
 import xyz.devvydont.smprpg.ability.handlers.InstantTransmissionAbilityHandler;
 import xyz.devvydont.smprpg.ability.handlers.SugarRushAbilityHandler;
-import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.ability.handlers.HealingHandler;
+import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +31,61 @@ public enum Ability {
                     create(SugarRushAbilityHandler.DURATION + "s", GREEN)
             )),
             SugarRushAbilityHandler::new),
+
+    MELON_MEND(
+            "Melon Mend",
+            List.of(merge(
+                    create("Heal for "),
+                    create("+" + HealingHandler.SMALL_HEAL_AMOUNT*HealingHandler.SMALL_HEAL_SECONDS*2, GREEN), create(Symbols.HEART, RED),
+                    create(" over "),
+                    create("+" + HealingHandler.SMALL_HEAL_SECONDS + "s", GREEN)
+            )),
+            () -> new HealingHandler(HealingHandler.SMALL_HEAL_AMOUNT, HealingHandler.SMALL_HEAL_SECONDS)
+    ),
+
+    FRUITFUL_REMEDY(
+            "Fruitful Remedy",
+            List.of(merge(
+                    create("Heal for "),
+                    create("+" + HealingHandler.NORMAL_HEAL_AMOUNT*HealingHandler.SMALL_HEAL_SECONDS*2, GREEN), create(Symbols.HEART, RED),
+                    create(" over "),
+                    create("+" + HealingHandler.SMALL_HEAL_SECONDS + "s", GREEN)
+            )),
+            () -> new HealingHandler(HealingHandler.NORMAL_HEAL_AMOUNT, HealingHandler.SMALL_HEAL_SECONDS)
+    ),
+
+    NATURES_RESPITE(
+            "Nature's Respite",
+            List.of(merge(
+                    create("Heal for "),
+                    create("+" + HealingHandler.BIG_HEAL_AMOUNT*HealingHandler.NORMAL_HEAL_SECONDS*2, GREEN), create(Symbols.HEART, RED),
+                    create(" over "),
+                    create("+" + HealingHandler.NORMAL_HEAL_SECONDS + "s", GREEN)
+            )),
+            () -> new HealingHandler(HealingHandler.BIG_HEAL_AMOUNT, HealingHandler.NORMAL_HEAL_SECONDS)
+    ),
+
+    FULL_BLOOM(
+            "Full Bloom",
+            List.of(merge(
+                    create("Heal for "),
+                    create("+" + HealingHandler.HEFTY_HEAL_AMOUNT*HealingHandler.NORMAL_HEAL_SECONDS*2, GREEN), create(Symbols.HEART, RED),
+                    create(" over "),
+                    create("+" + HealingHandler.NORMAL_HEAL_SECONDS + "s", GREEN)
+            )),
+            () -> new HealingHandler(HealingHandler.HEFTY_HEAL_AMOUNT, HealingHandler.NORMAL_HEAL_SECONDS)
+    ),
+
+    REJUVENATION_BURST(
+            "Rejuvenation Burst",
+            List.of(merge(
+                    create("Heal for "),
+                    create("+" + HealingHandler.COLOSSAL_HEAL_AMOUNT*HealingHandler.BIG_HEAL_SECONDS*2, GREEN), create(Symbols.HEART, RED),
+                    create(" over "),
+                    create("+" + HealingHandler.BIG_HEAL_SECONDS + "s", GREEN)
+            )),
+            () -> new HealingHandler(HealingHandler.COLOSSAL_HEAL_AMOUNT, HealingHandler.BIG_HEAL_SECONDS)
+    ),
 
     INSTANT_TRANSMISSION(
             "Instant Transmission",

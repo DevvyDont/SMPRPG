@@ -19,6 +19,7 @@ import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DraconicCrystal;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.WarpCatalyst;
+import xyz.devvydont.smprpg.items.blueprints.resources.farming.MelonBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.SugarCaneBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.mining.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.mob.*;
@@ -393,6 +394,13 @@ public enum CustomItemType {
     GRAPPLING_HOOK("Grappling Hook", Material.FISHING_ROD, ItemRarity.RARE, GrapplingHook.class),
     CRYSTALLIZED_SUGAR("Crystallized Sugar", Material.SUGAR, ItemRarity.RARE, true, CrystallizedSugarBlueprint.class),
 
+    // HEALING WANDS
+    HEALING_WAND("Wand of Healing", Material.STICK, ItemRarity.COMMON, true, HealingWandBlueprint.class),
+    ALLEVIATION_WAND("Wand of Alleviation", Material.STICK, ItemRarity.UNCOMMON, true, HealingWandBlueprint.class),
+    CURING_ROD("Scepter of Curing", Material.STICK, ItemRarity.RARE, true, HealingWandBlueprint.class),
+    STAFF_OF_REGENERATION("Staff of Regeneration", Material.STICK, ItemRarity.EPIC, true, HealingWandBlueprint.class),
+    STAFF_OF_REJUVENATION("Staff of Rejuvenation", Material.STICK, ItemRarity.LEGENDARY, true, HealingWandBlueprint.class),
+
     SMALL_BACKPACK("Small Backpack", Material.FIREWORK_STAR, ItemRarity.COMMON, SmallBackpack.class),
     MEDIUM_BACKPACK("Medium Backpack", Material.FIREWORK_STAR, ItemRarity.UNCOMMON, MediumBackpack.class),
     LARGE_BACKPACK("Large Backpack", Material.FIREWORK_STAR, ItemRarity.RARE, LargeBackpack.class),
@@ -629,6 +637,13 @@ public enum CustomItemType {
     ENCHANTED_SUGAR("Enchanted Sugar", Material.SUGAR, ItemRarity.RARE, true, SugarCaneBlueprintFamily.class),
     ENCHANTED_SUGAR_CANE("Enchanted Sugar Cane", Material.SUGAR_CANE, ItemRarity.RARE, true, SugarCaneBlueprintFamily.class),
     SUGAR_SINGULARITY("Sugar Singularity", Material.SUGAR_CANE, ItemRarity.EPIC, true, SugarCaneBlueprintFamily.class),
+
+    PREMIUM_MELON_SLICE("Premium Melon Slice", Material.MELON_SLICE, ItemRarity.UNCOMMON, true, MelonBlueprintFamily.class),
+    PREMIUM_MELON("Premium Melon", Material.MELON, ItemRarity.UNCOMMON, true, MelonBlueprintFamily.class),
+    ENCHANTED_MELON_SLICE("Enchanted Melon Slice", Material.MELON_SLICE, ItemRarity.RARE, true, MelonBlueprintFamily.class),
+    ENCHANTED_MELON("Enchanted Melon", Material.MELON, ItemRarity.RARE, true, MelonBlueprintFamily.class),
+    MELON_SLICE_SINGULARITY("Melon Slice Singularity", Material.GLISTERING_MELON_SLICE, ItemRarity.EPIC, true, MelonBlueprintFamily.class),
+    MELON_SINGULARITY("Melon Singularity", Material.MELON, ItemRarity.LEGENDARY, true, MelonBlueprintFamily.class),
 
     // SINGULARITY SET
     SINGULARITY_HELMET(    "Singularity Helmet",     Material.CRYING_OBSIDIAN,      ItemRarity.MYTHIC, SingularityHelmet.class),

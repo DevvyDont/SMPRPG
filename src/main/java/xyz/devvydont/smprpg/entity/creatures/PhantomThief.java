@@ -1,4 +1,4 @@
-﻿package xyz.devvydont.smprpg.entity.creatures;
+package xyz.devvydont.smprpg.entity.creatures;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
