@@ -2,10 +2,14 @@ package xyz.devvydont.smprpg.fishing.listeners;
 
 import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent;
 import io.papermc.paper.event.entity.EntityEquipmentChangedEvent;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -89,6 +93,10 @@ public class FishingBehaviorListeners extends ToggleableListener {
 
         event.getHook().setHookedEntity(_new);
         event.getHook().pullHookedEntity();
+
+        // If this isn't an item (sea creature), give it more force towards the player.
+        if (!(_new instanceof Item))
+            _new.setVelocity(event.getPlayer().getEyeLocation().toVector().subtract(_new.getLocation().toVector()).normalize().multiply(2));
     }
 
     /**

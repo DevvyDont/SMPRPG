@@ -257,7 +257,7 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
 
         // Treasure items
         materialWorthMap.put(Material.NAME_TAG, 5000);
-        materialWorthMap.put(Material.SADDLE, 5000);
+        materialWorthMap.put(Material.SADDLE, 5);
         materialWorthMap.put(Material.HEART_OF_THE_SEA, 10_000);
     }
 

@@ -83,14 +83,18 @@ public class FishingRewardRegistry {
         // Initialize the treasure pool.
         builder.putAll(FishingLootType.TREASURE,
 
-                new ItemStackFishingLoot.Builder(Material.SADDLE)
+                new ItemStackFishingLoot.Builder(Material.TURTLE_SCUTE)
+                        .withMinimumAmount(1)
+                        .withMaximumAmount(3)
                         .withMinecraftExperience(50)
                         .withSkillExperience(100)
+                        .withWeight(2)
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.DIAMOND)
                         .withMinecraftExperience(10)
                         .withSkillExperience(250)
+                        .withWeight(2)
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.NAUTILUS_SHELL)
@@ -98,6 +102,7 @@ public class FishingRewardRegistry {
                         .withSkillExperience(500)
                         .withRequirement(FishingLootRequirement.quality(100))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withWeight(2)
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.HEART_OF_THE_SEA)
@@ -105,6 +110,38 @@ public class FishingRewardRegistry {
                         .withMinecraftExperience(50)
                         .withSkillExperience(750)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.EXPERIENCE_BOTTLE)
+                        .withSkillExperience(500)
+                        .withMinecraftExperience(50)
+                        .withRequirement(FishingLootRequirement.quality(10))
+                        .withWeight(2)
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.LARGE_EXPERIENCE_BOTTLE)
+                        .withSkillExperience(750)
+                        .withMinecraftExperience(75)
+                        .withRequirement(FishingLootRequirement.quality(75))
+                        .build(),
+
+
+                new ItemStackFishingLoot.Builder(CustomItemType.HEFTY_EXPERIENCE_BOTTLE)
+                        .withSkillExperience(1000)
+                        .withMinecraftExperience(100)
+                        .withRequirement(FishingLootRequirement.quality(200))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.GIGANTIC_EXPERIENCE_BOTTLE)
+                        .withSkillExperience(1250)
+                        .withMinecraftExperience(125)
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.COLOSSAL_EXPERIENCE_BOTTLE)
+                        .withSkillExperience(1500)
+                        .withMinecraftExperience(150)
+                        .withRequirement(FishingLootRequirement.quality(1000))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.CAVIAR)
