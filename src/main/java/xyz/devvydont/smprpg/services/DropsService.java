@@ -599,4 +599,24 @@ public class DropsService implements IService, Listener {
         }, TickTime.TICK * 5);
     }
 
+    /**
+     * When something picks up a drop, and it is marked as owned by someone, don't let it be picked up. Unless of course
+     * they own the drop.
+     */
+    @EventHandler
+    private void __onEntityPickupItem(EntityPickupItemEvent event) {
+
+        var owner = getOwner(event.getEntity());
+        // No owner? don't do anything.
+        if (owner == null)
+            return;
+
+        // Entity owns the item? Don't do anything.
+        if (owner.equals(event.getEntity().getUniqueId()))
+            return;
+
+        // Trying to pick up an item we don't own.
+        event.setCancelled(true);
+    }
+
 }
