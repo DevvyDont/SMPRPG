@@ -189,6 +189,6 @@ public class EnvironmentalDamageListener extends ToggleableListener {
             return;
 
         if (shouldGiveIFrames(event.getCause()))
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> living.setNoDamageTicks(10), 0);
+            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> living.setNoDamageTicks(20), 0);
     }
 }
