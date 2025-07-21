@@ -99,6 +99,9 @@ public class EntityService implements IService, Listener {
         vanillaEntityHandlers.put(EntityType.ELDER_GUARDIAN, LeveledElderGuardian.class);
         vanillaEntityHandlers.put(EntityType.WARDEN, LeveledWarden.class);
 
+        vanillaEntityHandlers.put(EntityType.SLIME, LeveledSizedCube.class);
+        vanillaEntityHandlers.put(EntityType.MAGMA_CUBE, LeveledSizedCube.class);
+
         vanillaEntityHandlers.put(EntityType.BLAZE, LeveledBlaze.class);
         vanillaEntityHandlers.put(EntityType.WITHER_SKELETON, LeveledWitherSkeleton.class);
 

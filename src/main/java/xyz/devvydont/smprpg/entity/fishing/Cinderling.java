@@ -1,17 +1,24 @@
 package xyz.devvydont.smprpg.entity.fishing;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Slime;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.SlimeSplitEvent;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.Collection;
 import java.util.List;
 
-public class Cinderling extends SeaCreature<LivingEntity> {
+public class Cinderling extends SeaCreature<LivingEntity> implements Listener {
 
     /**
      * An unsafe constructor to use to allow dynamic creation of custom entities.
@@ -30,5 +37,17 @@ public class Cinderling extends SeaCreature<LivingEntity> {
         return List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CINDERITE), 2, this)
         );
+    }
+
+    /*
+    When we split, we don't want to spawn any children.
+     */
+    @EventHandler
+    private void __onSplit(SlimeSplitEvent event) {
+
+        if (!event.getEntity().equals(_entity))
+            return;
+
+        event.setCancelled(true);
     }
 }
