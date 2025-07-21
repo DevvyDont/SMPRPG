@@ -37,7 +37,7 @@ public class LeveledGuardian extends VanillaEntity<Guardian> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_PRISMARINE_CRYSTAL), 140, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_DIAMOND_BLOCK), 15000, this),
 
-                new ChancedItemDrop(ItemService.generate(CustomItemType.NEPTUNES_CONCH), 80, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.NEPTUNES_CONCH), 50, this),
 
                 // Extremely rare pity drops
                 new ChancedItemDrop(ItemService.generate(CustomItemType.NEPTUNE_HELMET), 200_000, this),
