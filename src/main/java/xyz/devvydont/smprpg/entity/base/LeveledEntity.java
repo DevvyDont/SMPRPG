@@ -516,7 +516,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * @return A fresh skill experience reward instance.
      */
     public SkillExperienceReward generateSkillExperienceReward() {
-        return SkillExperienceReward.of(SkillType.COMBAT, (int) (getLevel() * getSkillExperienceMultiplier()));
+        return SkillExperienceReward.of(SkillType.COMBAT, (int) (getLevel() * getSkillExperienceMultiplier() * 2));
     }
 
     /**
