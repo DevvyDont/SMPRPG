@@ -7,6 +7,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.fishing.loot.requirements.FishingLootRequirement;
 import xyz.devvydont.smprpg.services.EntityService;
@@ -34,6 +35,11 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
             SMPRPG.getInstance().getLogger().severe("Failed to generate custom sea creature for fishing event of type " + customEntityType);
             return null;
         }
+
+        // Tag the entity with who was responsible for spawning it. This allows the person to always get loot from them
+        // even if they had their kill stolen.
+        if (entity instanceof SeaCreature<?> seaCreature)
+            seaCreature.setSpawnedBy(ctx.getPlayer().getUniqueId());
 
         return entity.getEntity();
     }

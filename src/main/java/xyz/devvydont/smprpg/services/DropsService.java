@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.events.CustomChancedItemDropSuccessEvent;
@@ -464,6 +465,13 @@ public class DropsService implements IService, Listener {
         // Loop through all players that helped kill this entity and did at least some meaningful damage
         Map<Player, Double> involvedPlayers = new HashMap<>();
         involvedPlayers.put(killer, 1.0);  // Ensure killer at least gets credit for the kill
+
+        // If this is a sea creature, the person who spawned it in should get credit no matter what.
+        if (entity instanceof SeaCreature<?> seaCreature && seaCreature.getSpawnedBy() != null) {
+            var spawner = Bukkit.getPlayer(seaCreature.getSpawnedBy());
+            if (spawner != null)
+                involvedPlayers.put(spawner, 1.0);
+        }
 
         // If this entity has a damage map go through all participants and add them to the involved players
         if (entity instanceof IDamageTrackable trackable)
