@@ -75,7 +75,7 @@ public class ImpalingEnchantment extends VanillaEnchantment implements Listener 
 
     @Override
     public int getSkillRequirement() {
-        return 28;
+        return 17;
     }
 
     @EventHandler

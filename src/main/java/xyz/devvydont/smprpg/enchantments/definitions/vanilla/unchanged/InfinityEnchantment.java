@@ -78,7 +78,7 @@ public class InfinityEnchantment extends VanillaEnchantment implements Listener 
 
     @Override
     public int getSkillRequirement() {
-        return 12;
+        return 25;
     }
 
     /*
