@@ -28,10 +28,10 @@ public enum CustomEntityType implements IMenuDisplayable {
 
     // Mobs that spawn in castles.
     CASTLE_DWELLER(EntityType.ZOMBIE_VILLAGER, "Castle Dweller",
-            15, 400, 50, CastleDweller::new),
+            15, 400, 40, CastleDweller::new),
 
     UNDEAD_ARCHER(EntityType.SKELETON, "Undead Archer",
-            15, 350, 40, UndeadArcher::new),
+            15, 350, 25, UndeadArcher::new),
 
     // Mobs that spawn in woodland mansions.
     MANSION_SPIDER(EntityType.SPIDER, "Mansion Spider",
@@ -56,10 +56,17 @@ public enum CustomEntityType implements IMenuDisplayable {
                     .withChance(.35f)),
 
     PALACE_THUG(EntityType.WITHER_SKELETON, "Palace Thug",
-            35, 2_500, 350,
+            25, 1_250, 115,
             PalaceThug::new,
             EntitySpawnCondition.StructureSpawnCondition
-                    .structure(Structure.MANSION)
+                    .structure(Structure.FORTRESS)
+                    .withChance(.10f)),
+
+    PHANTOM_THIEF(EntityType.STRAY, "Phantom Thief",
+            25, 900, 70,
+            PhantomThief::new,
+            EntitySpawnCondition.StructureSpawnCondition
+                    .structure(Structure.FORTRESS)
                     .withChance(.10f)),
 
     FIERY_SYLPH(EntityType.BLAZE, "Fiery Sylph",
@@ -67,7 +74,7 @@ public enum CustomEntityType implements IMenuDisplayable {
             FierySylph::new,
             EntitySpawnCondition.StructureSpawnCondition
                     .structure(Structure.FORTRESS)
-                    .withChance(.10f)),
+                    .withChance(.05f)),
 
     PHOENIX(EntityType.BLAZE, "Phoenix",
             40, 5_000, 600,
@@ -263,6 +270,10 @@ public enum CustomEntityType implements IMenuDisplayable {
             case SNAPPING_TURTLE -> Material.TURTLE_SCUTE;
             case SEA_BEAR -> Material.SALMON;
             case MINNOW -> Material.COD;
+            case PROTOCOL_SENTINEL -> Material.IRON_INGOT;
+            case PHANTOM_THIEF -> Material.STRAY_SPAWN_EGG;
+            case CINDERLING -> Material.MAGMA_CREAM;
+            case ECHO_RAY -> Material.PHANTOM_MEMBRANE;
             default -> Material.SKELETON_SKULL;
         };
     }

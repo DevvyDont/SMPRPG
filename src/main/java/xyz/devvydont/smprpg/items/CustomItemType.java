@@ -418,6 +418,8 @@ public enum CustomItemType {
     COTTON_CANDY("Cotton Candy", Material.PINK_DYE, ItemRarity.COMMON, CottonCandy.class),
     SOGGY_LETTUCE("Soggy Lettuce", Material.GREEN_DYE, ItemRarity.COMMON, SoggyLettuce.class),
     STOLEN_APPLE("Stolen Apple", Material.APPLE, ItemRarity.COMMON, StolenApples.class),
+    PHANTOM_CURRY("Phantom Curry", Material.RAW_COPPER, ItemRarity.COMMON, PhantomCurry.class),
+    SHADOW_BREW("Shadow Brew", Material.POTION, ItemRarity.COMMON, ShadowBrew.class),
     CHILI_PEPPER("Chili Pepper", Material.GOLDEN_CARROT, ItemRarity.COMMON, ChiliPepper.class),
 
     // EXP BOTTLES
