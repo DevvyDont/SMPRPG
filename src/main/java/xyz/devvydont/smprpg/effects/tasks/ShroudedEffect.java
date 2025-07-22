@@ -45,7 +45,9 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, false, false));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, false, false));
         getPlayer().setAllowFlight(true);
-        getPlayer().setGlowing(true);
+
+        if (!getPlayer().isGlowing())
+            getPlayer().setGlowing(true);
 
         // If we are flying, subtract a second depending on the tick. This will make it appear like it's draining.
         if (getPlayer().isFlying())
