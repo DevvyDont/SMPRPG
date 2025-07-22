@@ -507,6 +507,9 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
         else if (_entity instanceof Creature)
             return 1;
 
+        else if (_entity instanceof Enemy)  // Seriously bukkit??
+            return 1;
+
         return 0;
     }
 
