@@ -41,11 +41,11 @@ public class PalaceThug<T extends LivingEntity> extends CustomEntityInstance<T> 
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.STOLEN_APPLE), 3, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_HELMET), 225, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_CHESTPLATE), 300, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_LEGGINGS), 250, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_BOOTS), 225, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_KNIFE), 300, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_HELMET), 425, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_CHESTPLATE), 500, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_LEGGINGS), 450, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_BOOTS), 425, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.REAVER_KNIFE), 500, this),
 
                 new ChancedItemDrop(ItemService.generate(Material.COAL), 4, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_COAL), 500, this),

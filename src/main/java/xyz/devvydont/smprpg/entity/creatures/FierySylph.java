@@ -28,19 +28,19 @@ public class FierySylph<T extends LivingEntity> extends CustomEntityInstance<T> 
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CHILI_PEPPER), 3, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_HELMET), 1000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_CHESTPLATE), 1000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_LEGGINGS), 1000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOOTS), 1000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOW), 1100, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_PICKAXE), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_INGOT), 2000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_HELMET), 425, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_CHESTPLATE), 500, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_LEGGINGS), 450, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOOTS), 425, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOW), 500, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_PICKAXE), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_INGOT), 250, this),
 
                 new ChancedItemDrop(ItemService.generate(Material.BLAZE_ROD), 2, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_BLAZE_ROD), 25, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_BLAZE_ROD), 350, this),
 
-                new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_ARROW), 400, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_ARROW), 150, this)
         );
     }
 
