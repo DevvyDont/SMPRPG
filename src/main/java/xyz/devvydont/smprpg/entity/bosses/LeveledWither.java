@@ -39,9 +39,9 @@ public class LeveledWither extends BossInstance<Wither> {
     @Override
     public EntityConfiguration getDefaultConfiguration() {
         return EntityConfiguration.builder()
-                .withLevel(40)
-                .withHealth(400_000)
-                .withDamage(1450)
+                .withLevel(30)
+                .withHealth(300_000)
+                .withDamage(240)
                 .build();
     }
 
