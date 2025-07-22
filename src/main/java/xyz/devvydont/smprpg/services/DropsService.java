@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.*;
 import org.bukkit.damage.DamageType;
+import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -605,6 +606,12 @@ public class DropsService implements IService, Listener {
      */
     @EventHandler
     private void __onEntityPickupItem(EntityPickupItemEvent event) {
+
+        // Never allow enemies to pickup items.
+        if (!(event.getEntity() instanceof Enemy)) {
+            event.setCancelled(true);
+            return;
+        }
 
         var owner = getOwner(event.getEntity());
         // No owner? don't do anything.
