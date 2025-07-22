@@ -363,6 +363,9 @@ public class DropsService implements IService, Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void __onPlayerDeath(PlayerDeathEvent event) {
 
+        // Don't lose any levels.
+        event.setKeepLevel(true);
+
         // Go through all the drops on the player and tag it as being owned
         for (ItemStack drop : event.getDrops()) {
             drop.editMeta(meta -> {
