@@ -62,7 +62,7 @@ public class ShroudedEffectListener implements Listener {
                 ComponentUtils.create("Death Certificate", NamedTextColor.RED),
                 ComponentUtils.create(" containing information regarding your death and the "),
                 effect.getNameComponent(),
-                ComponentUtils.create(" ailment to be temporarily invisible to hostile enemies.\nKeep in mind, "),
+                ComponentUtils.create(" ailment to help you get your items back. Enemies will\nnot target you, and you can fly (but not for free)!\nKeep in mind, "),
                 ComponentUtils.create("certain interactions", NamedTextColor.RED),
                 ComponentUtils.create(" are capable of making it expire!")
         )));
