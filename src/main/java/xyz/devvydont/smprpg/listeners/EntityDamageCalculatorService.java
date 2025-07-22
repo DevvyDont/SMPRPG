@@ -63,10 +63,10 @@ public class EntityDamageCalculatorService implements Listener, IService {
     public final static double MAX_ARROW_DAMAGE_VELOCITY = 60.0;
 
     // How much percentage of damage to increase per level of strength an entity has.
-    public final static double DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT = 20;
+    public final static double DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT = 30;
     // How much defense per level of resistance is applied when an entity has the resistance effect.
     // This will actually end up being implemented in LeveledEntity#getDefense() for convenience.
-    public final static int DEFENSE_PERCENT_PER_LEVEL_RESISTANCE_EFFECT = 20;
+    public final static int DEFENSE_PERCENT_PER_LEVEL_RESISTANCE_EFFECT = 100;
 
     /*
      * STATIC HELPER METHODS
