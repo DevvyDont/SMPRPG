@@ -86,8 +86,7 @@ public abstract class ReforgeBase implements Keyed, IAttributeContainer {
             var option = AttributeUtil.getAttributeFormat(entry.getAttribute());
             var number = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) ? option.format(entry.getAmount()) : option.format(entry.getAmount()*100);
             // If this is a multiplicative operation, or we need to force the attribute to show as a percent, use percents.
-            String percent = entry.getOperation().equals(AttributeModifier.Operation.ADD_NUMBER) && !option.percentage() ? "" : "%";
-            String numberSection = String.format("%s%s%s", sign, number, percent);
+            String numberSection = String.format("%s%s", sign, number);
             var wrapper = entry.getAttribute();
             var numberColor = wrapper.Type.equals(AttributeType.SPECIAL) ? NamedTextColor.LIGHT_PURPLE :
                     wrapper.Type.equals(AttributeType.HELPFUL) && entry.getAmount() > 0 ? NamedTextColor.GREEN : NamedTextColor.RED;
