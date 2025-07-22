@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.charms;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +17,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class LuckyCharm extends CustomAttributeItem implements IModelOverridden {
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 1);
+    }
 
     public LuckyCharm(ItemService itemService, CustomItemType type) {
         super(itemService, type);

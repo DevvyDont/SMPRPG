@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.charms;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -21,6 +22,12 @@ public class SpeedCharm extends CustomAttributeItem implements IModelOverridden 
 
     public SpeedCharm(ItemService itemService, CustomItemType type) {
         super(itemService, type);
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 1);
     }
 
     @Override
