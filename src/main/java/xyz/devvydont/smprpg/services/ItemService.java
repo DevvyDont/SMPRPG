@@ -1109,18 +1109,16 @@ public class ItemService implements IService, Listener {
         SMPItemBlueprint blueprint = getBlueprint(event.getEntity().getItemStack());
         ensureItemStackUpdated(event.getEntity().getItemStack());
 
-        // Don't continue if the item is common.
-        if (blueprint.getRarity(event.getEntity().getItemStack()).equals(ItemRarity.COMMON)) {
-            event.getEntity().setCustomNameVisible(false);
-            return;
-        }
-
         Component quantity = ComponentUtils.EMPTY;
         if (event.getEntity().getItemStack().getAmount() > 1)
             quantity = ComponentUtils.create(String.format("%dx ", event.getEntity().getItemStack().getAmount()));
 
         event.getEntity().customName(quantity.append(blueprint.getNameComponent(event.getEntity().getItemStack())));
         event.getEntity().setCustomNameVisible(true);
+
+        // Don't continue if the item is common.
+        if (blueprint.getRarity(event.getEntity().getItemStack()).equals(ItemRarity.COMMON))
+            event.getEntity().setCustomNameVisible(false);
     }
 
     /**
