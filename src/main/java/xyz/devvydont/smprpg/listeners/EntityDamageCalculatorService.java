@@ -397,7 +397,7 @@ public class EntityDamageCalculatorService implements Listener, IService {
 
         // Armor changes how much iframes we get for this attack
         if (armor != null)
-            iframeTicks = (int) armor.getValue();
+            iframeTicks = (int) armor.getValue() * 2;
 
         final int noDamageTicks = leveled.getInvincibilityTicks() + iframeTicks;
 

@@ -132,7 +132,7 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
 
     @Override
     public int getInvincibilityTicks() {
-        return 10;
+        return 20;
     }
 
     @Override
