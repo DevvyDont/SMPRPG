@@ -209,7 +209,7 @@ public class MenuDifficultyChooser extends MenuBase {
                     ComponentUtils.create("* -50% Incoming Damage", NamedTextColor.GREEN),
                     ComponentUtils.create("* +25% Skill Experience", NamedTextColor.GREEN),
                     ComponentUtils.create("* Ignore Dimension Requirements", NamedTextColor.GREEN),
-                    ComponentUtils.create("* -50% Drop Rate Chance", NamedTextColor.RED)
+                    ComponentUtils.create("* Permanent -50 Luck (Drop rates)", NamedTextColor.RED)
             );
 
             case STANDARD -> List.of(
@@ -218,7 +218,7 @@ public class MenuDifficultyChooser extends MenuBase {
             );
 
             case HARD -> List.of(
-                    ComponentUtils.create("* +100% Drop Rate Chance", NamedTextColor.GREEN),
+                    ComponentUtils.create("* Permanent +100 Luck (Drop rates)", NamedTextColor.GREEN),
                     ComponentUtils.create("* +50% Vanilla Experience from Orbs", NamedTextColor.GREEN),
                     ComponentUtils.create("* x2 Incoming Damage", NamedTextColor.RED),
                     ComponentUtils.create("* -50% Base Stats", NamedTextColor.RED),

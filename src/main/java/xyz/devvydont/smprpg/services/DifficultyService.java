@@ -48,15 +48,15 @@ public class DifficultyService implements IService, Listener {
     }
 
     /**
-     * Given a difficulty, determine the drop chance multiplier.
+     * Given a difficulty, determine the luck boost.
      * @param difficulty The difficulty a player is on.
-     * @return The multiplier of drop rate chance they receive.
+     * @return The luck boost they receive.
      */
-    public static float getDropRateChanceMultiplier(ProfileDifficulty difficulty) {
+    public static int getAdditiveDropRateFor(ProfileDifficulty difficulty) {
         return switch (difficulty) {
-            case EASY -> -.5f;
-            case HARD -> 1f;
-            default -> 0f;
+            case EASY -> -50;
+            case HARD -> 100;
+            default -> 0;
         };
     }
 
@@ -125,14 +125,14 @@ public class DifficultyService implements IService, Listener {
         luck.removeModifier(DIFFICULTY_MODIFIER_KEY);
 
         // If we don't have a multiplier to give, no reason to add a modifier.
-        var multiplier = getDropRateChanceMultiplier(difficulty);
-        if (multiplier == 0) {
+        var boost = getAdditiveDropRateFor(difficulty);
+        if (boost == 0) {
             luck.save(player, AttributeWrapper.LUCK);
             return;
         }
 
         // Apply a luck modifier based on the difficulty.
-        luck.addModifier(new AttributeModifier(DIFFICULTY_MODIFIER_KEY, getDropRateChanceMultiplier(difficulty), AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY));
+        luck.addModifier(new AttributeModifier(DIFFICULTY_MODIFIER_KEY, boost, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
         luck.save(player, AttributeWrapper.LUCK);
     }
 
