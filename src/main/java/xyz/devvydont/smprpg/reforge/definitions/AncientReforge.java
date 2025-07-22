@@ -21,7 +21,7 @@ public class AncientReforge extends ReforgeBase {
     }
 
     public static int getDefenseBonus(ItemRarity rarity) {
-        return (rarity.ordinal() + 1) * 2 / 3;
+        return rarity.ordinal() + 1;
     }
 
     public static float getMovementSpeedBonus(ItemRarity rarity) {
@@ -32,14 +32,14 @@ public class AncientReforge extends ReforgeBase {
 
     public static float getStrengthBonus(ItemRarity rarity) {
         if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return .07f;
-        return .05f;
+            return .05f;
+        return .03f;
     }
 
     public static float getLuckBonus(ItemRarity rarity) {
         if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return .06f;
-        return .03f;
+            return 2;
+        return 1;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AncientReforge extends ReforgeBase {
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, getMovementSpeedBonus(rarity)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, getMovementSpeedBonus(rarity)),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrengthBonus(rarity)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.LUCK, getLuckBonus(rarity))
+                AttributeEntry.additive(AttributeWrapper.LUCK, getLuckBonus(rarity))
         );
     }
 

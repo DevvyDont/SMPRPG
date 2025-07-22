@@ -25,22 +25,18 @@ public class PolishedReforge extends ReforgeBase {
     }
 
     public static float getMovementSpeedBonus(ItemRarity rarity) {
-        if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return .02f;
         return .01f;
     }
 
     public static float getStrengthBonus(ItemRarity rarity) {
         if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return .03f;
-        return .02f;
+            return .02f;
+        return .01f;
     }
 
 
     public static float getLuckBonus(ItemRarity rarity) {
-        if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return .02f;
-        return .01f;
+        return 1;
     }
 
     @Override
@@ -52,7 +48,7 @@ public class PolishedReforge extends ReforgeBase {
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, getMovementSpeedBonus(rarity)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, getMovementSpeedBonus(rarity)),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrengthBonus(rarity)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.LUCK, getLuckBonus(rarity))
+                AttributeEntry.additive(AttributeWrapper.LUCK, getLuckBonus(rarity))
         );
     }
 
@@ -67,6 +63,6 @@ public class PolishedReforge extends ReforgeBase {
 
     @Override
     public int getPowerRating() {
-        return 3;
+        return 2;
     }
 }

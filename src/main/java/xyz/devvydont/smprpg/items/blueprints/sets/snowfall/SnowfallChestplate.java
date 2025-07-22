@@ -24,7 +24,7 @@ public class SnowfallChestplate extends SnowfallArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 480),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 350),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .45),
-                new ScalarAttributeEntry(AttributeWrapper.LUCK, .25)
+                AttributeEntry.additive(AttributeWrapper.LUCK, 25)
         );
     }
 

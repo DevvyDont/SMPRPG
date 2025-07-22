@@ -24,7 +24,7 @@ public class SnowfallLeggings extends SnowfallArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 455),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 320),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .45),
-                new ScalarAttributeEntry(AttributeWrapper.LUCK, .25)
+                AttributeEntry.additive(AttributeWrapper.LUCK, 25)
         );
     }
 

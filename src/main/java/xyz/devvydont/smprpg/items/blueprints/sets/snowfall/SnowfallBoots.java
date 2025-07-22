@@ -24,7 +24,7 @@ public class SnowfallBoots extends SnowfallArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 355),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 250),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .45),
-                new ScalarAttributeEntry(AttributeWrapper.LUCK, .25)
+                AttributeEntry.additive(AttributeWrapper.LUCK, 25)
         );
     }
 

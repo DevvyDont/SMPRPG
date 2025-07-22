@@ -24,7 +24,7 @@ public class SnowfallHelmet extends SnowfallArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 380),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 275),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .45),
-                new ScalarAttributeEntry(AttributeWrapper.LUCK, .25)
+                AttributeEntry.additive(AttributeWrapper.LUCK, 25)
         );
     }
 

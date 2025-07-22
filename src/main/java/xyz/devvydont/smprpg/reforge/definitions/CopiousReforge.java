@@ -22,7 +22,7 @@ public class CopiousReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                new MultiplicativeAttributeEntry(AttributeWrapper.LUCK, rarity.ordinal() * .02 + .06)
+                AttributeEntry.additive(AttributeWrapper.LUCK, rarity.ordinal() * 2 + 3)
         );
     }
 
@@ -35,6 +35,6 @@ public class CopiousReforge extends ReforgeBase {
 
     @Override
     public int getPowerRating() {
-        return 3;
+        return 2;
     }
 }

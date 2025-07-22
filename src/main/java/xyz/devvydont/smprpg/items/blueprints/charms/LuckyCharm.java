@@ -36,7 +36,7 @@ public class LuckyCharm extends CustomAttributeItem implements IModelOverridden 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new MultiplicativeAttributeEntry(AttributeWrapper.LUCK, .3)
+                AttributeEntry.additive(AttributeWrapper.LUCK, 30)
         );
     }
 
