@@ -207,7 +207,6 @@ public abstract class SMPItemBlueprint {
             return List.of();
 
         List<Component> lines = new ArrayList<>();
-        lines.add(ComponentUtils.EMPTY);
         lines.add(ComponentUtils.create(reforge.getType().display() + " Reforge", NamedTextColor.BLUE));
         lines.addAll(reforge.getDescription());
         return lines;
