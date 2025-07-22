@@ -464,6 +464,10 @@ public class EntityDamageCalculatorService implements Listener, IService {
         if (!(trident.getShooter() instanceof LivingEntity shooter))
             return;
 
+        // Players always crit tridents.
+        if (shooter instanceof Player)
+            trident.setCritical(true);
+
         var attackDamage = shooter.getAttribute(Attribute.ATTACK_DAMAGE);
         // This entity doesn't have an attack damage attribute, we can't do anything.
         if (attackDamage == null)
