@@ -38,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.items.SMPItemQuery;
 import xyz.devvydont.smprpg.items.base.ChargedItemBlueprint;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -1108,6 +1109,12 @@ public class ItemService implements IService, Listener {
         SMPItemBlueprint blueprint = getBlueprint(event.getEntity().getItemStack());
         ensureItemStackUpdated(event.getEntity().getItemStack());
 
+        // Don't continue if the item is common.
+        if (blueprint.getRarity(event.getEntity().getItemStack()).equals(ItemRarity.COMMON)) {
+            event.getEntity().setCustomNameVisible(false);
+            return;
+        }
+
         Component quantity = ComponentUtils.EMPTY;
         if (event.getEntity().getItemStack().getAmount() > 1)
             quantity = ComponentUtils.create(String.format("%dx ", event.getEntity().getItemStack().getAmount()));
@@ -1123,6 +1130,13 @@ public class ItemService implements IService, Listener {
     private void __onCustomItemMerge(ItemMergeEvent event) {
 
         var blueprint = getBlueprint(event.getEntity().getItemStack());
+
+        // Do not do this for common items.
+        if (blueprint.getRarity(event.getEntity().getItemStack()).equals(ItemRarity.COMMON)) {
+            event.getEntity().setCustomNameVisible(false);
+            return;
+        }
+        
         int newTotal = event.getEntity().getItemStack().getAmount() + event.getTarget().getItemStack().getAmount();
 
         var quantity = ComponentUtils.EMPTY;

@@ -306,6 +306,12 @@ public class DropsService implements IService, Listener {
                             continue;
                         }
 
+                        // Common items don't display a tag.
+                        if (ItemService.blueprint(item.getItemStack()).getRarity(item.getItemStack()).equals(ItemRarity.COMMON)) {
+                            item.setCustomNameVisible(false);
+                            continue;
+                        }
+
                         // If it hasn't expired yet, update the name of the item
                         String rawName = getOwnerName(item);
                         if (rawName == null)
@@ -412,8 +418,10 @@ public class DropsService implements IService, Listener {
         event.getEntity().setInvulnerable(true);
 
         // Only use a name tag for uncommon and better items.
-        if (rarity.ordinal() >= ItemRarity.UNCOMMON.ordinal())
+        var nameVisible = rarity.ordinal() >= ItemRarity.UNCOMMON.ordinal();
+        if (nameVisible)
             event.getEntity().customName(name.append(ComponentUtils.create(" (" + p.getName() + ")", NamedTextColor.DARK_GRAY)));
+        event.getEntity().setCustomNameVisible(nameVisible);
 
         // Items expire when we tell them to, so let bukkit never decide for us
         event.getEntity().setUnlimitedLifetime(true);
