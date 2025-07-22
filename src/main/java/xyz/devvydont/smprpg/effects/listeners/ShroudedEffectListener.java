@@ -47,7 +47,7 @@ public class ShroudedEffectListener implements Listener {
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onRespawn(PlayerRespawnEvent event) {
-        var effect = new ShroudedEffect(service, event.getPlayer(), 60*5);
+        var effect = new ShroudedEffect(service, event.getPlayer(), 60*10);
         var msg = ComponentUtils.merge(
                 ComponentUtils.create("From "),
                 ComponentUtils.create("???", NamedTextColor.DARK_RED, TextDecoration.BOLD),
@@ -67,7 +67,7 @@ public class ShroudedEffectListener implements Listener {
                 ComponentUtils.create(" are capable of making it expire!")
         )));
         event.getPlayer().sendMessage(msg);
-        service.giveEffect(event.getPlayer(), new ShroudedEffect(service, event.getPlayer(),  60*5));
+        service.giveEffect(event.getPlayer(), new ShroudedEffect(service, event.getPlayer(),  60*10));
     }
 
 }

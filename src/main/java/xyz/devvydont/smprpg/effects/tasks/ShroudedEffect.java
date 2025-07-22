@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.effects.tasks;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -43,16 +44,25 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 2, false, false));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, false, false));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, false, false));
+        getPlayer().setAllowFlight(true);
+        getPlayer().setGlowing(true);
+
+        // If we are flying, subtract a second depending on the tick. This will make it appear like it's draining.
+        if (getPlayer().isFlying())
+            seconds--;
     }
 
     @Override
     protected void expire() {
         // No need to do anything!
+        getPlayer().setAllowFlight(false);
+        getPlayer().setGlowing(false);
     }
 
     @Override
     public void removed() {
-        
+        getPlayer().setAllowFlight(false);
+        getPlayer().setGlowing(false);
     }
 
     /*
