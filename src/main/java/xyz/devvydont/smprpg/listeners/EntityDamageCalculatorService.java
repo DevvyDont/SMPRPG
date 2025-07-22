@@ -451,6 +451,50 @@ public class EntityDamageCalculatorService implements Listener, IService {
     }
 
     /**
+     * Used to tag tridents with the proper damage value based on the attack damage stat of the shooter.
+     * @param event The {@link ProjectileLaunchEvent} event that provides us with relevant context.
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    private void __onEntityThrowTrident(ProjectileLaunchEvent event) {
+
+        var projectile = event.getEntity();
+        if (!(projectile instanceof Trident trident))
+            return;
+
+        if (!(trident.getShooter() instanceof LivingEntity shooter))
+            return;
+
+        var attackDamage = shooter.getAttribute(Attribute.ATTACK_DAMAGE);
+        // This entity doesn't have an attack damage attribute, we can't do anything.
+        if (attackDamage == null)
+            return;
+
+        // Using the attack of the entity, set a base damage value to use.
+        double tridentDamage = attackDamage.getValue();
+
+        // If this wasn't a player, consider difficulty and give the arrow a 2x boost to nullify velocity falloff since entities don't shoot arrows that travel at max speed
+        if (!(shooter instanceof Player))
+            tridentDamage = getDifficultyAdjustedDamage(shooter.getWorld(), tridentDamage);
+
+        // Punish bow stacking.
+        var isDualWieldingWeapons = false;
+        if (shooter.getEquipment() != null) {
+            var handBlueprint = ItemService.blueprint(shooter.getEquipment().getItemInMainHand());
+            var offhandBlueprint = ItemService.blueprint(shooter.getEquipment().getItemInOffHand());
+            isDualWieldingWeapons = handBlueprint.getItemClassification().isWeapon() && offhandBlueprint.getItemClassification().isWeapon();
+        }
+
+        if (isTryingToBowStackExploit(shooter) || isDualWieldingWeapons) {
+            tridentDamage *= .05;
+            shooter.sendMessage(ComponentUtils.error("You seem to be struggling throwing tridents correctly with the items you are holding..."));
+            shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_ENDERMAN_HURT, 1f, 1.25f);
+        }
+
+        // Set the damage.
+        setBaseProjectileDamage(trident, tridentDamage);
+    }
+
+    /**
      * As soon as we possibly can, intercept events where an arrow is damaging an entity.
      * We need to set the base damage of this event to the arrow's base damage and apply
      * a multiplier on it based on arrow velocity.
