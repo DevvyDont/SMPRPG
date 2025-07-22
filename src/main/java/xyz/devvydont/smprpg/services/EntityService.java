@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -261,6 +262,16 @@ public class EntityService implements IService, Listener {
         var entity = location.getWorld().spawnEntity(location, type.Type, CreatureSpawnEvent.SpawnReason.CUSTOM, e -> {
             e.getPersistentDataContainer().set(getClassNamespacedKey(), PersistentDataType.STRING, type.key());
         });
+
+        // If this entity has equipment, completely remove it. Our custom entities need to define their own items.
+        if (entity instanceof LivingEntity living && living.getEquipment() != null) {
+            living.getEquipment().setItemInMainHand(null);
+            living.getEquipment().setItemInOffHand(null);
+            living.getEquipment().setHelmet(null);
+            living.getEquipment().setChestplate(null);
+            living.getEquipment().setLeggings(null);
+            living.getEquipment().setBoots(null);
+        }
 
         // Custom entities must be LivingEntity. If they aren't, we have to use reflection. This isn't ideal.
         if (!(entity instanceof LivingEntity living)) {
