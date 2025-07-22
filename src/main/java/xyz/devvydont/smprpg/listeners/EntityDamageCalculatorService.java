@@ -66,7 +66,7 @@ public class EntityDamageCalculatorService implements Listener, IService {
     public final static double DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT = 30;
     // How much defense per level of resistance is applied when an entity has the resistance effect.
     // This will actually end up being implemented in LeveledEntity#getDefense() for convenience.
-    public final static int DEFENSE_PERCENT_PER_LEVEL_RESISTANCE_EFFECT = 100;
+    public final static int DEFENSE_PER_LEVEL_RESISTANCE = 150;
 
     /*
      * STATIC HELPER METHODS
