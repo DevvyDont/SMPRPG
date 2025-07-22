@@ -21,7 +21,7 @@ public class AncientReforge extends ReforgeBase {
     }
 
     public static int getDefenseBonus(ItemRarity rarity) {
-        return rarity.ordinal() + 1;
+        return rarity.ordinal()*2 + 1;
     }
 
     public static float getMovementSpeedBonus(ItemRarity rarity) {
