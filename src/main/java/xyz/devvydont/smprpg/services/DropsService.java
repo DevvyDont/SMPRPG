@@ -614,7 +614,7 @@ public class DropsService implements IService, Listener {
     private void __onEntityPickupItem(EntityPickupItemEvent event) {
 
         // Never allow enemies to pickup items.
-        if (!(event.getEntity() instanceof Enemy)) {
+        if (event.getEntity() instanceof Enemy) {
             event.setCancelled(true);
             return;
         }
