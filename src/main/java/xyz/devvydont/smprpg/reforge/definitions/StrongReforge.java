@@ -25,7 +25,8 @@ public class StrongReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBoost(rarity))
+                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBoost(rarity)),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 20 + rarity.ordinal() * 5)
         );
     }
 

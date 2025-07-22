@@ -20,13 +20,14 @@ public class StingingReforge extends ReforgeBase {
     }
 
     public static float getDamageBonus(ItemRarity rarity) {
-        return .02f * rarity.ordinal() + .06f;
+        return .02f * rarity.ordinal() + .04f;
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBonus(rarity))
+                AttributeEntry.multiplicative(AttributeWrapper.STRENGTH, getDamageBonus(rarity)),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 50 + rarity.ordinal() * 20)
         );
     }
 

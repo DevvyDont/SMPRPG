@@ -22,13 +22,13 @@ public class LeveledBlaze extends VanillaEntity<Blaze> {
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CHILI_PEPPER), 3, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_HELMET), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_CHESTPLATE), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_LEGGINGS), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOOTS), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOW), 2500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_PICKAXE), 4000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_INGOT), 3000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_HELMET), 10_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_CHESTPLATE), 10_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_LEGGINGS), 10_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOOTS), 10_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOW), 10_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_PICKAXE), 5_000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_INGOT), 2_500, this),
 
                 new ChancedItemDrop(ItemService.generate(Material.BLAZE_ROD), 2, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_BLAZE_ROD), 35, this),

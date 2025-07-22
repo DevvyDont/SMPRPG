@@ -24,11 +24,16 @@ public class SavageReforge extends ReforgeBase {
         return .04f * (rarity.ordinal()+1) + .16f;
     }
 
+    public int getCritical(ItemRarity rarity) {
+        return 10 + rarity.ordinal() * 15;
+    }
+
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBoost(rarity)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .05),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, getCritical(rarity)),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, -50 - 10*rarity.ordinal()),
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, -50 - 10*rarity.ordinal())
         );
@@ -44,6 +49,6 @@ public class SavageReforge extends ReforgeBase {
 
     @Override
     public int getPowerRating() {
-        return 2;
+        return 1;
     }
 }

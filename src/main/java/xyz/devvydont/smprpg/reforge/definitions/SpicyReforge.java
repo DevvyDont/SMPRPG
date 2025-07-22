@@ -19,6 +19,10 @@ public class SpicyReforge extends ReforgeBase {
         return .05f * rarity.ordinal() + .10f;
     }
 
+    public static int getCriticalBonus(ItemRarity rarity) {
+        return 10 + rarity.ordinal() * 10;
+    }
+
     public SpicyReforge(ReforgeType type) {
         super(type);
     }
@@ -27,7 +31,8 @@ public class SpicyReforge extends ReforgeBase {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBonus(rarity)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .05f)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .05f),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getCriticalBonus(rarity))
         );
     }
 
@@ -35,12 +40,12 @@ public class SpicyReforge extends ReforgeBase {
     public List<Component> getDescription() {
         return List.of(
                 ComponentUtils.create("Provides a generous boost to"),
-                ComponentUtils.create("damage and attack speed")
+                ComponentUtils.create("damage output stats")
         );
     }
 
     @Override
     public int getPowerRating() {
-        return 2;
+        return 3;
     }
 }

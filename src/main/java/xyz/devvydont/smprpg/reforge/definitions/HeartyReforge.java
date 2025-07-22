@@ -21,7 +21,8 @@ public class HeartyReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, (rarity.ordinal()+1)*7)
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, (rarity.ordinal()+1)*7),
+                AttributeEntry.additive(AttributeWrapper.REGENERATION, (rarity.ordinal()+1)*10)
         );
     }
 

@@ -56,6 +56,8 @@ public class WitheredReforge extends ReforgeBase implements Listener {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBuff(rarity)),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getDamageBuff(rarity)*100),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, getDamageBuff(rarity)*50),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .12f)
         );
     }
