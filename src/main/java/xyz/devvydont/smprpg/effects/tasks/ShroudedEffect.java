@@ -42,6 +42,7 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
     protected void tick() {
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 2, false, false));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, false, false));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, false, false));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
     @Override
     public void removed() {
-        getPlayer().removePotionEffect(PotionEffectType.ABSORPTION);
+        
     }
 
     /*
