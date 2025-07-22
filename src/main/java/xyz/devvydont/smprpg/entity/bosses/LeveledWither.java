@@ -41,8 +41,13 @@ public class LeveledWither extends BossInstance<Wither> {
         return EntityConfiguration.builder()
                 .withLevel(30)
                 .withHealth(300_000)
-                .withDamage(240)
+                .withDamage(250)
                 .build();
+    }
+
+    @Override
+    public double getHalfHeartValue() {
+        return 50;
     }
 
     @Override

@@ -30,6 +30,11 @@ public class LeveledElderGuardian extends BossInstance<ElderGuardian> {
     }
 
     @Override
+    public long getTimeLimit() {
+        return 60 * 5;
+    }
+
+    @Override
     public String getClassKey() {
         return VanillaEntity.VANILLA_CLASS_KEY;
     }
