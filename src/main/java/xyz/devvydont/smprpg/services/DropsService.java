@@ -63,11 +63,11 @@ public class DropsService implements IService, Listener {
     }
 
     // How long items will last on the ground in seconds when marked as a drop.
-    public static int COMMON_EXPIRE_SECONDS = 60 * 60;    // 1hr
-    public static int UNCOMMON_EXPIRE_SECONDS = 90 * 60;  // 1.5hr
-    public static int RARE_EXPIRE_SECONDS = 60 * 60 * 5;  // 5hr
-    public static int EPIC_EXPIRE_SECONDS = 60 * 60 * 12; // 12hr
-    public static int LEGENDARY_EXPIRE_SECONDS = 60 * 60 * 24; // 24hr
+    public static int COMMON_EXPIRE_SECONDS = 60 * 20;    // 20min
+    public static int UNCOMMON_EXPIRE_SECONDS = 60 * 60;  // 1hr
+    public static int RARE_EXPIRE_SECONDS = 60 * 60 * 2;  // 2hr
+    public static int EPIC_EXPIRE_SECONDS = 60 * 60 * 4; // 4hr
+    public static int LEGENDARY_EXPIRE_SECONDS = 60 * 60 * 12; // 12hr
 
     /*
      * Helper method to determine how long an item should last based on its rarity
@@ -408,9 +408,12 @@ public class DropsService implements IService, Listener {
 
         // Transfer ownership to the item entity, add their name to it, and make it unbreakable
         event.getEntity().setOwner(owner);
-        event.getEntity().customName(name.append(ComponentUtils.create(" (" + p.getName() + ")", NamedTextColor.DARK_GRAY)));
         event.getEntity().setCanMobPickup(false);
         event.getEntity().setInvulnerable(true);
+
+        // Only use a name tag for uncommon and better items.
+        if (rarity.ordinal() >= ItemRarity.UNCOMMON.ordinal())
+            event.getEntity().customName(name.append(ComponentUtils.create(" (" + p.getName() + ")", NamedTextColor.DARK_GRAY)));
 
         // Items expire when we tell them to, so let bukkit never decide for us
         event.getEntity().setUnlimitedLifetime(true);
