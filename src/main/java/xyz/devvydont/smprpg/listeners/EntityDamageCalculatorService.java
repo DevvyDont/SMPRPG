@@ -18,13 +18,11 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.listeners.damage.CriticalDamageListener;
 import xyz.devvydont.smprpg.listeners.damage.DamagePopupListener;
-import xyz.devvydont.smprpg.services.DifficultyService;
-import xyz.devvydont.smprpg.services.EntityService;
-import xyz.devvydont.smprpg.services.IService;
-import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.services.*;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
@@ -663,6 +661,28 @@ public class EntityDamageCalculatorService implements Listener, IService {
         // Apply the multiplier.
         double multiplier = 0.05 + (1.0 - 0.05) * Math.pow(cooldown, 2);
         event.multiplyDamage(multiplier);
+    }
+
+    /*
+     * When players deal melee damage, we need to check if it was a because of a sweeping attack.
+     * We need to apply their sweeping multiplier to the damage.
+     */
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    private void __onPlayerPerformSweepingAttack(CustomEntityDamageByEntityEvent event) {
+
+        // We only care about sweeping interactions.
+        if (!event.getOriginalEvent().getCause().equals(EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK))
+            return;
+
+        if (!(event.getDealer() instanceof LivingEntity living))
+            return;
+
+        // Get the sweeping efficiency. This is quite literally just a multiplier on the damage.
+        var sweepingEfficiency = AttributeService.getInstance().getAttribute(living, AttributeWrapper.SWEEPING);
+        if (sweepingEfficiency == null)
+            return;
+
+        event.multiplyDamage(sweepingEfficiency.getValue());
     }
 
     /**

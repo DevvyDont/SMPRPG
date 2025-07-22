@@ -9,6 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.VanillaEnchantment;
@@ -19,12 +20,29 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Note; vanilla minecraft already does this for us because of data driven enchantments. There's no point on double
+ * stacking a modifier. In the even we figure out how to make the vanilla sweeping edge *not* apply a modifier,
+ * we should opt to use our own.
+ */
 public class SweepingEdgeEnchantment extends VanillaEnchantment implements AttributeEnchantment {
 
+//    public static int getSweepingEdgeEfficiency(int level) {
+//        return switch (level) {
+//            case 1 -> 15;
+//            case 2 -> 30;
+//            case 3 -> 45;
+//            case 4 -> 65;
+//            case 5 -> 90;
+//            default -> 0;
+//        };
+//    }
+
+    /*
+    Vanilla sweeping edge behavior. Used to display a tooltip.
+     */
     public static int getSweepingEdgeEfficiency(int level) {
-        if (level <= 0)
-            return 0;
-        return (int)((1 - 1.0 / (level+1)) * 100);
+        return (int) ((1.0 - (1.0 / (level+1))) * 100);
     }
 
     public SweepingEdgeEnchantment(TypedKey<Enchantment> key) {
@@ -39,7 +57,9 @@ public class SweepingEdgeEnchantment extends VanillaEnchantment implements Attri
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases sweeping damage to "),
+            ComponentUtils.create("Increases "),
+            ComponentUtils.create(AttributeWrapper.SWEEPING.DisplayName, NamedTextColor.GOLD),
+            ComponentUtils.create(" by "),
             ComponentUtils.create(getSweepingEdgeEfficiency(getLevel()) + "%", NamedTextColor.GREEN)
         );
     }
@@ -82,7 +102,7 @@ public class SweepingEdgeEnchantment extends VanillaEnchantment implements Attri
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-//                new AdditiveAttributeEntry(Attribute.SWEEPING_DAMAGE_RATIO, getSweepingEdgeEfficiency(getLevel())/1000.0)
+//                AttributeEntry.additive(AttributeWrapper.SWEEPING, getSweepingEdgeEfficiency(getLevel())/100.0)
         );
     }
 

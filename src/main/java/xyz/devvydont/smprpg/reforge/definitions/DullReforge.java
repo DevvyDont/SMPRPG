@@ -20,7 +20,7 @@ public class DullReforge extends ReforgeBase {
     }
 
     public static float getSweepBoost(ItemRarity rarity) {
-        return .04f * rarity.ordinal() + .20f;
+        return .02f * rarity.ordinal() + .05f;
     }
 
     @Override

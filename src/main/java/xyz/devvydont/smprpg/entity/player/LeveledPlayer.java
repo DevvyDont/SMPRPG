@@ -250,6 +250,7 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
         updateBaseAttribute(AttributeWrapper.DEFENSE, 0);
         updateBaseAttribute(AttributeWrapper.CRITICAL_CHANCE, 0);
         updateBaseAttribute(AttributeWrapper.CRITICAL_DAMAGE, getDifficulty() == ProfileDifficulty.HARD ? 25 : 50);
+        updateBaseAttribute(AttributeWrapper.SWEEPING, .05);
 
         updateBaseAttribute(AttributeWrapper.MINING_FORTUNE, 0);
         updateBaseAttribute(AttributeWrapper.FARMING_FORTUNE, 0);
