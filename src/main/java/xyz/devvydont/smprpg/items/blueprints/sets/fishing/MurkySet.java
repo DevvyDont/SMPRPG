@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IDyeable;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
@@ -26,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class MurkySet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable {
+public class MurkySet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable, IBreakableEquipment {
 
     public static final int POWER = 5;
     public static final int CATCH_QUALITY = 15;
@@ -122,5 +123,10 @@ public class MurkySet extends CustomAttributeItem implements ITrimmable, IDyeabl
             case MURKY_BOOTS -> 10;
             default -> 0;
         };
+    }
+
+    @Override
+    public int getMaxDurability() {
+        return 5_000;
     }
 }
