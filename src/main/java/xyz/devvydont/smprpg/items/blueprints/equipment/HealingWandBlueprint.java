@@ -31,9 +31,9 @@ public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilit
         return switch (this.getCustomItemType()) {
             case HEALING_WAND -> 50;
             case ALLEVIATION_WAND -> 75;
-            case CURING_ROD -> 100;
-            case STAFF_OF_REGENERATION -> 150;
-            case STAFF_OF_REJUVENATION -> 200;
+            case CURING_ROD -> 120;
+            case STAFF_OF_REGENERATION -> 200;
+            case STAFF_OF_REJUVENATION -> 500;
             default -> 999;
         };
     }
@@ -52,10 +52,10 @@ public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilit
     protected CustomItemType getUpgradeMaterial() {
         return switch (this.getCustomItemType()) {
             case ALLEVIATION_WAND -> CustomItemType.PREMIUM_MELON;
-            case CURING_ROD -> CustomItemType.ENCHANTED_MELON;
-            case STAFF_OF_REGENERATION -> CustomItemType.MELON_SLICE_SINGULARITY;
-            case STAFF_OF_REJUVENATION -> CustomItemType.MELON_SINGULARITY;
-            default -> CustomItemType.MELON_SINGULARITY;
+            case CURING_ROD -> CustomItemType.ENCHANTED_MELON_SLICE;
+            case STAFF_OF_REGENERATION -> CustomItemType.ENCHANTED_MELON;
+            case STAFF_OF_REJUVENATION -> CustomItemType.MELON_SLICE_SINGULARITY;
+            default -> CustomItemType.MELON_SLICE_SINGULARITY;
         };
     }
 

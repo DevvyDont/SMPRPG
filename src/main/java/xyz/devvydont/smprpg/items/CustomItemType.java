@@ -427,7 +427,7 @@ public enum CustomItemType {
     SOGGY_LETTUCE("Soggy Lettuce", Material.GREEN_DYE, ItemRarity.COMMON, SoggyLettuce.class),
     STOLEN_APPLE("Stolen Apple", Material.APPLE, ItemRarity.COMMON, StolenApples.class),
     PHANTOM_CURRY("Phantom Curry", Material.RAW_COPPER, ItemRarity.COMMON, PhantomCurry.class),
-    SHADOW_BREW("Shadow Brew", Material.POTION, ItemRarity.COMMON, ShadowBrew.class),
+    SHADOW_BREW("Shadow Brew", Material.FIREWORK_STAR, ItemRarity.COMMON, ShadowBrew.class),
     CHILI_PEPPER("Chili Pepper", Material.GOLDEN_CARROT, ItemRarity.COMMON, ChiliPepper.class),
 
     // EXP BOTTLES
@@ -641,9 +641,8 @@ public enum CustomItemType {
     PREMIUM_MELON_SLICE("Premium Melon Slice", Material.MELON_SLICE, ItemRarity.UNCOMMON, true, MelonBlueprintFamily.class),
     PREMIUM_MELON("Premium Melon", Material.MELON, ItemRarity.UNCOMMON, true, MelonBlueprintFamily.class),
     ENCHANTED_MELON_SLICE("Enchanted Melon Slice", Material.MELON_SLICE, ItemRarity.RARE, true, MelonBlueprintFamily.class),
-    ENCHANTED_MELON("Enchanted Melon", Material.MELON, ItemRarity.RARE, true, MelonBlueprintFamily.class),
-    MELON_SLICE_SINGULARITY("Melon Slice Singularity", Material.GLISTERING_MELON_SLICE, ItemRarity.EPIC, true, MelonBlueprintFamily.class),
-    MELON_SINGULARITY("Melon Singularity", Material.MELON, ItemRarity.LEGENDARY, true, MelonBlueprintFamily.class),
+    ENCHANTED_MELON("Enchanted Melon", Material.MELON, ItemRarity.EPIC, true, MelonBlueprintFamily.class),
+    MELON_SLICE_SINGULARITY("Melon Slice Singularity", Material.GLISTERING_MELON_SLICE, ItemRarity.LEGENDARY, true, MelonBlueprintFamily.class),
 
     // SINGULARITY SET
     SINGULARITY_HELMET(    "Singularity Helmet",     Material.CRYING_OBSIDIAN,      ItemRarity.MYTHIC, SingularityHelmet.class),

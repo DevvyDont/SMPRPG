@@ -51,7 +51,8 @@ public class ShadowBrew extends CustomItemBlueprint implements ISellable, IEdibl
     public Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(
-                        new PotionEffect(PotionEffectType.SPEED, (int) TickTime.seconds(30), 2, false, false)
+                        new PotionEffect(PotionEffectType.SPEED, (int) TickTime.seconds(30), 2, false, false),
+                        new PotionEffect(PotionEffectType.INVISIBILITY, (int) TickTime.seconds(30), 0, false, false)
                 ), 1f))
                 .sound(SoundEventKeys.ENTITY_GENERIC_DRINK)
                 .consumeSeconds(1.5f)

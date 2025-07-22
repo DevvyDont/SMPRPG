@@ -18,8 +18,7 @@ public class MelonBlueprintFamily extends CustomCompressableBlueprint {
             new CompressionRecipeMember(new MaterialWrapper(CustomItemType.PREMIUM_MELON), 9),
             new CompressionRecipeMember(new MaterialWrapper(CustomItemType.ENCHANTED_MELON_SLICE), 9),
             new CompressionRecipeMember(new MaterialWrapper(CustomItemType.ENCHANTED_MELON), 9),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.MELON_SLICE_SINGULARITY), 9),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.MELON_SINGULARITY), 9)
+            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.MELON_SLICE_SINGULARITY), 9)
     );
 
     public MelonBlueprintFamily(ItemService itemService, CustomItemType type) {

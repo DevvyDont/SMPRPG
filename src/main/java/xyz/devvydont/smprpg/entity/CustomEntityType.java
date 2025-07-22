@@ -70,18 +70,18 @@ public enum CustomEntityType implements IMenuDisplayable {
                     .withChance(.10f)),
 
     FIERY_SYLPH(EntityType.BLAZE, "Fiery Sylph",
-            35, 2_100, 300,
+            35, 2_200, 300,
             FierySylph::new,
             EntitySpawnCondition.StructureSpawnCondition
                     .structure(Structure.FORTRESS)
                     .withChance(.05f)),
 
     PHOENIX(EntityType.BLAZE, "Phoenix",
-            40, 5_000, 600,
+            40, 5_000, 450,
             CustomEntityInstance::new),
 
     INFERNAL_PHOENIX(EntityType.BLAZE, "Infernal Phoenix",
-            40, 750_000, 750, BlazeBoss::new),
+            40, 750_000, 600, BlazeBoss::new),
 
     // Wither skeletons that spawn on the end island
     WITHERED_SERAPH(EntityType.WITHER_SKELETON, "Withered Seraph",
