@@ -40,7 +40,7 @@ public class EntityAnalyzer extends CustomItemBlueprint implements IHeaderDescri
     }
 
     public void execute(Player player, LivingEntity entity) {
-        var gui = new InterfaceStats(SMPRPG.getInstance(), player, entity);
+        var gui = new InterfaceStats(player, entity);
         gui.openMenu();
 
         if (player.isSneaking()) {

@@ -37,8 +37,6 @@ public class AncientReforge extends ReforgeBase {
     }
 
     public static float getLuckBonus(ItemRarity rarity) {
-        if (rarity.ordinal() >= ItemRarity.EPIC.ordinal())
-            return 2;
         return 1;
     }
 

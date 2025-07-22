@@ -61,6 +61,8 @@ public class SkillGlobals {
      * @return The experience needed.
      */
     public static int getExperienceForLevel(int level) {
+        if (level <= 0)
+            return 0;
         return dropIntegerPrecision((int) (Math.pow(level+1, 3) + 92), 2);
     }
 

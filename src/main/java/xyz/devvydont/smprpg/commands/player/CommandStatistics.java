@@ -32,6 +32,6 @@ public class CommandStatistics extends PlayerCommandBase {
             return;
         }
 
-        new InterfaceStats(SMPRPG.getInstance(), player, targetEntity).openMenu();
+        new InterfaceStats(player, targetEntity).openMenu();
     }
 }

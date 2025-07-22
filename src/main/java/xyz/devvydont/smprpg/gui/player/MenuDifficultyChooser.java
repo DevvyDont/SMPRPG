@@ -31,6 +31,11 @@ public class MenuDifficultyChooser extends MenuBase {
         render();
     }
 
+    public MenuDifficultyChooser(@NotNull Player player, MenuBase parent) {
+        super(player, 4, parent);
+        render();
+    }
+
     /**
      * Locks the player to view this menu requiring them to make a decision.
      */

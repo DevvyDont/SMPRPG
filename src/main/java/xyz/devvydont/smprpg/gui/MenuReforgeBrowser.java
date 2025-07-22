@@ -35,6 +35,10 @@ public class MenuReforgeBrowser extends MenuBase {
         super(player, ROWS);
     }
 
+    public MenuReforgeBrowser(@NotNull Player player, MenuBase parent) {
+        super(player, ROWS, parent);
+    }
+
     @Override
     protected void handleInventoryOpened(InventoryOpenEvent event) {
         super.handleInventoryOpened(event);

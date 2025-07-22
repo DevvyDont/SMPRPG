@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeCategory;
@@ -36,12 +37,15 @@ import java.util.Set;
 import static xyz.devvydont.smprpg.util.formatting.ComponentUtils.*;
 
 public class InterfaceStats extends MenuBase {
-    private static final int SLOT_HELMET = 14;
-    private static final int SLOT_CHESTPLATE = 23;
-    private static final int SLOT_LEGGINGS = 32;
-    private static final int SLOT_BOOTS = 41;
-    private static final int SLOT_MAIN_HAND = 24;
-    private static final int SLOT_OFF_HAND = 22;
+
+    public static final int ROWS = 6;
+
+    private static final int SLOT_HELMET = 15;
+    private static final int SLOT_CHESTPLATE = 24;
+    private static final int SLOT_LEGGINGS = 33;
+    private static final int SLOT_BOOTS = 42;
+    private static final int SLOT_MAIN_HAND = 25;
+    private static final int SLOT_OFF_HAND = 23;
     private static final int SLOT_STATS = 20;
     private static final int SLOT_INVENTORY = 11;
     private static final int SLOT_MISC_INFO = 29;
@@ -56,30 +60,19 @@ public class InterfaceStats extends MenuBase {
             AttributeWrapper.LUCK
     );
 
-    private final LivingEntity targetEntity;
-    private final EntityService entityService;
+    private final LivingEntity target;
 
-    public InterfaceStats(SMPRPG plugin, Player owner, LivingEntity targetPlayer) {
-        super(owner, 6);
-        this.targetEntity = targetPlayer;
-        this.entityService = SMPRPG.getService(EntityService.class);
+    public InterfaceStats(@NotNull Player player, LivingEntity target, MenuBase parentMenu) {
+        super(player, ROWS, parentMenu);
+        this.target = target;
     }
 
-    @Override
-    protected void handleInventoryOpened(InventoryOpenEvent event) {
-        // Prepare the inventory
+    public InterfaceStats(@NotNull Player player, LivingEntity target) {
+        super(player, ROWS);
+        this.target = target;
+    }
 
-        var name = this.targetEntity instanceof Player castedPlayer ?
-                SMPRPG.getService(ChatService.class).getPlayerDisplay(castedPlayer) :
-                targetEntity.name();
-
-        event.titleOverride(merge(
-                create("Statistics Viewer (", NamedTextColor.BLACK),
-                name,
-                create(")", NamedTextColor.BLACK)
-        ));
-
-        // Render the UI
+    public void render() {
         this.clear();
         this.setBorderFull();
 
@@ -108,10 +101,30 @@ public class InterfaceStats extends MenuBase {
             });
         }
 
-        this.setButton(SLOT_STATS, getStats(), e -> this.openSubMenu(new SubmenuStatOverview(this.player, this.targetEntity, this)));
+        this.setButton(SLOT_STATS, getStats(), e -> this.openSubMenu(new SubmenuStatOverview(this.player, this.target, this)));
 
         if (this.isPlayer())
             this.setSlot(SLOT_STATS - 1, getInfo());
+
+        this.setBackButton();
+    }
+
+    @Override
+    protected void handleInventoryOpened(InventoryOpenEvent event) {
+        // Prepare the inventory
+
+        var name = this.target instanceof Player castedPlayer ?
+                SMPRPG.getService(ChatService.class).getPlayerDisplay(castedPlayer) :
+                target.name();
+
+        event.titleOverride(merge(
+                create("Statistics Viewer (", NamedTextColor.BLACK),
+                name,
+                create(")", NamedTextColor.BLACK)
+        ));
+
+        // Render the UI
+        this.render();
     }
 
     @Override
@@ -121,11 +134,11 @@ public class InterfaceStats extends MenuBase {
     }
 
     private boolean isPlayer() {
-        return this.targetEntity instanceof Player;
+        return this.target instanceof Player;
     }
 
     private Player getPlayer() {
-        return (Player) this.targetEntity;
+        return (Player) this.target;
     }
 
     private ItemStack getHead() {
@@ -144,9 +157,10 @@ public class InterfaceStats extends MenuBase {
     public ItemStack getStats() {
         ItemStack skull = this.getHead();
         ItemMeta meta = skull.getItemMeta();
-        var entity = this.entityService.getEntityInstance(this.targetEntity);
+        var entityService = SMPRPG.getService(EntityService.class);
+        var entity = entityService.getEntityInstance(this.target);
 
-        meta.displayName(this.targetEntity.name().color(NamedTextColor.AQUA).append(create("'s stats")).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(this.target.name().color(NamedTextColor.AQUA).append(create("'s stats")).decoration(TextDecoration.ITALIC, false));
         List<Component> lore = new ArrayList<>();
         lore.add(ComponentUtils.EMPTY);
 
@@ -154,7 +168,7 @@ public class InterfaceStats extends MenuBase {
         lore.add(create("Power Rating: ", NamedTextColor.GOLD).append(create(Symbols.POWER + entity.getLevel(), NamedTextColor.YELLOW)));
         lore.add(ComponentUtils.EMPTY);
 
-        var hpAttr = AttributeService.getInstance().getAttribute(this.targetEntity, AttributeWrapper.HEALTH);
+        var hpAttr = AttributeService.getInstance().getAttribute(this.target, AttributeWrapper.HEALTH);
         var hp = hpAttr != null ? hpAttr.getValue() : 0;
         var def = entity.getDefense();
         var ehp = EntityDamageCalculatorService.calculateEffectiveHealth(hp, def);
@@ -162,7 +176,7 @@ public class InterfaceStats extends MenuBase {
         for (var wrapper : AttributeWrapper.values()) {
 
             // We can skip attributes we don't have
-            var attribute = AttributeService.getInstance().getAttribute(this.targetEntity, wrapper);
+            var attribute = AttributeService.getInstance().getAttribute(this.target, wrapper);
             if (attribute == null)
                 continue;
 
@@ -253,7 +267,7 @@ public class InterfaceStats extends MenuBase {
         var age = formatTime(ageMs / 1000 / 60, true);
 
         paper.editMeta(meta -> {
-            meta.displayName(this.targetEntity.name().color(NamedTextColor.AQUA).append(create("'s Information")).decoration(TextDecoration.ITALIC, false));
+            meta.displayName(this.target.name().color(NamedTextColor.AQUA).append(create("'s Information")).decoration(TextDecoration.ITALIC, false));
             meta.lore(ComponentUtils.cleanItalics(List.of(
                     EMPTY,
                     merge(create("Profile type: "), create(player.getDifficulty().Display, player.getDifficulty().Color)),
@@ -270,12 +284,13 @@ public class InterfaceStats extends MenuBase {
         ItemStack paper = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta meta = paper.getItemMeta();
 
-        meta.displayName(this.targetEntity.name().color(NamedTextColor.AQUA).append(create("'s Skills")).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(this.target.name().color(NamedTextColor.AQUA).append(create("'s Skills")).decoration(TextDecoration.ITALIC, false));
         List<Component> lore = new ArrayList<>();
         lore.add(ComponentUtils.EMPTY);
 
+        var entityService = SMPRPG.getService(EntityService.class);
         if (this.isPlayer())
-            lore.addAll(getSkillDisplay(this.entityService.getPlayerInstance(this.getPlayer())));
+            lore.addAll(getSkillDisplay(entityService.getPlayerInstance(this.getPlayer())));
         else
             lore.add(create("Only players have skills!", NamedTextColor.RED));
         meta.lore(ComponentUtils.cleanItalics(lore));
@@ -288,7 +303,7 @@ public class InterfaceStats extends MenuBase {
         ItemStack chest = new ItemStack(Material.CHEST);
         ItemMeta meta = chest.getItemMeta();
 
-        meta.displayName(this.targetEntity.name().color(NamedTextColor.AQUA).append(create("'s Full Inventory")).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(this.target.name().color(NamedTextColor.AQUA).append(create("'s Full Inventory")).decoration(TextDecoration.ITALIC, false));
         List<Component> lore = List.of(
                 ComponentUtils.EMPTY,
                 merge(create("Click to view their "), create("inventory", NamedTextColor.GOLD), create(" and "), create("ender chest", NamedTextColor.LIGHT_PURPLE), create("!"))
@@ -300,16 +315,16 @@ public class InterfaceStats extends MenuBase {
 
     @Nullable
     private ItemStack getEquipment(int slot) {
-        if (this.targetEntity.getEquipment() == null)
+        if (this.target.getEquipment() == null)
             return null;
 
         return switch (slot) {
-            case SLOT_HELMET -> this.targetEntity.getEquipment().getHelmet();
-            case SLOT_CHESTPLATE -> this.targetEntity.getEquipment().getChestplate();
-            case SLOT_LEGGINGS -> this.targetEntity.getEquipment().getLeggings();
-            case SLOT_BOOTS -> this.targetEntity.getEquipment().getBoots();
-            case SLOT_MAIN_HAND -> this.targetEntity.getEquipment().getItemInMainHand();
-            case SLOT_OFF_HAND -> this.targetEntity.getEquipment().getItemInOffHand();
+            case SLOT_HELMET -> this.target.getEquipment().getHelmet();
+            case SLOT_CHESTPLATE -> this.target.getEquipment().getChestplate();
+            case SLOT_LEGGINGS -> this.target.getEquipment().getLeggings();
+            case SLOT_BOOTS -> this.target.getEquipment().getBoots();
+            case SLOT_MAIN_HAND -> this.target.getEquipment().getItemInMainHand();
+            case SLOT_OFF_HAND -> this.target.getEquipment().getItemInOffHand();
             case SLOT_STATS -> this.getStats();
             case SLOT_MISC_INFO -> this.getSkills();
             default -> null;
@@ -317,7 +332,7 @@ public class InterfaceStats extends MenuBase {
     }
 
     private Component getMissingComponent(int slot) {
-        Component name = this.targetEntity.name();
+        Component name = this.target.name();
         return switch (slot) {
             case SLOT_HELMET -> name.append(create(" is not wearing a helmet", NamedTextColor.RED));
             case SLOT_CHESTPLATE -> name.append(create(" is not wearing a chestplate", NamedTextColor.RED));

@@ -22,6 +22,7 @@ public class SMPRPGBootstrapper implements PluginBootstrap {
 
     private void bootstrapCommands(BootstrapContext context) {
         CommandBase[] commandsToRegister = new CommandBase[] {
+                new CommandMenu("menu"),
                 new CommandAttribute("attribute"),
                 new CommandEcoAdmin("eco"),
                 new CommandBalance("balance"),

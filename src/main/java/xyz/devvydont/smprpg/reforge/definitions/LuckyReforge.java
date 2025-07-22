@@ -22,7 +22,7 @@ public class LuckyReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.LUCK, rarity.ordinal() + 2)
+                AttributeEntry.additive(AttributeWrapper.LUCK, (rarity.ordinal() / 2) + 1)
         );
     }
 

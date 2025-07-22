@@ -46,6 +46,16 @@ public class EnchantmentMenu extends MenuBase {
         enchantments.addAll(SMPRPG.getService(EnchantmentService.class).getCustomEnchantments());
     }
 
+    public EnchantmentMenu(@NotNull Player player, MenuBase parent) {
+        super(player, ROWS, parent);
+
+        // Set up the enchantments. These are just a copy of all the enchantments in a list.
+        enchantments = new ArrayList<>();
+        enchantments.addAll(SMPRPG.getService(EnchantmentService.class).getCustomEnchantments());
+    }
+
+
+
     @Override
     protected void handleInventoryOpened(InventoryOpenEvent event) {
         event.titleOverride(ComponentUtils.create("Enchantments", NamedTextColor.BLACK));
@@ -213,11 +223,7 @@ public class EnchantmentMenu extends MenuBase {
         });
 
         // Close button
-        this.setButton((ROWS-1)*9+4, BUTTON_EXIT, (e) -> {
-            closeMenu();
-            this.sounds.playMenuClose();
-        });
-
+        this.setBackButton();
     }
 
 

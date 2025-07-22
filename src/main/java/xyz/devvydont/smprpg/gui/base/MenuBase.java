@@ -530,6 +530,14 @@ public abstract class MenuBase implements Listener {
         }
     }
 
+    /**
+     * Creates a context aware back/close button by automatically assuming the caller wants to place it at the bottom
+     * of the menu, in the center.
+     */
+    protected final void setBackButton() {
+        this.setBackButton(this.getInventorySize()-5);  // Shift 5 slots from the end.
+    }
+
     // -----------
     //   Helpers
     // -----------
