@@ -482,7 +482,9 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
 
-        activelyInvolvedPlayers.remove(event.getPlayer().getUniqueId());
+        var removed = activelyInvolvedPlayers.remove(event.getPlayer().getUniqueId());
+        if (removed == null)
+            return;
 
         if (bossBar != null)
             bossBar.removeViewer(event.getPlayer());
@@ -513,6 +515,8 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         if (event.getPlayer().getLocation().distance(_entity.getLocation()) < 200) {
             if (bossBar != null)
                 bossBar.addViewer(event.getPlayer());
+            if (scoreboard != null)
+                scoreboard.display(event.getPlayer());
             return;
         }
 
