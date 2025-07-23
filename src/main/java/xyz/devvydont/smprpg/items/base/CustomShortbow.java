@@ -19,11 +19,14 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.ActionBarService;
+import xyz.devvydont.smprpg.services.AttributeService;
+import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.items.AbilityUtil;
@@ -123,13 +126,13 @@ public abstract class CustomShortbow extends CustomAttributeItem implements IHea
         event.setCancelled(true);
         AbstractArrow arrow = event.getPlayer().launchProjectile(arrowClass, event.getPlayer().getLocation().getDirection().normalize().multiply(EntityDamageCalculatorService.MAX_ARROW_DAMAGE_VELOCITY/20));
         arrow.setItemStack(consumable.asOne());
-        arrow.setCritical(true);
+
         if (event.getItem().containsEnchantment(Enchantment.INFINITY))
             arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
 
         // We should be good to shoot an arrow. Manually call the shoot bow event so plugins can modify it.
         // This will also cause the damage listener to set the damage as intended on the arrow so we don't have to that
-        EntityShootBowEvent bowEvent = new EntityShootBowEvent(event.getPlayer(), item, consumable, arrow, event.getHand(), 1.0f, shouldConsume);
+        EntityShootBowEvent bowEvent = new EntityShootBowEvent(event.getPlayer(), item, consumable, arrow, event.getHand(), 0.5f, shouldConsume);
         bowEvent.callEvent();
 
         // If something cancelled the event, remove the arrow and cancel the interaction

@@ -64,7 +64,7 @@ public class CriticalDamageListener extends ToggleableListener {
     private void __onAutoCriticalArrowConditionMeet(EntityShootBowEvent event) {
 
         // Skip non-arrows
-        if (!(event.getEntity() instanceof AbstractArrow arrow))
+        if (!(event.getProjectile() instanceof AbstractArrow arrow))
             return;
 
         // Do a crit chance check.
