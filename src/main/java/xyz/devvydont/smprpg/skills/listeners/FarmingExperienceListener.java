@@ -230,7 +230,7 @@ public class FarmingExperienceListener implements Listener {
                 for (ItemStack drop : laterDrops)
                     block.getWorld().dropItemNaturally(block.getLocation(), drop);
                 ChunkUtil.markBlockSkillValid(block);
-                var loc = event.getBlock().getLocation();
+                var loc = block.getLocation();
                 loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(1));
             }, yOffset);
 
