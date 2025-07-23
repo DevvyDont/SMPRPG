@@ -24,7 +24,6 @@ public abstract class InfernoArmorSet extends CustomAttributeItem implements IBr
     public static final int POWER = 40;
     public static CustomItemType CRAFTING_COMPONENT = CustomItemType.INFERNO_REMNANT;
 
-
     public InfernoArmorSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
@@ -40,7 +39,7 @@ public abstract class InfernoArmorSet extends CustomAttributeItem implements IBr
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, getDefense()),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealth()),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrength()),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 15)
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25)
         );
     }
 

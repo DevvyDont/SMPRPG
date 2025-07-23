@@ -62,7 +62,7 @@ public abstract class ReaverArmorSet extends CustomAttributeItem implements IHea
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealth()),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrength()),
                 new AdditiveAttributeEntry(AttributeWrapper.KNOCKBACK_RESISTANCE, .15),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 20)
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 12)
         );
     }
 

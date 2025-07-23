@@ -47,7 +47,7 @@ public class WitheredReforge extends ReforgeBase implements Listener {
                 ComponentUtils.create("in attack damage and attack speed"),
                 ComponentUtils.EMPTY,
                 ComponentUtils.create("Withered Bonus", NamedTextColor.BLUE),
-                ComponentUtils.create("Deal ").append(ComponentUtils.create("2x", NamedTextColor.GREEN)).append(ComponentUtils.create(" damage to enemies who")),
+                ComponentUtils.create("Deal ").append(ComponentUtils.create("+50%", NamedTextColor.GREEN)).append(ComponentUtils.create(" damage to enemies who")),
                 ComponentUtils.create("have the ").append(ComponentUtils.create("withered", NamedTextColor.DARK_RED).append(ComponentUtils.create(" potion effect")))
         );
     }
@@ -56,8 +56,8 @@ public class WitheredReforge extends ReforgeBase implements Listener {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBuff(rarity)),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getDamageBuff(rarity)*100),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, getDamageBuff(rarity)*50),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getDamageBuff(rarity)*80),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, getDamageBuff(rarity)*40),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .12f)
         );
     }
@@ -88,6 +88,6 @@ public class WitheredReforge extends ReforgeBase implements Listener {
             return;
 
         // We have the withered reforge and the one getting attacked is withered. 2x the damage
-        event.multiplyDamage(2);
+        event.multiplyDamage(1.5);
     }
 }

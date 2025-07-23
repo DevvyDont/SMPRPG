@@ -60,7 +60,7 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)+15),
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)+10),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.3)
         );
     }
@@ -130,7 +130,7 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
             return;
 
         // RNG roll
-        if (Math.random() * 100 > WITHER_APPLY_CHANCE)
+        if (Math.random() * 100 < WITHER_APPLY_CHANCE)
             return;
 
         // Apply!
