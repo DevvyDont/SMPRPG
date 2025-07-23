@@ -44,6 +44,7 @@ import xyz.devvydont.smprpg.items.base.ChargedItemBlueprint;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.items.base.VanillaItemBlueprint;
+import xyz.devvydont.smprpg.items.blueprints.potion.PotionBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*;
 import xyz.devvydont.smprpg.items.interfaces.*;
@@ -328,6 +329,8 @@ public class ItemService implements IService, Listener {
         registerVanillaMaterialResolver(Material.MACE, ItemMace.class);
 
         registerVanillaMaterialResolver(Material.ENCHANTED_BOOK, ItemEnchantedBook.class);
+
+        registerVanillaMaterialResolver(Material.POTION, PotionBlueprint.class);
 
         // Register vanilla items that should have a sell price.
         for (Map.Entry<Material, Integer> entry : VanillaResource.getMaterialWorthMap().entrySet())
