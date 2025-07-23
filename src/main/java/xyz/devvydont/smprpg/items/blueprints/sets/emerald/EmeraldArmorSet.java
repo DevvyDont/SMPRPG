@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.emerald;
 
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -14,6 +15,7 @@ import xyz.devvydont.smprpg.items.attribute.ScalarAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.IEquippableAssetOverride;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -21,10 +23,12 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
+public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable, IEquippableAssetOverride {
 
     public static int EMERALD_POWER = 20;
     public static Material INGREDIENT = Material.EMERALD_BLOCK;
+
+    private static final Key ASSET_KEY = Key.key("emerald")
 
 
     public EmeraldArmorSet(ItemService itemService, CustomItemType type) {
@@ -34,6 +38,11 @@ public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBr
     @Override
     public EquipmentSlotGroup getActiveSlot() {
         return EquipmentSlotGroup.ARMOR;
+    }
+
+    @Override
+    public Key getAssetId() {
+        return ASSET_KEY;
     }
 
     @Override
