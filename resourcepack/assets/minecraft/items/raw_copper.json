@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/raw_copper"
+        },
+        "cases": [
+            {
+                "when": "smprpg:phantom_curry",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/phantom_curry"
+                }
+            }
+        ]
+    }
+}

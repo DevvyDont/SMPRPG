@@ -1,0 +1,33 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/totem_of_undying"
+        },
+        "cases": [
+            {
+                "when": "smprpg:speed_charm",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/speed_charm"
+                }
+            },
+            {
+                "when": "smprpg:lucky_charm",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/lucky_charm"
+                }
+            },
+            {
+                "when": "smprpg:strength_charm",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/strength_charm"
+                }
+            }
+        ]
+    }
+}

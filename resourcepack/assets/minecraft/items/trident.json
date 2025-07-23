@@ -1,0 +1,81 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "minecraft:select",
+            "cases": [
+                {
+                    "model": {
+                        "type": "minecraft:model",
+                        "model": "minecraft:item/trident"
+                    },
+                    "when": [
+                        "gui",
+                        "ground",
+                        "fixed"
+                    ]
+                }
+            ],
+            "fallback": {
+                "type": "minecraft:condition",
+                "on_false": {
+                    "type": "minecraft:special",
+                    "base": "minecraft:item/trident_in_hand",
+                    "model": {
+                        "type": "minecraft:trident"
+                    }
+                },
+                "on_true": {
+                    "type": "minecraft:special",
+                    "base": "minecraft:item/trident_throwing",
+                    "model": {
+                        "type": "minecraft:trident"
+                    }
+                },
+                "property": "minecraft:using_item"
+            },
+            "property": "minecraft:display_context"
+        },
+        "cases": [
+            {
+                "when": "smprpg:neptune_trident",
+                "model": {
+                    "type": "minecraft:select",
+                    "cases": [
+                        {
+                            "model": {
+                                "type": "minecraft:model",
+                                "model": "swords:item/neptune_trident"
+                            },
+                            "when": [
+                                "gui",
+                                "ground",
+                                "fixed"
+                            ]
+                        }
+                    ],
+                    "fallback": {
+                        "type": "minecraft:condition",
+                        "on_false": {
+                            "type": "minecraft:special",
+                            "base": "swords:item/neptune_trident_in_hand",
+                            "model": {
+                                "type": "minecraft:trident"
+                            }
+                        },
+                        "on_true": {
+                            "type": "minecraft:special",
+                            "base": "swords:item/neptune_trident_throwing",
+                            "model": {
+                                "type": "minecraft:trident"
+                            }
+                        },
+                        "property": "minecraft:using_item"
+                    },
+                    "property": "minecraft:display_context"
+                }
+            }
+        ]
+    }
+}

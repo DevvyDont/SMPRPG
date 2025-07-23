@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/wooden_hoe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:copper_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/copper_hoe"
+                }
+            }
+        ]
+    }
+}

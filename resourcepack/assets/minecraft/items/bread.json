@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/bread"
+        },
+        "cases": [
+            {
+                "when": "smprpg:stale_bread",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/stale_bread"
+                }
+            }
+        ]
+    }
+}

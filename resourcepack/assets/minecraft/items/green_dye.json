@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/green_dye"
+        },
+        "cases": [
+            {
+                "when": "smprpg:soggy_lettuce",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/soggy_lettuce"
+                }
+            }
+        ]
+    }
+}

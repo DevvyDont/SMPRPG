@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/iron_sword"
+        },
+        "cases": [
+            {
+                "when": "smprpg:mystbloom_kunai",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/mystbloom_kunai"
+                }
+            }
+        ]
+    }
+}

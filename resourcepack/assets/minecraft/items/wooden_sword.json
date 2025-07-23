@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/wooden_sword"
+        },
+        "cases": [
+            {
+                "when": "smprpg:copper_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/copper_sword"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/pink_dye"
+        },
+        "cases": [
+            {
+                "when": "smprpg:cotton_candy",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/cotton_candy"
+                }
+            }
+        ]
+    }
+}
