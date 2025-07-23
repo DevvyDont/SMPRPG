@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/redstone_torch"
+        },
+        "cases": [
+            {
+                "when": "smprpg:thermometer",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/thermometer"
+                }
+            }
+        ]
+    }
+}
