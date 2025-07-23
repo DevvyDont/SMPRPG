@@ -5,12 +5,15 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Ageable;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
@@ -25,6 +28,18 @@ import java.util.Collection;
 public class FarmingExperienceListener implements Listener {
 
     final SMPRPG plugin;
+
+    /**
+     * Todo: tweak this a bit more per mob.
+     * It would be interesting if certain mobs yielded more rewards, but we need to get an idea of how good this is.
+     * @param type The type of entity that was bred.
+     * @return The amount of experience to give out.
+     */
+    public static int getExperienceFromBreed(EntityType type) {
+        return switch (type) {
+            default -> 100;
+        };
+    }
 
     public static int getExperienceValue(ItemStack item) {
 
@@ -212,6 +227,19 @@ public class FarmingExperienceListener implements Listener {
 
         }
 
+    }
+
+    /**
+     * When a player breeds animals, we should give them farming experience.
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onBreedAnimals(EntityBreedEvent event) {
+
+        if (!(event.getBreeder() instanceof Player player))
+            return;
+
+        var playerWrapper = SMPRPG.getService(EntityService.class).getPlayerInstance(player);
+        playerWrapper.getFarmingSkill().addExperience(getExperienceFromBreed(event.getEntityType()), SkillExperienceGainEvent.ExperienceSource.BREED);
     }
 
 }
