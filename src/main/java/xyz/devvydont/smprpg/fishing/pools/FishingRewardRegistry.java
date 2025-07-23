@@ -89,6 +89,7 @@ public class FishingRewardRegistry {
                         .withMinecraftExperience(50)
                         .withSkillExperience(100)
                         .withWeight(2)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.DIAMOND)
@@ -175,7 +176,6 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
-
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SNAPPING_TURTLE)
                         .withMinecraftExperience(25)
                         .withSkillExperience(200)
@@ -252,6 +252,20 @@ public class FishingRewardRegistry {
                         .withWeight(2)
                         .withMinecraftExperience(1)
                         .withSkillExperience(10)
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(Material.COAL)
+                        .withWeight(2)
+                        .withMinecraftExperience(1)
+                        .withSkillExperience(10)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(Material.BLAZE_POWDER)
+                        .withWeight(2)
+                        .withMinecraftExperience(1)
+                        .withSkillExperience(10)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(Material.TRIPWIRE_HOOK)
