@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "materials:item/obsidian_tool_rod"
+    }
+}

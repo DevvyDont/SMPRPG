@@ -1,0 +1,54 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/stick"
+        },
+        "cases": [
+            {
+                "when": "smprpg:healing_wand",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/wand_of_healing"
+                }
+            },
+            {
+                "when": "smprpg:alleviation_wand",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/wand_of_alleviation"
+                }
+            },
+            {
+                "when": "smprpg:curing_rod",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/scepter_of_curing"
+                }
+            },
+            {
+                "when": "smprpg:staff_of_regeneration",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/staff_of_regeneration"
+                }
+            },
+            {
+                "when": "smprpg:staff_of_rejuvenation",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/staff_of_rejuvenation"
+                }
+            },
+            {
+                "when": "smprpg:obsidian_tool_rod",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/obsidian_tool_rod"
+                }
+            }
+        ]
+    }
+}

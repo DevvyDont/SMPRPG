@@ -1,0 +1,103 @@
+{
+    "display": {
+        "firstperson_lefthand": {
+            "rotation": [
+                0,
+                90,
+                -25
+            ],
+            "scale": [
+                1.36,
+                1.36,
+                0.68
+            ],
+            "translation": [
+                1.13,
+                4.2,
+                1.13
+            ]
+        },
+        "firstperson_righthand": {
+            "rotation": [
+                0,
+                -90,
+                25
+            ],
+            "scale": [
+                1.36,
+                1.36,
+                0.68
+            ],
+            "translation": [
+                1.13,
+                4.2,
+                1.13
+            ]
+        },
+        "fixed": {
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "scale": [
+                2,
+                2,
+                2
+            ]
+        },
+        "ground": {
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                1,
+                1,
+                0.5
+            ],
+            "translation": [
+                0,
+                2,
+                0
+            ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [
+                0,
+                90,
+                20
+            ],
+            "scale": [
+                1.7,
+                1.7,
+                0.85
+            ],
+            "translation": [
+                0,
+                2,
+                5
+            ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [
+                0,
+                -90,
+                -20
+            ],
+            "scale": [
+                1.7,
+                1.7,
+                0.85
+            ],
+            "translation": [
+                0,
+                2,
+                5
+            ]
+        }
+    },
+    "gui_light": "front",
+    "parent": "builtin/generated"
+}

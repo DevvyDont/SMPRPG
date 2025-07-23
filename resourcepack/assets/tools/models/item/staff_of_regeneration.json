@@ -1,0 +1,6 @@
+{
+  "parent": "universal:item/staff_hand",
+  "textures": {
+    "layer0": "tools:item/staff_of_regeneration"
+  }
+}
