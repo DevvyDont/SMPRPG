@@ -1,0 +1,27 @@
+﻿name: Push resource pack to VPS
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Zip resource pack
+        run: |
+          cd resourcepack
+          zip -r ../resourcepack.zip ./
+
+      - name: Upload resource pack to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "./resourcepack.zip"
+          target: "/home/${{ secrets.VPS_SSH_USER }}/${{ secrets.VPS_SERVER_DIRECTORY }}/resourcepack/"
+        continue-on-error: true  # This step is optional, this is just QoL to manually update resource pack
