@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/sugar"
+        },
+        "cases": [
+            {
+                "when": "smprpg:crystallized_sugar",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/crystallized_sugar"
+                }
+            }
+        ]
+    }
+}
