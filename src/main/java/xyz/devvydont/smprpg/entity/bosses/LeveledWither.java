@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
@@ -26,6 +27,12 @@ public class LeveledWither extends BossInstance<Wither> {
     @Override
     public @Nullable BossBar createBossBar() {
         return null;
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
+        this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
 
     /*

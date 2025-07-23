@@ -165,6 +165,7 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
     @Override
     public void setup() {
         super.setup();
+        this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
 
     @Override

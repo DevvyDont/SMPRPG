@@ -4,6 +4,7 @@ import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
@@ -22,6 +23,12 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
 
     public LeveledDragon(EnderDragon entity) {
         super(entity);
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
+        this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
 
     @Override
