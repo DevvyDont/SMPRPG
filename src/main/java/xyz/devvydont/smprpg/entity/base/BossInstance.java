@@ -368,7 +368,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
 
     @Override
     public double getDamageRatioRequirement() {
-        return .25;
+        return .20;
     }
 
     @Override
