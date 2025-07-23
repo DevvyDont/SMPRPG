@@ -75,6 +75,7 @@ public class MiningExperienceListener implements Listener {
                     case MAGMA_BLOCK -> 2;
                     case GOLD_NUGGET -> 5;
                     case NETHER_GOLD_ORE -> 22;
+                    case GLOWSTONE_DUST -> 5;
                     case GLOWSTONE -> 15;
                     case NETHER_QUARTZ_ORE -> 25;
                     case QUARTZ -> 10;

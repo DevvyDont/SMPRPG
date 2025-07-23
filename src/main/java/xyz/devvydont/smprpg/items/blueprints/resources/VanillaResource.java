@@ -43,6 +43,7 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.DIRT, 1);
         materialWorthMap.put(Material.GRAVEL, 1);
         materialWorthMap.put(Material.GLASS, 2);
+        materialWorthMap.put(Material.FLINT, 2);
         materialWorthMap.put(Material.OBSIDIAN, 45);
         materialWorthMap.put(Material.CRYING_OBSIDIAN, 60);
 
@@ -259,6 +260,7 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.NAME_TAG, 5000);
         materialWorthMap.put(Material.SADDLE, 5);
         materialWorthMap.put(Material.HEART_OF_THE_SEA, 10_000);
+        materialWorthMap.put(Material.TURTLE_SCUTE, 5_000);
     }
 
     /**
