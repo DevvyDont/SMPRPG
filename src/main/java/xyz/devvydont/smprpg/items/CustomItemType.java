@@ -226,7 +226,7 @@ public enum CustomItemType {
     NEPTUNE_LEGGINGS("Neptune Leggings",     Material.LEATHER_LEGGINGS,   ItemRarity.LEGENDARY, NeptuneLeggings.class),
     NEPTUNE_BOOTS("Neptune Boots",           Material.LEATHER_BOOTS,      ItemRarity.LEGENDARY, NeptuneBoots.class),
     NEPTUNE_TRIDENT("Neptune's Trident",     Material.TRIDENT,            ItemRarity.LEGENDARY, NeptuneTrident.class),
-    NEPTUNE_BOW("Neptune's Bow",             Material.BOW,                ItemRarity.LEGENDARY, NeptuneBow.class),
+    NEPTUNE_BOW("Neptune's Shortbow",        Material.BOW,                ItemRarity.LEGENDARY, NeptuneBow.class),
 
     // QUARTZ
     QUARTZ_HELMET("Quartz Helmet",         Material.IRON_HELMET,        ItemRarity.RARE, QuartzHelmet.class),

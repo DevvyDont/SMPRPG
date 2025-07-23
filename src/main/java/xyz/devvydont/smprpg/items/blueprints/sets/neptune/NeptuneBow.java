@@ -10,6 +10,7 @@ import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.base.CustomShortbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.netherite.NetheriteBow;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
@@ -20,7 +21,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.BowRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class NeptuneBow extends CustomAttributeItem implements IBreakableEquipment, ICraftable {
+public class NeptuneBow extends CustomShortbow implements IBreakableEquipment, ICraftable {
 
     @Override
     public boolean wantNerfedSellPrice() {
@@ -35,7 +36,9 @@ public class NeptuneBow extends CustomAttributeItem implements IBreakableEquipme
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, NetheriteBow.DAMAGE-10),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25)
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, -.5),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 35)
         );
     }
 
