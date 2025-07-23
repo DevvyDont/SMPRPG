@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.special;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Equippable;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -101,7 +102,7 @@ public class MagmaHelmet extends CustomAttributeItem implements ICraftable, IHea
 
     @Override
     public int getMaxDurability() {
-        return 2500;
+        return 2000;
     }
 
     private boolean isFireCause(EntityDamageEvent.DamageCause cause) {
@@ -128,5 +129,6 @@ public class MagmaHelmet extends CustomAttributeItem implements ICraftable, IHea
             return;
 
         event.setCancelled(true);
+        helmet.damage(1, living);
     }
 }
