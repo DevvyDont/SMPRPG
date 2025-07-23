@@ -30,10 +30,7 @@ import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
-import xyz.devvydont.smprpg.entity.bosses.LeveledDragon;
-import xyz.devvydont.smprpg.entity.bosses.LeveledElderGuardian;
-import xyz.devvydont.smprpg.entity.bosses.LeveledWarden;
-import xyz.devvydont.smprpg.entity.bosses.LeveledWither;
+import xyz.devvydont.smprpg.entity.bosses.*;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.entity.vanilla.*;
@@ -526,5 +523,13 @@ public class EntityService implements IService, Listener {
 
         entity.setup();
         event.setCancelled(true);
+    }
+
+    public <T extends LeveledEntity<?>> ArrayList<T> getEntitiesOfClass(Class<T> clazz) {
+        var results = new ArrayList<T>();
+        for (var entity : entityInstances.values())
+            if (entity.getClass() == clazz)
+                results.add((T) entity);
+        return results;
     }
 }

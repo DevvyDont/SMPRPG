@@ -196,6 +196,10 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
      */
     public void wipe() {
 
+        // If the entity is already removed, we prob already did this.
+        if (!_entity.isValid())
+            return;
+
         for (Player player : getActivelyInvolvedPlayers()) {
             // Kill everyone
             player.setHealth(0);
@@ -204,8 +208,9 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         Bukkit.broadcast(ComponentUtils.alert(ComponentUtils.merge(
             ComponentUtils.create("The "),
             getPowerComponent(),
+            ComponentUtils.SPACE,
             getNameComponent(),
-            ComponentUtils.create(" has reigned victorious and wiped out those who challenged it.")
+            ComponentUtils.create(" has reigned victorious and wiped out those who challenged it...")
         )));
 
         for (Player p : Bukkit.getOnlinePlayers())
@@ -384,7 +389,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     @Override
     public void setup() {
         super.setup();
-        scoreboard = new SimpleGlobalScoreboard(cloneScoreboard(), getPowerComponent().append(getNameComponent()));
+        scoreboard = new SimpleGlobalScoreboard(cloneScoreboard(), getPowerComponent().append(ComponentUtils.SPACE).append(getNameComponent()));
         heal();
         bossBar = createBossBar();
         cleanupBrainTickTask();
@@ -436,7 +441,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
 
         // We died!!!
         Bukkit.broadcast(ComponentUtils.create("-----------------------------"));
-        Bukkit.broadcast(getPowerComponent().append(getNameComponent()).append(ComponentUtils.create(" Defeated!", getNameColor())));
+        Bukkit.broadcast(getPowerComponent().append(ComponentUtils.SPACE).append(getNameComponent()).append(ComponentUtils.create(" Defeated!")));
         Bukkit.broadcast(ComponentUtils.EMPTY);
         var winnerChatInfo = SMPRPG.getService(ChatService.class).getPlayerInfo(player);
         Bukkit.broadcast(ComponentUtils.create(winnerChatInfo.prefix(), NamedTextColor.WHITE).append(ComponentUtils.create(player.getName(), winnerChatInfo.nameColor())).append(ComponentUtils.create(" dealt the final blow!")));

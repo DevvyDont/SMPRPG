@@ -20,6 +20,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.bosses.BlazeBoss;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.ItemRarity;
@@ -42,6 +43,7 @@ public class InfernoArrow extends CustomItemBlueprint implements IHeaderDescriba
         WRONG_DIMENSION("This only works in the Nether!"),
         NO_LAVA("This arrow must be shot into lava!"),
         NO_ROOM("There is not enough space!"),
+        ALREADY_PRESENT("There is already one present!"),
         NOT_ENABLED("You are not prepared for this encounter yet...")
         ;
 
@@ -53,6 +55,16 @@ public class InfernoArrow extends CustomItemBlueprint implements IHeaderDescriba
         public String getMessage() {
             return message;
         }
+    }
+
+    private static boolean isValidSpawnBlock(Material material) {
+        return switch (material) {
+            case LAVA -> true;
+            case WEEPING_VINES -> true;
+            case AIR -> true;
+            case TWISTING_VINES -> true;
+            default -> false;
+        };
     }
 
     // How much should the arrow velocity be dampened by when colliding with a block and reflecting?
@@ -112,13 +124,16 @@ public class InfernoArrow extends CustomItemBlueprint implements IHeaderDescriba
         if (!block.getType().equals(Material.LAVA))
             return InfernoSpawnResult.NO_LAVA;
 
-        // Is there room to spawn this boss?
-        // todo figure out some raycasting checks maybe to determine the validity of the spot?
-        // todo for now just see if we can fit 25 blocks above us for room for expansion
-        for (int y = 1; y <= 40; y++)
-            if (!block.getRelative(BlockFace.UP, 10).getType().equals(Material.AIR))
-                return InfernoSpawnResult.NO_ROOM;
-        // end todo
+        // Is one already spawned?
+        for (var ignored : SMPRPG.getService(EntityService.class).getEntitiesOfClass(BlazeBoss.class))
+            return InfernoSpawnResult.ALREADY_PRESENT;
+
+        // Is there room to spawn this boss
+        for (int xOffset = -2; xOffset <= 2; xOffset++)
+            for (int zOffset = -2; zOffset <= 2; zOffset++)
+                for (int y = 1; y <= 20; y++)
+                    if (!isValidSpawnBlock(block.getLocation().clone().add(xOffset, y, zOffset).getBlock().getType()))
+                        return InfernoSpawnResult.NO_ROOM;
 
         // Is the boss enabled?
         if (!ALLOW_SPAWNING)
@@ -214,7 +229,7 @@ public class InfernoArrow extends CustomItemBlueprint implements IHeaderDescriba
 
         Bukkit.broadcast(ComponentUtils.merge(
                 name,
-                ComponentUtils.create(" summoned an"),
+                ComponentUtils.create(" summoned an "),
                 boss.getNameComponent(),
                 ComponentUtils.SYMBOL_EXCLAMATION
         ));
