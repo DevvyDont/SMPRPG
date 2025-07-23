@@ -150,6 +150,7 @@ public class DropsService implements IService, Listener {
         setFlag(meta, DropFlag.LOOT);
         setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(blueprint.getRarity(item)));
         item.setItemMeta(meta);
+        Bukkit.broadcast(Component.text("tagging itemstack"));
     }
 
     /**
@@ -395,20 +396,20 @@ public class DropsService implements IService, Listener {
 
         // Set the rarity glow of the item
         event.getEntity().setGlowing(true);
-        ItemStack item = event.getEntity().getItemStack();
-        ItemRarity rarity = SMPRPG.getService(ItemService.class).getBlueprint(item).getRarity(item);
+        var item = event.getEntity().getItemStack();
+        var rarity = SMPRPG.getService(ItemService.class).getBlueprint(item).getRarity(item);
         getTeam(rarity).addEntity(event.getEntity());
 
         // Set who owns the item based on previous tag setting
-        UUID owner = getOwner(event.getEntity().getItemStack());
+        var owner = getOwner(item);
 
         // No owner means we do nothing
         if (owner == null)
             return;
 
         // Tag the end of the display name to display the owner's name
-        Player p = Bukkit.getPlayer(owner);
-        Component name = event.getEntity().customName();
+        var p = Bukkit.getPlayer(owner);
+        var name = event.getEntity().customName();
         if (p == null || name == null)
             return;
 
@@ -425,7 +426,7 @@ public class DropsService implements IService, Listener {
 
         // Items expire when we tell them to, so let bukkit never decide for us
         event.getEntity().setUnlimitedLifetime(true);
-        setExpiryTimestamp(event.getEntity(), getExpiryTimestamp(event.getEntity().getItemStack()));
+        setExpiryTimestamp(event.getEntity(), getExpiryTimestamp(item));
         setOwner(event.getEntity(), p);
 
         // If this is a drop and the rarity is above rare, add the firework task
@@ -433,7 +434,9 @@ public class DropsService implements IService, Listener {
             DropFireworkTask.start(event.getEntity());
 
         // Now that we successfully transferred ItemStack -> Item entity data, we can clear the flags on the itemstack
-        removeAllTags(event.getEntity().getItemStack());
+        removeAllTags(item);
+        Bukkit.broadcast(Component.text("tags removed"));
+        event.getEntity().setItemStack(item);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -524,14 +527,8 @@ public class DropsService implements IService, Listener {
                     continue;
 
                 // Tag all the drops as loot drops
-                for (ItemStack item : allInvolvedPlayersDrops) {
-                    item.editMeta(meta -> {
-                        ItemRarity rarity = SMPRPG.getService(ItemService.class).getBlueprint(item).getRarity(item);
-                        setOwner(meta, player);
-                        setFlag(meta, DropFlag.LOOT);
-                        setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(rarity));
-                    });
-                }
+                for (ItemStack item : allInvolvedPlayersDrops)
+                    addDefaultLootFlags(item, player);
 
                 // Extend the list of items
                 event.getDrops().addAll(allInvolvedPlayersDrops);
@@ -552,15 +549,9 @@ public class DropsService implements IService, Listener {
         for (Item itemEntity : event.getItems()) {
             ItemStack item = itemEntity.getItemStack();
             SMPRPG.getService(ItemService.class).ensureItemStackUpdated(item);
-            item.editMeta(meta -> {
-                ItemRarity rarity = SMPRPG.getService(ItemService.class).getBlueprint(item).getRarity(item);
-                setOwner(meta, event.getPlayer());
-                setFlag(meta, DropFlag.LOOT);
-                setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(rarity));
-            });
+            addDefaultLootFlags(item, event.getPlayer());
             itemEntity.setItemStack(item);
         }
-
     }
 
     @EventHandler

@@ -8,11 +8,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
@@ -21,11 +23,14 @@ import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent;
+import xyz.devvydont.smprpg.services.DropsService;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.skills.SkillInstance;
 import xyz.devvydont.smprpg.util.world.ChunkUtil;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class FarmingExperienceListener implements Listener {
 
@@ -222,20 +227,41 @@ public class FarmingExperienceListener implements Listener {
                 return;
 
             plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                block.getWorld().playSound(block.getLocation(), block.getBlockSoundGroup().getBreakSound(), 1, 1);
-                Collection<ItemStack> laterDrops = block.getDrops(tool);
-                if (!ChunkUtil.isBlockSkillInvalid(block))
-                    farming.addExperience(getExperienceForDrops(laterDrops, block.getWorld().getEnvironment()), SkillExperienceGainEvent.ExperienceSource.HARVEST);
-                block.setType(Material.AIR, false);
+                // Create the items that this block would drop if it were broken properly, and add loot tags.
+                List<ItemStack> laterDrops = new ArrayList<>(block.getDrops(tool));
+                var dropEntities = new ArrayList<Item>();
                 for (ItemStack drop : laterDrops)
-                    block.getWorld().dropItemNaturally(block.getLocation(), drop);
+                    dropEntities.add(block.getWorld().dropItemNaturally(block.getLocation(), drop));
+
+                // Call the event. If it's cancelled, we can stop.
+                var newEvent = new BlockDropItemEvent(block, block.getState(), event.getPlayer(), new ArrayList<>(dropEntities));
+                if (!newEvent.callEvent()) {
+                    for (var item : dropEntities)
+                        item.remove();
+                    return;
+                }
+
+                // Check if any items ended up getting removed. They are not going to spawn in the world.
+                for (var item : dropEntities)
+                    if (!newEvent.getItems().contains(item))
+                        item.remove();
+
+                // This might seem strange, but it's necessary due to our hacky behavior.
+                // We now need to remove the item flags from the items so they can be picked up and stack properly.
+                for (var item : newEvent.getItems())
+                    SMPRPG.getService(DropsService.class).removeAllTags(item.getItemStack());
+
+                // Allow the event to happen. Give experience and delete the block.
+                if (!ChunkUtil.isBlockSkillInvalid(block)) {
+                    var loc = block.getLocation();
+                    loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(1));
+                    farming.addExperience(getExperienceForDrops(laterDrops, block.getWorld().getEnvironment()), SkillExperienceGainEvent.ExperienceSource.HARVEST);
+                }
+                block.setType(Material.AIR, false);
+                block.getWorld().playSound(block.getLocation(), block.getBlockSoundGroup().getBreakSound(), 1, 1);
                 ChunkUtil.markBlockSkillValid(block);
-                var loc = block.getLocation();
-                loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(1));
             }, yOffset);
-
         }
-
     }
 
     /**
