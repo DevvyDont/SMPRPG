@@ -139,7 +139,7 @@ public class SkillGlobals {
 
     // The combat skill improves some damage related attributes.
     public static double STR_PER_LEVEL = 5;
-    public static double CRITICAL_CHANCE_PER_LEVEL = 0.25;
+    public static double CRITICAL_CHANCE_PER_LEVEL = 0.5;
     public static double CRITICAL_RATING_PER_4_LEVELS = 4;
     public static int CRITICAL_RATING_LEVEL_FREQUENCY = 4;
 
