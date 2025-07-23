@@ -28,7 +28,7 @@ public class InfernoShortbow extends CustomShortbow implements ICraftable, ISell
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 130),
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 120),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.4),
                 new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 75),
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 50)
