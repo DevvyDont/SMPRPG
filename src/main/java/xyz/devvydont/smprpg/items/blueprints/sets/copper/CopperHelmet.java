@@ -25,7 +25,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.HelmetRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperHelmet extends CustomAttributeItem implements ICraftable, IBreakableEquipment, IEquippableOverride {
+public class CopperHelmet extends CopperArmorSet implements ICraftable, IBreakableEquipment, IEquippableOverride {
 
     public CopperHelmet(ItemService itemService, CustomItemType type) {
         super(itemService, type);

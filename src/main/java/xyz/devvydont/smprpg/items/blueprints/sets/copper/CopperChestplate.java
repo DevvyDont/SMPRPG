@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.ChestplateRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperChestplate extends CustomAttributeItem implements IBreakableEquipment, ICraftable, IDyeable, ITrimmable {
+public class CopperChestplate extends CopperArmorSet implements IBreakableEquipment, ICraftable, IDyeable, ITrimmable {
 
     public CopperChestplate(ItemService itemService, CustomItemType type) {
         super(itemService, type);

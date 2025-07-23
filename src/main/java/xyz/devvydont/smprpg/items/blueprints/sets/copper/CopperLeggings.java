@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperLeggings extends CustomAttributeItem implements IBreakableEquipment, ICraftable, ITrimmable, IDyeable {
+public class CopperLeggings extends CopperArmorSet implements IBreakableEquipment, ICraftable, ITrimmable, IDyeable {
 
     public CopperLeggings(ItemService itemService, CustomItemType type) {
         super(itemService, type);

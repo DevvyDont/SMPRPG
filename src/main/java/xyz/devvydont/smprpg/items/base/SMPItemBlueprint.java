@@ -3,12 +3,15 @@ package xyz.devvydont.smprpg.items.base;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
 import io.papermc.paper.datacomponent.item.Enchantable;
+import io.papermc.paper.datacomponent.item.Equippable;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
@@ -18,6 +21,7 @@ import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.intellij.lang.annotations.Subst;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
@@ -320,6 +324,25 @@ public abstract class SMPItemBlueprint {
         if (this instanceof IEquippableOverride override) {
             itemStack.setData(DataComponentTypes.EQUIPPABLE, override.getEquipmentOverride());
             itemStack.editMeta(meta -> meta.setMaxStackSize(1));  // Also don't allow it to stack.
+        }
+
+        // Now that our item has equippable properties (if it's meant to), we can inject an asset ID onto the item
+        // so a resource pack can override it (if it has a key defined).
+        if (this instanceof IEquippableAssetOverride override) {
+            var equippable = itemStack.getData(DataComponentTypes.EQUIPPABLE);
+            if (equippable != null)
+                itemStack.setData(DataComponentTypes.EQUIPPABLE, Equippable.equippable(equippable.slot())
+                        .damageOnHurt(equippable.damageOnHurt())
+                        .dispensable(equippable.dispensable())
+                        .swappable(equippable.swappable())
+                        .equipSound(equippable.equipSound())
+                        .allowedEntities(equippable.allowedEntities())
+                        .assetId(override.getAssetId())
+                        .shearSound(equippable.shearSound())
+                        .cameraOverlay(equippable.cameraOverlay())
+                        .equipOnInteract(equippable.equipOnInteract())
+                        .canBeSheared(equippable.canBeSheared())
+                        .build());
         }
 
         // If this is a consumable, apply the consumable data to the item stack.

@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.BootsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperBoots extends CustomAttributeItem implements IBreakableEquipment, ICraftable, ITrimmable, IDyeable {
+public class CopperBoots extends CopperArmorSet implements IBreakableEquipment, ICraftable, ITrimmable, IDyeable {
 
     public CopperBoots(ItemService itemService, CustomItemType type) {
         super(itemService, type);
