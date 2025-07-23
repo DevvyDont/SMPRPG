@@ -150,7 +150,6 @@ public class DropsService implements IService, Listener {
         setFlag(meta, DropFlag.LOOT);
         setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(blueprint.getRarity(item)));
         item.setItemMeta(meta);
-        Bukkit.broadcast(Component.text("tagging itemstack"));
     }
 
     /**
@@ -435,7 +434,6 @@ public class DropsService implements IService, Listener {
 
         // Now that we successfully transferred ItemStack -> Item entity data, we can clear the flags on the itemstack
         removeAllTags(item);
-        Bukkit.broadcast(Component.text("tags removed"));
         event.getEntity().setItemStack(item);
     }
 
