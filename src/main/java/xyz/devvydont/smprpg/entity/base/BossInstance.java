@@ -26,6 +26,7 @@ import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.components.DamageTracker;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
+import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
@@ -532,5 +533,24 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         activelyInvolvedPlayers.remove(event.getPlayer().getUniqueId());
         if (bossBar != null)
             bossBar.removeViewer(event.getPlayer());
+    }
+
+    /**
+     * Never let a player take PVP damage or deal PVP damage if they are in the fight.
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPVPDuringBoss(CustomEntityDamageByEntityEvent event) {
+
+        // Only listen to PVP.
+        if (!(event.getDealer() instanceof Player dealer))
+            return;
+
+        if (!(event.getDamaged() instanceof Player damaged))
+            return;
+
+        // We know this is PVP. If either character is participating in this fight, cancel.
+        if (activelyInvolvedPlayers.containsKey(dealer.getUniqueId()) || activelyInvolvedPlayers.containsKey(damaged.getUniqueId()))
+            event.setCancelled(true);
+
     }
 }
