@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.skills.listeners;
 
 import org.bukkit.block.Block;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -69,6 +70,7 @@ public class ForagingExperienceListener implements Listener {
         SkillInstance skill = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer()).getWoodcuttingSkill();
         skill.addExperience(getBaseExperienceForBlock(event.getBlock()), SkillExperienceGainEvent.ExperienceSource.WOODCUTTING);
         ChunkUtil.markBlockSkillValid(event.getBlock());
+        event.setExpToDrop(1);
     }
 
 }

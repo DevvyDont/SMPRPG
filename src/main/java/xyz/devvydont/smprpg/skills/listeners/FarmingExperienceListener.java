@@ -1,11 +1,13 @@
 package xyz.devvydont.smprpg.skills.listeners;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -116,6 +118,9 @@ public class FarmingExperienceListener implements Listener {
 
         LeveledPlayer player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         player.getFarmingSkill().addExperience(exp, SkillExperienceGainEvent.ExperienceSource.HARVEST);
+        var loc = event.getHarvestedBlock().getLocation();
+        var expToDrop = Math.max(1, exp/10);
+        loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(expToDrop));
     }
 
     private int getExperienceForDrops(Collection<ItemStack> drops, World.Environment environment) {
@@ -161,6 +166,8 @@ public class FarmingExperienceListener implements Listener {
 
         var player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         player.getFarmingSkill().addExperience(exp, SkillExperienceGainEvent.ExperienceSource.HARVEST);
+        var expToDrop = Math.max(1, exp/10);
+        event.setExpToDrop(expToDrop);
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -223,6 +230,8 @@ public class FarmingExperienceListener implements Listener {
                 for (ItemStack drop : laterDrops)
                     block.getWorld().dropItemNaturally(block.getLocation(), drop);
                 ChunkUtil.markBlockSkillValid(block);
+                var loc = event.getBlock().getLocation();
+                loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(1));
             }, yOffset);
 
         }

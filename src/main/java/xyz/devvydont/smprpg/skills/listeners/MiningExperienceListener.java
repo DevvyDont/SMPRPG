@@ -131,6 +131,7 @@ public class MiningExperienceListener implements Listener {
         if (exp <= 0)
             return;
 
+        event.setExpToDrop(Math.max(1, exp/10));
         skill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.ORE);
         ChunkUtil.markBlockSkillValid(event.getBlock());
     }
