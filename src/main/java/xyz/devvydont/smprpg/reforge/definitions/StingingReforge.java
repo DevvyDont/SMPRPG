@@ -27,7 +27,8 @@ public class StingingReforge extends ReforgeBase {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 AttributeEntry.multiplicative(AttributeWrapper.STRENGTH, getDamageBonus(rarity)),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 50 + rarity.ordinal() * 20)
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 50 + rarity.ordinal() * 10),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 20 + rarity.ordinal() * 5)
         );
     }
 

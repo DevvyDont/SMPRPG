@@ -27,7 +27,8 @@ public class SharpReforge extends ReforgeBase {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBonus(rarity)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .01f)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .01f),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 20 + 5 * rarity.ordinal())
         );
     }
 

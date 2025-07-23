@@ -24,6 +24,7 @@ public class OverheatingReforge extends ReforgeBase {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, SpicyReforge.getDamageBonus(rarity) - .05),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, (double) SpicyReforge.getCriticalBonus(rarity) /2),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, SwiftReforge.getAttackSpeedBuff(rarity)),
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, AgileReforge.getMovementSpeedBuff(rarity))
         );
