@@ -17,20 +17,20 @@ import xyz.devvydont.smprpg.services.ItemService;
 import java.util.Collection;
 import java.util.List;
 
-public class DesolatedStone extends ReforgeStone implements ICraftable, ISellable, ICustomTextured {
+public class SmolderingCoreBlueprint extends ReforgeStone implements ICraftable, ISellable, ICustomTextured {
 
-    public DesolatedStone(ItemService itemService, CustomItemType type) {
+    public SmolderingCoreBlueprint(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public String getTextureUrl() {
-        return "895a05992afa37b3806b81f0003ca617b3c1cbb9170a2309115b9c6a03eb73af";
+        return "eac5a3b17e8f1b98cda535abecf0667761a4f5991388af71efac2021f7bcce09";
     }
 
     @Override
     public ReforgeType getReforgeType() {
-        return ReforgeType.WITHERED;
+        return ReforgeType.OVERHEATING;
     }
 
     @Override
@@ -51,9 +51,9 @@ public class DesolatedStone extends ReforgeStone implements ICraftable, ISellabl
                 "nsn",
                 "ono"
         );
-        recipe.setIngredient('o', ItemService.generate(CustomItemType.ENCHANTED_OBSIDIAN));
-        recipe.setIngredient('n', ItemService.generate(Material.NETHERITE_INGOT));
-        recipe.setIngredient('s', ItemService.generate(CustomItemType.PREMIUM_NETHER_STAR));
+        recipe.setIngredient('o', ItemService.generate(CustomItemType.ENCHANTED_BLAZE_ROD));
+        recipe.setIngredient('n', ItemService.generate(CustomItemType.BOILING_INGOT));
+        recipe.setIngredient('s', ItemService.generate(CustomItemType.INFERNO_REMNANT));
         recipe.setCategory(CraftingBookCategory.MISC);
         return recipe;
     }
@@ -61,12 +61,12 @@ public class DesolatedStone extends ReforgeStone implements ICraftable, ISellabl
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                ItemService.generate(Material.NETHER_STAR)
+                ItemService.generate(CustomItemType.INFERNO_REMNANT)
         );
     }
 
     @Override
     public int getWorth(ItemStack item) {
-        return 50_000 * item.getAmount();
+        return 70_000 * item.getAmount();
     }
 }

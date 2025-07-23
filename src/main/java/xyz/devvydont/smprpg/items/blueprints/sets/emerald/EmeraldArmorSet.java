@@ -28,7 +28,7 @@ public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBr
     public static int EMERALD_POWER = 20;
     public static Material INGREDIENT = Material.EMERALD_BLOCK;
 
-    private static final Key ASSET_KEY = Key.key("emerald")
+    private static final Key ASSET_KEY = Key.key("emerald");
 
 
     public EmeraldArmorSet(ItemService itemService, CustomItemType type) {

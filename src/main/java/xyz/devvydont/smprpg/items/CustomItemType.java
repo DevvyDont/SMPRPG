@@ -292,6 +292,7 @@ public enum CustomItemType {
     SCORCHING_STRING("Scorching String", Material.STRING, ItemRarity.RARE, true, ScorchingString.class),
     INFERNO_RESIDUE("Inferno Residue", Material.ORANGE_DYE, ItemRarity.RARE, true, InfernoResidue.class),
     INFERNO_REMNANT("Inferno Remnant", ItemRarity.EPIC, InfernoRemnant.class),
+    SMOLDERING_CORE("Smoldering Core", ItemRarity.LEGENDARY, SmolderingCoreBlueprint.class),
 
     // UNSTABLE
     UNSTABLE_HELMET(    "Unstable Helmet",     Material.NETHERITE_HELMET,    ItemRarity.RARE, UnstableHelmet.class),
