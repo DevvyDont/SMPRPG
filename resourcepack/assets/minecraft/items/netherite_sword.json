@@ -1,0 +1,26 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/netherite_sword"
+        },
+        "cases": [
+            {
+                "when": "smprpg:reaver_knife",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/reaver_knife"
+                }
+            },
+            {
+                "when": "smprpg:forsaken_cutlass",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/forsaken_cutlass"
+                }
+            }
+        ]
+    }
+}
