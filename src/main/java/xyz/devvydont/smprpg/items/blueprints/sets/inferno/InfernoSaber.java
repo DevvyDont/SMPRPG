@@ -51,9 +51,9 @@ public class InfernoSaber extends CustomAttributeItem implements ICraftable, IMo
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 200),
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 150),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.6),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 75),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 50),
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, .25)
         );
     }

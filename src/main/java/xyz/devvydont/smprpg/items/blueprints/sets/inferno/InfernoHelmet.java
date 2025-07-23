@@ -27,8 +27,8 @@ public class InfernoHelmet extends InfernoArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, getDefense()),
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealth()),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrength()),
-                new ScalarAttributeEntry(AttributeWrapper.INTELLIGENCE, 50),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 15)
+                AttributeEntry.additive(AttributeWrapper.INTELLIGENCE, 50),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25)
         );
     }
 

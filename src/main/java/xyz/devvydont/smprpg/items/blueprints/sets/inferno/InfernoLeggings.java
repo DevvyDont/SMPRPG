@@ -28,7 +28,7 @@ public class InfernoLeggings extends InfernoArmorSet {
                 new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealth()),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrength()),
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, .15),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 15)
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25)
         );
     }
 
