@@ -103,6 +103,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
 
         // We do have a time limit, set the timestamp
         _entity.setRemoveWhenFarAway(false);
+        _entity.setPersistent(false);
         wipeTimestamp = System.currentTimeMillis() + (getTimeLimit() * 1000L);
     }
 
@@ -560,9 +561,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         // We know this is PVP. If either character is participating in this fight, cancel.
         if (activelyInvolvedPlayers.containsKey(dealer.getUniqueId()) || activelyInvolvedPlayers.containsKey(damaged.getUniqueId()))
             event.setCancelled(true);
-
     }
-
 
     /**
      * When we take damage, limit the max damage we can take so high level players can't obliterate us.
