@@ -339,6 +339,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     public void updateAttributes() {
         updateBaseAttribute(AttributeWrapper.STRENGTH, this._config.getBaseDamage());
         updateBaseAttribute(AttributeWrapper.HEALTH, this._config.getBaseHealth());
+        updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
 
     private Scoreboard cloneScoreboard() {
@@ -516,7 +517,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         if (event.getPlayer().getLocation().distance(_entity.getLocation()) < 200) {
             if (bossBar != null)
                 bossBar.addViewer(event.getPlayer());
-            if (scoreboard != null)
+            if (scoreboard != null && !scoreboard.showing(event.getPlayer()))
                 scoreboard.display(event.getPlayer());
             return;
         }

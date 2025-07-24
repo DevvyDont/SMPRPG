@@ -100,6 +100,10 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
                 minions.remove(uuid);
                 minion.getEntity().remove();
             }
+
+            // If this minion has been alive for 20 ticks, enable its AI. We spawned it with disabled AI to prevent spawn damage.
+            if (minion.getEntity() instanceof LivingEntity minionLiving && minion.getEntity().getTicksLived() > 20)
+                minionLiving.setAI(true);
         }
 
         // The main logic of the boss.
@@ -116,8 +120,10 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
             _entity.setInvulnerable(true);
             getEntity().setAI(false);
 
-            for (var minion : minions.values())
-                ParticleUtil.spawnParticlesBetweenTwoPoints(Particle.ENCHANTED_HIT, _entity.getWorld(), getEntity().getEyeLocation().toVector(), minion.getEntity().getLocation().add(0, 1, 0).toVector(), 50);
+            // Only spawn particles every so often.
+            if (tick % 5 == 0)
+                for (var minion : minions.values())
+                    ParticleUtil.spawnParticlesBetweenTwoPoints(Particle.ENCHANTED_HIT, _entity.getWorld(), getEntity().getEyeLocation().toVector(), minion.getEntity().getLocation().add(0, 1, 0).toVector(), 50);
 
             // No minions left? Back to default
             if (minions.isEmpty())
@@ -319,6 +325,10 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
         var mob = SMPRPG.getService(EntityService.class).spawnCustomEntity(CustomEntityType.PHOENIX, spawn);
         if (mob == null || mob.getEntity() == null)
             return;
+
+        // Disable its AI at first so it doesn't deal damage immediately.
+        if (mob.getEntity() instanceof LivingEntity livingMinion)
+            livingMinion.setAI(false);
 
         minions.put(mob.getEntity().getUniqueId(), mob);
     }
