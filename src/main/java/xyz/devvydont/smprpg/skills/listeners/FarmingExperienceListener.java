@@ -255,11 +255,9 @@ public class FarmingExperienceListener implements Listener {
                     SMPRPG.getService(DropsService.class).removeAllTags(item.getItemStack());
 
                 // Allow the event to happen. Give experience and delete the block.
-                if (!ChunkUtil.isBlockSkillInvalid(block)) {
-                    var loc = block.getLocation();
-                    loc.getWorld().spawn(loc, ExperienceOrb.class, orb -> orb.setExperience(1));
+                if (!ChunkUtil.isBlockSkillInvalid(block))
                     farming.addExperience(getExperienceForDrops(laterDrops, block.getWorld().getEnvironment()), SkillExperienceGainEvent.ExperienceSource.HARVEST);
-                }
+                
                 block.setType(Material.AIR, false);
                 block.getWorld().playSound(block.getLocation(), block.getBlockSoundGroup().getBreakSound(), 1, 1);
                 ChunkUtil.markBlockSkillValid(block);
