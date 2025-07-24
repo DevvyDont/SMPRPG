@@ -17,7 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -30,6 +29,7 @@ import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
+import xyz.devvydont.smprpg.entity.base.listeners.EnderDragonSpawnContributionListener;
 import xyz.devvydont.smprpg.entity.bosses.*;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
@@ -150,7 +150,8 @@ public class EntityService implements IService, Listener {
             }
         }.runTaskTimer(plugin, 5*60*20, 5*60*20);
 
-        listeners.add(new EntityTamingAttributeFix());
+        listeners.add(new EntityTamingAttributeFix());  // Scales entities to owner levels.
+        listeners.add(new EnderDragonSpawnContributionListener());  // Adds boss contribution weight for boss spawning.
         for (var listener : listeners)
             listener.start();
     }

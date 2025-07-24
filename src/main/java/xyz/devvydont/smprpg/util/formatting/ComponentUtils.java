@@ -72,6 +72,25 @@ public final class ComponentUtils {
         return MiniMessage.miniMessage().deserialize(String.format("<gradient:%s:%s>%s</gradient>", startColor.asHexString(), endColor.asHexString(), message));
     }
 
+    /**
+     * Creates a silly text component that encrypts random characters in the string.
+     * @param message The message to encrypt.
+     * @param intensity The percentage of characters that should randomly be encrypted.
+     * @return A new component with random encrypted characters.
+     */
+    public static Component encrypt(String message, double intensity) {
+
+        var newComponent = create("");
+
+        for (var _char : message.toCharArray()) {
+            var charComponent = Math.random() < intensity ?
+                    Component.text(_char).decorate(TextDecoration.OBFUSCATED) :
+                    Component.text(_char);
+            newComponent = newComponent.append(charComponent);
+        }
+        return newComponent;
+    }
+
     // -----------
     //   Helpers
     // -----------

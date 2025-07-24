@@ -19,6 +19,8 @@ import java.util.List;
 
 public class LeveledDragon extends BossInstance<EnderDragon> {
 
+    public static final double BASE_CRYSTAL_LUCK = .5;
+
     private final boolean wasSummoned = false;
 
     public LeveledDragon(EnderDragon entity) {

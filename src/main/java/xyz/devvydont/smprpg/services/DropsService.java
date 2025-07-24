@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -47,6 +48,8 @@ import java.util.*;
  * - When an entity drops items, they drop items for whoever helped kill it so everyone gets items
  */
 public class DropsService implements IService, Listener {
+
+
 
     public enum DropFlag {
         NULL,
@@ -148,6 +151,23 @@ public class DropsService implements IService, Listener {
         var blueprint = SMPRPG.getService(ItemService.class).getBlueprint(item);
         setOwner(meta, owner);
         setFlag(meta, DropFlag.LOOT);
+        setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(blueprint.getRarity(item)));
+        item.setItemMeta(meta);
+    }
+
+    /**
+     * Adds the necessary flags to this item that makes it behave like standard death drops, with delayed item deletion and
+     * loot drop owning.
+     * @param item The item to tag.
+     * @param player The owner of the item.
+     */
+    public void addDefaultDeathFlags(ItemStack item, Player player) {
+        if (item == null || item.getType() == Material.AIR)
+            return;
+        var meta = item.getItemMeta();
+        var blueprint = SMPRPG.getService(ItemService.class).getBlueprint(item);
+        setOwner(meta, player);
+        setFlag(meta, DropFlag.DEATH);
         setExpiryTimestamp(meta, System.currentTimeMillis() + getMillisecondsUntilExpiry(blueprint.getRarity(item)));
         item.setItemMeta(meta);
     }

@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.entity.base;
 
+import io.papermc.paper.registry.keys.SoundEventKeys;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -7,6 +9,7 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -65,12 +68,97 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
      */
     private final Map<UUID, Player> activelyInvolvedPlayers = new HashMap<>();
 
+    /**
+     * All bosses can be spawned by players in some way. This map will represent the contributions towards spawning,
+     * from 0-1. If a player solely spawns a boss, they have their odds doubled. Helping spawn a boss also contributes
+     * but not as much.
+     */
+    private final Map<UUID, Double> spawnContribution = new HashMap<>();
+
+
     public BossInstance(Entity entity) {
         super(entity);
     }
 
     public BossInstance(T entity) {
         super(entity);
+    }
+
+    /**
+     * Broadcasts the [PLAYER] has summoned x! chat message when we spawn in.
+     * Dynamically handles complex spawning scenarios with multiple players as well.
+     * @param players The players who summoned the boss.
+     */
+    public void broadcastSpawnedByPlayers(List<Player> players) {
+
+        // First, make a prefix component. If it was one player, just put their name.
+        // If it was two players, put x and y.
+        // If it was more, do a comma separated list with the last player being and. for example, x, y and z.
+        Component names;
+        ChatService chatService = SMPRPG.getService(ChatService.class);
+        if (players.size() == 1) {
+            names = chatService.getPlayerDisplay(players.getFirst());
+        } else if (players.size() == 2) {
+            names = Component.text()
+                    .append(chatService.getPlayerDisplay(players.get(0)))
+                    .append(Component.text("and"))
+                    .append(chatService.getPlayerDisplay(players.get(1)))
+                    .build();
+        } else {
+            // More than 2 players: x, y, and z
+            names = Component.empty();
+            for (int i = 0; i < players.size(); i++) {
+                if (i > 0) {
+                    if (i == players.size() - 1) {
+                        names = names.append(Component.text(" and "));
+                    } else {
+                        names = names.append(Component.text(", "));
+                    }
+                }
+                names = names.append(chatService.getPlayerDisplay(players.get(i)));
+            }
+        }
+
+        Bukkit.broadcast(ComponentUtils.alert(ComponentUtils.merge(
+                names,
+                ComponentUtils.create(" has summoned the "),
+                getPowerComponent(),
+                ComponentUtils.SPACE,
+                getNameComponent(),
+                ComponentUtils.create("!")
+        ), NamedTextColor.DARK_PURPLE));
+
+        if (!this._entity.getType().equals(EntityType.WITHER))
+            Audience.audience(Bukkit.getOnlinePlayers()).playSound(net.kyori.adventure.sound.Sound.sound().type(SoundEventKeys.ENTITY_WITHER_SPAWN).volume(.2f).build());
+    }
+
+    /**
+     * Gets the spawn contribution map. Represents player IDs to a weight on how much they contributed to spawn.
+     * The intended use is to have values from 0-1, representing 0-100% luck boost, but if you want spawning to be
+     * more impactful you can go beyond 1.
+     * @return The spawn contribution map.
+     */
+    public Map<UUID, Double> getSpawnContribution() {
+        return spawnContribution;
+    }
+
+    /**
+     * Add spawn contribution weight for a player. Adds to their already present contribution weight.
+     * @param player The player to add.
+     * @param contribution The amount of weight to add.
+     */
+    public void addSpawnContribution(Player player, double contribution) {
+        addSpawnContribution(player.getUniqueId(), contribution);
+    }
+
+    /**
+     * Add spawn contribution weight for a player. Adds to their already present contribution weight.
+     * @param playerId The player to add.
+     * @param contribution The amount of weight to add.
+     */
+    public void addSpawnContribution(UUID playerId, double contribution) {
+        var val = spawnContribution.getOrDefault(playerId, 0.0);
+        spawnContribution.put(playerId, val + contribution);
     }
 
     @Override
