@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/blaze_rod"
+        },
+        "cases": [
+            {
+                "when": "smprpg:inferno_saber",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/inferno_saber"
+                }
+            }
+        ]
+    }
+}

@@ -53,11 +53,6 @@ public class InfernoLeggings extends InfernoArmorSet {
     }
 
     @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.WAYFINDER;
-    }
-
-    @Override
     public CraftingRecipe getCustomRecipe() {
         return new LeggingsRecipe(this, ItemService.generate(CustomItemType.INFERNO_REMNANT), generate()).build();
     }

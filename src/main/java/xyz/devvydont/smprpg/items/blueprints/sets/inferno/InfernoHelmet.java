@@ -53,11 +53,6 @@ public class InfernoHelmet extends InfernoArmorSet {
     }
 
     @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.SILENCE;
-    }
-
-    @Override
     public CraftingRecipe getCustomRecipe() {
         return new HelmetRecipe(this, ItemService.generate(CustomItemType.INFERNO_REMNANT), generate()).build();
     }
