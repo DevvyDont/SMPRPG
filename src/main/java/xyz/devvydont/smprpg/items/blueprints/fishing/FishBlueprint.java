@@ -131,7 +131,7 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
     public int getWorth(ItemStack item) {
         var rarityFactor = (this.getRarity(item).ordinal() + 1.0);
         var base = this.getBaseWorth();
-        return (int) (Math.pow(rarityFactor, rarityFactor) * base);
+        return (int) (Math.pow(rarityFactor, rarityFactor) * base * item.getAmount());
     }
 
     @Override
