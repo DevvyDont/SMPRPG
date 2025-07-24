@@ -28,6 +28,7 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.STONE, 1);
         materialWorthMap.put(Material.STONE_BRICKS, 1);
         materialWorthMap.put(Material.COBBLESTONE, 1);
+        materialWorthMap.put(Material.BLACKSTONE, 1);
         materialWorthMap.put(Material.GRANITE, 1);
         materialWorthMap.put(Material.DIORITE, 1);
         materialWorthMap.put(Material.ANDESITE, 1);
@@ -42,6 +43,7 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.RED_SANDSTONE, 1);
         materialWorthMap.put(Material.DIRT, 1);
         materialWorthMap.put(Material.GRAVEL, 1);
+        materialWorthMap.put(Material.LEAF_LITTER, 1);
         materialWorthMap.put(Material.GLASS, 2);
         materialWorthMap.put(Material.FLINT, 2);
         materialWorthMap.put(Material.OBSIDIAN, 45);
@@ -178,6 +180,12 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.SPRUCE_SAPLING, 2);
         materialWorthMap.put(Material.CHERRY_SAPLING, 2);
         materialWorthMap.put(Material.JUNGLE_SAPLING, 2);
+        materialWorthMap.put(Material.BROWN_MUSHROOM, 2);
+        materialWorthMap.put(Material.RED_MUSHROOM, 2);
+        materialWorthMap.put(Material.RED_MUSHROOM_BLOCK, 8);
+        materialWorthMap.put(Material.BROWN_MUSHROOM_BLOCK, 8);
+        materialWorthMap.put(Material.POISONOUS_POTATO, 1);
+        materialWorthMap.put(Material.POTATOES, 3);
         materialWorthMap.put(Material.COOKIE, 15);
 
         materialWorthMap.put(Material.WHEAT, 3);
