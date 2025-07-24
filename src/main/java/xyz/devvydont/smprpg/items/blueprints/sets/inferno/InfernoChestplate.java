@@ -58,11 +58,6 @@ public class InfernoChestplate extends InfernoArmorSet {
     }
 
     @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.SILENCE;
-    }
-
-    @Override
     public CraftingRecipe getCustomRecipe() {
         return new ChestplateRecipe(this, ItemService.generate(CustomItemType.INFERNO_REMNANT), generate()).build();
     }

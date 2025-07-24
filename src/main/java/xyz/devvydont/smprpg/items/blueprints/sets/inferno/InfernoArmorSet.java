@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.inferno;
 
+import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,7 @@ import xyz.devvydont.smprpg.items.attribute.ScalarAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.IEquippableAssetOverride;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -19,10 +21,11 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class InfernoArmorSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
+public abstract class InfernoArmorSet extends CustomAttributeItem implements IBreakableEquipment, ICraftable, IEquippableAssetOverride {
 
     public static final int POWER = 40;
     public static CustomItemType CRAFTING_COMPONENT = CustomItemType.INFERNO_REMNANT;
+    private static final Key key = Key.key("inferno");
 
     public InfernoArmorSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -60,11 +63,6 @@ public abstract class InfernoArmorSet extends CustomAttributeItem implements IBr
     }
 
     @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.REDSTONE;
-    }
-
-    @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
     }
@@ -75,4 +73,7 @@ public abstract class InfernoArmorSet extends CustomAttributeItem implements IBr
                 ItemService.generate(CustomItemType.INFERNO_REMNANT)
         );
     }
+
+    @Override
+    public Key getAssetId() {return key;}
 }

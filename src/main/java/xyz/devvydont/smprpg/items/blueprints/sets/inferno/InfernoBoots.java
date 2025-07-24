@@ -53,11 +53,6 @@ public class InfernoBoots extends InfernoArmorSet {
     }
 
     @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.WAYFINDER;
-    }
-
-    @Override
     public CraftingRecipe getCustomRecipe() {
         return new BootsRecipe(this, ItemService.generate(CustomItemType.INFERNO_REMNANT), generate()).build();
     }
