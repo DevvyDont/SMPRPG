@@ -371,6 +371,7 @@ public class DropsService implements IService, Listener {
 
         // Don't lose any levels.
         event.setKeepLevel(true);
+        event.setDroppedExp(0);
 
         // Go through all the drops on the player and tag it as being owned
         for (ItemStack drop : event.getDrops()) {
