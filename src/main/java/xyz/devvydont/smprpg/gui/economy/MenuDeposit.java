@@ -1,6 +1,8 @@
 package xyz.devvydont.smprpg.gui.economy;
 
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -49,6 +51,14 @@ public final class MenuDeposit extends MenuBase {
         // If the item clicked is not sellable, we can't do anything with it.
         var itemBlueprint = this.itemService.getBlueprint(event.getCurrentItem());
         event.setCancelled(!(itemBlueprint instanceof ISellable));
+
+        // If the item clicked is enchanted or reforged, we should prevent the item from being shift clicked.
+        if (event.isShiftClick() && (!event.getCurrentItem().getEnchantments().isEmpty() || itemBlueprint.isReforged(event.getCurrentItem()))) {
+            var error = ComponentUtils.merge(ComponentUtils.create("WHOA THERE!", NamedTextColor.RED, TextDecoration.BOLD), ComponentUtils.create(" Do you really want to sell this? Manually drag the item in the menu if so."));
+            player.sendMessage(ComponentUtils.alert(error, NamedTextColor.RED));
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_DEATH, 1f, 1.5f);
+            event.setCancelled(true);
+        }
     }
 
     @Override
