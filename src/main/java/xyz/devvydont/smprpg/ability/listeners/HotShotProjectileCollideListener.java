@@ -37,6 +37,11 @@ public class HotShotProjectileCollideListener extends ToggleableListener {
         event.setCancelled(true);
         event.blockList().clear();
         for (LivingEntity living : event.getLocation().getNearbyLivingEntities(EXPLOSION_RADIUS)) {
+
+            // Players are immune to this.
+            if (living instanceof Player)
+                continue;
+
             double falloff = EXPLOSION_RADIUS - event.getLocation().distance(living.getLocation());
             falloff /= EXPLOSION_RADIUS;
             double damage = DAMAGE * falloff;
