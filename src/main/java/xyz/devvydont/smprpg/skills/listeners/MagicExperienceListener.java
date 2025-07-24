@@ -86,11 +86,11 @@ public class MagicExperienceListener implements Listener {
         // Consider the base potion effect
         if (meta.getBasePotionType() != null)
             for (PotionEffect effect : meta.getBasePotionType().getPotionEffects())
-                exp += ((effect.getAmplifier()+1) * effect.getDuration() / 150);
+                exp += ((effect.getAmplifier()+1) * effect.getDuration() / 25);
 
         // Consider the extra potion effects
         for (PotionEffect effect : meta.getCustomEffects())
-            exp += ((effect.getAmplifier()+1) * effect.getDuration() / 250);
+            exp += ((effect.getAmplifier()+1) * effect.getDuration() / 50);
 
         return exp;
     }
