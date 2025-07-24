@@ -562,4 +562,29 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
             event.setCancelled(true);
 
     }
+
+
+    /**
+     * When we take damage, limit the max damage we can take so high level players can't obliterate us.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void __onReceiveDamage(CustomEntityDamageByEntityEvent event) {
+
+        if (!event.getDamaged().equals(_entity))
+            return;
+
+        var cap = this.getHalfHeartValue() * 2;
+        var dmg = event.getFinalDamage();
+
+        if (dmg <= cap)
+            return;
+
+        // We need to tone it back...
+        var curve = 0.3;
+        var reduced = cap + Math.pow(dmg-cap, curve);
+        double scale = reduced / dmg;
+        event.multiplyDamage(scale);
+        if (event.isCritical())
+            event.multiplyDamage(1.5);
+    }
 }
