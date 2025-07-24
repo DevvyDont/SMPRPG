@@ -399,6 +399,14 @@ public class DropsService implements IService, Listener {
         var rarity = SMPRPG.getService(ItemService.class).getBlueprint(item).getRarity(item);
         getTeam(rarity).addEntity(event.getEntity());
 
+        // Items with enchantments cannot die.
+        if (!item.getEnchantments().isEmpty())
+            event.getEntity().setInvulnerable(true);
+
+        // Rare+ items cannot die.
+        if (rarity.ordinal() >= ItemRarity.RARE.ordinal())
+            event.getEntity().setInvulnerable(true);
+
         // Set who owns the item based on previous tag setting
         var owner = getOwner(item);
 
