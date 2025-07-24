@@ -9,26 +9,32 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.EnchantmentUtil;
+import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
 import xyz.devvydont.smprpg.events.CustomItemDropRollEvent;
+import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
+import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public class FortuityEnchantment extends CustomEnchantment implements Listener {
+import java.util.Collection;
+import java.util.List;
 
-    public static float getChanceIncrease(int level) {
+public class FortuityEnchantment extends CustomEnchantment implements AttributeEnchantment {
+
+    public static int getChanceIncrease(int level) {
         return switch (level) {
             case 0 -> 0;
-            case 1 -> .10f;
-            case 2 -> .25f;
-            case 3 -> .5f;
-            case 4 -> .9f;
-            case 5 -> 1.5f;
-            default -> getChanceIncrease(5) + .5f * (level-5);
+            case 1 -> 2;
+            case 2 -> 4;
+            case 3 -> 6;
+            case 4 -> 8;
+            case 5 -> 10;
+            default -> getChanceIncrease(5) + 2 * (level-5);
         };
     }
-
 
     public FortuityEnchantment(String id) {
         super(id);
@@ -42,15 +48,16 @@ public class FortuityEnchantment extends CustomEnchantment implements Listener {
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases rare item drop chance by "),
-            ComponentUtils.create("+" + (int)(getChanceIncrease(getLevel())*100) + "%", NamedTextColor.GREEN),
-            ComponentUtils.create(" from mobs")
+            ComponentUtils.create("Increases "),
+            ComponentUtils.create(AttributeWrapper.LUCK.DisplayName, NamedTextColor.GOLD),
+            ComponentUtils.create(" by "),
+            ComponentUtils.create("+" + getChanceIncrease(getLevel()), NamedTextColor.GREEN)
         );
     }
 
     @Override
     public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_WEAPON;
+        return ItemTypeTagKeys.ENCHANTABLE_VANISHING;
     }
 
     @Override
@@ -70,7 +77,7 @@ public class FortuityEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public EquipmentSlotGroup getEquipmentSlotGroup() {
-        return EquipmentSlotGroup.HAND;
+        return EquipmentSlotGroup.ANY;
     }
 
     @Override
@@ -78,14 +85,36 @@ public class FortuityEnchantment extends CustomEnchantment implements Listener {
         return 25;
     }
 
-    @EventHandler
-    public void onItemRoll(CustomItemDropRollEvent event) {
+    /**
+     * What kind of attribute container is this? Items can have multiple containers of stats that stack
+     * to prevent collisions
+     *
+     * @return
+     */
+    @Override
+    public AttributeModifierType getAttributeModifierType() {
+        return AttributeModifierType.ENCHANTMENT;
+    }
 
-        int fortuity = EnchantmentUtil.getHoldingEnchantLevel(getEnchantment(), EquipmentSlotGroup.HAND, event.getPlayer().getEquipment());
-        if (fortuity < 1)
-            return;
+    /**
+     * What modifiers themselves will be contained on the item if there are no variables to affect them?
+     *
+     * @return
+     */
+    @Override
+    public Collection<AttributeEntry> getHeldAttributes() {
+        return List.of(
+                AttributeEntry.additive(AttributeWrapper.LUCK, getChanceIncrease(getLevel()))
+        );
+    }
 
-        float multiplier = getChanceIncrease(fortuity) + 1.0f;
-        event.setChance(event.getChance() * multiplier);
+    /**
+     * How much should we increase the power rating of an item if this container is present?
+     *
+     * @return
+     */
+    @Override
+    public int getPowerRating() {
+        return 0;
     }
 }

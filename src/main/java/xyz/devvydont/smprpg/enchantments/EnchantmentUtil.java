@@ -77,5 +77,12 @@ public class EnchantmentUtil {
     }
 
 
+    public static int getTotalEnchantLevel(Enchantment enchantment, EntityEquipment equipment) {
+        return getHoldingEnchantLevel(enchantment, EquipmentSlotGroup.HAND, equipment) + getWornEnchantLevel(enchantment, equipment);
+    }
+
+    public static int getTotalEnchantLevel(CustomEnchantment enchantment, EntityEquipment equipment) {
+        return getHoldingEnchantLevel(enchantment, EquipmentSlotGroup.HAND, equipment) + getWornEnchantLevel(enchantment, equipment);
+    }
 
 }
