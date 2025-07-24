@@ -307,7 +307,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         // If we have a time limit, add a wipe section
         int secondsLeft = Math.max(0, getSecondsLeft());
         long msLeft = wipeTimestamp-System.currentTimeMillis()-(secondsLeft*1000L);
-        if (secondsLeft < 1000) {
+        if (secondsLeft < 1000 && secondsLeft > 0) {
             lines.add(ComponentUtils.EMPTY);
 
             // Color is always green by default
