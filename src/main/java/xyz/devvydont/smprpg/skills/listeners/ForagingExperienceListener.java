@@ -67,8 +67,12 @@ public class ForagingExperienceListener implements Listener {
         if (ChunkUtil.isBlockSkillInvalid(event.getBlock()))
             return;
 
+        var exp = getBaseExperienceForBlock(event.getBlock());
+        if (exp <= 0)
+            return;
+
         SkillInstance skill = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer()).getWoodcuttingSkill();
-        skill.addExperience(getBaseExperienceForBlock(event.getBlock()), SkillExperienceGainEvent.ExperienceSource.WOODCUTTING);
+        skill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.WOODCUTTING);
         ChunkUtil.markBlockSkillValid(event.getBlock());
         event.setExpToDrop(1);
     }

@@ -121,6 +121,9 @@ public class FarmingExperienceListener implements Listener {
         for (ItemStack item : event.getItemsHarvested())
             exp += getExperienceValue(item);
 
+        if (exp <= 0)
+            return;
+
         LeveledPlayer player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         player.getFarmingSkill().addExperience(exp, SkillExperienceGainEvent.ExperienceSource.HARVEST);
         var loc = event.getHarvestedBlock().getLocation();
