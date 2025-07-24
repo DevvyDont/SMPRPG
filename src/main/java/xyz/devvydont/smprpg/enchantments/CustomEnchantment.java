@@ -162,6 +162,17 @@ public abstract class CustomEnchantment implements Cloneable {
     public abstract int getSkillRequirement();
 
     /**
+     * Checks the requirement of the enchantment for a specific level of the enchantment.
+     * @param level
+     * @return
+     */
+    public int getSkillRequirementForLevel(int level) {
+        double percentage = (double) (level-1) / getMaxLevel();
+        int enchantLevelRequirement = (int) (percentage * (100-getSkillRequirement()) + getSkillRequirement());
+        return Math.min(100, enchantLevelRequirement);
+    }
+
+    /**
      * The skill level required to stop rolling this enchantment. This is mainly used so that players can stop
      * rolling curse enchantments on gear at a certain level
      *

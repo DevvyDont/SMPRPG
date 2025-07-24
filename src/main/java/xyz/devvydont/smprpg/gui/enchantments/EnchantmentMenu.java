@@ -18,6 +18,7 @@ import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
+import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,8 +111,19 @@ public class EnchantmentMenu extends MenuBase {
         }
 
         enchantmentDescription.add(ComponentUtils.EMPTY);
-        boolean isUnlocked = SMPRPG.getService(EntityService.class).getPlayerInstance(player).getMagicSkill().getLevel() >= enchantment.getSkillRequirement();
+        var magicLvl = SMPRPG.getService(EntityService.class).getPlayerInstance(player).getMagicSkill().getLevel();
+        boolean isUnlocked = magicLvl >= enchantment.getSkillRequirement();
         enchantmentDescription.add(ComponentUtils.merge(ComponentUtils.create("Magic Skill Level Requirement: ", isUnlocked ? NamedTextColor.GRAY : NamedTextColor.RED), ComponentUtils.create(String.valueOf(enchantment.getSkillRequirement()), isUnlocked ? NamedTextColor.LIGHT_PURPLE : NamedTextColor.DARK_RED)));
+
+        if (enchantment.getMaxLevel() > 1) {
+            enchantmentDescription.add(ComponentUtils.EMPTY);
+            for (int i = 2; i <= enchantment.getMaxLevel(); i++) {
+                var unlocked = magicLvl >= enchantment.getSkillRequirementForLevel(i) ?
+                        ComponentUtils.create(Symbols.CHECK, NamedTextColor.GREEN) :
+                        ComponentUtils.create(Symbols.X, NamedTextColor.RED);
+                enchantmentDescription.add(ComponentUtils.merge(unlocked, ComponentUtils.SPACE, enchantment.build(i).getDisplayName().append(Component.text(" " + i)).color(NamedTextColor.DARK_GRAY), ComponentUtils.create(": Magic " + enchantment.getSkillRequirementForLevel(i), NamedTextColor.DARK_GRAY)));
+            }
+        }
 
         book.editMeta(meta -> {
             meta.lore(ComponentUtils.cleanItalics(enchantmentDescription));

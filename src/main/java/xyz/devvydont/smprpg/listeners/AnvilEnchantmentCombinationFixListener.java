@@ -222,14 +222,11 @@ public class AnvilEnchantmentCombinationFixListener extends ToggleableListener {
 
             // Level of enchant is too high?
             // Determine how many levels we have over the requirement and what magic level would give us the max level
-            double percentage = (double) (entries.getValue()-1) / enchantment.getMaxLevel();
-            int enchantLevelRequirement = (int) (percentage * (99-requirement) + requirement);
-            enchantLevelRequirement = Math.min(99, enchantLevelRequirement);
+            var enchantLevelRequirement = enchantment.getSkillRequirementForLevel(entries.getValue());
             if (enchantLevelRequirement > magicLevel){
                 information.add(ComponentUtils.create("- Need Magic " + enchantLevelRequirement + " to apply high level enchantment ", NamedTextColor.RED).append(enchantment.getEnchantment().displayName(entries.getValue()).color(enchantment.getEnchantColor())));
                 allowed = false;
             }
-
         }
 
         information.add(ComponentUtils.EMPTY);
