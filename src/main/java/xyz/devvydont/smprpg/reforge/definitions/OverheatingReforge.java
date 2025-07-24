@@ -23,20 +23,20 @@ public class OverheatingReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                new MultiplicativeAttributeEntry(AttributeWrapper.STRENGTH, SpicyReforge.getDamageBonus(rarity)),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, SpicyReforge.getCriticalBonus(rarity)*2),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 6*rarity.ordinal()),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, SwiftReforge.getAttackSpeedBuff(rarity)*2),
-                new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, AgileReforge.getMovementSpeedBuff(rarity)*2)
+                AttributeEntry.scalar(AttributeWrapper.STRENGTH, SpicyReforge.getDamageBonus(rarity)/2),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, Math.round(SpicyReforge.getCriticalBonus(rarity)/4.0)),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 5+rarity.ordinal()),
+                AttributeEntry.scalar(AttributeWrapper.ATTACK_SPEED, SwiftReforge.getAttackSpeedBuff(rarity)*2),
+                AttributeEntry.scalar(AttributeWrapper.MOVEMENT_SPEED, AgileReforge.getMovementSpeedBuff(rarity)*2)
         );
     }
-
 
     @Override
     public List<Component> getDescription() {
         return List.of(
                 ComponentUtils.create("Provides a").append(ComponentUtils.create(" SIGNIFICANT", NamedTextColor.GOLD)).append(ComponentUtils.create(" boost")),
-                ComponentUtils.create("in attack damage, attack speed, and movement speed")
+                ComponentUtils.create("in movement speed and attack speed"),
+                ComponentUtils.create("with a moderate strength buff")
         );
     }
 

@@ -19,7 +19,7 @@ public class AgileReforge extends ReforgeBase {
     }
 
     public static float getMovementSpeedBuff(ItemRarity rarity) {
-        return rarity.ordinal() * .01f + .04f;
+        return rarity.ordinal() * .02f + .06f;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class SwiftReforge extends ReforgeBase {
     }
 
     public static float getAttackSpeedBuff(ItemRarity rarity) {
-        return rarity.ordinal() * .01f + .04f;
+        return rarity.ordinal() * .01f + .05f;
     }
 
     public SwiftReforge(ReforgeType type) {
