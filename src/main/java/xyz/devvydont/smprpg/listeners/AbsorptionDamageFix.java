@@ -17,19 +17,16 @@ import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
  */
 public class AbsorptionDamageFix extends ToggleableListener {
 
-
     public void crackEntityArmor(LivingEntity entity) {
         entity.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, entity.getEyeLocation(), 20);
         entity.getWorld().playSound(entity.getEyeLocation(), Sound.BLOCK_GLASS_BREAK, 1f, 1.5f);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEntityDamage(EntityDamageEvent event) {
 
         if (!(event.getEntity() instanceof LivingEntity living))
             return;
-
-        var plugin = SMPRPG.getInstance();
 
         var entity = SMPRPG.getService(EntityService.class).getEntityInstance(event.getEntity());
 
@@ -50,7 +47,7 @@ public class AbsorptionDamageFix extends ToggleableListener {
         absorbDmgEvent.callEvent();
 
         // Make the original damage event do no damage.
-        event.setDamage(EntityDamageEvent.DamageModifier.BASE, 0.01);
+        event.setDamage(EntityDamageEvent.DamageModifier.BASE, 0.0001);
     }
 
 }

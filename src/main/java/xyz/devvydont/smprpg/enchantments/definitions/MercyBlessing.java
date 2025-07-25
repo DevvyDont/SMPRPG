@@ -90,11 +90,15 @@ public class MercyBlessing extends CustomEnchantment implements Listener {
     }
 
     @Override
-    public @NotNull RegistryKeySet<Enchantment> getConflictingEnchantments() {
+    public @NotNull RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
         return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentService.KEEPING_BLESSING.getTypedKey());
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    /**
+     * Listen for when damage is dealt. We aren't *supposed* to use monitor here, but this needs to happen
+     * ABSOLUTELY LAST. If it's not, then there's a chance we risk this proc'ing when it's not supposed to.
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onFatalDamage(EntityDamageEvent event) {
 
         if (!(event.getEntity() instanceof Player player))
@@ -107,7 +111,7 @@ public class MercyBlessing extends CustomEnchantment implements Listener {
         if (!chestplate.containsEnchantment(getEnchantment()))
             return;
 
-        if (player.getCooldown(chestplate.getType()) > 0)
+        if (player.getCooldown(chestplate) > 0)
             return;
 
         // Invalid damage type?
@@ -128,7 +132,7 @@ public class MercyBlessing extends CustomEnchantment implements Listener {
             return;
 
         event.setDamage(EntityDamageEvent.DamageModifier.BASE, player.getHealth()-1);
-        player.setCooldown(chestplate.getType(), COOLDOWN*20);
+        player.setCooldown(chestplate, COOLDOWN*20);
         player.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, player.getEyeLocation(), 25);
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_TOTEM_USE, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20*30, 4, true));
