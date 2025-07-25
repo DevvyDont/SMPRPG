@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/orange_dye"
+        },
+        "cases": [
+            {
+                "when": "smprpg:inferno_residue",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/inferno_residue"
+                }
+            }
+        ]
+    }
+}

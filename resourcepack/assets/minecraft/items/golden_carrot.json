@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/golden_carrot"
+        },
+        "cases": [
+            {
+                "when": "smprpg:chili_pepper",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/chili_pepper"
+                }
+            }
+        ]
+    }
+}

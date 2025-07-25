@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/blaze_powder"
+        },
+        "cases": [
+            {
+                "when": "smprpg:cinderite",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/cinderite"
+                }
+            }
+        ]
+    }
+}
