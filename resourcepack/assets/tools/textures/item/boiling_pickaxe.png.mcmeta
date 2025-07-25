@@ -1,0 +1,10 @@
+
+{
+	"__comment": "",
+	"animation": {
+		"interpolate": true,
+		"width": 16,
+		"height": 16,
+		"frametime": 2
+	}
+}

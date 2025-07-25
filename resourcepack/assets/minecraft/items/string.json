@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/string"
+        },
+        "cases": [
+            {
+                "when": "smprpg:scorching_string",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/scorching_string"
+                }
+            }
+        ]
+    }
+}
