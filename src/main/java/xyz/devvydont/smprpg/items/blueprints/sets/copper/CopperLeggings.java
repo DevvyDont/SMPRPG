@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperLeggings extends CopperArmorSet implements IBreakableEquipment, ICraftable, ITrimmable, IDyeable {
+public class CopperLeggings extends CopperArmorSet implements IBreakableEquipment, ICraftable, IDyeable {
 
     public CopperLeggings(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -76,16 +76,6 @@ public class CopperLeggings extends CopperArmorSet implements IBreakableEquipmen
     @Override
     public Color getColor() {
         return Color.fromRGB(0xfed83d);
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.COPPER;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.RAISER;
     }
 
     @Override

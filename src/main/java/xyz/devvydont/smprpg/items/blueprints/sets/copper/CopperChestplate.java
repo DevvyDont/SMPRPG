@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.ChestplateRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperChestplate extends CopperArmorSet implements IBreakableEquipment, ICraftable, IDyeable, ITrimmable {
+public class CopperChestplate extends CopperArmorSet implements IBreakableEquipment, ICraftable, IDyeable {
 
     public CopperChestplate(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -76,16 +76,6 @@ public class CopperChestplate extends CopperArmorSet implements IBreakableEquipm
     @Override
     public Color getColor() {
         return Color.fromRGB(0xf9801d);
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.GOLD;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.RAISER;
     }
 
     @Override
