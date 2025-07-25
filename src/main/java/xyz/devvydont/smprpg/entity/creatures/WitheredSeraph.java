@@ -48,7 +48,6 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
         this.updateBaseAttribute(AttributeWrapper.MOVEMENT_SPEED, .25);
     }
 
-
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(

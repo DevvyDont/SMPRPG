@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -656,25 +657,22 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     /**
      * When we take damage, limit the max damage we can take so high level players can't obliterate us.
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void __onReceiveDamage(CustomEntityDamageByEntityEvent event) {
+    @EventHandler(priority = EventPriority.LOW)
+    public void __onReceiveDamage(EntityDamageByEntityEvent event) {
 
-        if (!event.getDamaged().equals(_entity))
+        if (!event.getEntity().equals(_entity))
             return;
 
         var cap = this.getHalfHeartValue() * 2;
         var dmg = event.getFinalDamage();
-
         if (dmg <= cap)
             return;
 
         // We need to tone it back...
-        var curve = 0.3;
+        var curve = 0.5;
         var reduced = cap + Math.pow(dmg-cap, curve);
         double scale = reduced / dmg;
-        event.multiplyDamage(scale);
-        if (event.isCritical())
-            event.multiplyDamage(1.5);
+        event.setDamage(dmg * scale);
     }
 
     /**
