@@ -104,7 +104,7 @@ public class FishingBehaviorListeners extends ToggleableListener {
      * the fishhook that monitors its behavior every tick.
      * @param event The {@link PlayerFishEvent} that provides us with relevant context.
      */
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler()
     private void __onStartFishWithSpecialRod(PlayerFishEvent event) {
 
         // If this hook is associated with a task already, offset the logic to the task. Not this.
