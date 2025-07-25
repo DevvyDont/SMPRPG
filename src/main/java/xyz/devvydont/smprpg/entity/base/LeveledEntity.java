@@ -226,6 +226,14 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * Default nametag behavior. Displays as [✦3] Zombie 100/100❤
      */
     public void updateNametag() {
+
+        // Don't show animals that are lvl 10 or lower unless they are missing HP. Helps FPS with large animal farms.
+        if (this._entity instanceof Animals)
+            if (this.getLevel() <= 10 && this.getHealthPercentage() >= 1.0) {
+                _entity.setCustomNameVisible(false);
+                return;
+            }
+
         _entity.setCustomNameVisible(true);
         _entity.customName(this.getFullComponent());
     }
