@@ -58,18 +58,12 @@
                     "fallback": {
                         "type": "minecraft:condition",
                         "on_false": {
-                            "type": "minecraft:special",
-                            "base": "swords:item/neptune_trident_in_hand",
-                            "model": {
-                                "type": "minecraft:trident"
-                            }
+                            "type": "minecraft:model",
+                            "model": "swords:item/neptune_trident_in_hand"
                         },
                         "on_true": {
-                            "type": "minecraft:special",
-                            "base": "swords:item/neptune_trident_throwing",
-                            "model": {
-                                "type": "minecraft:trident"
-                            }
+                            "type": "minecraft:model",
+                            "model": "swords:item/neptune_trident_throwing"
                         },
                         "property": "minecraft:using_item"
                     },
