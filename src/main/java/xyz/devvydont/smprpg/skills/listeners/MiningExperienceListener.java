@@ -51,6 +51,9 @@ public class MiningExperienceListener implements Listener {
                     case CRYING_OBSIDIAN -> 24;
 
                     case AMETHYST_BLOCK -> 4;
+                    case AMETHYST_SHARD -> 10;
+                    case AMETHYST_CLUSTER -> 15;
+                    case BUDDING_AMETHYST -> 10;
                     case LARGE_AMETHYST_BUD -> 15;
                     case MEDIUM_AMETHYST_BUD -> 20;
                     case SMALL_AMETHYST_BUD -> 25;
