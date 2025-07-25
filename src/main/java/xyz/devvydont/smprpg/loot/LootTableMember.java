@@ -111,7 +111,7 @@ public class LootTableMember implements LootSource {
         if (isWantEnchants())
             enchantItem(reward);
 
-        CustomItemDropRollEvent rollEvent = new CustomItemDropRollEvent(player, player.getInventory().getItemInMainHand(), chance, reward);
+        CustomItemDropRollEvent rollEvent = new CustomItemDropRollEvent(player, player.getInventory().getItemInMainHand(), chance, reward, this);
         rollEvent.callEvent();
 
         boolean success = Math.random() < rollEvent.getChance();

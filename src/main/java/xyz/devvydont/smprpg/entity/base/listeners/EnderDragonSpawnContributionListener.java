@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 
 /**
  * In charge of listening to game events in order to add boss spawn contributions for the ender dragon.
@@ -156,10 +157,13 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
         if (!(event.getEntity() instanceof LeveledDragon dragon))
             return;
 
+        dragon.setSummoned(true);
+        dragon.setConfiguration(dragon.getDefaultConfiguration());
+
         // Contribute some chance boosting for the crystals we have. Clear out the crystals once we are done!
         // We are also using a formula here that discourages solo spawning the dragon. You lose out on drop odds w/ mass crystal placing.
         for (var entry : crystalPlacers.asMap().entrySet())
-            dragon.addSpawnContribution(entry.getKey(), 1-Math.pow((1-LeveledDragon.BASE_CRYSTAL_LUCK), entry.getValue().size()));
+            dragon.addSpawnContribution(entry.getKey(), (1-Math.pow((1-LeveledDragon.BASE_CRYSTAL_LUCK), entry.getValue().size())) * LeveledDragon.CRYSTAL_LUCK_SOFT_CAP);
 
         // Announcement message for the players responsible.
         List<Player> spawners = new ArrayList<>();

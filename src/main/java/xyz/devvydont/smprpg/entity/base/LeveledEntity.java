@@ -141,6 +141,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
 
     public void setConfiguration(EntityConfiguration config) {
         this._config = config;
+        this.setLevel(config.getBaseLevel());
         this.updateAttributes();
     }
 

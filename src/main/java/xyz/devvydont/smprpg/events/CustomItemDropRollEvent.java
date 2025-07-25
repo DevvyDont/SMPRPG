@@ -6,6 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.util.items.LootSource;
 
 public class CustomItemDropRollEvent extends Event {
 
@@ -27,14 +28,16 @@ public class CustomItemDropRollEvent extends Event {
     private final ItemStack drop;
     private final double initialChance;
     private double chance;
+    private final @NotNull LootSource source;
 
-    public CustomItemDropRollEvent(@NotNull Player player, @Nullable ItemStack tool, double initialChance, ItemStack drop) {
+    public CustomItemDropRollEvent(@NotNull Player player, @Nullable ItemStack tool, double initialChance, ItemStack drop, @NotNull LootSource source) {
         this.player = player;
         this.tool = tool;
         this.offhand = player.getInventory().getItemInOffHand();
         this.initialChance = initialChance;
         this.chance = initialChance;
         this.drop = drop;
+        this.source = source;
     }
 
     /**
@@ -100,4 +103,11 @@ public class CustomItemDropRollEvent extends Event {
         this.chance = chance;
     }
 
+    /**
+     * Gets the source of this drop. This is typically a {@link xyz.devvydont.smprpg.entity.base.LeveledEntity}.
+     * @return The source.
+     */
+    public @NotNull LootSource getSource() {
+        return source;
+    }
 }

@@ -1,8 +1,10 @@
 package xyz.devvydont.smprpg.entity.bosses;
 
 import net.kyori.adventure.bossbar.BossBar;
+import org.bukkit.Material;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
@@ -19,9 +21,17 @@ import java.util.List;
 
 public class LeveledDragon extends BossInstance<EnderDragon> {
 
+    /**
+     * A number from 0-.9999 that determines how intense crystal placement luck is at first.
+     */
     public static final double BASE_CRYSTAL_LUCK = .5;
 
-    private final boolean wasSummoned = false;
+    /**
+     * How much luck multiplier you "cap out at".
+     */
+    public static final double CRYSTAL_LUCK_SOFT_CAP = 4;
+
+    private boolean wasSummoned = false;
 
     public LeveledDragon(EnderDragon entity) {
         super(entity);
@@ -58,6 +68,10 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
         return "Ender Dragon";
     }
 
+    public void setSummoned(boolean summoned) {
+        this.wasSummoned = summoned;
+    }
+
     @Override
     public EntityConfiguration getDefaultConfiguration() {
         return EntityConfiguration.builder()
@@ -70,14 +84,17 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_HELMET), 100, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_CHESTPLATE), 125, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_LEGGINGS), 110, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_BOOTS), 100, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_DAGGER), 125, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.TRANSMISSION_WAND), 125, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL), 20, this),
-                new QuantityLootDrop(ItemService.generate(CustomItemType.DRAGON_SCALES), 2, 7, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_HELMET), 850, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_CHESTPLATE), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_LEGGINGS), 900, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_BOOTS), 850, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_DAGGER), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.TRANSMISSION_WAND), 1500, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL), 500, this),
+                new QuantityLootDrop(ItemService.generate(CustomItemType.DRAGON_SCALES), 1, 2, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 50, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 7, this),
+                new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 3, 7, this)
         );
     }
 

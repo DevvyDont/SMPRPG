@@ -30,6 +30,7 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.components.DamageTracker;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
+import xyz.devvydont.smprpg.events.CustomItemDropRollEvent;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
@@ -674,5 +675,25 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         event.multiplyDamage(scale);
         if (event.isCritical())
             event.multiplyDamage(1.5);
+    }
+
+    /**
+     * When we roll for drops, check if the player involved has a spawn contribution boost.
+     */
+    @EventHandler
+    public void __onRollForDrops(CustomItemDropRollEvent event) {
+
+        if (!event.getSource().equals(this))
+            return;
+
+        // This loot roll involves us! Check if the player rolling is present.
+        var contributionRating = getSpawnContribution().get(event.getPlayer().getUniqueId());
+        if (contributionRating == null)
+            return;
+
+        // This player contributed to our spawn. Let's boost the chance. By default, we say that for every .01
+        // contribution rating, they get a 1% boost.
+        var newChance = event.getChance() * (contributionRating+1);
+        event.setChance(newChance);
     }
 }
