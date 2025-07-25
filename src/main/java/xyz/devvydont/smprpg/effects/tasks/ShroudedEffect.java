@@ -41,14 +41,15 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
     @Override
     protected void tick() {
-        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 2, false, false));
-        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, false, false));
-        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, false, false));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 2, true, true));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 1, true, true));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, true, true));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 50, 0, true, true));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 50, 9, true, true));
+        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 50, 0, true, true));
         getPlayer().setAllowFlight(true);
-
-        if (!getPlayer().isGlowing())
-            getPlayer().setGlowing(true);
-
+        getPlayer().setFoodLevel(20);
+        getPlayer().setSaturation(20);
         // If we are flying, subtract a second depending on the tick. This will make it appear like it's draining.
         if (getPlayer().isFlying())
             seconds--;
@@ -56,15 +57,14 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
 
     @Override
     protected void expire() {
-        // No need to do anything!
-        getPlayer().setAllowFlight(false);
-        getPlayer().setGlowing(false);
+        if (!getPlayer().getGameMode().isInvulnerable())
+            getPlayer().setAllowFlight(false);
     }
 
     @Override
     public void removed() {
-        getPlayer().setAllowFlight(false);
-        getPlayer().setGlowing(false);
+        if (!getPlayer().getGameMode().isInvulnerable())
+            getPlayer().setAllowFlight(false);
     }
 
     /*
