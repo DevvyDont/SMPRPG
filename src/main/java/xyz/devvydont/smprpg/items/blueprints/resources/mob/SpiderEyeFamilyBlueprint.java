@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.interfaces.IConsumable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
 import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,13 +67,13 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
 
         if (getCustomItemType().equals(CustomItemType.ENCHANTED_SPIDER_EYE))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.JUMP_BOOST, 20*600, 1),
-                    new PotionEffect(PotionEffectType.NIGHT_VISION, 20*600, 0)
+                    new PotionEffect(PotionEffectType.JUMP_BOOST, (int) TickTime.minutes(5), 1),
+                    new PotionEffect(PotionEffectType.NIGHT_VISION, (int) TickTime.minutes(5), 0)
             ), 1f));
 
         if (getCustomItemType().equals(CustomItemType.PREMIUM_CHICKEN))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.JUMP_BOOST, 20*600, 0)
+                    new PotionEffect(PotionEffectType.JUMP_BOOST, (int) TickTime.minutes(5), 0)
             ), 1f));
 
         return Consumable.consumable()

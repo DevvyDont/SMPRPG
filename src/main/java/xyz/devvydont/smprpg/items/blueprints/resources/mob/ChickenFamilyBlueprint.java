@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.interfaces.IConsumable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
 import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,16 +67,16 @@ public class ChickenFamilyBlueprint extends CustomCompressableBlueprint implemen
 
         if (getCustomItemType().equals(CustomItemType.ENCHANTED_CHICKEN))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*600, 2),
-                    new PotionEffect(PotionEffectType.REGENERATION, 20*600, 0),
-                    new PotionEffect(PotionEffectType.SLOW_FALLING, 20*120, 0),
-                    new PotionEffect(PotionEffectType.SPEED, 20*120, 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 2),
+                    new PotionEffect(PotionEffectType.REGENERATION, (int) TickTime.minutes(5), 0),
+                    new PotionEffect(PotionEffectType.SLOW_FALLING, (int) TickTime.minutes(5), 0),
+                    new PotionEffect(PotionEffectType.SPEED, (int) TickTime.minutes(5), 0)
             ), 1f));
 
         if (getCustomItemType().equals(CustomItemType.PREMIUM_CHICKEN))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*600, 0),
-                    new PotionEffect(PotionEffectType.SLOW_FALLING, 20*120, 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 0),
+                    new PotionEffect(PotionEffectType.SLOW_FALLING, (int) TickTime.minutes(2), 0)
             ), 1f));
 
         return Consumable.consumable()

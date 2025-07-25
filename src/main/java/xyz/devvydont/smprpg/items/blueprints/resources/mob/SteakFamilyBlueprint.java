@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.interfaces.IConsumable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
 import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,15 +66,15 @@ public class SteakFamilyBlueprint extends CustomCompressableBlueprint implements
 
         if (getCustomItemType().equals(CustomItemType.ENCHANTED_STEAK))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*600, 6),
-                    new PotionEffect(PotionEffectType.REGENERATION, 20*600, 1),
-                    new PotionEffect(PotionEffectType.RESISTANCE, 20*600, 2)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 4),
+                    new PotionEffect(PotionEffectType.REGENERATION, (int) TickTime.minutes(5), 0),
+                    new PotionEffect(PotionEffectType.RESISTANCE, (int) TickTime.minutes(5), 1)
             ), 1f));
 
         if (getCustomItemType().equals(CustomItemType.PREMIUM_STEAK))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*60, 1),
-                    new PotionEffect(PotionEffectType.RESISTANCE, 20*60, 1)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(1), 2),
+                    new PotionEffect(PotionEffectType.RESISTANCE, (int) TickTime.minutes(1), 0)
             ), 1f));
 
         return Consumable.consumable()

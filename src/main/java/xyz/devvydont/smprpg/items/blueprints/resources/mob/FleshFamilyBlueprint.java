@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.interfaces.IConsumable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
 import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,13 +66,13 @@ public class FleshFamilyBlueprint extends CustomCompressableBlueprint implements
 
         if (getCustomItemType().equals(CustomItemType.ENCHANTED_FLESH))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*600, 2),
-                    new PotionEffect(PotionEffectType.NIGHT_VISION, 20*600, 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 2),
+                    new PotionEffect(PotionEffectType.NIGHT_VISION, (int) TickTime.minutes(5), 0)
             ), 1f));
 
         if (getCustomItemType().equals(CustomItemType.PREMIUM_FLESH))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.ABSORPTION, 20*600, 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 0)
             ), 1f));
 
         return Consumable.consumable()
