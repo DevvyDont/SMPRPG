@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,8 @@ import xyz.devvydont.smprpg.util.tasks.VoidProtectionTask;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * In charge of managing item drops in the world.
@@ -99,8 +102,8 @@ public class DropsService implements IService, Listener {
     // A timestamp on when this drop should expire from the world and disappear. Varying rarity items have different times.
     private final NamespacedKey DROP_EXPIRE_KEY;
 
-    private final List<Item> expiredItemQueue = new ArrayList<>();
-    private List<Item> itemsToUpdateQueue = new ArrayList<>();
+    private final CopyOnWriteArrayList<Item> expiredItemQueue = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Item> itemsToUpdateQueue = new CopyOnWriteArrayList<>();
 
     // A task that cleans up items.
     private BukkitRunnable itemCleanupTask = null;
@@ -293,6 +296,13 @@ public class DropsService implements IService, Listener {
         return seconds / 3600 + "h";
     }
 
+    public static List<Item> getAllLoadedItems() {
+        var items = new ArrayList<Item>();
+        for (var world : Bukkit.getWorlds())
+            items.addAll(world.getEntitiesByClass(Item.class));
+        return items;
+    }
+
     @Override
     public void setup() throws RuntimeException {
         var plugin = SMPRPG.getInstance();
@@ -324,7 +334,7 @@ public class DropsService implements IService, Listener {
                 var toProcess = new ArrayList<>(itemsToUpdateQueue);
                 if (toProcess.size() > 1000) {
                     toProcess = new ArrayList<>(toProcess.subList(0, 1000));
-                    itemsToUpdateQueue = new ArrayList<>(itemsToUpdateQueue.subList(1000, itemsToUpdateQueue.size()));
+                    itemsToUpdateQueue = new CopyOnWriteArrayList<>(itemsToUpdateQueue.subList(1000, itemsToUpdateQueue.size()));
                 } else {
                     itemsToUpdateQueue.clear();
                 }
@@ -362,7 +372,7 @@ public class DropsService implements IService, Listener {
                 }
             }
         };
-        itemCleanupTask.runTaskTimer(SMPRPG.getInstance(), 0, TickTime.seconds(1));
+        itemCleanupTask.runTaskTimer(SMPRPG.getInstance(), 0, TickTime.TICK);
 
         // Make a task that will slowly decrement items on the ground so they despawn eventually.
         itemTimerTask = new BukkitRunnable() {
@@ -374,9 +384,20 @@ public class DropsService implements IService, Listener {
                 expiredItemQueue.clear();
                 itemsToUpdateQueue.clear();
 
+
+                List<Item> entities = null;
+                try {
+                    entities = Bukkit.getScheduler().callSyncMethod(SMPRPG.getInstance(), DropsService::getAllLoadedItems).get();
+                } catch (InterruptedException e) {
+                    SMPRPG.getInstance().getLogger().warning("Item cleanup query task was interrupted. " + e.getMessage());
+                } catch (ExecutionException e) {
+                    SMPRPG.getInstance().getLogger().warning("Item cleanup query task ran into an error. " + e.getMessage());
+                }
+                if (entities == null)
+                    return;
+
                 // Loop through every item loaded on the server currently.
-                for (World world : Bukkit.getWorlds()) {
-                    for (Item item : world.getEntitiesByClass(Item.class)) {
+                for (var item : entities) {
 
                         // If this item doesn't have the expiry tag, we can't do anything with it
                         if (!hasExpiryTimestamp(item))
@@ -389,11 +410,12 @@ public class DropsService implements IService, Listener {
                             continue;
                         }
                         itemsToUpdateQueue.add(item);
-                    }
                 }
+
             }
         };
-        itemTimerTask.runTaskTimerAsynchronously(plugin, 0, TickTime.seconds(30));
+
+        itemTimerTask.runTaskTimerAsynchronously(plugin, 0, TickTime.seconds(1));
 
         new VoidProtectionTask().runTaskTimer(plugin, TickTime.INSTANTANEOUSLY, TickTime.TICK);
     }
