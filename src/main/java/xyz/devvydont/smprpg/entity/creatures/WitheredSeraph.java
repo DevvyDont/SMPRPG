@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
@@ -19,7 +20,7 @@ import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 import java.util.Collection;
 import java.util.List;
 
-public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance<T> {
+public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance<T> implements Listener {
 
     public WitheredSeraph(T entity, CustomEntityType entityType) {
         super(entity, entityType);
