@@ -99,6 +99,12 @@ public class DropsService implements IService, Listener {
     // A timestamp on when this drop should expire from the world and disappear. Varying rarity items have different times.
     private final NamespacedKey DROP_EXPIRE_KEY;
 
+    private final List<Item> expiredItemQueue = new ArrayList<>();
+    private List<Item> itemsToUpdateQueue = new ArrayList<>();
+
+    // A task that cleans up items.
+    private BukkitRunnable itemCleanupTask = null;
+
     // A task that runs every second to check if an item should expire or not.
     private BukkitRunnable itemTimerTask = null;
 
@@ -307,11 +313,68 @@ public class DropsService implements IService, Listener {
         };
         dropAnnouncementTask.runTaskTimerAsynchronously(plugin, TickTime.INSTANTANEOUSLY, TickTime.HALF_SECOND);
 
+        // A synchronous cleanup job for items that are considered expired. Our async task is in charge of populating
+        // the list of stale items for us. The reason for this is so we can async observe items without lagging the TPS.
+        itemCleanupTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+
+                // Update any items that were flagged as needing it. We should only be allowed to do this ~1,000 times
+                // on a single tick, so hard cap the amount of items we do.
+                var toProcess = new ArrayList<>(itemsToUpdateQueue);
+                if (toProcess.size() > 1000) {
+                    toProcess = new ArrayList<>(toProcess.subList(0, 1000));
+                    itemsToUpdateQueue = new ArrayList<>(itemsToUpdateQueue.subList(1000, itemsToUpdateQueue.size()));
+                } else {
+                    itemsToUpdateQueue.clear();
+                }
+
+                for (var item : toProcess) {
+                    // Common items don't display a tag.
+                    if (ItemService.blueprint(item.getItemStack()).getRarity(item.getItemStack()).equals(ItemRarity.COMMON)) {
+                        item.setCustomNameVisible(false);
+                        continue;
+                    }
+
+                    // If it hasn't expired yet, update the name of the item
+                    String rawName = getOwnerName(item);
+                    if (rawName == null)
+                        rawName = "???";
+
+                    var now = System.currentTimeMillis();
+                    long expiresAt = getExpiryTimestamp(item);
+                    var name = ComponentUtils.create(" (" + rawName + ")", NamedTextColor.DARK_GRAY);
+                    var timeleft = stringifyTime((expiresAt - now) / 1000);
+                    var time = ComponentUtils.create(" (" + timeleft + ")", NamedTextColor.DARK_GRAY);
+                    var itemName = SMPRPG.getService(ItemService.class).getBlueprint(item.getItemStack()).getNameComponent(item.getItemStack());
+                    item.customName(time.append(itemName).append(name.decoration(TextDecoration.OBFUSCATED, false)));
+                }
+
+                // Simple. Delete any items in the queue.
+                for (var item : expiredItemQueue.stream().toList()) {
+                    // We need to try except this because it can fail. It's not a serious issue though.
+                    try {
+                        item.remove();
+                        expiredItemQueue.remove(item);
+                    } catch (Exception e) {
+                        SMPRPG.getInstance().getLogger().warning(e.getMessage());
+                    }
+                }
+            }
+        };
+        itemCleanupTask.runTaskTimer(SMPRPG.getInstance(), 0, TickTime.seconds(1));
+
         // Make a task that will slowly decrement items on the ground so they despawn eventually.
         itemTimerTask = new BukkitRunnable() {
             @Override
             public void run() {
                 long now = System.currentTimeMillis();
+
+                // We are about to refresh the queue so clear it.
+                expiredItemQueue.clear();
+                itemsToUpdateQueue.clear();
+
+                // Loop through every item loaded on the server currently.
                 for (World world : Bukkit.getWorlds()) {
                     for (Item item : world.getEntitiesByClass(Item.class)) {
 
@@ -319,34 +382,18 @@ public class DropsService implements IService, Listener {
                         if (!hasExpiryTimestamp(item))
                             continue;
 
-                        // This item has an expiry time, see if it has expired, if it has then remove it
+                        // This item has an expiry time, see if it has expired, if it has then removed it
                         long expiresAt = getExpiryTimestamp(item);
                         if (expiresAt < now) {
-                            item.remove();
+                            expiredItemQueue.add(item);
                             continue;
                         }
-
-                        // Common items don't display a tag.
-                        if (ItemService.blueprint(item.getItemStack()).getRarity(item.getItemStack()).equals(ItemRarity.COMMON)) {
-                            item.setCustomNameVisible(false);
-                            continue;
-                        }
-
-                        // If it hasn't expired yet, update the name of the item
-                        String rawName = getOwnerName(item);
-                        if (rawName == null)
-                            rawName = "???";
-
-                        Component name = ComponentUtils.create(" (" + rawName + ")", NamedTextColor.DARK_GRAY);
-                        String timeleft = stringifyTime((expiresAt - now) / 1000);
-                        Component time = ComponentUtils.create(" (" + timeleft + ")", NamedTextColor.DARK_GRAY);
-                        Component itemName = SMPRPG.getService(ItemService.class).getBlueprint(item.getItemStack()).getNameComponent(item.getItemStack());
-                        item.customName(time.append(itemName).append(name.decoration(TextDecoration.OBFUSCATED, false)));
+                        itemsToUpdateQueue.add(item);
                     }
                 }
             }
         };
-        itemTimerTask.runTaskTimer(plugin, 0, TickTime.seconds(1));
+        itemTimerTask.runTaskTimerAsynchronously(plugin, 0, TickTime.seconds(30));
 
         new VoidProtectionTask().runTaskTimer(plugin, TickTime.INSTANTANEOUSLY, TickTime.TICK);
     }
@@ -359,8 +406,12 @@ public class DropsService implements IService, Listener {
         if (dropAnnouncementTask != null)
             dropAnnouncementTask.cancel();
 
+        if (itemCleanupTask != null)
+            itemCleanupTask.cancel();
+
         itemTimerTask = null;
         dropAnnouncementTask = null;
+        itemCleanupTask = null;
     }
 
     /**
