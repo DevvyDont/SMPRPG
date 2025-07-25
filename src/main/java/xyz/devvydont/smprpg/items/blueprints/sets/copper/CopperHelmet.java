@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.copper;
 
 import io.papermc.paper.datacomponent.item.Equippable;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -14,6 +15,7 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.ScalarAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.interfaces.IDyeable;
 import xyz.devvydont.smprpg.items.interfaces.IEquippableOverride;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemArmor;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
@@ -25,15 +27,10 @@ import xyz.devvydont.smprpg.util.crafting.builders.HelmetRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperHelmet extends CopperArmorSet implements ICraftable, IBreakableEquipment, IEquippableOverride {
+public class CopperHelmet extends CopperArmorSet implements ICraftable, IBreakableEquipment, IDyeable {
 
     public CopperHelmet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
-    }
-
-    @Override
-    public Equippable getEquipmentOverride() {
-        return IEquippableOverride.generateDefault(EquipmentSlot.HEAD);
     }
 
     @Override
@@ -78,5 +75,10 @@ public class CopperHelmet extends CopperArmorSet implements ICraftable, IBreakab
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.HELMET;
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.fromRGB(0xf9801d);
     }
 }
