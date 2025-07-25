@@ -73,6 +73,24 @@ public class CustomEntityDamageByEntityEvent extends Event implements Cancellabl
         return projectile != null;
     }
 
+    /**
+     * Checks if this damage event is considered a melee event.
+     * Melee events are defined as events where the direct entity IS the causing entity.
+     * @return True if this is a melee interaction.
+     */
+    public boolean isMelee() {
+        return !this.getOriginalEvent().getDamageSource().isIndirect();
+    }
+
+    /**
+     * Checks if this damage event is considered an indirect damage event.
+     * Indirect events are defined as events where the direct entity IS NOT the causing entity.
+     * @return True if this is an indirect damage interaction.
+     */
+    public boolean isIndirect() {
+        return this.getOriginalEvent().getDamageSource().isIndirect();
+    }
+
     public boolean isCritical() {
         return critical;
     }

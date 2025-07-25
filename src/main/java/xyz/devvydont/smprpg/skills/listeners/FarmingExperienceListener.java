@@ -257,7 +257,7 @@ public class FarmingExperienceListener implements Listener {
                 // Allow the event to happen. Give experience and delete the block.
                 if (!ChunkUtil.isBlockSkillInvalid(block))
                     farming.addExperience(getExperienceForDrops(laterDrops, block.getWorld().getEnvironment()), SkillExperienceGainEvent.ExperienceSource.HARVEST);
-                
+
                 block.setType(Material.AIR, false);
                 block.getWorld().playSound(block.getLocation(), block.getBlockSoundGroup().getBreakSound(), 1, 1);
                 ChunkUtil.markBlockSkillValid(block);

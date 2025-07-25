@@ -125,6 +125,10 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
         if (!isItemOfType(living.getEquipment().getItemInMainHand()))
             return;
 
+        // Is this a direct event?
+        if (event.isIndirect())
+            return;
+
         // The cutlass was used. Apply withering if we roll for it and it is not already applied
         if (attacked.hasPotionEffect(PotionEffectType.WITHER))
             return;
