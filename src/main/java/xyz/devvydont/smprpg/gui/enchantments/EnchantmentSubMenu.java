@@ -1,14 +1,18 @@
 package xyz.devvydont.smprpg.gui.enchantments;
 
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
+import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +38,15 @@ public class EnchantmentSubMenu extends MenuBase {
 
     public ItemStack createEnchantmentButton(int level) {
         ItemStack item = createNamedItem(Material.ENCHANTED_BOOK, enchantment.getEnchantment().displayName(level).color(enchantment.getEnchantColor()));
+        var magicLvl = SMPRPG.getService(EntityService.class).getPlayerInstance(player).getMagicSkill().getLevel();
+        boolean isUnlocked = magicLvl >= enchantment.getSkillRequirementForLevel(level);
+        var check = isUnlocked ? ComponentUtils.create(Symbols.CHECK, NamedTextColor.GREEN) : ComponentUtils.create(Symbols.X, NamedTextColor.RED);
+        var req = ComponentUtils.merge(ComponentUtils.create("Magic Skill Level Requirement: ", isUnlocked ? NamedTextColor.GRAY : NamedTextColor.RED), ComponentUtils.create(String.valueOf(enchantment.getSkillRequirementForLevel(level)), isUnlocked ? NamedTextColor.LIGHT_PURPLE : NamedTextColor.DARK_RED));
         item.editMeta(meta -> {
             meta.lore(ComponentUtils.cleanItalics(List.of(
-                    enchantment.build(level).getDescription()
+                    enchantment.build(level).getDescription(),
+                    ComponentUtils.EMPTY,
+                    ComponentUtils.merge(check, ComponentUtils.SPACE, req)
             )));
         });
         return item;

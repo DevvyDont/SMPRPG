@@ -115,6 +115,8 @@ public class EnchantmentMenu extends MenuBase {
         boolean isUnlocked = magicLvl >= enchantment.getSkillRequirement();
         enchantmentDescription.add(ComponentUtils.merge(ComponentUtils.create("Magic Skill Level Requirement: ", isUnlocked ? NamedTextColor.GRAY : NamedTextColor.RED), ComponentUtils.create(String.valueOf(enchantment.getSkillRequirement()), isUnlocked ? NamedTextColor.LIGHT_PURPLE : NamedTextColor.DARK_RED)));
 
+        enchantmentDescription.add(ComponentUtils.EMPTY);
+        enchantmentDescription.add(ComponentUtils.create("Click to go deeper!", NamedTextColor.YELLOW));
         if (enchantment.getMaxLevel() > 1) {
             enchantmentDescription.add(ComponentUtils.EMPTY);
             for (int i = 2; i <= enchantment.getMaxLevel(); i++) {
