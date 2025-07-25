@@ -64,6 +64,8 @@ public class EntityDamageCalculatorService implements Listener, IService {
 
     // How much percentage of damage to increase per level of strength an entity has.
     public final static double DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT = 30;
+    // How much percentage of damage to decrease per level of weakness an entity has.
+    public final static double DAMAGE_PERCENT_PER_LEVEL_WEAKNESS_EFFECT = 15;
     // How much defense per level of resistance is applied when an entity has the resistance effect.
     // This will actually end up being implemented in LeveledEntity#getDefense() for convenience.
     public final static int DEFENSE_PER_LEVEL_RESISTANCE = 150;
@@ -319,10 +321,10 @@ public class EntityDamageCalculatorService implements Listener, IService {
     }
 
     /*
-     * Handle simple damage boosting effects. For now, this is just the strength potion effect.
+     * Handle simple damage boosting effects. For now, this is just the strength/weakness potion effect.
      */
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    private void __onDamageDealtWithStrength(CustomEntityDamageByEntityEvent event) {
+    private void __onDamageDealtWithStrengthOrWeakness(CustomEntityDamageByEntityEvent event) {
 
         if (doesntUseStrengthAttribute(event.getVanillaCause()))
             return;
@@ -331,10 +333,19 @@ public class EntityDamageCalculatorService implements Listener, IService {
             return;
 
         PotionEffect strength = living.getPotionEffect(PotionEffectType.STRENGTH);
-        if (strength == null)
+        PotionEffect weakness = living.getPotionEffect(PotionEffectType.WEAKNESS);
+        if (strength == null && weakness == null)
             return;
 
-        double multiplier = (strength.getAmplifier() + 1) * DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT / 100.0 + 1.0;
+        // Start at a 1.0 multiplier. Increase it for strength, and decrease it for weakness.
+        var multiplier = 1.0;
+        if (strength != null)
+            multiplier += (strength.getAmplifier() + 1) * DAMAGE_PERCENT_PER_LEVEL_STRENGTH_EFFECT / 100.0;
+        if (weakness != null)
+            multiplier -= (weakness.getAmplifier() + 1) * DAMAGE_PERCENT_PER_LEVEL_WEAKNESS_EFFECT / 100.0;
+
+        // Clamp the value to never go below 5% damage.
+        multiplier = Math.max(.05, multiplier);
         event.multiplyDamage(multiplier);
     }
 
