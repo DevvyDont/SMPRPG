@@ -5,11 +5,13 @@ import com.google.common.collect.Multimap;
 import org.bukkit.Material;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.fishing.SeaBear;
+import xyz.devvydont.smprpg.entity.fishing.Shark;
 import xyz.devvydont.smprpg.entity.fishing.SnappingTurtle;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootBase;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootType;
 import xyz.devvydont.smprpg.fishing.loot.ItemStackFishingLoot;
 import xyz.devvydont.smprpg.fishing.loot.SeaCreatureFishingLoot;
+import xyz.devvydont.smprpg.fishing.loot.requirements.BiomeChoiceRequirement;
 import xyz.devvydont.smprpg.fishing.loot.requirements.FishingLootRequirement;
 import xyz.devvydont.smprpg.fishing.utils.TemperatureReading;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -189,6 +191,14 @@ public class FishingRewardRegistry {
                         .withSkillExperience(500)
                         .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
                         .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SHARK)
+                        .withMinecraftExperience(75)
+                        .withSkillExperience(600)
+                        .withRequirement(FishingLootRequirement.quality(Shark.RATING_REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 

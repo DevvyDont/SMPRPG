@@ -51,6 +51,15 @@ public interface FishingLootRequirement {
     }
 
     /**
+     * Returns a biome requirement that passes if the given biome equals the biome of the context.
+     * @param biomeGroup The required biome to pass.
+     * @return The {@link FishingLootRequirement requirement.}
+     */
+    static FishingLootRequirement biomes(BiomeChoiceRequirement.BiomeGroup biomeGroup) {
+        return new BiomeChoiceRequirement(biomeGroup);
+    }
+
+    /**
      * Returns a fishing rating requirement that passes if the given rating is high enough given the rating of the ctx.
      * @param requirement The required fishing rating to pass.
      * @return The {@link FishingLootRequirement requirement.}

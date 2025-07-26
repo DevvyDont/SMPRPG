@@ -102,6 +102,8 @@ public enum CustomEntityType implements IMenuDisplayable {
             10, 200, 25, SnappingTurtle::new),
     SEA_BEAR(EntityType.POLAR_BEAR, "Sea Bear",
             20, 500, 45, SeaBear::new),
+    SHARK(EntityType.DOLPHIN, "Shark",
+            25, 1_200, 110, Shark::new),
 
     CINDERLING(EntityType.MAGMA_CUBE, "Cinderling",
             20, 650, 50, Cinderling::new),

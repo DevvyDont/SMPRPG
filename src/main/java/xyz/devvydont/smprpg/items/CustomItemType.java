@@ -365,6 +365,7 @@ public enum CustomItemType {
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
+    SHARK_FIN("Shark fin", Material.PRISMARINE_SHARD, ItemRarity.RARE, true, 5000),
     CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
     ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
 
