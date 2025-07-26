@@ -33,6 +33,7 @@ public class LeveledWither extends BossInstance<Wither> {
     public void setup() {
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
+        this.updateBaseAttribute(AttributeWrapper.REGENERATION, 1);
     }
 
     /*
@@ -50,11 +51,6 @@ public class LeveledWither extends BossInstance<Wither> {
                 .withHealth(300_000)
                 .withDamage(250)
                 .build();
-    }
-
-    @Override
-    public double getHalfHeartValue() {
-        return 50;
     }
 
     @Override
@@ -101,8 +97,4 @@ public class LeveledWither extends BossInstance<Wither> {
         );
     }
 
-    @Override
-    public boolean hasVanillaDrops() {
-        return false;
-    }
 }

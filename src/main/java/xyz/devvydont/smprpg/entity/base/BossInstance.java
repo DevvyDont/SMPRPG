@@ -32,6 +32,7 @@ import xyz.devvydont.smprpg.entity.components.DamageTracker;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.events.CustomItemDropRollEvent;
+import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
@@ -663,7 +664,22 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         if (!event.getEntity().equals(_entity))
             return;
 
-        var cap = this.getHalfHeartValue() * 2;
+        // Only living entities have damage caps.
+        if (!(event.getDamager() instanceof LivingEntity damager))
+            return;
+
+        // We want a DPS cap, not just a raw damage cap. Use default attack speed of 4.
+        var attackSpeed = 4.0;
+        var attackSpeedAttribute = AttributeService.getInstance().getAttribute(damager, AttributeWrapper.ATTACK_SPEED);
+        if (attackSpeedAttribute != null)
+            attackSpeed = attackSpeedAttribute.getValue();
+
+        // Clamp attack speed so nothing crazy happens...
+        attackSpeed = Math.max(.5, Math.min(16, attackSpeed));
+
+        var capMultiplier = 4.0 / attackSpeed;
+
+        var cap = this.getHalfHeartValue() * capMultiplier;
         var dmg = event.getFinalDamage();
         if (dmg <= cap)
             return;
