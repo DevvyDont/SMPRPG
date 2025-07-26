@@ -46,7 +46,6 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, true, true));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 50, 0, true, true));
         getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 50, 9, true, true));
-        getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 50, 0, true, true));
         getPlayer().setAllowFlight(true);
         getPlayer().setFoodLevel(20);
         getPlayer().setSaturation(20);
