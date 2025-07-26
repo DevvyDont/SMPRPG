@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.blueprints.equipment.*;
 import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.food.*;
 import xyz.devvydont.smprpg.items.blueprints.misc.DeathCertificate;
+import xyz.devvydont.smprpg.items.blueprints.misc.MossySkull;
 import xyz.devvydont.smprpg.items.blueprints.potion.ExperienceBottle;
 import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
@@ -362,6 +363,7 @@ public enum CustomItemType {
     IRON_ROD("Iron Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
     GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
     DIAMOND_ROD("Diamond Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
+    PRISMARINE_ROD("Prismarine Rod", Material.FISHING_ROD, ItemRarity.RARE, WaterRod.class),
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
@@ -608,6 +610,8 @@ public enum CustomItemType {
     JUPITERS_ARTIFACT("Jupiter's Artifact", ItemRarity.EPIC, JupiterArtifact.class),
     IRIDESCENT_LENS("Iridescent Lens", ItemRarity.LEGENDARY, IridescentLens.class),
     HYPNOTIC_EYE("Hypnotic Eye", ItemRarity.LEGENDARY, HypnoticEye.class),
+
+    MOSSY_SKULL("Skull Fragment", ItemRarity.EPIC, MossySkull.class),
     GILDED_SKULL("Gilded Skull", ItemRarity.LEGENDARY, GildedSkull.class),
 
     // DRAGON

@@ -276,6 +276,7 @@ public enum CustomEntityType implements IMenuDisplayable {
             case PHANTOM_THIEF -> Material.STRAY_SPAWN_EGG;
             case CINDERLING -> Material.MAGMA_CREAM;
             case ECHO_RAY -> Material.PHANTOM_MEMBRANE;
+            case SHARK -> Material.PRISMARINE_SHARD;
             default -> Material.SKELETON_SKULL;
         };
     }

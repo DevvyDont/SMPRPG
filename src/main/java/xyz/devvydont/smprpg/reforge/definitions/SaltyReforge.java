@@ -23,8 +23,8 @@ public class SaltyReforge extends ReforgeBase {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, -20 + rarity.ordinal() * 5),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, .4 + rarity.ordinal() * .15),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .4 + rarity.ordinal() * .15)
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, .4 + rarity.ordinal() * .2),
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .4 + rarity.ordinal() * .2)
         );
     }
 

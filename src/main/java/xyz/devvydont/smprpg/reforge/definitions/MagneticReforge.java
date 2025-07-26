@@ -22,8 +22,8 @@ public class MagneticReforge extends ReforgeBase  {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 10 + rarity.ordinal() * 5),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, rarity.ordinal()),
-                AttributeEntry.scalar(AttributeWrapper.FISHING_CREATURE_CHANCE, -.2 + rarity.ordinal() * .04)
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, 0.5 + rarity.ordinal() * .25),
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, -.25 + rarity.ordinal() * .05)
         );
     }
 

@@ -115,6 +115,14 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
+                new ItemStackFishingLoot.Builder(CustomItemType.MOSSY_SKULL)
+                        .withRequirement(FishingLootRequirement.quality(200))
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(1000)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.SWAMP))
+                        .build(),
+
                 new ItemStackFishingLoot.Builder(CustomItemType.EXPERIENCE_BOTTLE)
                         .withSkillExperience(500)
                         .withMinecraftExperience(50)

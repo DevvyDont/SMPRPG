@@ -123,7 +123,7 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
 
     private int getFishingRating() {
         return switch (getCustomItemType()) {
-            case NETHERITE_ROD -> 100;
+            case NETHERITE_ROD -> 120;
             case SPITFIRE_ROD -> 200;
             default -> 0;
         };
@@ -140,7 +140,7 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
     private int getChance() {
         return switch (getCustomItemType()) {
             case NETHERITE_ROD -> 2;
-            case SPITFIRE_ROD -> 5;
+            case SPITFIRE_ROD -> 3;
             default -> 0;
         };
     };

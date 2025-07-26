@@ -52,6 +52,7 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
             case IRON_ROD -> ToolsUtil.IRON_TOOL_POWER;
             case GOLD_ROD -> ToolsUtil.GOLD_TOOL_POWER;
             case DIAMOND_ROD -> ToolsUtil.DIAMOND_TOOL_POWER;
+            case PRISMARINE_ROD -> ToolsUtil.NETHERITE_TOOL_POWER-5;
             default -> 0;
         };
     };
@@ -78,6 +79,21 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
 
     @Override
     public CraftingRecipe getCustomRecipe() {
+
+        if (this.getCustomItemType() == CustomItemType.PRISMARINE_ROD) {
+            var recipe = new ShapedRecipe(getRecipeKey(), generate());
+            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+            recipe.shape(
+                    "sms",
+                    "mrm",
+                    "sms"
+            );
+            recipe.setIngredient('m', ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_CRYSTAL));
+            recipe.setIngredient('s', ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_SHARD));
+            recipe.setIngredient('r', ItemService.generate(CustomItemType.DIAMOND_ROD));
+            return recipe;
+        }
+
         var recipe = new ShapedRecipe(getRecipeKey(), generate());
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         recipe.shape(
@@ -118,6 +134,7 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
             case IRON_ROD -> 20;
             case GOLD_ROD -> 35;
             case DIAMOND_ROD -> 65;
+            case PRISMARINE_ROD -> 100;
             default -> 0;
         };
     };
@@ -127,6 +144,7 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
             case IRON_ROD -> ItemSword.getSwordDamage(Material.IRON_SWORD) / 2;
             case GOLD_ROD -> ItemSword.getSwordDamage(Material.GOLDEN_SWORD) / 2;
             case DIAMOND_ROD -> ItemSword.getSwordDamage(Material.DIAMOND_SWORD) / 2;
+            case PRISMARINE_ROD -> ItemSword.getSwordDamage(Material.DIAMOND_SWORD) / 2 + 10;
             default -> 0;
         };
     };
@@ -136,6 +154,7 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
             case IRON_ROD -> 0.25;
             case GOLD_ROD -> 0.5;
             case DIAMOND_ROD -> 1;
+            case PRISMARINE_ROD -> 1.5;
             default -> 0;
         };
     };

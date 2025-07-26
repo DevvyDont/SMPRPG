@@ -15,6 +15,7 @@ public record BiomeChoiceRequirement(BiomeGroup biome) implements FishingLootReq
 
     public enum BiomeGroup {
         OCEAN(NamedTextColor.AQUA, Biome.OCEAN, Biome.COLD_OCEAN, Biome.DEEP_COLD_OCEAN, Biome.DEEP_OCEAN, Biome.DEEP_LUKEWARM_OCEAN, Biome.WARM_OCEAN),
+        SWAMP(NamedTextColor.DARK_GREEN, Biome.SWAMP, Biome.MANGROVE_SWAMP, Biome.GROVE),
         ;
 
         private final TextColor color;

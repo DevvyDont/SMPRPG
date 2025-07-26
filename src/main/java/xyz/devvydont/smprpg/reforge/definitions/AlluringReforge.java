@@ -22,8 +22,9 @@ public class AlluringReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
+                AttributeEntry.additive(AttributeWrapper.STRENGTH, 10 + rarity.ordinal() * 5),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50 + rarity.ordinal() * 10),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, rarity.ordinal())
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 1 + rarity.ordinal())
         );
     }
 

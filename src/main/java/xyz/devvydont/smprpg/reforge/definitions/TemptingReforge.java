@@ -23,7 +23,7 @@ public class TemptingReforge extends ReforgeBase  {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 10 + rarity.ordinal() * 5),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, rarity.ordinal()),
-                AttributeEntry.scalar(AttributeWrapper.FISHING_TREASURE_CHANCE, -.2 + rarity.ordinal() * .04)
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, -.25 + rarity.ordinal() * .05)
         );
     }
 

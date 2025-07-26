@@ -21,8 +21,9 @@ public class PlunderingReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
+                AttributeEntry.additive(AttributeWrapper.LUCK, 2 + rarity.ordinal() * 2),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50 + rarity.ordinal() * 10),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, rarity.ordinal())
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, 1 + rarity.ordinal())
         );
     }
 
