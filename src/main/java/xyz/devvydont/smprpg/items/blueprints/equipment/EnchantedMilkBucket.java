@@ -46,7 +46,7 @@ public class EnchantedMilkBucket extends ChargedItemBlueprint implements IHeader
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.CONSUMABLE;
+        return ItemClassification.EQUIPMENT;
     }
 
     @EventHandler
