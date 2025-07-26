@@ -69,6 +69,14 @@ public enum ReforgeType {
     QUICK(QuickReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE),
     HASTY(HastyReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE),
 
+    // Fishing oriented
+    TEMPTING(TemptingReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+    ALLURING(AlluringReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+    MAGNETIC(MagneticReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+    PLUNDERING(PlunderingReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+    SALTY(SaltyReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+    PRISMATIC(PrismaticReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+
     // Luck oriented
     LUCKY(LuckyReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE),
     COPIOUS(CopiousReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE),
@@ -150,11 +158,10 @@ public enum ReforgeType {
     public boolean isRollable() {
 
         return switch (this) {
-            case ERROR, ACCELERATED, WITHERED, OVERHEATING -> false;
+            case ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING -> false;
             default -> true;
         };
     }
-
 
     public Material getDisplayMaterial() {
         return switch (this) {
@@ -188,6 +195,12 @@ public enum ReforgeType {
             case FORTIFIED -> Material.NETHERITE_CHESTPLATE;
             case AGILE -> Material.LEATHER_BOOTS;
             case ANCIENT -> Material.LEATHER_CHESTPLATE;
+            case PLUNDERING -> Material.GOLD_BLOCK;
+            case PRISMATIC -> Material.PRISMARINE_CRYSTALS;
+            case SALTY -> Material.SUGAR;
+            case TEMPTING -> Material.ROTTEN_FLESH;
+            case ALLURING -> Material.PORKCHOP;
+            case MAGNETIC -> Material.IRON_BLOCK;
             default -> Material.BARRIER;
         };
     }
