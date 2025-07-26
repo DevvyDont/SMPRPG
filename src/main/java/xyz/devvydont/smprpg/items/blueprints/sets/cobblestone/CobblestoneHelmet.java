@@ -25,7 +25,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.HelmetRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CobblestoneHelmet extends CustomAttributeItem implements ICraftable, IBreakableEquipment, IEquippableOverride {
+public class CobblestoneHelmet extends CobblestoneArmorSet implements ICraftable, IBreakableEquipment, IEquippableOverride {
 
     public CobblestoneHelmet(ItemService itemService, CustomItemType type) {
         super(itemService, type);

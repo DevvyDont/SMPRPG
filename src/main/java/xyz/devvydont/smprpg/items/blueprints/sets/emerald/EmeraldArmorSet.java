@@ -23,7 +23,7 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable, IEquippableAssetOverride {
+public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBreakableEquipment, ICraftable, IEquippableAssetOverride {
 
     public static int EMERALD_POWER = 20;
     public static Material INGREDIENT = Material.EMERALD_BLOCK;
@@ -80,15 +80,5 @@ public abstract class EmeraldArmorSet extends CustomAttributeItem implements IBr
     @Override
     public int getMaxDurability() {
         return 20_000;
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.EMERALD;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.SILENCE;
     }
 }

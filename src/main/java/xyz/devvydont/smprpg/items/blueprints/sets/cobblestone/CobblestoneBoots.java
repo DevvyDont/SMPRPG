@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.BootsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CobblestoneBoots extends CustomAttributeItem implements IBreakableEquipment, IDyeable, ICraftable, ITrimmable {
+public class CobblestoneBoots extends CobblestoneArmorSet implements IBreakableEquipment, IDyeable, ICraftable {
 
 
     public CobblestoneBoots(ItemService itemService, CustomItemType type) {
@@ -75,16 +75,6 @@ public class CobblestoneBoots extends CustomAttributeItem implements IBreakableE
     @Override
     public int getMaxDurability() {
         return 600;
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.NETHERITE;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.RIB;
     }
 
     @Override

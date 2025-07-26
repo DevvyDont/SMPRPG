@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:cobblestone"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:cobblestone"
+      }
+    ]
+  }
+}

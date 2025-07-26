@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.ChestplateRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CobblestoneChestplate extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, IDyeable, ICraftable {
+public class CobblestoneChestplate extends CobblestoneArmorSet implements IBreakableEquipment, IDyeable, ICraftable {
 
     public CobblestoneChestplate(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -74,16 +74,6 @@ public class CobblestoneChestplate extends CustomAttributeItem implements IBreak
     @Override
     public int getMaxDurability() {
         return 750;
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.NETHERITE;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.RIB;
     }
 
     @Override

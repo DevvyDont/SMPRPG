@@ -27,7 +27,7 @@ import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class CobblestoneLeggings extends CustomAttributeItem implements ICraftable, IDyeable, ITrimmable, IBreakableEquipment {
+public class CobblestoneLeggings extends CobblestoneArmorSet implements ICraftable, IDyeable, IBreakableEquipment {
 
     public CobblestoneLeggings(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -74,16 +74,6 @@ public class CobblestoneLeggings extends CustomAttributeItem implements ICraftab
     @Override
     public int getMaxDurability() {
         return 675;
-    }
-
-    @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.NETHERITE;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.RIB;
     }
 
     @Override
