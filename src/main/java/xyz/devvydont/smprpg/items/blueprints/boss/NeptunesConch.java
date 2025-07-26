@@ -90,6 +90,7 @@ public class NeptunesConch extends CustomItemBlueprint implements IHeaderDescrib
                 .consumeSeconds(5)
                 .sound(SoundEventKeys.ITEM_GOAT_HORN_SOUND_6)
                 .animation(ItemUseAnimation.TOOT_HORN)
+                .hasConsumeParticles(false)
                 .build();
     }
 
