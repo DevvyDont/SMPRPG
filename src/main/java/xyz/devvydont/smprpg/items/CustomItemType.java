@@ -606,6 +606,8 @@ public enum CustomItemType {
     JUPITER_CRYSTAL("Jupiter Crystal", Material.PRISMARINE_CRYSTALS, ItemRarity.RARE, true, 1000),
     JUPITERS_ARTIFACT("Jupiter's Artifact", ItemRarity.EPIC, JupiterArtifact.class),
     IRIDESCENT_LENS("Iridescent Lens", ItemRarity.LEGENDARY, IridescentLens.class),
+    HYPNOTIC_EYE("Hypnotic Eye", ItemRarity.LEGENDARY, HypnoticEye.class),
+    GILDED_SKULL("Gilded Skull", ItemRarity.LEGENDARY, GildedSkull.class),
 
     // DRAGON
     DRAGON_SCALES(   "Dragon Scales",    Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true),
