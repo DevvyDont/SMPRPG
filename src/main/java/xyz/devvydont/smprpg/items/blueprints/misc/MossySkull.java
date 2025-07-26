@@ -1,12 +1,14 @@
 package xyz.devvydont.smprpg.items.blueprints.misc;
 
+import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 
-public class MossySkull extends CustomItemBlueprint implements ICustomTextured {
+public class MossySkull extends CustomItemBlueprint implements ICustomTextured, ISellable {
 
     public MossySkull(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -33,5 +35,17 @@ public class MossySkull extends CustomItemBlueprint implements ICustomTextured {
     @Override
     public String getTextureUrl() {
         return "8cda4d12e94d8d13128cc0662b50398ff0aab964192e77f4ffe1a2ce41a86ee0";
+    }
+
+    /**
+     * Given this item stack, how much should it be able to sell for?
+     * Keep in mind that the size of the stack needs to considered as well!
+     *
+     * @param item The item that can be sold.
+     * @return The worth of the item.
+     */
+    @Override
+    public int getWorth(ItemStack item) {
+        return 45_000 * item.getAmount();
     }
 }

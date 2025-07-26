@@ -367,7 +367,7 @@ public enum CustomItemType {
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
-    SHARK_FIN("Shark fin", Material.PRISMARINE_SHARD, ItemRarity.RARE, true, 5000),
+    SHARK_FIN("Shark Fin", Material.PRISMARINE_SHARD, ItemRarity.RARE, true, 5000),
     CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
     ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
 
@@ -611,7 +611,7 @@ public enum CustomItemType {
     IRIDESCENT_LENS("Iridescent Lens", ItemRarity.LEGENDARY, IridescentLens.class),
     HYPNOTIC_EYE("Hypnotic Eye", ItemRarity.LEGENDARY, HypnoticEye.class),
 
-    MOSSY_SKULL("Skull Fragment", ItemRarity.EPIC, MossySkull.class),
+    MOSSY_SKULL("Mossy Skull", ItemRarity.EPIC, MossySkull.class),
     GILDED_SKULL("Gilded Skull", ItemRarity.LEGENDARY, GildedSkull.class),
 
     // DRAGON

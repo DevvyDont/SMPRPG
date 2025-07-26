@@ -78,7 +78,7 @@ public class IridescentLens extends ReforgeStone implements ICraftable, ISellabl
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 75_000;
+        return 75_000 * item.getAmount();
     }
 
     @Override

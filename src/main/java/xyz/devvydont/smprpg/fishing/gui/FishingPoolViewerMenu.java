@@ -142,6 +142,13 @@ public class FishingPoolViewerMenu extends MenuBase {
 
         // Draft up a description. We need information like weight, requirements and rewards.
         var item = InterfaceUtil.getNamedItem(loot.getDisplayMaterial(), name);
+
+        // If this is an item, we can actually just use the item itself...
+        if (loot instanceof ItemStackFishingLoot itemLoot) {
+            item = itemLoot.getItem().clone();
+            item.setData(DataComponentTypes.ITEM_NAME, name);
+        }
+
         var lore = new ArrayList<Component>();
         lore.add(EMPTY);
         lore.add(merge(create("Times Caught: ", GOLD), generateCaughtComponent(loot)));

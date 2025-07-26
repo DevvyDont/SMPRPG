@@ -46,7 +46,7 @@ public class GildedSkull extends ReforgeStone implements ISellable, ICustomTextu
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 75_000;
+        return 75_000 * item.getAmount();
     }
 
     @Override
