@@ -295,6 +295,10 @@ public class EntityService implements IService, Listener {
     }
 
     private void trackEntity(LeveledEntity<?> entity) {
+
+        if (isTracking(entity.getEntity()))
+            return;
+
         removeEntity(entity.getEntity().getUniqueId());
         entityInstances.put(entity.getEntity().getUniqueId(), entity);
         if (entity instanceof Listener listener)

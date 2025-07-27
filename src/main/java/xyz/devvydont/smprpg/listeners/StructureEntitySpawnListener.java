@@ -4,9 +4,12 @@ import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -132,7 +135,7 @@ public class StructureEntitySpawnListener extends ToggleableListener {
         SMPRPG.getService(ActionBarService.class).addActionBarComponent(player, ActionBarService.ActionBarSource.STRUCTURE, getStructureComponent(player, mostDangerousStructure, highestLevel), 5);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onLeveledEntitySpawn(LeveledEntitySpawnEvent event) {
 
         Location location = event.getEntity().getEntity().getLocation();
