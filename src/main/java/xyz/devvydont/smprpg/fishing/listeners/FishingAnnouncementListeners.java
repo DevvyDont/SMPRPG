@@ -102,12 +102,7 @@ public class FishingAnnouncementListeners extends ToggleableListener {
         // Make the message.
         var itemComponent = blueprint.getNameComponent(itemStack).hoverEvent(itemStack.asHoverEvent());
 
-        // Consider the rarity probability if it was a fish.
-        var rarityProbability = 1.0;
-        if (blueprint instanceof FishBlueprint)
-            rarityProbability *= FishBlueprint.probability(rarity);
-
-        var chance = create(String.format("(%.2f%%)", event.getCalculationResult().probability() * rarityProbability * 100), DARK_GRAY);
+        var chance = create(String.format("(%.2f%%)", event.getCalculationResult().probability() * 100), DARK_GRAY);
         var message = alert(merge(
                 prefixComponent,
                 SPACE,

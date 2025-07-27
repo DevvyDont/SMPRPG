@@ -46,11 +46,6 @@ public class ItemStackFishingLoot extends FishingLootBase {
 
         // Generate the item and flag it as owned by the player so drop protection applies to it.
         var reward = item.clone();
-
-        // Post-processing for fish items. It needs a rarity.
-        if (SMPRPG.getService(ItemService.class).getBlueprint(reward) instanceof FishBlueprint blueprint)
-            blueprint.setRarity(reward, blueprint.pickRandomRarity());
-
         reward.setAmount(RNG.nextInt(minAmount, maxAmount+1));
         SMPRPG.getService(DropsService.class).addDefaultLootFlags(reward, ctx.getPlayer());
 

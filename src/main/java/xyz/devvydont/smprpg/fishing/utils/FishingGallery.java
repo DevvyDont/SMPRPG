@@ -71,19 +71,24 @@ public class FishingGallery {
 
     /**
      * Gets the amount of times a certain loot was caught with a specific rarity.
+     * This is considered a deprecated system, as fish no longer come in different rarities.
      * @param loot The loot to query.
      * @param rarity The rarity to query.
      *
      */
+    @Deprecated
     public int get(FishingLootBase loot, ItemRarity rarity) {
         return keyToTimesCaught.getOrDefault(loot.getKey(rarity), 0);
     }
 
     /**
      * Calculates the total times caught regardless of rarity. This will work with any fishing loot item.
+     * This is deprecated as differing rarity items is not catchable anymore.
+     * In the future, consider removing this and instead using {@link FishingGallery#get(FishingLootBase)}
      * @param loot The loot to query.
      * @return The amount of times caught.
      */
+    @Deprecated
     public int total(FishingLootBase loot) {
         var total = 0;
         total += get(loot);

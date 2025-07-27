@@ -181,25 +181,9 @@ public class FishingPoolViewerMenu extends MenuBase {
      * @return A friendly displayable component to put next to "Times Caught".
      */
     private Component generateCaughtComponent(FishingLootBase loot) {
-
         var gallery = this.player.getPersistentDataContainer().getOrDefault(KeyStore.FISHING_GALLERY, PDCAdapters.FISHING_GALLERY, new FishingGallery());
-
-        // Handle the simple case first. Normal item.
-        if (!type.equals(FishingLootType.FISH)) {
-            var times = gallery.get(loot);
-            return create(times, times > 0 ? GREEN : DARK_GRAY);
-        }
-
-        // Handle every single rarity, and separate them to make it more readable.
-        var sep = create(" | ", GRAY);
-        return merge(
-                create(gallery.get(loot, ItemRarity.COMMON), ItemRarity.COMMON.color), sep,
-                create(gallery.get(loot, ItemRarity.UNCOMMON), ItemRarity.UNCOMMON.color), sep,
-                create(gallery.get(loot, ItemRarity.RARE), ItemRarity.RARE.color), sep,
-                create(gallery.get(loot, ItemRarity.EPIC), ItemRarity.EPIC.color), sep,
-                create(gallery.get(loot, ItemRarity.LEGENDARY), ItemRarity.LEGENDARY.color),
-                create(String.format(" (%s)", gallery.total(loot)), DARK_GRAY)
-        );
+        var times = gallery.total(loot);
+        return create(times, times > 0 ? GREEN : DARK_GRAY);
     }
 
     /**

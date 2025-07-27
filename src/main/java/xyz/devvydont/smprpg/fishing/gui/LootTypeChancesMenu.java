@@ -91,12 +91,6 @@ public class LootTypeChancesMenu extends MenuBase {
                 merge(create("Sell them, cook them, or collect them all!")),
                 EMPTY,
                 merge(create("Current fish chance: "), formatOdds(odds.getOrDefault(FishingLootType.FISH, 0d))),
-                merge(create("After catching a fish, the rarity is randomly rolled with the following odds:")),
-                formatRarityOdds(ItemRarity.COMMON),
-                formatRarityOdds(ItemRarity.UNCOMMON),
-                formatRarityOdds(ItemRarity.RARE),
-                formatRarityOdds(ItemRarity.EPIC),
-                formatRarityOdds(ItemRarity.LEGENDARY),
                 EMPTY,
                 create("Click to dive deeper!", YELLOW)
         ), e -> {
@@ -203,19 +197,5 @@ public class LootTypeChancesMenu extends MenuBase {
     public static Component formatOdds(double odds) {
         var str = String.format("%.2f%%", odds);
         return create(str, chooseColorForOdds(odds));
-    }
-
-    /**
-     * Shortcut method used for rendering a fish rarity chance line.
-     * @param itemRarity The rarity.
-     * @return A chat component.
-     */
-    public static Component formatRarityOdds(ItemRarity itemRarity) {
-        return merge(
-                create("* "),
-                itemRarity.applyDecoration(create(itemRarity.name())),
-                create(": "),
-                formatOdds(FishBlueprint.probability(itemRarity)*100)
-        );
     }
 }
