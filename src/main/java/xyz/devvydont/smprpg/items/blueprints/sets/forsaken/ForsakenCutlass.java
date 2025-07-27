@@ -108,7 +108,7 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
         return ForsakenArmorSet.DURABILITY;
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void __onAttackWithCutlass(CustomEntityDamageByEntityEvent event) {
 
         // Can the attacked entity have potion effects?

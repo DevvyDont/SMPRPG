@@ -48,16 +48,6 @@ public class NeptuneBow extends CustomShortbow implements IBreakableEquipment, I
     }
 
     @Override
-    public ItemClassification getItemClassification() {
-        return ItemClassification.BOW;
-    }
-
-    @Override
-    public EquipmentSlotGroup getActiveSlot() {
-        return EquipmentSlotGroup.HAND;
-    }
-
-    @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
     }
