@@ -33,7 +33,7 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
     /**
      * Affects the number display of the temperature. When on, displays real value as well as the fake converted one.
      */
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     // Constants for mapping
     private static final float MIN_MC_TEMP = -0.5f;
@@ -130,7 +130,7 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
         if (!isItemOfType(event.getItem()))
             return;
 
-        var rawTemp = event.getPlayer().getLocation().getBlock().getTemperature();
+        var rawTemp = TemperatureReading.fromBlock(event.getPlayer().getLocation().getBlock());
         var temp = TemperatureReading.fromValue(rawTemp);
         SMPRPG.getService(ActionBarService.class).addActionBarComponent(
                 event.getPlayer(),

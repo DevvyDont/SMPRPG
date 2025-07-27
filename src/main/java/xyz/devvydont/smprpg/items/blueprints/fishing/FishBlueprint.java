@@ -46,12 +46,36 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      */
     public static int getBaseWorth(CustomItemType fish) {
         return switch (fish) {
+            case COD -> 75;
+            case CARP -> 55;
             case SALMON -> 100;
-            case PUFFERFISH -> 1_500;
-            case CLOWNFISH -> 12_000;
-            case BLISTERFISH -> 250;
-            case VOIDFIN -> 500;
-            default -> 40;
+            case GUPPY -> 120;
+
+            case SNAPPER -> 450;
+            case CATFISH -> 600;
+            case PUFFERFISH -> 500;
+            case CLOWNFISH -> 800;
+            case BASS -> 1_000;
+
+            case YELLOWFIN_TUNA -> 7_500;
+            case BARRACUDA -> 4_000;
+            case PIKE -> 4_500;
+            case STURGEON -> 5_500;
+            case BLUE_TANG -> 7_000;
+
+            case GOLIATH_GROUPER -> 35_000;
+            case LEAFY_SEADRAGON -> 30_000;
+            case LIONFISH -> 25_000;
+
+            case BLUE_MARLIN -> 90_000;
+            case FANGTOOTH -> 100_000;
+            case DEEP_SEA_ANGLERFISH -> 125_000;
+
+            case BLISTERFISH -> 180;
+
+            case VOIDFIN -> 225;
+
+            default -> 50;
         };
     }
 
@@ -61,15 +85,8 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      * @return The amount of half hunger bars to replenish.
      */
     public static int getNutrition(CustomItemType fish) {
-        return switch (fish) {
-            case COD -> 1;
-            case SALMON -> 1;
-            case PUFFERFISH -> 1;
-            case CLOWNFISH -> 2;
-            case BLISTERFISH -> 2;
-            case VOIDFIN -> 3;
-            default -> 0;
-        };
+        // Lazy for now, just use the rarity.
+        return (fish.DefaultRarity.ordinal() + 1) * 2;
     }
 
     /**
@@ -78,15 +95,8 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
      * @return The amount of saturation.
      */
     public static int getSaturation(CustomItemType fish) {
-        return switch (fish) {
-            case COD -> 1;
-            case SALMON -> 1;
-            case PUFFERFISH -> 1;
-            case CLOWNFISH -> 2;
-            case BLISTERFISH -> 3;
-            case VOIDFIN -> 4;
-            default -> 0;
-        };
+        // Lazy for now, just use the rarity.
+        return (fish.DefaultRarity.ordinal() + 1) * 2;
     }
 
     /**
@@ -98,14 +108,15 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
     @Override
     public Material getDisplayMaterial() {
         return switch (this.getCustomItemType()) {
-            case COD -> Material.COD;
+            case CATFISH -> Material.CAT_SPAWN_EGG;
+            case LIONFISH -> Material.FOX_SPAWN_EGG;
+            case COD, PIKE, GUPPY -> Material.COD;
             case SALMON, BLISTERFISH -> Material.SALMON;
             case PUFFERFISH, VOIDFIN -> Material.PUFFERFISH;
             case CLOWNFISH -> Material.TROPICAL_FISH;
-            default -> this.getDisplayMaterial();
+            default -> this.getCustomItemType().DisplayMaterial;
         };
     }
-
 
     @Override
     public int getWorth(ItemStack item) {
@@ -136,11 +147,14 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
     public Consumable getConsumableComponent(ItemStack item) {
         var component = Consumable.consumable()
                 .consumeSeconds(1.6f);
+
+        // Conditionally add effects for any "weird" fish.
         if (this.getCustomItemType() == CustomItemType.PUFFERFISH)
             component.addEffect(ConsumeEffect.applyStatusEffects(
                     List.of(new PotionEffect(PotionEffectType.POISON, 20, 0, false, false)),
                     1.0f
             ));
+
         return component.build();
     }
 }

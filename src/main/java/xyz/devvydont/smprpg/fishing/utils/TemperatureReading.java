@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.fishing.utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
@@ -31,6 +32,25 @@ public enum TemperatureReading {
 
     /**
      * Temperature calculation logic. No need to overcomplicate this.
+     * @param block The block to query temperature for.
+     * @return The temperature group.
+     */
+    public static double fromBlock(Block block) {
+
+        // Biome overrides for some biomes to make more sense.
+        var biome = block.getBiome();
+        if (biome.equals(Biome.WARM_OCEAN))
+            return block.getTemperature() + 1;
+
+        if (biome.equals(Biome.LUKEWARM_OCEAN))
+            return block.getTemperature() + 0.75;
+
+        // Use default minecraft logic.
+        return block.getTemperature();
+    }
+
+    /**
+     * Temperature calculation logic. No need to overcomplicate this.
      * @param value The temperature value, most commonly retrieved from {@link Block#getTemperature()}.
      * @return The temperature group.
      */
@@ -50,6 +70,5 @@ public enum TemperatureReading {
 
         // It's hot.
         return SCORCHING;
-
     }
 }

@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.block.Biome;
 import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public record BiomeRequirement(Biome biome) implements FishingLootRequirement {
             Map.entry(Biome.CRIMSON_FOREST, TextColor.color(0xFF4500)),
             Map.entry(Biome.DARK_FOREST, TextColor.color(0x006400)),
             Map.entry(Biome.DEEP_COLD_OCEAN, TextColor.color(0x4682B4)),
-            Map.entry(Biome.DEEP_DARK, TextColor.color(0x8B4513)),
+            Map.entry(Biome.DEEP_DARK, TextColor.color(69, 56, 94)),
             Map.entry(Biome.DEEP_FROZEN_OCEAN, TextColor.color(0x87CEFA)),
             Map.entry(Biome.DEEP_LUKEWARM_OCEAN, TextColor.color(0x00CED1)),
             Map.entry(Biome.DEEP_OCEAN, TextColor.color(0x191970)),
@@ -90,7 +91,7 @@ public record BiomeRequirement(Biome biome) implements FishingLootRequirement {
 
     @Override
     public Component display() {
-        return ComponentUtils.merge(ComponentUtils.create(biome.getKey().getKey(), getBiomeColor()), ComponentUtils.create(" biome"));
+        return ComponentUtils.merge(ComponentUtils.create(MinecraftStringUtils.getTitledString(biome.getKey().getKey()), getBiomeColor()), ComponentUtils.create(" biome"));
     }
 
 

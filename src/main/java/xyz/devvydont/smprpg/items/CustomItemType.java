@@ -413,13 +413,39 @@ public enum CustomItemType {
 
     THERMOMETER("Thermometer", Material.ECHO_SHARD, ItemRarity.RARE, ThermometerBlueprint.class),
 
-    // FISH (rarity doesn't matter, set by persistent data tag anyway.)
-    COD("Cod", Material.TROPICAL_FISH, FishBlueprint.class),
-    SALMON("Salmon", Material.TROPICAL_FISH, FishBlueprint.class),
-    PUFFERFISH("Pufferfish", Material.TROPICAL_FISH, FishBlueprint.class),
-    CLOWNFISH("Clownfish", Material.TROPICAL_FISH, FishBlueprint.class),
-    BLISTERFISH("Blisterfish", Material.TROPICAL_FISH, FishBlueprint.class),
-    VOIDFIN("Voidfin", Material.TROPICAL_FISH, FishBlueprint.class),
+    // COMMON OVERWORLD FISH
+    COD("Cod",       Material.TROPICAL_FISH, ItemRarity.COMMON, FishBlueprint.class),
+    SALMON("Salmon", Material.TROPICAL_FISH, ItemRarity.COMMON, FishBlueprint.class),
+    CARP("Carp",     Material.TROPICAL_FISH, ItemRarity.COMMON, FishBlueprint.class),
+    GUPPY("Guppy",   Material.TROPICAL_FISH, ItemRarity.COMMON, FishBlueprint.class),
+
+    // UNCOMMON OVERWORLD FISH
+    BASS("Bass",             Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+    CLOWNFISH("Clownfish",   Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+    PUFFERFISH("Pufferfish", Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+    CATFISH("Catfish",       Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+    SNAPPER("Snapper",       Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+
+    // RARE OVERWORLD FISH
+    PIKE("Pike",                     Material.TROPICAL_FISH, ItemRarity.RARE, FishBlueprint.class),
+    STURGEON("Sturgeon",             Material.TROPICAL_FISH, ItemRarity.RARE, FishBlueprint.class),
+    BLUE_TANG("Blue Tang",           Material.TROPICAL_FISH, ItemRarity.RARE, FishBlueprint.class),
+    BARRACUDA("Barracuda",           Material.TROPICAL_FISH, ItemRarity.RARE, FishBlueprint.class),
+    YELLOWFIN_TUNA("Yellowfin Tuna", Material.TROPICAL_FISH, ItemRarity.RARE, FishBlueprint.class),
+
+    // EPIC OVERWORLD FISH
+    GOLIATH_GROUPER("Goliath Grouper", Material.TROPICAL_FISH, ItemRarity.EPIC, FishBlueprint.class),
+    LEAFY_SEADRAGON("Leafy Seadragon", Material.TROPICAL_FISH, ItemRarity.EPIC, FishBlueprint.class),
+    LIONFISH("Lionfish",               Material.TROPICAL_FISH, ItemRarity.EPIC, FishBlueprint.class),
+
+    // LEGENDARY OVERWORLD FISH
+    BLUE_MARLIN("Blue Marlin",                 Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
+    FANGTOOTH("Fangtooth",                     Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
+    DEEP_SEA_ANGLERFISH("Deep Sea Anglerfish", Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
+
+    BLISTERFISH("Blisterfish", Material.TROPICAL_FISH, ItemRarity.COMMON,   FishBlueprint.class),
+
+    VOIDFIN("Voidfin",         Material.TROPICAL_FISH, ItemRarity.COMMON,   FishBlueprint.class),
 
     // FISH STUFF
     CAVIAR("Caviar", Material.PHANTOM_MEMBRANE, ItemRarity.EPIC, true, 25_000),

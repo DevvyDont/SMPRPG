@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.fishing.pools;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.fishing.SeaBear;
 import xyz.devvydont.smprpg.entity.fishing.Shark;
@@ -27,6 +28,12 @@ import java.util.Collection;
  */
 public class FishingRewardRegistry {
 
+    public static final int COMMON_WEIGHT = 100;
+    public static final int UNCOMMON_WEIGHT = 35;
+    public static final int RARE_WEIGHT = 15;
+    public static final int EPIC_WEIGHT = 4;
+    public static final int LEGENDARY_WEIGHT = 1;
+
     private static final Multimap<FishingLootType, FishingLootBase> REGISTRY;
 
     // Initializes the registry.
@@ -37,45 +44,193 @@ public class FishingRewardRegistry {
         // Initialize the fish pool.
         builder.putAll(FishingLootType.FISH,
 
-                // Start with fish that can be fished up anywhere. Introduction to the system essentially.
+                // Common overworld fish
                 new ItemStackFishingLoot.Builder(CustomItemType.COD)
-                        .withWeight(10)
+                        .withWeight(COMMON_WEIGHT)
                         .withMinecraftExperience(1)
+                        .withSkillExperience(10)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.GUPPY)
+                        .withWeight(COMMON_WEIGHT)
+                        .withMinecraftExperience(2)
                         .withSkillExperience(15)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
-                new ItemStackFishingLoot.Builder(CustomItemType.SALMON)
-                        .withWeight(7)
-                        .withMinecraftExperience(5)
+                new ItemStackFishingLoot.Builder(CustomItemType.CARP)
+                        .withWeight(COMMON_WEIGHT)
+                        .withMinecraftExperience(1)
                         .withSkillExperience(20)
-                        .withRequirement(FishingLootRequirement.quality(15))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .build(),
 
-                new ItemStackFishingLoot.Builder(CustomItemType.PUFFERFISH)
-                        .withWeight(3)
-                        .withMinecraftExperience(10)
-                        .withSkillExperience(25)
-                        .withRequirement(FishingLootRequirement.quality(40))
+                new ItemStackFishingLoot.Builder(CustomItemType.SALMON)
+                        .withWeight(COMMON_WEIGHT)
+                        .withMinecraftExperience(3)
+                        .withSkillExperience(50)
+                        .withRequirement(FishingLootRequirement.quality(50))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.CLOWNFISH)
-                        .withMinecraftExperience(30)
-                        .withSkillExperience(75)
-                        .withRequirement(FishingLootRequirement.quality(100))
+                        .withMinecraftExperience(15)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withSkillExperience(300)
+                        .withRequirement(FishingLootRequirement.quality(200))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
                         .build(),
 
+                new ItemStackFishingLoot.Builder(CustomItemType.PUFFERFISH)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withMinecraftExperience(10)
+                        .withSkillExperience(200)
+                        .withRequirement(FishingLootRequirement.quality(100))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.BASS)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withMinecraftExperience(10)
+                        .withSkillExperience(250)
+                        .withRequirement(FishingLootRequirement.quality(120))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.CATFISH)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withMinecraftExperience(15)
+                        .withSkillExperience(250)
+                        .withRequirement(FishingLootRequirement.quality(75))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.SWAMP))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.SNAPPER)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withMinecraftExperience(10)
+                        .withSkillExperience(300)
+                        .withRequirement(FishingLootRequirement.quality(150))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.PIKE)
+                        .withWeight(RARE_WEIGHT)
+                        .withMinecraftExperience(25)
+                        .withSkillExperience(600)
+                        .withRequirement(FishingLootRequirement.quality(200))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.RIVER))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.STURGEON)
+                        .withWeight(RARE_WEIGHT)
+                        .withMinecraftExperience(35)
+                        .withSkillExperience(1000)
+                        .withRequirement(FishingLootRequirement.quality(400))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.COLD))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.BLUE_TANG)
+                        .withWeight(RARE_WEIGHT)
+                        .withMinecraftExperience(30)
+                        .withSkillExperience(900)
+                        .withRequirement(FishingLootRequirement.quality(300))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.BARRACUDA)
+                        .withWeight(RARE_WEIGHT)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(1500)
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.YELLOWFIN_TUNA)
+                        .withWeight(RARE_WEIGHT)
+                        .withMinecraftExperience(60)
+                        .withSkillExperience(2500)
+                        .withRequirement(FishingLootRequirement.quality(600))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.GOLIATH_GROUPER)
+                        .withWeight(EPIC_WEIGHT)
+                        .withMinecraftExperience(100)
+                        .withSkillExperience(5000)
+                        .withRequirement(FishingLootRequirement.quality(700))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.LIONFISH)
+                        .withWeight(EPIC_WEIGHT)
+                        .withMinecraftExperience(100)
+                        .withSkillExperience(2_000)
+                        .withRequirement(FishingLootRequirement.quality(400))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.LEAFY_SEADRAGON)
+                        .withWeight(EPIC_WEIGHT)
+                        .withMinecraftExperience(30)
+                        .withSkillExperience(1_000)
+                        .withRequirement(FishingLootRequirement.quality(300))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.BLUE_MARLIN)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withMinecraftExperience(250)
+                        .withSkillExperience(10_000)
+                        .withRequirement(FishingLootRequirement.quality(800))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.WARM))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.FANGTOOTH)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withMinecraftExperience(250)
+                        .withSkillExperience(10_000)
+                        .withRequirement(FishingLootRequirement.quality(850))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biome(Biome.DEEP_OCEAN))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.DEEP_SEA_ANGLERFISH)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withMinecraftExperience(250)
+                        .withSkillExperience(10_000)
+                        .withRequirement(FishingLootRequirement.quality(900))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biome(Biome.DEEP_DARK))
+                        .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.BLISTERFISH)
+                        .withWeight(COMMON_WEIGHT)
                         .withMinecraftExperience(30)
                         .withSkillExperience(15)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.VOIDFIN)
+                        .withWeight(COMMON_WEIGHT)
                         .withMinecraftExperience(30)
                         .withSkillExperience(20)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))

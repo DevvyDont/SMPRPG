@@ -118,7 +118,7 @@ public class FishingContext {
     }
 
     public TemperatureReading getTemperature() {
-        return TemperatureReading.fromValue(location.getBlock().getTemperature());
+        return TemperatureReading.fromValue(TemperatureReading.fromBlock(location.getBlock()));
     }
 
     /**
