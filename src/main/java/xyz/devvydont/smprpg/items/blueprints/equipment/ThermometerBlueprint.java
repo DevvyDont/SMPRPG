@@ -33,7 +33,7 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
     /**
      * Affects the number display of the temperature. When on, displays real value as well as the fake converted one.
      */
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     // Constants for mapping
     private static final float MIN_MC_TEMP = -0.5f;
