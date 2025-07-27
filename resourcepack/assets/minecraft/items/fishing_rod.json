@@ -61,6 +61,21 @@
                 }
             },
             {
+                "when": "smprpg:prismarine_rod",
+                "model": {
+                    "type": "minecraft:condition",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/prismarine_rod"
+                    },
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/prismarine_rod_cast"
+                    },
+                    "property": "minecraft:fishing_rod/cast"
+                }
+            },
+            {
                 "when": "smprpg:netherite_rod",
                 "model": {
                     "type": "minecraft:condition",
@@ -86,6 +101,36 @@
                     "on_true": {
                         "type": "minecraft:model",
                         "model": "tools:item/spitfire_rod_cast"
+                    },
+                    "property": "minecraft:fishing_rod/cast"
+                }
+            },
+            {
+                "when": "smprpg:comet_rod",
+                "model": {
+                    "type": "minecraft:condition",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/comet_rod"
+                    },
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/comet_rod_cast"
+                    },
+                    "property": "minecraft:fishing_rod/cast"
+                }
+            },
+            {
+                "when": "smprpg:nebula_rod",
+                "model": {
+                    "type": "minecraft:condition",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/nebula_rod"
+                    },
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/nebula_rod_cast"
                     },
                     "property": "minecraft:fishing_rod/cast"
                 }

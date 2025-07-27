@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/diamond_sword"
+        },
+        "cases": [
+            {
+                "when": "smprpg:elderflame_dagger",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/elderflame_dagger"
+                }
+            }
+        ]
+    }
+}

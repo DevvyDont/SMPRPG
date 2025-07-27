@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/nether_star"
+        },
+        "cases": [
+            {
+                "when": "smprpg:displacement_matrix",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/displacement_matrix"
+                }
+            }
+        ]
+    }
+}

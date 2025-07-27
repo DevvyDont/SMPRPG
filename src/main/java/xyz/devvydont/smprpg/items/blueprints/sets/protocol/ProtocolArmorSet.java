@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.protocol;
 
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.World;
@@ -15,6 +16,7 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.interfaces.IEquippableAssetOverride;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -24,13 +26,15 @@ import xyz.devvydont.smprpg.util.items.AbilityUtil;
 import java.util.Collection;
 import java.util.List;
 
-public class ProtocolArmorSet extends CustomAttributeItem implements ITrimmable, IHeaderDescribable {
+public class ProtocolArmorSet extends CustomAttributeItem implements IEquippableAssetOverride, IHeaderDescribable {
 
     public static final int POWER = 45;
     public static final double CHESTPLATE_DEFENSE = 225;
     public static final double CHESTPLATE_HEALTH = 50;
 
     public static final double END_DAMAGE_REDUCTION = .15;
+
+    private static final Key key = Key.key("protocol");
 
     public ProtocolArmorSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -123,13 +127,8 @@ public class ProtocolArmorSet extends CustomAttributeItem implements ITrimmable,
     }
 
     @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.AMETHYST;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.FLOW;
+    public Key getAssetId() {
+        return key;
     }
 
     /**
