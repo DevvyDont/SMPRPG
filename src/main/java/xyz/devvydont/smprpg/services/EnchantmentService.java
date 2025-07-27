@@ -110,6 +110,7 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment TREASURE_HUNTER = new TreasureHunterEnchantment("treasure_hunter");
     public final static CustomEnchantment FELLING = new FellingEnchantment("felling");
     public final static CustomEnchantment HARVESTING = new HarvestingEnchantment("harvesting");
+    public final static CustomEnchantment REPLENISHING = new ReplenishingEnchantment("replenishing");
 
 
     public final static CustomEnchantment[] CUSTOM_ENCHANTMENTS = {
@@ -162,6 +163,7 @@ public class EnchantmentService implements IService, Listener {
             FORTUNE,
             HARVESTING,
             FELLING,
+            REPLENISHING,
             FROST_WALKER,
             IMPALING,
             KNOCKBACK,
