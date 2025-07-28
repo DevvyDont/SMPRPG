@@ -331,10 +331,17 @@ public class ItemService implements IService, Listener {
         registerVanillaMaterialResolver(Material.ENCHANTED_BOOK, ItemEnchantedBook.class);
 
         registerVanillaMaterialResolver(Material.POTION, PotionBlueprint.class);
+        registerVanillaMaterialResolver(Material.ENDER_PEARL, PotionBlueprint.class);
 
         // Register vanilla items that should have a sell price.
-        for (Map.Entry<Material, Integer> entry : VanillaResource.getMaterialWorthMap().entrySet())
+        for (Map.Entry<Material, Integer> entry : VanillaResource.getMaterialWorthMap().entrySet()) {
+
+            // If this item has already been registered by a more specific resolver, don't re-register it...
+            if (vanillaBlueprintResolver.containsKey(entry.getKey()))
+                continue;
+
             registerVanillaMaterialResolver(entry.getKey(), VanillaResource.class);
+        }
 
         var plugin = SMPRPG.getInstance();
         // Loop through all the custom items and use reflection to register a handler
@@ -433,6 +440,9 @@ public class ItemService implements IService, Listener {
             plugin.getLogger().severe("Failed to instantiate vanilla material handler " + material + " - " + e.getMessage());
             return null;
         }
+
+        if (material.equals(Material.ENDER_PEARL))
+            Bukkit.broadcast(Component.text("a"));
 
         vanillaBlueprintResolver.put(material, instance);
         if (instance instanceof Listener listener)

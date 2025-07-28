@@ -5,6 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.ItemRarity;
+import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
@@ -12,7 +14,7 @@ import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
  * Represents an item that shouldn't have any special behavior associated with it. It will simply function as
  * a featureless item that updates according to the item meta and components that is has.
  */
-public class VanillaItemBlueprint extends SMPItemBlueprint {
+public class VanillaItemBlueprint extends SMPItemBlueprint implements ISellable {
 
     protected final Material material;
 
@@ -63,5 +65,17 @@ public class VanillaItemBlueprint extends SMPItemBlueprint {
     @Override
     public ItemStack generate() {
         return ItemStack.of(material);
+    }
+
+    /**
+     * Given this item stack, how much should it be able to sell for?
+     * Keep in mind that the size of the stack needs to considered as well!
+     *
+     * @param item The item that can be sold.
+     * @return The worth of the item.
+     */
+    @Override
+    public int getWorth(ItemStack item) {
+        return VanillaResource.getMaterialValue(material);
     }
 }
