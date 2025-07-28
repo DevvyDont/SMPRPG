@@ -36,6 +36,7 @@ import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.entity.vanilla.*;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
 import xyz.devvydont.smprpg.listeners.pets.EntityTamingAttributeFix;
+import xyz.devvydont.smprpg.listeners.pets.TamedEntityFeedFix;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
@@ -151,6 +152,7 @@ public class EntityService implements IService, Listener {
         }.runTaskTimer(plugin, 5*60*20, 5*60*20);
 
         listeners.add(new EntityTamingAttributeFix());  // Scales entities to owner levels.
+        listeners.add(new TamedEntityFeedFix());  // Allows tamed entities to heal more efficiently.
         listeners.add(new EnderDragonSpawnContributionListener());  // Adds boss contribution weight for boss spawning.
         for (var listener : listeners)
             listener.start();
