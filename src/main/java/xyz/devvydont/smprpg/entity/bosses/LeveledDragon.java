@@ -1,10 +1,33 @@
 package xyz.devvydont.smprpg.entity.bosses;
 
+import com.destroystokyo.paper.event.entity.EnderDragonFireballHitEvent;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.TeleportFlag;
+import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.bossbar.BossBar;
-import org.bukkit.Material;
-import org.bukkit.entity.EnderDragon;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.util.TriState;
+import org.bukkit.*;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
@@ -18,6 +41,9 @@ import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class LeveledDragon extends BossInstance<EnderDragon> {
 
@@ -79,6 +105,36 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
                 .withHealth(wasSummoned ? 3_000_000 : 1_000_000)
                 .withDamage(wasSummoned ? 1250 : 500)
                 .build();
+    }
+
+    private TNTPrimed makeTnt(World world, Location loc, int ticks, Vector velocity, float yield, BlockData data) {
+        TNTPrimed tnt = (TNTPrimed) world.spawnEntity(loc, EntityType.TNT);
+        tnt.setFuseTicks(ticks);
+        tnt.setVelocity(velocity);
+        tnt.setYield(yield);
+        tnt.setBlockData(data);
+        return tnt;
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void doFireballSpawn(EnderDragonFireballHitEvent event)
+    {
+        var world = event.getEntity().getWorld();
+        var loc = event.getEntity().getLocation();
+        var tnt = makeTnt(world, loc, 20, new Vector(0, 1.0, 0), 5.0f, Material.AMETHYST_BLOCK.createBlockData());
+        tnt.setFireTicks(100);
+        for (int i = 0; i <= 3; i++) {
+            double x = 0;
+            double z = 0;
+            switch (i) {
+                case 0: x = 0.25; z = 0; break;
+                case 1: x = -0.25; z = 0; break;
+                case 2: x = 0; z = 0.25; break;
+                case 3: x = 0; z = -0.25; break;
+            }
+            var velocity = new Vector(x, 1.0, z);
+            makeTnt(world, loc, 80, velocity, 5.0f, Material.WHITE_GLAZED_TERRACOTTA.createBlockData());
+        }
     }
 
     @Override
