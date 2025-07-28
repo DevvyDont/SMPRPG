@@ -65,7 +65,7 @@ public class VelocityEnchantment extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 41;
+        return 42;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)

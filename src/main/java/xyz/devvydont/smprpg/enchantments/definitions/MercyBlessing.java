@@ -86,7 +86,7 @@ public class MercyBlessing extends CustomEnchantment implements Listener {
 
     @Override
     public int getSkillRequirement() {
-        return 30;
+        return 40;
     }
 
     @Override

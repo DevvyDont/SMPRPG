@@ -78,7 +78,7 @@ public class OpportunistEnchantment extends CustomEnchantment implements Attribu
 
     @Override
     public int getSkillRequirement() {
-        return 42;
+        return 43;
     }
 
     @Override
