@@ -161,12 +161,11 @@ public class EnchantmentCalculator {
         // Use the cost of the slot as a metric
         int cost = calculateSlotCost(slot);
 
-        // Determine how many levels we have over the requirement and what magic level would give us the max level
-        int magicLevelsOverRequirement = cost - enchantment.getSkillRequirement();
-        int maxMagicLevels = 99 - enchantment.getSkillRequirement();
-
-        float percentage = (float)magicLevelsOverRequirement / maxMagicLevels;
-        int level = Math.round(enchantment.getMaxLevel() * percentage);
+        // Find the maximum allowed level they can roll for this cost.
+        var level = 1;
+        for (int i = 1; i <= enchantment.getMaxLevel(); i++)
+            if (enchantment.getSkillRequirementForLevel(i) <= cost)
+                level = i;
 
         // 20% chance to increase by one, 15% chance to decrease by one
         if (rng.nextInt(100) < 20)
