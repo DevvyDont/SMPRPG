@@ -15,6 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataHolder;
@@ -51,8 +52,6 @@ import java.util.concurrent.ExecutionException;
  * - When an entity drops items, they drop items for whoever helped kill it so everyone gets items
  */
 public class DropsService implements IService, Listener {
-
-
 
     public enum DropFlag {
         NULL,
@@ -734,6 +733,21 @@ public class DropsService implements IService, Listener {
 
         // Trying to pick up an item we don't own.
         event.setCancelled(true);
+    }
+
+    /**
+     * Prevent hopper like blocks from picking up loot tagged items.
+     * This is to prevent players being able to pick up other players drops by using redstone blocks.
+     */
+    @EventHandler
+    private void __onHopperTaggedItem(InventoryPickupItemEvent event) {
+
+        if (getOwner(event.getItem()) != null)
+            event.setCancelled(true);
+        
+        if (event.getItem().getOwner() != null)
+            event.setCancelled(true);
+
     }
 
 }
