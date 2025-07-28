@@ -84,6 +84,7 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment KEEPING_BLESSING = new KeepingBlessing("keeping");
     public final static CustomEnchantment TELEKINESIS_BLESSING = new TelekinesisBlessing("telekinesis");
     public final static CustomEnchantment MERCY_BLESSING = new MercyBlessing("mercy");
+    public final static CustomEnchantment VOIDSTRIDING_BLESSING = new VoidstridingBlessing("voidstriding");
     public final static CustomEnchantment FORTUITY = new FortuityEnchantment("fortuity");
     public final static CustomEnchantment HEARTY = new HeartyEnchantment("hearty");
     public final static CustomEnchantment SPEEDSTER = new SpeedsterEnchantment("speedster");
@@ -110,7 +111,7 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment TREASURE_HUNTER = new TreasureHunterEnchantment("treasure_hunter");
     public final static CustomEnchantment FELLING = new FellingEnchantment("felling");
     public final static CustomEnchantment HARVESTING = new HarvestingEnchantment("harvesting");
-    public final static CustomEnchantment REPLENISHING = new ReplenishingEnchantment("replenishing");
+    public final static CustomEnchantment REPLENISHING = new ReplenishingBlessing("replenishing");
 
 
     public final static CustomEnchantment[] CUSTOM_ENCHANTMENTS = {
@@ -119,6 +120,7 @@ public class EnchantmentService implements IService, Listener {
             KEEPING_BLESSING,
             TELEKINESIS_BLESSING,
             MERCY_BLESSING,
+            VOIDSTRIDING_BLESSING,
 
             // Curses
             BINDING_CURSE,
