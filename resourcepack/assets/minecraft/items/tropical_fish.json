@@ -1,0 +1,271 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/tropical_fish"
+        },
+        "cases": [
+            {
+                "when": "smprpg:cod",
+                "model": {
+                    "type": "model",
+                    "model": "item/cod"
+                }
+            },
+            {
+                "when": "smprpg:salmon",
+                "model": {
+                    "type": "model",
+                    "model": "item/salmon"
+                }
+            },
+            {
+                "when": "smprpg:tropical_fish",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:pufferfish",
+                "model": {
+                    "type": "model",
+                    "model": "item/pufferfish"
+                }
+            },
+            {
+                "when": "smprpg:carp",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:guppy",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/guppy"
+                }
+            },
+            {
+                "when": "smprpg:bass",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:catfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/catfish"
+                }
+            },
+            {
+                "when": "smprpg:snapper",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/snapper"
+                }
+            },
+            {
+                "when": "smprpg:pike",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/pike"
+                }
+            },
+            {
+                "when": "smprpg:sturgeon",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/sturgeon"
+                }
+            },
+            {
+                "when": "smprpg:blue_tang",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/blue_tang"
+                }
+            },
+            {
+                "when": "smprpg:barracuda",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/barracuda"
+                }
+            },
+            {
+                "when": "smprpg:yellowfin_tuna",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/yellowfin_tuna"
+                }
+            },
+            {
+                "when": "smprpg:goliath_grouper",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:leafy_seadragon",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/leafy_seadragon"
+                }
+            },
+            {
+                "when": "smprpg:lionfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/lionfish"
+                }
+            },
+            {
+                "when": "smprpg:blue_marlin",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/blue_marlin"
+                }
+            },
+            {
+                "when": "smprpg:fangtooth",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/fangtooth"
+                }
+            },
+            {
+                "when": "smprpg:deep_sea_anglerfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/deep_sea_anglerfish"
+                }
+            },
+            {
+                "when": "smprpg:blisterfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/blisterfish"
+                }
+            },
+            {
+                "when": "smprpg:impling",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:crimsonfish",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:soul_scale",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:bone_maw",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/bone_maw"
+                }
+            },
+            {
+                "when": "smprpg:flarefin",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:ghost_fish",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:devil_ray",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/devil_ray"
+                }
+            },
+            {
+                "when": "smprpg:voidfin",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/voidfin"
+                }
+            },
+            {
+                "when": "smprpg:orbling",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/orbling"
+                }
+            },
+            {
+                "when": "smprpg:warper",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:blobfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/blobfish"
+                }
+            },
+            {
+                "when": "smprpg:goblin_shark",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:starsurfer",
+                "model": {
+                    "type": "model",
+                    "model": "item/tropical_fish"
+                }
+            },
+            {
+                "when": "smprpg:abyssal_squid",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/abyssal_squid"
+                }
+            },
+            {
+                "when": "smprpg:twilight_anglerfish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/twilight_anglerfish"
+                }
+            },
+            {
+                "when": "smprpg:cosmic_cuttlefish",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/cosmic_cuttlefish"
+                }
+            }
+        ]
+    }
+}

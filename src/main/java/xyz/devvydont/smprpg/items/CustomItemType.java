@@ -443,9 +443,42 @@ public enum CustomItemType {
     FANGTOOTH("Fangtooth",                     Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
     DEEP_SEA_ANGLERFISH("Deep Sea Anglerfish", Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
 
-    BLISTERFISH("Blisterfish", Material.TROPICAL_FISH, ItemRarity.COMMON,   FishBlueprint.class),
+    // COMMON NETHER FISH
+    BLISTERFISH("Blisterfish",  Material.TROPICAL_FISH, ItemRarity.COMMON,    FishBlueprint.class),
+    IMPLING("Impling",          Material.TROPICAL_FISH, ItemRarity.COMMON,    FishBlueprint.class),
 
-    VOIDFIN("Voidfin",         Material.TROPICAL_FISH, ItemRarity.COMMON,   FishBlueprint.class),
+    // UNCOMMON NETHER FISH
+    CRIMSONFISH("Crimsonfish",  Material.TROPICAL_FISH, ItemRarity.UNCOMMON,  FishBlueprint.class),
+
+    // RARE NETHER FISH
+    BONE_MAW("Bone Maw",        Material.TROPICAL_FISH, ItemRarity.RARE,      FishBlueprint.class),
+    SOUL_SCALE("Soul Scale",    Material.TROPICAL_FISH, ItemRarity.RARE,      FishBlueprint.class),
+
+    // EPIC NETHER FISH
+    FLAREFIN("Flarefin",        Material.TROPICAL_FISH, ItemRarity.EPIC,      FishBlueprint.class),
+    GHOST_FISH("Ghost Fish",    Material.TROPICAL_FISH, ItemRarity.EPIC,      FishBlueprint.class),
+
+    // LEGENDARY NETHER FISH
+    DEVIL_RAY("Devil Ray",      Material.TROPICAL_FISH, ItemRarity.LEGENDARY, FishBlueprint.class),
+
+    // COMMON END FISH
+    VOIDFIN("Voidfin",                              Material.TROPICAL_FISH, ItemRarity.COMMON,     FishBlueprint.class),
+    ORBLING("Orbling",                              Material.TROPICAL_FISH, ItemRarity.COMMON,     FishBlueprint.class),
+
+    // UNCOMMON END FISH
+    WARPER("Warper",                                Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+    BLOBFISH("Blobfish",                            Material.TROPICAL_FISH, ItemRarity.UNCOMMON,     FishBlueprint.class),
+
+    // RARE END FISH
+    GOBLIN_SHARK("Goblin Shark",                    Material.TROPICAL_FISH, ItemRarity.RARE,     FishBlueprint.class),
+
+    // EPIC END FISH
+    STARSURFER("Star Surfer",                       Material.TROPICAL_FISH, ItemRarity.EPIC,     FishBlueprint.class),
+    ABYSSAL_SQUID("Abyssal Squid",                  Material.TROPICAL_FISH, ItemRarity.EPIC,     FishBlueprint.class),
+
+    // LEGENDARY END FISH
+    TWILIGHT_ANGLERFISH("Twilight Angler Fish",    Material.TROPICAL_FISH, ItemRarity.LEGENDARY,     FishBlueprint.class),
+    COSMIC_CUTTLEFISH("Cosmic Cuttlefish",          Material.TROPICAL_FISH, ItemRarity.LEGENDARY,     FishBlueprint.class),
 
     // FISH STUFF
     CAVIAR("Caviar", Material.PHANTOM_MEMBRANE, ItemRarity.EPIC, true, 25_000),

@@ -49,14 +49,19 @@ public class ReplenishingEnchantment extends CustomEnchantment implements Listen
     }
 
     @Override
-    public @NotNull Component getDisplayName() { return ComponentUtils.create("Replenishing"); }
+    public @NotNull Component getDisplayName() {
+        return ComponentUtils.create("Blessing of Replenishing", NamedTextColor.YELLOW);
+    }
+
+    @Override
+    public @NotNull TextColor getEnchantColor() {
+        return NamedTextColor.YELLOW;
+    }
 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-                ComponentUtils.create("Grants a "),
-                ComponentUtils.create("+" + getReplantChance(getLevel()) + "%", NamedTextColor.GREEN),
-                ComponentUtils.create(" chance for crops to replant when harvested.")
+                ComponentUtils.create("Crops will automatically replant on harvest.")
         );
     }
 
@@ -72,7 +77,7 @@ public class ReplenishingEnchantment extends CustomEnchantment implements Listen
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 1;
     }
 
     @Override
@@ -86,7 +91,7 @@ public class ReplenishingEnchantment extends CustomEnchantment implements Listen
     }
 
     @Override
-    public int getSkillRequirement() { return 25; }
+    public int getSkillRequirement() { return 30; }
 
     /*
      * There may be multiple instances where we want to attempt to perform this enchant's ability on an item, so pull
@@ -97,7 +102,7 @@ public class ReplenishingEnchantment extends CustomEnchantment implements Listen
      * @return true if successful false otherwise
      */
     private int getReplantChance(int level) {
-        return Math.min(100, level * 20);
+        return Math.min(100, level * 100);
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)

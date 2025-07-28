@@ -72,8 +72,31 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
             case DEEP_SEA_ANGLERFISH -> 125_000;
 
             case BLISTERFISH -> 180;
+            case IMPLING -> 215;
+
+            case CRIMSONFISH -> 750;
+
+            case BONE_MAW -> 4500;
+            case SOUL_SCALE -> 7500;
+
+            case FLAREFIN -> 50000;
+            case GHOST_FISH -> 60000;
+
+            case DEVIL_RAY -> 200000;
 
             case VOIDFIN -> 225;
+            case ORBLING -> 300;
+
+            case WARPER -> 1500;
+            case BLOBFISH -> 2000;
+
+            case GOBLIN_SHARK -> 40000;
+
+            case STARSURFER -> 175000;
+            case ABYSSAL_SQUID -> 250000;
+
+            case TWILIGHT_ANGLERFISH -> 500000;
+            case COSMIC_CUTTLEFISH -> 750000;
 
             default -> 50;
         };
@@ -108,12 +131,12 @@ public class FishBlueprint extends CustomItemBlueprint implements IModelOverridd
     @Override
     public Material getDisplayMaterial() {
         return switch (this.getCustomItemType()) {
-            case CATFISH -> Material.CAT_SPAWN_EGG;
-            case LIONFISH -> Material.FOX_SPAWN_EGG;
-            case COD, PIKE, GUPPY -> Material.COD;
-            case SALMON, BLISTERFISH -> Material.SALMON;
-            case PUFFERFISH, VOIDFIN -> Material.PUFFERFISH;
-            case CLOWNFISH -> Material.TROPICAL_FISH;
+            // case CATFISH -> Material.CAT_SPAWN_EGG;
+            // case LIONFISH -> Material.FOX_SPAWN_EGG;
+            // case COD, PIKE, GUPPY -> Material.COD;
+            // case SALMON, BLISTERFISH -> Material.SALMON;
+            // case PUFFERFISH, VOIDFIN -> Material.PUFFERFISH;
+            // case CLOWNFISH -> Material.TROPICAL_FISH;
             default -> this.getCustomItemType().DisplayMaterial;
         };
     }
