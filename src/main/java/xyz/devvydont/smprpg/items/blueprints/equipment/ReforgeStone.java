@@ -51,7 +51,7 @@ public abstract class ReforgeStone extends CustomItemBlueprint implements Reforg
 
         // Sample of statistics that get altered for a certain rarity
         // Is this attribute present on this item? If not skip it
-        lines.add(ComponentUtils.create("Stat Modifiers", NamedTextColor.BLUE));
+        lines.add(ComponentUtils.create("Stat Modifiers:", NamedTextColor.BLUE));
         lines.addAll(reforge.formatAttributeModifiersWithRarity(DISPLAY_RARITY));
         lines.add(ComponentUtils.create("Example bonuses for " + DISPLAY_RARITY.name() +" item are shown.", NamedTextColor.DARK_GRAY));
         lines.add(ComponentUtils.create("Results vary based on item rarity!", NamedTextColor.DARK_GRAY));
@@ -59,6 +59,9 @@ public abstract class ReforgeStone extends CustomItemBlueprint implements Reforg
         lines.add(ComponentUtils.create("Valid Equipment:", NamedTextColor.BLUE));
         for (ItemClassification clazz : getReforgeType().getAllowedItems())
             lines.add(ComponentUtils.create("- " + MinecraftStringUtils.getTitledString(clazz.name())));
+        lines.add(ComponentUtils.EMPTY);
+        lines.add(ComponentUtils.create("Application Cost:", NamedTextColor.BLUE));
+        lines.add(ComponentUtils.merge(ComponentUtils.create("- "), ComponentUtils.create(getExperienceCost() + " levels", NamedTextColor.GREEN)));
         return lines;
     }
 
