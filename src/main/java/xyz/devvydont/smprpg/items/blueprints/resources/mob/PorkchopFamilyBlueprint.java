@@ -66,15 +66,15 @@ public class PorkchopFamilyBlueprint extends CustomCompressableBlueprint impleme
 
         if (getCustomItemType().equals(CustomItemType.ENCHANTED_PORKCHOP))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.STRENGTH, (int) TickTime.minutes(5), 1),
-                    new PotionEffect(PotionEffectType.REGENERATION, (int) TickTime.minutes(5), 1),
-                    new PotionEffect(PotionEffectType.RESISTANCE, (int) TickTime.minutes(5), 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(5), 4),
+                    new PotionEffect(PotionEffectType.REGENERATION, (int) TickTime.minutes(5), 0),
+                    new PotionEffect(PotionEffectType.RESISTANCE, (int) TickTime.minutes(5), 1)
             ), 1f));
 
         if (getCustomItemType().equals(CustomItemType.PREMIUM_PORKCHOP))
             effects.add(ConsumeEffect.applyStatusEffects(List.of(
-                    new PotionEffect(PotionEffectType.STRENGTH, (int) TickTime.minutes(1), 0),
-                    new PotionEffect(PotionEffectType.REGENERATION, (int) TickTime.minutes(1), 0)
+                    new PotionEffect(PotionEffectType.ABSORPTION, (int) TickTime.minutes(1), 2),
+                    new PotionEffect(PotionEffectType.RESISTANCE, (int) TickTime.minutes(1), 0)
             ), 1f));
 
         return Consumable.consumable()
