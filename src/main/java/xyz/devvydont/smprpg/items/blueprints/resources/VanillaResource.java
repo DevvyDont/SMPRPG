@@ -357,6 +357,12 @@ public class VanillaResource extends VanillaItemBlueprint implements ISellable {
         materialWorthMap.put(Material.MELON_SLICE, 1);
         materialWorthMap.put(Material.KELP, 1);
         materialWorthMap.put(Material.NETHER_WART, 5);
+        materialWorthMap.put(Material.NETHER_WART_BLOCK, 10);
+        materialWorthMap.put(Material.NETHER_BRICK, 4);
+        materialWorthMap.put(Material.NETHER_BRICK_FENCE, 2);
+        materialWorthMap.put(Material.NETHER_BRICK_SLAB, 2);
+        materialWorthMap.put(Material.NETHER_BRICK_WALL, 2);
+        materialWorthMap.put(Material.NETHER_BRICK_STAIRS, 2);
 
         materialWorthMap.put(Material.BEEF, 2);
         materialWorthMap.put(Material.COOKED_BEEF, 5);
