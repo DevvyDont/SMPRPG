@@ -36,7 +36,8 @@ public class CopperAxe extends CustomAttributeItem implements ICraftable, IBreak
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemAxe.getAxeDamage(Material.WOODEN_AXE)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, .1),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF+.25)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF+.25),
+                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, ItemAxe.getAxeFortune(Material.WOODEN_AXE))
         );
     }
 

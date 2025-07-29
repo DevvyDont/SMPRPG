@@ -18,6 +18,18 @@ import java.util.List;
 
 public class ItemPickaxe extends VanillaAttributeItem implements IBreakableEquipment {
 
+    public static double getPickaxeFortune(Material material) {
+        return switch (material) {
+            case NETHERITE_PICKAXE -> 70;
+            case DIAMOND_PICKAXE -> 45;
+            case GOLDEN_PICKAXE -> 60;
+            case IRON_PICKAXE -> 30;
+            case STONE_PICKAXE -> 15;
+            case WOODEN_PICKAXE -> 5;
+            default -> 0;
+        };
+    }
+
     public static double getPickaxeDamage(Material material) {
         return switch (material) {
             case NETHERITE_PICKAXE -> 30;
@@ -57,7 +69,8 @@ public class ItemPickaxe extends VanillaAttributeItem implements IBreakableEquip
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getPickaxeDamage(material)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, PICKAXE_ATTACK_SPEED_DEBUFF)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, PICKAXE_ATTACK_SPEED_DEBUFF),
+                new AdditiveAttributeEntry(AttributeWrapper.MINING_FORTUNE, getPickaxeFortune(material))
         );
     }
 

@@ -19,6 +19,7 @@ import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.VanillaEnchantment;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
+import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
@@ -100,7 +101,7 @@ public class FortuneEnchantment extends VanillaEnchantment implements AttributeE
      */
     @NotNull
     public RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
-        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH);
+        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH, EnchantmentService.HARVESTING.getTypedKey(), EnchantmentService.FELLING.getTypedKey());
     }
 
     /**

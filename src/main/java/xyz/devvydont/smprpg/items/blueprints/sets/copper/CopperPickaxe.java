@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemHoe;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemPickaxe;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
@@ -49,7 +50,8 @@ public class CopperPickaxe extends CustomAttributeItem implements IBreakableEqui
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemPickaxe.getPickaxeDamage(Material.WOODEN_PICKAXE)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, .1),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, PICKAXE_ATTACK_SPEED_DEBUFF / 2)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, PICKAXE_ATTACK_SPEED_DEBUFF / 2),
+                new AdditiveAttributeEntry(AttributeWrapper.MINING_FORTUNE, ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE))
         );
     }
 

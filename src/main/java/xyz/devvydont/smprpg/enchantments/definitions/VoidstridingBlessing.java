@@ -1,6 +1,9 @@
 package xyz.devvydont.smprpg.enchantments.definitions;
 
+import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.keys.tags.ItemTypeTagKeys;
+import io.papermc.paper.registry.set.RegistryKeySet;
+import io.papermc.paper.registry.set.RegistrySet;
 import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -11,6 +14,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
+import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.time.TickTime;
@@ -76,6 +81,16 @@ public class VoidstridingBlessing extends CustomEnchantment implements Listener 
     @Override
     public EquipmentSlotGroup getEquipmentSlotGroup() {
         return EquipmentSlotGroup.FEET;
+    }
+
+    @Override
+    public @NotNull RegistryKeySet<Enchantment> getConflictingEnchantments() {
+        return RegistrySet.keySet(RegistryKey.ENCHANTMENT,
+                EnchantmentService.KEEPING_BLESSING.getTypedKey(),
+                EnchantmentService.MERCY_BLESSING.getTypedKey(),
+                EnchantmentService.TELEKINESIS_BLESSING.getTypedKey(),
+                EnchantmentService.REPLENISHING.getTypedKey()
+        );
     }
 
     @Override

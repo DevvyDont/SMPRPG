@@ -18,6 +18,18 @@ import java.util.List;
 
 public class ItemHoe extends VanillaAttributeItem implements IBreakableEquipment {
 
+    public static double getHoeFortune(Material material) {
+        return switch (material) {
+            case NETHERITE_HOE -> ItemPickaxe.getPickaxeFortune(Material.NETHERITE_PICKAXE);
+            case DIAMOND_HOE -> ItemPickaxe.getPickaxeFortune(Material.DIAMOND_PICKAXE);
+            case GOLDEN_HOE -> ItemPickaxe.getPickaxeFortune(Material.GOLDEN_PICKAXE);
+            case IRON_HOE -> ItemPickaxe.getPickaxeFortune(Material.IRON_PICKAXE);
+            case STONE_HOE -> ItemPickaxe.getPickaxeFortune(Material.STONE_PICKAXE);
+            case WOODEN_HOE -> ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE);
+            default -> 0;
+        };
+    }
+
     public static double getHoeDamage(Material material) {
         return switch (material) {
             case NETHERITE_HOE -> 20;
@@ -66,7 +78,8 @@ public class ItemHoe extends VanillaAttributeItem implements IBreakableEquipment
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getHoeDamage(material)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, getHoeAttackSpeedDebuff(material))
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, getHoeAttackSpeedDebuff(material)),
+                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, getHoeFortune(material))
         );
     }
 

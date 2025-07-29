@@ -18,6 +18,7 @@ import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
+import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
@@ -84,7 +85,7 @@ public class HarvestingEnchantment extends CustomEnchantment implements Attribut
      */
     @NotNull
     public RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
-        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH);
+        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH, EnchantmentKeys.FORTUNE, EnchantmentService.FELLING.getTypedKey());
     }
 
     /**

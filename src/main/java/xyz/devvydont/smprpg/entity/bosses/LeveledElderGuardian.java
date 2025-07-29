@@ -93,6 +93,8 @@ public class LeveledElderGuardian extends BossInstance<ElderGuardian> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.NEPTUNE_BOW), 125, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.IRIDESCENT_LENS), 100, this),
 
+                new ChancedItemDrop(ItemService.generate(Material.WET_SPONGE), 100, this),
+
                 // Pity drops
                 // Crafts into Jupiter crystal, need 8 to get 1 crystal
                 // Armor components, 24 required for full set from pity alone.
