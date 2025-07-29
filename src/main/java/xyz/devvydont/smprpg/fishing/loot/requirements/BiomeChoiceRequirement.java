@@ -14,7 +14,7 @@ import java.util.List;
 public record BiomeChoiceRequirement(BiomeGroup biome) implements FishingLootRequirement {
 
     public enum BiomeGroup {
-        OCEAN(NamedTextColor.AQUA, Biome.OCEAN, Biome.COLD_OCEAN, Biome.DEEP_COLD_OCEAN, Biome.DEEP_OCEAN, Biome.DEEP_LUKEWARM_OCEAN, Biome.WARM_OCEAN),
+        OCEAN(NamedTextColor.AQUA, Biome.OCEAN, Biome.COLD_OCEAN, Biome.DEEP_COLD_OCEAN, Biome.DEEP_OCEAN, Biome.DEEP_LUKEWARM_OCEAN, Biome.WARM_OCEAN, Biome.LUKEWARM_OCEAN),
         RIVER(NamedTextColor.BLUE, Biome.RIVER, Biome.FROZEN_RIVER),
         SWAMP(NamedTextColor.DARK_GREEN, Biome.SWAMP, Biome.MANGROVE_SWAMP, Biome.GROVE),
         ;
