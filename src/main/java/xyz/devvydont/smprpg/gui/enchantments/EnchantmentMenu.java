@@ -37,7 +37,7 @@ public class EnchantmentMenu extends MenuBase {
     private int page = 0;
     private boolean reverseResults = false;
 
-    private EnchantmentSortMode sortMode = EnchantmentSortMode.DEFAULT;
+    private EnchantmentSortMode sortMode = EnchantmentSortMode.ALPHABETICAL;
 
     public EnchantmentMenu(@NotNull Player player) {
         super(player, ROWS);
