@@ -97,6 +97,15 @@ public class BlockLootRegistry {
                 .build()
         );
 
+        register(Material.WET_SPONGE, BlockLootEntry.builder()
+                .add(BlockLootContext.AUTO_SMELT, BlockLoot.of(ItemService.generate(Material.SPONGE)))
+                .add(BlockLootContext.SILK_TOUCH, BlockLoot.of(ItemService.generate(Material.WET_SPONGE)))
+                .add(BlockLootContext.CORRECT_TOOL, BlockLoot.of(ItemService.generate(Material.WET_SPONGE)))
+                .add(BlockLootContext.INCORRECT_TOOL, BlockLoot.of(ItemService.generate(Material.WET_SPONGE)))
+                .uses(AttributeWrapper.MINING_FORTUNE)
+                .build()
+        );
+
         register(Material.END_STONE, BlockLootEntry.builder(ItemClassification.PICKAXE)
                 .add(BlockLootContext.AUTO_SMELT, BlockLoot.of(ItemService.generate(Material.END_STONE)))
                 .add(BlockLootContext.SILK_TOUCH, BlockLoot.of(ItemService.generate(Material.END_STONE)))
