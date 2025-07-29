@@ -586,4 +586,15 @@ public enum AttributeWrapper {
     public @NotNull NamespacedKey key() {
         return _key;
     }
+
+    /**
+     * Checks if this attribute contributes to general combat effectiveness. Used for hard mode attribute nerfs.
+     * @return True if this is a combat attribute, false if hard mode should be unaffected.
+     */
+    public boolean isCombatAttribute() {
+        return switch (this) {
+            case CRITICAL_DAMAGE, CRITICAL_CHANCE, STRENGTH, REGENERATION, INTELLIGENCE, HEALTH, DEFENSE -> true;
+            default -> false;
+        };
+    }
 }

@@ -38,8 +38,16 @@ public class AttributeReward implements ISkillReward {
     }
 
     public double calculateRewardAmount(Player player, double amount) {
+
+        // No matter what, non combat stats are always full amounts.
+        if (!getAttribute().isCombatAttribute())
+            return amount;
+
+        // Hard mode players will have attributes nerfed.
         if (SMPRPG.getService(DifficultyService.class).getDifficulty(player) == ProfileDifficulty.HARD)
             return amount / 2;
+
+        // No special case.
         return amount;
     }
 
