@@ -276,12 +276,14 @@ public class EntityService implements IService, Listener {
         // Custom entities must be LivingEntity. If they aren't, we have to use reflection. This isn't ideal.
         if (!(entity instanceof LivingEntity living)) {
             var normalEntity = type.create(entity);
+            normalEntity.setup();
             trackEntity(normalEntity);
             return normalEntity;
         }
 
         // Create an instance of the handler and track it.
         var leveled = type.create(living);
+        leveled.setup();
         leveled.updateAttributes();
         trackEntity(leveled);
         return leveled;
