@@ -101,6 +101,65 @@ public class TelekinesisBlessing extends CustomEnchantment implements Listener {
      * @param item the item to teleport into an owner's inventory if present
      * @return true if successful false otherwise
      */
+    private boolean performTelekinesis(Item item) {
+
+        // Does this item have an owner?
+        UUID ownerID = SMPRPG.getService(DropsService.class).getOwner(item);
+        if (ownerID == null)
+            return false;
+
+        // Is the owner of the item online?
+        Player owner = Bukkit.getPlayer(ownerID);
+        if (owner == null)
+            return false;
+
+        // Is this item marked with the "loot" tag?
+        DropsService.DropFlag flag = SMPRPG.getService(DropsService.class).getFlag(item);
+        if (!flag.equals(DropsService.DropFlag.LOOT))
+            return false;
+
+        // Do we have telekinesis?
+        ItemStack helmet = owner.getInventory().getHelmet();
+        if (helmet == null)
+            return false;
+
+        if (!helmet.containsEnchantment(getEnchantment()))
+            return false;
+
+        // Do we have an empty spot in our inventory?
+        if (owner.getInventory().firstEmpty() == -1) {
+            SMPRPG.getService(ActionBarService.class).addActionBarComponent(owner, ActionBarService.ActionBarSource.MISC, ComponentUtils.create("FULL INVENTORY!", NamedTextColor.RED), 2);
+            owner.playSound(owner.getLocation(), Sound.BLOCK_CHEST_OPEN, .25f, 2f);
+            return false;
+        }
+
+        // We have telekinesis and this drop belongs to us. Attempt to add it
+        ItemStack drop = item.getItemStack();
+        Map<Integer, ItemStack> overflow = owner.getInventory().addItem(drop);
+        owner.getWorld().playSound(owner.getLocation(), Sound.ENTITY_ITEM_PICKUP, .25f, 1.75f);
+
+        // If the overflow map is empty, then we successfully transported items!
+        if (overflow.isEmpty())
+            return true;
+
+        // We have overflow items, go ahead and spawn the items back into the world but with an alternative tag so that
+        // we ignore this item when it drops.
+        for (Map.Entry<Integer, ItemStack> entry : overflow.entrySet()) {
+            entry.getValue().editMeta(meta -> SMPRPG.getService(DropsService.class).setFlag(meta, DropsService.DropFlag.TELEKINESIS_FAIL));
+            owner.getWorld().dropItemNaturally(owner.getEyeLocation(), entry.getValue());
+        }
+
+        return true;
+    }
+
+    /*
+     * There may be multiple instances where we want to attempt to perform this enchant's ability on an item, so pull
+     * out the behavior into a method. BlockDropItemEvent happens after ItemSpawnEvent, so we can delay the
+     * telekinetic check until the next tick to try and capture it
+     *
+     * @param item the item to teleport into an owner's inventory if present
+     * @return true if successful false otherwise
+     */
     private boolean performTelekinesis(ItemStack item) {
 
         // Does this item have an owner?
@@ -179,8 +238,14 @@ public class TelekinesisBlessing extends CustomEnchantment implements Listener {
 
             // Attempt telekinesis, if we were successful then remove the drop.
             boolean success = performTelekinesis(item.getItemStack());
-            if (success)
+            // Failed on the item stack itself. Maybe try the normal item?
+            if (!success)
+                success = performTelekinesis(item);
+
+            if (success) {
                 event.getItems().remove(item);
+                item.remove();
+            }
         }
     }
 }

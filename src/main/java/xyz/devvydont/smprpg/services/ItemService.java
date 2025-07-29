@@ -441,9 +441,6 @@ public class ItemService implements IService, Listener {
             return null;
         }
 
-        if (material.equals(Material.ENDER_PEARL))
-            Bukkit.broadcast(Component.text("a"));
-
         vanillaBlueprintResolver.put(material, instance);
         if (instance instanceof Listener listener)
             plugin.getServer().getPluginManager().registerEvents(listener, plugin);

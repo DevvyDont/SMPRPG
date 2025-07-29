@@ -69,7 +69,6 @@ public class ForagingExperienceListener implements Listener {
 
         SkillInstance skill = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer()).getWoodcuttingSkill();
         skill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.WOODCUTTING);
-        ChunkUtil.markBlockSkillValid(event.getBlock());
         event.setExpToDrop(1);
     }
 

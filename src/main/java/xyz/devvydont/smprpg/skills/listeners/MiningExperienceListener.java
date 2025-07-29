@@ -124,8 +124,6 @@ public class MiningExperienceListener implements Listener {
         if (ChunkUtil.isBlockSkillInvalid(event.getBlock()))
             return;
 
-        ChunkUtil.markBlockSkillValid(event.getBlock());
-
         SkillInstance skill = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer()).getMiningSkill();
 
         int exp = 0;
@@ -136,6 +134,5 @@ public class MiningExperienceListener implements Listener {
 
         event.setExpToDrop(Math.max(1, exp/10));
         skill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.ORE);
-        ChunkUtil.markBlockSkillValid(event.getBlock());
     }
 }

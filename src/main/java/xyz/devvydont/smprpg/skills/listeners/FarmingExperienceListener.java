@@ -19,6 +19,7 @@ import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
+import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
@@ -153,10 +154,6 @@ public class FarmingExperienceListener implements Listener {
 
         // If this block is marked as skill invalid, we have some things we need to do.
         if (ChunkUtil.isBlockSkillInvalid(event.getBlock())) {
-
-            // Mark the block as valid again. Block breaks mean this is valid now.
-            ChunkUtil.markBlockSkillValid(event.getBlock());
-
             // If this block does not have age states, we don't have to consider anything. past this point
             if (!isAgeable)
                 return;
@@ -181,6 +178,15 @@ public class FarmingExperienceListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onGrow(BlockGrowEvent event) {
         ChunkUtil.markBlockSkillValid(event.getBlock());
+    }
+
+    /**
+     * When a structure grows, (like a tree), mark all blocks as skill valid.
+     */
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onStructureGrow(StructureGrowEvent event) {
+        for (var block : event.getBlocks())
+            ChunkUtil.markBlockSkillValid(block.getBlock());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)

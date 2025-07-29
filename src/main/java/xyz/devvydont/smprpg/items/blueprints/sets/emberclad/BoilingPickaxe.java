@@ -35,19 +35,7 @@ import xyz.devvydont.smprpg.util.items.AbilityUtil;
 
 import java.util.*;
 
-public class BoilingPickaxe extends CustomAttributeItem implements Listener, IHeaderDescribable, IBreakableEquipment, ICraftable {
-
-    public static final Map<Material, Material> autoSmeltMap = new HashMap<>();
-
-    static {
-        autoSmeltMap.put(Material.RAW_GOLD, Material.GOLD_INGOT);
-        autoSmeltMap.put(Material.RAW_IRON, Material.IRON_INGOT);
-        autoSmeltMap.put(Material.RAW_COPPER, Material.COPPER_INGOT);
-        autoSmeltMap.put(Material.COBBLESTONE, Material.STONE);
-        autoSmeltMap.put(Material.COBBLED_DEEPSLATE, Material.DEEPSLATE);
-        autoSmeltMap.put(Material.SAND, Material.GLASS);
-        autoSmeltMap.put(Material.CLAY_BALL, Material.BRICK);
-    }
+public class BoilingPickaxe extends CustomAttributeItem implements IHeaderDescribable, IBreakableEquipment, ICraftable {
 
     public BoilingPickaxe(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -99,36 +87,6 @@ public class BoilingPickaxe extends CustomAttributeItem implements Listener, IHe
     @Override
     public int getMaxDurability() {
         return 50_000;
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBreakSmeltableBlock(BlockDropItemEvent event) {
-
-        if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.AIR))
-            return;
-
-        if (!isItemOfType(event.getPlayer().getInventory().getItemInMainHand()))
-            return;
-
-        // We broke a block with this pickaxe. Replace any items that need to be smelted
-        for (Item drop : event.getItems()) {
-
-            ItemStack itemstack = drop.getItemStack();
-            SMPItemBlueprint blueprint = itemService.getBlueprint(itemstack);
-            if (blueprint.isCustom())
-                continue;
-
-            Material smeltedMaterial = autoSmeltMap.get(itemstack.getType());
-            if (smeltedMaterial == null)
-                continue;
-
-            // Transform the item stack.
-            ItemStack updatedItem = itemstack.withType(smeltedMaterial);
-            blueprint = itemService.getBlueprint(updatedItem);
-            blueprint.updateItemData(updatedItem);
-            drop.setItemStack(updatedItem);
-        }
-
     }
 
     @Override

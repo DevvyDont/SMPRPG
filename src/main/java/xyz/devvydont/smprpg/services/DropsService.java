@@ -164,6 +164,44 @@ public class DropsService implements IService, Listener {
     }
 
     /**
+     * Transfers loot flags from an item to an item entity that holds the item.
+     * This is useful as we want to hold loot data for as little time as possible on ItemStack instances, but it's fine
+     * to keep them on Item entities. With it set up this way, we can read owner/loot data from item entities so
+     * that we don't mess with any item stacking behavior on pickup.
+     * @param item The item to transfer tags to. The item stack on the entity will be used.
+     */
+    public void transferLootFlags(Item item) {
+
+        // Transfer owner.
+        removeOwner(item);
+        item.setOwner(null);
+        var owner = getOwner(item.getItemStack());
+        if (owner != null) {
+            var player = Bukkit.getPlayer(owner);
+            if (player != null) {
+                setOwner(item, player);
+                item.setOwner(owner);
+                item.setCanMobPickup(false);
+            }
+        }
+
+        var timestamp = getExpiryTimestamp(item.getItemStack());
+        if (timestamp != 0) {
+            setExpiryTimestamp(item, timestamp);
+            item.setUnlimitedLifetime(true);  // Expiry set items expire when we tell them to.
+        }
+
+        var flag = getFlag(item.getItemStack());
+        if (flag != DropFlag.NULL) {
+            setFlag(item, flag);
+            item.setInvulnerable(true);  // Loot tagged items cannot die.
+        }
+
+        // Wipe item stack data.
+        removeAllTags(item.getItemStack());
+    }
+
+    /**
      * Adds the necessary flags to this item that makes it behave like standard death drops, with delayed item deletion and
      * loot drop owning.
      * @param item The item to tag.
@@ -345,18 +383,8 @@ public class DropsService implements IService, Listener {
                         continue;
                     }
 
-                    // If it hasn't expired yet, update the name of the item
-                    String rawName = getOwnerName(item);
-                    if (rawName == null)
-                        rawName = "???";
-
-                    var now = System.currentTimeMillis();
-                    long expiresAt = getExpiryTimestamp(item);
-                    var name = ComponentUtils.create(" (" + rawName + ")", NamedTextColor.DARK_GRAY);
-                    var timeleft = stringifyTime((expiresAt - now) / 1000);
-                    var time = ComponentUtils.create(" (" + timeleft + ")", NamedTextColor.DARK_GRAY);
-                    var itemName = SMPRPG.getService(ItemService.class).getBlueprint(item.getItemStack()).getNameComponent(item.getItemStack());
-                    item.customName(time.append(itemName).append(name.decoration(TextDecoration.OBFUSCATED, false)));
+                    var itemName = generateItemName(item);
+                    item.customName(itemName);
                 }
 
                 // Simple. Delete any items in the queue.
@@ -436,6 +464,44 @@ public class DropsService implements IService, Listener {
     }
 
     /**
+     * Generates the name component for an item for how it should display as a nametag over an item entity.
+     * The difference with this and normal item names, is that this includes stack size.
+     * @param item The item.
+     * @return A reusable component.
+     */
+    private Component generateItemName(Item item) {
+
+
+        // Time left?
+        var timeLeftComponent = ComponentUtils.EMPTY;
+        if (hasExpiryTimestamp(item)) {
+            var now = System.currentTimeMillis();
+            long expiresAt = getExpiryTimestamp(item);
+            var secLeft = (expiresAt - now) / 1000;
+            var timeleft = stringifyTime(secLeft);
+            timeLeftComponent = ComponentUtils.create(" (" + timeleft + ") ", secLeft <= 300 ? NamedTextColor.RED : NamedTextColor.DARK_GRAY);
+        }
+
+        var blueprint = ItemService.blueprint(item.getItemStack());
+
+        // Multiple items?
+        var stack = ComponentUtils.create(item.getItemStack().getAmount() + "x", NamedTextColor.GRAY);
+        if (item.getItemStack().getAmount() == 1)
+            stack = ComponentUtils.EMPTY;
+
+        // Owner?
+        var owner = getOwnerName(item);
+        var ownerComponent = owner != null ? ComponentUtils.create(String.format(" (%s)", owner), NamedTextColor.DARK_GRAY) : ComponentUtils.EMPTY;
+
+        return ComponentUtils.merge(
+                timeLeftComponent,
+                stack,
+                blueprint.getNameComponent(item.getItemStack()),
+                ownerComponent
+        );
+    }
+
+    /**
      * When players roll for a drop, consider their luck stat as a factor for an item
      *
      * @param event
@@ -455,8 +521,6 @@ public class DropsService implements IService, Listener {
 
     /**
      * When a player dies, mark all their items as being owned by them
-     *
-     * @param event
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void __onPlayerDeath(PlayerDeathEvent event) {
@@ -480,11 +544,12 @@ public class DropsService implements IService, Listener {
      * When an item spawns into the world, check if it is owned by someone
      * and transfer the PDC value over to the item entity
      * Also add rarity glow to the item
-     *
-     * @param event
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     private void __onItemSpawn(ItemSpawnEvent event) {
+
+        // Right away, transfer loot flags to the item entity.
+        transferLootFlags(event.getEntity());
 
         // Set the rarity glow of the item
         event.getEntity().setGlowing(true);
@@ -500,42 +565,16 @@ public class DropsService implements IService, Listener {
         if (rarity.ordinal() >= ItemRarity.RARE.ordinal())
             event.getEntity().setInvulnerable(true);
 
-        // Set who owns the item based on previous tag setting
-        var owner = getOwner(item);
+        var name = generateItemName(event.getEntity());
 
-        // No owner means we do nothing
-        if (owner == null)
-            return;
-
-        // Tag the end of the display name to display the owner's name
-        var p = Bukkit.getPlayer(owner);
-        var name = event.getEntity().customName();
-        if (p == null || name == null)
-            return;
-
-        // Transfer ownership to the item entity, add their name to it, and make it unbreakable
-        event.getEntity().setOwner(owner);
-        event.getEntity().setCanMobPickup(false);
-        event.getEntity().setInvulnerable(true);
-
-        // Only use a name tag for uncommon and better items.
         var nameVisible = rarity.ordinal() >= ItemRarity.UNCOMMON.ordinal();
         if (nameVisible)
-            event.getEntity().customName(name.append(ComponentUtils.create(" (" + p.getName() + ")", NamedTextColor.DARK_GRAY)));
+            event.getEntity().customName(name);
         event.getEntity().setCustomNameVisible(nameVisible);
-
-        // Items expire when we tell them to, so let bukkit never decide for us
-        event.getEntity().setUnlimitedLifetime(true);
-        setExpiryTimestamp(event.getEntity(), getExpiryTimestamp(item));
-        setOwner(event.getEntity(), p);
 
         // If this is a drop and the rarity is above rare, add the firework task
         if (getFlag(item).equals(DropFlag.LOOT) && rarity.ordinal() >= ItemRarity.RARE.ordinal())
             DropFireworkTask.start(event.getEntity());
-
-        // Now that we successfully transferred ItemStack -> Item entity data, we can clear the flags on the itemstack
-        removeAllTags(item);
-        event.getEntity().setItemStack(item);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -649,12 +688,13 @@ public class DropsService implements IService, Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     private void __onBlockDroppedItemEvent(BlockDropItemEvent event) {
 
-        // Tag all the drops as loot drops
+        // Tag all the drops as loot drops. Since we are given item entities, we need to .
         for (Item itemEntity : event.getItems()) {
             ItemStack item = itemEntity.getItemStack();
             SMPRPG.getService(ItemService.class).ensureItemStackUpdated(item);
             addDefaultLootFlags(item, event.getPlayer());
-            itemEntity.setItemStack(item);
+            transferLootFlags(itemEntity);
+            itemEntity.customName(generateItemName(itemEntity));
         }
     }
 
@@ -744,7 +784,7 @@ public class DropsService implements IService, Listener {
 
         if (getOwner(event.getItem()) != null)
             event.setCancelled(true);
-        
+
         if (event.getItem().getOwner() != null)
             event.setCancelled(true);
 

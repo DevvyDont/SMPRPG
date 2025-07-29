@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.util.world;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.metadata.FixedMetadataValue;
 import xyz.devvydont.smprpg.SMPRPG;
 
@@ -35,6 +36,15 @@ public class ChunkUtil {
      * @return
      */
     public static boolean isBlockSkillInvalid(Block block) {
+        return block.hasMetadata(SKILL_INVALID_TAG);
+    }
+
+    /**
+     * Given a block, determine if it is not allowed to earn experience when broken.
+     * @param block The block state to query.
+     * @return true if it is not valid to award skill experience.
+     */
+    public static boolean isBlockSkillInvalid(BlockState block) {
         return block.hasMetadata(SKILL_INVALID_TAG);
     }
 
