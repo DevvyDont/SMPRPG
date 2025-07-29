@@ -9,6 +9,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
@@ -119,10 +120,14 @@ public class ReplenishingBlessing extends CustomEnchantment implements Listener 
         var passThreshold = getReplantChance(enchLevel);
         Block block = event.getBlock();
         BlockData data = block.getBlockData();
+        var blockMat = data.getPlacementMaterial();
         if (data instanceof Ageable) {
             Ageable ageable = (Ageable) data;
             if (ageable.getAge() != ageable.getMaximumAge()) {
-                event.setCancelled(true);
+                switch (blockMat) {
+                    case Material.BAMBOO: case Material.SUGAR_CANE: break;
+                    default: event.setCancelled(true); break;
+                }
                 return;
             }
 
