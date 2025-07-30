@@ -288,6 +288,13 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
      */
     public void wipe() {
 
+        cleanupBrainTickTask();
+        cleanupScoreboard();
+        if (bossBar != null) {
+            bossBar.removeViewer(Audience.audience(Bukkit.getOnlinePlayers()));
+        }
+        bossBar = null;
+
         // If the entity is already removed, we prob already did this.
         if (!_entity.isValid())
             return;
@@ -308,7 +315,6 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         for (Player p : Bukkit.getOnlinePlayers())
             p.playSound(p.getLocation(), Sound.ENTITY_WARDEN_SONIC_BOOM, 1, .1f);
 
-        cleanupBrainTickTask();
         _entity.remove();
     }
 

@@ -25,7 +25,7 @@ public class StabilizedEnchantment extends CustomEnchantment implements Listener
     }
 
     public static int getPercentageIncrease(int level) {
-        return BlessedEnchantment.getPercentageIncrease(level);
+        return (int) (BlessedEnchantment.getPercentageIncrease(level) * 1.5);
     }
 
     @Override

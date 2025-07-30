@@ -1,34 +1,17 @@
 package xyz.devvydont.smprpg.entity.bosses;
 
 import com.destroystokyo.paper.event.entity.EnderDragonFireballHitEvent;
-import io.papermc.paper.datacomponent.DataComponentType;
-import io.papermc.paper.entity.LookAnchor;
-import io.papermc.paper.entity.TeleportFlag;
-import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.util.TriState;
 import org.bukkit.*;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.util.BoundingBox;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -37,19 +20,18 @@ import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
+import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
 import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
+import xyz.devvydont.smprpg.util.particles.ParticleUtil;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
-public class LeveledDragon extends BossInstance<EnderDragon> {
+public class LeveledDragon extends BossInstance<EnderDragon> implements Listener {
 
     /**
      * A number from 0-.9999 that determines how intense crystal placement luck is at first.
@@ -71,6 +53,8 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
     public void setup() {
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
+        this.updateBaseAttribute(AttributeWrapper.KNOCKBACK_RESISTANCE, 100);
+        this.updateBaseAttribute(AttributeWrapper.REGENERATION, 5);
     }
 
     @Override
@@ -184,6 +168,56 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
                 new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 1, 3, this),
                 new QuantityLootDrop(ItemService.generate(CustomItemType.ENDERIOS), 1, 2, this)
         );
+    }
+
+    @Override
+    public void wipe() {
+
+        var battle = _entity.getWorld().getEnderDragonBattle();
+        if (battle != null) {
+            battle.generateEndPortal(true);
+            battle.resetCrystals();
+        }
+
+        super.wipe();
+    }
+
+    /**
+     * When we take damage and there's still crystals up, give us some reduction.
+     * @param event
+     */
+    @EventHandler
+    public void onDamageReceivedWhileCrystalsActive(CustomEntityDamageByEntityEvent event) {
+
+        if (!(event.getDamaged().equals(_entity)))
+            return;
+
+        var dragonBattle = _entity.getWorld().getEnderDragonBattle();
+        if (dragonBattle == null)
+            return;
+
+        updateBaseAttribute(AttributeWrapper.DEFENSE, dragonBattle.getHealingCrystals().size() * 150);
+
+        for (var crystal : dragonBattle.getHealingCrystals())
+            ParticleUtil.spawnParticlesBetweenTwoPoints(Particle.SOUL_FIRE_FLAME, crystal.getWorld(), crystal.getLocation().toVector(), _entity.getLocation().toVector(), 100);
+    }
+
+    /**
+     * When we take damage and there's still crystals up, give us some reduction.
+     * @param event
+     */
+    @EventHandler
+    public void onHealWithCrystalsActive(EntityRegainHealthEvent event) {
+
+        if (!(event.getEntity().equals(_entity)))
+            return;
+
+        var dragonBattle = _entity.getWorld().getEnderDragonBattle();
+        if (dragonBattle == null)
+            return;
+
+        updateBaseAttribute(AttributeWrapper.DEFENSE, dragonBattle.getHealingCrystals().size() * 150);
+        event.setAmount(dragonBattle.getHealingCrystals().size() * 500);
     }
 
 }

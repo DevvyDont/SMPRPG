@@ -16,7 +16,7 @@ public class HealthRegenerationListener extends ToggleableListener {
 
     public boolean isNaturalRegeneration(EntityRegainHealthEvent.RegainReason regainReason) {
         return switch (regainReason) {
-            case REGEN, SATIATED, MAGIC_REGEN -> true;
+            case REGEN, SATIATED, MAGIC_REGEN, ENDER_CRYSTAL -> true;
             default -> false;
         };
     }

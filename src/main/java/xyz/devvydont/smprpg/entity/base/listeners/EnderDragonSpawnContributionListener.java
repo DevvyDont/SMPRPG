@@ -165,6 +165,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
 
         dragon.setSummoned(true);
         dragon.setConfiguration(dragon.getDefaultConfiguration());
+        dragon.heal();
 
         // Contribute some chance boosting for the crystals we have. Clear out the crystals once we are done!
         // We are also using a formula here that discourages solo spawning the dragon. You lose out on drop odds w/ mass crystal placing.
@@ -177,7 +178,6 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             if (Bukkit.getPlayer(id) != null && !spawners.contains(Bukkit.getPlayer(id)))
                 spawners.add(Bukkit.getPlayer(id));
         dragon.broadcastSpawnedByPlayers(spawners);
-
         crystalPlacers.clear();
     }
 
@@ -316,8 +316,8 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             nearbyPlayers.sendMessage(ComponentUtils.alert(ComponentUtils.merge(
                     SMPRPG.getService(ChatService.class).getPlayerDisplay(event.getPlayer()),
                     ComponentUtils.SPACE,
-                    ComponentUtils.create("has placed an "),
-                    ComponentUtils.create("End Crystal", NamedTextColor.LIGHT_PURPLE),
+                    ComponentUtils.create("has placed a "),
+                    ComponentUtils.create("Summoning Crystal", NamedTextColor.LIGHT_PURPLE),
                     ComponentUtils.create("! "),
                     ComponentUtils.create("[" + total + "/8]", NamedTextColor.GOLD)
             ), NamedTextColor.LIGHT_PURPLE));
