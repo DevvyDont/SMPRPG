@@ -63,7 +63,7 @@ public class LootingEnchantment extends VanillaEnchantment implements Listener {
 
     @Override
     public int getMaxLevel() {
-        return 10;
+        return 5;
     }
 
     @Override
