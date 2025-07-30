@@ -494,7 +494,7 @@ public enum CustomItemType {
     PHANTOM_CURRY("Phantom Curry", Material.RAW_COPPER, ItemRarity.COMMON, PhantomCurry.class),
     SHADOW_BREW("Shadow Brew", Material.FIREWORK_STAR, ItemRarity.COMMON, ShadowBrew.class),
     CHILI_PEPPER("Chili Pepper", Material.GOLDEN_CARROT, ItemRarity.COMMON, ChiliPepper.class),
-    ENDERIOS("Enderios", Material.ECHO_SHARD, ItemRarity.COMMON, EnderiosBlueprint.class),
+    ENDERIOS("Enderios", Material.DISC_FRAGMENT_5, ItemRarity.COMMON, EnderiosBlueprint.class),
     BREADBOARD("Breadboard", Material.IRON_TRAPDOOR, ItemRarity.COMMON, BreadboardBlueprint.class),
     CHARRED_CRISP("Charred Crisp", Material.DRIED_KELP, ItemRarity.COMMON, CharredCrispBlueprint.class),
 
