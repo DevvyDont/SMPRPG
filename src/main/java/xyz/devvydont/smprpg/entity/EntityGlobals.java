@@ -133,7 +133,7 @@ public class EntityGlobals {
             case BREEZE -> 25;
             case BOGGED -> 25;
 
-            case SHULKER -> 50;
+            case SHULKER -> 55;
             case ENDER_DRAGON -> 40;
             case WITHER -> 30;
 
