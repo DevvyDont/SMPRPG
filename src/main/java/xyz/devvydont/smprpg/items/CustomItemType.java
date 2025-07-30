@@ -307,7 +307,7 @@ public enum CustomItemType {
     PROTOCOL_CHESTPLATE("Protocol 781-A Chestplate", Material.IRON_CHESTPLATE,ItemRarity.EPIC, ProtocolArmorSet.class),
     PROTOCOL_LEGGINGS(  "Protocol 781-A Leggings",   Material.IRON_LEGGINGS,  ItemRarity.EPIC, ProtocolArmorSet.class),
     PROTOCOL_BOOTS(     "Protocol 781-A Boots",      Material.IRON_BOOTS,     ItemRarity.EPIC, ProtocolArmorSet.class),
-    DISPLACEMENT_MATRIX("Displacement Matrix",      Material.NETHER_STAR,     ItemRarity.RARE),
+    DISPLACEMENT_MATRIX("Displacement Matrix",      Material.NETHER_STAR,     ItemRarity.RARE, true, 60_000),
     WARP_CATALYST("Warp Catalyst", ItemRarity.EPIC, WarpCatalyst.class),
 
     // ELDERFLAME
@@ -682,6 +682,7 @@ public enum CustomItemType {
     DRAGON_SCALES(   "Dragon Scales",    Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true),
     DRACONIC_CRYSTAL("Draconic Crystal", ItemRarity.EPIC, DraconicCrystal.class),
     TRANSMISSION_WAND("Transmission Wand", Material.PRISMARINE_SHARD, ItemRarity.EPIC, TransmissionWand.class),
+    MAGIC_MIRROR("Magic Mirror", Material.RECOVERY_COMPASS, ItemRarity.EPIC, MagicMirror.class),
 
     SUMMONING_CRYSTAL("Summoning Crystal", Material.END_CRYSTAL, ItemRarity.EPIC, true, 50_000),
 
