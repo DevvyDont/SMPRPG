@@ -24,15 +24,15 @@ public class WitheredReforge extends ReforgeBase implements Listener {
 
     public static float getDamageBuff(ItemRarity rarity) {
         return switch (rarity) {
-            case COMMON -> .20f;
-            case UNCOMMON -> .25f;
-            case RARE -> .30f;
-            case EPIC -> .35f;
-            case LEGENDARY -> .40f;
-            case MYTHIC -> .50f;
-            case DIVINE -> .55f;
-            case TRANSCENDENT -> .60f;
-            case SPECIAL -> .70f;
+            case COMMON -> .4f;
+            case UNCOMMON -> .45f;
+            case RARE -> .5f;
+            case EPIC -> .55f;
+            case LEGENDARY -> .65f;
+            case MYTHIC -> .7f;
+            case DIVINE -> .75f;
+            case TRANSCENDENT -> .75f;
+            case SPECIAL -> .75f;
         };
     }
 
@@ -56,9 +56,9 @@ public class WitheredReforge extends ReforgeBase implements Listener {
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBuff(rarity)),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getDamageBuff(rarity)*80),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, getDamageBuff(rarity)*40),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .12f)
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 2 + rarity.ordinal() * 2),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, 2 + rarity.ordinal() * 2),
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .10f)
         );
     }
 

@@ -31,23 +31,6 @@ public class SharpnessEnchantment extends VanillaEnchantment implements Attribut
         super(key);
     }
 
-    public static int getDamageIncrease(int level) {
-        return switch (level) {
-            case 0 -> 0;
-            case 1 -> 10;
-            case 2 -> 20;
-            case 3 -> 30;
-            case 4 -> 40;
-            case 5 -> 50;
-            case 6 -> 65;
-            case 7 -> 80;
-            case 8 -> 95;
-            case 9 -> 125;
-            case 10 -> 150;
-            default -> getDamageIncrease(10) + 50 * (level-10);
-        };
-    }
-
     @Override
     public AttributeModifierType getAttributeModifierType() {
         return AttributeModifierType.ENCHANTMENT;
@@ -56,7 +39,7 @@ public class SharpnessEnchantment extends VanillaEnchantment implements Attribut
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getDamageIncrease(getLevel()))
+                AttributeEntry.multiplicative(AttributeWrapper.STRENGTH, getLevel() * 10 / 100.0)
         );
     }
 
@@ -73,14 +56,14 @@ public class SharpnessEnchantment extends VanillaEnchantment implements Attribut
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases base damage by "),
-            ComponentUtils.create("+" + getDamageIncrease(getLevel()), NamedTextColor.GREEN)
+            ComponentUtils.create("Increases damage by "),
+            ComponentUtils.create("+" + getLevel() * 10 + "%", NamedTextColor.GREEN)
         );
     }
 
     @Override
     public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_SHARP_WEAPON;
+        return ItemTypeTagKeys.ENCHANTABLE_WEAPON;
     }
 
     @Override

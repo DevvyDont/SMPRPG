@@ -48,7 +48,7 @@ public class DraconicCrystal extends CustomItemBlueprint implements ICraftable, 
                 "sss"
         );
         recipe.setIngredient('s', itemService.getCustomItem(CustomItemType.DRAGON_SCALES));
-        recipe.setIngredient('d', itemService.getCustomItem(Material.DIAMOND));
+        recipe.setIngredient('d', itemService.getCustomItem(CustomItemType.ENCHANTED_DIAMOND));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
     }

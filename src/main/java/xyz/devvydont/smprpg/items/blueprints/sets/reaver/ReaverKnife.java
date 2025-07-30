@@ -47,7 +47,7 @@ public class ReaverKnife extends CustomAttributeItem implements IBreakableEquipm
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)),
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)-10),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.4)
         );
     }

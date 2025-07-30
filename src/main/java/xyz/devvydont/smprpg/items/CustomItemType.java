@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.items.blueprints.food.*;
 import xyz.devvydont.smprpg.items.blueprints.misc.DeathCertificate;
 import xyz.devvydont.smprpg.items.blueprints.misc.MossySkull;
 import xyz.devvydont.smprpg.items.blueprints.potion.ExperienceBottle;
+import xyz.devvydont.smprpg.items.blueprints.reforge.VoidRelic;
 import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DraconicCrystal;
@@ -315,6 +316,7 @@ public enum CustomItemType {
     ELDERFLAME_LEGGINGS(  "Elderflame Leggings",   Material.NETHERITE_LEGGINGS,  ItemRarity.LEGENDARY, ElderflameLeggings.class),
     ELDERFLAME_BOOTS(     "Elderflame Boots",      Material.LEATHER_BOOTS,       ItemRarity.LEGENDARY, ElderflameBoots.class),
     ELDERFLAME_DAGGER("Elderflame Dagger", Material.DIAMOND_SWORD, ItemRarity.LEGENDARY, ElderflameDagger.class),
+    VOID_RELIC("Void Relic", ItemRarity.LEGENDARY, VoidRelic.class),
 
     // ARAXYS SET
     ARAXYS_HELMET("Araxys Helmet",         Material.SPAWNER,              ItemRarity.EPIC, AraxysHelmet.class),

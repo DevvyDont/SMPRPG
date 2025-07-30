@@ -60,8 +60,9 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)+10),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.3)
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.NETHERITE_SWORD)),
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.35),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 10)
         );
     }
 

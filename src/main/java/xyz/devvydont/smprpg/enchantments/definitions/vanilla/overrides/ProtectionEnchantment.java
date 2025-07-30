@@ -30,17 +30,17 @@ public class ProtectionEnchantment extends VanillaEnchantment implements Attribu
     public static int getProtection(int level) {
         return switch (level) {
             case 0 -> 0;
-            case 1 -> 10;
-            case 2 -> 20;
-            case 3 -> 30;
-            case 4 -> 45;
-            case 5 -> 60;
-            case 6 -> 75;
-            case 7 -> 90;
-            case 8 -> 105;
-            case 9 -> 125;
-            case 10 -> 150;
-            default -> getProtection(10) + 25*(level - 10);
+            case 1 -> 5;
+            case 2 -> 10;
+            case 3 -> 15;
+            case 4 -> 20;
+            case 5 -> 30;
+            case 6 -> 40;
+            case 7 -> 50;
+            case 8 -> 65;
+            case 9 -> 80;
+            case 10 -> 100;
+            default -> getProtection(10) + 50*(level - 10);
         };
     }
 
