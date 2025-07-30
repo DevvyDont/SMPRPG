@@ -97,8 +97,9 @@ public enum ReforgeType {
 
     // META reforges, only dropped from rare drops
     ACCELERATED(AcceleratedReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.CHARM),  // MAX Movement Speed
-    WITHERED(WitheredReforge.class, ItemClassification.SWORD, ItemClassification.AXE, ItemClassification.BOW, ItemClassification.CROSSBOW, ItemClassification.SHORTBOW, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.TOOL, ItemClassification.CHARM),  // MAX Movement Speed
+    WITHERED(WitheredReforge.class, ItemClassification.SWORD, ItemClassification.AXE, ItemClassification.BOW, ItemClassification.CROSSBOW, ItemClassification.SHORTBOW, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.TOOL, ItemClassification.CHARM),
     OVERHEATING(OverheatingReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.CHARM),
+    CRYSTALLIZED(CrystallizedReforge.class, ItemClassification.SWORD, ItemClassification.AXE, ItemClassification.BOW, ItemClassification.CROSSBOW, ItemClassification.SHORTBOW, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.TOOL, ItemClassification.CHARM),
 //    OVERCLOCKED(UnimplementedReforge.class, ItemClassification.TOOL, ItemClassification.PICKAXE, ItemClassification.HOE),  // MAX Dig speed
 //    EPHEMERAL(UnimplementedReforge.class, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE),    // MAX Attack Speed
 //    IMMORTAL(UnimplementedReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS),     // MAX DEF armor
