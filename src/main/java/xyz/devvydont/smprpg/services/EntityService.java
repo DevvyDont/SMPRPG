@@ -184,6 +184,7 @@ public class EntityService implements IService, Listener {
         // Are we using the vanilla handler? (We don't have a custom class setup for this vanilla type)
         if (!vanillaEntityHandlers.containsKey(entity.getType())) {
             ret = new VanillaEntity<>(entity);
+            ret.setup();
             ret.updateAttributes();
             trackEntity(ret);
             return ret;
@@ -194,12 +195,14 @@ public class EntityService implements IService, Listener {
         try {
             var clazz = entity.getType().getEntityClass();
             ret = handler.getConstructor(clazz).newInstance(entity);
+            ret.setup();
             ret.updateAttributes();
             trackEntity(ret);
             return ret;
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
             SMPRPG.getInstance().getLogger().severe(String.format("Failed to instantiate vanilla class handler %s for entity type %s. Ensure that a constructor exists using the %s class as a parameter.", handler.getName(), entity.getType(), entity.getType().getEntityClass()));
             ret =  new VanillaEntity<>(entity);
+            ret.setup();
             ret.updateAttributes();
             trackEntity(ret);
             return ret;
@@ -224,6 +227,7 @@ public class EntityService implements IService, Listener {
         // Is this a player? We use a pretty barebones instance for players for least amount of interference possible
         if (entity instanceof Player player) {
             LeveledPlayer leveledPlayer = new LeveledPlayer(SMPRPG.getInstance(), player);
+            leveledPlayer.setup();
             trackEntity(leveledPlayer);
             return leveledPlayer;
         }
@@ -241,12 +245,14 @@ public class EntityService implements IService, Listener {
         // Custom entities must be LivingEntity. If they aren't, we have to use reflection. This isn't ideal.
         if (!(entity instanceof LivingEntity living)) {
             var normalEntity = type.create(entity);
+            normalEntity.setup();
             trackEntity(normalEntity);
             return normalEntity;
         }
 
         // Create an instance of the handler and track it.
         var leveled = type.create(living);
+        leveled.setup();
         trackEntity(leveled);
         return leveled;
     }
@@ -261,33 +267,18 @@ public class EntityService implements IService, Listener {
 
         // Spawn the vanilla entity to attach the wrapper to.
         var entity = location.getWorld().spawnEntity(location, type.Type, CreatureSpawnEvent.SpawnReason.CUSTOM, e -> {
+            if (e instanceof LivingEntity living && living.getEquipment() != null) {
+                living.getEquipment().setItemInMainHand(null);
+                living.getEquipment().setItemInOffHand(null);
+                living.getEquipment().setHelmet(null);
+                living.getEquipment().setChestplate(null);
+                living.getEquipment().setLeggings(null);
+                living.getEquipment().setBoots(null);
+            }
+
             e.getPersistentDataContainer().set(getClassNamespacedKey(), PersistentDataType.STRING, type.key());
         });
-
-        // If this entity has equipment, completely remove it. Our custom entities need to define their own items.
-        if (entity instanceof LivingEntity living && living.getEquipment() != null) {
-            living.getEquipment().setItemInMainHand(null);
-            living.getEquipment().setItemInOffHand(null);
-            living.getEquipment().setHelmet(null);
-            living.getEquipment().setChestplate(null);
-            living.getEquipment().setLeggings(null);
-            living.getEquipment().setBoots(null);
-        }
-
-        // Custom entities must be LivingEntity. If they aren't, we have to use reflection. This isn't ideal.
-        if (!(entity instanceof LivingEntity living)) {
-            var normalEntity = type.create(entity);
-            normalEntity.setup();
-            trackEntity(normalEntity);
-            return normalEntity;
-        }
-
-        // Create an instance of the handler and track it.
-        var leveled = type.create(living);
-        leveled.setup();
-        leveled.updateAttributes();
-        trackEntity(leveled);
-        return leveled;
+        return getEntityInstance(entity);
     }
 
     /**
@@ -308,7 +299,6 @@ public class EntityService implements IService, Listener {
         entityInstances.put(entity.getEntity().getUniqueId(), entity);
         if (entity instanceof Listener listener)
             SMPRPG.getInstance().getServer().getPluginManager().registerEvents(listener, SMPRPG.getInstance());
-        entity.setup();
     }
 
     private void removeEntity(UUID uuid) {
@@ -328,6 +318,7 @@ public class EntityService implements IService, Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void __onEntitySpawnForTheFirstTime(CreatureSpawnEvent event) {
         var entity = getEntityInstance(event.getEntity());
+        entity.setup();
         trackEntity(entity);
         entity.resetLevel();
 
@@ -339,7 +330,6 @@ public class EntityService implements IService, Listener {
 
         // If this entity is holding/wearing anything, we need to fix their items to have proper stats
         var equipment = event.getEntity().getEquipment();
-        var plugin = SMPRPG.getInstance();
         if (equipment != null) {
             equipment.setHelmet(SMPRPG.getService(ItemService.class).ensureItemStackUpdated(equipment.getHelmet()));
             equipment.setChestplate(SMPRPG.getService(ItemService.class).ensureItemStackUpdated(equipment.getChestplate()));

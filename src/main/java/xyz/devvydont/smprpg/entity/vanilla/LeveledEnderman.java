@@ -55,15 +55,16 @@ public class LeveledEnderman extends VanillaEntity<Enderman> implements Listener
     public @Nullable Collection<LootDrop> getItemDrops() {
         List<LootDrop> drops = new java.util.ArrayList<>(List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 50, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 250, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_HELMET), 5000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_CHESTPLATE), 5000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_LEGGINGS), 5000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_BOOTS), 5000, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 250, this)
         ));
 
-        if (canDropCrystal())
+        if (canDropCrystal()) {
             drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.SUMMONING_CRYSTAL), 100, this));
+            drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_HELMET), 500, this));
+            drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_CHESTPLATE), 500, this));
+            drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_LEGGINGS), 500, this));
+            drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.UNSTABLE_BOOTS), 500, this));
+        }
 
         return drops;
     }

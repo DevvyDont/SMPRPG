@@ -482,6 +482,8 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     @Override
     public void setup() {
         super.setup();
+        cleanupBrainTickTask();
+        cleanupScoreboard();
         scoreboard = new SimpleGlobalScoreboard(cloneScoreboard(), getPowerComponent().append(ComponentUtils.SPACE).append(getNameComponent()));
         heal();
         bossBar = createBossBar();

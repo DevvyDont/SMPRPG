@@ -54,7 +54,6 @@ public class CommandSummon extends CommandBase {
                     executor.sendMessage(ComponentUtils.error("Failed to spawn a " + toSpawn + ". Check console for details"));
                     return;
                 }
-                entity.setup();
                 if (level >= 0)
                     entity.setLevel(level);
                 executor.sendMessage(ComponentUtils.success("Successfully spawned a " + toSpawn + " (lv. " + level + ")"));
