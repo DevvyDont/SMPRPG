@@ -28,7 +28,7 @@ public class PowerEnchantment extends VanillaEnchantment implements AttributeEnc
     }
 
     public static int getDamageIncrease(int level) {
-        return SharpnessEnchantment.getDamageIncrease(level);
+        return level * 10;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PowerEnchantment extends VanillaEnchantment implements AttributeEnc
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getDamageIncrease(getLevel()))
+                AttributeEntry.multiplicative(AttributeWrapper.STRENGTH, getDamageIncrease(getLevel()) / 100.0)
         );
     }
 
@@ -56,8 +56,8 @@ public class PowerEnchantment extends VanillaEnchantment implements AttributeEnc
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases base damage by "),
-            ComponentUtils.create("+" + getDamageIncrease(getLevel()), NamedTextColor.GREEN)
+            ComponentUtils.create("Increases damage by "),
+            ComponentUtils.create("+" + getDamageIncrease(getLevel()) + "%", NamedTextColor.GREEN)
         );
     }
 
