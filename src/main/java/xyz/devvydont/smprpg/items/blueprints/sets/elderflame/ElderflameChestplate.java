@@ -19,7 +19,7 @@ import java.util.List;
 public class ElderflameChestplate extends ElderflameArmorSet {
 
     public static final int DEFENSE = 300;
-    public static final int HEALTH = 200;
+    public static final int HEALTH = 150;
     public static final double STRENGTH = .75;
     public static final int CRIT = 25;
 

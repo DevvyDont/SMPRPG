@@ -648,7 +648,7 @@ public class DropsService implements IService, Listener {
             // Now test for coins
             // Some chance to add more money
             if (Math.random() < .2) {
-                var moneyItem = ItemUtil.getOptimalCoinStacks(SMPRPG.getService(ItemService.class), (int) (entity.getLevel() * (Math.random() * 3)));
+                var moneyItem = ItemUtil.getOptimalCoinStacks(SMPRPG.getService(ItemService.class), (int) (entity.getLevel() * 3 * (Math.random() * 3)));
                 for (var money : moneyItem)
                     addDefaultLootFlags(money, player);
                 event.getDrops().addAll(moneyItem);
