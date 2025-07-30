@@ -5,22 +5,26 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 public class DisintegratingEffect extends SpecialEffectTask {
 
     public static final int SECONDS = 30;
 
-    public static final int TIER_2_TICK_THRESHOLD = SECONDS / 3 * 20;
-    public static final int TIER_3_TICK_THRESHOLD = SECONDS / 3 * 2 * 20;
+    public static final int TIER_2_TICK_THRESHOLD = SECONDS / 3 * 10;
+    public static final int TIER_3_TICK_THRESHOLD = SECONDS / 3 * 2 * 10;
 
     private static final NamespacedKey MODIFIER_KEY = new NamespacedKey("smprpg", "disintegration");
 
@@ -38,7 +42,12 @@ public class DisintegratingEffect extends SpecialEffectTask {
 
     @Override
     public Component getNameComponent() {
-        return ComponentUtils.encrypt("DISINTEGRATING!", getTier() / 10f * 25).color(NamedTextColor.LIGHT_PURPLE).decoration(TextDecoration.BOLD, true);
+        var text = "DISINTEGRATING";
+        if (_ticks < TIER_2_TICK_THRESHOLD)
+            text = "CORRODING";
+        else if (_ticks < TIER_3_TICK_THRESHOLD)
+            text = "FRACTURING";
+        return ComponentUtils.encrypt(text, getTier() / 10f * 1.5).color(NamedTextColor.LIGHT_PURPLE).decoration(TextDecoration.BOLD, true);
     }
 
     @Override
@@ -79,7 +88,7 @@ public class DisintegratingEffect extends SpecialEffectTask {
 
         var tier = getTier();
         hpDrain += tier;
-        scaleDrain += .005 * tier;
+        scaleDrain += .002 * tier;
 
         new ParticleBuilder(Particle.PORTAL)
                 .location(getPlayer().getEyeLocation())
@@ -94,17 +103,34 @@ public class DisintegratingEffect extends SpecialEffectTask {
         if (_ticks == TIER_2_TICK_THRESHOLD)
             getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20*20, 0, true, true));
 
-        updateAttribute(Attribute.MAX_HEALTH, -hpDrain);
-        updateAttribute(Attribute.SCALE, -scaleDrain);
+        if (_ticks == TIER_3_TICK_THRESHOLD || _ticks == TIER_2_TICK_THRESHOLD) {
+            getPlayer().getWorld().playSound(getPlayer().getLocation(), Sound.BLOCK_GLASS_BREAK, 1, .5f);
+            new ParticleBuilder(Particle.FLASH)
+                    .location(getPlayer().getEyeLocation())
+                    .spawn();
+        }
 
         // Damage the player for whatever tier we are in.
         if (getPlayer().getHealth() > 1)
             getPlayer().setHealth(getPlayer().getHealth() - 1);
+
+        updateAttribute(Attribute.MAX_HEALTH, -hpDrain);
+        updateAttribute(Attribute.SCALE, -scaleDrain);
+
+        getPlayer().setHealthScale(SMPRPG.getService(EntityService.class).getPlayerInstance(getPlayer()).getHealthScale());
     }
 
     @Override
     protected void expire() {
         clearAttributes();
+        var ses = SMPRPG.getService(SpecialEffectService.class);
+        getPlayer().getWorld().playSound(getPlayer().getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 1, 1);
+        new ParticleBuilder(Particle.DRAGON_BREATH)
+                .location(getPlayer().getEyeLocation())
+                .offset(.1, .1, .1)
+                .count(5)
+                .spawn();
+        ses.giveEffect(getPlayer(), new HollowedEffect(ses, getPlayer(), 10));
     }
 
     @Override

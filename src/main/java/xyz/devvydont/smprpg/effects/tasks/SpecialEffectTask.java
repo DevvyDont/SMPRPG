@@ -117,9 +117,9 @@ public abstract class SpecialEffectTask extends BukkitRunnable {
 
         // If the task expired, remove this task
         if (seconds <= 0) {
-            expire();
             sendActionBar(-1);
             service.removeEffect(_player.getUniqueId());
+            expire();
             cancel();
             return;
         }

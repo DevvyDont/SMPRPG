@@ -151,9 +151,15 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
         if (specialEffectService.hasEffect(player))
             return;
 
-        if (event.getCause().equals(EntityDamageByEntityEvent.DamageCause.ENTITY_ATTACK) && event.getDamageSource().getCausingEntity() instanceof EnderDragon) {
-            specialEffectService.giveEffect(player, new DisintegratingEffect(specialEffectService, player, 30));
-        }
+        // Check if our entity was responsible for the damage.
+        if (!_entity.equals(event.getDamageSource().getCausingEntity()))
+            return;
+
+        // Check if the direct entity involved was the area effect cloud.
+        if (!(event.getDamageSource().getDirectEntity() instanceof AreaEffectCloud cloud))
+            return;
+
+        specialEffectService.giveEffect(player, new DisintegratingEffect(specialEffectService, player, DisintegratingEffect.SECONDS));
     }
 
     /**
