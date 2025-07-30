@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
@@ -130,7 +132,8 @@ public class EnvironmentalDamageListener extends ToggleableListener {
             return;
         }
 
-        event.setDamage(EntityDamageEvent.DamageModifier.BASE, entity.getHalfHeartValue() * getEnvironmentalDamagePercentage(event.getCause()));
+        var damage = entity.getHalfHeartValue() * getEnvironmentalDamagePercentage(event.getCause());
+        event.setDamage(EntityDamageEvent.DamageModifier.BASE, damage);
     }
 
     @EventHandler
@@ -190,5 +193,23 @@ public class EnvironmentalDamageListener extends ToggleableListener {
 
         if (shouldGiveIFrames(event.getCause()))
             Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> living.setNoDamageTicks(20), 0);
+    }
+
+    /**
+     * Ender pearl damage is considered an entity vs entity damage event. This is counter-intuitive, as you would think
+     * that ender pearling is environmental damage. This event overrides the damage that ender pearls deal.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void __onEnderPearlDealDamage(EntityDamageByEntityEvent event) {
+
+        // Only listen if the attacker is a pearl.
+        if (!(event.getDamager() instanceof EnderPearl pearl))
+            return;
+
+        // Since the damager is a pearl, we can pretty much guarantee this is a typical ender pearl event.
+        // Deal damage based on their max HP that falls in line with what you would see in vanilla.
+        var receiver = SMPRPG.getService(EntityService.class).getEntityInstance(event.getEntity());
+        var damage = receiver.getHalfHeartValue() * 3;
+        event.setDamage(damage);
     }
 }

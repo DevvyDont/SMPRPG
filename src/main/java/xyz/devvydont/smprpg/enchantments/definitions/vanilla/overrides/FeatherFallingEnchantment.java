@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -98,20 +99,5 @@ public class FeatherFallingEnchantment extends VanillaEnchantment implements Att
     @Override
     public int getPowerRating() {
         return getLevel()/5;
-    }
-
-    @EventHandler
-    public void onFallDamageTaken(EntityDamageEvent event) {
-
-        if (!(event.getEntity() instanceof LivingEntity living))
-            return;
-
-        int featherFallingLevel = EnchantmentUtil.getWornEnchantLevel(Enchantment.FEATHER_FALLING, living.getEquipment());
-        if (featherFallingLevel <= 0)
-            return;
-
-        double resist = 1 - getFallResistPercent(featherFallingLevel) / 100.0;
-        event.setDamage(EntityDamageEvent.DamageModifier.BASE, event.getDamage() * resist);
-        event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.BLOCK_WOOL_BREAK, 1, 1.5f);
     }
 }

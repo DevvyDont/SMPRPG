@@ -44,8 +44,9 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
     @Override
     public void updateAttributes() {
         super.updateAttributes();
-        this.updateBaseAttribute(AttributeWrapper.SCALE, 1.2);
-        this.updateBaseAttribute(AttributeWrapper.MOVEMENT_SPEED, .25);
+        this.updateBaseAttribute(AttributeWrapper.SCALE, 1.25);
+        this.updateBaseAttribute(AttributeWrapper.MOVEMENT_SPEED, .15);
+        this.updateBaseAttribute(AttributeWrapper.FOLLOW_RANGE, 3);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import io.papermc.paper.registry.keys.SoundEventKeys;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -18,10 +19,13 @@ import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.bosses.LeveledDragon;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -305,6 +309,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
                 return;
 
             crystalPlacers.put(event.getPlayer().getUniqueId(), crystal);
+            crystal.addScoreboardTag("summoning_crystal");
             var total = crystalPlacers.values().size();
             var nearbyPlayers = Audience.audience(event.getClickedBlock().getLocation().getNearbyPlayers(MESSAGE_RANGE));
 
@@ -335,5 +340,30 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             }, TickTime.seconds(1));
 
         }, TickTime.INSTANTANEOUSLY);
+    }
+
+    /**
+     * When a crystal does damage to a player, give them the special dragon effect as a little introduction to the mechanic.
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void __onCrystalDamagePlayer(EntityDamageByEntityEvent event) {
+
+        // Check if the entity causing damage is an end crystal.
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION))
+            return;
+
+        if (!(event.getDamager() instanceof EnderCrystal crystal))
+            return;
+
+        // We use the scoreboard tag system only to know if the exploding entity is a summoning crystal.
+        if (!crystal.getScoreboardTags().contains("summoning_crystal"))
+            return;
+
+        // Summoning crystal is dealing damage, let's turn it up a bit. Defense is applicable, so we can do quite a bit.
+        event.setDamage(2000);
+
+        // If it's a player, they disintegrate.
+        if (event.getEntity() instanceof Player player)
+            SMPRPG.getService(SpecialEffectService.class).giveEffect(player, new DisintegratingEffect(SMPRPG.getService(SpecialEffectService.class), player, DisintegratingEffect.SECONDS));
     }
 }

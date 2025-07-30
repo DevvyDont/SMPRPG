@@ -12,6 +12,10 @@ import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import xyz.devvydont.smprpg.SMPRPG;
@@ -19,7 +23,7 @@ import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public class DisintegratingEffect extends SpecialEffectTask {
+public class DisintegratingEffect extends SpecialEffectTask implements Listener {
 
     public static final int SECONDS = 30;
 
@@ -136,5 +140,16 @@ public class DisintegratingEffect extends SpecialEffectTask {
     @Override
     public void removed() {
         clearAttributes();
+    }
+
+    /**
+     * Any teleport event of any kind will clear the effect, pretty simple.
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void __onTeleport(PlayerTeleportEvent event) {
+        if (!event.getPlayer().equals(getPlayer()))
+            return;
+
+        SMPRPG.getService(SpecialEffectService.class).removeEffect(getPlayer());
     }
 }

@@ -331,7 +331,7 @@ public class ItemService implements IService, Listener {
         registerVanillaMaterialResolver(Material.ENCHANTED_BOOK, ItemEnchantedBook.class);
 
         registerVanillaMaterialResolver(Material.POTION, PotionBlueprint.class);
-        registerVanillaMaterialResolver(Material.ENDER_PEARL, PotionBlueprint.class);
+        registerVanillaMaterialResolver(Material.ENDER_PEARL, EnderPearlBlueprint.class);
 
         // Register vanilla items that should have a sell price.
         for (Map.Entry<Material, Integer> entry : VanillaResource.getMaterialWorthMap().entrySet()) {
