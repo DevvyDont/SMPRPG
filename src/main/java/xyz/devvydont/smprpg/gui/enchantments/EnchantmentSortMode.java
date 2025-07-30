@@ -38,7 +38,7 @@ public enum EnchantmentSortMode {
     public List<CustomEnchantment> sort(List<CustomEnchantment> enchantments) {
         switch (this) {
             case DEFAULT:
-                return new ArrayList<>(SMPRPG.getService(EnchantmentService.class).getCustomEnchantments());
+                return new ArrayList<>(SMPRPG.getService(EnchantmentService.class).getOrderedCustomEnchantments());
 
             case REQUIREMENT:
                 enchantments.sort((e1, e2) -> Comparator.comparingInt(CustomEnchantment::getSkillRequirement).compare(e1, e2));

@@ -113,7 +113,10 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment HARVESTING = new HarvestingEnchantment("harvesting");
     public final static CustomEnchantment REPLENISHING = new ReplenishingBlessing("replenishing");
 
-
+    /**
+     * Enchantments to register on the server. The order you define them here will affect the order that they
+     * are displayed on items, and the default sorting mode in the /enchantments interface.
+     */
     public final static CustomEnchantment[] CUSTOM_ENCHANTMENTS = {
 
             // Blessings
@@ -121,6 +124,7 @@ public class EnchantmentService implements IService, Listener {
             TELEKINESIS_BLESSING,
             MERCY_BLESSING,
             VOIDSTRIDING_BLESSING,
+            REPLENISHING,
 
             // Curses
             BINDING_CURSE,
@@ -165,7 +169,6 @@ public class EnchantmentService implements IService, Listener {
             FORTUNE,
             HARVESTING,
             FELLING,
-            REPLENISHING,
             FROST_WALKER,
             IMPALING,
             KNOCKBACK,
@@ -269,6 +272,20 @@ public class EnchantmentService implements IService, Listener {
      */
     public Collection<CustomEnchantment> getCustomEnchantments(ItemMeta meta) {
         return getCustomEnchantments(meta.getEnchants());
+    }
+
+    /**
+     * Returns all enchantments that are registered on the server in the order they were registered.
+     * This is mainly only used for displaying using the "default" sorting mode in the enchanting GUI.
+     * If you don't really care about the order, call {@link EnchantmentService#getCustomEnchantments()} instead.
+     * @return A sorted collection of enchantments.
+     */
+    public Collection<CustomEnchantment> getOrderedCustomEnchantments() {
+        var registered = new ArrayList<CustomEnchantment>();
+        for (var enchantment : CUSTOM_ENCHANTMENTS)
+            if (enchantments.containsKey(enchantment.getEnchantment()))
+                registered.add(enchantment);
+        return registered;
     }
 
     /**
