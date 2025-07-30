@@ -55,7 +55,8 @@ public class LeveledEnderman extends VanillaEntity<Enderman> implements Listener
     public @Nullable Collection<LootDrop> getItemDrops() {
         List<LootDrop> drops = new java.util.ArrayList<>(List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 50, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 250, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 250, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ENDERIOS), 4, this)
         ));
 
         if (canDropCrystal()) {

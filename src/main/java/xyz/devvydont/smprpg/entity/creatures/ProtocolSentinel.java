@@ -42,6 +42,7 @@ public class ProtocolSentinel extends CustomEntityInstance<IronGolem> implements
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BREADBOARD), 4, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_HELMET), 400, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_CHESTPLATE), 400, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_LEGGINGS), 400, this),

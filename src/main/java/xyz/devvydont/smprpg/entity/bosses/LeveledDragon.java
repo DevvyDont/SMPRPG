@@ -181,7 +181,8 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 50, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 5, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.SUMMONING_CRYSTAL), 150, this),
-                new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 1, 3, this)
+                new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 1, 3, this),
+                new QuantityLootDrop(ItemService.generate(CustomItemType.ENDERIOS), 1, 2, this)
         );
     }
 

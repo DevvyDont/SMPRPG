@@ -12,6 +12,7 @@ import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
+import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
@@ -52,6 +53,7 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.CHARRED_CRISP), 4, this),
                 new ChancedItemDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.OBSIDIAN), 5, this),
                 new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.BONE), 1, 2, this)
         );
