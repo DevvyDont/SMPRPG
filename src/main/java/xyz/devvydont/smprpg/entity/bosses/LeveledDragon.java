@@ -16,6 +16,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +30,10 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
@@ -137,6 +141,25 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void __onTakeCloudDamage(EntityDamageByEntityEvent event) {
+
+        if (!(event.getEntity() instanceof Player player))
+            return;
+
+        var specialEffectService = SMPRPG.getService(SpecialEffectService.class);
+        if (specialEffectService.hasEffect(player))
+            return;
+
+        if (event.getCause().equals(EntityDamageByEntityEvent.DamageCause.ENTITY_ATTACK) && event.getDamageSource().getCausingEntity() instanceof EnderDragon) {
+            specialEffectService.giveEffect(player, new DisintegratingEffect(specialEffectService, player, 30));
+        }
+    }
+
+    /**
+     * When putting drops here, consider the fact that crystal contribution makes a HUGE impact on drop luck.
+     * If someone places optimal crystals to summon, these odds are more or less slashed by a factor of 4.
+     */
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
@@ -145,12 +168,13 @@ public class LeveledDragon extends BossInstance<EnderDragon> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_LEGGINGS), 900, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_BOOTS), 850, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_DAGGER), 1000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.TRANSMISSION_WAND), 1500, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL), 500, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.TRANSMISSION_WAND), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL), 400, this),
                 new QuantityLootDrop(ItemService.generate(CustomItemType.DRAGON_SCALES), 1, 2, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL), 50, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 7, this),
-                new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 3, 7, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL), 5, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.SUMMONING_CRYSTAL), 150, this),
+                new QuantityLootDrop(ItemService.generate(Material.ENDER_PEARL), 1, 3, this)
         );
     }
 

@@ -63,7 +63,7 @@ public class LeveledEnderman extends VanillaEntity<Enderman> implements Listener
         ));
 
         if (canDropCrystal())
-            drops.add(new ChancedItemDrop(ItemService.generate(Material.END_CRYSTAL), 50, this));
+            drops.add(new ChancedItemDrop(ItemService.generate(CustomItemType.SUMMONING_CRYSTAL), 100, this));
 
         return drops;
     }

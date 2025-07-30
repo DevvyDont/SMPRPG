@@ -51,7 +51,7 @@ public class ReplenishingBlessing extends CustomEnchantment implements Listener 
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-                ComponentUtils.create("Crops will automatically replant on harvest.")
+                ComponentUtils.create("Crops are automatically replanted on harvest")
         );
     }
 

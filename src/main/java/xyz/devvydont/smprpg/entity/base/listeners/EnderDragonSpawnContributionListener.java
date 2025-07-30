@@ -24,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.bosses.LeveledDragon;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
+import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.services.DropsService;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -186,7 +188,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             if (entry.getValue().equals(event.getEntity())) {
 
                 // We found a crystal, it's tied to a player, and it's going to die. Itemize it.
-                var itemStack = ItemService.generate(Material.END_CRYSTAL);
+                var itemStack = ItemService.generate(CustomItemType.SUMMONING_CRYSTAL);
                 var player = Bukkit.getPlayer(entry.getKey());
                 if (player != null)
                     SMPRPG.getService(DropsService.class).addDefaultDeathFlags(itemStack, player);
@@ -252,6 +254,20 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
         var portal = battle.getEndPortalLocation();
         if (portal == null)
             return;
+
+        // We need a summoning crystal. Not a normal one!
+        var item = ItemService.blueprint(event.getItem());
+        if (!(item instanceof CustomItemBlueprint custom)) {
+            event.getPlayer().sendMessage(ComponentUtils.error("This isn't the right crystal! Try killing some endermen!"));
+            event.setCancelled(true);
+            return;
+        }
+
+        if (!custom.getCustomItemType().equals(CustomItemType.SUMMONING_CRYSTAL)) {
+            event.getPlayer().sendMessage(ComponentUtils.error("This isn't the right crystal! Try killing some endermen!"));
+            event.setCancelled(true);
+            return;
+        }
 
         // Don't listen unless we are able to place crystals.
         // In fact, cancel the event too just to prevent any weird behavior.

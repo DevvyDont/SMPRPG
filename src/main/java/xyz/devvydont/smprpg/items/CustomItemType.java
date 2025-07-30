@@ -678,6 +678,8 @@ public enum CustomItemType {
     DRACONIC_CRYSTAL("Draconic Crystal", ItemRarity.EPIC, DraconicCrystal.class),
     TRANSMISSION_WAND("Transmission Wand", Material.PRISMARINE_SHARD, ItemRarity.EPIC, TransmissionWand.class),
 
+    SUMMONING_CRYSTAL("Summoning Crystal", Material.END_CRYSTAL, ItemRarity.EPIC, true, 50_000),
+
     // PASSIVE MOBS
     PREMIUM_PORKCHOP("Premium Porkchop", Material.COOKED_PORKCHOP, ItemRarity.UNCOMMON, true, PorkchopFamilyBlueprint.class),
     ENCHANTED_PORKCHOP("Enchanted Porkchop", Material.COOKED_PORKCHOP, ItemRarity.RARE, true, PorkchopFamilyBlueprint.class),
