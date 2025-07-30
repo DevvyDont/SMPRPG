@@ -93,7 +93,7 @@ public enum CustomEntityType implements IMenuDisplayable {
     PROTOCOL_SENTINEL(EntityType.IRON_GOLEM, "Protocol Sentinel",
             45, 7_500, 400,
             ProtocolSentinel::new,
-            EntitySpawnCondition.BiomeSpawnCondition.biome(Biome.THE_END).withChance(.15f)),
+            EntitySpawnCondition.BiomeSpawnCondition.biome(Biome.THE_END).withChance(.05f)),
 
     // Fishing creatures.
     MINNOW(EntityType.SILVERFISH, "Minnow",

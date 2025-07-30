@@ -31,7 +31,7 @@ public class ProtocolSentinel extends CustomEntityInstance<IronGolem> implements
     @Override
     public void updateAttributes() {
         super.updateAttributes();
-        this.updateBaseAttribute(AttributeWrapper.SCALE, 1.25);
+        this.updateBaseAttribute(AttributeWrapper.SCALE, 1.5);
     }
 
     @Override
@@ -42,11 +42,11 @@ public class ProtocolSentinel extends CustomEntityInstance<IronGolem> implements
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_HELMET), 200, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_CHESTPLATE), 200, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_LEGGINGS), 200, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_BOOTS), 200, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.DISPLACEMENT_MATRIX), 200, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_HELMET), 400, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_CHESTPLATE), 400, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_LEGGINGS), 400, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PROTOCOL_BOOTS), 400, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.DISPLACEMENT_MATRIX), 400, this),
                 new QuantityLootDrop(ItemService.generate(Material.IRON_INGOT), 1, 2, this)
         );
     }

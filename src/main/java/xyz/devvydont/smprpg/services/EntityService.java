@@ -27,6 +27,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.base.listeners.EnderDragonSpawnContributionListener;
@@ -519,6 +520,19 @@ public class EntityService implements IService, Listener {
             // Check if this location is suitable for this custom entity
             if (type.testNaturalSpawn(event.getLocation()))
                 choices.add(type);
+
+        // Filter this enemy so it doesn't flood the world. Ensure there already aren't more than 10 present.
+        // The main reason for this existing, is to prevent 1000 iron golems from spawning on the end island since
+        // it is not considered a hostile mob.
+        for (var choice : choices.stream().toList()) {
+            var count = 0;
+            for (var nearby : event.getLocation().getNearbyLivingEntities(250))
+                if (getEntityInstance(nearby) instanceof CustomEntityInstance<?> custom && custom.getEntityType().equals(choice))
+                    count++;
+
+            if (count > 10)
+                choices.remove(choice);
+        }
 
         // Did we find a custom entity type?
         if (choices.isEmpty())
