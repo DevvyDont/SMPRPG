@@ -95,6 +95,12 @@ public enum CustomEntityType implements IMenuDisplayable {
             ProtocolSentinel::new,
             EntitySpawnCondition.BiomeSpawnCondition.biome(Biome.THE_END).withChance(.05f)),
 
+    VOIDSPINNER(EntityType.SPIDER, "Voidspinner",
+            55, 15_000, 1250, Voidspinner::new),
+
+    VOIDLURKER(EntityType.SHULKER, "Voidlurker",
+            55, 20_000, 1000, Voidlurker::new),
+
     // Fishing creatures.
     MINNOW(EntityType.SILVERFISH, "Minnow",
             5, 120, 10, Minnow::new),

@@ -75,9 +75,9 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(getRecipeKey(), generate());
         recipe.shape("pip", "ici", "pip");
-        recipe.setIngredient('p', ItemService.generate(CustomItemType.ENCHANTED_ENDER_PEARL));
+        recipe.setIngredient('p', ItemService.generate(CustomItemType.ENCHANTED_AMETHYST_BLOCK));
         recipe.setIngredient('i', ItemService.generate(CustomItemType.ENCHANTED_IRON_BLOCK));
-        recipe.setIngredient('c', ItemService.generate(CustomItemType.DISPLACEMENT_MATRIX));
+        recipe.setIngredient('c', ItemService.generate(CustomItemType.WARP_CATALYST));
         recipe.setCategory(CraftingBookCategory.MISC);
         return recipe;
     }

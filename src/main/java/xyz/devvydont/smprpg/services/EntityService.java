@@ -36,6 +36,7 @@ import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.entity.vanilla.*;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
+import xyz.devvydont.smprpg.listeners.damage.ShulkerDefenseModeFix;
 import xyz.devvydont.smprpg.listeners.pets.EntityTamingAttributeFix;
 import xyz.devvydont.smprpg.listeners.pets.TamedEntityFeedFix;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
@@ -155,6 +156,7 @@ public class EntityService implements IService, Listener {
         listeners.add(new EntityTamingAttributeFix());  // Scales entities to owner levels.
         listeners.add(new TamedEntityFeedFix());  // Allows tamed entities to heal more efficiently.
         listeners.add(new EnderDragonSpawnContributionListener());  // Adds boss contribution weight for boss spawning.
+        listeners.add(new ShulkerDefenseModeFix());  // Fixes shulkers so they take reduced damage when not peeking.
         for (var listener : listeners)
             listener.start();
     }
