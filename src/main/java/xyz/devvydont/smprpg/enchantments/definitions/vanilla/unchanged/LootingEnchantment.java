@@ -15,6 +15,8 @@ import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
 import xyz.devvydont.smprpg.enchantments.EnchantmentUtil;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.VanillaEnchantment;
 import xyz.devvydont.smprpg.events.CustomItemQuantityRollDropEvent;
+import xyz.devvydont.smprpg.items.blueprints.economy.CustomItemCoin;
+import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 public class LootingEnchantment extends VanillaEnchantment implements Listener {
@@ -84,6 +86,10 @@ public class LootingEnchantment extends VanillaEnchantment implements Listener {
 
         int looting = EnchantmentUtil.getEnchantLevel(Enchantment.LOOTING, event.getTool());
         if (looting < 1)
+            return;
+
+        // Don't proc looting on coins...
+        if (ItemService.blueprint(event.getDrop()) instanceof CustomItemCoin)
             return;
 
         int extraDrops = (int) Math.round(Math.random()*looting+1);
