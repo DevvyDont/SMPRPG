@@ -55,7 +55,8 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
         return List.of(
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CHARRED_CRISP), 4, this),
                 new ChancedItemDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.OBSIDIAN), 5, this),
-                new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.BONE), 1, 2, this)
+                new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.BONE), 1, 2, this),
+                new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.ARROW), 1, 2, this)
         );
     }
 
