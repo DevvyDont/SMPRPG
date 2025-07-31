@@ -102,7 +102,7 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
      */
     @Override
     public long getCooldown(ItemStack item) {
-        return 5;
+        return 1;
     }
 
     @Override

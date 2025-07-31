@@ -56,6 +56,7 @@ public class InstantTransmissionAbilityHandler implements AbilityHandler {
         player.getWorld().playEffect(newLocation, Effect.ENDER_SIGNAL, 0);
         player.getWorld().playSound(newLocation, Sound.ENTITY_ENDER_EYE_DEATH, .4f, 1);
         player.getWorld().playSound(old, Sound.ENTITY_ENDERMAN_TELEPORT, .4f, 1);
+        player.setFallDistance(0);
         return true;
     }
 }

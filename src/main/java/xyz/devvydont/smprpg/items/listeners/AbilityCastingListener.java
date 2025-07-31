@@ -109,9 +109,6 @@ public class AbilityCastingListener extends ToggleableListener {
         if (event.getAction().isRightClick() && targetBlock != null && INTERACTABLE_BLOCK_BLACKLIST.contains(targetBlock.getType()))
             return;
 
-        // Prevent double proc from right click air and right click block.
-        Bukkit.broadcast(Component.text(event.getAction().name()));
-
         // Check every ability and see if the click type matches.
         var abilities = caster.getAbilities(item);
         var player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
