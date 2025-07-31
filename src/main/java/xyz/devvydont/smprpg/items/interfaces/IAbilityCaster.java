@@ -19,5 +19,14 @@ public interface IAbilityCaster {
      */
     Collection<AbilityEntry> getAbilities(ItemStack item);
 
+    /**
+     * Get the cooldown in between item uses.
+     * Keep in mind this is more for preventing strange things from happening via casting on the same tick or teleporting,
+     * so it needs to be per item since we use the default cooldown system.
+     * @param item The item.
+     * @return The cooldown in ticks.
+     */
+    long getCooldown(ItemStack item);
+
     record AbilityEntry (Ability ability, AbilityActivationMethod activation, AbilityCost cost){}
 }

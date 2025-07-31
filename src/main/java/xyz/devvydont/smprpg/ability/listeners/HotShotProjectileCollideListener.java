@@ -1,5 +1,8 @@
 package xyz.devvydont.smprpg.ability.listeners;
 
+import com.destroystokyo.paper.ParticleBuilder;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.LivingEntity;
@@ -57,8 +60,14 @@ public class HotShotProjectileCollideListener extends ToggleableListener {
                     DamageSource.builder(DamageType.MAGIC).build()
             );
         }
-        event.getLocation().createExplosion(0, false, false);
+        new ParticleBuilder(Particle.EXPLOSION)
+                .location(event.getLocation())
+                .count(3)
+                .offset(.5, .2, .5)
+                .spawn();
+        event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1.25f);
         HotShotAbilityHandler.removeInfernoProjectile(event.getEntity());
+        event.setCancelled(true);
     }
 
 }

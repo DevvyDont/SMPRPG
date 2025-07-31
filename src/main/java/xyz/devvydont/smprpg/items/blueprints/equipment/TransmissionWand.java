@@ -92,6 +92,19 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
         );
     }
 
+    /**
+     * Get the cooldown in between item uses.
+     * Keep in mind this is more for preventing strange things from happening via casting on the same tick or teleporting,
+     * so it needs to be per item since we use the default cooldown system.
+     *
+     * @param item The item.
+     * @return The cooldown in ticks.
+     */
+    @Override
+    public long getCooldown(ItemStack item) {
+        return 5;
+    }
+
     @Override
     public Material getDisplayMaterial() {
         return Material.DIAMOND_SHOVEL;

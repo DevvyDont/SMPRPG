@@ -34,6 +34,7 @@ import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.items.AbilityUtil;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.*;
 
@@ -110,6 +111,19 @@ public class InfernoSaber extends CustomAttributeItem implements ICraftable, IMo
                         AbilityCost.of(AbilityCost.Resource.MANA, 150)
                 )
         );
+    }
+
+    /**
+     * Get the cooldown in between item uses.
+     * Keep in mind this is more for preventing strange things from happening via casting on the same tick or teleporting,
+     * so it needs to be per item since we use the default cooldown system.
+     *
+     * @param item The item.
+     * @return The cooldown in ticks.
+     */
+    @Override
+    public long getCooldown(ItemStack item) {
+        return TickTime.seconds(1);
     }
 
     @Override

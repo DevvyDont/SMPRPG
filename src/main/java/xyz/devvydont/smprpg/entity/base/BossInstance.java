@@ -104,7 +104,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         } else if (players.size() == 2) {
             names = Component.text()
                     .append(chatService.getPlayerDisplay(players.get(0)))
-                    .append(Component.text("and"))
+                    .append(Component.text(" and "))
                     .append(chatService.getPlayerDisplay(players.get(1)))
                     .build();
         } else {
@@ -124,7 +124,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
 
         Bukkit.broadcast(ComponentUtils.alert(ComponentUtils.merge(
                 names,
-                ComponentUtils.create(" has summoned the "),
+                ComponentUtils.create(" summoned the "),
                 getPowerComponent(),
                 ComponentUtils.SPACE,
                 getNameComponent(),
@@ -613,7 +613,7 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         if (!event.hasChangedBlock())
             return;
 
-        if (event.getPlayer().getLocation().distance(_entity.getLocation()) < 200) {
+        if (!_entity.isDead() && event.getPlayer().getLocation().distance(_entity.getLocation()) < 200) {
             if (bossBar != null)
                 bossBar.addViewer(event.getPlayer());
             if (scoreboard != null && !scoreboard.showing(event.getPlayer()))
