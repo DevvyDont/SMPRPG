@@ -789,4 +789,17 @@ public class DropsService implements IService, Listener {
 
     }
 
+    /**
+     * Don't allow items to move through dimensions if tagged.
+     */
+    @EventHandler
+    public void __onItemAttemptDimensionTransition(EntityPortalEnterEvent event) {
+
+        if (!(event.getEntity() instanceof Item item))
+            return;
+
+        if (getOwner(item) != null || item.getOwner() != null)
+            event.setCancelled(true);
+    }
+
 }
