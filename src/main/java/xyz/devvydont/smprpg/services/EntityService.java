@@ -522,7 +522,7 @@ public class EntityService implements IService, Listener {
                 if (getEntityInstance(nearby) instanceof CustomEntityInstance<?> custom && custom.getEntityType().equals(choice))
                     count++;
 
-            if (count > 10)
+            if (count > 25)
                 choices.remove(choice);
         }
 
