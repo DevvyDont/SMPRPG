@@ -890,6 +890,7 @@ public class ItemService implements IService, Listener {
                         ComponentUtils.create("Usage Cost: ", NamedTextColor.GRAY),
                         ComponentUtils.create(ability.cost().amount() + ability.cost().resource().getSymbol(), ability.cost().resource().getColor())
                         ));
+                lore.add(AbilityUtil.getCooldownComponent(String.format("%.1fs", caster.getCooldown(itemStack) / 20.0)));
             }
         }
 
