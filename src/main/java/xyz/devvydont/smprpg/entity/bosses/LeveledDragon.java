@@ -10,9 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityPortalEnterEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
@@ -245,6 +243,37 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
             return;
         }
 
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onCrystalDestroyed(EntityDamageEvent event) {
+
+        if (!(event.getEntity() instanceof EnderCrystal crystal))
+            return;
+
+        var battle = crystal.getWorld().getEnderDragonBattle();
+        if (battle == null)
+            return;
+
+        if (battle.getEnderDragon() == null)
+            return;
+
+        if (!battle.getEnderDragon().equals(_entity))
+            return;
+
+        var found = false;
+        for (var healingCrystal : battle.getHealingCrystals())
+            if (healingCrystal.equals(crystal))
+                found = true;
+
+        if (!found)
+            return;
+
+        if (!(event.getDamageSource().getCausingEntity() instanceof Player player))
+            return;
+        
+        // Found a crystal in this fight that was destroyed by a player!
+        getDamageTracker().addDamageDealtByEntity(player, (int)getHalfHeartValue() * 10);
     }
 
 }
