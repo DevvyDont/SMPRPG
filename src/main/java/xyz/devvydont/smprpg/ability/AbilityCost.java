@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.ability;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
@@ -46,6 +47,9 @@ public record AbilityCost(Resource resource, int amount) {
      * @return True if they can afford the cost.
      */
     public boolean canUse(LeveledEntity<?> entity) {
+
+        if (entity.getEntity() instanceof Player player && player.getGameMode().isInvulnerable())
+            return true;
 
         return switch (resource) {
 

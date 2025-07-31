@@ -80,6 +80,10 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
     }
 
     public void useMana(int cost) {
+
+        if (this.getPlayer().getGameMode().isInvulnerable())
+            return;
+
         this._mana -= cost;
         this._mana = Math.max(0, this._mana);
     }
@@ -365,5 +369,9 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
             return;
 
         updateNametag();
+    }
+
+    public void refillMana() {
+        _mana = getMaxMana();
     }
 }

@@ -306,13 +306,16 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             if (crystalPlacers.containsEntry(event.getPlayer().getUniqueId(), crystal))
                 return;
 
+            var playerName = SMPRPG.getService(ChatService.class).getPlayerDisplay(event.getPlayer());
             crystalPlacers.put(event.getPlayer().getUniqueId(), crystal);
+            crystal.customName(playerName);
+            crystal.setCustomNameVisible(true);
             crystal.addScoreboardTag("summoning_crystal");
             var total = crystalPlacers.values().size();
             var nearbyPlayers = Audience.audience(event.getClickedBlock().getLocation().getNearbyPlayers(MESSAGE_RANGE));
 
             nearbyPlayers.sendMessage(ComponentUtils.alert(ComponentUtils.merge(
-                    SMPRPG.getService(ChatService.class).getPlayerDisplay(event.getPlayer()),
+                    playerName,
                     ComponentUtils.SPACE,
                     ComponentUtils.create("has placed a "),
                     ComponentUtils.create("Summoning Crystal", NamedTextColor.LIGHT_PURPLE),

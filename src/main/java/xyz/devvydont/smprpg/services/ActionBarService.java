@@ -4,11 +4,13 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.EntityGlobals;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
@@ -113,13 +115,17 @@ public class ActionBarService implements IService, Listener {
         return ComponentUtils.powerLevelPrefix(p.getLevel());
     }
 
-    private void display(Player player) {
+    /**
+     * Get the full component to display about some player.
+     * @param player
+     * @return
+     */
+    private Component getPlayersComponent(final Player player) {
 
         // Do not attempt to display leveled info about the player if the entity service is not tracking them.
         // Since this task is async, we don't want to force entity setup mechanisms.
-        var plugin = SMPRPG.getInstance();
         if (!SMPRPG.getService(EntityService.class).isTracking(player))
-            return;
+            return ComponentUtils.EMPTY;
 
         // The component Will always have their health
         Component message = getPowerComponent(player).append(ComponentUtils.create(" ")).append(getHealthComponent(player));
@@ -135,6 +141,29 @@ public class ActionBarService implements IService, Listener {
 
         for (Map.Entry<ActionBarSource, ActionBarComponent> entry : playersComponents.entrySet())
             message = message.append(ComponentUtils.create(" | ")).append(entry.getValue().display());
+
+        return message;
+    }
+
+    private void display(Player player) {
+
+        // If the player is in creative mode, there is no point on showing information to them.
+        if (player.getGameMode().equals(GameMode.CREATIVE))
+            return;
+
+        // If the player is in spectator mode, and they are spectating someone, use theirs.
+        var playerToShow = player;
+        if (player.getGameMode().equals(GameMode.SPECTATOR) && player.getSpectatorTarget() instanceof Player)
+            playerToShow = (Player) player.getSpectatorTarget();
+
+        // If they are spectating and not spectating a player, don't show them a bar.
+        if (player.getGameMode().equals(GameMode.SPECTATOR) && playerToShow.equals(player))
+            return;
+
+        // Get the component for the player. If it's empty, don't even bother sending it.
+        var message = getPlayersComponent(playerToShow);
+        if (message.equals(ComponentUtils.EMPTY))
+            return;
 
         player.sendActionBar(message);
     }

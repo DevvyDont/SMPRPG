@@ -366,6 +366,12 @@ public class EntityService implements IService, Listener {
         leveled.updateAttributes();
         trackEntity(leveled);
 
+        // If they are in a non survival mode, full heal them.
+        if (event.getPlayer().getGameMode().isInvulnerable()) {
+            leveled.heal();
+            leveled.refillMana();
+        }
+
         // Fix every item in their inventory
         for (var item : event.getPlayer().getInventory().getContents())
             if (item != null && !item.getType().equals(Material.AIR))

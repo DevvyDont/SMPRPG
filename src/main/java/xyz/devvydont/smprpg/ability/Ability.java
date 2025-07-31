@@ -1,10 +1,7 @@
 package xyz.devvydont.smprpg.ability;
 
 import net.kyori.adventure.text.Component;
-import xyz.devvydont.smprpg.ability.handlers.HotShotAbilityHandler;
-import xyz.devvydont.smprpg.ability.handlers.InstantTransmissionAbilityHandler;
-import xyz.devvydont.smprpg.ability.handlers.SugarRushAbilityHandler;
-import xyz.devvydont.smprpg.ability.handlers.HealingHandler;
+import xyz.devvydont.smprpg.ability.handlers.*;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.Collection;
@@ -102,7 +99,16 @@ public enum Ability {
                     merge(create("you are looking that")),
                     merge(create("deals "), create(HotShotAbilityHandler.DAMAGE, RED), create(" damage"))
             ),
-            HotShotAbilityHandler::new)
+            HotShotAbilityHandler::new),
+
+    // Admin abilities.
+    ITEM_SWEEP(
+            "Item Sweep",
+            List.of(
+                    merge(create("Pick up every nearby item")),
+                    merge(create("regardless of owner status"))
+            ),
+            ItemSweepAbilityHandler::new),
 
     ;
 
