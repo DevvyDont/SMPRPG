@@ -47,6 +47,11 @@ public class ShroudedEffectListener implements Listener {
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onRespawn(PlayerRespawnEvent event) {
+
+        // Why is this a thing? Seriously WHY???
+        if (event.getRespawnReason().equals(PlayerRespawnEvent.RespawnReason.END_PORTAL))
+            return;
+
         var effect = new ShroudedEffect(service, event.getPlayer(), 60*10);
         var msg = ComponentUtils.merge(
                 ComponentUtils.create("From "),
@@ -67,7 +72,7 @@ public class ShroudedEffectListener implements Listener {
                 ComponentUtils.create(" are capable of making it expire!")
         )));
         event.getPlayer().sendMessage(msg);
-        service.giveEffect(event.getPlayer(), new ShroudedEffect(service, event.getPlayer(),  60*10));
+        service.giveEffect(event.getPlayer(), effect);
     }
 
 }
