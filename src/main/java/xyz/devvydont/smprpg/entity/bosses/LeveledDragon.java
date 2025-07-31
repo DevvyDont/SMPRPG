@@ -5,11 +5,13 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityPortalEnterEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
@@ -218,6 +220,31 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
 
         updateBaseAttribute(AttributeWrapper.DEFENSE, dragonBattle.getHealingCrystals().size() * 150);
         event.setAmount(dragonBattle.getHealingCrystals().size() * 500);
+    }
+
+    @EventHandler
+    public void onAttemptTeleportDuringDragonFight(EntityPortalEnterEvent event) {
+
+        if (!event.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END))
+            return;
+
+        if (!event.getPortalType().equals(PortalType.ENDER))
+            return;
+
+        var dragonBattle = _entity.getWorld().getEnderDragonBattle();
+        if (dragonBattle == null)
+            return;
+
+        if (dragonBattle.getEnderDragon() != null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if (!dragonBattle.getRespawnPhase().equals(DragonBattle.RespawnPhase.NONE)) {
+            event.setCancelled(true);
+            return;
+        }
+
     }
 
 }

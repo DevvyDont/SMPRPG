@@ -63,7 +63,7 @@ public class SharpnessEnchantment extends VanillaEnchantment implements Attribut
 
     @Override
     public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_WEAPON;
+        return ItemTypeTagKeys.ENCHANTABLE_SHARP_WEAPON;
     }
 
     @Override
