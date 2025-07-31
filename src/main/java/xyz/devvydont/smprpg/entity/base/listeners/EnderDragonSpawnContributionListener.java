@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import io.papermc.paper.registry.keys.SoundEventKeys;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.sound.Sound;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -41,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
 
 /**
  * In charge of listening to game events in order to add boss spawn contributions for the ender dragon.
@@ -360,7 +358,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
             return;
 
         // Summoning crystal is dealing damage, let's turn it up a bit. Defense is applicable, so we can do quite a bit.
-        event.setDamage(2000);
+        event.setDamage(1000);
 
         // If it's a player, they disintegrate.
         if (event.getEntity() instanceof Player player)

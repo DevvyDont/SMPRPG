@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.debug;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -60,6 +62,6 @@ public class EntityDeleter extends CustomItemBlueprint implements Listener {
             return;
 
         event.getDamaged().remove();
-        player.sendMessage(ComponentUtils.success("Deleted " + event.getDamaged().getName()));
+        player.sendMessage(event.getDamaged().name().append(Component.text(" deleted!", NamedTextColor.GREEN)));
     }
 }

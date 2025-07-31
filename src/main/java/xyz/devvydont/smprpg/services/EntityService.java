@@ -547,4 +547,14 @@ public class EntityService implements IService, Listener {
                 results.add((T) entity);
         return results;
     }
+
+    /**
+     * Potential fix for maybe invincible mobs. Don't allow dead things to take damage.
+     */
+    @EventHandler
+    public void onDamageWhileDead(EntityDamageEvent event) {
+
+        if (event.getEntity().isDead())
+            event.setCancelled(true);
+    }
 }
