@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
+import org.bukkit.potion.PotionType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
@@ -27,6 +28,7 @@ import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
 import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 import xyz.devvydont.smprpg.util.particles.ParticleUtil;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.Collection;
 import java.util.List;
@@ -101,6 +103,7 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
         tnt.setVelocity(velocity);
         tnt.setYield(yield);
         tnt.setBlockData(data);
+        tnt.setSource(_entity);
         return tnt;
     }
 
@@ -271,9 +274,30 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
 
         if (!(event.getDamageSource().getCausingEntity() instanceof Player player))
             return;
-        
+
         // Found a crystal in this fight that was destroyed by a player!
-        getDamageTracker().addDamageDealtByEntity(player, (int)getHalfHeartValue() * 10);
+        getDamageTracker().addDamageDealtByEntity(player, (int)(getHalfHeartValue() * 7.5));
+    }
+
+    /**
+     * When a dragon's TNT explodes, we should create another pool of his toxic gas where it blew up.
+     */
+    @EventHandler
+    public void onDragonTntExplosion(EntityExplodeEvent event) {
+
+        if (!(event.getEntity() instanceof TNTPrimed tnt))
+            return;
+
+        if (!_entity.equals(tnt.getSource()))
+            return;
+
+        var cloud = event.getEntity().getWorld().spawn(event.getLocation(), AreaEffectCloud.class);
+        cloud.setColor(Color.PURPLE);
+        cloud.setSource(_entity);
+        cloud.setParticle(Particle.DRAGON_BREATH);
+        cloud.setBasePotionType(PotionType.HARMING);
+        cloud.setOwnerUniqueId(_entity.getUniqueId());
+        cloud.setDuration((int) TickTime.seconds(30));
     }
 
 }
