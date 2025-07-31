@@ -1,7 +1,9 @@
 package xyz.devvydont.smprpg.listeners.damage;
 
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
@@ -104,6 +106,9 @@ public class DamagePopupListener extends ToggleableListener {
 
         // Only worry about living entities.
         if (!(event.getDamaged() instanceof LivingEntity living))
+            return;
+
+        if (living.getMaximumNoDamageTicks() > 0 && living.getNoDamageTicks() * 2 > living.getMaximumNoDamageTicks())
             return;
 
         // First, determine the type. We only care about two here, with that being damage and critical.

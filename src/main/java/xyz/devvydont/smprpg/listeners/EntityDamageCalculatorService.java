@@ -282,6 +282,13 @@ public class EntityDamageCalculatorService implements Listener, IService {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void __onEntityDealDamageToAnotherEntity(EntityDamageByEntityEvent event) {
 
+        if (event.getEntity() instanceof LivingEntity living) {
+            if (living.getNoDamageTicks() > 0 && living.getNoDamageTicks() * 2 > living.getMaximumNoDamageTicks()) {
+                event.setCancelled(true);
+                return;
+            }
+        }
+
         // Depending on the cause of the damage, determine whether we should use strength or not
         if (doesntUseStrengthAttribute(event.getCause()))
             return;
@@ -399,6 +406,10 @@ public class EntityDamageCalculatorService implements Listener, IService {
         if (!(event.getEntity() instanceof LivingEntity living))
             return;
 
+        // If they currently have i-frames, don't recalculate them.
+        if (living.getNoDamageTicks() > 0)
+            return;
+
         var leveled = SMPRPG.getService(EntityService.class).getEntityInstance(living);
 
         var armor = living.getAttribute(Attribute.ARMOR);
@@ -410,8 +421,7 @@ public class EntityDamageCalculatorService implements Listener, IService {
 
         final int noDamageTicks = leveled.getInvincibilityTicks() + iframeTicks;
 
-        living.setNoDamageTicks(noDamageTicks);
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> living.setNoDamageTicks(noDamageTicks), 0);
+        living.setMaximumNoDamageTicks(noDamageTicks);
     }
 
     /*
