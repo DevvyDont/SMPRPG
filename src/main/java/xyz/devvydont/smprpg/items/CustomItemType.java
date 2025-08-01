@@ -80,6 +80,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.prelude.PreludeChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.prelude.PreludeHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.prelude.PreludeLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.protocol.ProtocolArmorSet;
+import xyz.devvydont.smprpg.items.blueprints.sets.protocol.ProtocolHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.quartz.QuartzBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.quartz.QuartzChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.quartz.QuartzHelmet;
@@ -303,7 +304,7 @@ public enum CustomItemType {
     UNSTABLE_BOOTS(     "Unstable Boots",      Material.LEATHER_BOOTS,       ItemRarity.RARE, UnstableBoots.class),
 
     // PROTOCOL
-    PROTOCOL_HELMET(    "Protocol 781-A Helmet",     Material.IRON_HELMET,    ItemRarity.EPIC, ProtocolArmorSet.class),
+    PROTOCOL_HELMET(    "Protocol 781-A Helmet",     Material.IRON_HELMET,    ItemRarity.EPIC, ProtocolHelmet.class),
     PROTOCOL_CHESTPLATE("Protocol 781-A Chestplate", Material.IRON_CHESTPLATE,ItemRarity.EPIC, ProtocolArmorSet.class),
     PROTOCOL_LEGGINGS(  "Protocol 781-A Leggings",   Material.IRON_LEGGINGS,  ItemRarity.EPIC, ProtocolArmorSet.class),
     PROTOCOL_BOOTS(     "Protocol 781-A Boots",      Material.IRON_BOOTS,     ItemRarity.EPIC, ProtocolArmorSet.class),
