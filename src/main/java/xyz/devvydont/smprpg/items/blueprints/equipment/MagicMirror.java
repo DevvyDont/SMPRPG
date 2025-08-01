@@ -60,7 +60,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
     public Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(7)
-                .animation(ItemUseAnimation.SPEAR)
+                .animation(ItemUseAnimation.BLOCK)
                 .hasConsumeParticles(false)
                 .sound(SoundEventKeys.BLOCK_AMETHYST_BLOCK_CHIME)
                 .build();
@@ -126,7 +126,15 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
             event.getPlayer().sendMessage(ComponentUtils.error("You are not at full mana!"));
             event.getPlayer().getWorld().playSound(event.getPlayer().getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1, .5f);
             event.setCancelled(true);
+            return;
         }
+
+        new ParticleBuilder(Particle.END_ROD)
+                .location(event.getPlayer().getLocation().add(0, 1, 0))
+                .offset(.75, .1, .75)
+                .count(50)
+                .extra(0)
+                .spawn();
     }
 
     /**

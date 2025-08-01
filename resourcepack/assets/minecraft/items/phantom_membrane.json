@@ -13,6 +13,20 @@
                     "type": "model",
                     "model": "food:item/caviar"
                 }
+            },
+            {
+                "when": "smprpg:echo_membrane",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/echo_membrane"
+                }
+            },
+            {
+                "when": "smprpg:dragon_scales",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/dragon_scales"
+                }
             }
         ]
     }
