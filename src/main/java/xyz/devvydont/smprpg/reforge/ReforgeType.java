@@ -159,7 +159,7 @@ public enum ReforgeType {
     public boolean isRollable() {
 
         return switch (this) {
-            case ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING -> false;
+            case ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING, CRYSTALLIZED -> false;
             default -> true;
         };
     }
