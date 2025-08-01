@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/disc_fragment_5"
+        },
+        "cases": [
+            {
+                "when": "smprpg:enderios",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/enderios"
+                }
+            }
+        ]
+    }
+}

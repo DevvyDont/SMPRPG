@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/prismarine_crystals"
+        },
+        "cases": [
+            {
+                "when": "smprpg:jupiter_crystal",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/jupiter_crystal"
+                }
+            }
+        ]
+    }
+}

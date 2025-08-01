@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/dried_kelp"
+        },
+        "cases": [
+            {
+                "when": "smprpg:charred_crisp",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/charred_crisp"
+                }
+            }
+        ]
+    }
+}

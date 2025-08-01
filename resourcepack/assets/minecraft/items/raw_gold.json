@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/raw_gold"
+        },
+        "cases": [
+            {
+                "when": "smprpg:potato_chip",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/potato_chip"
+                }
+            }
+        ]
+    }
+}

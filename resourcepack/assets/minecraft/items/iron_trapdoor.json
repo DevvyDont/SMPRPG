@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:block/iron_trapdoor_bottom"
+        },
+        "cases": [
+            {
+                "when": "smprpg:breadboard",
+                "model": {
+                    "type": "model",
+                    "model": "food:item/breadboard"
+                }
+            }
+        ]
+    }
+}

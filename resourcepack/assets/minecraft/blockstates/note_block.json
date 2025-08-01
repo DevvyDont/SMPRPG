@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"instrument=custom_head,note=24": {
+		"model": "blocks:block/end_ore"
+	},
+    "": {
+      "model": "minecraft:block/note_block"
+    }
+  }
+}
