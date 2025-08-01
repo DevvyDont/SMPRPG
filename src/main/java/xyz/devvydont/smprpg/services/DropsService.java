@@ -573,7 +573,7 @@ public class DropsService implements IService, Listener {
         event.getEntity().setCustomNameVisible(nameVisible);
 
         // If this is a drop and the rarity is above rare, add the firework task
-        if (getFlag(item).equals(DropFlag.LOOT) && rarity.ordinal() >= ItemRarity.RARE.ordinal())
+        if (getFlag(event.getEntity()).equals(DropFlag.LOOT) && rarity.ordinal() >= ItemRarity.RARE.ordinal())
             DropFireworkTask.start(event.getEntity());
     }
 
