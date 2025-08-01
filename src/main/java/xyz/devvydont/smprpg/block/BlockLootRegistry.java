@@ -128,6 +128,13 @@ public class BlockLootRegistry {
                 .build()
         );
 
+        register(Material.CALCITE, BlockLootEntry.builder(ItemClassification.PICKAXE)
+                .add(BlockLootContext.AUTO_SMELT, BlockLoot.of(ItemService.generate(Material.CALCITE)))
+                .add(BlockLootContext.SILK_TOUCH, BlockLoot.of(ItemService.generate(Material.CALCITE)))
+                .add(BlockLootContext.CORRECT_TOOL, BlockLoot.of(ItemService.generate(Material.CALCITE)))
+                .build()
+        );
+
         register(Material.COAL_ORE, BlockLootEntry.builder(ItemClassification.PICKAXE)
                 .add(BlockLootContext.AUTO_SMELT, BlockLoot.of(ItemService.generate(Material.COAL), 1.5))
                 .add(BlockLootContext.SILK_TOUCH, BlockLoot.of(ItemService.generate(Material.COAL_ORE)))
