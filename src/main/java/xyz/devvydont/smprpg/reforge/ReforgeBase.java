@@ -103,7 +103,7 @@ public abstract class ReforgeBase implements Keyed, IAttributeContainer {
      */
     public void applyItemPersistence(ItemStack itemStack) {
         itemStack.editMeta(meta -> {
-            meta.getPersistentDataContainer().set(getItemService().REFORGE_TYPE_KEY, PersistentDataType.STRING, getKey().value());
+            meta.getPersistentDataContainer().set(getItemService().getReforgeTypeKey(), PersistentDataType.STRING, getKey().value());
         });
     }
 
@@ -114,7 +114,7 @@ public abstract class ReforgeBase implements Keyed, IAttributeContainer {
      */
     public void removeItemPersistence(ItemStack itemStack) {
         itemStack.editMeta(meta -> {
-            meta.getPersistentDataContainer().remove(getItemService().REFORGE_TYPE_KEY);
+            meta.getPersistentDataContainer().remove(getItemService().getReforgeTypeKey());
         });
     }
 
