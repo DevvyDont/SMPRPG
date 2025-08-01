@@ -1213,7 +1213,7 @@ public class ItemService implements IService, Listener {
     /**
      * Schedules item update for next tick so we can catch things like interacting with buckets
      */
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onInteract(PlayerInteractEvent event) {
         new BukkitRunnable() {
             @Override
@@ -1301,6 +1301,10 @@ public class ItemService implements IService, Listener {
 
         ItemStack item = event.getItemInHand();
         SMPItemBlueprint blueprint = getBlueprint(item);
+
+        // Hack for summoning crystals. Allow them to be placed!
+        if (blueprint instanceof CustomItemBlueprint custom && custom.getCustomItemType().equals(CustomItemType.SUMMONING_CRYSTAL))
+            return;
 
         // If this item is a custom item, don't allow it to be placed!!!
         if (blueprint.isCustom())
