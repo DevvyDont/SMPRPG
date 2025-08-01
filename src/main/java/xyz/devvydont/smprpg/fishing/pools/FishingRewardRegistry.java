@@ -192,7 +192,7 @@ public class FishingRewardRegistry {
                         .withMinecraftExperience(30)
                         .withSkillExperience(10_000)
                         .withRequirement(FishingLootRequirement.quality(300))
-                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new ItemStackFishingLoot.Builder(CustomItemType.BLUE_MARLIN)
