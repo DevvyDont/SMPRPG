@@ -512,6 +512,10 @@ public class EntityService implements IService, Listener {
         if (!NATURAL_REASONS.contains(event.getSpawnReason()))
             return;
 
+        // DO NOT do this with bosses. This will break ender dragons.
+        if (event.getEntity() instanceof Boss)
+            return;
+
         // Determine eligible creatures that can spawn in its place
         List<CustomEntityType> choices = new ArrayList<>();
         for (CustomEntityType type : CustomEntityType.values())
