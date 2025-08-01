@@ -1,0 +1,10 @@
+{
+  "food.breadboard.eat": {
+    "sounds": [
+      "audio:random/breadboard_eat1",
+      "audio:random/breadboard_eat2",
+      "audio:random/breadboard_eat3"
+    ],
+    "subtitle": "subtitles.breadboard.eat"
+  }
+}

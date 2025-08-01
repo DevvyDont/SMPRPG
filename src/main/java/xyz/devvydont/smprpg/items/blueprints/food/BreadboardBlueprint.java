@@ -2,6 +2,8 @@ package xyz.devvydont.smprpg.items.blueprints.food;
 
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
+import io.papermc.paper.registry.keys.SoundEventKeys;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,6 +18,8 @@ import xyz.devvydont.smprpg.util.time.TickTime;
 import java.util.List;
 
 public class BreadboardBlueprint extends CustomItemBlueprint implements IEdible, ISellable {
+
+    public final NamespacedKey EatSound = new NamespacedKey("audio", "food.breadboard.eat");
 
     public BreadboardBlueprint(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -46,6 +50,7 @@ public class BreadboardBlueprint extends CustomItemBlueprint implements IEdible,
         return Consumable.consumable()
                 .consumeSeconds(1.5f)
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(new PotionEffect(PotionEffectType.GLOWING, (int) TickTime.seconds(30), 0, true, true)), .5f))
+                .sound(EatSound)
                 .build();
     }
 
