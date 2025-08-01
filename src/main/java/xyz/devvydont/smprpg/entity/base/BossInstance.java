@@ -8,10 +8,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -315,7 +312,9 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
         for (Player p : Bukkit.getOnlinePlayers())
             p.playSound(p.getLocation(), Sound.ENTITY_WARDEN_SONIC_BOOM, 1, .1f);
 
-        _entity.remove();
+        // Dragons cannot be .removed() otherwise the game will freak out...
+        if (!(_entity instanceof EnderDragon))
+            _entity.remove();
     }
 
     @Override

@@ -149,7 +149,7 @@ public class EntityService implements IService, Listener {
                     if (!entry.getValue().getEntity().isValid())
                         invalid.add(entry.getKey());
                 for (var id : invalid)
-                    entityInstances.remove(id);
+                    removeEntity(id);
             }
         }.runTaskTimer(plugin, 5*60*20, 5*60*20);
 

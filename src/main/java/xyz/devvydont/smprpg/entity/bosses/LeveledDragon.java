@@ -107,9 +107,23 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
         return tnt;
     }
 
+    @Override
+    public void cleanup() {
+        super.cleanup();
+
+        // Since this is a dragon, we need a bit more care. Trigger the normal death, but make sure nobody gets credit.
+        getDamageTracker().clear();
+        _entity.setPhase(EnderDragon.Phase.DYING);
+    }
+
     @EventHandler(priority = EventPriority.LOW)
     public void doFireballSpawn(EnderDragonFireballHitEvent event)
     {
+
+        // Only perform this action if the source is from us.
+        if (!_entity.equals(event.getEntity().getShooter()))
+            return;
+
         var world = event.getEntity().getWorld();
         var loc = event.getEntity().getLocation();
         var tnt = makeTnt(world, loc, 20, new Vector(0, 1.0, 0), 5.0f, Material.AMETHYST_BLOCK.createBlockData());

@@ -71,4 +71,8 @@ public class DamageTracker {
         return map;
     }
 
+    public void clear() {
+        damageTracker.clear();
+        hitTracker.clear();
+    }
 }
