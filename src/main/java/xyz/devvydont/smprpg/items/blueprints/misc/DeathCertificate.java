@@ -114,6 +114,9 @@ public class DeathCertificate extends CustomItemBlueprint implements Listener, I
     @EventHandler(ignoreCancelled = true)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
 
+        if (event.getRespawnReason().equals(PlayerRespawnEvent.RespawnReason.END_PORTAL))
+            return;
+
         ItemStack paper = generate();
         setData(paper, event.getPlayer());
         updateItemData(paper);

@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.equipment;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.*;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -31,6 +32,12 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
 
     public TransmissionWand(ItemService itemService, CustomItemType type) {
         super(itemService, type);
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 1);
     }
 
     @Override

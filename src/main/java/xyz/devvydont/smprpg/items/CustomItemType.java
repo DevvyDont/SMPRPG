@@ -496,7 +496,7 @@ public enum CustomItemType {
     SHADOW_BREW("Shadow Brew", Material.FIREWORK_STAR, ItemRarity.COMMON, ShadowBrew.class),
     CHILI_PEPPER("Chili Pepper", Material.GOLDEN_CARROT, ItemRarity.COMMON, ChiliPepper.class),
     ENDERIOS("Enderios", Material.DISC_FRAGMENT_5, ItemRarity.COMMON, EnderiosBlueprint.class),
-    BREADBOARD("Breadboard", Material.IRON_TRAPDOOR, ItemRarity.COMMON, BreadboardBlueprint.class),
+    BREADBOARD("Breadboard", Material.PAPER, ItemRarity.COMMON, BreadboardBlueprint.class),
     CHARRED_CRISP("Charred Crisp", Material.DRIED_KELP, ItemRarity.COMMON, CharredCrispBlueprint.class),
 
     // EXP BOTTLES
@@ -684,6 +684,9 @@ public enum CustomItemType {
     DRACONIC_CRYSTAL("Draconic Crystal", ItemRarity.EPIC, DraconicCrystal.class),
     TRANSMISSION_WAND("Transmission Wand", Material.PRISMARINE_SHARD, ItemRarity.EPIC, TransmissionWand.class),
     MAGIC_MIRROR("Magic Mirror", Material.RECOVERY_COMPASS, ItemRarity.EPIC, MagicMirror.class),
+    SLUMBER_SHARD("Slumber Shard", Material.PRISMARINE_SHARD, ItemRarity.EPIC, MagicMirrorShard.class),
+    CINDER_SHARD("Cinder Shard", Material.RESIN_BRICK, ItemRarity.EPIC, MagicMirrorShard.class),
+    VOID_SHARD("Void Shard", Material.ECHO_SHARD, ItemRarity.EPIC, MagicMirrorShard.class),
 
     SUMMONING_CRYSTAL("Summoning Crystal", Material.END_CRYSTAL, ItemRarity.EPIC, true, 50_000),
 
