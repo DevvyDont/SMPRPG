@@ -86,7 +86,7 @@ class ActionBarService : IService, Listener {
     /**
      * A helper method to retrieve the health component for the player.
      */
-    private fun getHealthComponent(player: Player?): Component {
+    private fun getHealthComponent(player: Player): Component {
         val leveledPlayer = SMPRPG.getService(EntityService::class.java).getPlayerInstance(player)
         val hp = ceil(leveledPlayer.getTotalHp()).toInt()
         val maxHP = ceil(leveledPlayer.getMaxHp()).toInt()
@@ -100,7 +100,7 @@ class ActionBarService : IService, Listener {
     /**
      * A helper method to retrieve the defense component for the player.
      */
-    private fun getDefenseComponent(player: Player?): Component {
+    private fun getDefenseComponent(player: Player): Component {
         val def = SMPRPG.getService(EntityService::class.java).getPlayerInstance(player).defense
         return ComponentUtils.create(def.toString() + "", NamedTextColor.DARK_GREEN)
             .append(ComponentUtils.create(Symbols.SHIELD, NamedTextColor.GRAY))
@@ -125,7 +125,7 @@ class ActionBarService : IService, Listener {
     /**
      * A helper method to retrieve the level component for the player.
      */
-    private fun getPowerComponent(player: Player?): Component {
+    private fun getPowerComponent(player: Player): Component {
         val p = SMPRPG.getService(EntityService::class.java).getPlayerInstance(player)
         return ComponentUtils.powerLevelPrefix(p.getLevel())
     }
