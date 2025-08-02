@@ -245,8 +245,17 @@
             {
                 "when": "smprpg:magic_mirror",
                 "model": {
-                    "type": "model",
-                    "model": "tools:item/magic_mirror"
+                    "type": "minecraft:condition",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/magic_mirror"
+                    },
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/magic_mirror_use"
+                    },
+                    "property": "minecraft:keybind_down",
+					"keybind": "key.use"
                 }
             }
         ]
