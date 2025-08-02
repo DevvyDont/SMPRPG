@@ -714,9 +714,9 @@ public class DropsService implements IService, Listener {
         Component suffix = ComponentUtils.create(" found ").append(item).append(ComponentUtils.create(" from ")).append(event.getSource().getAsComponent()).append(ComponentUtils.create("!"));
         Component chance = ComponentUtils.create(" (" + event.getFormattedChance() + ")", NamedTextColor.DARK_GRAY);
 
-        // Should we tell the entire server this drop happened?
+        // Should we tell the entire server this drop happened? Legendary always gets announced, epic only if under 5%.
         boolean broadcastServer = rarityOfDrop.ordinal() >= ItemRarity.LEGENDARY.ordinal();
-        if (event.getChance() < rarityOfDrop.ordinal() * rarityOfDrop.ordinal() / 100.0)
+        if (event.getChance() <= .05 && rarityOfDrop.equals(ItemRarity.EPIC))
             broadcastServer = true;
 
         // We have 3 levels of "rare drop" obtaining based on the chance.
