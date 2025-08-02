@@ -32,7 +32,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
         // Spawn the entity. This can fail, but we allow null returns if something breaks.
         var entity = SMPRPG.getService(EntityService.class).spawnCustomEntity(customEntityType, ctx.getLocation());
         if (entity == null) {
-            SMPRPG.getInstance().getLogger().severe("Failed to generate custom sea creature for fishing event of type " + customEntityType);
+            SMPRPG.getPlugin().getLogger().severe("Failed to generate custom sea creature for fishing event of type " + customEntityType);
             return null;
         }
 
@@ -53,7 +53,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
      */
     @Override
     public NamespacedKey getKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), customEntityType.key());
+        return new NamespacedKey(SMPRPG.getPlugin(), customEntityType.key());
     }
 
     public CustomEntityType getCustomEntityType() {

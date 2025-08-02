@@ -12,7 +12,6 @@ import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.fishing.loot.requirements.FishingLootRequirement;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
-import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.services.DropsService;
 import xyz.devvydont.smprpg.services.ItemService;
 
@@ -61,7 +60,7 @@ public class ItemStackFishingLoot extends FishingLootBase {
      */
     @Override
     public NamespacedKey getKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), key);
+        return new NamespacedKey(SMPRPG.getPlugin(), key);
     }
 
     public ItemStack getItem() {

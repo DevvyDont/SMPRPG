@@ -15,7 +15,7 @@ public class SkillGlobals {
      * @return The max skill level.
      */
     public static int getMaxSkillLevel() {
-        return SMPRPG.getInstance().getConfig().getInt("max-skill-level", 100);
+        return SMPRPG.getPlugin().getConfig().getInt("max-skill-level", 100);
     }
 
     /**

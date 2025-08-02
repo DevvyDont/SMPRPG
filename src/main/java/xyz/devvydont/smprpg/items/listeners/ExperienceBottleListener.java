@@ -12,7 +12,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ExperienceThrowable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
@@ -22,7 +21,7 @@ import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
  */
 public class ExperienceBottleListener extends ToggleableListener {
 
-    private final NamespacedKey EXPERIENCE_KEY = new NamespacedKey(SMPRPG.getInstance(), "stored-experience");
+    private final NamespacedKey EXPERIENCE_KEY = new NamespacedKey(SMPRPG.getPlugin(), "stored-experience");
 
     /*
      * When we interact using the bottle, go ahead and throw it.

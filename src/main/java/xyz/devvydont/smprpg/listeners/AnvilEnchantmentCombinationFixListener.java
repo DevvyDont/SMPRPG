@@ -177,7 +177,7 @@ public class AnvilEnchantmentCombinationFixListener extends ToggleableListener {
         event.getView().setRepairCost(1);
         event.setResult(null);
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
 
         // We have to support books being supplied to us.
         SMPItemBlueprint firstBlueprint = SMPRPG.getService(ItemService.class).getBlueprint(firstItemStack);
@@ -259,7 +259,7 @@ public class AnvilEnchantmentCombinationFixListener extends ToggleableListener {
         if (event.getInventory().getFirstItem() == null || event.getInventory().getSecondItem() == null)
             return;
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
 
         // Is the second slot a reforge stone?
         if (!(SMPRPG.getService(ItemService.class).getBlueprint(event.getInventory().getSecondItem()) instanceof ReforgeApplicator reforgeApplicator))

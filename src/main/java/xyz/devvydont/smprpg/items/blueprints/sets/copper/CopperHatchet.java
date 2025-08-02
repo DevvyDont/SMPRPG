@@ -20,7 +20,6 @@ import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.builders.AxeRecipe;
 import xyz.devvydont.smprpg.util.items.ToolsUtil;
 
 import java.util.Collection;
@@ -66,7 +65,7 @@ public class CopperHatchet extends CustomAttributeItem implements ICraftable, IB
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

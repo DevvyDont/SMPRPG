@@ -19,7 +19,7 @@ import xyz.devvydont.smprpg.gui.player.MenuDifficultyChooser;
 
 public class DifficultyService implements IService, Listener {
 
-    public final static NamespacedKey DIFFICULTY_MODIFIER_KEY = new NamespacedKey(SMPRPG.getInstance(), "difficulty_modifier");
+    public final static NamespacedKey DIFFICULTY_MODIFIER_KEY = new NamespacedKey(SMPRPG.getPlugin(), "difficulty_modifier");
 
     /**
      * Given a difficulty, determine the skill experience multiplier.
@@ -63,7 +63,7 @@ public class DifficultyService implements IService, Listener {
     private final NamespacedKey difficultyKey;
 
     public DifficultyService() {
-        this.difficultyKey = new NamespacedKey(SMPRPG.getInstance(), "profile_type");
+        this.difficultyKey = new NamespacedKey(SMPRPG.getPlugin(), "profile_type");
     }
 
     @Override

@@ -61,7 +61,7 @@ public abstract class ReforgeBase implements Keyed, IAttributeContainer {
 
     @Override
     public @NotNull NamespacedKey getKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getType().key());
+        return new NamespacedKey(SMPRPG.getPlugin(), getType().key());
     }
 
     /**

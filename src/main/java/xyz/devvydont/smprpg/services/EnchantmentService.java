@@ -215,7 +215,7 @@ public class EnchantmentService implements IService, Listener {
 
             // If an enchantment wants to listen to events, register it.
             if (enchantment instanceof Listener listener)
-                SMPRPG.getInstance().getServer().getPluginManager().registerEvents(listener, SMPRPG.getInstance());
+                SMPRPG.getPlugin().getServer().getPluginManager().registerEvents(listener, SMPRPG.getPlugin());
         }
     }
 
@@ -386,9 +386,9 @@ public class EnchantmentService implements IService, Listener {
         if (event.getEnchanter().getGameMode() == GameMode.CREATIVE)
             newLevel = event.getEnchanter().getLevel();
 
-        BukkitScheduler scheduler = SMPRPG.getInstance().getServer().getScheduler();
+        BukkitScheduler scheduler = SMPRPG.getPlugin().getServer().getScheduler();
         int finalNewLevel = newLevel;
-        scheduler.runTaskLater(SMPRPG.getInstance(), () -> {
+        scheduler.runTaskLater(SMPRPG.getPlugin(), () -> {
            InventoryView view = event.getEnchanter().getOpenInventory();
            if (!(view.getTopInventory() instanceof EnchantingInventory inv))
             return;

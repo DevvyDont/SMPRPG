@@ -233,7 +233,7 @@ public class MenuReforge extends MenuBase {
             return;
 
         // Update the anvil button on the next tick to react to the state of the GUI
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> setSlot(BUTTON_SLOT, generateAnvilButton()), 0L);
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> setSlot(BUTTON_SLOT, generateAnvilButton()), 0L);
 
         // If we are clicking in the player inventory allow it to happen. We need to allow them to manage items.
         if (event.getClickedInventory().getType().equals(InventoryType.PLAYER)) {

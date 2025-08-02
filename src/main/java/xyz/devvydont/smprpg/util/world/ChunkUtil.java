@@ -17,7 +17,7 @@ public class ChunkUtil {
      * @param block
      */
     public static void markBlockSkillInvalid(Block block) {
-        block.setMetadata(SKILL_INVALID_TAG, new FixedMetadataValue(SMPRPG.getInstance(), true));
+        block.setMetadata(SKILL_INVALID_TAG, new FixedMetadataValue(SMPRPG.getPlugin(), true));
     }
 
     /**
@@ -26,7 +26,7 @@ public class ChunkUtil {
      * @param block
      */
     public static void markBlockSkillValid(Block block) {
-        block.removeMetadata(SKILL_INVALID_TAG, SMPRPG.getInstance());
+        block.removeMetadata(SKILL_INVALID_TAG, SMPRPG.getPlugin());
     }
 
     /**

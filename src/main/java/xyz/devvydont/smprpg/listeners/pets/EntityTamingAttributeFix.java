@@ -24,7 +24,7 @@ public class EntityTamingAttributeFix extends ToggleableListener {
         var entityWrapper = SMPRPG.getService(EntityService.class).getEntityInstance(e.getEntity());
 
         // Do it on the next tick so vanilla doesn't override our behavior.
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> entityWrapper.copyLevel(player), TickTime.INSTANTANEOUSLY);
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> entityWrapper.copyLevel(player), TickTime.INSTANTANEOUSLY);
     }
 
 }

@@ -64,7 +64,7 @@ public class DimensionPortalLockingListener extends ToggleableListener {
         try {
             reload();
         } catch (Exception e) {
-            SMPRPG.getInstance().getLogger().severe("Failed to initialize dimension locks: " + e.getMessage());
+            SMPRPG.getPlugin().getLogger().severe("Failed to initialize dimension locks: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -73,7 +73,7 @@ public class DimensionPortalLockingListener extends ToggleableListener {
      * Reloads the timestamps and level requirements for the end and the nether from the config.
      */
     public void reload() {
-        var cfg = SMPRPG.getInstance().getConfig();
+        var cfg = SMPRPG.getPlugin().getConfig();
 
         // Read the sections from the config we care about.
         var netherLvl = cfg.getInt("world_skill_unlocks.nether");
@@ -90,7 +90,7 @@ public class DimensionPortalLockingListener extends ToggleableListener {
         // Update.
         NETHER_LOCK = new DimensionLock(Instant.parse(netherTime), netherLvl);
         END_LOCK = new DimensionLock(Instant.parse(endTime), endLvl);
-        SMPRPG.getInstance().getLogger().info("Reloaded dimension locks from config");
+        SMPRPG.getPlugin().getLogger().info("Reloaded dimension locks from config");
     }
 
     /**
@@ -135,7 +135,7 @@ public class DimensionPortalLockingListener extends ToggleableListener {
         }
 
         // They are allowed to go! We don't need to do anything.
-        SMPRPG.getInstance().getLogger().finest(String.format("%s has passed all checks for dimension travel using a %s portal.", player.getName(), event.getPortalType()));
+        SMPRPG.getPlugin().getLogger().finest(String.format("%s has passed all checks for dimension travel using a %s portal.", player.getName(), event.getPortalType()));
     }
 
     /**

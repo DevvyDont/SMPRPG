@@ -93,7 +93,7 @@ public class CommandBalanceTop extends CommandBase {
                 output = output.append(ComponentUtils.create("\n-------------------------------------"));
                 commandSender.sendMessage(output);
             }
-        }.runTaskAsynchronously(SMPRPG.getInstance());
+        }.runTaskAsynchronously(SMPRPG.getPlugin());
 
     }
 

@@ -23,6 +23,6 @@ public final class CommandDeposit extends PlayerCommandBase {
 
     @Override
     protected void playerInvoked(@NotNull Player player, @NotNull CommandSourceStack ctx, @NotNull String @NotNull [] args) {
-        new MenuDeposit(SMPRPG.getInstance(), player).openMenu();
+        new MenuDeposit(SMPRPG.getPlugin(), player).openMenu();
     }
 }

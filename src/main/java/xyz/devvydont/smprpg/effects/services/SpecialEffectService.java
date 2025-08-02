@@ -22,7 +22,7 @@ public class SpecialEffectService implements IService {
     private void registerListeners() {
         listeners.add(new ShroudedEffectListener(this));
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         for (Listener listener : listeners)
             plugin.getServer().getPluginManager().registerEvents(listener, plugin);
     }
@@ -67,7 +67,7 @@ public class SpecialEffectService implements IService {
         removeEffect(player);
 
         // Create a task and run it every second and store it
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         if (effect instanceof Listener listener)
             plugin.getServer().getPluginManager().registerEvents(listener, plugin);
         effect.runTaskTimer(plugin, 0, SpecialEffectTask.PERIOD);

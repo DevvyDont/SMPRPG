@@ -31,7 +31,7 @@ public class ChatService implements IService, Listener {
 
     @Override
     public void setup() throws RuntimeException {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         plugin.getLogger().info("Setting up Chat service");
 
         // If vault isn't installed, we cannot function correctly.
@@ -53,7 +53,7 @@ public class ChatService implements IService, Listener {
 
     @Override
     public void cleanup() {
-        SMPRPG.getInstance().getLogger().info("Cleaning up ChatService");
+        SMPRPG.getPlugin().getLogger().info("Cleaning up ChatService");
     }
 
     private TextColor determineNameColor(OfflinePlayer player) {

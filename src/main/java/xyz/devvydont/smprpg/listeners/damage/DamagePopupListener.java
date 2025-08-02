@@ -1,9 +1,7 @@
 package xyz.devvydont.smprpg.listeners.damage;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
@@ -88,7 +86,7 @@ public class DamagePopupListener extends ToggleableListener {
             public void run() {
                 display.remove();
             }
-        }.runTaskLater(SMPRPG.getInstance(), TickTime.seconds(2));
+        }.runTaskLater(SMPRPG.getPlugin(), TickTime.seconds(2));
     }
 
     /**

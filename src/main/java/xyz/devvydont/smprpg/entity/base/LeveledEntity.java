@@ -38,7 +38,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
     protected EntityConfiguration _config = EntityConfiguration.DEFAULT;
 
     public LeveledEntity(Entity entity) {
-        this._plugin =  SMPRPG.getInstance();
+        this._plugin =  SMPRPG.getPlugin();
         this._entity = (T) entity;
     }
 

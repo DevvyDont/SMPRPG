@@ -17,7 +17,7 @@ public class HealthScaleListener extends ToggleableListener {
 
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         var player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         new BukkitRunnable() {
             public void run() {
@@ -28,7 +28,7 @@ public class HealthScaleListener extends ToggleableListener {
 
     @EventHandler
     public void onSkillLevelUp(SkillLevelUpEvent event) {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         var player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         event.getPlayer().setHealthScale(player.getHealthScale());
     }

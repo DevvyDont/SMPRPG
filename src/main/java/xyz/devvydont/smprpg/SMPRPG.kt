@@ -107,8 +107,13 @@ class SMPRPG : JavaPlugin() {
     companion object {
         var INSTANCE: SMPRPG? = null
 
+        /**
+         * A global shortcut to retrieve the plugin instance.
+         * In Kotlin, you can use the 'plugin' variable anywhere in the codebase.
+         * In Java, you can use the 'SMPRPG.getPlugin()' call to retrieve the plugin anywhere in the codebase.
+         */
         @JvmStatic
-        val instance: SMPRPG
+        val plugin: SMPRPG
             get() = INSTANCE!!
 
         /**

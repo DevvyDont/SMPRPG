@@ -21,7 +21,7 @@ public abstract class ToggleableListener implements Listener {
         if (enabled)
             return;
 
-        SMPRPG.getInstance().getServer().getPluginManager().registerEvents(this, SMPRPG.getInstance());
+        SMPRPG.getPlugin().getServer().getPluginManager().registerEvents(this, SMPRPG.getPlugin());
         enabled = true;
     }
 

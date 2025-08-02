@@ -61,11 +61,11 @@ public class EntityService implements IService, Listener {
     private BukkitTask wellnessCheckTask = null;
 
     public static NamespacedKey getClassNamespacedKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), ENTITY_CLASS_KEY);
+        return new NamespacedKey(SMPRPG.getPlugin(), ENTITY_CLASS_KEY);
     }
 
     public static NamespacedKey getLevelNamespacedKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), LEVEL_KEY_STRING);
+        return new NamespacedKey(SMPRPG.getPlugin(), LEVEL_KEY_STRING);
     }
 
     public EntityService() {
@@ -83,7 +83,7 @@ public class EntityService implements IService, Listener {
         for (CustomEntityType customEntityType : CustomEntityType.values())
             entityResolver.put(customEntityType.key(), customEntityType);
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         plugin.getLogger().info(String.format("Registered %s custom entity types", entityResolver.size()));
 
         vanillaEntityHandlers.put(EntityType.ZOMBIE, LeveledZombie.class);
@@ -202,7 +202,7 @@ public class EntityService implements IService, Listener {
             trackEntity(ret);
             return ret;
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-            SMPRPG.getInstance().getLogger().severe(String.format("Failed to instantiate vanilla class handler %s for entity type %s. Ensure that a constructor exists using the %s class as a parameter.", handler.getName(), entity.getType(), entity.getType().getEntityClass()));
+            SMPRPG.getPlugin().getLogger().severe(String.format("Failed to instantiate vanilla class handler %s for entity type %s. Ensure that a constructor exists using the %s class as a parameter.", handler.getName(), entity.getType(), entity.getType().getEntityClass()));
             ret =  new VanillaEntity<>(entity);
             ret.setup();
             ret.updateAttributes();
@@ -228,7 +228,7 @@ public class EntityService implements IService, Listener {
 
         // Is this a player? We use a pretty barebones instance for players for least amount of interference possible
         if (entity instanceof Player player) {
-            LeveledPlayer leveledPlayer = new LeveledPlayer(SMPRPG.getInstance(), player);
+            LeveledPlayer leveledPlayer = new LeveledPlayer(SMPRPG.getPlugin(), player);
             leveledPlayer.setup();
             trackEntity(leveledPlayer);
             return leveledPlayer;
@@ -300,7 +300,7 @@ public class EntityService implements IService, Listener {
         removeEntity(entity.getEntity().getUniqueId());
         entityInstances.put(entity.getEntity().getUniqueId(), entity);
         if (entity instanceof Listener listener)
-            SMPRPG.getInstance().getServer().getPluginManager().registerEvents(listener, SMPRPG.getInstance());
+            SMPRPG.getPlugin().getServer().getPluginManager().registerEvents(listener, SMPRPG.getPlugin());
     }
 
     private void removeEntity(UUID uuid) {
@@ -410,7 +410,7 @@ public class EntityService implements IService, Listener {
             public void run() {
                 leveled.updateNametag();
             }
-        }.runTaskLater(SMPRPG.getInstance(), 1L);
+        }.runTaskLater(SMPRPG.getPlugin(), 1L);
     }
 
     // Handle nametag updates and Damage popups for healing events
@@ -430,7 +430,7 @@ public class EntityService implements IService, Listener {
             public void run() {
                 leveled.updateNametag();
             }
-        }.runTaskLater(SMPRPG.getInstance(), 1L);
+        }.runTaskLater(SMPRPG.getPlugin(), 1L);
 
     }
 
@@ -451,7 +451,7 @@ public class EntityService implements IService, Listener {
             public void run() {
                 leveled.updateNametag();
             }
-        }.runTaskLater(SMPRPG.getInstance(), 1L);
+        }.runTaskLater(SMPRPG.getPlugin(), 1L);
     }
 
     // Handle nametag updates when we switch the item in our hand
@@ -463,7 +463,7 @@ public class EntityService implements IService, Listener {
             public void run() {
                 leveled.updateNametag();
             }
-        }.runTaskLater(SMPRPG.getInstance(), 1L);
+        }.runTaskLater(SMPRPG.getPlugin(), 1L);
     }
 
     // Handle nametag updates when we switch armor we are wearing
@@ -475,7 +475,7 @@ public class EntityService implements IService, Listener {
             public void run() {
                 leveled.updateNametag();
             }
-        }.runTaskLater(SMPRPG.getInstance(), 1L);
+        }.runTaskLater(SMPRPG.getPlugin(), 1L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

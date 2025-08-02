@@ -22,7 +22,7 @@ public class EconomyService implements IService {
     @Override
     public void setup() throws RuntimeException {
         // If vault isn't installed, we cannot function correctly.
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
             plugin.getLogger().severe("Vault is not installed. Please install Vault");
             throw new RuntimeException("Vault is not installed. Please install Vault");
@@ -41,7 +41,7 @@ public class EconomyService implements IService {
 
     @Override
     public void cleanup() {
-        SMPRPG.getInstance().getLogger().info("Cleaning up EconomyService");
+        SMPRPG.getPlugin().getLogger().info("Cleaning up EconomyService");
     }
 
     /**
@@ -73,7 +73,7 @@ public class EconomyService implements IService {
      */
     public boolean addMoney(OfflinePlayer player, double amount) {
         EconomyResponse response = economy.depositPlayer(player, (int)Math.round(amount));
-        SMPRPG.getInstance().getLogger().finest(String.format("Server has paid %s %.0f coins, balance is now %.0f", player.getName(), response.amount, response.balance));
+        SMPRPG.getPlugin().getLogger().finest(String.format("Server has paid %s %.0f coins, balance is now %.0f", player.getName(), response.amount, response.balance));
         return response.transactionSuccess();
     }
 
@@ -86,7 +86,7 @@ public class EconomyService implements IService {
      */
     public boolean takeMoney(OfflinePlayer player, double amount) {
         EconomyResponse response = economy.withdrawPlayer(player, (int)Math.round(amount));
-        SMPRPG.getInstance().getLogger().info(String.format("Server has attempted to take %s's %.0f coins, balance is now %.0f (%s-%s)", player.getName(), response.amount, response.balance, response.type, response.errorMessage));
+        SMPRPG.getPlugin().getLogger().info(String.format("Server has attempted to take %s's %.0f coins, balance is now %.0f (%s-%s)", player.getName(), response.amount, response.balance, response.type, response.errorMessage));
         return response.transactionSuccess();
     }
 

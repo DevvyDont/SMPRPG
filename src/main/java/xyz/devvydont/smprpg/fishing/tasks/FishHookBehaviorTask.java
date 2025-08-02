@@ -1,7 +1,6 @@
 package xyz.devvydont.smprpg.fishing.tasks;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
@@ -150,7 +149,7 @@ public class FishHookBehaviorTask extends BukkitRunnable {
      */
     public static FishHookBehaviorTask create(FishHook hook) {
         var instance = new FishHookBehaviorTask(hook);
-        instance.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
+        instance.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
         return instance;
     }
 
@@ -268,8 +267,8 @@ public class FishHookBehaviorTask extends BukkitRunnable {
                 this.ticksUntilBite = Integer.MAX_VALUE;
                 this.cleanupHookMount();
                 for (var flag : IFishingRod.FishingFlag.values())
-                    this.hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
-                this.hook.setMetadata(this.getFlagFromCurrentState().toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+                    this.hook.removeMetadata(flag.toString(), SMPRPG.getPlugin());
+                this.hook.setMetadata(this.getFlagFromCurrentState().toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
             }
         }
     }

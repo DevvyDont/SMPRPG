@@ -31,7 +31,7 @@ public class SugarRushAbilityHandler implements AbilityHandler {
         ctx.caster().getWorld().playSound(ctx.caster().getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, .25f, 2f);
         speed.removeModifier(ATTRIBUTE_KEY);
         speed.addTransientModifier(new AttributeModifier(ATTRIBUTE_KEY, BOOST/100.0, AttributeModifier.Operation.ADD_SCALAR));
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> speed.removeModifier(ATTRIBUTE_KEY), TickTime.seconds(DURATION));
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> speed.removeModifier(ATTRIBUTE_KEY), TickTime.seconds(DURATION));
         return true;
     }
 }

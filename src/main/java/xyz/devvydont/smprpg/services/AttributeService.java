@@ -39,7 +39,7 @@ public class AttributeService implements IService, Listener {
     @Override
     public void setup() throws RuntimeException {
         // Listener to apply/remove custom attributes.
-        SMPRPG.getInstance().getServer().getPluginManager().registerEvents(new AttributeApplyListener(), SMPRPG.getInstance());
+        SMPRPG.getPlugin().getServer().getPluginManager().registerEvents(new AttributeApplyListener(), SMPRPG.getPlugin());
     }
 
     @Override
@@ -95,7 +95,7 @@ public class AttributeService implements IService, Listener {
         // If this is vanilla, no need to do anything special!
         if (wrapper.isVanilla()) {
             if (wrapper.getWrappedAttribute() == null) {
-                SMPRPG.getInstance().getLogger().severe("Incorrect attribute wrapper definition " + wrapper + ". If an attribute is vanilla, it must contain a wrapped attribute!");
+                SMPRPG.getPlugin().getLogger().severe("Incorrect attribute wrapper definition " + wrapper + ". If an attribute is vanilla, it must contain a wrapped attribute!");
                 return;
             }
             target.registerAttribute(wrapper.getWrappedAttribute());
@@ -339,7 +339,7 @@ public class AttributeService implements IService, Listener {
             for (var vanillaModifier : meta.getAttributeModifiers().entries()) {
                 var attribute = AttributeWrapper.fromAttribute(vanillaModifier.getKey());
                 if (attribute == null) {
-                    SMPRPG.getInstance().getLogger().warning("Unknown attribute " + vanillaModifier.getKey() + ". Please add it to AttributeWrapper!");
+                    SMPRPG.getPlugin().getLogger().warning("Unknown attribute " + vanillaModifier.getKey() + ". Please add it to AttributeWrapper!");
                     continue;
                 }
                 modifiers.put(attribute, vanillaModifier.getValue());

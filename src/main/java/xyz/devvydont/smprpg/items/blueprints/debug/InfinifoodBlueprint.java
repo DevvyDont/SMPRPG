@@ -61,6 +61,6 @@ public class InfinifoodBlueprint extends CustomItemBlueprint implements IEdible,
             return;
 
         event.setReplacement(event.getItem());
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> event.getPlayer().getInventory().setItem(event.getHand(), event.getItem()), TickTime.INSTANTANEOUSLY);
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> event.getPlayer().getInventory().setItem(event.getHand(), event.getItem()), TickTime.INSTANTANEOUSLY);
     }
 }

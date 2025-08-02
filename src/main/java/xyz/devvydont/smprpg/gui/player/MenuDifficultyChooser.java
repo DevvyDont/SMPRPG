@@ -254,7 +254,7 @@ public class MenuDifficultyChooser extends MenuBase {
     @Override
     protected void handleInventoryClosed(InventoryCloseEvent event) {
         if (event.getPlayer().equals(this.player) && this.locked) {
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
                 openMenu();
                 playInvalidAnimation();
             }, 0);

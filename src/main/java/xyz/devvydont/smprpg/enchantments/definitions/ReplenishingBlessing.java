@@ -133,7 +133,7 @@ public class ReplenishingBlessing extends CustomEnchantment implements Listener 
 
             if (random.nextInt(100) <= passThreshold) {
                 ageable.setAge(0);
-                Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
                     block.setType(block.getType());
                     block.setBlockData(ageable);
                 }, TickTime.INSTANTANEOUSLY);

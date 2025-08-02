@@ -22,7 +22,7 @@ public class SlimeRapidAttackFixListener extends ToggleableListener {
 
     private long getCooldown(Entity entity) {
         for (var meta : entity.getMetadata(COOLDOWN_KEY))
-            if (meta.getOwningPlugin() == SMPRPG.getInstance())
+            if (meta.getOwningPlugin() == SMPRPG.getPlugin())
                 return meta.asLong();
         return NO_COOLDOWN;
     }
@@ -41,7 +41,7 @@ public class SlimeRapidAttackFixListener extends ToggleableListener {
             return;
         }
 
-        slime.setMetadata(COOLDOWN_KEY, new FixedMetadataValue(SMPRPG.getInstance(), System.currentTimeMillis() + SLIME_ATTACK_COOLDOWN_MS));
+        slime.setMetadata(COOLDOWN_KEY, new FixedMetadataValue(SMPRPG.getPlugin(), System.currentTimeMillis() + SLIME_ATTACK_COOLDOWN_MS));
     }
 
 }

@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpectralArrow;
@@ -235,6 +234,6 @@ public class InfernoArrow extends CustomItemBlueprint implements IHeaderDescriba
         ));
 
         for (int i = 0; i < 5; i++)
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> boss.getEntity().getWorld().createExplosion(boss.getEntity().getLocation().add(0, 5, 0), 5.0f, false, false), i*3);
+            Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> boss.getEntity().getWorld().createExplosion(boss.getEntity().getLocation().add(0, 5, 0), 5.0f, false, false), i*3);
     }
 }

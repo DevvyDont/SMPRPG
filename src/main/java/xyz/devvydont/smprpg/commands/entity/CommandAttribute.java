@@ -219,7 +219,7 @@ public class CommandAttribute extends CommandBase {
                 return;
             }
             attribute.addModifier(new AttributeModifier(
-                new NamespacedKey(SMPRPG.getInstance(), key),
+                new NamespacedKey(SMPRPG.getPlugin(), key),
                 amount,
                 operation,
                 slot
@@ -234,7 +234,7 @@ public class CommandAttribute extends CommandBase {
 
             // Extract the UUID to remove.
             var uuid = context.args()[3];
-            var key = new NamespacedKey(SMPRPG.getInstance(), uuid);
+            var key = new NamespacedKey(SMPRPG.getPlugin(), uuid);
             attribute.removeModifier(key);
             attribute.save(context.target(), context.attribute());
 

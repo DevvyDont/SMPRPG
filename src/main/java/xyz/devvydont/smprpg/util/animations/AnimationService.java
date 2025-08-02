@@ -23,7 +23,7 @@ public final class AnimationService implements Runnable, IService {
 
     @Override
     public void setup() throws RuntimeException {
-        var task = Bukkit.getScheduler().runTaskTimer(SMPRPG.getInstance(), this, TickTime.INSTANTANEOUSLY, TickTime.TICK);
+        var task = Bukkit.getScheduler().runTaskTimer(SMPRPG.getPlugin(), this, TickTime.INSTANTANEOUSLY, TickTime.TICK);
         taskId = task.getTaskId();
     }
 

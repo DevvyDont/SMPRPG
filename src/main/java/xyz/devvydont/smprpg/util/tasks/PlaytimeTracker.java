@@ -27,7 +27,7 @@ public class PlaytimeTracker extends BukkitRunnable {
     public static PlaytimeTracker start() {
         stop();
         task = new PlaytimeTracker();
-        task.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.minutes(1));
+        task.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.minutes(1));
         return task;
     }
 

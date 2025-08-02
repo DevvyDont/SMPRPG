@@ -98,7 +98,7 @@ class ItemService : IService, Listener {
     override fun setup() {
         registerReforges()
 
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         plugin.logger.info(String.format("Successfully registered %d reforges", reforges.size))
 
         val recipeCount = countRecipes()
@@ -135,7 +135,7 @@ class ItemService : IService, Listener {
     }
 
     override fun cleanup() {
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         plugin.logger.info("Cleaning up ItemService")
 
         // Unregister all the custom recipes.
@@ -156,7 +156,7 @@ class ItemService : IService, Listener {
      * @return How many recipes are registered.
      */
     private fun countRecipes(): Int {
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         var n = 0
         val recipeIterator = plugin.server.recipeIterator()
         while (recipeIterator.hasNext()) {
@@ -266,7 +266,7 @@ class ItemService : IService, Listener {
             registerVanillaMaterialResolver(entry.key, VanillaResource::class.java)
         }
 
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         // Loop through all the custom items and use reflection to register a handler
         for (customItemType in CustomItemType.entries) {
             val blueprint: CustomItemBlueprint?
@@ -350,7 +350,7 @@ class ItemService : IService, Listener {
     }
 
     private fun registerReforges() {
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         for (reforgeType in ReforgeType.entries) {
             val handler: ReforgeBase = reforgeType.createHandler()
             if (handler is Listener) plugin.server.pluginManager.registerEvents(handler as Listener, plugin)
@@ -362,7 +362,7 @@ class ItemService : IService, Listener {
         material: Material,
         wrapper: Class<out VanillaItemBlueprint>
     ): VanillaItemBlueprint {
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         plugin.logger.finest(
             String.format(
                 "Assigned vanilla material %s with wrapper class %s",
@@ -390,7 +390,7 @@ class ItemService : IService, Listener {
     }
 
     private fun registerCustomItem(blueprint: CustomItemBlueprint) {
-        val plugin = SMPRPG.instance
+        val plugin = SMPRPG.plugin
         plugin.logger.finest(
             String.format(
                 "Registering custom item %s {key=%s}",
@@ -1185,7 +1185,7 @@ class ItemService : IService, Listener {
             override fun run() {
                 ensureItemStackUpdated(e.item)
             }
-        }.runTaskLater(SMPRPG.instance, TickTime.INSTANTANEOUSLY)
+        }.runTaskLater(SMPRPG.plugin, TickTime.INSTANTANEOUSLY)
     }
 
     /**
@@ -1199,7 +1199,7 @@ class ItemService : IService, Listener {
                 ensureItemStackUpdated(event.getPlayer().inventory.itemInMainHand)
                 ensureItemStackUpdated(event.getPlayer().inventory.itemInOffHand)
             }
-        }.runTaskLater(SMPRPG.instance, 0L)
+        }.runTaskLater(SMPRPG.plugin, 0L)
     }
 
     /**
@@ -1214,7 +1214,7 @@ class ItemService : IService, Listener {
             override fun run() {
                 ensureItemStackUpdated(event.player.inventory.itemInMainHand)
             }
-        }.runTaskLater(SMPRPG.instance, 0L)
+        }.runTaskLater(SMPRPG.plugin, 0L)
     }
 
     @EventHandler
@@ -1238,7 +1238,7 @@ class ItemService : IService, Listener {
             override fun run() {
                 for (item in gear) ensureItemStackUpdated(item)
             }
-        }.runTaskLater(SMPRPG.instance, 0L)
+        }.runTaskLater(SMPRPG.plugin, 0L)
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)

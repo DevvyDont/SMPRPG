@@ -58,7 +58,7 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
             this.level = level;
         }
 
-        private static NamespacedKey key = new NamespacedKey(SMPRPG.getInstance(), "spawner-options");
+        private static NamespacedKey key = new NamespacedKey(SMPRPG.getPlugin(), "spawner-options");
 
         Map<CustomEntityType, SpawnerEntry> entries;
 

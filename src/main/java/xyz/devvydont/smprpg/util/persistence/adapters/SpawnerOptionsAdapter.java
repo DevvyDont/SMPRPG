@@ -82,8 +82,8 @@ public class SpawnerOptionsAdapter implements PersistentDataType<String, EntityS
         try {
             container = gson.fromJson(primitive, SpawnerGsonContainer.class);
         } catch (JsonSyntaxException e) {
-            SMPRPG.getInstance().getLogger().severe("Failed to parse primitive spawning options. String is: " + primitive);
-            SMPRPG.getInstance().getLogger().severe(e.toString());
+            SMPRPG.getPlugin().getLogger().severe("Failed to parse primitive spawning options. String is: " + primitive);
+            SMPRPG.getPlugin().getLogger().severe(e.toString());
             return new EntitySpawner.SpawnerOptions();
         }
 

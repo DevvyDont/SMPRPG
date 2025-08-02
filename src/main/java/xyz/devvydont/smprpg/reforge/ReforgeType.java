@@ -216,7 +216,7 @@ public enum ReforgeType {
         try {
             return this.handler.getConstructor(this.getClass()).newInstance(this);
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-            SMPRPG.getInstance().getLogger().severe("Failed to instantiate handler for " + this.name() + "! Does the constructor match ReforgeBase?");
+            SMPRPG.getPlugin().getLogger().severe("Failed to instantiate handler for " + this.name() + "! Does the constructor match ReforgeBase?");
             throw new RuntimeException(e);
         }
     }

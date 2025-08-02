@@ -93,7 +93,7 @@ public abstract class MenuBase implements Listener {
         this.shouldPlayClosingSound = true;
 
         // Open the UI
-        Bukkit.getPluginManager().registerEvents(this, SMPRPG.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, SMPRPG.getPlugin());
         this.player.openInventory(this.inventory);
     }
 

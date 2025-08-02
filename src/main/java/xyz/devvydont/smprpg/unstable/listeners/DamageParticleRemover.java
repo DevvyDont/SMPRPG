@@ -20,7 +20,7 @@ public class DamageParticleRemover {
 
     public DamageParticleRemover() {
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
 
         if (plugin.getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
             plugin.getLogger().severe("ProtocolLib is not installed. High damage particles will clutter clients' screens.");

@@ -62,7 +62,7 @@ public class ExperienceGainNotifier implements Listener {
                 public void run() {
                     messagePlayerSkillLevelUp(event.getPlayer(), event.getSkill(), iter);
                 }
-            }.runTaskLater(SMPRPG.getInstance(), delay);
+            }.runTaskLater(SMPRPG.getPlugin(), delay);
             delay += 10;
         }
 

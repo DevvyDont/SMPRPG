@@ -34,7 +34,7 @@ public enum SkillType {
 
     public NamespacedKey getNamespacedKey() {
         if (key == null)
-            key = new NamespacedKey(SMPRPG.getInstance(), getKey());
+            key = new NamespacedKey(SMPRPG.getPlugin(), getKey());
 
         return key;
     }

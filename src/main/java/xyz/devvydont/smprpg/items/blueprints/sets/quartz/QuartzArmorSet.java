@@ -56,7 +56,7 @@ public abstract class QuartzArmorSet extends CustomAttributeItem implements ITri
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey());
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey());
     }
 
     @Override

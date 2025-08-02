@@ -14,6 +14,6 @@ public final class CommandWithdrawal extends PlayerCommandBase {
 
     @Override
     protected void playerInvoked(@NotNull Player player, @NotNull CommandSourceStack ctx, @NotNull String @NotNull [] args) {
-        new MenuWithdraw(SMPRPG.getInstance(), player).openMenu();
+        new MenuWithdraw(SMPRPG.getPlugin(), player).openMenu();
     }
 }

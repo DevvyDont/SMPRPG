@@ -17,11 +17,9 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.Nullable;
@@ -113,7 +111,7 @@ public class DropsService implements IService, Listener {
     public static final Map<ItemRarity, Team> rarityToTeam = new HashMap<>();
 
     public DropsService() {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         this.OWNER_UUID_KEY = new NamespacedKey(plugin, "drop-owner-uuid");
         this.OWNER_NAME_KEY = new NamespacedKey(plugin, "drop-owner-name");
         this.DROP_FLAG_KEY = new NamespacedKey(plugin, "drop-flag");
@@ -342,7 +340,7 @@ public class DropsService implements IService, Listener {
 
     @Override
     public void setup() throws RuntimeException {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
 
         // Make a task that will gradually pop off drop announcements in the drop queue.
         dropAnnouncementTask = new BukkitRunnable() {
@@ -394,12 +392,12 @@ public class DropsService implements IService, Listener {
                         item.remove();
                         expiredItemQueue.remove(item);
                     } catch (Exception e) {
-                        SMPRPG.getInstance().getLogger().warning(e.getMessage());
+                        SMPRPG.getPlugin().getLogger().warning(e.getMessage());
                     }
                 }
             }
         };
-        itemCleanupTask.runTaskTimer(SMPRPG.getInstance(), 0, TickTime.TICK);
+        itemCleanupTask.runTaskTimer(SMPRPG.getPlugin(), 0, TickTime.TICK);
 
         // Make a task that will slowly decrement items on the ground so they despawn eventually.
         itemTimerTask = new BukkitRunnable() {
@@ -414,11 +412,11 @@ public class DropsService implements IService, Listener {
 
                 List<Item> entities = null;
                 try {
-                    entities = Bukkit.getScheduler().callSyncMethod(SMPRPG.getInstance(), DropsService::getAllLoadedItems).get();
+                    entities = Bukkit.getScheduler().callSyncMethod(SMPRPG.getPlugin(), DropsService::getAllLoadedItems).get();
                 } catch (InterruptedException e) {
-                    SMPRPG.getInstance().getLogger().warning("Item cleanup query task was interrupted. " + e.getMessage());
+                    SMPRPG.getPlugin().getLogger().warning("Item cleanup query task was interrupted. " + e.getMessage());
                 } catch (ExecutionException e) {
-                    SMPRPG.getInstance().getLogger().warning("Item cleanup query task ran into an error. " + e.getMessage());
+                    SMPRPG.getPlugin().getLogger().warning("Item cleanup query task ran into an error. " + e.getMessage());
                 }
                 if (entities == null)
                     return;
@@ -742,7 +740,7 @@ public class DropsService implements IService, Listener {
 
         // Just show the message to the player since it's not THAT crazy. We should do this a bit later tho...
         Component message = prefix.append(ComponentUtils.create("You")).append(suffix).append(chance);
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
             event.getPlayer().sendMessage(message);
             event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_CHICKEN_EGG, 1, 1);
         }, TickTime.TICK * 5);

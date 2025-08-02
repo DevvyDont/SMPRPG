@@ -67,7 +67,7 @@ public class CommandSimulateFishing extends PlayerCommandBase {
                 if (tick >= casts)
                     cancel();
             }
-        }.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
+        }.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
     }
 
     @Override

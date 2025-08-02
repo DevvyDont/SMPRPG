@@ -17,7 +17,7 @@ import xyz.devvydont.smprpg.skills.rewards.ISkillReward;
 public class SkillService implements IService, Listener {
 
     public SkillService() {
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         new CombatExperienceListener(plugin);
         new MiningExperienceListener(plugin);
         new ForagingExperienceListener(plugin);
@@ -31,7 +31,7 @@ public class SkillService implements IService, Listener {
     @Override
     public void setup() throws RuntimeException {
 
-        var plugin = SMPRPG.getInstance();
+        var plugin = SMPRPG.getPlugin();
         int sum = 0;
         for (int i = 1; i <= SkillGlobals.getMaxSkillLevel(); i++) {
             int xp = SkillGlobals.getExperienceForLevel(i);

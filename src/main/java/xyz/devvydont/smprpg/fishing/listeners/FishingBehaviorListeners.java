@@ -2,13 +2,10 @@ package xyz.devvydont.smprpg.fishing.listeners;
 
 import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent;
 import io.papermc.paper.event.entity.EntityEquipmentChangedEvent;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -118,8 +115,8 @@ public class FishingBehaviorListeners extends ToggleableListener {
         // force tag the fishing hook as a normal fishing hook so it doesn't catch lava/void fish in normal circumstances.
         if (event.getState().equals(PlayerFishEvent.State.LURED)) {
             for (var flag : IFishingRod.FishingFlag.values())
-                event.getHook().removeMetadata(flag.toString(), SMPRPG.getInstance());
-            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+                event.getHook().removeMetadata(flag.toString(), SMPRPG.getPlugin());
+            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
         }
 
         // Filter out events where we aren't casting a fishing line to start the process.
@@ -141,7 +138,7 @@ public class FishingBehaviorListeners extends ToggleableListener {
         // We have two jobs. Start a ticking behavior task to simulate fishing in contexts where fishing isn't supported,
         // and tag the fishing hook with the flags that it's allowed to fish for.
         for (var flag : rodBlueprint.getFishingFlags())
-            event.getHook().setMetadata(flag.name(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+            event.getHook().setMetadata(flag.name(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
 
         // If this rod is nothing special, we can simply ignore it. It will act like a vanilla fishing rod.
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL) && rodBlueprint.getFishingFlags().size() == 1)

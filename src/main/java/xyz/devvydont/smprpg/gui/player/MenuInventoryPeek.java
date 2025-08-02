@@ -8,10 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.gui.InterfaceUtil;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
@@ -68,7 +66,7 @@ public class MenuInventoryPeek extends MenuBase {
         event.titleOverride(ComponentUtils.create(targetPlayer.getName() + "'s Inventory", NamedTextColor.BLACK));
 
         // Update the inventory layout every tick to match the player.
-        inventoryUpdateTask = Bukkit.getScheduler().runTaskTimer(SMPRPG.getInstance(), this::renderInventory, 0, 10);
+        inventoryUpdateTask = Bukkit.getScheduler().runTaskTimer(SMPRPG.getPlugin(), this::renderInventory, 0, 10);
     }
 
     @Override

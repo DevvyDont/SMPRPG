@@ -90,7 +90,7 @@ public class HealingHandler implements AbilityHandler {
             }
         };
 
-        task.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.HALF_SECOND);
+        task.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.HALF_SECOND);
         entityIdToHealingTask.put(ctx.caster().getUniqueId(), task);
         ctx.caster().getWorld().playSound(ctx.caster().getLocation(), Sound.ENTITY_CREAKING_DEATH, 1f, 2f);
         return true;
