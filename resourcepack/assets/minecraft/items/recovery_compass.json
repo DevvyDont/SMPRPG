@@ -254,8 +254,7 @@
                         "type": "minecraft:model",
                         "model": "tools:item/magic_mirror_use"
                     },
-                    "property": "minecraft:keybind_down",
-					"keybind": "key.use"
+                    "property": "minecraft:using_item"
                 }
             }
         ]
