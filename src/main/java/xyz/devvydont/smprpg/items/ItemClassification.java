@@ -23,6 +23,7 @@ public enum ItemClassification {
     AXE(ItemTypeTagKeys.ENCHANTABLE_WEAPON, ItemTypeTagKeys.ENCHANTABLE_SHARP_WEAPON, ItemTypeTagKeys.ENCHANTABLE_MINING, ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING, ItemTypeTagKeys.AXES),
     HOE(ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING, ItemTypeTagKeys.ENCHANTABLE_MINING, ItemTypeTagKeys.HOES),
     PICKAXE(ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING, ItemTypeTagKeys.ENCHANTABLE_MINING, ItemTypeTagKeys.ENCHANTABLE_MINING_LOOT, ItemTypeTagKeys.PICKAXES),
+    HATCHET(ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING, ItemTypeTagKeys.ENCHANTABLE_MINING, ItemTypeTagKeys.AXES),
     // Anything that can be worn
     HELMET(ItemTypeTagKeys.ENCHANTABLE_HEAD_ARMOR, ItemTypeTagKeys.ENCHANTABLE_ARMOR, ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING),
     CHESTPLATE(ItemTypeTagKeys.ENCHANTABLE_CHEST_ARMOR, ItemTypeTagKeys.ENCHANTABLE_ARMOR, ItemTypeTagKeys.ENCHANTABLE_DURABILITY, ItemTypeTagKeys.ENCHANTABLE_VANISHING),
@@ -129,7 +130,7 @@ public enum ItemClassification {
         // todo, we can prob figure this out dynamically using item type tags but worried for rapid checks performance wise since it's a intersection operation
         return switch (this) {
             case SWORD, TRIDENT, BOW, CROSSBOW, SHORTBOW, HELMET, CHESTPLATE, LEGGINGS, BOOTS, WEAPON, MACE, AXE, TOOL, PICKAXE, HOE,
-                 ROD, CHARM, EQUIPMENT -> true;
+                 ROD, CHARM, EQUIPMENT, HATCHET -> true;
             default -> false;
         };
     }

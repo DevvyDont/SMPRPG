@@ -245,8 +245,58 @@
             {
                 "when": "smprpg:magic_mirror",
                 "model": {
-                    "type": "model",
-                    "model": "tools:item/magic_mirror"
+                    "type": "minecraft:condition",
+                    "property": "minecraft:using_item",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/magic_mirror"
+                    },
+                    "on_true": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:component",
+                        "predicate": "minecraft:custom_data",
+                        "value": {
+                            "PublicBukkitValues": {
+                                "smprpg:current_mode": "player_spawn"
+                            }
+                        },
+                        "on_true": {
+                            "type": "minecraft:model",
+                            "model": "tools:item/magic_mirror_use_ow"
+                        },
+                        "on_false": {
+                            "type": "minecraft:condition",
+                            "property": "minecraft:component",
+                            "predicate": "minecraft:custom_data",
+                            "value": {
+                                "PublicBukkitValues": {
+                                    "smprpg:current_mode": "overworld_spawn"
+                                }
+                            },
+                            "on_true": {
+                                "type": "minecraft:model",
+                                "model": "tools:item/magic_mirror_use_spawn"
+                            },
+                            "on_false": {
+                                "type": "minecraft:condition",
+                                "property": "minecraft:component",
+                                "predicate": "minecraft:custom_data",
+                                "value": {
+                                    "PublicBukkitValues": {
+                                        "smprpg:current_mode": "end_spawn"
+                                    }
+                                },
+                                "on_true": {
+                                    "type": "minecraft:model",
+                                    "model": "tools:item/magic_mirror_use_end"
+                                },
+                                "on_false": {
+                                    "type": "minecraft:model",
+                                    "model": "tools:item/magic_mirror_use_nether"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         ]

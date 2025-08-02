@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/iron_axe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:iron_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/iron_hatchet"
+                }
+            }
+        ]
+    }
+}

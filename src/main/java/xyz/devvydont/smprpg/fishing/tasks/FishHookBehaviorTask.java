@@ -349,6 +349,13 @@ public class FishHookBehaviorTask extends BukkitRunnable {
         if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))
             return;
 
+        // Damage the rod.
+        if (event.getHand() != null) {
+            var rod = event.getPlayer().getInventory().getItem(event.getHand());
+            if (!rod.getType().equals(Material.AIR))
+                rod.damage(1, event.getPlayer());
+        }
+
         // Simulates a catch!
         if (this.ticksAllowedToCatch >= 0) {
             hook.setHookedEntity(null);
