@@ -29,6 +29,7 @@ public class HotShotAbilityHandler implements AbilityHandler {
 
     public static void setInfernoProjectile(Entity projectile) {
         projectiles.put(projectile.getUniqueId(), projectile);
+        projectile.addScoreboardTag("hotshot");
     }
 
     public static void removeInfernoProjectile(Entity projectile) {

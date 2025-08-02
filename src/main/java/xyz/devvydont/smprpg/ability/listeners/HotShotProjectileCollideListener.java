@@ -9,6 +9,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import xyz.devvydont.smprpg.ability.handlers.HotShotAbilityHandler;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
@@ -68,6 +70,19 @@ public class HotShotProjectileCollideListener extends ToggleableListener {
         event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1.25f);
         HotShotAbilityHandler.removeInfernoProjectile(event.getEntity());
         event.setCancelled(true);
+    }
+
+    /**
+     * More of a hack if anything. Disables the default damage that the hot shot explosion does. Our damage we calculate
+     * is 100% manual and done through magic.
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void __onHotShotProjectileDamage(EntityDamageEvent event) {
+        if (event.getDamageSource().getDirectEntity() == null)
+            return;
+
+        if (event.getDamageSource().getDirectEntity().getScoreboardTags().contains("hotshot"))
+            event.setCancelled(true);
     }
 
 }
