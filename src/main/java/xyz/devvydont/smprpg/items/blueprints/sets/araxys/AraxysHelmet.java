@@ -49,10 +49,10 @@ public class AraxysHelmet extends AraxysArmorPiece implements IBreakableEquipmen
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 190),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 190),
-                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .6),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 50),
+                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, (double) AraxysChestplate.DEFENSE / 2 + 30),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, (double) AraxysChestplate.HEALTH / 2 + 30),
+                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, AraxysChestplate.STRENGTH),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, AraxysChestplate.CRIT),
                 new AdditiveAttributeEntry(AttributeWrapper.INTELLIGENCE, 200)
         );
     }

@@ -83,12 +83,12 @@ public class ChatService implements IService, Listener {
     /**
      * Injects the player level into a chat message no matter what chat plugins are doing.
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void __onChat(AsyncChatEvent event) {
         event.renderer(CHAT_RENDERER);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void __onJoin(PlayerJoinEvent event) {
         var name = getPlayerDisplay(event.getPlayer());
         var msg = ComponentUtils.merge(
@@ -98,7 +98,7 @@ public class ChatService implements IService, Listener {
         event.joinMessage(ComponentUtils.alert(msg, NamedTextColor.GREEN));
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void __onLeave(PlayerQuitEvent event) {
         var name = getPlayerDisplay(event.getPlayer());
         var msg = ComponentUtils.merge(

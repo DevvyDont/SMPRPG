@@ -15,6 +15,11 @@ import java.util.List;
 
 public class AraxysChestplate extends AraxysArmorPiece {
 
+    public static final int DEFENSE = 320;
+    public static final int HEALTH = 300;
+    public static final double STRENGTH = .75;
+    public static final int CRIT = 40;
+
     public AraxysChestplate(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
@@ -27,10 +32,10 @@ public class AraxysChestplate extends AraxysArmorPiece {
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 300),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 300),
-                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .75),
-                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 50)
+                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, DEFENSE),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, HEALTH),
+                new ScalarAttributeEntry(AttributeWrapper.STRENGTH, STRENGTH),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 40)
         );
     }
 
