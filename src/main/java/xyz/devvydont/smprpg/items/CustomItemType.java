@@ -39,12 +39,10 @@ import xyz.devvydont.smprpg.items.blueprints.sets.bone.BoneBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.bone.BoneChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.bone.BoneHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.bone.BoneLeggings;
-import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.CobblestoneBoots;
-import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.CobblestoneChestplate;
-import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.CobblestoneHelmet;
-import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.CobblestoneLeggings;
+import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.copper.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondBow;
+import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.elderflame.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emberclad.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldBoots;
@@ -55,6 +53,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.gold.GoldHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumHelmet;
@@ -62,6 +61,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.inferno.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.infinity.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.iron.IronBow;
+import xyz.devvydont.smprpg.items.blueprints.sets.iron.IronHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.mystbloom.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.mystic.LuxeBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.mystic.LuxeChestplate;
@@ -73,6 +73,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.neofrontier.NeoFrontierHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.neofrontier.NeoFrontierLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.neptune.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.netherite.NetheriteBow;
+import xyz.devvydont.smprpg.items.blueprints.sets.netherite.NetheriteHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.phantom.EvoriDreamwings;
 import xyz.devvydont.smprpg.items.blueprints.sets.phantom.PhantomWings;
 import xyz.devvydont.smprpg.items.blueprints.sets.prelude.PreludeBoots;
@@ -129,8 +130,10 @@ import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantLeggings;
+import xyz.devvydont.smprpg.items.blueprints.sets.wood.WoodHatchet;
 import xyz.devvydont.smprpg.items.blueprints.storage.*;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
+import xyz.devvydont.smprpg.items.tools.ItemHatchet;
 
 public enum CustomItemType {
 
@@ -390,6 +393,15 @@ public enum CustomItemType {
     NETHERITE_BOW("Netherite Bow", Material.BOW, ItemRarity.RARE,     NetheriteBow.class),
     DIAMOND_BOW("Diamond Bow",     Material.BOW, ItemRarity.UNCOMMON, DiamondBow.class),
     IRON_BOW(   "Iron Bow",        Material.BOW, ItemRarity.COMMON,   IronBow.class),
+
+    // HATCHETS
+    WOODEN_HATCHET("Wooden Hatchet",    Material.WOODEN_AXE,    ItemRarity.COMMON,   WoodHatchet.class),
+    STONE_HATCHET("Stone Hatchet",     Material.STONE_AXE,     ItemRarity.COMMON,   StoneHatchet.class),
+    COPPER_HATCHET("Copper Hatchet",    Material.WOODEN_AXE,    ItemRarity.COMMON,   CopperHatchet.class),
+    IRON_HATCHET("Iron Hatchet",      Material.IRON_AXE,      ItemRarity.COMMON,   IronHatchet.class),
+    GOLD_HATCHET("Golden Hatchet",      Material.GOLDEN_AXE,    ItemRarity.COMMON,   GoldHatchet.class),
+    DIAMOND_HATCHET("Diamond Hatchet",   Material.DIAMOND_AXE,   ItemRarity.UNCOMMON, DiamondHatchet.class),
+    NETHERITE_HATCHET("Netherite Hatchet", Material.NETHERITE_AXE, ItemRarity.RARE,     NetheriteHatchet.class),
 
     // EXILED SET
     EXILED_CROSSBOW("Exiled Crossbow", Material.CROSSBOW, ItemRarity.EPIC,  ExiledCrossbow.class),

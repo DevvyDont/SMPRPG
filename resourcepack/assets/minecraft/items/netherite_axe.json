@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/netherite_axe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:netherite_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/netherite_hatchet"
+                }
+            }
+        ]
+    }
+}

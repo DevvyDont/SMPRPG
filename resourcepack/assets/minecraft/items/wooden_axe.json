@@ -13,6 +13,20 @@
                     "type": "model",
                     "model": "tools:item/copper_axe"
                 }
+            },
+            {
+                "when": "smprpg:wooden_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/wooden_hatchet"
+                }
+            },
+            {
+                "when": "smprpg:copper_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/copper_hatchet"
+                }
             }
         ]
     }

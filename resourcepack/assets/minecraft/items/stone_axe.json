@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/stone_axe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:stone_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/stone_hatchet"
+                }
+            }
+        ]
+    }
+}
