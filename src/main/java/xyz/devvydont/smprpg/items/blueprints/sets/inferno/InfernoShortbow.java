@@ -12,6 +12,7 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomShortbow;
+import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -19,7 +20,7 @@ import xyz.devvydont.smprpg.services.ItemService;
 import java.util.Collection;
 import java.util.List;
 
-public class InfernoShortbow extends CustomShortbow implements ICraftable, ISellable {
+public class InfernoShortbow extends CustomShortbow implements ICraftable, ISellable, IBreakableEquipment {
 
     public InfernoShortbow(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -63,5 +64,10 @@ public class InfernoShortbow extends CustomShortbow implements ICraftable, ISell
         return List.of(
                 ItemService.generate(InfernoArmorSet.CRAFTING_COMPONENT)
         );
+    }
+
+    @Override
+    public int getMaxDurability() {
+        return 40_000;
     }
 }
