@@ -1,8 +1,10 @@
 package xyz.devvydont.smprpg.items.blueprints.equipment;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.attribute.AttributeType;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -68,5 +70,11 @@ public abstract class ReforgeStone extends CustomItemBlueprint implements Reforg
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.REFORGE_STONE;
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 1);
     }
 }
