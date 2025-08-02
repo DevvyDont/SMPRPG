@@ -141,6 +141,9 @@ public abstract class CustomShortbow extends CustomAttributeItem implements IHea
             arrow.remove();
             return;
         }
+        
+        if (item != null)
+            item.damage(1, event.getPlayer());
 
         // Post processing effects that we call only when the event was successful.
         event.getPlayer().getWorld().playSound(event.getPlayer().getEyeLocation(), Sound.ENTITY_ARROW_SHOOT, 1, 1.5f);
