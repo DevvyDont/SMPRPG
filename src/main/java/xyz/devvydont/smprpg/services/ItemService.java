@@ -48,10 +48,7 @@ import xyz.devvydont.smprpg.items.blueprints.potion.PotionBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*;
 import xyz.devvydont.smprpg.items.interfaces.*;
-import xyz.devvydont.smprpg.items.listeners.AbilityCastingListener;
-import xyz.devvydont.smprpg.items.listeners.BackpackInteractionListener;
-import xyz.devvydont.smprpg.items.listeners.ExperienceBottleListener;
-import xyz.devvydont.smprpg.items.listeners.ShieldBlockingListener;
+import xyz.devvydont.smprpg.items.listeners.*;
 import xyz.devvydont.smprpg.reforge.ReforgeBase;
 import xyz.devvydont.smprpg.reforge.ReforgeType;
 import xyz.devvydont.smprpg.util.attributes.AttributeUtil;
@@ -176,6 +173,7 @@ public class ItemService implements IService, Listener {
         listeners.add(new ExperienceBottleListener());
         listeners.add(new BackpackInteractionListener());
         listeners.add(new AbilityCastingListener());
+        listeners.add(new RareItemDropPreventionListener());
     }
 
     @Override
