@@ -39,7 +39,7 @@
                 "when": "smprpg:carp",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/carp"
                 }
             },
             {
@@ -53,7 +53,7 @@
                 "when": "smprpg:bass",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/bass"
                 }
             },
             {
@@ -109,7 +109,7 @@
                 "when": "smprpg:goliath_grouper",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/goliath_grouper"
                 }
             },
             {
@@ -158,21 +158,21 @@
                 "when": "smprpg:impling",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/impling"
                 }
             },
             {
                 "when": "smprpg:crimsonfish",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/crimsonfish"
                 }
             },
             {
                 "when": "smprpg:soul_scale",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/soul_scale"
                 }
             },
             {
@@ -186,14 +186,14 @@
                 "when": "smprpg:flarefin",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/flarefin"
                 }
             },
             {
                 "when": "smprpg:ghost_fish",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/ghost_fish"
                 }
             },
             {
@@ -221,7 +221,7 @@
                 "when": "smprpg:warper",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/warper"
                 }
             },
             {
@@ -235,14 +235,14 @@
                 "when": "smprpg:goblin_shark",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/goblin_shark"
                 }
             },
             {
                 "when": "smprpg:starsurfer",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/starsurfer"
                 }
             },
             {
