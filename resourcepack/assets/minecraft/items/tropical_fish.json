@@ -193,7 +193,7 @@
                 "when": "smprpg:ghost_fish",
                 "model": {
                     "type": "model",
-                    "model": "item/tropical_fish"
+                    "model": "materials:item/ghost_fish"
                 }
             },
             {
