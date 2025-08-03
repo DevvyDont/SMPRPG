@@ -70,7 +70,7 @@ class DifficultyService : IService, Listener {
      */
     fun applyDifficultyModifiers(player: Player, difficulty: ProfileDifficulty) {
         // As of now, the only global difficulty modifier is luck. First remove it.
-        val luck = AttributeService.getInstance().getOrCreateAttribute(player, AttributeWrapper.LUCK)
+        val luck = AttributeService.instance.getOrCreateAttribute(player, AttributeWrapper.LUCK)
         luck.removeModifier(DIFFICULTY_MODIFIER_KEY)
 
         // If we don't have a multiplier to give, no reason to add a modifier.
