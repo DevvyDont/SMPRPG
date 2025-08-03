@@ -448,7 +448,7 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
-                new ItemStackFishingLoot.Builder(Material.END_CRYSTAL)
+                new ItemStackFishingLoot.Builder(CustomItemType.SUMMONING_CRYSTAL)
                         .withMinecraftExperience(50)
                         .withSkillExperience(200)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
