@@ -11,6 +11,7 @@ import xyz.devvydont.smprpg.items.blueprints.charms.StrengthCharm;
 import xyz.devvydont.smprpg.items.blueprints.debug.*;
 import xyz.devvydont.smprpg.items.blueprints.economy.CustomItemCoin;
 import xyz.devvydont.smprpg.items.blueprints.equipment.*;
+import xyz.devvydont.smprpg.items.blueprints.equipment.EnderPack;
 import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.food.*;
 import xyz.devvydont.smprpg.items.blueprints.misc.DeathCertificate;
@@ -408,6 +409,8 @@ public enum CustomItemType {
     EXILED_AXE("Exiled Axe", Material.IRON_AXE, ItemRarity.EPIC,  ExiledAxe.class),
 
     // MISC TOOLS
+    PORTACRAFTER("Port-A-Crafter", ItemRarity.UNCOMMON, Portacrafter.class),
+    ENDER_PACK("Ender Pack", ItemRarity.EPIC, EnderPack.class),
     SQUID_HELMET("Squid Helmet", ItemRarity.RARE, SquidHelmet.class),
     MAGMA_HELMET("Magma Helmet", ItemRarity.RARE, MagmaHelmet.class),
     GRAPPLING_HOOK("Grappling Hook", Material.FISHING_ROD, ItemRarity.RARE, GrapplingHook.class),
