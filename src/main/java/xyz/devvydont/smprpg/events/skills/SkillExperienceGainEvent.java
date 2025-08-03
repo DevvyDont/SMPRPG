@@ -59,7 +59,7 @@ public class SkillExperienceGainEvent extends Event implements Cancellable {
 
 
     public Player getPlayer() {
-        return getSkill().getOwner();
+        return getSkill().owner;
     }
 
     public ExperienceSource getSource() {
@@ -67,7 +67,7 @@ public class SkillExperienceGainEvent extends Event implements Cancellable {
     }
 
     public SkillType getSkillType() {
-        return skill.getType();
+        return skill.type;
     }
 
     public void setSource(ExperienceSource source) {

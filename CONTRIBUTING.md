@@ -57,9 +57,44 @@ if (valid)
         println("expired!")
 ```
 
+- When implementing event handlers, they should satisfy the following requirements:
+1. The `Suppress("unused")` annotation is also present.
+2. The function is private*.
+3. The function starts with the `on` prefix. e.g. `onPlayerJoin()`
+```kotlin
+// Good
+@EventHandler
+@Suppress("unused")
+private fun onPlayerJoin(event: PlayerJoinEvent) {
+    event.player.sendMessage(Component.text("hey! :)"))
+} 
+```
+\*Note: There is a caveat to this that can lead to unintended behavior. If a child class extends the class that contains
+the listener, and it is marked as private in the parent class, the child class will **not** register the listener when 
+registered. If the child class **must** also register the listener from a parent class, it is alright to leave the event 
+handler to be public. Just keep in mind, that in most circumstances this is a symptom of poorly designed code structure,
+and that you may need to rethink where your event handler is going!
+
+
 ### Java Standards (Work in Progress)
 
 Java code is considered legacy, but there may come times when you need to contribute Java code.
 Java code is also a lot more lenient than Kotlin, but good standards should still be followed.
 A good general rule of thumb, is your inspector should have no warnings on default settings.
 You should also follow the same ideologies that the Kotlin section brings up, as they apply to Java as well. 
+
+- When implementing event handlers, they should satisfy the following requirements:
+1. The function is private*.
+2. The function starts with the `__on` prefix. e.g. `__onPlayerJoin()`
+```java
+// Good
+@EventHandler
+private void __onPlayerJoin(PlayerJoinEvent event) {
+    event.getPlayer().sendMessage(Component.text("hey! :)"));
+} 
+```
+\*Note: There is a caveat to this that can lead to unintended behavior. If a child class extends the class that contains
+the listener, and it is marked as private in the parent class, the child class will **not** register the listener when
+registered. If the child class **must** also register the listener from a parent class, it is alright to leave the event
+handler to be public. Just keep in mind, that in most circumstances this is a symptom of poorly designed code structure,
+and that you may need to rethink where your event handler is going!

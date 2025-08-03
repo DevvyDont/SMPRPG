@@ -203,7 +203,7 @@ public class MainMenu extends MenuBase {
         var df = new DecimalFormat("#,###");
 
         return List.of(
-                merge(create("You are currently: "), create(skill.getType().getDisplayName() + " " + skill.getLevel(), AQUA)),
+                merge(create("You are currently: "), create(skill.type.getDisplayName() + " " + skill.getLevel(), AQUA)),
                 merge(create(df.format(progress) + "XP ", GRAY), bar, create(" " + df.format(rightBound) + "XP", GRAY))
         );
     }

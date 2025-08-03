@@ -1,36 +1,34 @@
-package xyz.devvydont.smprpg.skills;
+package xyz.devvydont.smprpg.skills
 
-import org.bukkit.attribute.AttributeModifier;
-import xyz.devvydont.smprpg.SMPRPG;
+import org.bukkit.attribute.AttributeModifier
+import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
+import java.math.BigDecimal
+import java.math.MathContext
+import kotlin.math.pow
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.util.HashMap;
-import java.util.Map;
+object SkillGlobals {
 
-public class SkillGlobals {
+    @JvmStatic
+    val maxSkillLevel: Int
+        /**
+         * Returns the max skill level as defined by the plugin's config.yml.
+         * @return The max skill level.
+         */
+        get() = plugin.getConfig().getInt("max-skill-level", 100)
 
-    /**
-     * Returns the max skill level as defined by the plugin's config.yml.
-     * @return The max skill level.
-     */
-    public static int getMaxSkillLevel() {
-        return SMPRPG.getPlugin().getConfig().getInt("max-skill-level", 100);
-    }
-
-    /**
-     * Returns the total experience needed to hit the current skill experience cap.
-     * @return Total experience.
-     */
-    public static int getTotalExperienceCap() {
-        return getCumulativeExperienceForLevel(getMaxSkillLevel());
-    }
+    @JvmStatic
+    val totalExperienceCap: Int
+        /**
+         * Returns the total experience needed to hit the current skill experience cap.
+         * @return Total experience.
+         */
+        get() = getCumulativeExperienceForLevel(maxSkillLevel)
 
     /**
      * A static cache for cumulative experience requirements. This is due to the fact that experience has a
      * recursive relationship, as most experience formulas are.
      */
-    private static final Map<Integer, Integer> cumulativeExperienceCache = new HashMap<>();
+    private val cumulativeExperienceCache: MutableMap<Int, Int> = HashMap()
 
     /**
      * Gets the TOTAL amount of experience required for a level. Works as a lifetime experience value as opposed to
@@ -38,32 +36,35 @@ public class SkillGlobals {
      * @param level The level of experience to calculate.
      * @return The cumulative experience to reach that level.
      */
-    public static int getCumulativeExperienceForLevel(int level) {
-
+    @JvmStatic
+    fun getCumulativeExperienceForLevel(level: Int): Int {
         // If we are attempting to find experience for a level that is not valid (base case also)
+
         if (level <= 0)
-            return 0;
+            return 0
 
         // If we previously cached the answer for this level use that
-        if (cumulativeExperienceCache.containsKey(level))
-            return cumulativeExperienceCache.get(level);
+        val xp = cumulativeExperienceCache[level]
+        if (xp != null)
+            return xp
 
         // Recursively add the experience from previous levels to this one
-        int experience = getExperienceForLevel(level) + getCumulativeExperienceForLevel(level-1);
-        cumulativeExperienceCache.put(level, experience);
-        return experience;
+        val experience = getExperienceForLevel(level) + getCumulativeExperienceForLevel(level - 1)
+        cumulativeExperienceCache.put(level, experience)
+        return experience
     }
 
     /**
      * Returns the amount of experience required to level up when starting at a certain level.
-     * Keep in mind, this is not cumulative. If you need total experience, use {@link SkillGlobals#getCumulativeExperienceForLevel(int)}
+     * Keep in mind, this is not cumulative. If you need total experience, use [SkillGlobals.getCumulativeExperienceForLevel]
      * @param level The level to calculate experience for.
      * @return The experience needed.
      */
-    public static int getExperienceForLevel(int level) {
+    @JvmStatic
+    fun getExperienceForLevel(level: Int): Int {
         if (level <= 0)
-            return 0;
-        return dropIntegerPrecision((int) (Math.pow(level+1, 3) + 92), 2);
+            return 0
+        return dropIntegerPrecision(((level + 1).toDouble().pow(3.0) + 92).toInt(), 2)
     }
 
     /**
@@ -73,10 +74,10 @@ public class SkillGlobals {
      * @param numSignificantDigits How many numbers you want to keep for the left side of the number.
      * @return The final number. For example, if you pass in 12,345 w/ 2 significant digits, you get 12,000.
      */
-    public static int dropIntegerPrecision(int n, int numSignificantDigits) {
-        BigDecimal bd = new BigDecimal(n);
-        bd = bd.round(new MathContext(numSignificantDigits));
-        return bd.intValue();
+    fun dropIntegerPrecision(n: Int, numSignificantDigits: Int): Int {
+        var bd = BigDecimal(n)
+        bd = bd.round(MathContext(numSignificantDigits))
+        return bd.toInt()
     }
 
     /**
@@ -84,15 +85,16 @@ public class SkillGlobals {
      * @param experience The total experience to use for calculating.
      * @return The level that this experience represents.
      */
-    public static int getLevelForExperience(int experience) {
-
+    @JvmStatic
+    fun getLevelForExperience(experience: Int): Int {
         // Loop through the experience cumulative values until we haven't hit a threshold yet
-        for (int i = 0; i <= getMaxSkillLevel(); i++)
-            if (experience < getCumulativeExperienceForLevel(i+1))
-                return i;
+
+        for (i in 0..maxSkillLevel)
+            if (experience < getCumulativeExperienceForLevel(i + 1))
+                return i
 
         // Our experience was never lower than the max level cumulative experience requirement, we must be max level
-        return getMaxSkillLevel();
+        return maxSkillLevel
     }
 
     /**
@@ -106,21 +108,26 @@ public class SkillGlobals {
      * @param level The skill level to award coins for.
      * @return How many coins should be awarded.
      */
-    public static int getCoinRewardForLevel(int level) {
-        return getExperienceForLevel(level) / 2;
+    @JvmStatic
+    fun getCoinRewardForLevel(level: Int): Int {
+        return getExperienceForLevel(level) / 2
     }
 
     /**
      * Strength/attack damage is a very strange attribute for us to handle.
-     * <p>
+     *
+     *
      * Weapons will use the additive modifiers for base attack damage, which makes sense.
-     * <p>
+     *
+     *
      * Gear will use scalar modifiers since there should realistically be no more than 6 active at a time, all with
      * equal weighting.
-     * <p>
+     *
+     *
      * Skills will use multiplicative modifiers so that the small increments still feel meaningful at any point in
      * the game.
-     * <p>
+     *
+     *
      * The reason it is set up this way is due to the fact that if skills were scalar, any sort of scalar additions
      * from any other source would feel meaningless due to the shear amount of expected DPS of a player. With only
      * gear respecting the fact that it is scalar, the numbers will *feel* more impactful. The old issue that we faced
@@ -131,49 +138,51 @@ public class SkillGlobals {
      * Here is an example of what a potential item display could look like and why it can be confusing:
      * ((200) 100 + 50% + 50% = 100 + 100% = 200) vs ((200) 100 + 50% + 50% = 100 * 1.5 * 1.5 = 225)
      */
-    public static AttributeModifier.Operation STRENGTH_SKILL_OPERATION = AttributeModifier.Operation.MULTIPLY_SCALAR_1;
+
+    @JvmField
+    val STRENGTH_SKILL_OPERATION: AttributeModifier.Operation = AttributeModifier.Operation.MULTIPLY_SCALAR_1
 
     // Typically, we give HP for every skill, every certain amount of levels. Define that here.
-    public static int HP_LEVEL_FREQUENCY = 5;
-    public static double HP_PER_5_LEVELS = 2;
+    const val HP_LEVEL_FREQUENCY: Int = 5
+    const val HP_PER_5_LEVELS: Double = 2.0
 
     // The combat skill improves some damage related attributes.
-    public static double STR_PER_LEVEL = 5;
-    public static double CRITICAL_CHANCE_PER_LEVEL = 0.5;
-    public static double CRITICAL_RATING_PER_4_LEVELS = 4;
-    public static int CRITICAL_RATING_LEVEL_FREQUENCY = 4;
+    const val STR_PER_LEVEL: Double = 5.0
+    const val CRITICAL_CHANCE_PER_LEVEL: Double = 0.5
+    const val CRITICAL_RATING_PER_4_LEVELS: Double = 4.0
+    const val CRITICAL_RATING_LEVEL_FREQUENCY: Int = 4
 
     // All foraging skills give fortune for their respective attribute.
-    public static final double FORTUNE_PER_LEVEL = 3;
+    const val FORTUNE_PER_LEVEL: Double = 3.0
 
     // Farming gives regeneration every 2 levels.
-    public static final double REGENERATION_PER_2_LEVELS = 2;
-    public static final int REGENERATION_LEVEL_FREQUENCY = 2;
+    const val REGENERATION_PER_2_LEVELS: Double = 2.0
+    const val REGENERATION_LEVEL_FREQUENCY: Int = 2
 
     // Fishing skill gives fishing chances every 4 levels.
-    public static double FISHING_CHANCE_PER_4_LEVEL = 0.2;
-    public static int FISHING_CHANCE_FREQUENCY = 4;
+    const val FISHING_CHANCE_PER_4_LEVEL: Double = 0.2
+    const val FISHING_CHANCE_FREQUENCY: Int = 4
 
     // The magic skill gives intelligence and luck.
-    public static double INT_PER_LEVEL = 5;
-    public static double LUCK_PER_4_LEVELS = 4;
-    public static int LUCK_LEVEL_FREQUENCY = 4;
+    const val INT_PER_LEVEL: Double = 5.0
+    const val LUCK_PER_4_LEVELS: Double = 4.0
+    const val LUCK_LEVEL_FREQUENCY: Int = 4
 
     // The mining skill awards mining efficiency every 4 levels.
-    public static int MINING_EFF_LEVEL_FREQUENCY = 4;
-    public static double MINING_EFF_PER_4_LEVELS = 5;
+    const val MINING_EFF_LEVEL_FREQUENCY: Int = 4
+    const val MINING_EFF_PER_4_LEVELS: Double = 5.0
 
     // Woodcutting gives a small defense and critical rating boost.
-    public static int DEFENSE_LEVEL_FREQUENCY = 2;
-    public static double DEFENSE_PER_2_LEVELS = 4;
+    const val DEFENSE_LEVEL_FREQUENCY: Int = 2
+    const val DEFENSE_PER_2_LEVELS: Double = 4.0
 
     /**
      * Used for scaling attribute rewards. Higher levels will result in better attributes.
      * @param level The level this attribute resides at.
      * @return The expected multiplier.
      */
-    public static int getLevelMultiplier(int level) {
-        return (level-1) / 10 + 1;
+    fun getLevelMultiplier(level: Int): Int {
+        return (level - 1) / 10 + 1
     }
 
     /**
@@ -182,16 +191,17 @@ public class SkillGlobals {
      * @param level The level of the skill.
      * @return How effective the stat should be.
      */
-    public static double getScalingStatPerLevel(double base, int level) {
-
+    @JvmStatic
+    fun getScalingStatPerLevel(base: Double, level: Int): Double {
         // Base case, level 0 means no stats duh
+
         if (level <= 0)
-            return 0;
+            return 0.0
 
         // Add the stat that we had from last level, and add to it.
         // todo: memoize this, i imagine this is a lot of gross recursive math in later levels.
-        var addition = base * getLevelMultiplier(level);
-        return getScalingStatPerLevel(base, level-1) + addition;
+        val addition = base * getLevelMultiplier(level)
+        return getScalingStatPerLevel(base, level - 1) + addition
     }
 
     /**
@@ -202,15 +212,14 @@ public class SkillGlobals {
      * @param level The level to calculate for.
      * @return How effective the stat should be.
      */
-    public static double getScalingStatPerXLevel(double base, int x, int level) {
-
+    @JvmStatic
+    fun getScalingStatPerXLevel(base: Double, x: Int, level: Int): Double {
         // Base case, level 0 means no stats duh
         if (level <= 0)
-            return 0;
+            return 0.0
 
         // Add the stat that we had from the previous tier to this one.
-        var addition = base * getLevelMultiplier(level);
-        return getScalingStatPerXLevel(base, x, level-x) + addition;
+        val addition = base * getLevelMultiplier(level)
+        return getScalingStatPerXLevel(base, x, level - x) + addition
     }
-
 }

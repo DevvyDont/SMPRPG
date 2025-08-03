@@ -18,22 +18,21 @@ import kotlin.math.max
 class SkillService : IService, Listener {
 
     init {
-        val plugin = plugin
-        CombatExperienceListener(plugin)
-        MiningExperienceListener(plugin)
-        ForagingExperienceListener(plugin)
-        FarmingExperienceListener(plugin)
-        MagicExperienceListener(plugin)
-        FishingExperienceListener(plugin)
+        CombatExperienceListener()
+        MiningExperienceListener()
+        ForagingExperienceListener()
+        FarmingExperienceListener()
+        MagicExperienceListener()
+        FishingExperienceListener()
 
-        ExperienceGainNotifier(plugin)
+        ExperienceGainNotifier()
     }
 
     @Throws(RuntimeException::class)
     override fun setup() {
         val plugin = plugin
         var sum = 0
-        for (i in 1..SkillGlobals.getMaxSkillLevel()) {
+        for (i in 1..SkillGlobals.maxSkillLevel) {
             val xp = SkillGlobals.getExperienceForLevel(i)
             sum += xp
             plugin.logger.fine("Skill Requirement for Level $i: $xp ($sum)")
@@ -53,7 +52,7 @@ class SkillService : IService, Listener {
     private fun removeAttributeSkillRewards(player: LeveledPlayer) {
         // Remove every skill reward that is an attribute skill.
         for (skill in player.skills)
-            for (level in 0..SkillGlobals.getMaxSkillLevel())
+            for (level in 0..SkillGlobals.maxSkillLevel)
                 for (reward in skill.getRewards(level))
                     if (reward is AttributeReward)
                         reward.remove(player.player, skill.type)

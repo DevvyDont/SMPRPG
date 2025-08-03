@@ -31,7 +31,7 @@ public class SkillExperiencePostGainEvent extends Event {
     }
 
     public Player getPlayer() {
-        return getSkill().getOwner();
+        return getSkill().owner;
     }
 
     public SkillExperienceGainEvent.ExperienceSource getSource() {
@@ -39,7 +39,7 @@ public class SkillExperiencePostGainEvent extends Event {
     }
 
     public SkillType getSkillType() {
-        return skill.getType();
+        return skill.type;
     }
 
     public int getExperienceEarned() {

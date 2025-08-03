@@ -26,11 +26,11 @@ public class SkillLevelUpEvent extends Event {
     }
 
     public Player getPlayer() {
-        return getSkill().getOwner();
+        return getSkill().owner;
     }
 
     public SkillType getSkillType() {
-        return skill.getType();
+        return skill.type;
     }
 
     public SkillInstance getSkill() {

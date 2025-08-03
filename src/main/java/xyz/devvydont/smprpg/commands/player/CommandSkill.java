@@ -42,7 +42,7 @@ public class CommandSkill extends CommandBase {
         output.add(ComponentUtils.EMPTY);
         for (var skill : player.getSkills()) {
             output.add(ComponentUtils.merge(
-                    ComponentUtils.create(skill.getType().getDisplayName() + " " + skill.getLevel(), NamedTextColor.AQUA),
+                    ComponentUtils.create(skill.type.getDisplayName() + " " + skill.getLevel(), NamedTextColor.AQUA),
                     ComponentUtils.create(" - "),
                     ComponentUtils.create(MinecraftStringUtils.formatNumber(skill.getExperienceProgress()), NamedTextColor.GREEN),
                     ComponentUtils.create("/"),

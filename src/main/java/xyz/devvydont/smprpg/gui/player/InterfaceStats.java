@@ -226,7 +226,7 @@ public class InterfaceStats extends MenuBase {
         List<Component> display = new ArrayList<>();
         for (SkillInstance skill : player.getSkills())
             display.add(ComponentUtils.merge(
-                    ComponentUtils.create(skill.getType().getDisplayName() + " " + skill.getLevel(), NamedTextColor.GOLD),
+                    ComponentUtils.create(skill.type.getDisplayName() + " " + skill.getLevel(), NamedTextColor.GOLD),
                     ComponentUtils.create(" - "),
                     ComponentUtils.create(MinecraftStringUtils.formatNumber(skill.getExperienceProgress()), NamedTextColor.GREEN),
                     ComponentUtils.create("/"),
