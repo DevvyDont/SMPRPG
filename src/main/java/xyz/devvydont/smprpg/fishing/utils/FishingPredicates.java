@@ -22,7 +22,7 @@ public class FishingPredicates {
     /**
      * The predicate that void rods typically use. Checks if the current block is in the void.
      */
-    public static final ILocationPredicate VOID_PREDICATE = e -> e.getWorld().getEnvironment().equals(World.Environment.THE_END) && e.getBlock().getY() <= 0;
+    public static final ILocationPredicate VOID_PREDICATE = e -> e.getWorld().getEnvironment().equals(World.Environment.THE_END) && e.getBlock().getY() < 0;
 
     /**
      * Complex predicate allows both lava and void fishing to work at the same time.
