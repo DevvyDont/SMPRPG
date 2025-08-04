@@ -66,8 +66,8 @@ public enum ReforgeType {
     AGILE(AgileReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.CHARM),
 
     // Mining/Dig speed oriented
-    QUICK(QuickReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE),
-    HASTY(HastyReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE),
+    QUICK(QuickReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
+    HASTY(HastyReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
 
     // Fishing oriented
     TEMPTING(TemptingReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
@@ -78,8 +78,8 @@ public enum ReforgeType {
     PRISMATIC(PrismaticReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
 
     // Luck oriented
-    LUCKY(LuckyReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE),
-    COPIOUS(CopiousReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE),
+    LUCKY(LuckyReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
+    COPIOUS(CopiousReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
 
     // DAMAGE (melee)
     SPICY(SpicyReforge.class, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.CHARM),
@@ -92,8 +92,8 @@ public enum ReforgeType {
     RAPID(RapidReforge.class, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.SHORTBOW, ItemClassification.CHARM),
 
     // REACH
-    REACHING(ReachingReforge.class, ItemClassification.TOOL, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.CHARM, ItemClassification.PICKAXE, ItemClassification.HOE),
-    EXTENDED(ExtendedReforge.class, ItemClassification.TOOL, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.CHARM, ItemClassification.PICKAXE, ItemClassification.HOE),
+    REACHING(ReachingReforge.class, ItemClassification.TOOL, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.CHARM, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
+    EXTENDED(ExtendedReforge.class, ItemClassification.TOOL, ItemClassification.SWORD, ItemClassification.TRIDENT, ItemClassification.WEAPON, ItemClassification.AXE, ItemClassification.MACE, ItemClassification.CHARM, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
 
     // META reforges, only dropped from rare drops
     ACCELERATED(AcceleratedReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.CHARM),  // MAX Movement Speed
