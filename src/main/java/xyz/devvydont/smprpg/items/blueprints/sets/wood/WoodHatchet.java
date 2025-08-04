@@ -4,10 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.crafting.CraftingGlobals;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemPickaxe;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
@@ -50,18 +50,7 @@ public class WoodHatchet extends ItemHatchet implements ICraftable, IBreakableEq
                 "ps",
                 " s"
         );
-        recipe.setIngredient('p', new RecipeChoice.MaterialChoice(Material.OAK_PLANKS,
-                                                                        Material.SPRUCE_PLANKS,
-                                                                        Material.BIRCH_PLANKS,
-                                                                        Material.JUNGLE_PLANKS,
-                                                                        Material.ACACIA_PLANKS,
-                                                                        Material.DARK_OAK_PLANKS,
-                                                                        Material.BAMBOO_PLANKS,
-                                                                        Material.CHERRY_PLANKS,
-                                                                        Material.MANGROVE_PLANKS,
-                                                                        Material.CRIMSON_PLANKS,
-                                                                        Material.WARPED_PLANKS,
-                                                                        Material.PALE_OAK_PLANKS));
+        recipe.setIngredient('p', CraftingGlobals.WOODEN_PLANKS_WILDCARD);
         recipe.setIngredient('s', itemService.getCustomItem(Material.STICK));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
