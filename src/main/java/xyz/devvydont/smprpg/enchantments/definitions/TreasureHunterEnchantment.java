@@ -27,12 +27,13 @@ public class TreasureHunterEnchantment extends CustomEnchantment implements Attr
 
     public static double getTreasureChance(int level) {
         return switch (level) {
-            case 1 -> 0.25;
-            case 2 -> 0.55;
-            case 3 -> 0.95;
-            case 4 -> 1.35;
-            case 5 -> 2.0;
-            default -> 0;
+            case 0 -> 0;
+            case 1 -> 0.5;
+            case 2 -> 1.0;
+            case 3 -> 1.5;
+            case 4 -> 2.0;
+            case 5 -> 2.5;
+            default -> 3.0;
         };
     }
 

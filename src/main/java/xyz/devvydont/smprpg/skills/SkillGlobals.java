@@ -151,7 +151,7 @@ public class SkillGlobals {
     public static final int REGENERATION_LEVEL_FREQUENCY = 2;
 
     // Fishing skill gives fishing chances every 4 levels.
-    public static double FISHING_CHANCE_PER_4_LEVEL = 0.2;
+    public static double FISHING_CHANCE_PER_4_LEVEL = 0.8;
     public static int FISHING_CHANCE_FREQUENCY = 4;
 
     // The magic skill gives intelligence and luck.

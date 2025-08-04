@@ -87,7 +87,7 @@ public class AbyssalInstinctEnchantment extends CustomEnchantment implements Att
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.FISHING_CREATURE_CHANCE, getTreasureChance(getLevel()))
+                new AdditiveAttributeEntry(AttributeWrapper.FISHING_CREATURE_CHANCE, getTreasureChance(getLevel())*2)
         );
     }
 
