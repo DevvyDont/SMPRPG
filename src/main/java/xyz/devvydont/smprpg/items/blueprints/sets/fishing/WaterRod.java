@@ -64,7 +64,7 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
 
     @Override
     public int getMaxDurability() {
-        return getPowerRating() * 1_000;
+        return Math.max(1, getPowerRating() * 1_000);
     }
 
     @Override
@@ -112,7 +112,8 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
             case IRON_ROD -> ItemService.generate(Material.IRON_INGOT);
             case GOLD_ROD -> ItemService.generate(Material.GOLD_INGOT);
             case DIAMOND_ROD -> ItemService.generate(Material.DIAMOND);
-            default -> throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
+            default -> ItemService.generate(Material.BARRIER);
+//            default -> throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
         };
     }
 

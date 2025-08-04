@@ -53,6 +53,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.gold.GoldHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumBoots;
@@ -354,18 +355,34 @@ public enum CustomItemType {
     PRELUDE_LEGGINGS(  "Prelude to Chaos Leggings",       Material.NETHERITE_LEGGINGS,   ItemRarity.LEGENDARY,  PreludeLeggings.class),
     PRELUDE_BOOTS(     "Prelude to Chaos Boots",          Material.NETHERITE_BOOTS,      ItemRarity.LEGENDARY,  PreludeBoots.class),
     
-    // FISHING SETS
+    // ALL AROUND FISHING
     MURKY_HELMET(    "Murky Helmet",     Material.LEATHER_HELMET,     ItemRarity.COMMON, MurkySet.class),
     MURKY_CHESTPLATE("Murky Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.COMMON, MurkySet.class),
     MURKY_LEGGINGS(  "Murky Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.COMMON, MurkySet.class),
     MURKY_BOOTS(     "Murky Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MurkySet.class),
 
-    // FISHING SETS
-    MINNOW_HELMET(    "Minnow Helmet",     Material.LEATHER_HELMET,     ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.UNCOMMON, MinnowSet.class),
+    // SEA CREATURE FISHING
     MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.UNCOMMON, false, 4_500),
+    MINNOW_HELMET(    "Minnow Helmet",     Material.LEATHER_HELMET,     ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_ROD("Minnow Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
+
+    HOLOMOKU_ROD("Holomoku Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
+
+    RUINATION_ROD("Ruination Rod", Material.FISHING_ROD, ItemRarity.RARE, WaterRod.class),
+
+    NOCTURNUM_ROD("Nocturnum Rod", Material.FISHING_ROD, ItemRarity.EPIC, WaterRod.class),
+
+    XENOMATTER(   "Xenomatter",    Material.PHANTOM_MEMBRANE, ItemRarity.EPIC,      true, 250_000),
+    STRANGE_FIBER("Strange Fiber", Material.STRING,           ItemRarity.LEGENDARY, true, 1_000_000),
+    STRANGE_ROD(  "Strange Rod",   Material.STICK,            ItemRarity.LEGENDARY, true, 1_000_000),
+    XENOHUNTER_HELMET(    "Xenohunter Helmet",     Material.NETHERITE_HELMET,     ItemRarity.LEGENDARY, XenohunterHelmet.class),
+    XENOHUNTER_CHESTPLATE("Xenohunter Chestplate", Material.NETHERITE_CHESTPLATE, ItemRarity.LEGENDARY, XenohunterChestplate.class),
+    XENOHUNTER_LEGGINGS(  "Xenohunter Leggings",   Material.NETHERITE_LEGGINGS,   ItemRarity.LEGENDARY, XenohunterLeggings.class),
+    XENOHUNTER_BOOTS(     "Xenohunter Boots",      Material.NETHERITE_BOOTS,      ItemRarity.LEGENDARY, XenohunterBoots.class),
+    XENOHUNTER_ROD(       "Xenohunter Rod",        Material.FISHING_ROD,          ItemRarity.LEGENDARY, XenohunterRod.class),
 
     IRON_ROD("Iron Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
     GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.ItemClassification;
+import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.reforge.definitions.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,28 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Contains ALL reforges that are possible to get
- * When reforges are applied, we can apply the following stats:
- *
- * HP
- * DEFENSE
- * ARMOR TOUGHNESS
- * KNOCKBACK RESIST
- *
- * MOVEMENT SPEED
- * MINING SPEED
- *
- * DAMAGE
- * ATTACK SPEED
- *
- * BLOCK REACH
- * COMBAT REACH
- *
- * SAFE FALL DISTANCE
- * FALL DAMAGE MULTIPLIER
- *
- * LUCK
- * JUMP/GRAVITY
+ * Contains ALL the reforges that are applicable to items.
+ * When creating a new reforge, MAKE SURE you check the following things:
+ * - Make sure your reforge class handler (the first parameter) implements Listener and handles any special logic (if desired)!
+ * - What items do you want the item to be applicable to? You are adding item types that show up on the bottom of item lore.
+ * - If you DON'T WANT your reforge to be NPC rollable, make sure you flag it as so in the {@link ReforgeType#isRollable()} method!
+ * - Make sure you provide a material to make your reforge show up as in the /reforges menu! ({@link ReforgeType#getDisplayMaterial()})
+ * - When adding attributes to your reforges in its handler class, make sure to make item rarity affect how good it is! {@link ItemRarity#ordinal()} is great for this.
  */
 public enum ReforgeType {
 
@@ -69,13 +55,16 @@ public enum ReforgeType {
     QUICK(QuickReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
     HASTY(HastyReforge.class, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.AXE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
 
-    // Fishing oriented
+    // Fishing oriented (RODS)
     TEMPTING(TemptingReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
     ALLURING(AlluringReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
     MAGNETIC(MagneticReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
     PLUNDERING(PlunderingReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
     SALTY(SaltyReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
     PRISMATIC(PrismaticReforge.class, ItemClassification.CHARM, ItemClassification.ROD),
+
+    // Fishing oriented (ARMOR)
+    SIRENIC(SirenicReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.CHARM),
 
     // Luck oriented
     LUCKY(LuckyReforge.class, ItemClassification.HELMET, ItemClassification.CHESTPLATE, ItemClassification.LEGGINGS, ItemClassification.BOOTS, ItemClassification.ROD, ItemClassification.TOOL, ItemClassification.CHARM, ItemClassification.SWORD, ItemClassification.BOW, ItemClassification.SHORTBOW, ItemClassification.CROSSBOW, ItemClassification.AXE, ItemClassification.TRIDENT, ItemClassification.MACE, ItemClassification.PICKAXE, ItemClassification.HOE, ItemClassification.HATCHET),
@@ -159,7 +148,7 @@ public enum ReforgeType {
     public boolean isRollable() {
 
         return switch (this) {
-            case ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING, CRYSTALLIZED -> false;
+            case ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING, CRYSTALLIZED, SIRENIC -> false;
             default -> true;
         };
     }
@@ -201,6 +190,7 @@ public enum ReforgeType {
             case SALTY -> Material.SUGAR;
             case TEMPTING -> Material.ROTTEN_FLESH;
             case ALLURING -> Material.PORKCHOP;
+            case SIRENIC -> Material.HEART_OF_THE_SEA;
             case MAGNETIC -> Material.IRON_BLOCK;
             default -> Material.BARRIER;
         };

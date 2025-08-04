@@ -15,6 +15,10 @@ import java.util.List;
 
 public class AlluringReforge extends ReforgeBase {
 
+    public static double getChance(ItemRarity rarity) {
+        return 1 + rarity.ordinal();
+    }
+
     public AlluringReforge(ReforgeType type) {
         super(type);
     }
@@ -24,7 +28,7 @@ public class AlluringReforge extends ReforgeBase {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.STRENGTH, 10 + rarity.ordinal() * 5),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50 + rarity.ordinal() * 10),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 1 + rarity.ordinal())
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, getChance(rarity))
         );
     }
 
