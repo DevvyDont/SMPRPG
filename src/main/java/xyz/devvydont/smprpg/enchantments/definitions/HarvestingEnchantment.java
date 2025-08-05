@@ -77,16 +77,6 @@ public class HarvestingEnchantment extends CustomEnchantment implements Attribut
         return 0;
     }
 
-    /**
-     * A set of enchantments that this enchantment conflicts with.
-     * If there are none, this enchantment has no conflicts
-     *
-     * @return
-     */
-    @NotNull
-    public RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
-        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH, EnchantmentKeys.FORTUNE, EnchantmentService.FELLING.getTypedKey());
-    }
 
     /**
      * What kind of attribute container is this? Items can have multiple containers of stats that stack
