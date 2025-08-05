@@ -53,6 +53,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.gold.GoldHatchet;
@@ -371,9 +372,20 @@ public enum CustomItemType {
 
     HOLOMOKU_ROD("Holomoku Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
 
-    RUINATION_ROD("Ruination Rod", Material.FISHING_ROD, ItemRarity.RARE, WaterRod.class),
+    RUINATION_HELMET("Ruination Helmet", Material.DIAMOND_HELMET, ItemRarity.RARE),
+    RUINATION_CHESTPLATE("Ruination Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.RARE),
+    RUINATION_LEGGINGS("Ruination Leggings", Material.DIAMOND_LEGGINGS, ItemRarity.RARE),
+    RUINATION_BOOTS("Ruination Boots", Material.DIAMOND_BOOTS, ItemRarity.RARE),
+    RUINATION_ROD("Ruination Rod", Material.FISHING_ROD, ItemRarity.RARE),
 
-    NOCTURNUM_ROD("Nocturnum Rod", Material.FISHING_ROD, ItemRarity.EPIC, WaterRod.class),
+    NECROPLASM(   "Necroplasm",           Material.BLACK_DYE, ItemRarity.RARE, true, 100_000),
+    LUCIFUGOUS_THREAD("Lucifugous Fiber", Material.STRING,    ItemRarity.EPIC, true, 400_000),
+    LUCIFUGOUS_ROD(  "Lucifugous Rod",    Material.STICK,     ItemRarity.EPIC, true, 400_000),
+    NOCTURNUM_HELMET(    "Nocturnum Helmet",     Material.NETHERITE_HELMET,     ItemRarity.EPIC, NocturnumHelmet.class),
+    NOCTURNUM_CHESTPLATE("Nocturnum Chestplate", Material.NETHERITE_CHESTPLATE, ItemRarity.EPIC, NocturnumChestplate.class),
+    NOCTURNUM_LEGGINGS(  "Nocturnum Leggings",   Material.NETHERITE_LEGGINGS,   ItemRarity.EPIC, NocturnumLeggings.class),
+    NOCTURNUM_BOOTS(     "Nocturnum Boots",      Material.LEATHER_BOOTS,        ItemRarity.EPIC, NocturnumBoots.class),
+    NOCTURNUM_ROD("Nocturnum Rod", Material.FISHING_ROD, ItemRarity.EPIC, NocturnumRod.class),
 
     XENOMATTER(   "Xenomatter",    Material.PHANTOM_MEMBRANE, ItemRarity.EPIC,      true, 250_000),
     STRANGE_FIBER("Strange Fiber", Material.STRING,           ItemRarity.LEGENDARY, true, 1_000_000),

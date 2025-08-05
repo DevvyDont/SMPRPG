@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter;
+package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -24,9 +24,9 @@ import java.util.Set;
 /**
  * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
  */
-public class XenohunterRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+public class NocturnumRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
 
-    public XenohunterRod(ItemService itemService, CustomItemType type) {
+    public NocturnumRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -45,10 +45,10 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.STRENGTH, 250),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 100),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 250),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 20)
+                AttributeEntry.additive(AttributeWrapper.STRENGTH, 180),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 70),
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 150),
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 12)
         );
     }
 
@@ -57,7 +57,7 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
      */
     @Override
     public int getPowerRating() {
-        return XenohunterSet.POWER;
+        return NocturnumSet.POWER;
     }
 
     /**
@@ -70,7 +70,7 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
 
     @Override
     public int getMaxDurability() {
-        return 80_000;
+        return 60_000;
     }
 
     @Override
@@ -86,9 +86,9 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
                 " ts",
                 "r s"
         );
-        recipe.setIngredient('t', ItemService.generate(CustomItemType.NOCTURNUM_ROD));
-        recipe.setIngredient('r', ItemService.generate(CustomItemType.STRANGE_ROD));
-        recipe.setIngredient('s', ItemService.generate(CustomItemType.STRANGE_FIBER));
+        recipe.setIngredient('t', ItemService.generate(CustomItemType.RUINATION_ROD));
+        recipe.setIngredient('r', ItemService.generate(CustomItemType.LUCIFUGOUS_ROD));
+        recipe.setIngredient('s', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
     }
@@ -99,7 +99,7 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
      */
     @Override
     public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.XENOMATTER));
+        return List.of(ItemService.generate(CustomItemType.NECROPLASM));
     }
 
     /**
@@ -110,7 +110,6 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
     @Override
     public Set<FishingFlag> getFishingFlags() {
         return Set.of(
-                FishingFlag.NORMAL,
                 FishingFlag.LAVA,
                 FishingFlag.VOID
         );

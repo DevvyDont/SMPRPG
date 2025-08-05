@@ -34,6 +34,7 @@ public class SirenicReforge extends ReforgeBase implements Listener {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 30),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, AlluringReforge.getChance(rarity) / 2),
                 AttributeEntry.scalar(AttributeWrapper.STRENGTH, .1),
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15)
