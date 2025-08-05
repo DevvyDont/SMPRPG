@@ -190,11 +190,23 @@ public class EnvironmentalDamageListener extends ToggleableListener {
             return;
 
         // If this is a boss, don't do it
-        if (SMPRPG.getService(EntityService.class).getEntityInstance(living) instanceof BossInstance)
+        var wrapper = SMPRPG.getService(EntityService.class).getEntityInstance(living);
+        if (wrapper instanceof BossInstance)
             return;
 
-        if (shouldGiveIFrames(event.getCause()))
+        if (shouldGiveIFrames(event.getCause())) {
             living.setNoDamageTicks(20);
+            if (living.getMaximumNoDamageTicks() == 0)
+                living.setMaximumNoDamageTicks(20);
+        }
+
+        if (!shouldGiveIFrames(event.getCause())) {
+            var armor = living.getAttribute(Attribute.ARMOR);
+            var iframes = 0;
+            if (armor != null)
+                iframes += (int) (armor.getValue() * 2);
+            living.setMaximumNoDamageTicks(wrapper.getInvincibilityTicks() + iframes);
+        }
     }
 
     /**
