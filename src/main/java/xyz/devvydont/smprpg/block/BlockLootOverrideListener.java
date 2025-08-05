@@ -57,15 +57,15 @@ public class BlockLootOverrideListener extends ToggleableListener {
 
         // The block is flagged. We need context. Essentially, we have manual checks that determine this.
         var ctx = BlockLootContext.INCORRECT_TOOL;
-        var toolPreference = entry.getPreferredTool();
+        var toolPreferences = entry.getPreferredTools();
         var itemUsedToBreak = event.getPlayer().getInventory().getItemInMainHand();
         var itemUsedToBreakBlueprint = ItemService.blueprint(itemUsedToBreak);
         var usedTool = itemUsedToBreakBlueprint.getItemClassification();
 
         // If there's no tool preference for the block or there's a tool preference match, then we are using correct tool.
-        if (toolPreference == null)
+        if (toolPreferences.isEmpty())
             ctx = BlockLootContext.CORRECT_TOOL;
-        else if (usedTool.equals(toolPreference))
+        else if (toolPreferences.contains(usedTool))
             ctx = BlockLootContext.CORRECT_TOOL;
 
         // If we are using silk touch on our tool because of the enchantment...

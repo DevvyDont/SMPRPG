@@ -1,12 +1,15 @@
 package xyz.devvydont.smprpg.block;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.ItemClassification;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * A member of the {@link BlockLootRegistry}. Holds a material and loot to drop under certain contexts.
@@ -14,7 +17,7 @@ import java.util.Collection;
 public class BlockLootEntry {
 
     // What equipment type is preferable for breaking this block. Only affects drops, not mining speed.
-    private final @Nullable ItemClassification preferredTool;
+    private final @NotNull Set<ItemClassification> preferredTool;
 
     // What contexts lead to which loot items. In most circumstances, this is one item but there's support for many.
     private final Multimap<BlockLootContext, BlockLoot> loot;
@@ -22,23 +25,19 @@ public class BlockLootEntry {
     private final @Nullable AttributeWrapper fortuneOverride;
 
     public BlockLootEntry(
-            @Nullable ItemClassification preferredTool,
             Multimap<BlockLootContext, BlockLoot> loot,
-            @Nullable AttributeWrapper fortuneOverride) {
-        this.preferredTool = preferredTool;
+            @Nullable AttributeWrapper fortuneOverride,
+            @NotNull Set<ItemClassification> preferredTools) {
+        this.preferredTool = ImmutableSet.copyOf(preferredTools);
         this.loot = loot;
         this.fortuneOverride = fortuneOverride;
-    }
-
-    public BlockLootEntry(@Nullable ItemClassification preferredTool, Multimap<BlockLootContext, BlockLoot> loot) {
-        this(preferredTool, loot, null);
     }
 
     /**
      * Get the preferred tool for this block loot entry.
      * @return The preferred tool.
      */
-    public @Nullable ItemClassification getPreferredTool() {
+    public @NotNull Set<ItemClassification> getPreferredTools() {
         return preferredTool;
     }
 
@@ -71,11 +70,11 @@ public class BlockLootEntry {
     /**
      * Gets a builder for ease of creation for loot definitions. This version of the builder should be
      * used when a certain tool is required to break a block.
-     * @param preferredTool The preferred tool to break a block for proper loot.
+     * @param preferredTools The preferred tool to break a block for proper loot.
      * @return A new builder instance.
      */
-    public static Builder builder(ItemClassification preferredTool) {
-        return new Builder(preferredTool);
+    public static Builder builder(ItemClassification...preferredTools) {
+        return new Builder(preferredTools);
     }
 
     /**
@@ -84,7 +83,7 @@ public class BlockLootEntry {
      * @return A new builder instance.
      */
     public static Builder builder() {
-        return new Builder(null);
+        return new Builder();
     }
 
     /**
@@ -92,12 +91,12 @@ public class BlockLootEntry {
      */
     public static class Builder {
 
-        private final @Nullable ItemClassification preferredTool;
+        private final @NotNull Set<ItemClassification> preferredTool;
         private final Multimap<BlockLootContext, BlockLoot> loot = HashMultimap.create();
         private @Nullable AttributeWrapper fortuneOverride = null;
 
-        private Builder(@Nullable ItemClassification preferredTool) {
-            this.preferredTool = preferredTool;
+        private Builder(ItemClassification...preferredTool) {
+            this.preferredTool = ImmutableSet.copyOf(preferredTool);
         }
 
         /**
@@ -129,9 +128,8 @@ public class BlockLootEntry {
          * @return The new entry.
          */
         public BlockLootEntry build() {
-            return new BlockLootEntry(this.preferredTool, this.loot, this.fortuneOverride);
+            return new BlockLootEntry(this.loot, this.fortuneOverride, this.preferredTool);
         }
-
 
     }
 
