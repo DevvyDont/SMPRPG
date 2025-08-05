@@ -45,7 +45,8 @@ public class ItemHatchet extends CustomAttributeItem implements IBreakableEquipm
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getHatchetDamage()),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, HATCHET_ATTACK_SPEED_DEBUFF),
-                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, getHatchetFortune())
+                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, getHatchetFortune()),
+                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, getHatchetFortune())
         );
     }
 

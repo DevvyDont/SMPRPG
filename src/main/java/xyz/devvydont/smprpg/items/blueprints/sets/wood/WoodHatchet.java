@@ -35,7 +35,7 @@ public class WoodHatchet extends ItemHatchet implements ICraftable, IBreakableEq
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.WOODEN_SWORD) - 5; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {

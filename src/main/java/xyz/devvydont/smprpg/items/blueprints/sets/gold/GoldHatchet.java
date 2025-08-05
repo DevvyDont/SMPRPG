@@ -34,7 +34,7 @@ public class GoldHatchet extends ItemHatchet implements ICraftable, IBreakableEq
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.GOLDEN_SWORD) - 7; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.GOLDEN_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.GOLDEN_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {

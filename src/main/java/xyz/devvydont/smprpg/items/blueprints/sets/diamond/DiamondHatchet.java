@@ -34,7 +34,7 @@ public class DiamondHatchet extends ItemHatchet implements ICraftable, IBreakabl
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.DIAMOND_SWORD) - 12; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.DIAMOND_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.DIAMOND_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {

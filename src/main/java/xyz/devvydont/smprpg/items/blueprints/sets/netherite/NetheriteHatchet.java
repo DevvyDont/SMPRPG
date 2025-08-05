@@ -34,7 +34,7 @@ public class NetheriteHatchet extends ItemHatchet implements ICraftable, IBreaka
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.NETHERITE_SWORD) - 25; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.NETHERITE_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.NETHERITE_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {

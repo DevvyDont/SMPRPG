@@ -34,7 +34,7 @@ public class StoneHatchet extends ItemHatchet implements ICraftable, IBreakableE
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.STONE_SWORD) - 5; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.STONE_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.STONE_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {

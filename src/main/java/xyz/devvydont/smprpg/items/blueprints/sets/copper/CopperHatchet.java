@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemAxe;
+import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemPickaxe;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
@@ -40,7 +41,8 @@ public class CopperHatchet extends CustomAttributeItem implements ICraftable, IB
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemSword.getSwordDamage(Material.WOODEN_SWORD) - 5),
                 new MultiplicativeAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, .1),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF+.25),
-                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, ItemAxe.getAxeFortune(Material.WOODEN_AXE))
+                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, ItemAxe.getAxeFortune(Material.WOODEN_AXE) * 0.8),
+                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE) * 0.8)
         );
     }
 
