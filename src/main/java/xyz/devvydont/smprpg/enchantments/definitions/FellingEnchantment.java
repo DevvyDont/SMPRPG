@@ -78,17 +78,6 @@ public class FellingEnchantment extends CustomEnchantment implements AttributeEn
     }
 
     /**
-     * A set of enchantments that this enchantment conflicts with.
-     * If there are none, this enchantment has no conflicts
-     *
-     * @return
-     */
-    @NotNull
-    public RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
-        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.SILK_TOUCH, EnchantmentKeys.FORTUNE, EnchantmentService.HARVESTING.getTypedKey());
-    }
-
-    /**
      * What kind of attribute container is this? Items can have multiple containers of stats that stack
      * to prevent collisions
      *

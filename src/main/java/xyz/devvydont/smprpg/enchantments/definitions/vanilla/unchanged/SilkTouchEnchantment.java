@@ -44,15 +44,4 @@ public class SilkTouchEnchantment extends UnchangedEnchantment {
     public int getSkillRequirement() {
         return 20;
     }
-
-    /**
-     * A set of enchantments that this enchantment conflicts with.
-     * If there are none, this enchantment has no conflicts
-     *
-     * @return
-     */
-    @NotNull
-    public RegistryKeySet<Enchantment> getConflictingEnchantments() {
-        return RegistrySet.keySet(RegistryKey.ENCHANTMENT, EnchantmentKeys.FORTUNE);
-    }
 }
