@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.listeners;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
@@ -192,7 +194,7 @@ public class EnvironmentalDamageListener extends ToggleableListener {
             return;
 
         if (shouldGiveIFrames(event.getCause()))
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> living.setNoDamageTicks(20), 0);
+            living.setNoDamageTicks(20);
     }
 
     /**
