@@ -114,14 +114,6 @@ public class FishingBehaviorListeners extends ToggleableListener {
             return;
         }
 
-        // We know we don't have a task. If a normal fishing event fires, this is probably a safe time to
-        // force tag the fishing hook as a normal fishing hook so it doesn't catch lava/void fish in normal circumstances.
-        if (event.getState().equals(PlayerFishEvent.State.LURED)) {
-            for (var flag : IFishingRod.FishingFlag.values())
-                event.getHook().removeMetadata(flag.toString(), SMPRPG.getInstance());
-            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
-        }
-
         // Filter out events where we aren't casting a fishing line to start the process.
         if (!event.getState().equals(PlayerFishEvent.State.FISHING))
             return;
@@ -138,16 +130,14 @@ public class FishingBehaviorListeners extends ToggleableListener {
         if (!(blueprint instanceof IFishingRod rodBlueprint))
             return;
 
-        // We have two jobs. Start a ticking behavior task to simulate fishing in contexts where fishing isn't supported,
-        // and tag the fishing hook with the flags that it's allowed to fish for.
-        for (var flag : rodBlueprint.getFishingFlags())
-            event.getHook().setMetadata(flag.name(), new FixedMetadataValue(SMPRPG.getInstance(), true));
-
         // If this rod is nothing special, we can simply ignore it. It will act like a vanilla fishing rod.
+        if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL))
+            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL) && rodBlueprint.getFishingFlags().size() == 1)
             return;
 
-        hook = FishHookBehaviorTask.create(event.getHook());
+        hook = FishHookBehaviorTask.create(event.getHook(), rodBlueprint.getFishingFlags());
 
         // Customize the hook's behavior to suit the fishing rod depending on the flags present.
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.LAVA) && rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))

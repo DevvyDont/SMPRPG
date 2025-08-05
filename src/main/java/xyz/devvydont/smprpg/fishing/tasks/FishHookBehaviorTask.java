@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.unchanged.LureEnchantment;
@@ -19,7 +20,9 @@ import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
+import java.util.Collections;
 import java.util.Random;
+import java.util.Set;
 
 import static xyz.devvydont.smprpg.fishing.utils.FishingPredicates.*;
 
@@ -148,8 +151,9 @@ public class FishHookBehaviorTask extends BukkitRunnable {
      * @param hook The {@link FishHook} to simulate behavior for.
      * @return A newly created and now running task. No need to start it.
      */
-    public static FishHookBehaviorTask create(FishHook hook) {
+    public static FishHookBehaviorTask create(FishHook hook, final Set<IFishingRod.FishingFlag> allowedFishingFlags) {
         var instance = new FishHookBehaviorTask(hook);
+        instance.setAllowedFishingFlags(allowedFishingFlags);
         instance.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
         return instance;
     }
@@ -183,6 +187,8 @@ public class FishHookBehaviorTask extends BukkitRunnable {
      * anything like that. I've tried everything :(
      */
     private @Nullable ArmorStand hookMount = null;
+
+    private @NotNull Set<IFishingRod.FishingFlag> allowedFishingFlags = Collections.emptySet();
 
     /**
      * Used as an input to a sine function to simulate "up and down" bobbing while waiting for a catch.
@@ -227,13 +233,18 @@ public class FishHookBehaviorTask extends BukkitRunnable {
 
         // If the hook is gone, we can kill the task. The player caused the hook to vanish from the world.
         if (!hook.isValid()) {
-            this.cleanupHookMount();
             cancel();
             return;
         }
 
         // Handle the state that this task is currently in. Runs every tick.
         handleState();
+    }
+
+    @Override
+    public synchronized void cancel() throws IllegalStateException {
+        super.cancel();
+        this.cleanupHookMount();
     }
 
     /**
@@ -244,6 +255,15 @@ public class FishHookBehaviorTask extends BukkitRunnable {
         var ticks = new Random().nextLong(MIN_FISH_WAIT_TIME, MAX_FISH_WAIT_TIME+1);
         ticks -= TickTime.seconds(LureEnchantment.getDecreaseTime(lureFactor));
         return Math.clamp(ticks, TickTime.SECOND, MAX_FISH_WAIT_TIME);
+    }
+
+
+    public @NotNull Set<IFishingRod.FishingFlag> getAllowedFishingFlags() {
+        return allowedFishingFlags;
+    }
+
+    public void setAllowedFishingFlags(@NotNull Set<IFishingRod.FishingFlag> allowedFishingFlags) {
+        this.allowedFishingFlags = allowedFishingFlags;
     }
 
     /**
@@ -267,9 +287,6 @@ public class FishHookBehaviorTask extends BukkitRunnable {
                 this.ticksUntilFish = Integer.MAX_VALUE;
                 this.ticksUntilBite = Integer.MAX_VALUE;
                 this.cleanupHookMount();
-                for (var flag : IFishingRod.FishingFlag.values())
-                    this.hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
-                this.hook.setMetadata(this.getFlagFromCurrentState().toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
             }
         }
     }
@@ -317,8 +334,9 @@ public class FishHookBehaviorTask extends BukkitRunnable {
             return IFishingRod.FishingFlag.VOID;
 
         // If we have the complex predicate, it is a bit annoying. We have to determine it from the block.
-        return switch (this.hook.getLocation().getBlock().getType()) {
-            case AIR -> IFishingRod.FishingFlag.VOID;
+        var block = this.hook.getLocation().getBlock().getType();
+        return switch (block) {
+            case VOID_AIR -> IFishingRod.FishingFlag.VOID;
             case LAVA -> IFishingRod.FishingFlag.LAVA;
             default -> IFishingRod.FishingFlag.NORMAL;
         };
@@ -485,6 +503,16 @@ public class FishHookBehaviorTask extends BukkitRunnable {
         // Now actually shift the anchor to be a bit "inside" the lava, since we want there to be room for bobbing.
         anchor.add(0, ANCHOR_VERTICAL_OFFSET, 0);
         this.bobTicks = 0;
+
+        // Update the metadata of the hook to only filter for drops that we want. This is only necessary for
+        // complex fishing rods!
+        for (var flag : IFishingRod.FishingFlag.values())
+            hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
+
+        if (LAVA_PREDICATE.check(location))
+            hook.setMetadata(IFishingRod.FishingFlag.LAVA.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+        if (VOID_PREDICATE.check(location))
+            hook.setMetadata(IFishingRod.FishingFlag.VOID.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
     }
 
     /**
@@ -492,6 +520,9 @@ public class FishHookBehaviorTask extends BukkitRunnable {
      */
     public void unanchor() {
         this.anchor = null;
+        for (var flag : IFishingRod.FishingFlag.values())
+            hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
+        hook.setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
     }
 
     /**
@@ -501,7 +532,7 @@ public class FishHookBehaviorTask extends BukkitRunnable {
     private void attemptAnchor() {
 
         // If we touch water, and we don't have the water flag, we die.
-        if (!this.hook.hasMetadata(IFishingRod.FishingFlag.NORMAL.toString()) && this.hook.getLocation().getBlock().getType().equals(Material.WATER)) {
+        if (!getAllowedFishingFlags().contains(IFishingRod.FishingFlag.NORMAL) && this.hook.getLocation().getBlock().getType().equals(Material.WATER)) {
             this.hook.remove();
             this.hook.getWorld().playSound(this.hook.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.25f);
             if (this.getOwner() != null)
