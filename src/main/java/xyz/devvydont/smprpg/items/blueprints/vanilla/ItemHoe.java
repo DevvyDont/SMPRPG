@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.VanillaAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -55,12 +55,12 @@ public class ItemHoe extends VanillaAttributeItem implements IBreakableEquipment
 
     public static int getHoeRating(Material material) {
         return switch (material) {
-            case NETHERITE_HOE -> ToolsUtil.NETHERITE_TOOL_POWER;
-            case DIAMOND_HOE -> ToolsUtil.DIAMOND_TOOL_POWER;
-            case GOLDEN_HOE -> ToolsUtil.GOLD_TOOL_POWER;
-            case IRON_HOE -> ToolsUtil.IRON_TOOL_POWER;
-            case STONE_HOE -> ToolsUtil.STONE_TOOL_POWER;
-            case WOODEN_HOE -> ToolsUtil.WOOD_TOOL_POWER;
+            case NETHERITE_HOE -> ToolGlobals.NETHERITE_TOOL_POWER;
+            case DIAMOND_HOE -> ToolGlobals.DIAMOND_TOOL_POWER;
+            case GOLDEN_HOE -> ToolGlobals.GOLD_TOOL_POWER;
+            case IRON_HOE -> ToolGlobals.IRON_TOOL_POWER;
+            case STONE_HOE -> ToolGlobals.STONE_TOOL_POWER;
+            case WOODEN_HOE -> ToolGlobals.WOOD_TOOL_POWER;
             default -> 1;
         };
     }
@@ -97,12 +97,12 @@ public class ItemHoe extends VanillaAttributeItem implements IBreakableEquipment
     @Override
     public int getMaxDurability() {
         return switch (material) {
-            case NETHERITE_HOE -> ToolsUtil.NETHERITE_TOOL_DURABILITY;
-            case DIAMOND_HOE -> ToolsUtil.DIAMOND_TOOL_DURABILITY;
-            case GOLDEN_HOE -> ToolsUtil.GOLD_TOOL_DURABILITY;
-            case IRON_HOE -> ToolsUtil.IRON_TOOL_DURABILITY;
-            case STONE_HOE -> ToolsUtil.STONE_TOOL_DURABILITY;
-            case WOODEN_HOE -> ToolsUtil.WOOD_TOOL_DURABILITY;
+            case NETHERITE_HOE -> ToolGlobals.NETHERITE_TOOL_DURABILITY;
+            case DIAMOND_HOE -> ToolGlobals.DIAMOND_TOOL_DURABILITY;
+            case GOLDEN_HOE -> ToolGlobals.GOLD_TOOL_DURABILITY;
+            case IRON_HOE -> ToolGlobals.IRON_TOOL_DURABILITY;
+            case STONE_HOE -> ToolGlobals.STONE_TOOL_DURABILITY;
+            case WOODEN_HOE -> ToolGlobals.WOOD_TOOL_DURABILITY;
             default -> 50_000;
         };
     }

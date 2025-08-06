@@ -1,6 +1,6 @@
 package xyz.devvydont.smprpg.util.items;
 
-public class ToolsUtil {
+public class ToolGlobals {
 
     public static final int NETHERITE_TOOL_DURABILITY = 10_000;
     public static final int DIAMOND_TOOL_DURABILITY = 5_000;

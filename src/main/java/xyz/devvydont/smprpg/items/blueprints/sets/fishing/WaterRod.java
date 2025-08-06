@@ -18,7 +18,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -49,10 +49,10 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
     @Override
     public int getPowerRating() {
         return switch (getCustomItemType()) {
-            case IRON_ROD -> ToolsUtil.IRON_TOOL_POWER;
-            case GOLD_ROD -> ToolsUtil.GOLD_TOOL_POWER;
-            case DIAMOND_ROD -> ToolsUtil.DIAMOND_TOOL_POWER;
-            case PRISMARINE_ROD -> ToolsUtil.NETHERITE_TOOL_POWER-5;
+            case IRON_ROD -> ToolGlobals.IRON_TOOL_POWER;
+            case GOLD_ROD -> ToolGlobals.GOLD_TOOL_POWER;
+            case DIAMOND_ROD -> ToolGlobals.DIAMOND_TOOL_POWER;
+            case PRISMARINE_ROD -> ToolGlobals.NETHERITE_TOOL_POWER-5;
             default -> 0;
         };
     };

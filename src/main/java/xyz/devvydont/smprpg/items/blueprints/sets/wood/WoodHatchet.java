@@ -15,7 +15,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.tools.ItemHatchet;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -63,7 +63,7 @@ public class WoodHatchet extends ItemHatchet implements ICraftable, IBreakableEq
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.WOOD_TOOL_DURABILITY;
+        return ToolGlobals.WOOD_TOOL_DURABILITY;
     }
 
 }

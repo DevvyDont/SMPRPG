@@ -17,7 +17,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.util.crafting.builders.BowRecipe;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -73,6 +73,6 @@ public class CopperBow extends CustomAttributeItem implements ICraftable, IBreak
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.COPPER_TOOL_DURABILITY;
+        return ToolGlobals.COPPER_TOOL_DURABILITY;
     }
 }

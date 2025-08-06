@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.VanillaAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,12 +32,12 @@ public class ItemShovel extends VanillaAttributeItem implements IBreakableEquipm
 
     public static int getShovelRating(Material material) {
         return switch (material) {
-            case NETHERITE_SHOVEL -> ToolsUtil.NETHERITE_TOOL_POWER;
-            case DIAMOND_SHOVEL -> ToolsUtil.DIAMOND_TOOL_POWER;
-            case GOLDEN_SHOVEL -> ToolsUtil.GOLD_TOOL_POWER;
-            case IRON_SHOVEL -> ToolsUtil.IRON_TOOL_POWER;
-            case STONE_SHOVEL -> ToolsUtil.STONE_TOOL_POWER;
-            case WOODEN_SHOVEL -> ToolsUtil.WOOD_TOOL_POWER;
+            case NETHERITE_SHOVEL -> ToolGlobals.NETHERITE_TOOL_POWER;
+            case DIAMOND_SHOVEL -> ToolGlobals.DIAMOND_TOOL_POWER;
+            case GOLDEN_SHOVEL -> ToolGlobals.GOLD_TOOL_POWER;
+            case IRON_SHOVEL -> ToolGlobals.IRON_TOOL_POWER;
+            case STONE_SHOVEL -> ToolGlobals.STONE_TOOL_POWER;
+            case WOODEN_SHOVEL -> ToolGlobals.WOOD_TOOL_POWER;
             default -> 1;
         };
     }
@@ -74,12 +74,12 @@ public class ItemShovel extends VanillaAttributeItem implements IBreakableEquipm
     @Override
     public int getMaxDurability() {
         return switch (material) {
-            case NETHERITE_SHOVEL -> ToolsUtil.NETHERITE_TOOL_DURABILITY;
-            case DIAMOND_SHOVEL -> ToolsUtil.DIAMOND_TOOL_DURABILITY;
-            case GOLDEN_SHOVEL -> ToolsUtil.GOLD_TOOL_DURABILITY;
-            case IRON_SHOVEL -> ToolsUtil.IRON_TOOL_DURABILITY;
-            case STONE_SHOVEL -> ToolsUtil.STONE_TOOL_DURABILITY;
-            case WOODEN_SHOVEL -> ToolsUtil.WOOD_TOOL_DURABILITY;
+            case NETHERITE_SHOVEL -> ToolGlobals.NETHERITE_TOOL_DURABILITY;
+            case DIAMOND_SHOVEL -> ToolGlobals.DIAMOND_TOOL_DURABILITY;
+            case GOLDEN_SHOVEL -> ToolGlobals.GOLD_TOOL_DURABILITY;
+            case IRON_SHOVEL -> ToolGlobals.IRON_TOOL_DURABILITY;
+            case STONE_SHOVEL -> ToolGlobals.STONE_TOOL_DURABILITY;
+            case WOODEN_SHOVEL -> ToolGlobals.WOOD_TOOL_DURABILITY;
             default -> 50_000;
         };
     }

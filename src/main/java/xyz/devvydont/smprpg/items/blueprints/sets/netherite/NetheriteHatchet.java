@@ -14,7 +14,7 @@ import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -62,7 +62,7 @@ public class NetheriteHatchet extends ItemHatchet implements ICraftable, IBreaka
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.NETHERITE_TOOL_DURABILITY;
+        return ToolGlobals.NETHERITE_TOOL_DURABILITY;
     }
 
 }

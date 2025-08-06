@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.VanillaAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,12 +44,12 @@ public class ItemPickaxe extends VanillaAttributeItem implements IBreakableEquip
 
     public static int getPickaxeRating(Material material) {
         return switch (material) {
-            case NETHERITE_PICKAXE -> ToolsUtil.NETHERITE_TOOL_POWER;
-            case DIAMOND_PICKAXE -> ToolsUtil.DIAMOND_TOOL_POWER;
-            case GOLDEN_PICKAXE -> ToolsUtil.GOLD_TOOL_POWER;
-            case IRON_PICKAXE -> ToolsUtil.IRON_TOOL_POWER;
-            case STONE_PICKAXE -> ToolsUtil.STONE_TOOL_POWER;
-            case WOODEN_PICKAXE -> ToolsUtil.WOOD_TOOL_POWER;
+            case NETHERITE_PICKAXE -> ToolGlobals.NETHERITE_TOOL_POWER;
+            case DIAMOND_PICKAXE -> ToolGlobals.DIAMOND_TOOL_POWER;
+            case GOLDEN_PICKAXE -> ToolGlobals.GOLD_TOOL_POWER;
+            case IRON_PICKAXE -> ToolGlobals.IRON_TOOL_POWER;
+            case STONE_PICKAXE -> ToolGlobals.STONE_TOOL_POWER;
+            case WOODEN_PICKAXE -> ToolGlobals.WOOD_TOOL_POWER;
             default -> 1;
         };
     }
@@ -87,12 +87,12 @@ public class ItemPickaxe extends VanillaAttributeItem implements IBreakableEquip
     @Override
     public int getMaxDurability() {
         return switch (material) {
-            case NETHERITE_PICKAXE -> ToolsUtil.NETHERITE_TOOL_DURABILITY;
-            case DIAMOND_PICKAXE -> ToolsUtil.DIAMOND_TOOL_DURABILITY;
-            case GOLDEN_PICKAXE -> ToolsUtil.GOLD_TOOL_DURABILITY;
-            case IRON_PICKAXE -> ToolsUtil.IRON_TOOL_DURABILITY;
-            case STONE_PICKAXE -> ToolsUtil.STONE_TOOL_DURABILITY;
-            case WOODEN_PICKAXE -> ToolsUtil.WOOD_TOOL_DURABILITY;
+            case NETHERITE_PICKAXE -> ToolGlobals.NETHERITE_TOOL_DURABILITY;
+            case DIAMOND_PICKAXE -> ToolGlobals.DIAMOND_TOOL_DURABILITY;
+            case GOLDEN_PICKAXE -> ToolGlobals.GOLD_TOOL_DURABILITY;
+            case IRON_PICKAXE -> ToolGlobals.IRON_TOOL_DURABILITY;
+            case STONE_PICKAXE -> ToolGlobals.STONE_TOOL_DURABILITY;
+            case WOODEN_PICKAXE -> ToolGlobals.WOOD_TOOL_DURABILITY;
             default -> 1_000;
         };
     }
