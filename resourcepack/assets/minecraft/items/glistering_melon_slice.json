@@ -1,0 +1,28 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/glistering_melon_slice"
+        },
+        "cases": [
+            {
+                "when": "smprpg:melon_slice_singularity",
+                "model": {
+                    "type": "minecraft:composite",
+                    "models": [
+						{
+							"type": "minecraft:model",
+							"model": "item/glistering_melon_slice"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "universal:overlay/legendary_star"
+						}
+					]
+                }
+            }
+        ]
+    }
+}

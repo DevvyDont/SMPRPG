@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "tools:item/boiling_pickaxe"
                 }
+            },
+            {
+                "when": "smprpg:dragonsteel_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/dragonsteel_pickaxe"
+                }
             }
         ]
     }

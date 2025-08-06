@@ -20,6 +20,13 @@
                     "type": "model",
                     "model": "swords:item/forsaken_cutlass"
                 }
+            },
+            {
+                "when": "smprpg:dragonsteel_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/dragonsteel_sword"
+                }
             }
         ]
     }

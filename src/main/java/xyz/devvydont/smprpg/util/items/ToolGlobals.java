@@ -10,6 +10,7 @@ import org.bukkit.block.BlockType;
 
 public class ToolGlobals {
 
+    public static final int DRAGONSTEEL_TOOL_DURABILITY = 40_000;
     public static final int NETHERITE_TOOL_DURABILITY = 10_000;
     public static final int DIAMOND_TOOL_DURABILITY = 5_000;
     public static final int STEEL_TOOL_DURABILITY = 2_500;
@@ -28,6 +29,7 @@ public class ToolGlobals {
     public static final int STEEL_TOOL_POWER = 12;
     public static final int DIAMOND_TOOL_POWER = 15;
     public static final int NETHERITE_TOOL_POWER = 25;
+    public static final int DRAGONSTEEL_TOOL_POWER = 40;
 
 
     // Tool Components

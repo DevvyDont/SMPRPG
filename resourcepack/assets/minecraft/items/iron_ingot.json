@@ -4,21 +4,21 @@
         "property": "custom_model_data",
         "fallback": {
             "type": "model",
-            "model": "item/iron_sword"
+            "model": "item/iron_ingot"
         },
         "cases": [
             {
-                "when": "smprpg:mystbloom_kunai",
+                "when": "smprpg:steel_ingot",
                 "model": {
                     "type": "model",
-                    "model": "swords:item/mystbloom_kunai"
+                    "model": "materials:item/steel_ingot"
                 }
             },
             {
-                "when": "smprpg:steel_sword",
+                "when": "smprpg:dragonsteel_ingot",
                 "model": {
                     "type": "model",
-                    "model": "swords:item/steel_sword"
+                    "model": "materials:item/dragonsteel_ingot"
                 }
             }
         ]

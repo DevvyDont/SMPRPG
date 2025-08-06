@@ -1,16 +1,14 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.steel;
+package xyz.devvydont.smprpg.items.blueprints.sets.dragonsteel;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Tool;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.keys.BlockTypeKeys;
-import io.papermc.paper.registry.keys.EnchantmentKeys;
 import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
 import io.papermc.paper.registry.set.RegistrySet;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.BlockType;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -33,7 +31,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class SteelSword extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
+public class DragonsteelSword extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
 
     public static final Tool TOOL_COMP = Tool.tool()
             .defaultMiningSpeed(1.0f)
@@ -43,14 +41,14 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
             .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.SWORD_EFFICIENT), 1.5f, TriState.FALSE))
             .build();
 
-    public SteelSword(ItemService itemService, CustomItemType type) {
+    public DragonsteelSword(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 40),
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 120),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemSword.SWORD_ATTACK_SPEED_DEBUFF)
         );
     }
@@ -87,8 +85,8 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
     @Override
     public CraftingRecipe getCustomRecipe() {
         return new SwordRecipe(this,
-                itemService.getCustomItem(CustomItemType.STEEL_INGOT),
-                itemService.getCustomItem(Material.STICK),
+                itemService.getCustomItem(CustomItemType.DRAGONSTEEL_INGOT),
+                itemService.getCustomItem(CustomItemType.OBSIDIAN_TOOL_ROD),
                 generate()
         ).build();
     }

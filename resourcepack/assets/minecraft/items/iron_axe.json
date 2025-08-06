@@ -13,6 +13,20 @@
                     "type": "model",
                     "model": "tools:item/iron_hatchet"
                 }
+            },
+            {
+                "when": "smprpg:steel_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/steel_axe"
+                }
+            },
+            {
+                "when": "smprpg:steel_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/steel_hatchet"
+                }
             }
         ]
     }

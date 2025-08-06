@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/netherite_hoe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:dragonsteel_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/dragonsteel_hoe"
+                }
+            }
+        ]
+    }
+}

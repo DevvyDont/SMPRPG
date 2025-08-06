@@ -46,6 +46,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.copper.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondBow;
 import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondHatchet;
+import xyz.devvydont.smprpg.items.blueprints.sets.dragonsteel.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.elderflame.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emberclad.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldBoots;
@@ -746,6 +747,14 @@ public enum CustomItemType {
     VOID_SHARD("Void Shard", Material.ECHO_SHARD, ItemRarity.EPIC, MagicMirrorShard.class),
 
     SUMMONING_CRYSTAL("Summoning Crystal", Material.END_CRYSTAL, ItemRarity.EPIC, true, 50_000),
+
+    // DRAGONSTEEL TOOLS
+    DRAGONSTEEL_PICKAXE("Dragonsteel Pickaxe",      Material.NETHERITE_PICKAXE,      ItemRarity.LEGENDARY,   DragonsteelPickaxe.class),
+    DRAGONSTEEL_AXE("Dragonsteel Axe",              Material.NETHERITE_AXE,          ItemRarity.LEGENDARY,   DragonsteelAxe.class),
+    DRAGONSTEEL_HATCHET("Dragonsteel Hatchet",      Material.NETHERITE_AXE,          ItemRarity.LEGENDARY,   DragonsteelHatchet.class),
+    DRAGONSTEEL_SWORD("Dragonsteel Sword",          Material.NETHERITE_SWORD,        ItemRarity.LEGENDARY,   DragonsteelSword.class),
+    DRAGONSTEEL_HOE("Dragonsteel Hoe",              Material.NETHERITE_HOE,          ItemRarity.LEGENDARY,   DragonsteelHoe.class),
+    DRAGONSTEEL_SHOVEL("Dragonsteel Shovel",        Material.NETHERITE_SHOVEL,       ItemRarity.LEGENDARY,   DragonsteelShovel.class),
 
     // PASSIVE MOBS
     PREMIUM_PORKCHOP("Premium Porkchop", Material.COOKED_PORKCHOP, ItemRarity.UNCOMMON, true, PorkchopFamilyBlueprint.class),

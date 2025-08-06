@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -38,10 +39,9 @@ public class DragonsteelIngot extends CustomItemBlueprint implements ISellable, 
 
     @Override
     public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.shape("mmm", "mim", "mmm");
-        recipe.setIngredient('m', ItemService.generate(CustomItemType.DRAGON_SCALES));
-        recipe.setIngredient('i', ItemService.generate(CustomItemType.STEEL_INGOT));
+        var recipe = new ShapelessRecipe(getRecipeKey(), generate());
+        recipe.addIngredient(4, ItemService.generate(CustomItemType.STEEL_INGOT));
+        recipe.addIngredient(4, ItemService.generate(CustomItemType.DRAGON_SCALES));
         recipe.setCategory(CraftingBookCategory.MISC);
         return recipe;
 

@@ -1,16 +1,11 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.steel;
+package xyz.devvydont.smprpg.items.blueprints.sets.dragonsteel;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Tool;
-import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.registry.keys.BlockTypeKeys;
-import io.papermc.paper.registry.keys.EnchantmentKeys;
 import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
-import io.papermc.paper.registry.set.RegistrySet;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.BlockType;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -22,45 +17,43 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
-import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
+import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemHoe;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.builders.SwordRecipe;
+import xyz.devvydont.smprpg.util.crafting.builders.HoeRecipe;
 import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
 
-
-public class SteelSword extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
+public class DragonsteelHoe extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
 
     public static final Tool TOOL_COMP = Tool.tool()
             .defaultMiningSpeed(1.0f)
-            .canDestroyBlocksInCreative(false)
-            .addRule(Tool.rule(RegistrySet.keySet(RegistryKey.BLOCK, BlockTypeKeys.COBWEB), 15.0f, TriState.TRUE))
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.SWORD_INSTANTLY_MINES), Float.MAX_VALUE, TriState.FALSE))
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.SWORD_EFFICIENT), 1.5f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_DIAMOND_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 11.0f, TriState.TRUE))
             .build();
 
-    public SteelSword(ItemService itemService, CustomItemType type) {
+    public DragonsteelHoe(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 40),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemSword.SWORD_ATTACK_SPEED_DEBUFF)
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 30),
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemHoe.getHoeAttackSpeedDebuff(Material.NETHERITE_HOE)),
+                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, 100)
         );
     }
 
     @Override
-    public int getPowerRating() { return ToolGlobals.STEEL_TOOL_POWER; }
+    public int getPowerRating() { return ToolGlobals.DRAGONSTEEL_TOOL_POWER; }
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.SWORD;
+        return ItemClassification.HOE;
     }
 
     @Override
@@ -70,7 +63,7 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
 
     @Override
     public int getMaxDurability() {
-        return ToolGlobals.STEEL_TOOL_DURABILITY;
+        return ToolGlobals.DRAGONSTEEL_TOOL_DURABILITY;
     }
 
     @Override
@@ -86,9 +79,9 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
 
     @Override
     public CraftingRecipe getCustomRecipe() {
-        return new SwordRecipe(this,
-                itemService.getCustomItem(CustomItemType.STEEL_INGOT),
-                itemService.getCustomItem(Material.STICK),
+        return new HoeRecipe(this,
+                itemService.getCustomItem(CustomItemType.DRAGONSTEEL_INGOT),
+                itemService.getCustomItem(CustomItemType.OBSIDIAN_TOOL_ROD),
                 generate()
         ).build();
     }
@@ -96,7 +89,7 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                itemService.getCustomItem(CustomItemType.STEEL_INGOT)
+                itemService.getCustomItem(CustomItemType.DRAGONSTEEL_INGOT)
         );
     }
 
