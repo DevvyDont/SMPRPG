@@ -6,32 +6,42 @@ import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.keys.BlockTypeKeys;
 import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
 import io.papermc.paper.registry.set.RegistrySet;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.events.CustomItemDropRollEvent;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.builders.SwordRecipe;
+import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.items.AbilityUtil;
 import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 
-public class DragonsteelSword extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
+public class DragonsteelSword extends CustomAttributeItem implements ICraftable, IHeaderDescribable, IBreakableEquipment, Listener {
 
     public static final Tool TOOL_COMP = Tool.tool()
             .defaultMiningSpeed(1.0f)
@@ -41,8 +51,17 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
             .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.SWORD_EFFICIENT), 1.5f, TriState.FALSE))
             .build();
 
-    public DragonsteelSword(ItemService itemService, CustomItemType type) {
-        super(itemService, type);
+    public static final int SUMMONING_CRYSTAL_BOOST = 2;
+
+    public DragonsteelSword(ItemService itemService, CustomItemType type) { super(itemService, type); }
+
+    @Override
+    public List<Component> getHeader(ItemStack itemStack) {
+        List<Component> components = new ArrayList<>();
+        components.add(AbilityUtil.getAbilityComponent("Draconic Summoner (Passive)"));
+        components.add(ComponentUtils.create("Summoning Crystal drops are ").append(ComponentUtils.create(SUMMONING_CRYSTAL_BOOST + "x", NamedTextColor.GREEN)).append(ComponentUtils.create(" more common")));
+        components.add(ComponentUtils.create("when killing ").append(ComponentUtils.create("Ender", NamedTextColor.DARK_PURPLE)).append(ComponentUtils.create(" type mobs.")));
+        return components;
     }
 
     @Override
@@ -97,6 +116,20 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
         return List.of(
                 itemService.getCustomItem(CustomItemType.DRAGONSTEEL_INGOT)
         );
+    }
+
+    @EventHandler
+    public void onRollWitherSkull(CustomItemDropRollEvent event) {
+
+        if (event.getTool() == null || event.getTool().getType().equals(Material.AIR))
+            return;
+
+        if (!isItemOfType(event.getTool()))
+            return;
+
+        SMPItemBlueprint drop = itemService.getBlueprint(event.getDrop());
+        if (drop.equals(itemService.getBlueprint(CustomItemType.SUMMONING_CRYSTAL)))
+            event.setChance(event.getChance() * SUMMONING_CRYSTAL_BOOST);;
     }
 
 }
