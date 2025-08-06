@@ -45,6 +45,7 @@ public class DragonsteelAxe extends CustomAttributeItem implements ICraftable, I
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 140),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 25),
                 new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, 100)
         );
     }

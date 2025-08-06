@@ -49,12 +49,13 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 120),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemSword.SWORD_ATTACK_SPEED_DEBUFF)
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemSword.SWORD_ATTACK_SPEED_DEBUFF),
+                new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 10)
         );
     }
 
     @Override
-    public int getPowerRating() { return ToolGlobals.STEEL_TOOL_POWER; }
+    public int getPowerRating() { return ToolGlobals.DRAGONSTEEL_TOOL_POWER; }
 
     @Override
     public ItemClassification getItemClassification() {
@@ -68,7 +69,7 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
 
     @Override
     public int getMaxDurability() {
-        return ToolGlobals.STEEL_TOOL_DURABILITY;
+        return ToolGlobals.DRAGONSTEEL_TOOL_DURABILITY;
     }
 
     @Override
@@ -94,7 +95,7 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                itemService.getCustomItem(CustomItemType.STEEL_INGOT)
+                itemService.getCustomItem(CustomItemType.DRAGONSTEEL_INGOT)
         );
     }
 
