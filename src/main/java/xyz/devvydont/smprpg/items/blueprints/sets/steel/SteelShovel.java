@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.copper;
+package xyz.devvydont.smprpg.items.blueprints.sets.steel;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Tool;
@@ -17,45 +17,43 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
-import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemHoe;
+import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemShovel;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.builders.HoeRecipe;
+import xyz.devvydont.smprpg.util.crafting.builders.ShovelRecipe;
 import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
 
-public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
+
+public class SteelShovel extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
 
     public static final Tool TOOL_COMP = Tool.tool()
             .defaultMiningSpeed(1.0f)
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_STONE_TOOL), 1.0f, TriState.FALSE))
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 5.0f, TriState.TRUE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_IRON_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_SHOVEL), 7.0f, TriState.TRUE))
             .build();
 
-    public CopperHoe(ItemService itemService, CustomItemType type) {
+    public SteelShovel(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemHoe.getHoeDamage(Material.WOODEN_HOE)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemHoe.getHoeAttackSpeedDebuff(Material.IRON_HOE) / 2),
-                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, ItemHoe.getHoeFortune(Material.WOODEN_HOE))
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 20),
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemShovel.SHOVEL_ATTACK_SPEED_DEBUFF)
         );
     }
 
     @Override
-    public int getPowerRating() {
-        return 5;
-    }
+    public int getPowerRating() { return ToolGlobals.STEEL_TOOL_POWER; }
 
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.HOE;
+        return ItemClassification.TOOL;
     }
 
     @Override
@@ -65,7 +63,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
 
     @Override
     public int getMaxDurability() {
-        return ToolGlobals.COPPER_TOOL_DURABILITY;
+        return ToolGlobals.STEEL_TOOL_DURABILITY;
     }
 
     @Override
@@ -81,8 +79,8 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
 
     @Override
     public CraftingRecipe getCustomRecipe() {
-        return new HoeRecipe(this,
-                itemService.getCustomItem(Material.COPPER_INGOT),
+        return new ShovelRecipe(this,
+                itemService.getCustomItem(CustomItemType.STEEL_INGOT),
                 itemService.getCustomItem(Material.STICK),
                 generate()
         ).build();
@@ -91,7 +89,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                itemService.getCustomItem(Material.COPPER_INGOT)
+                itemService.getCustomItem(CustomItemType.STEEL_INGOT)
         );
     }
 

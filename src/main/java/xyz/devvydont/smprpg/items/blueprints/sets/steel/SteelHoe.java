@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.copper;
+package xyz.devvydont.smprpg.items.blueprints.sets.steel;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Tool;
@@ -27,31 +27,29 @@ import xyz.devvydont.smprpg.util.items.ToolGlobals;
 import java.util.Collection;
 import java.util.List;
 
-public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
+public class SteelHoe extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
 
     public static final Tool TOOL_COMP = Tool.tool()
             .defaultMiningSpeed(1.0f)
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_STONE_TOOL), 1.0f, TriState.FALSE))
-            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 5.0f, TriState.TRUE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_IRON_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 7.0f, TriState.TRUE))
             .build();
 
-    public CopperHoe(ItemService itemService, CustomItemType type) {
+    public SteelHoe(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemHoe.getHoeDamage(Material.WOODEN_HOE)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemHoe.getHoeAttackSpeedDebuff(Material.IRON_HOE) / 2),
-                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, ItemHoe.getHoeFortune(Material.WOODEN_HOE))
+                new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 13),
+                new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, ItemHoe.getHoeAttackSpeedDebuff(Material.IRON_HOE)),
+                new AdditiveAttributeEntry(AttributeWrapper.FARMING_FORTUNE, 35)
         );
     }
 
     @Override
-    public int getPowerRating() {
-        return 5;
-    }
+    public int getPowerRating() { return ToolGlobals.STEEL_TOOL_POWER; }
 
     @Override
     public ItemClassification getItemClassification() {
@@ -65,7 +63,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
 
     @Override
     public int getMaxDurability() {
-        return ToolGlobals.COPPER_TOOL_DURABILITY;
+        return ToolGlobals.STEEL_TOOL_DURABILITY;
     }
 
     @Override
@@ -82,7 +80,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
     @Override
     public CraftingRecipe getCustomRecipe() {
         return new HoeRecipe(this,
-                itemService.getCustomItem(Material.COPPER_INGOT),
+                itemService.getCustomItem(CustomItemType.STEEL_INGOT),
                 itemService.getCustomItem(Material.STICK),
                 generate()
         ).build();
@@ -91,7 +89,7 @@ public class CopperHoe extends CustomAttributeItem implements ICraftable, IBreak
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                itemService.getCustomItem(Material.COPPER_INGOT)
+                itemService.getCustomItem(CustomItemType.STEEL_INGOT)
         );
     }
 

@@ -1,5 +1,9 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.copper;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Tool;
+import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -27,15 +31,18 @@ import static xyz.devvydont.smprpg.items.blueprints.vanilla.ItemAxe.AXE_ATTACK_S
 
 public class CopperAxe extends CustomAttributeItem implements ICraftable, IBreakableEquipment {
 
-    public CopperAxe(ItemService itemService, CustomItemType type) {
-        super(itemService, type);
-    }
+    public static final Tool TOOL_COMP = Tool.tool()
+            .defaultMiningSpeed(1.0f)
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_STONE_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_AXE), 5.0f, TriState.TRUE))
+            .build();
+
+    public CopperAxe(ItemService itemService, CustomItemType type) { super(itemService, type); }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemAxe.getAxeDamage(Material.WOODEN_AXE)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, .1),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF+.25),
                 new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, ItemAxe.getAxeFortune(Material.WOODEN_AXE))
         );
@@ -64,6 +71,12 @@ public class CopperAxe extends CustomAttributeItem implements ICraftable, IBreak
     @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.TOOL, TOOL_COMP);
     }
 
     @Override

@@ -1,5 +1,9 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.copper;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Tool;
+import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -33,6 +37,13 @@ public class CopperHatchet extends CustomAttributeItem implements ICraftable, IB
     public CopperHatchet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
+
+    public static final Tool TOOL_COMP = Tool.tool()
+            .defaultMiningSpeed(1.0f)
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_STONE_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_AXE), 5.0f, TriState.TRUE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 3.75f, TriState.TRUE))
+            .build();
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
@@ -68,6 +79,12 @@ public class CopperHatchet extends CustomAttributeItem implements ICraftable, IB
     @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.TOOL, TOOL_COMP);
     }
 
     @Override

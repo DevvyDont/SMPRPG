@@ -1,5 +1,9 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.diamond;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Tool;
+import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -21,6 +25,13 @@ import java.util.List;
 
 public class DiamondHatchet extends ItemHatchet implements ICraftable, IBreakableEquipment {
 
+    public static final Tool TOOL_COMP = Tool.tool()
+            .defaultMiningSpeed(1.0f)
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_DIAMOND_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_AXE), 8.0f, TriState.TRUE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 6.0f, TriState.TRUE))
+            .build();
+
     public DiamondHatchet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
@@ -39,6 +50,12 @@ public class DiamondHatchet extends ItemHatchet implements ICraftable, IBreakabl
     @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+    }
+
+    @Override
+    public void updateItemData(ItemStack itemStack) {
+        super.updateItemData(itemStack);
+        itemStack.setData(DataComponentTypes.TOOL, TOOL_COMP);
     }
 
     @Override

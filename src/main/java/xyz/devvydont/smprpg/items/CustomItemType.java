@@ -123,6 +123,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.snowfall.SnowfallLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.MagmaHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.SpaceHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.SquidHelmet;
+import xyz.devvydont.smprpg.items.blueprints.sets.steel.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadHelmet;
@@ -432,8 +433,16 @@ public enum CustomItemType {
     COPPER_HATCHET("Copper Hatchet",    Material.WOODEN_AXE,    ItemRarity.COMMON,   CopperHatchet.class),
     IRON_HATCHET("Iron Hatchet",      Material.IRON_AXE,      ItemRarity.COMMON,   IronHatchet.class),
     GOLD_HATCHET("Golden Hatchet",      Material.GOLDEN_AXE,    ItemRarity.COMMON,   GoldHatchet.class),
-    DIAMOND_HATCHET("Diamond Hatchet",   Material.DIAMOND_AXE,   ItemRarity.UNCOMMON, DiamondHatchet.class),
-    NETHERITE_HATCHET("Netherite Hatchet", Material.NETHERITE_AXE, ItemRarity.RARE,     NetheriteHatchet.class),
+    DIAMOND_HATCHET("Diamond Hatchet",   Material.DIAMOND_AXE,   ItemRarity.RARE, DiamondHatchet.class),
+    NETHERITE_HATCHET("Netherite Hatchet", Material.NETHERITE_AXE, ItemRarity.EPIC,     NetheriteHatchet.class),
+
+    // STEEL TOOLS
+    STEEL_PICKAXE("Steel Pickaxe",      Material.IRON_PICKAXE,      ItemRarity.UNCOMMON,   SteelPickaxe.class),
+    STEEL_AXE("Steel Axe",              Material.IRON_AXE,          ItemRarity.UNCOMMON,   SteelAxe.class),
+    STEEL_HATCHET("Steel Hatchet",      Material.IRON_AXE,          ItemRarity.UNCOMMON,   SteelHatchet.class),
+    STEEL_SWORD("Steel Sword",          Material.IRON_SWORD,        ItemRarity.UNCOMMON,   SteelSword.class),
+    STEEL_HOE("Steel Hoe",              Material.IRON_HOE,          ItemRarity.UNCOMMON,   SteelHoe.class),
+    STEEL_SHOVEL("Steel Shovel",        Material.IRON_SHOVEL,       ItemRarity.UNCOMMON,   SteelShovel.class),
 
     // EXILED SET
     EXILED_CROSSBOW("Exiled Crossbow", Material.CROSSBOW, ItemRarity.EPIC,  ExiledCrossbow.class),
