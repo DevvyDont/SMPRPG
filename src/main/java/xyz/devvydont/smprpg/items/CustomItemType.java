@@ -322,9 +322,9 @@ public enum CustomItemType {
     WARP_CATALYST("Warp Catalyst", ItemRarity.EPIC, WarpCatalyst.class),
 
     // ELDERFLAME
-    ELDERFLAME_HELMET(    "Elderflame Helmet",     Material.NETHERITE_HELMET,    ItemRarity.LEGENDARY, ElderflameHelmet.class),
-    ELDERFLAME_CHESTPLATE("Elderflame Wings",      Material.ELYTRA,              ItemRarity.LEGENDARY, ElderflameChestplate.class),
-    ELDERFLAME_LEGGINGS(  "Elderflame Leggings",   Material.NETHERITE_LEGGINGS,  ItemRarity.LEGENDARY, ElderflameLeggings.class),
+    ELDERFLAME_HELMET(    "Elderflame Helmet",     Material.LEATHER_HELMET,    ItemRarity.LEGENDARY, ElderflameHelmet.class),
+    ELDERFLAME_CHESTPLATE("Elderflame Wings",      Material.LEATHER_CHESTPLATE,              ItemRarity.LEGENDARY, ElderflameChestplate.class),
+    ELDERFLAME_LEGGINGS(  "Elderflame Leggings",   Material.LEATHER_LEGGINGS,  ItemRarity.LEGENDARY, ElderflameLeggings.class),
     ELDERFLAME_BOOTS(     "Elderflame Boots",      Material.LEATHER_BOOTS,       ItemRarity.LEGENDARY, ElderflameBoots.class),
     ELDERFLAME_DAGGER("Elderflame Dagger", Material.DIAMOND_SWORD, ItemRarity.LEGENDARY, ElderflameDagger.class),
     VOID_RELIC("Void Relic", ItemRarity.LEGENDARY, VoidRelic.class),

@@ -1,22 +1,23 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.elderflame;
 
+import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
-import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
+import xyz.devvydont.smprpg.items.interfaces.IEquippableAssetOverride;
 import xyz.devvydont.smprpg.services.ItemService;
 
 import java.util.Collection;
 import java.util.List;
 
-public abstract class ElderflameArmorSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
+public abstract class ElderflameArmorSet extends CustomAttributeItem implements IBreakableEquipment, ICraftable, IEquippableAssetOverride {
+
+    private static final Key key = Key.key("elderflame");
 
     public ElderflameArmorSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -38,18 +39,13 @@ public abstract class ElderflameArmorSet extends CustomAttributeItem implements 
     }
 
     @Override
-    public TrimMaterial getTrimMaterial() {
-        return TrimMaterial.DIAMOND;
-    }
-
-    @Override
-    public TrimPattern getTrimPattern() {
-        return TrimPattern.SILENCE;
-    }
-
-    @Override
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+    }
+
+    @Override
+    public Key getAssetId() {
+        return key;
     }
 
     @Override
