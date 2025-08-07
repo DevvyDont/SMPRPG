@@ -52,9 +52,7 @@ public class ProficientEnchantment extends CustomEnchantment implements Attribut
     public TagKey<ItemType> getItemTypeTag() { return ItemTypeTagKeys.ENCHANTABLE_VANISHING; }
 
     @Override
-    public int getAnvilCost() {
-        return 0;
-    }
+    public int getAnvilCost() { return 1; }
 
     @Override
     public int getMaxLevel() {
@@ -68,12 +66,12 @@ public class ProficientEnchantment extends CustomEnchantment implements Attribut
 
     @Override
     public EquipmentSlotGroup getEquipmentSlotGroup() {
-        return EquipmentSlotGroup.MAINHAND;
+        return EquipmentSlotGroup.ANY;
     }
 
     @Override
     public int getSkillRequirement() {
-        return 0;
+        return 22;
     }
 
     /**

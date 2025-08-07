@@ -57,7 +57,8 @@ public class InterfaceStats extends MenuBase {
             AttributeWrapper.ATTACK_SPEED,
             AttributeWrapper.INTELLIGENCE,
             AttributeWrapper.MOVEMENT_SPEED,
-            AttributeWrapper.LUCK
+            AttributeWrapper.LUCK,
+            AttributeWrapper.PROFICIENCY
     );
 
     private final LivingEntity target;
