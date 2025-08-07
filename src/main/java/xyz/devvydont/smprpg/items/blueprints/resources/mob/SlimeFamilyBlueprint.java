@@ -14,6 +14,7 @@ public class SlimeFamilyBlueprint extends CustomCompressableBlueprint {
 
     public static final List<CompressionRecipeMember> COMPRESSION_FLOW = List.of(
             new CompressionRecipeMember(new MaterialWrapper(Material.SLIME_BALL)),
+            new CompressionRecipeMember(new MaterialWrapper(Material.SLIME_BLOCK)),
             new CompressionRecipeMember(new MaterialWrapper(CustomItemType.PREMIUM_SLIME)),
             new CompressionRecipeMember(new MaterialWrapper(CustomItemType.ENCHANTED_SLIME))
     );
