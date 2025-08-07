@@ -244,6 +244,15 @@ public enum AttributeWrapper {
                     create(".")
             )),
 
+    LUMBERING("Lumbering",
+            AttributeCategory.FORAGING,
+            AttributeType.HELPFUL,
+            merge(
+                    create("Affects the number of "),
+                    create("extra connected logs", YELLOW),
+                    create(" you can break at a time.")
+            )),
+
     WOODCUTTING_FORTUNE("Splintering",
             AttributeCategory.FORAGING,
             AttributeType.HELPFUL,

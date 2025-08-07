@@ -46,7 +46,8 @@ public class SteelAxe extends CustomAttributeItem implements ICraftable, IBreaka
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, 50),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF),
-                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, 35)
+                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, 35),
+                new AdditiveAttributeEntry(AttributeWrapper.LUMBERING, 1)
         );
     }
 

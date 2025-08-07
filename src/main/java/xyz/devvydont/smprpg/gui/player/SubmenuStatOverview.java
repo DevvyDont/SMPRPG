@@ -218,6 +218,7 @@ public class SubmenuStatOverview extends MenuBase {
             case MINING_REACH -> Material.BRUSH;
             case MINING_FORTUNE -> Material.DIAMOND;
             case FARMING_FORTUNE -> Material.WHEAT;
+            case LUMBERING -> Material.IRON_AXE;
             case WOODCUTTING_FORTUNE -> Material.OAK_LOG;
             case FISHING_SPEED -> Material.PRISMARINE;
             case FISHING_RATING -> Material.FISHING_ROD;

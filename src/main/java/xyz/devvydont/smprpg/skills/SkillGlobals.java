@@ -166,6 +166,8 @@ public class SkillGlobals {
     // Woodcutting gives a small defense and critical rating boost.
     public static int DEFENSE_LEVEL_FREQUENCY = 2;
     public static double DEFENSE_PER_2_LEVELS = 4;
+    public static int LUMBERING_LEVEL_FREQUENCY = 10;
+    public static double LUMBERING_PER_10_LEVELS = 1;
 
     /**
      * Used for scaling attribute rewards. Higher levels will result in better attributes.
