@@ -110,6 +110,7 @@ public class EnchantmentService implements IService, Listener {
     public final static CustomEnchantment ABYSSAL_INSTINCT = new AbyssalInstinctEnchantment("abyssal_instinct");
     public final static CustomEnchantment TREASURE_HUNTER = new TreasureHunterEnchantment("treasure_hunter");
     public final static CustomEnchantment FELLING = new FellingEnchantment("felling");
+    public final static CustomEnchantment CHOPPING = new ChoppingEnchantment("chopping");
     public final static CustomEnchantment HARVESTING = new HarvestingEnchantment("harvesting");
     public final static CustomEnchantment REPLENISHING = new ReplenishingBlessing("replenishing");
 
@@ -169,6 +170,7 @@ public class EnchantmentService implements IService, Listener {
             FORTUNE,
             HARVESTING,
             FELLING,
+            CHOPPING,
             FROST_WALKER,
             IMPALING,
             KNOCKBACK,
