@@ -236,6 +236,7 @@ public class SubmenuStatOverview extends MenuBase {
             case KNOCKBACK_RESISTANCE -> Material.SHIELD;
             case CRITICAL_CHANCE -> Material.GOLDEN_AXE;
             case CRITICAL_DAMAGE -> Material.DIAMOND_AXE;
+            case PROFICIENCY -> Material.EXPERIENCE_BOTTLE;
             default -> Material.BARRIER;
         };
     }

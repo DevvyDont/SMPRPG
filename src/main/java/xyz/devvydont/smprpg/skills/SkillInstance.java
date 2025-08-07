@@ -2,9 +2,11 @@ package xyz.devvydont.smprpg.skills;
 
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent;
 import xyz.devvydont.smprpg.events.skills.SkillExperiencePostGainEvent;
 import xyz.devvydont.smprpg.events.skills.SkillLevelUpEvent;
+import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.skills.rewards.ISkillReward;
 
 import java.util.Collection;
@@ -89,8 +91,11 @@ public class SkillInstance {
         // Add the experience and take note of what level we are before and after
         int oldLevel = getLevel();
         int expCap = SkillGlobals.getTotalExperienceCap();
-        int newExp = getExperience() + event.getExperienceEarned();
-        setExperience(Math.min(expCap, newExp));
+        double expEarned = event.getExperienceEarned();
+        expEarned *= 1.0 + (getProficiencyStacks() / 100.0);
+        event.setExperienceEarned((int) Math.round(expEarned));
+        double newExp = getExperience() + expEarned;
+        setExperience(Math.min(expCap, (int) Math.round(newExp)));
         int newLevel = getLevel();
 
         // Combo increasing
@@ -153,6 +158,17 @@ public class SkillInstance {
      */
     public int getExperienceForNextLevel() {
         return SkillGlobals.getCumulativeExperienceForLevel(getNextLevel()) - getExperience();
+    }
+
+    /**
+     * Returns the amount of stacks of prociency that will apply to earned experience.
+     * @return Proficiency stacks, as a double
+     */
+    public double getProficiencyStacks() {
+        var proficiencyInstance = AttributeService.getInstance().getAttribute(getOwner(), AttributeWrapper.PROFICIENCY);
+        if (proficiencyInstance != null)
+            return proficiencyInstance.getValue();
+        return 0.0;
     }
 
     /**

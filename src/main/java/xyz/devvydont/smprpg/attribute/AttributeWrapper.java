@@ -430,6 +430,15 @@ public enum AttributeWrapper {
                 create(" you are.")
             )),
 
+    PROFICIENCY("Proficiency",
+            AttributeCategory.SPECIAL,
+            AttributeType.HELPFUL,
+            merge(
+                    create("How much extra "),
+                    create("skill experience", GREEN),
+                    create(" you earn.")
+            )),
+
     ZOMBIE_REINFORCEMENTS(Attribute.SPAWN_REINFORCEMENTS,
             "Zombie Reinforcements",
             AttributeCategory.SPECIAL,

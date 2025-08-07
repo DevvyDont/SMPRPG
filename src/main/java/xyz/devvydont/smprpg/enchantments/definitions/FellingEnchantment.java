@@ -96,7 +96,7 @@ public class FellingEnchantment extends CustomEnchantment implements AttributeEn
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.FARMING_FORTUNE, getFortune(getLevel()))
+                AttributeEntry.additive(AttributeWrapper.WOODCUTTING_FORTUNE, getFortune(getLevel()))
         );
     }
 
