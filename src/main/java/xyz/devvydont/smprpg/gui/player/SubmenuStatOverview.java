@@ -219,6 +219,7 @@ public class SubmenuStatOverview extends MenuBase {
             case MINING_FORTUNE -> Material.DIAMOND;
             case FARMING_FORTUNE -> Material.WHEAT;
             case WOODCUTTING_FORTUNE -> Material.OAK_LOG;
+            case FISHING_SPEED -> Material.PRISMARINE;
             case FISHING_RATING -> Material.FISHING_ROD;
             case FISHING_CREATURE_CHANCE -> Material.DROWNED_SPAWN_EGG;
             case FISHING_TREASURE_CHANCE -> Material.GOLD_BLOCK;

@@ -165,10 +165,8 @@ public class SkillInstance {
      * @return Proficiency stacks, as a double
      */
     public double getProficiencyStacks() {
-        var proficiencyInstance = AttributeService.getInstance().getAttribute(getOwner(), AttributeWrapper.PROFICIENCY);
-        if (proficiencyInstance != null)
-            return proficiencyInstance.getValue();
-        return 0.0;
+        var proficiencyInstance = AttributeService.getInstance().getOrCreateAttribute(getOwner(), AttributeWrapper.PROFICIENCY);
+        return proficiencyInstance.getValue();
     }
 
     /**

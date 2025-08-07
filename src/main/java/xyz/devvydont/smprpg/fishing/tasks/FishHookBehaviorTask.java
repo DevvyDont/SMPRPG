@@ -1,7 +1,6 @@
 package xyz.devvydont.smprpg.fishing.tasks;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
@@ -13,7 +12,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.enchantments.definitions.vanilla.unchanged.LureEnchantment;
 import xyz.devvydont.smprpg.fishing.utils.FishingPredicates;
 import xyz.devvydont.smprpg.fishing.utils.HookEffectOptions;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
@@ -252,9 +250,11 @@ public class FishHookBehaviorTask extends BukkitRunnable {
      * @return How many ticks until the next fish spawns in.
      */
     public long decideNextFishTime() {
-        var ticks = new Random().nextLong(MIN_FISH_WAIT_TIME, MAX_FISH_WAIT_TIME+1);
-        ticks -= TickTime.seconds(LureEnchantment.getDecreaseTime(lureFactor));
-        return Math.clamp(ticks, TickTime.SECOND, MAX_FISH_WAIT_TIME);
+        int minWait = hook.getMinWaitTime();
+        int maxWait = hook.getMaxWaitTime() + 1;
+        var ticks = new Random().nextLong(minWait, maxWait);
+        var retVal = Math.clamp(ticks, 1, maxWait);
+        return retVal;
     }
 
 

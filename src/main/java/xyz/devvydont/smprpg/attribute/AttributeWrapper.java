@@ -253,6 +253,15 @@ public enum AttributeWrapper {
                     create(".")
             )),
 
+    FISHING_SPEED("Fishing Speed",
+            AttributeCategory.FISHING,
+            AttributeType.HELPFUL,
+            merge(
+                    create("The speed of your "),
+                    create("fishing bobbers", BLUE),
+                    create(" while fishing.")
+            )),
+
     FISHING_RATING("Reeling",
             AttributeCategory.FISHING,
             AttributeType.HELPFUL,

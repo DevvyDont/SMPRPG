@@ -22,6 +22,7 @@ import xyz.devvydont.smprpg.fishing.calculator.FishLootCalculator;
 import xyz.devvydont.smprpg.fishing.events.FishingLootGenerateEvent;
 import xyz.devvydont.smprpg.fishing.tasks.FishHookBehaviorTask;
 import xyz.devvydont.smprpg.fishing.utils.FishingContext;
+import xyz.devvydont.smprpg.fishing.utils.HookEffectOptions;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -108,7 +109,18 @@ public class FishingBehaviorListeners extends ToggleableListener {
     private void __onStartFishWithSpecialRod(PlayerFishEvent event) {
 
         // If this hook is associated with a task already, offset the logic to the task. Not this.
-        var hook = tasks.get(event.getHook().getUniqueId());
+        int baseMaxWait = (int) TickTime.seconds(30);
+        int fishingSpeed;
+
+        var speedAtrInst = AttributeService.getInstance().getOrCreateAttribute(event.getPlayer(), AttributeWrapper.FISHING_SPEED);
+        fishingSpeed = (int) speedAtrInst.getValue();
+
+        var hookEntity = event.getHook();
+        int maxWait = (baseMaxWait - fishingSpeed);
+        hookEntity.setMinWaitTime(Math.max(1, (int) (maxWait/2)));
+        hookEntity.setMaxWaitTime(Math.max(1, maxWait));
+
+        var hook = tasks.get(hookEntity.getUniqueId());
         if (hook != null) {
             hook.handleFishingEvent(event);
             return;
@@ -146,8 +158,6 @@ public class FishingBehaviorListeners extends ToggleableListener {
             hook.setOptions(FishHookBehaviorTask.LAVA_OPTIONS);
         else if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))
             hook.setOptions(FishHookBehaviorTask.VOID_OPTIONS);
-
-        hook.setLure(fishingRod.getEnchantmentLevel(Enchantment.LURE));
 
         tasks.put(event.getHook().getUniqueId(), hook);
     }
