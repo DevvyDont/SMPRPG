@@ -29,7 +29,7 @@ public class Minnow extends SeaCreature<LivingEntity> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new QuantityLootDrop(ItemService.generate(CustomItemType.MINNOW_SCALE), 1, 3, this)
+                new QuantityLootDrop(ItemService.generate(CustomItemType.MINNOW_SCALE), 1, 2, this)
         );
     }
 }

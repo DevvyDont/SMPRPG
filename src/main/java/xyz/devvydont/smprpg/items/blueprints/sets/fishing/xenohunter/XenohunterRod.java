@@ -115,4 +115,14 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
                 FishingFlag.VOID
         );
     }
+
+    @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (4_500_000 * item.getAmount());
+    }
 }

@@ -94,4 +94,14 @@ public abstract class XenohunterSet extends CustomAttributeItem implements IBrea
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
     }
+
+    @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (4_000_000 * item.getAmount());
+    }
 }

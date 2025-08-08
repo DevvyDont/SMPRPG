@@ -52,7 +52,7 @@ public abstract class HolomokuSet extends CustomAttributeItem implements IBreaka
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 2),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 15)
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 20)
         );
     }
 
@@ -92,5 +92,15 @@ public abstract class HolomokuSet extends CustomAttributeItem implements IBreaka
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(ItemService.generate(CustomItemType.HOLOMOKU_CREST));
+    }
+
+    @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (50_000*item.getAmount());
     }
 }

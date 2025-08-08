@@ -28,7 +28,7 @@ public class HolomokuBoots extends HolomokuSet {
      */
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.HELMET;
+        return ItemClassification.BOOTS;
     }
 
     @Override

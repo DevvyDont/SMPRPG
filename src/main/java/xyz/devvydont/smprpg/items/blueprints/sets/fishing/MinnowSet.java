@@ -14,6 +14,7 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IDyeable;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
@@ -26,10 +27,10 @@ import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 import java.util.Collection;
 import java.util.List;
 
-public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable {
+public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable, IBreakableEquipment {
 
     public static final int POWER = 15;
-    public static final int CATCH_QUALITY = 5;
+    public static final int CATCH_QUALITY = 10;
     public static final double CHANCE = 1;
     public static final int COLOR = 0x9B9B9B;
     public static final TrimPattern TRIM = TrimPattern.RIB;
@@ -46,7 +47,7 @@ public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeab
 
     @Override
     public int getWorth(ItemStack item) {
-        return 15_000 * item.getAmount();
+        return (CustomItemType.MINNOW_SCALE.Worth * 3) * item.getAmount();
     }
 
     @Override
@@ -143,5 +144,10 @@ public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeab
             case MINNOW_BOOTS -> 5;
             default -> 0;
         };
+    }
+
+    @Override
+    public int getMaxDurability() {
+        return 12_000;
     }
 }

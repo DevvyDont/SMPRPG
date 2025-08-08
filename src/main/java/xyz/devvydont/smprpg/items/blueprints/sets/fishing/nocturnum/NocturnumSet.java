@@ -51,7 +51,7 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 4),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50)
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 55)
         );
     }
 
@@ -85,5 +85,15 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(ItemService.generate(CustomItemType.NECROPLASM));
+    }
+
+    @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (1_100_000 * item.getAmount());
     }
 }

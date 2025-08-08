@@ -1,5 +1,6 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku;
+package xyz.devvydont.smprpg.items.blueprints.sets.fishing;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -12,7 +13,6 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku.HolomokuSet;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
@@ -25,9 +25,9 @@ import java.util.Set;
 /**
  * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
  */
-public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+public class MinnowRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
 
-    public HolomokuRod(ItemService itemService, CustomItemType type) {
+    public MinnowRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -46,10 +46,10 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.STRENGTH, 50),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 45),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3)
+                AttributeEntry.additive(AttributeWrapper.STRENGTH, 25),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 5),
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 25),
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 2)
         );
     }
 
@@ -58,7 +58,7 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
      */
     @Override
     public int getPowerRating() {
-        return HolomokuSet.POWER;
+        return MinnowSet.POWER;
     }
 
     /**
@@ -71,7 +71,7 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
 
     @Override
     public int getMaxDurability() {
-        return 25_000;
+        return 15_000;
     }
 
     @Override
@@ -84,12 +84,11 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
         recipe.shape(
                 "  r",
-                " ts",
+                " rs",
                 "r s"
         );
-        recipe.setIngredient('t', ItemService.generate(CustomItemType.MINNOW_ROD));
-        recipe.setIngredient('r', ItemService.generate(HolomokuSet.UPGRADE_MATERIAL));
-        recipe.setIngredient('s', ItemService.generate(CustomItemType.PREMIUM_STRING));
+        recipe.setIngredient('r', ItemService.generate(CustomItemType.MINNOW_SCALE));
+        recipe.setIngredient('s', ItemService.generate(Material.STRING));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
     }
@@ -100,7 +99,7 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
      */
     @Override
     public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(HolomokuSet.UPGRADE_MATERIAL));
+        return List.of(ItemService.generate(CustomItemType.MINNOW_SCALE));
     }
 
     /**
@@ -122,6 +121,6 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
 
     @Override
     public int getWorth(ItemStack item) {
-        return super.getWorth(item) + (40_000 * item.getAmount());
+        return super.getWorth(item) + (5_000 * item.getAmount());
     }
 }

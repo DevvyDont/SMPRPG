@@ -115,4 +115,9 @@ public class RuinationRod extends CustomAttributeItem implements IBreakableEquip
                 FishingFlag.LAVA
         );
     }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (100_000 * item.getAmount());
+    }
 }

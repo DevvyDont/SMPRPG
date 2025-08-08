@@ -42,7 +42,7 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
         recipe.shape(" f ", "shs", " f ");
         recipe.setIngredient('f', ItemService.generate(CustomItemType.SHARK_FIN));
         recipe.setIngredient('s', ItemService.generate(Material.NAUTILUS_SHELL));
-        recipe.setIngredient('f', ItemService.generate(Material.HEART_OF_THE_SEA));
+        recipe.setIngredient('h', ItemService.generate(Material.HEART_OF_THE_SEA));
         recipe.setCategory(CraftingBookCategory.MISC);
         return recipe;
     }
@@ -69,6 +69,6 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 10_000;
+        return 17_500;
     }
 }

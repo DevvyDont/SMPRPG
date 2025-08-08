@@ -114,4 +114,14 @@ public class NocturnumRod extends CustomAttributeItem implements IBreakableEquip
                 FishingFlag.VOID
         );
     }
+
+    @Override
+    public boolean wantNerfedSellPrice() {
+        return false;
+    }
+
+    @Override
+    public int getWorth(ItemStack item) {
+        return super.getWorth(item) + (1_250_000 * item.getAmount());
+    }
 }

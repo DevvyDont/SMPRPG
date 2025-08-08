@@ -366,12 +366,12 @@ public enum CustomItemType {
     MURKY_BOOTS(     "Murky Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MurkySet.class),
 
     // SEA CREATURE FISHING
-    MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.UNCOMMON, false, 4_500),
+    MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.COMMON, false, 2_000),
     MINNOW_HELMET(    "Minnow Helmet",     Material.LEATHER_HELMET,     ItemRarity.COMMON, MinnowSet.class),
     MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.COMMON, MinnowSet.class),
     MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.COMMON, MinnowSet.class),
     MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MinnowSet.class),
-    MINNOW_ROD("Minnow Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
+    MINNOW_ROD("Minnow Rod", Material.FISHING_ROD, ItemRarity.COMMON, MinnowRod.class),
 
     HOLOMOKU_CREST("Holomoku Crest", Material.NAUTILUS_SHELL, ItemRarity.UNCOMMON, true, HolomokuCrest.class),
     HOLOMOKU_HELMET("Holomoku Helmet",         Material.DIAMOND_HELMET,     ItemRarity.UNCOMMON, HolomokuHelmet.class),
@@ -389,8 +389,8 @@ public enum CustomItemType {
     RUINATION_ROD("Ruination Rod",               Material.FISHING_ROD,        ItemRarity.RARE, RuinationRod.class),
 
     NECROPLASM(   "Necroplasm",           Material.BLACK_DYE, ItemRarity.RARE, true, 100_000),
-    LUCIFUGOUS_THREAD("Lucifugous Fiber", Material.STRING,    ItemRarity.EPIC, true, 400_000),
-    LUCIFUGOUS_ROD(  "Lucifugous Rod",    Material.STICK,     ItemRarity.EPIC, true, 400_000),
+    LUCIFUGOUS_THREAD("Lucifugous Thread", Material.STRING,    ItemRarity.EPIC, true, 400_000),
+    LUCIFUGOUS_ROD(  "Lucifugous Pole",    Material.STICK,     ItemRarity.EPIC, true, 400_000),
     NOCTURNUM_HELMET(    "Nocturnum Helmet",     Material.NETHERITE_HELMET,     ItemRarity.EPIC, NocturnumHelmet.class),
     NOCTURNUM_CHESTPLATE("Nocturnum Chestplate", Material.NETHERITE_CHESTPLATE, ItemRarity.EPIC, NocturnumChestplate.class),
     NOCTURNUM_LEGGINGS(  "Nocturnum Leggings",   Material.NETHERITE_LEGGINGS,   ItemRarity.EPIC, NocturnumLeggings.class),
@@ -399,7 +399,7 @@ public enum CustomItemType {
 
     XENOMATTER(   "Xenomatter",    Material.PHANTOM_MEMBRANE, ItemRarity.EPIC,      true, 250_000),
     STRANGE_FIBER("Strange Fiber", Material.STRING,           ItemRarity.LEGENDARY, true, 1_000_000),
-    STRANGE_ROD(  "Strange Rod",   Material.STICK,            ItemRarity.LEGENDARY, true, 1_000_000),
+    STRANGE_ROD(  "Strange Pole",   Material.STICK,            ItemRarity.LEGENDARY, true, 1_000_000),
     XENOHUNTER_HELMET(    "Xenohunter Helmet",     Material.NETHERITE_HELMET,     ItemRarity.LEGENDARY, XenohunterHelmet.class),
     XENOHUNTER_CHESTPLATE("Xenohunter Chestplate", Material.NETHERITE_CHESTPLATE, ItemRarity.LEGENDARY, XenohunterChestplate.class),
     XENOHUNTER_LEGGINGS(  "Xenohunter Leggings",   Material.NETHERITE_LEGGINGS,   ItemRarity.LEGENDARY, XenohunterLeggings.class),
@@ -413,7 +413,7 @@ public enum CustomItemType {
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
-    SHARK_FIN("Shark Fin", Material.PRISMARINE_SHARD, ItemRarity.RARE, true, 5000),
+    SHARK_FIN("Shark Fin", Material.PRISMARINE_SHARD, ItemRarity.UNCOMMON, true, 5000),
     CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
     ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
 
