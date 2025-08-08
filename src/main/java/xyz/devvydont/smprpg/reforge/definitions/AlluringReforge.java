@@ -16,7 +16,7 @@ import java.util.List;
 public class AlluringReforge extends ReforgeBase {
 
     public static double getChance(ItemRarity rarity) {
-        return 1 + rarity.ordinal();
+        return 2 + rarity.ordinal();
     }
 
     public AlluringReforge(ReforgeType type) {
