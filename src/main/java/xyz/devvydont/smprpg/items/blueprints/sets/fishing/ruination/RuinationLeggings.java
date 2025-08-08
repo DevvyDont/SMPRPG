@@ -29,7 +29,7 @@ public class RuinationLeggings extends RuinationSet {
      */
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.CHESTPLATE;
+        return ItemClassification.LEGGINGS;
     }
 
     @Override

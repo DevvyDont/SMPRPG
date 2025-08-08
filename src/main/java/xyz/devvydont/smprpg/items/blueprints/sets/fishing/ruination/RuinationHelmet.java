@@ -29,7 +29,7 @@ public class RuinationHelmet extends RuinationSet {
      */
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.CHESTPLATE;
+        return ItemClassification.HELMET;
     }
 
     @Override

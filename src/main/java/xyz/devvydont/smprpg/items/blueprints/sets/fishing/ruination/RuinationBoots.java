@@ -29,7 +29,7 @@ public class RuinationBoots extends RuinationSet {
      */
     @Override
     public ItemClassification getItemClassification() {
-        return ItemClassification.CHESTPLATE;
+        return ItemClassification.BOOTS;
     }
 
     @Override
