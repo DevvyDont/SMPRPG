@@ -32,7 +32,7 @@ public abstract class CustomAttributeItem extends CustomItemBlueprint implements
 
     @Override
     public int getWorth(ItemStack item) {
-        return AttributeUtil.calculateValue(getPowerRating(), getDefaultRarity(), this instanceof ICraftable && wantNerfedSellPrice()) * item.getAmount();
+        return AttributeUtil.calculateValue(getTotalPower(item.getItemMeta()), getDefaultRarity(), this instanceof ICraftable && wantNerfedSellPrice()) * item.getAmount();
     }
 
     @Override

@@ -23,6 +23,7 @@ import xyz.devvydont.smprpg.items.interfaces.IAttributeItem;
 import xyz.devvydont.smprpg.services.*;
 import xyz.devvydont.smprpg.skills.SkillInstance;
 import xyz.devvydont.smprpg.skills.SkillType;
+import xyz.devvydont.smprpg.util.attributes.AttributeUtil;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
@@ -185,7 +186,7 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
             if (!(blueprint instanceof IAttributeItem attributable))
                 continue;
 
-            total += attributable.getPowerRating();
+            total += attributable.getPowerRating() + AttributeUtil.getPowerBonus(item.getItemMeta());
             factor += 1;
         }
 
