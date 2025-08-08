@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/water_bucket"
+        },
+        "cases": [
+            {
+                "when": "smprpg:everlasting_water_bucket",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/everlasting_water_bucket"
+                }
+            }
+        ]
+    }
+}
