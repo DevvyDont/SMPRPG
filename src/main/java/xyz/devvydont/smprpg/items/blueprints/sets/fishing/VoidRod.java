@@ -2,10 +2,7 @@ package xyz.devvydont.smprpg.items.blueprints.sets.fishing;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.CraftingRecipe;
-import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -16,13 +13,15 @@ import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class VoidRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+public class VoidRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable, ISellable {
 
     public VoidRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -37,7 +36,7 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.STRENGTH, getStrength()),
-                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, -.5),
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, getFishingRating()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, getChance()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance())
@@ -47,9 +46,11 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
     @Override
     public int getPowerRating() {
         return switch (getCustomItemType()) {
-            case COMET_ROD -> 40;
-            case NEBULA_ROD -> 50;
-            default -> 0;
+            case ENDSTONE_ROD -> 25;
+            case ENDER_ROD -> 35;
+            case COMET_ROD -> 45;
+            case NEBULA_ROD -> 60;
+            default -> 1;
         };
     };
 
@@ -73,38 +74,59 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "_recipe");
     }
 
+    /**
+     * Work out which fishing rod this rod will be crafted from.
+     */
+    private RecipeChoice getTransmuteComponent() {
+        return switch (this.getCustomItemType()) {
+            case ENDSTONE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(Material.END_STONE));
+            case ENDER_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ENDSTONE_ROD));
+            case COMET_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ENDER_ROD));
+            case NEBULA_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.COMET_ROD));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.BARRIER));
+        };
+    }
+
+    /**
+     * Get the material used for crafting the rod part of the rod.
+     */
+    private RecipeChoice getCraftingMaterial() {
+        return switch (this.getCustomItemType()) {
+            case ENDSTONE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(Material.END_STONE));
+            case ENDER_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.PREMIUM_ENDER_PEARL));
+            case COMET_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.OBSIDIAN_TOOL_ROD));
+            case NEBULA_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.BARRIER));
+        };
+    }
+
+    /**
+     * Get the material used for crafting the rod part of the rod.
+     */
+    private RecipeChoice getStringMaterial() {
+        return switch (this.getCustomItemType()) {
+            case ENDSTONE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.PREMIUM_STRING));
+            case ENDER_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ENCHANTED_STRING));
+            case COMET_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ASTRAL_FILAMENT));
+            case NEBULA_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ETHEREAL_FIBER));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.BARRIER));
+        };
+    }
+
     @Override
     public CraftingRecipe getCustomRecipe() {
-
-        if (this.getCustomItemType() == CustomItemType.COMET_ROD) {
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    "  s",
-                    " sm",
-                    "s m"
-            );
-            recipe.setIngredient('m', ItemService.generate(CustomItemType.ENCHANTED_STRING));
-            recipe.setIngredient('s', ItemService.generate(CustomItemType.DRACONIC_CRYSTAL));
-            return recipe;
-        }
-
-        if (this.getCustomItemType() == CustomItemType.NEBULA_ROD) {
-
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    "mmm",
-                    "mrm",
-                    "mmm"
-            );
-            recipe.setIngredient('m', ItemService.generate(CustomItemType.ECHO_MEMBRANE));
-            recipe.setIngredient('r', ItemService.generate(CustomItemType.COMET_ROD));
-            return recipe;
-        }
-
-        throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
-
+        var recipe = new ShapedRecipe(getRecipeKey(), generate());
+        recipe.shape(
+                "  m",
+                " ts",
+                "m s"
+        );
+        recipe.setIngredient('m', getCraftingMaterial());
+        recipe.setIngredient('t', getTransmuteComponent());
+        recipe.setIngredient('s', getStringMaterial());
+        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+        recipe.setGroup("void_rod");
+        return recipe;
     }
 
     /**
@@ -115,32 +137,51 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
      */
     @Override
     public Collection<ItemStack> unlockedBy() {
-        return List.of(
-                ItemService.generate(CustomItemType.DRACONIC_CRYSTAL)
-        );
+        if (getCraftingMaterial() instanceof RecipeChoice.ExactChoice exact)
+            return List.of(exact.getItemStack());
+        return List.of(ItemService.generate(Material.END_STONE));
     }
 
     private int getFishingRating() {
         return switch (getCustomItemType()) {
-            case COMET_ROD -> 200;
-            case NEBULA_ROD -> 300;
+            case ENDSTONE_ROD -> 45;
+            case ENDER_ROD -> 65;
+            case COMET_ROD -> 100;
+            case NEBULA_ROD -> 170;
             default -> 0;
         };
     };
 
     private int getStrength() {
         return switch (getCustomItemType()) {
-            case COMET_ROD -> 100;
-            case NEBULA_ROD -> 150;
+            case ENDSTONE_ROD -> 50;
+            case ENDER_ROD -> 65;
+            case COMET_ROD -> 90;
+            case NEBULA_ROD -> 120;
             default -> 0;
         };
     };
 
     private int getChance() {
         return switch (getCustomItemType()) {
-            case COMET_ROD -> 6;
-            case NEBULA_ROD -> 8;
+            case ENDSTONE_ROD -> 1;
+            case ENDER_ROD -> 2;
+            case COMET_ROD -> 3;
+            case NEBULA_ROD -> 4;
             default -> 0;
         };
     };
+
+    @Override
+    public int getWorth(ItemStack item) {
+        var base =  super.getWorth(item);
+
+        return base + switch (this.getCustomItemType()) {
+            case ENDSTONE_ROD -> 50;
+            case ENDER_ROD -> 500;
+            case COMET_ROD -> 15_000;
+            case NEBULA_ROD -> 500_000;
+            default -> 0;
+        };
+    }
 }

@@ -17,6 +17,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -49,7 +50,8 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
                 AttributeEntry.additive(AttributeWrapper.STRENGTH, 50),
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 45),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3)
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3),
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN)
         );
     }
 

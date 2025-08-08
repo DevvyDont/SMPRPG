@@ -23,6 +23,8 @@ import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
 import xyz.devvydont.smprpg.items.blueprints.resources.crafting.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.MelonBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.SugarCaneBlueprintFamily;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.AstralFilament;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.EtherealFiber;
 import xyz.devvydont.smprpg.items.blueprints.resources.fishing.HolomokuCrest;
 import xyz.devvydont.smprpg.items.blueprints.resources.mining.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.mob.*;
@@ -407,9 +409,11 @@ public enum CustomItemType {
     XENOHUNTER_ROD(       "Xenohunter Rod",        Material.FISHING_ROD,          ItemRarity.LEGENDARY, XenohunterRod.class),
 
     IRON_ROD("Iron Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
-    GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
     DIAMOND_ROD("Diamond Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
     PRISMARINE_ROD("Prismarine Rod", Material.FISHING_ROD, ItemRarity.RARE, WaterRod.class),
+
+    GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, LavaRod.class),
+    STEEL_ROD("Steel Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, LavaRod.class),
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
@@ -417,8 +421,13 @@ public enum CustomItemType {
     CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
     ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
 
+    ENDSTONE_ROD("Endstone Rod", Material.FISHING_ROD, ItemRarity.COMMON, VoidRod.class),
+    ENDER_ROD("Ender Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, VoidRod.class),
     COMET_ROD("Comet Rod", Material.FISHING_ROD, ItemRarity.RARE, VoidRod.class),
     NEBULA_ROD("Nebula Rod", Material.FISHING_ROD, ItemRarity.EPIC, VoidRod.class),
+
+    ASTRAL_FILAMENT("Astral Filament", Material.STRING, ItemRarity.RARE, AstralFilament.class),
+    ETHEREAL_FIBER("Ethereal Fiber", Material.STRING, ItemRarity.EPIC, EtherealFiber.class),
 
     // ELYTRAS
     PHANTOM_WINGS("Phantom Wings", Material.ELYTRA, ItemRarity.RARE, PhantomWings.class),

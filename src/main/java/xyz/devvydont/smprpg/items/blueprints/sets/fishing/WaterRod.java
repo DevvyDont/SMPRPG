@@ -2,10 +2,7 @@ package xyz.devvydont.smprpg.items.blueprints.sets.fishing;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.CraftingRecipe;
-import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -50,7 +47,6 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
     public int getPowerRating() {
         return switch (getCustomItemType()) {
             case IRON_ROD -> ToolGlobals.IRON_TOOL_POWER;
-            case GOLD_ROD -> ToolGlobals.GOLD_TOOL_POWER;
             case DIAMOND_ROD -> ToolGlobals.DIAMOND_TOOL_POWER;
             case PRISMARINE_ROD -> ToolGlobals.NETHERITE_TOOL_POWER-5;
             default -> 0;
@@ -77,44 +73,54 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
         return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "_recipe");
     }
 
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-
-        if (this.getCustomItemType() == CustomItemType.PRISMARINE_ROD) {
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    "sms",
-                    "mrm",
-                    "sms"
-            );
-            recipe.setIngredient('m', ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_CRYSTAL));
-            recipe.setIngredient('s', ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_SHARD));
-            recipe.setIngredient('r', ItemService.generate(CustomItemType.DIAMOND_ROD));
-            return recipe;
-        }
-
-        var recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        recipe.shape(
-                "  s",
-                " sm",
-                "s m"
-        );
-        var mat = getCraftingMaterial();
-        recipe.setIngredient('s', mat);
-        recipe.setIngredient('m', Material.STRING);
-        return recipe;
+    /**
+     * Work out which fishing rod this rod will be crafted from.
+     */
+    private RecipeChoice getTransmuteComponent() {
+        return switch (this.getCustomItemType()) {
+            case IRON_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(Material.FISHING_ROD));
+            case DIAMOND_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.IRON_ROD));
+            case PRISMARINE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.DIAMOND_ROD));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.BARRIER));
+        };
     }
 
-    private ItemStack getCraftingMaterial() {
+    /**
+     * Get the material used for crafting the rod part of the rod.
+     */
+    private RecipeChoice getCraftingMaterial() {
         return switch (this.getCustomItemType()) {
-            case IRON_ROD -> ItemService.generate(Material.IRON_INGOT);
-            case GOLD_ROD -> ItemService.generate(Material.GOLD_INGOT);
-            case DIAMOND_ROD -> ItemService.generate(Material.DIAMOND);
-            default -> ItemService.generate(Material.BARRIER);
-//            default -> throw new IllegalStateException("Unexpected value: " + this.getCustomItemType());
+            case IRON_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(Material.IRON_INGOT));
+            case DIAMOND_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(Material.DIAMOND));
+            case PRISMARINE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.ENCHANTED_PRISMARINE_CRYSTAL));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.BARRIER));
         };
+    }
+
+    /**
+     * Get the material used for crafting the rod part of the rod.
+     */
+    private RecipeChoice getStringMaterial() {
+        return switch (this.getCustomItemType()) {
+            case PRISMARINE_ROD -> new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.PREMIUM_STRING));
+            default -> new RecipeChoice.ExactChoice(ItemService.generate(Material.STRING));
+        };
+    }
+
+    @Override
+    public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapedRecipe(getRecipeKey(), generate());
+        recipe.shape(
+                "  m",
+                " ts",
+                "m s"
+        );
+        recipe.setIngredient('m', getCraftingMaterial());
+        recipe.setIngredient('t', getTransmuteComponent());
+        recipe.setIngredient('s', getStringMaterial());
+        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+        recipe.setGroup("water_rod");
+        return recipe;
     }
 
     /**
@@ -125,17 +131,16 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
      */
     @Override
     public Collection<ItemStack> unlockedBy() {
-        return List.of(
-                ItemService.generate(Material.IRON_INGOT)
-        );
+        if (getCraftingMaterial() instanceof RecipeChoice.ExactChoice exact)
+            return List.of(exact.getItemStack());
+        return List.of(ItemService.generate(Material.IRON_INGOT));
     }
 
     private int getFishingRating() {
         return switch (getCustomItemType()) {
-            case IRON_ROD -> 20;
-            case GOLD_ROD -> 35;
-            case DIAMOND_ROD -> 65;
-            case PRISMARINE_ROD -> 100;
+            case IRON_ROD -> 10;
+            case DIAMOND_ROD -> 25;
+            case PRISMARINE_ROD -> 45;
             default -> 0;
         };
     };
@@ -152,10 +157,9 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
 
     private double getChance() {
         return switch (getCustomItemType()) {
-            case IRON_ROD -> 0.25;
-            case GOLD_ROD -> 0.5;
+            case IRON_ROD -> 0.5;
             case DIAMOND_ROD -> 1;
-            case PRISMARINE_ROD -> 1.5;
+            case PRISMARINE_ROD -> 2;
             default -> 0;
         };
     };

@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,7 +49,8 @@ public class NocturnumRod extends CustomAttributeItem implements IBreakableEquip
                 AttributeEntry.additive(AttributeWrapper.STRENGTH, 180),
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 70),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 150),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 12)
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 12),
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN)
         );
     }
 
