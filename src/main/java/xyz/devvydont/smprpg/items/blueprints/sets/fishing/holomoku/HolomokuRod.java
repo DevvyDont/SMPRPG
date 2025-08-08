@@ -1,0 +1,117 @@
+package xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku;
+
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.CraftingRecipe;
+import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.recipe.CraftingBookCategory;
+import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.ItemClassification;
+import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
+import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku.HolomokuSet;
+import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
+import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
+import xyz.devvydont.smprpg.services.ItemService;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
+ */
+public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+
+    public HolomokuRod(ItemService itemService, CustomItemType type) {
+        super(itemService, type);
+    }
+
+    /**
+     * Determine what type of item this is.
+     */
+    @Override
+    public ItemClassification getItemClassification() {
+        return ItemClassification.ROD;
+    }
+
+    /**
+     * What modifiers themselves will be contained on the item if there are no variables to affect them?
+     * @param item The item that is supposed to be holding the modifiers.
+     */
+    @Override
+    public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
+        return List.of(
+                AttributeEntry.additive(AttributeWrapper.STRENGTH, 50),
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15),
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 45),
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3)
+        );
+    }
+
+    /**
+     * How much should we increase the power rating of an item if this container is present?
+     */
+    @Override
+    public int getPowerRating() {
+        return HolomokuSet.POWER;
+    }
+
+    /**
+     * The slot that this item has to be worn in for attributes to kick in.
+     */
+    @Override
+    public EquipmentSlotGroup getActiveSlot() {
+        return EquipmentSlotGroup.HAND;
+    }
+
+    @Override
+    public int getMaxDurability() {
+        return 25_000;
+    }
+
+    @Override
+    public NamespacedKey getRecipeKey() {
+        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType() + "_recipe");
+    }
+
+    @Override
+    public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
+        recipe.shape(
+                "  r",
+                " ts",
+                "r s"
+        );
+        recipe.setIngredient('t', ItemService.generate(CustomItemType.MINNOW_ROD));
+        recipe.setIngredient('r', ItemService.generate(HolomokuSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('s', ItemService.generate(CustomItemType.PREMIUM_STRING));
+        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
+        return recipe;
+    }
+
+    /**
+     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
+     * of the recipe itself, but can be set to whatever is desired
+     */
+    @Override
+    public Collection<ItemStack> unlockedBy() {
+        return List.of(ItemService.generate(HolomokuSet.UPGRADE_MATERIAL));
+    }
+
+    /**
+     * Check what contexts this fishing rod is allowed to fish in. for example, if this rod can catch things in the
+     * void then it will contain FishingFlag.VOID.
+     * @return A set of fishing flags this rod contains.
+     */
+    @Override
+    public Set<FishingFlag> getFishingFlags() {
+        return Set.of(
+                FishingFlag.NORMAL
+        );
+    }
+}

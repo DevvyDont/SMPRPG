@@ -20,12 +20,10 @@ import xyz.devvydont.smprpg.items.blueprints.potion.ExperienceBottle;
 import xyz.devvydont.smprpg.items.blueprints.reforge.VoidRelic;
 import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DraconicCrystal;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DragonsteelIngot;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.SteelIngot;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.WarpCatalyst;
+import xyz.devvydont.smprpg.items.blueprints.resources.crafting.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.MelonBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.SugarCaneBlueprintFamily;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.HolomokuCrest;
 import xyz.devvydont.smprpg.items.blueprints.resources.mining.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.mob.*;
 import xyz.devvydont.smprpg.items.blueprints.reusable.SimpleTexturedItem;
@@ -56,7 +54,9 @@ import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.ruination.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.gold.GoldHatchet;
@@ -140,7 +140,6 @@ import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.wood.WoodHatchet;
 import xyz.devvydont.smprpg.items.blueprints.storage.*;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
-import xyz.devvydont.smprpg.items.tools.ItemHatchet;
 
 public enum CustomItemType {
 
@@ -374,13 +373,20 @@ public enum CustomItemType {
     MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MinnowSet.class),
     MINNOW_ROD("Minnow Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
 
-    HOLOMOKU_ROD("Holomoku Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
+    HOLOMOKU_CREST("Holomoku Crest", Material.NAUTILUS_SHELL, ItemRarity.UNCOMMON, true, HolomokuCrest.class),
+    HOLOMOKU_HELMET("Holomoku Helmet",         Material.DIAMOND_HELMET,     ItemRarity.UNCOMMON, HolomokuHelmet.class),
+    HOLOMOKU_CHESTPLATE("Holomoku Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.UNCOMMON, HolomokuChestplate.class),
+    HOLOMOKU_LEGGINGS("Holomoku Leggings",     Material.DIAMOND_LEGGINGS,   ItemRarity.UNCOMMON, HolomokuLeggings.class),
+    HOLOMOKU_BOOTS("Holomoku Boots",           Material.DIAMOND_BOOTS,      ItemRarity.UNCOMMON, HolomokuBoots.class),
+    HOLOMOKU_ROD("Holomoku Rod",               Material.FISHING_ROD,        ItemRarity.UNCOMMON, HolomokuRod.class),
 
-    RUINATION_HELMET("Ruination Helmet", Material.DIAMOND_HELMET, ItemRarity.RARE),
-    RUINATION_CHESTPLATE("Ruination Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.RARE),
-    RUINATION_LEGGINGS("Ruination Leggings", Material.DIAMOND_LEGGINGS, ItemRarity.RARE),
-    RUINATION_BOOTS("Ruination Boots", Material.DIAMOND_BOOTS, ItemRarity.RARE),
-    RUINATION_ROD("Ruination Rod", Material.FISHING_ROD, ItemRarity.RARE),
+    RAW_TRIDENTITE_CHUNK("Raw Tridentite Chunk", Material.CYAN_DYE, ItemRarity.UNCOMMON, true, 20_000),
+    TRIDENTITE("Tridentite", Material.IRON_INGOT, ItemRarity.RARE, Tridentite.class),
+    RUINATION_HELMET("Ruination Helmet",         Material.DIAMOND_HELMET,     ItemRarity.RARE, RuinationHelmet.class),
+    RUINATION_CHESTPLATE("Ruination Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.RARE, RuinationChestplate.class),
+    RUINATION_LEGGINGS("Ruination Leggings",     Material.DIAMOND_LEGGINGS,   ItemRarity.RARE, RuinationLeggings.class),
+    RUINATION_BOOTS("Ruination Boots",           Material.DIAMOND_BOOTS,      ItemRarity.RARE, RuinationBoots.class),
+    RUINATION_ROD("Ruination Rod",               Material.FISHING_ROD,        ItemRarity.RARE, RuinationRod.class),
 
     NECROPLASM(   "Necroplasm",           Material.BLACK_DYE, ItemRarity.RARE, true, 100_000),
     LUCIFUGOUS_THREAD("Lucifugous Fiber", Material.STRING,    ItemRarity.EPIC, true, 400_000),

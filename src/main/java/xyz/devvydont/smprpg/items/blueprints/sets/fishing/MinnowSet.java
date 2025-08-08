@@ -29,8 +29,8 @@ import java.util.List;
 public class MinnowSet extends CustomAttributeItem implements ITrimmable, IDyeable, ICraftable {
 
     public static final int POWER = 15;
-    public static final int CATCH_QUALITY = 25;
-    public static final double CHANCE = 0.5;
+    public static final int CATCH_QUALITY = 5;
+    public static final double CHANCE = 1;
     public static final int COLOR = 0x9B9B9B;
     public static final TrimPattern TRIM = TrimPattern.RIB;
     public static final TrimMaterial TRIM_MATERIAL = TrimMaterial.DIAMOND;

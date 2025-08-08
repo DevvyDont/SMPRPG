@@ -1,8 +1,9 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
+package xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -18,14 +19,14 @@ import java.util.Collection;
 import java.util.List;
 
 
-public abstract class NocturnumSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
+public abstract class HolomokuSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
 
-    public static int POWER = 60;
+    public static int POWER = 25;
 
     // Crafting components to be created.
-    public static CustomItemType UPGRADE_MATERIAL = CustomItemType.LUCIFUGOUS_THREAD;
+    public static CustomItemType UPGRADE_MATERIAL = CustomItemType.HOLOMOKU_CREST;
 
-    public NocturnumSet(ItemService itemService, CustomItemType type) {
+    public HolomokuSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -50,8 +51,8 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
-                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 4),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50)
+                AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 2),
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 15)
         );
     }
 
@@ -65,12 +66,18 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
 
     @Override
     public int getMaxDurability() {
-        return 60_000;
+        return 25_000;
     }
 
     @Override
     public TrimPattern getTrimPattern() {
         return TrimPattern.RIB;
+    }
+
+
+    @Override
+    public TrimMaterial getTrimMaterial() {
+        return TrimMaterial.EMERALD;
     }
 
     @Override
@@ -84,6 +91,6 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
      */
     @Override
     public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.NECROPLASM));
+        return List.of(ItemService.generate(CustomItemType.HOLOMOKU_CREST));
     }
 }
