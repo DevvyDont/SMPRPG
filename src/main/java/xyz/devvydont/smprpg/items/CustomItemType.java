@@ -469,6 +469,7 @@ public enum CustomItemType {
     ENDER_PACK("Ender Pack", ItemRarity.EPIC, EnderPack.class),
     SQUID_HELMET("Squid Helmet", ItemRarity.RARE, SquidHelmet.class),
     MAGMA_HELMET("Magma Helmet", ItemRarity.RARE, MagmaHelmet.class),
+    EVERLASTING_WATER_BUCKET("Everlasting Water Bucket", Material.WATER_BUCKET, ItemRarity.RARE, EverlastingWaterBucket.class),
     GRAPPLING_HOOK("Grappling Hook", Material.FISHING_ROD, ItemRarity.RARE, GrapplingHook.class),
     CRYSTALLIZED_SUGAR("Crystallized Sugar", Material.SUGAR, ItemRarity.RARE, true, CrystallizedSugarBlueprint.class),
 
