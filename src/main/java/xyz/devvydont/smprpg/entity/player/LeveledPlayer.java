@@ -217,12 +217,12 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
         } else if (hp < 1000) {
             scale = 20 + Math.round((hp - 100) / 40f); // 40 at 1000 HP
         } else {
-            scale = 40 + Math.round((hp - 1000) / 75f); // 60 at 2500 HP
+            scale = 40 + Math.round((hp - 1000) / 500f); // Half heart every 500HP
         }
 
-        // Round up to nearest even number to avoid half-hearts
+        // Round down to nearest even number to avoid half-hearts
         if (scale % 2 != 0)
-            scale++;
+            scale--;
 
         return Math.min(Math.max(2, scale), 60);
     }
