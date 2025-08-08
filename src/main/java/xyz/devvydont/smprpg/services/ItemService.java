@@ -49,6 +49,7 @@ import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*;
 import xyz.devvydont.smprpg.items.interfaces.*;
 import xyz.devvydont.smprpg.items.listeners.*;
+import xyz.devvydont.smprpg.listeners.crafting.CustomItemFurnacePreventions;
 import xyz.devvydont.smprpg.reforge.ReforgeBase;
 import xyz.devvydont.smprpg.reforge.ReforgeType;
 import xyz.devvydont.smprpg.util.attributes.AttributeUtil;
@@ -174,6 +175,7 @@ public class ItemService implements IService, Listener {
         listeners.add(new BackpackInteractionListener());
         listeners.add(new AbilityCastingListener());
         listeners.add(new RareItemDropPreventionListener());
+        listeners.add(new CustomItemFurnacePreventions());
     }
 
     @Override
@@ -800,6 +802,16 @@ public class ItemService implements IService, Listener {
             lore.addAll(describable.getHeader(itemStack));
         }
 
+        // Check if this is furnace fuel.
+        if (blueprint instanceof IFurnaceFuel fuel) {
+            lore.add(ComponentUtils.EMPTY);
+            lore.add(ComponentUtils.merge(
+                    ComponentUtils.create("Burns for "),
+                    ComponentUtils.create(String.format("%ds", fuel.getBurnTime()/20), NamedTextColor.GOLD),
+                    ComponentUtils.create(" in furnaces ")
+            ));
+        }
+
         // Check if this is a reforge applicator.
         if (blueprint instanceof ReforgeApplicator applicator) {
             lore.add(ComponentUtils.EMPTY);
@@ -867,6 +879,7 @@ public class ItemService implements IService, Listener {
         // Is this item compressed?
         if (blueprint instanceof Compressable compressable) {
             Component material = compressable.getCompressionFlow().getFirst().getMaterial().component().decoration(TextDecoration.BOLD, true);
+            lore.add(ComponentUtils.EMPTY);
             lore.add(ComponentUtils.create("An ultra compressed"));
             lore.add(ComponentUtils.create("collection of ").append(material));
             lore.add(ComponentUtils.EMPTY);
@@ -1308,29 +1321,5 @@ public class ItemService implements IService, Listener {
         if (blueprint.isCustom())
             event.setCancelled(true);
     }
-
-    /*
-     * We never want to allow players to cook custom items.
-     */
-    @EventHandler(priority = EventPriority.LOWEST)
-    private void __onSmelt(FurnaceSmeltEvent event) {
-
-        // Custom item? Make it so it never cooks
-        if (getBlueprint(event.getSource()).isCustom())
-            event.setCancelled(true);
-    }
-
-    /*
-     * We never want to allow players to cook custom items.
-     */
-    @EventHandler
-    private void __onSmeltCustomItem(FurnaceStartSmeltEvent event) {
-
-        // Custom item? Make it so it never cooks
-        if (getBlueprint(event.getSource()).isCustom())
-            event.setTotalCookTime(999_999);
-
-    }
-
 
 }
