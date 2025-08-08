@@ -1,9 +1,15 @@
 package xyz.devvydont.smprpg.items.listeners;
 
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.ItemRarity;
@@ -39,20 +45,15 @@ public class RareItemDropPreventionListener extends ToggleableListener {
         return false;
     }
 
-    /**
-     * Listen for when players drop items. Don't let a rare item be dropped unless it was already attempted to
-     * drop half a second ago.
-     */
-    @EventHandler
-    private void __onDropItem(PlayerDropItemEvent event) {
+    private void performRareDropCheck(Player player, ItemStack item, Cancellable event) {
 
-        if (!isRareItem(event.getItemDrop().getItemStack()))
+        if (!isRareItem(item))
             return;
 
         // We are dropping a rare item. Did they do this previously with a short time?
-        var lastTap = lastDropAttempts.getOrDefault(event.getPlayer().getUniqueId(), 0L);
+        var lastTap = lastDropAttempts.getOrDefault(player.getUniqueId(), 0L);
         var now = System.currentTimeMillis();
-        lastDropAttempts.put(event.getPlayer().getUniqueId(), System.currentTimeMillis() + DROP_COOLDOWN);
+        lastDropAttempts.put(player.getUniqueId(), System.currentTimeMillis() + DROP_COOLDOWN);
 
         var diff = now - lastTap;
         if (diff < DROP_COOLDOWN)
@@ -60,16 +61,46 @@ public class RareItemDropPreventionListener extends ToggleableListener {
 
         event.setCancelled(true);
 
-        var lastTimeWarned = lastWarning.getOrDefault(event.getPlayer().getUniqueId(), 0L);
+        var lastTimeWarned = lastWarning.getOrDefault(player.getUniqueId(), 0L);
         if (now - lastTimeWarned < WARNING_COOLDOWN)
             return;
 
-        lastWarning.put(event.getPlayer().getUniqueId(), now);
-        event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ITEM_BREAK, .5f, 2.0f);
-        event.getPlayer().sendMessage(ComponentUtils.alert(ComponentUtils.merge(
+        lastWarning.put(player.getUniqueId(), now);
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, .5f, 2.0f);
+        player.sendMessage(ComponentUtils.alert(ComponentUtils.merge(
                 ComponentUtils.create("CAREFUL!", NamedTextColor.RED, TextDecoration.BOLD),
                 ComponentUtils.create(" Do you really want to throw out this item? Double tap your drop key if so!")
         ), NamedTextColor.RED));
+
+    }
+
+    /**
+     * Listen for when players attempt to drop an item from an inventory.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void __onDropFromInventory(InventoryClickEvent event) {
+
+        var isDropEvent = switch (event.getAction()) {
+            case DROP_ALL_CURSOR, DROP_ALL_SLOT, DROP_ONE_CURSOR, DROP_ONE_SLOT -> true;
+            default -> false;
+        };
+
+        if (!isDropEvent)
+            return;
+
+        if (event.getCurrentItem() == null)
+            return;
+
+        performRareDropCheck((Player) event.getWhoClicked(), event.getCurrentItem(), event);
+    }
+
+    /**
+     * Listen for when players drop items. Don't let a rare item be dropped unless it was already attempted to
+     * drop half a second ago.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void __onDropItem(PlayerDropItemEvent event) {
+        performRareDropCheck(event.getPlayer(), event.getItemDrop().getItemStack(), event);
     }
 
 }
