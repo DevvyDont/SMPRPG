@@ -367,12 +367,9 @@ public class FishHookBehaviorTask extends BukkitRunnable {
         if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))
             return;
 
-        // Damage the rod.
-        if (event.getHand() != null) {
-            var rod = event.getPlayer().getInventory().getItem(event.getHand());
-            if (!rod.getType().equals(Material.AIR))
-                rod.damage(1, event.getPlayer());
-        }
+        // Honestly, I can't see why we would ever want to cancel an event at this point if we are reeling in and
+        // we know we have a custom fishing rod. Don't allow the event to cancel...
+        event.setCancelled(false);
 
         // Simulates a catch!
         if (this.ticksAllowedToCatch >= 0) {
@@ -385,7 +382,19 @@ public class FishHookBehaviorTask extends BukkitRunnable {
                 this.setState(HookBehaviorState.BOBBING);
                 return;
             }
+
+            // We need to damage the rod since we successfully caught something.
+            if (event.getHand() != null) {
+                var rod = event.getPlayer().getInventory().getItem(event.getHand());
+                if (!rod.getType().equals(Material.AIR))
+                    rod.damage(1, event.getPlayer());
+            }
+
             this.setState(HookBehaviorState.REELING);  // It's important we update the state before calling the event.
+        } else {
+            // Otherwise, we are just doing a normal reel. Keep in mind that this is insanely important.
+            // If we don't do this, we "reel in" the armor stand and perform damage to the rod when we shouldn't!
+            this.setState(HookBehaviorState.REELING);
         }
     }
 

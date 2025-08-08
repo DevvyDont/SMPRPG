@@ -60,6 +60,7 @@ import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 import xyz.devvydont.smprpg.util.items.AbilityUtil;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -1288,7 +1289,6 @@ public class ItemService implements IService, Listener {
         discoverRecipesForItem((Player) event.getWhoClicked(), event.getCurrentItem());
     }
 
-
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     private void __onPickupItem(PlayerAttemptPickupItemEvent event) {
 
@@ -1305,6 +1305,9 @@ public class ItemService implements IService, Listener {
         if (event.getDamage() > 0)
             event.setDamage(1);
 
+        // Update the item data. Necessary so that the lore reflects its durability.
+        // Do this on the next tick since this event is a pre-application event.
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> getBlueprint(event.getItem()).updateItemData(event.getItem()), TickTime.INSTANTANEOUSLY);
     }
 
     @EventHandler
