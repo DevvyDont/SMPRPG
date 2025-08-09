@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.enchantments.definitions;
 
+import io.papermc.paper.event.entity.EntityMoveEvent;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.keys.tags.ItemTypeTagKeys;
 import io.papermc.paper.registry.set.RegistryKeySet;
@@ -19,7 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -84,7 +84,7 @@ public class VoidstridingBlessing extends CustomEnchantment implements Listener 
     }
 
     @Override
-    public @NotNull RegistryKeySet<Enchantment> getConflictingEnchantments() {
+    public @NotNull RegistryKeySet<@NotNull Enchantment> getConflictingEnchantments() {
         return RegistrySet.keySet(RegistryKey.ENCHANTMENT,
                 EnchantmentService.KEEPING_BLESSING.getTypedKey(),
                 EnchantmentService.MERCY_BLESSING.getTypedKey(),
@@ -114,20 +114,22 @@ public class VoidstridingBlessing extends CustomEnchantment implements Listener 
         if (attributeInstance == null)
             return false;
 
-        if (attributeInstance.getModifier(key) != null) {
-            return true;
-        }
-
-        return false;
+        return attributeInstance.getModifier(key) != null;
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onTouchVoid(PlayerMoveEvent event) {
+    public void onTouchVoid(EntityMoveEvent event) {
+
+        if (!event.hasChangedBlock())
+            return;
 
         // Check that the item is enchanted.
-        var boots = event.getPlayer().getInventory().getBoots();
-        Player player = event.getPlayer();
-        AttributeInstance attribute = player.getAttribute(Attribute.GRAVITY);
+        var equipment = event.getEntity().getEquipment();
+        if (equipment == null)
+            return;
+
+        var boots = equipment.getBoots();
+        AttributeInstance attribute = event.getEntity().getAttribute(Attribute.GRAVITY);
         if (boots == null) {
             // Player has no boots, can't have enchanted boots.
             if (attribute != null)
@@ -143,10 +145,10 @@ public class VoidstridingBlessing extends CustomEnchantment implements Listener 
         }
 
         Location destLoc = event.getTo();
-        int minHeight = player.getWorld().getMinHeight();
+        int minHeight = event.getEntity().getWorld().getMinHeight();
 
-        if ((destLoc.getY() <= minHeight) && (player.getVelocity().getY() < 0)) {
-            player.setVelocity(player.getVelocity().setY(0));
+        if ((destLoc.getY() <= minHeight) && (event.getEntity().getVelocity().getY() < 0)) {
+            event.getEntity().setVelocity(event.getEntity().getVelocity().setY(0));
             if (attribute != null) {
                 attribute.removeModifier(key);
                 attribute.addTransientModifier(new AttributeModifier(key, -1.0, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
