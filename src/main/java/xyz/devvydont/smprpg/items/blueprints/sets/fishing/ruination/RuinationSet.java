@@ -52,7 +52,8 @@ public abstract class RuinationSet extends CustomAttributeItem implements IBreak
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 35)
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 35),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
         );
     }
 

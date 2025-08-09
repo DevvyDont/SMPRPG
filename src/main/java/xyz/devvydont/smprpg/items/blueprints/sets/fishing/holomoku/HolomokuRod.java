@@ -51,7 +51,8 @@ public class HolomokuRod extends CustomAttributeItem implements IBreakableEquipm
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 45),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3),
-                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN)
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
         );
     }
 

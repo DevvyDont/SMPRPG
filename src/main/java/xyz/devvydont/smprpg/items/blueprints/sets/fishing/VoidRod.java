@@ -39,7 +39,8 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
                 AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, getFishingRating()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, getChance()),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance())
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance()),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, getSpeed())
         );
     }
 
@@ -171,6 +172,16 @@ public class VoidRod extends CustomAttributeItem implements IBreakableEquipment,
             default -> 0;
         };
     };
+
+    private int getSpeed() {
+        return switch (this.getCustomItemType()) {
+            case ENDSTONE_ROD -> 5;
+            case ENDER_ROD -> 25;
+            case COMET_ROD -> 50;
+            case NEBULA_ROD -> 80;
+            default -> 0;
+        };
+    }
 
     @Override
     public int getWorth(ItemStack item) {

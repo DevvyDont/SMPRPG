@@ -51,7 +51,8 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 4),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 55)
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 55),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 25)
         );
     }
 

@@ -51,7 +51,8 @@ public class RuinationRod extends CustomAttributeItem implements IBreakableEquip
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 30),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 75),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 7),
-                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN)
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
         );
     }
 

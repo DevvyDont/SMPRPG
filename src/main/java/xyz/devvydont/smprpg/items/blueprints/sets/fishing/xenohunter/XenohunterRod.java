@@ -50,7 +50,8 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
                 AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 100),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 250),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 20),
-                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN)
+                AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 50)
         );
     }
 

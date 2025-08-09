@@ -49,7 +49,8 @@ public abstract class XenohunterSet extends CustomAttributeItem implements IBrea
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 5),
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 75)
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 75),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 50)
         );
     }
 

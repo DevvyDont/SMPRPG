@@ -40,7 +40,8 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
                 AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, getFishingRating()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, getChance()),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance())
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance()),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, getSpeed())
         );
     }
 
@@ -173,4 +174,14 @@ public class LavaRod extends CustomAttributeItem implements IBreakableEquipment,
             default -> 0;
         };
     };
+
+    private int getSpeed() {
+        return switch (this.getCustomItemType()) {
+            case GOLD_ROD -> 5;
+            case STEEL_ROD -> 15;
+            case NETHERITE_ROD -> 40;
+            case SPITFIRE_ROD -> 60;
+            default -> 0;
+        };
+    }
 }

@@ -57,7 +57,8 @@ public class MurkySet extends CustomAttributeItem implements ITrimmable, IDyeabl
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, CATCH_QUALITY),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, CHANCE),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, CHANCE)
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, CHANCE),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 5)
         );
     }
 

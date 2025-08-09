@@ -39,8 +39,18 @@ public class WaterRod extends CustomAttributeItem implements IBreakableEquipment
                 AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, -.5),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, getFishingRating()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, getChance()),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance())
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, getChance()),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, getSpeed())
         );
+    }
+
+    private int getSpeed() {
+        return switch (this.getCustomItemType()) {
+            case IRON_ROD -> 10;
+            case DIAMOND_ROD -> 25;
+            case PRISMARINE_ROD -> 40;
+            default -> 0;
+        };
     }
 
     @Override
