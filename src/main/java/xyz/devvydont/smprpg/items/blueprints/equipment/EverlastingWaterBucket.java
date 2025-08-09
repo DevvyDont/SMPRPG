@@ -94,8 +94,14 @@ public class EverlastingWaterBucket extends CustomItemBlueprint implements IHead
         var bucketInHand = event.getPlayer().getInventory().getItemInMainHand();
         var bucketVal = bucketInHand.getPersistentDataContainer().getOrDefault(ITEM_TYPE_KEY, PersistentDataType.STRING, "");
         if (bucketVal.equals(BUCKET_STRING)) {
+            // Cancel the vanilla event, as we are replicating functionality.
+            event.setCancelled(true);
+
             // We gotta redo bucket logic here, since it acts wonky otherwise.
             Block block = event.getBlock();
+
+            if (block.getWorld().isUltraWarm())
+                return;  // Can't place water in ultrawarm environments.
 
             // Waterlog the block if possible
             if (block.getBlockData() instanceof Waterlogged waterlog) {
@@ -105,9 +111,6 @@ public class EverlastingWaterBucket extends CustomItemBlueprint implements IHead
             } else {
                 event.getPlayer().getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.WATER);
             }
-
-            // Cancel the vanilla event, as we have replicated functionality.
-            event.setCancelled(true);
         }
     }
 }
