@@ -37,7 +37,8 @@ public class SirenicReforge extends ReforgeBase implements Listener {
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 30),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, AlluringReforge.getChance(rarity) / 2),
                 AttributeEntry.scalar(AttributeWrapper.STRENGTH, .1),
-                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15)
+                AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, 15),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
         );
     }
 
