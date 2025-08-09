@@ -12,6 +12,7 @@ public class FishingSkillRewards extends SkillRewardContainer {
 
         // Add fishing rating every level.
         this.addAttributeRewardEveryLevel(AttributeWrapper.FISHING_RATING, AttributeModifier.Operation.ADD_NUMBER, SkillGlobals.FORTUNE_PER_LEVEL);
+        this.addAttributeRewardEveryLevel(AttributeWrapper.FISHING_SPEED, AttributeModifier.Operation.ADD_NUMBER, SkillGlobals.FISHING_SPEED_PER_LEVEL);
 
         // Add sea creature chance and treasure chance every 4 levels.
         this.addAttributeRewardEveryXLevels(AttributeWrapper.FISHING_CREATURE_CHANCE, AttributeModifier.Operation.ADD_NUMBER, SkillGlobals.FISHING_CHANCE_PER_4_LEVEL, SkillGlobals.FISHING_CHANCE_FREQUENCY);
