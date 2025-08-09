@@ -115,13 +115,19 @@ public enum CustomEntityType implements IMenuDisplayable {
             20, 650, 50, Cinderling::new),
 
     ECHO_RAY(EntityType.PHANTOM, "Echo Ray",
-            40, 3_500, 450, EchoRay::new),
+            40, 5_000, 450, EchoRay::new),
+
+    CHORUS_SLUG(EntityType.ENDERMITE, "Chorus Slug",
+            45, 7_500, 700, ChorusSlug::new),
 
     SPACE_PIG(EntityType.PIG, "Space Pig",
             50, 30_000, 1_000, SpacePig::new),
 
     END_CUBE(EntityType.SHULKER, "Ç̵̻͆͒Ǘ̷̾́͝B̶̄́̒̒Ẻ̷̹͓̋ ",
             75, 500_000, 12_500, EndCube::new),
+
+    NIDHOGG(EntityType.PHANTOM, "Níðhöggr",
+            100, 100_000_000, 90_000, Nidhogg::new),
 
     TEST_ZOMBIE(EntityType.ZOMBIE, "Test Zombie",
             5, 120, 15,
@@ -289,6 +295,12 @@ public enum CustomEntityType implements IMenuDisplayable {
             case CINDERLING -> Material.MAGMA_CREAM;
             case ECHO_RAY -> Material.PHANTOM_MEMBRANE;
             case SHARK -> Material.PRISMARINE_SHARD;
+            case CHORUS_SLUG -> Material.ENDERMITE_SPAWN_EGG;
+            case NIDHOGG -> Material.DRAGON_HEAD;
+            case END_CUBE -> Material.SHULKER_BOX;
+            case SPACE_PIG -> Material.PORKCHOP;
+            case VOIDLURKER -> Material.SHULKER_SHELL;
+            case VOIDSPINNER -> Material.STRING;
             default -> Material.SKELETON_SKULL;
         };
     }

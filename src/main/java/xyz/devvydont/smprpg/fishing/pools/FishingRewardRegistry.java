@@ -507,10 +507,18 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build(),
 
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.CHORUS_SLUG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(1000)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.quality(400))
+                        .build(),
+
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SPACE_PIG)
                         .withMinecraftExperience(50)
-                        .withSkillExperience(500)
-                        .withWeight(UNCOMMON_WEIGHT)
+                        .withSkillExperience(2_500)
+                        .withWeight(RARE_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .withRequirement(FishingLootRequirement.quality(500))
                         .build(),
@@ -518,9 +526,17 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.END_CUBE)
                         .withMinecraftExperience(50)
                         .withSkillExperience(20_000)
+                        .withWeight(EPIC_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.quality(700))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.NIDHOGG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(50_000)
                         .withWeight(LEGENDARY_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
-                        .withRequirement(FishingLootRequirement.quality(650))
+                        .withRequirement(FishingLootRequirement.quality(1050))
                         .build()
         );
 
