@@ -500,6 +500,57 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.IMP)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(300)
+                        .withWeight(COMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(200))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.GHOST_KRAKEN)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(650)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(300))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.FIRE_GIANT)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(750)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(375))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.FLAMING_SIREN)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(7000)
+                        .withWeight(EPIC_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.biome(Biome.SOUL_SAND_VALLEY))
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.MAGMAPOTAMUS)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(2500)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(600))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.SCORCHING))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.TYPHON)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(20_000)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(900))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.SCORCHING))
+                        .build(),
+
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.ECHO_RAY)
                         .withMinecraftExperience(50)
                         .withSkillExperience(500)
@@ -520,6 +571,7 @@ public class FishingRewardRegistry {
                         .withSkillExperience(2_500)
                         .withWeight(RARE_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
                         .withRequirement(FishingLootRequirement.quality(500))
                         .build(),
 
@@ -528,6 +580,7 @@ public class FishingRewardRegistry {
                         .withSkillExperience(20_000)
                         .withWeight(EPIC_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
                         .withRequirement(FishingLootRequirement.quality(700))
                         .build(),
 
@@ -536,6 +589,7 @@ public class FishingRewardRegistry {
                         .withSkillExperience(50_000)
                         .withWeight(LEGENDARY_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
                         .withRequirement(FishingLootRequirement.quality(1050))
                         .build()
         );

@@ -31,6 +31,7 @@ import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.base.listeners.EnderDragonSpawnContributionListener;
+import xyz.devvydont.smprpg.entity.base.listeners.listeners.SeaCreatureBurnPrevention;
 import xyz.devvydont.smprpg.entity.bosses.*;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
@@ -157,6 +158,7 @@ public class EntityService implements IService, Listener {
         listeners.add(new TamedEntityFeedFix());  // Allows tamed entities to heal more efficiently.
         listeners.add(new EnderDragonSpawnContributionListener());  // Adds boss contribution weight for boss spawning.
         listeners.add(new ShulkerDefenseModeFix());  // Fixes shulkers so they take reduced damage when not peeking.
+        listeners.add(new SeaCreatureBurnPrevention());  // Prevents sea creatures from burning.
         for (var listener : listeners)
             listener.start();
     }

@@ -7,9 +7,9 @@ import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.reforge.ReforgeType;
 import xyz.devvydont.smprpg.services.ItemService;
 
-public class HypnoticEye extends ReforgeStone implements ICustomTextured, ISellable {
+public class PredatorTooth extends ReforgeStone implements ICustomTextured, ISellable {
 
-    public HypnoticEye(ItemService itemService, CustomItemType type) {
+    public PredatorTooth(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -25,7 +25,7 @@ public class HypnoticEye extends ReforgeStone implements ICustomTextured, ISella
      */
     @Override
     public String getTextureUrl() {
-        return "726c74070fe4661168336ba294531da7db4b71034eb8294a2a6ab84b1688a713";
+        return "f0c84320f4b0fcd8391b8a20f53bd41612ca6a50e758309525971f77ace2d";
     }
 
     /**
@@ -37,12 +37,12 @@ public class HypnoticEye extends ReforgeStone implements ICustomTextured, ISella
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 125_000 * item.getAmount();
+        return 75_000 * item.getAmount();
     }
 
     @Override
     public ReforgeType getReforgeType() {
-        return ReforgeType.SIRENIC;
+        return ReforgeType.ALLURING;
     }
 
     @Override

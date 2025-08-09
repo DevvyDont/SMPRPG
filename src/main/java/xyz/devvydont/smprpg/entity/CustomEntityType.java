@@ -112,7 +112,25 @@ public enum CustomEntityType implements IMenuDisplayable {
             25, 1_200, 110, Shark::new),
 
     CINDERLING(EntityType.MAGMA_CUBE, "Cinderling",
-            20, 650, 50, Cinderling::new),
+            20, 1_000, 50, Cinderling::new),
+
+    IMP(EntityType.BLAZE, "Imp",
+            25, 1_250, 150, Imp::new),
+
+    GHOST_KRAKEN(EntityType.GHAST, "Ghost Kraken",
+            30, 5_000, 300, GhostKraken::new),
+
+    FIRE_GIANT(EntityType.IRON_GOLEM, "Fire Giant",
+            40, 25_000, 750, FireGiant::new),
+
+    FLAMING_SIREN(EntityType.BOGGED, "Flaming Siren",
+            50, 35_000, 1_000, FlamingSiren::new),
+
+    MAGMAPOTAMUS(EntityType.HOGLIN, "Magmapotamus",
+            60, 100_000, 2_500, Magmapotamus::new),
+
+    TYPHON(EntityType.PHANTOM, "Typhon",
+            90, 70_000_000, 30_000, Typhon::new),
 
     ECHO_RAY(EntityType.PHANTOM, "Echo Ray",
             40, 5_000, 450, EchoRay::new),

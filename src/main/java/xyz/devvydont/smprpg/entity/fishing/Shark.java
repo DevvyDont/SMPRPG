@@ -30,8 +30,8 @@ public class Shark extends SeaCreature<LivingEntity> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-            new QuantityLootDrop(ItemService.generate(CustomItemType.SHARK_FIN), 1, 1, this),
-            new ChancedItemDrop(ItemService.generate(CustomItemType.HYPNOTIC_EYE), 20, this)
+            new ChancedItemDrop(ItemService.generate(CustomItemType.SHARK_FIN), 1, this),
+            new ChancedItemDrop(ItemService.generate(CustomItemType.PREDATOR_TOOTH), 30, this)
         );
     }
 }

@@ -183,7 +183,7 @@ public class EnvironmentalDamageListener extends ToggleableListener {
      * Since entities can take lots of damage very rapidly, we need to add some iframes to certain damage events so
      * they don't take an absurd amount of damage very quickly.
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onTakeRapidEnvironmentalDamage(EntityDamageEvent event) {
 
         if (!(event.getEntity() instanceof LivingEntity living))

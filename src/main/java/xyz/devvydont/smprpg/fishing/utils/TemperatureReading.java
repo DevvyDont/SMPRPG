@@ -45,6 +45,21 @@ public enum TemperatureReading {
         if (biome.equals(Biome.LUKEWARM_OCEAN))
             return block.getTemperature() + 0.75;
 
+        if (biome.equals(Biome.THE_END))
+            return block.getTemperature() - 0.5;
+
+        if (biome.equals(Biome.END_BARRENS))
+            return block.getTemperature() - 2;
+
+        if (biome.equals(Biome.END_HIGHLANDS))
+            return block.getTemperature() - 1;
+
+        if (biome.equals(Biome.END_MIDLANDS))
+            return block.getTemperature() - 1;
+
+        if (biome.equals(Biome.SMALL_END_ISLANDS))
+            return block.getTemperature() - 2;
+
         // Use default minecraft logic.
         return block.getTemperature();
     }
