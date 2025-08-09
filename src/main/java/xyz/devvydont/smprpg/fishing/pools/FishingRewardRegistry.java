@@ -462,12 +462,14 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.MINNOW)
                         .withMinecraftExperience(10)
                         .withSkillExperience(100)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SNAPPING_TURTLE)
                         .withMinecraftExperience(25)
                         .withSkillExperience(200)
+                        .withWeight(UNCOMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(SnappingTurtle.REQUIREMENT))
                         .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
@@ -476,6 +478,7 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_BEAR)
                         .withMinecraftExperience(50)
                         .withSkillExperience(500)
+                        .withWeight(RARE_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
                         .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
@@ -484,6 +487,7 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SHARK)
                         .withMinecraftExperience(75)
                         .withSkillExperience(600)
+                        .withWeight(RARE_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(Shark.RATING_REQUIREMENT))
                         .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
@@ -492,13 +496,31 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.CINDERLING)
                         .withMinecraftExperience(50)
                         .withSkillExperience(250)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.ECHO_RAY)
                         .withMinecraftExperience(50)
                         .withSkillExperience(500)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SPACE_PIG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(500)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.END_CUBE)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(20_000)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.quality(650))
                         .build()
         );
 

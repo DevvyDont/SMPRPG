@@ -117,6 +117,12 @@ public enum CustomEntityType implements IMenuDisplayable {
     ECHO_RAY(EntityType.PHANTOM, "Echo Ray",
             40, 3_500, 450, EchoRay::new),
 
+    SPACE_PIG(EntityType.PIG, "Space Pig",
+            50, 30_000, 1_000, SpacePig::new),
+
+    END_CUBE(EntityType.SHULKER, "Ç̵̻͆͒Ǘ̷̾́͝B̶̄́̒̒Ẻ̷̹͓̋ ",
+            75, 500_000, 12_500, EndCube::new),
+
     TEST_ZOMBIE(EntityType.ZOMBIE, "Test Zombie",
             5, 120, 15,
             TestZombie::new),
