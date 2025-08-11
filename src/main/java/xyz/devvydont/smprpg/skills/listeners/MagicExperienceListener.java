@@ -252,9 +252,8 @@ public class MagicExperienceListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPickupExperience(PlayerPickupExperienceEvent event) {
-        int exp = Math.max(1, event.getExperienceOrb().getExperience() / 10);
         LeveledPlayer player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
-        player.getMagicSkill().addExperience(exp, SkillExperienceGainEvent.ExperienceSource.XP);
+        player.getMagicSkill().addExperience(1, SkillExperienceGainEvent.ExperienceSource.XP);
     }
 
 
