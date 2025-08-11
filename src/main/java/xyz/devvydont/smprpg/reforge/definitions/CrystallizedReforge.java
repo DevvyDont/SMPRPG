@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.reforge.definitions;
 import com.destroystokyo.paper.ParticleBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -26,6 +27,7 @@ import xyz.devvydont.smprpg.reforge.ReforgeBase;
 import xyz.devvydont.smprpg.reforge.ReforgeType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -105,10 +107,16 @@ public class CrystallizedReforge extends ReforgeBase implements Listener {
             damage = hp.getValue();
         damage /= targets.size();
 
-        for (var target : targets) {
-            target.damage(damage, DamageSource.builder(DamageType.MAGIC).withDirectEntity(killer).withCausingEntity(killer).build());
-            target.getWorld().playSound(target.getLocation(), Sound.ENTITY_TURTLE_EGG_BREAK, 1, 2);
-            new ParticleBuilder(Particle.END_ROD).location(target.getEyeLocation()).count(3).offset(.25, .1, .25).spawn();
-        }
+        // Damage the targets on the next tick if they are not dead.
+        double finalDamage = damage;
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), task -> {
+            for (var target : targets) {
+                if (target.isDead())
+                    continue;
+                target.damage(finalDamage, DamageSource.builder(DamageType.MAGIC).withDirectEntity(killer).withCausingEntity(killer).build());
+                target.getWorld().playSound(target.getLocation(), Sound.ENTITY_TURTLE_EGG_BREAK, 1, 2);
+                new ParticleBuilder(Particle.END_ROD).location(target.getEyeLocation()).count(3).offset(.25, .1, .25).spawn();
+            }
+        }, TickTime.TICK);
     }
 }
