@@ -39,7 +39,7 @@ public abstract class SlimyArmorSet extends CustomAttributeItem implements ICraf
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), "-recipe");
+        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "-recipe");
     }
 
     public abstract int getHealth();
