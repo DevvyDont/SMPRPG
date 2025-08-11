@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.entity.player;
 
 import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent;
+import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -10,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Scoreboard;
@@ -63,6 +66,10 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
     public void setup() {
         super.setup();
         startManaTask();
+
+        // This is a temp fix simply due to the fact that vanilla orbs are just sentient beings and award people
+        // with stupid amounts of experience for no reason...
+        _entity.setLevel(Math.min(999, _entity.getLevel()));// todo: when mana becomes the xp bar, this NEEDS to be removed.
     }
 
     public void regenerateMana() {
@@ -370,6 +377,40 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
             return;
 
         updateNametag();
+    }
+
+    /**
+     * Prevent players from going over level 999.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void __onLevelChange(PlayerLevelChangeEvent event) {
+
+        if (!event.getPlayer().equals(getPlayer()))
+            return;
+
+        if (event.getNewLevel() > 999)
+            event.getPlayer().setLevel(999);
+
+        if (event.getNewLevel() == 999)
+            event.getPlayer().setExp(.9999f);
+    }
+
+    /**
+     * Prevent players from going over level 999 by preventing orb pickups if they are at level 999.
+     */
+    @EventHandler
+    private void __onPickupExperienceAtMax(PlayerPickupExperienceEvent event) {
+
+        if (!event.getPlayer().equals(getPlayer()))
+            return;
+
+        if (event.getPlayer().getLevel() > 999)
+            event.getPlayer().setLevel(999);
+
+        if (event.getPlayer().getLevel() == 999) {
+            event.getPlayer().setExp(.9999f);
+            event.setCancelled(true);
+        }
     }
 
     public void refillMana() {
