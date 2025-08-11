@@ -66,19 +66,19 @@ public class MagicExperienceListener implements Listener {
 
         // Find a potion type addition
         switch (item.getType()) {
-            case LINGERING_POTION -> exp += 25;
-            case SPLASH_POTION -> exp += 10;
+            case LINGERING_POTION -> exp += 50;
+            case SPLASH_POTION -> exp += 25;
         }
 
         // Find a potion effect addition
         if (meta.getBasePotionType() != null) {
             switch (meta.getBasePotionType()) {
                 case WATER:
-                    exp += 1;
+                    exp += 2;
                     break;
 
                 case MUNDANE, AWKWARD, THICK:
-                    exp += 2;
+                    exp += 5;
                     break;
             }
         }
@@ -86,11 +86,11 @@ public class MagicExperienceListener implements Listener {
         // Consider the base potion effect
         if (meta.getBasePotionType() != null)
             for (PotionEffect effect : meta.getBasePotionType().getPotionEffects())
-                exp += ((effect.getAmplifier()+1) * effect.getDuration() / 25);
+                exp += ((effect.getAmplifier()+1) * effect.getDuration() / 10);
 
         // Consider the extra potion effects
         for (PotionEffect effect : meta.getCustomEffects())
-            exp += ((effect.getAmplifier()+1) * effect.getDuration() / 50);
+            exp += ((effect.getAmplifier()+1) * effect.getDuration() / 20);
 
         return exp;
     }
