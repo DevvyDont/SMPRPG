@@ -101,57 +101,62 @@ public enum CustomEntityType implements IMenuDisplayable {
     VOIDLURKER(EntityType.SHULKER, "Voidlurker",
             55, 20_000, 1000, Voidlurker::new),
 
-    // Fishing creatures.
+    // Water fishing creatures.
     MINNOW(EntityType.SILVERFISH, "Minnow",
-            5, 120, 10, Minnow::new),
+            5, 500, 10, Minnow::new),
     SNAPPING_TURTLE(EntityType.TURTLE, "Snapping Turtle",
-            10, 200, 25, SnappingTurtle::new),
-    SEA_BEAR(EntityType.POLAR_BEAR, "Sea Bear",
-            20, 500, 45, SeaBear::new),
+            10, 1_250, 25, SnappingTurtle::new),
     SHARK(EntityType.DOLPHIN, "Shark",
-            25, 1_200, 110, Shark::new),
+            15, 2_250, 45, Shark::new),
     SEA_HAG(EntityType.WITCH, "Sea Hag",
-            30, 2_000, 200, SeaHag::new),
+            20, 3_000, 65, SeaHag::new),
+    SEA_BEAR(EntityType.POLAR_BEAR, "Sea Bear",
+            30, 7_500, 150, SeaBear::new),
     SCUBA_DROWNED(EntityType.DROWNED, "Scuba Drowned",
             40, 20_000, 500, ScubaDrowned::new),
-    KRAKEN(EntityType.GUARDIAN, "Kraken",
-            55, 50_000, 1500, Kraken::new),
 
+    // Water "boss"
+    KRAKEN(EntityType.GUARDIAN, "Kraken",
+            55, 15_000_000, 1500, Kraken::new),
+
+    // Lava fishing creatures.
     CINDERLING(EntityType.MAGMA_CUBE, "Cinderling",
-            20, 1_000, 50, Cinderling::new),
+            20, 2_750, 50, Cinderling::new),
 
     IMP(EntityType.BLAZE, "Imp",
-            25, 1_250, 150, Imp::new),
+            25, 4_000, 80, Imp::new),
 
     GHOST_KRAKEN(EntityType.GHAST, "Ghost Kraken",
-            30, 5_000, 300, GhostKraken::new),
+            30, 6_500, 300, GhostKraken::new),
 
     FIRE_GIANT(EntityType.IRON_GOLEM, "Fire Giant",
-            40, 25_000, 750, FireGiant::new),
+            40, 25_000, 600, FireGiant::new),
 
     FLAMING_SIREN(EntityType.BOGGED, "Flaming Siren",
-            50, 35_000, 1_000, FlamingSiren::new),
+            50, 50_000, 1_000, FlamingSiren::new),
 
     MAGMAPOTAMUS(EntityType.HOGLIN, "Magmapotamus",
-            60, 100_000, 2_500, Magmapotamus::new),
+            60, 125_000, 2_500, Magmapotamus::new),
 
+    // Lava fishing "boss"
     TYPHON(EntityType.PHANTOM, "Typhon",
-            90, 70_000_000, 30_000, Typhon::new),
+            90, 400_000_000, 30_000, Typhon::new),
+
 
     ECHO_RAY(EntityType.PHANTOM, "Echo Ray",
-            40, 5_000, 450, EchoRay::new),
+            40, 20_000, 500, EchoRay::new),
 
     CHORUS_SLUG(EntityType.ENDERMITE, "Chorus Slug",
-            45, 7_500, 700, ChorusSlug::new),
+            45, 35_000, 700, ChorusSlug::new),
 
     SPACE_PIG(EntityType.PIG, "Space Pig",
-            50, 30_000, 1_000, SpacePig::new),
+            50, 50_000, 1_000, SpacePig::new),
 
     END_CUBE(EntityType.SHULKER, "Ç̵̻͆͒Ǘ̷̾́͝B̶̄́̒̒Ẻ̷̹͓̋ ",
             75, 500_000, 12_500, EndCube::new),
 
     NIDHOGG(EntityType.PHANTOM, "Níðhöggr",
-            100, 100_000_000, 90_000, Nidhogg::new),
+            100, 1_000_000_000, 90_000, Nidhogg::new),
 
     TEST_ZOMBIE(EntityType.ZOMBIE, "Test Zombie",
             5, 120, 15,
