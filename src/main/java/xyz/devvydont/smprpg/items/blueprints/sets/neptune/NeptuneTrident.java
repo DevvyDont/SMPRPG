@@ -6,6 +6,7 @@ import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.ability.Passive;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
@@ -15,14 +16,16 @@ import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemSword;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
+import xyz.devvydont.smprpg.items.interfaces.IPassiveProvider;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.util.crafting.builders.SwordRecipe;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-public class NeptuneTrident extends CustomAttributeItem implements IBreakableEquipment, ICraftable {
+public class NeptuneTrident extends CustomAttributeItem implements IBreakableEquipment, ICraftable, IPassiveProvider {
 
     @Override
     public boolean wantNerfedSellPrice() {
@@ -76,6 +79,18 @@ public class NeptuneTrident extends CustomAttributeItem implements IBreakableEqu
     public Collection<ItemStack> unlockedBy() {
         return List.of(
                 itemService.getCustomItem(CustomItemType.PLUTO_FRAGMENT)
+        );
+    }
+
+    /**
+     * Retrieve the passives this item has.
+     *
+     * @return A set of passives.
+     */
+    @Override
+    public Set<Passive> getPassives() {
+        return Set.of(
+                Passive.ABYSSAL_ANNIHILATION
         );
     }
 }
