@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.services;
 
+import xyz.devvydont.smprpg.ability.handlers.passive.AbyssalAnnihilationListener;
+import xyz.devvydont.smprpg.ability.handlers.passive.AnglerListener;
 import xyz.devvydont.smprpg.ability.listeners.HotShotProjectileCollideListener;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 
@@ -24,6 +26,9 @@ public class AbilityService implements IService {
     public void setup() throws RuntimeException {
 
         listeners.add(new HotShotProjectileCollideListener());  // Allows the Hot Shot ability to function.
+
+        listeners.add(new AnglerListener());
+        listeners.add(new AbyssalAnnihilationListener());
         for (var listener : listeners)
             listener.start();
 

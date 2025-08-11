@@ -845,8 +845,17 @@ public class ItemService implements IService, Listener {
             for (var flag : rod.getFishingFlags())
                 lore.add(ComponentUtils.merge(ComponentUtils.create("- "), ComponentUtils.create(flag.Display + " Fishing", flag.Color)));
             lore.add(ComponentUtils.EMPTY);
-            lore.add(AbilityUtil.getAbilityComponent("Angler (Passive)"));
-            lore.add(ComponentUtils.merge(ComponentUtils.create("Does "), ComponentUtils.create(IFishingRod.CREATURE_MULTIPLIER + "x damage", NamedTextColor.RED), ComponentUtils.create(" to "), ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)));
+        }
+
+        if (blueprint instanceof IPassiveProvider passiveProvider) {
+            for (var passive : passiveProvider.getPassives()) {
+                lore.add(ComponentUtils.EMPTY);
+                lore.add(ComponentUtils.merge(
+                        AbilityUtil.getAbilityComponent(MinecraftStringUtils.getTitledString(passive.name())),
+                        ComponentUtils.create(" (Passive)", NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, false)
+                ));
+                lore.add(passive.getDescription());
+            }
         }
 
         // If this item holds experience

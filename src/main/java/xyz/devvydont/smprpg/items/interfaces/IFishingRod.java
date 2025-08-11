@@ -13,8 +13,6 @@ import java.util.Set;
  */
 public interface IFishingRod {
 
-    int CREATURE_MULTIPLIER = 5;
-
     enum FishingFlag {
         NORMAL("Water", SeaCreature.NAME_COLOR),
         LAVA("Lava", TextColor.color(255, 100, 28)),

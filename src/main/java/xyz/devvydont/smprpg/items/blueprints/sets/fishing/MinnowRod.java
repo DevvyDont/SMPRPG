@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.ability.Passive;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
@@ -16,6 +17,7 @@ import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
+import xyz.devvydont.smprpg.items.interfaces.IPassiveProvider;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
@@ -26,7 +28,7 @@ import java.util.Set;
 /**
  * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
  */
-public class MinnowRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable {
+public class MinnowRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable, IPassiveProvider {
 
     public MinnowRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -113,6 +115,18 @@ public class MinnowRod extends CustomAttributeItem implements IBreakableEquipmen
     public Set<FishingFlag> getFishingFlags() {
         return Set.of(
                 FishingFlag.NORMAL
+        );
+    }
+
+    /**
+     * Retrieve the passives this item has.
+     *
+     * @return A set of passives.
+     */
+    @Override
+    public Set<Passive> getPassives() {
+        return Set.of(
+                Passive.ANGLER
         );
     }
 

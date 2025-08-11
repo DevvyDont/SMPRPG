@@ -89,30 +89,6 @@ public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T>
     }
 
     /**
-     * When a sea creature takes damage from a fishing rod, 3x the damage.
-     */
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onTakeDamage(CustomEntityDamageByEntityEvent event) {
-
-        if (!event.getDamaged().equals(this._entity))
-            return;
-
-        if (!(event.getDealer() instanceof LivingEntity dealer))
-            return;
-
-        var equipment = dealer.getEquipment();
-        if (equipment == null)
-            return;
-
-        var mainItem = equipment.getItemInMainHand();
-        if (mainItem.getType() == Material.AIR)
-            return;
-
-        if (ItemService.blueprint(mainItem) instanceof IFishingRod)
-            event.multiplyDamage(IFishingRod.CREATURE_MULTIPLIER);
-    }
-
-    /**
      * When a fish spawns in, there is a chance to cancel it if the fisher is the owner of this sea creature.
      * Obviously, if we have more sea creatures alive, there will be more attempts at cancelling the fish.
      */
