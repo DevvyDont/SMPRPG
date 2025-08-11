@@ -5,6 +5,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
+import org.bukkit.block.Campfire;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -101,6 +102,8 @@ public class MenuRecipeViewer extends MenuBase {
             SMPRPG.broadcastToOperatorsCausedBy(this.player, ComponentUtils.create("Unknown recipe choice candidate: " + choice.getClass().getSimpleName()));
             throw new IllegalStateException("Unknown choice type: " + choice.getClass().getSimpleName());
         }
+
+        ItemService.blueprint(item).updateItemData(item);
 
         // If this item is deemed craftable by us, inject lore explaining that they can click it to go deeper.
         if (!RecipeService.getRecipesFor(item).isEmpty()) {
@@ -278,6 +281,8 @@ public class MenuRecipeViewer extends MenuBase {
             smelter = InterfaceUtil.getNamedItem(Material.BLAST_FURNACE, ComponentUtils.create("Blasting Recipe", NamedTextColor.GOLD));
         else if (cooking instanceof SmokingRecipe)
             smelter = InterfaceUtil.getNamedItem(Material.SMOKER, ComponentUtils.create("Smoker Recipe", NamedTextColor.GOLD));
+        else if (cooking instanceof CampfireRecipe)
+            smelter = InterfaceUtil.getNamedItem(Material.CAMPFIRE, ComponentUtils.create("Campfire Recipe", NamedTextColor.GOLD));
         else
             smelter = InterfaceUtil.getNamedItem(Material.BARRIER, ComponentUtils.create("Unknown Smelter: " + cooking.getClass().getSimpleName(), NamedTextColor.RED));
 
@@ -291,17 +296,6 @@ public class MenuRecipeViewer extends MenuBase {
         this.setButton(top, ingredient, event -> handleIngredientClick(ingredient));
         this.setSlot(middle, smelter);
         this.setSlot(bottom, InterfaceUtil.getNamedItem(Material.COAL, ComponentUtils.EMPTY));
-    }
-
-    private ItemStack resolveRecipeChoice(RecipeChoice choice) {
-        ItemStack item;
-        if (choice instanceof RecipeChoice.ExactChoice exact)
-            item = exact.getItemStack();
-        else if (choice instanceof RecipeChoice.MaterialChoice materialChoice)
-            item = materialChoice.getItemStack();
-        else
-            item = new ItemStack(Material.AIR);
-        return item;
     }
 
     /**
