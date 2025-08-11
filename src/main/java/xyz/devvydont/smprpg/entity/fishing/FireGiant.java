@@ -2,8 +2,16 @@ package xyz.devvydont.smprpg.entity.fishing;
 
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
+import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
+import xyz.devvydont.smprpg.util.items.LootDrop;
+
+import java.util.Collection;
+import java.util.List;
 
 public class FireGiant extends SeaCreature<IronGolem> {
     /**
@@ -22,5 +30,12 @@ public class FireGiant extends SeaCreature<IronGolem> {
     public void updateAttributes() {
         super.updateAttributes();
         updateBaseAttribute(AttributeWrapper.SCALE, 3);
+    }
+
+    @Override
+    public @Nullable Collection<LootDrop> getItemDrops() {
+        return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BRIMSTONE_RESIN), 1, this)
+        );
     }
 }

@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -41,8 +40,12 @@ public class NocturnumLeggings extends NocturnumSet {
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mmm", "mlm", "m m");
-        recipe.setIngredient('m', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.shape(
+                "btb",
+                "tlt",
+                "b b");
+        recipe.setIngredient('t', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(NocturnumSet.UPGRADE_BINDING));
         recipe.setIngredient('l', ItemService.generate(CustomItemType.RUINATION_LEGGINGS));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;

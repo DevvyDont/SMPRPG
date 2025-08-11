@@ -21,6 +21,7 @@ public interface ISmeltable {
     enum RecipeType {
         DEFAULT,
         BLASTING,
+        CAMPFIRE,
         SMOKING
     }
 
@@ -66,6 +67,8 @@ public interface ISmeltable {
             return new SmokingRecipe(key, blueprint.generate(), smeltable.getIngredient(), smeltable.getExperience(), (int) smeltable.getCookingTime());
         if (smeltable.getRecipeType().equals(RecipeType.DEFAULT))
             return new FurnaceRecipe(key, blueprint.generate(), smeltable.getIngredient(), smeltable.getExperience(), (int) smeltable.getCookingTime());
+        if (smeltable.getRecipeType().equals(RecipeType.CAMPFIRE))
+            return new CampfireRecipe(key, blueprint.generate(), smeltable.getIngredient(), smeltable.getExperience(), (int) smeltable.getCookingTime());
 
         throw new IllegalStateException("Could not register smoking recipe for " + smeltable.getRecipeType() + ". You need to add a relevant CookingRecipe!");
     }

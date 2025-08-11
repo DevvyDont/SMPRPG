@@ -1,6 +1,5 @@
-package xyz.devvydont.smprpg.items.blueprints.resources.fishing;
+package xyz.devvydont.smprpg.items.blueprints.resources.crafting;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
@@ -17,9 +16,9 @@ import xyz.devvydont.smprpg.services.ItemService;
 import java.util.Collection;
 import java.util.List;
 
-public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, ISellable {
+public class StrangeBinding extends CustomItemBlueprint implements ISellable, ICraftable {
 
-    public HolomokuCrest(ItemService itemService, CustomItemType type) {
+    public StrangeBinding(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
@@ -33,17 +32,19 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.shape("efe", "shs", "efe");
-        recipe.setIngredient('f', ItemService.generate(CustomItemType.SHARK_FIN));
-        recipe.setIngredient('s', ItemService.generate(Material.NAUTILUS_SHELL));
-        recipe.setIngredient('h', ItemService.generate(Material.HEART_OF_THE_SEA));
-        recipe.setIngredient('e', ItemService.generate(CustomItemType.UNCOMMON_FISH_ESSENCE));
+        recipe.shape(
+                " bn",
+                "bnb",
+                "nb "
+        );
+        recipe.setIngredient('b', ItemService.generate(CustomItemType.DRAGONSTEEL_INGOT));
+        recipe.setIngredient('n', ItemService.generate(CustomItemType.LATTICED_XENOMATTER));
         recipe.setCategory(CraftingBookCategory.MISC);
         return recipe;
     }
@@ -57,7 +58,7 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(
-                ItemService.generate(Material.HEART_OF_THE_SEA)
+                ItemService.generate(CustomItemType.LATTICED_XENOMATTER)
         );
     }
 
@@ -70,6 +71,6 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 17_500;
+        return 1_600_000;
     }
 }

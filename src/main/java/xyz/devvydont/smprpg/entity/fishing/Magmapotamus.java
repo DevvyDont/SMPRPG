@@ -32,4 +32,11 @@ public class Magmapotamus extends SeaCreature<Hoglin> {
         super.updateAttributes();
         updateBaseAttribute(AttributeWrapper.SCALE, 3);
     }
+
+    @Override
+    public @Nullable Collection<LootDrop> getItemDrops() {
+        return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.FLAMEBROILED_PORKCHOP), 1, this)
+        );
+    }
 }

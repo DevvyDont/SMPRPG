@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -42,8 +41,12 @@ public class NocturnumHelmet extends NocturnumSet
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mmm", "mhm");
-        recipe.setIngredient('m', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.shape(
+                "btb",
+                "tht"
+        );
+        recipe.setIngredient('t', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(NocturnumSet.UPGRADE_BINDING));
         recipe.setIngredient('h', ItemService.generate(CustomItemType.RUINATION_HELMET));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;

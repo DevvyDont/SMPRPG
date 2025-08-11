@@ -90,7 +90,7 @@ public class NocturnumRod extends CustomAttributeItem implements IBreakableEquip
                 "r s"
         );
         recipe.setIngredient('t', ItemService.generate(CustomItemType.RUINATION_ROD));
-        recipe.setIngredient('r', ItemService.generate(CustomItemType.LUCIFUGOUS_ROD));
+        recipe.setIngredient('r', ItemService.generate(NocturnumSet.UPGRADE_BINDING));
         recipe.setIngredient('s', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
@@ -125,6 +125,6 @@ public class NocturnumRod extends CustomAttributeItem implements IBreakableEquip
 
     @Override
     public int getWorth(ItemStack item) {
-        return super.getWorth(item) + (1_250_000 * item.getAmount());
+        return super.getWorth(item) + (1_750_000 * item.getAmount());
     }
 }

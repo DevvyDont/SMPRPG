@@ -448,7 +448,14 @@ public class FishingRewardRegistry {
 
                 new ItemStackFishingLoot.Builder(CustomItemType.SUMMONING_CRYSTAL)
                         .withMinecraftExperience(50)
-                        .withSkillExperience(200)
+                        .withSkillExperience(1000)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.HEART_OF_THE_VOID)
+                        .withRequirement(FishingLootRequirement.quality(650))
+                        .withMinecraftExperience(500)
+                        .withSkillExperience(5000)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build()
         );
@@ -482,20 +489,20 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
-                new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_BEAR)
-                        .withMinecraftExperience(75)
-                        .withSkillExperience(500)
-                        .withWeight(RARE_WEIGHT)
-                        .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
-                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
-                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
-                        .build(),
-
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_HAG)
                         .withMinecraftExperience(100)
                         .withSkillExperience(750)
                         .withWeight(RARE_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(SeaHag.RATING_REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_BEAR)
+                        .withMinecraftExperience(150)
+                        .withSkillExperience(1_250)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 

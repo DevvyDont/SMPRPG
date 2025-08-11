@@ -5,9 +5,10 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -20,54 +21,20 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import java.util.Collection;
 import java.util.List;
 
-public class TridentiteChunk extends CustomItemBlueprint implements IHeaderDescribable, ISellable, ICraftable {
+public class Necroplasm extends CustomItemBlueprint implements IHeaderDescribable, ISellable, ICraftable {
 
-    public TridentiteChunk(ItemService itemService, CustomItemType type) {
+    public Necroplasm(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         return List.of(
-                ComponentUtils.create("A raw chunk of various"),
-                ComponentUtils.create("treasures from the seas"),
+                ComponentUtils.create("A disgusting concoction"),
+                ComponentUtils.create("formed by the remains"),
+                ComponentUtils.merge(ComponentUtils.create("of various "), ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)),
                 ComponentUtils.EMPTY,
                 ComponentUtils.merge(ComponentUtils.create("Used for various "), ComponentUtils.create("crafting", NamedTextColor.GOLD), ComponentUtils.create(" components"))
-        );
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var shaped = new ShapedRecipe(getRecipeKey(), generate());
-        shaped.shape(
-                "hsh",
-                "pcj",
-                "hsh"
-        );
-        shaped.setIngredient('c', ItemService.generate(CustomItemType.ENCHANTED_PRISMARINE_CRYSTAL));
-        shaped.setIngredient('p', ItemService.generate(CustomItemType.PLUTO_FRAGMENT));
-        shaped.setIngredient('j', ItemService.generate(CustomItemType.JUPITER_CRYSTAL));
-        shaped.setIngredient('s', ItemService.generate(CustomItemType.RARE_FISH_ESSENCE));
-        shaped.setIngredient('h', ItemService.generate(CustomItemType.HEXED_CLOTH));
-        shaped.setCategory(CraftingBookCategory.MISC);
-        return shaped;
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     *
-     * @return
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(
-                ItemService.generate(CustomItemType.HEXED_CLOTH)
         );
     }
 
@@ -79,6 +46,39 @@ public class TridentiteChunk extends CustomItemBlueprint implements IHeaderDescr
         return ItemClassification.ITEM;
     }
 
+    @Override
+    public NamespacedKey getRecipeKey() {
+        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+    }
+
+    @Override
+    public CraftingRecipe getCustomRecipe() {
+        var recipe = new ShapelessRecipe(this.getRecipeKey(), generate());
+        recipe.addIngredient(2, ItemService.generate(CustomItemType.MIDNIGHT_HIDE));
+        recipe.addIngredient(2, ItemService.generate(CustomItemType.DEEP_SEA_BARNACLE));
+        recipe.addIngredient(ItemService.generate(CustomItemType.EPIC_FISH_ESSENCE));
+        recipe.addIngredient(2, ItemService.generate(CustomItemType.SPOOKY_TENDRIL));
+        recipe.addIngredient(2, ItemService.generate(CustomItemType.BRIMSTONE_RESIN));
+        recipe.setCategory(CraftingBookCategory.MISC);
+        return recipe;
+    }
+
+    /**
+     * A collection of items that will unlock the recipe for this item. Typically will be one of the components
+     * of the recipe itself, but can be set to whatever is desired
+     *
+     * @return
+     */
+    @Override
+    public Collection<ItemStack> unlockedBy() {
+        return List.of(
+                ItemService.generate(CustomItemType.MIDNIGHT_HIDE),
+                ItemService.generate(CustomItemType.DEEP_SEA_BARNACLE),
+                ItemService.generate(CustomItemType.SPOOKY_TENDRIL),
+                ItemService.generate(CustomItemType.BRIMSTONE_RESIN)
+        );
+    }
+
     /**
      * Given this item stack, how much should it be able to sell for?
      * Keep in mind that the size of the stack needs to considered as well!
@@ -88,6 +88,6 @@ public class TridentiteChunk extends CustomItemBlueprint implements IHeaderDescr
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 30_000 * item.getAmount();
+        return 100_000;
     }
 }

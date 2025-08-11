@@ -325,6 +325,15 @@ public enum CustomEntityType implements IMenuDisplayable {
             case SPACE_PIG -> Material.PORKCHOP;
             case VOIDLURKER -> Material.SHULKER_SHELL;
             case VOIDSPINNER -> Material.STRING;
+            case IMP -> Material.RED_DYE;
+            case KRAKEN -> Material.TRIDENT;
+            case TYPHON -> Material.BLAZE_SPAWN_EGG;
+            case SEA_HAG -> Material.WITHER_SPAWN_EGG;
+            case GHOST_KRAKEN -> Material.GHAST_SPAWN_EGG;
+            case FIRE_GIANT -> Material.RESIN_BRICK;
+            case MAGMAPOTAMUS -> Material.HOGLIN_SPAWN_EGG;
+            case FLAMING_SIREN -> Material.BOGGED_SPAWN_EGG;
+            case SCUBA_DROWNED -> Material.DROWNED_SPAWN_EGG;
             default -> Material.SKELETON_SKULL;
         };
     }

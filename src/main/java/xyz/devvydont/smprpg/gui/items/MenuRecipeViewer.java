@@ -92,7 +92,7 @@ public class MenuRecipeViewer extends MenuBase {
 
         ItemStack item = null;
         if (choice instanceof RecipeChoice.ExactChoice exact)
-            item = ItemService.blueprint(exact.getItemStack()).generate();
+            item = ItemService.clean(exact.getChoices().get(recipeChoiceIndex % exact.getChoices().size()));
 
         if (choice instanceof RecipeChoice.MaterialChoice material)
             item = ItemService.generate(material.getChoices().get(recipeChoiceIndex % material.getChoices().size()));

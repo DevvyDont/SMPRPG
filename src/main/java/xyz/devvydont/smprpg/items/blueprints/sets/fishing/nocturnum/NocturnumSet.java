@@ -23,6 +23,7 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
     public static int POWER = 60;
 
     // Crafting components to be created.
+    public static CustomItemType UPGRADE_BINDING = CustomItemType.LUCIFUGOUS_BINDING;
     public static CustomItemType UPGRADE_MATERIAL = CustomItemType.LUCIFUGOUS_THREAD;
 
     public NocturnumSet(ItemService itemService, CustomItemType type) {
@@ -95,6 +96,6 @@ public abstract class NocturnumSet extends CustomAttributeItem implements IBreak
 
     @Override
     public int getWorth(ItemStack item) {
-        return super.getWorth(item) + (1_100_000 * item.getAmount());
+        return super.getWorth(item) + (2_000_000 * item.getAmount());
     }
 }

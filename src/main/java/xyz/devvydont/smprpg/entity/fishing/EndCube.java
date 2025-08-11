@@ -30,7 +30,7 @@ public class EndCube extends SeaCreature<Shulker> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.XENOMATTER), 1, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.IMPOSSIBLE_GEOMETRY), 1, this)
         );
     }
 

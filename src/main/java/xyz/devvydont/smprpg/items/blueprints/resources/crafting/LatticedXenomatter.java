@@ -2,8 +2,10 @@ package xyz.devvydont.smprpg.items.blueprints.resources.crafting;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
+import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -16,19 +18,21 @@ import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.List;
 
-public class Tridentite extends CustomItemBlueprint implements IHeaderDescribable, ISmeltable, ISellable {
+public class LatticedXenomatter extends CustomItemBlueprint implements IHeaderDescribable, ISellable, ISmeltable {
 
-    public Tridentite(ItemService itemService, CustomItemType type) {
+    public LatticedXenomatter(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         return List.of(
-                ComponentUtils.create("A pristine metal forged by"),
-                ComponentUtils.create("the remains of the seas"),
+                ComponentUtils.merge(ComponentUtils.create("An intense "), ComponentUtils.create("hyper-stabilized", NamedTextColor.LIGHT_PURPLE), ComponentUtils.create(" material")),
+                ComponentUtils.merge(ComponentUtils.create("formed from the "), ComponentUtils.create("mystical essence", NamedTextColor.LIGHT_PURPLE), ComponentUtils.create(" of the")),
+                ComponentUtils.merge(ComponentUtils.create("most powerful "), ComponentUtils.create("creatures", NamedTextColor.RED), ComponentUtils.create(" that are lurking")),
+                ComponentUtils.merge(ComponentUtils.create("in the deep")),
                 ComponentUtils.EMPTY,
-                ComponentUtils.merge(ComponentUtils.create("Used for various "), ComponentUtils.create("crafting", NamedTextColor.GOLD), ComponentUtils.create(" components"))
+                ComponentUtils.merge(ComponentUtils.create("Used for crafting "), ComponentUtils.create("powerful fishing gear", SeaCreature.NAME_COLOR, TextDecoration.BOLD))
         );
     }
 
@@ -49,7 +53,7 @@ public class Tridentite extends CustomItemBlueprint implements IHeaderDescribabl
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 40_000;
+        return 300_000 * item.getAmount();
     }
 
     /**
@@ -59,7 +63,7 @@ public class Tridentite extends CustomItemBlueprint implements IHeaderDescribabl
      */
     @Override
     public RecipeChoice getIngredient() {
-        return new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.RAW_TRIDENTITE_CHUNK));
+        return new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.XENOMATTER));
     }
 
     /**
@@ -69,7 +73,7 @@ public class Tridentite extends CustomItemBlueprint implements IHeaderDescribabl
      */
     @Override
     public float getExperience() {
-        return 5;
+        return 100;
     }
 
     /**
@@ -79,7 +83,7 @@ public class Tridentite extends CustomItemBlueprint implements IHeaderDescribabl
      */
     @Override
     public long getCookingTime() {
-        return TickTime.seconds(30);
+        return TickTime.minutes(15);
     }
 
     /**
@@ -89,6 +93,6 @@ public class Tridentite extends CustomItemBlueprint implements IHeaderDescribabl
      */
     @Override
     public RecipeType getRecipeType() {
-        return RecipeType.BLASTING;
+        return RecipeType.CAMPFIRE;
     }
 }

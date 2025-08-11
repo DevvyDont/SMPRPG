@@ -34,8 +34,12 @@ public class XenohunterLeggings extends XenohunterSet {
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mmm", "mlm", "m m");
-        recipe.setIngredient('m', ItemService.generate(XenohunterSet.UPGRADE_COMPONENT));
+        recipe.shape(
+                "btb",
+                "tlt",
+                "b b");
+        recipe.setIngredient('t', ItemService.generate(XenohunterSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(XenohunterSet.UPGRADE_BINDING));
         recipe.setIngredient('l', ItemService.generate(CustomItemType.NOCTURNUM_LEGGINGS));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;

@@ -49,9 +49,14 @@ public class NocturnumChestplate extends NocturnumSet {
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mcm", "mmm", "mmm");
-        recipe.setIngredient('m', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.shape(
+                "bcb",
+                "ttt",
+                "btb"
+        );
         recipe.setIngredient('c', ItemService.generate(CustomItemType.RUINATION_CHESTPLATE));
+        recipe.setIngredient('t', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(NocturnumSet.UPGRADE_BINDING));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
     }

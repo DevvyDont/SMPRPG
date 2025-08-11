@@ -1,22 +1,27 @@
 package xyz.devvydont.smprpg.services;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.BlastingRecipe;
-import org.bukkit.inventory.FurnaceRecipe;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.*;
 import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.ItemRarity;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.base.VanillaItemBlueprint;
+import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ISmeltable;
 import xyz.devvydont.smprpg.listeners.crafting.CraftingTransmuteUpgradeFix;
+import xyz.devvydont.smprpg.listeners.crafting.NormalFishCampfireBlacklist;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles all recipe logic on the server. This includes crafting, smelting, etc.
@@ -75,8 +80,12 @@ public class RecipeService implements IService, Listener {
 
         registerFurnaceRecipes();
 
+        // Fish are special. They can be broken down into "essence" for certain crafting recipes.
+        registerFishTeardownRecipes();
+
         // Start listeners.
         listeners.add(new CraftingTransmuteUpgradeFix());
+        listeners.add(new NormalFishCampfireBlacklist());
         for (var listener : listeners)
             listener.start();
     }
@@ -98,5 +107,49 @@ public class RecipeService implements IService, Listener {
 
             Bukkit.addRecipe(ISmeltable.generateRecipe(item, smeltable));
         }
+    }
+
+    /**
+     * Registers every fish blueprint to have a teardown recipe into essence.
+     */
+    private void registerFishTeardownRecipes() {
+
+        Multimap<ItemRarity, CustomItemType> fishToRarity = HashMultimap.create();
+
+        // Loop through every fish blueprint and map its rarity.
+        for (var item : SMPRPG.getService(ItemService.class).getCustomBlueprints()) {
+            if (!(item instanceof FishBlueprint fish))
+                continue;
+
+            fishToRarity.put(fish.getDefaultRarity(), fish.getCustomItemType());
+        }
+
+        // Create a recipe for every rarity we discovered for a teardown.
+        for (var entry : fishToRarity.asMap().entrySet()) {
+            var essence = switch (entry.getKey()) {
+                case UNCOMMON -> CustomItemType.UNCOMMON_FISH_ESSENCE;
+                case RARE -> CustomItemType.RARE_FISH_ESSENCE;
+                case EPIC -> CustomItemType.EPIC_FISH_ESSENCE;
+                case LEGENDARY -> CustomItemType.LEGENDARY_FISH_ESSENCE;
+                case MYTHIC -> CustomItemType.MYTHIC_FISH_ESSENCE;
+                case DIVINE -> CustomItemType.DIVINE_FISH_ESSENCE;
+                case TRANSCENDENT -> CustomItemType.TRANSCENDENT_FISH_ESSENCE;
+                default -> CustomItemType.COMMON_FISH_ESSENCE;
+            };
+
+            var choices = new ArrayList<ItemStack>();
+            var cookingTimeFactor = (entry.getKey().ordinal() + 1);
+            for (var choice : entry.getValue())
+                choices.add(ItemService.generate(choice));
+            var recipe = new CampfireRecipe(
+                    new NamespacedKey(SMPRPG.getInstance(), entry.getKey() + "_campfire"),
+                    ItemService.generate(essence),
+                    new RecipeChoice.ExactChoice(choices),
+                    cookingTimeFactor * cookingTimeFactor,
+                    cookingTimeFactor * cookingTimeFactor * cookingTimeFactor * 20 + 5
+                    );
+            Bukkit.addRecipe(recipe);
+        }
+
     }
 }

@@ -1,12 +1,10 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum.NocturnumSet;
 import xyz.devvydont.smprpg.services.ItemService;
 
 public class XenohunterHelmet extends XenohunterSet {
@@ -36,8 +34,12 @@ public class XenohunterHelmet extends XenohunterSet {
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mmm", "mhm");
-        recipe.setIngredient('m', ItemService.generate(XenohunterSet.UPGRADE_COMPONENT));
+        recipe.shape(
+                "btb",
+                "tht"
+        );
+        recipe.setIngredient('t', ItemService.generate(XenohunterSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(XenohunterSet.UPGRADE_BINDING));
         recipe.setIngredient('h', ItemService.generate(CustomItemType.NOCTURNUM_HELMET));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;

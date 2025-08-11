@@ -90,7 +90,7 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
                 "r s"
         );
         recipe.setIngredient('t', ItemService.generate(CustomItemType.NOCTURNUM_ROD));
-        recipe.setIngredient('r', ItemService.generate(CustomItemType.STRANGE_ROD));
+        recipe.setIngredient('r', ItemService.generate(CustomItemType.STRANGE_BINDING));
         recipe.setIngredient('s', ItemService.generate(CustomItemType.STRANGE_FIBER));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
@@ -126,6 +126,6 @@ public class XenohunterRod extends CustomAttributeItem implements IBreakableEqui
 
     @Override
     public int getWorth(ItemStack item) {
-        return super.getWorth(item) + (4_500_000 * item.getAmount());
+        return super.getWorth(item) + (5_500_000 * item.getAmount());
     }
 }

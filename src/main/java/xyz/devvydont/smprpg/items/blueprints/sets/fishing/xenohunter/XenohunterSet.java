@@ -21,7 +21,8 @@ import java.util.List;
 public abstract class XenohunterSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
 
     public static int POWER = 80;
-    public static final CustomItemType UPGRADE_COMPONENT = CustomItemType.STRANGE_FIBER;
+    public static CustomItemType UPGRADE_BINDING = CustomItemType.STRANGE_BINDING;
+    public static CustomItemType UPGRADE_MATERIAL = CustomItemType.STRANGE_FIBER;
 
     public XenohunterSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -103,6 +104,6 @@ public abstract class XenohunterSet extends CustomAttributeItem implements IBrea
 
     @Override
     public int getWorth(ItemStack item) {
-        return super.getWorth(item) + (4_000_000 * item.getAmount());
+        return super.getWorth(item) + (5_600_000 * item.getAmount());
     }
 }

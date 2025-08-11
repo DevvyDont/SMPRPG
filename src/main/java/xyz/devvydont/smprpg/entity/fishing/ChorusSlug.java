@@ -41,4 +41,11 @@ public class ChorusSlug extends SeaCreature<Endermite> {
         boots.addUnsafeEnchantment(EnchantmentService.VOIDSTRIDING_BLESSING.getEnchantment(), 1);
         _entity.getEquipment().setBoots(boots);
     }
+
+    @Override
+    public @Nullable Collection<LootDrop> getItemDrops() {
+        return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ERRATIC_SLIME), 1, this)
+        );
+    }
 }

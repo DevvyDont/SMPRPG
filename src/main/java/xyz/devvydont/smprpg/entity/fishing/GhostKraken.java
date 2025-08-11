@@ -40,4 +40,11 @@ public class GhostKraken extends SeaCreature<Ghast> {
         _entity.customName(Component.text("Dinnerbone"));
         _entity.setCustomNameVisible(false);
     }
+
+    @Override
+    public @Nullable Collection<LootDrop> getItemDrops() {
+        return List.of(
+                new ChancedItemDrop(ItemService.generate(CustomItemType.SPOOKY_TENDRIL), 1, this)
+        );
+    }
 }

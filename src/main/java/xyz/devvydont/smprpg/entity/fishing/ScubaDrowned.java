@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ScubaDrowned extends SeaCreature<LivingEntity> {
 
-    public static final int RATING_REQUIREMENT = 450;
+    public static final int RATING_REQUIREMENT = 400;
 
     public ScubaDrowned(LivingEntity entity, CustomEntityType entityType) {
         super(entity, entityType);
@@ -29,7 +29,7 @@ public class ScubaDrowned extends SeaCreature<LivingEntity> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-
+            new ChancedItemDrop(ItemService.generate(CustomItemType.DEEP_SEA_BARNACLE), 1, this)
         );
     }
 }

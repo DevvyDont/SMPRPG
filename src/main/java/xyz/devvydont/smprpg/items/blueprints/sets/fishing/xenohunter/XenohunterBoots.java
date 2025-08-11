@@ -34,9 +34,13 @@ public class XenohunterBoots extends XenohunterSet {
     @Override
     public CraftingRecipe getCustomRecipe() {
         var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape("mbm", "m m");
-        recipe.setIngredient('m', ItemService.generate(XenohunterSet.UPGRADE_COMPONENT));
-        recipe.setIngredient('b', ItemService.generate(CustomItemType.NOCTURNUM_BOOTS));
+        recipe.shape(
+                "bxb",
+                "t t"
+        );
+        recipe.setIngredient('t', ItemService.generate(XenohunterSet.UPGRADE_MATERIAL));
+        recipe.setIngredient('b', ItemService.generate(XenohunterSet.UPGRADE_BINDING));
+        recipe.setIngredient('x', ItemService.generate(CustomItemType.NOCTURNUM_BOOTS));
         recipe.setCategory(CraftingBookCategory.EQUIPMENT);
         return recipe;
     }
