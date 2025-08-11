@@ -382,7 +382,8 @@ public enum CustomItemType {
     HOLOMOKU_BOOTS("Holomoku Boots",           Material.DIAMOND_BOOTS,      ItemRarity.UNCOMMON, HolomokuBoots.class),
     HOLOMOKU_ROD("Holomoku Rod",               Material.FISHING_ROD,        ItemRarity.UNCOMMON, HolomokuRod.class),
 
-    RAW_TRIDENTITE_CHUNK("Raw Tridentite Chunk", Material.CYAN_DYE, ItemRarity.UNCOMMON, true, 20_000),
+    HEXED_CLOTH("Hexed Cloth", Material.DRIED_KELP, ItemRarity.UNCOMMON, true, 8_000),
+    RAW_TRIDENTITE_CHUNK("Raw Tridentite Chunk", Material.CYAN_DYE, ItemRarity.RARE, true, TridentiteChunk.class),
     TRIDENTITE("Tridentite", Material.IRON_INGOT, ItemRarity.RARE, Tridentite.class),
     RUINATION_HELMET("Ruination Helmet",         Material.DIAMOND_HELMET,     ItemRarity.RARE, RuinationHelmet.class),
     RUINATION_CHESTPLATE("Ruination Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.RARE, RuinationChestplate.class),

@@ -29,8 +29,7 @@ public class ScubaDrowned extends SeaCreature<LivingEntity> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-            new ChancedItemDrop(ItemService.generate(CustomItemType.SHARK_FIN), 1, this),
-            new ChancedItemDrop(ItemService.generate(CustomItemType.PREDATOR_TOOTH), 30, this)
+
         );
     }
 }
