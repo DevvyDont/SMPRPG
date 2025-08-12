@@ -325,7 +325,6 @@ class DropsService : IService, Listener {
             override fun run() {
                 // Update any items that were flagged as needing it. We should only be allowed to do this ~1,000 times
                 // on a single tick, so hard cap the amount of items we do.
-
                 var toProcess = ArrayList(itemsToUpdateQueue)
                 if (toProcess.size > 1000) {
                     toProcess = ArrayList(toProcess.subList(0, 1000))
@@ -403,11 +402,15 @@ class DropsService : IService, Listener {
     }
 
     override fun cleanup() {
-        if (itemTimerTask != null) itemTimerTask!!.cancel()
 
-        if (dropAnnouncementTask != null) dropAnnouncementTask!!.cancel()
+        if (itemTimerTask != null)
+            itemTimerTask!!.cancel()
 
-        if (itemCleanupTask != null) itemCleanupTask!!.cancel()
+        if (dropAnnouncementTask != null)
+            dropAnnouncementTask!!.cancel()
+
+        if (itemCleanupTask != null)
+            itemCleanupTask!!.cancel()
 
         itemTimerTask = null
         dropAnnouncementTask = null
@@ -421,9 +424,8 @@ class DropsService : IService, Listener {
      * @return A reusable component.
      */
     private fun generateItemName(item: Item): Component? {
+
         // Time left?
-
-
         var timeLeftComponent = ComponentUtils.EMPTY
         if (hasExpiryTimestamp(item)) {
             val now = System.currentTimeMillis()
@@ -505,8 +507,8 @@ class DropsService : IService, Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     @Suppress("unused")
     private fun onItemSpawn(event: ItemSpawnEvent) {
-        // Right away, transfer loot flags to the item entity.
 
+        // Right away, transfer loot flags to the item entity.
         transferLootFlags(event.getEntity())
 
         // Set the rarity glow of the item
@@ -538,15 +540,18 @@ class DropsService : IService, Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     @Suppress("unused")
     private fun onFireworkDamageFromDrop(event: EntityDamageEvent) {
-        // We only care about fireworks
 
-        if (event.damageSource.damageType != DamageType.FIREWORKS) return
+        // We only care about fireworks
+        if (event.damageSource.damageType != DamageType.FIREWORKS)
+            return
 
         val firework = event.damageSource.directEntity as Firework?
-        if (firework == null) return
+        if (firework == null)
+            return
 
         // Custom fireworks don't do damage
-        if (firework.entitySpawnReason != CreatureSpawnEvent.SpawnReason.CUSTOM) return
+        if (firework.entitySpawnReason != CreatureSpawnEvent.SpawnReason.CUSTOM)
+            return
 
         event.setDamage(EntityDamageEvent.DamageModifier.BASE, 0.0)
         event.isCancelled = true
@@ -641,8 +646,8 @@ class DropsService : IService, Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     @Suppress("unused")
     private fun onBlockDroppedItemEvent(event: BlockDropItemEvent) {
-        // Tag all the drops as loot drops. Since we are given item entities, we need to .
 
+        // Tag all the drops as loot drops. Since we are given item entities, we need to .
         for (itemEntity in event.items) {
             val item = itemEntity.itemStack
             SMPRPG.getService(ItemService::class.java).ensureItemStackUpdated(item)
@@ -655,8 +660,8 @@ class DropsService : IService, Listener {
     @EventHandler
     @Suppress("unused")
     private fun onRareDropObtained(event: CustomChancedItemDropSuccessEvent) {
-        // Find out information about the item.
 
+        // Find out information about the item.
         val blueprint = SMPRPG.getService(ItemService::class.java).getBlueprint(event.item)
         val rarityOfDrop = blueprint.getRarity(event.item)
 
@@ -709,8 +714,8 @@ class DropsService : IService, Listener {
     @EventHandler
     @Suppress("unused")
     private fun onEntityPickupItem(event: EntityPickupItemEvent) {
-        // Never allow enemies to pickup items.
 
+        // Never allow enemies to pickup items.
         if (event.getEntity() is Enemy) {
             event.isCancelled = true
             return
@@ -749,10 +754,13 @@ class DropsService : IService, Listener {
     @EventHandler
     @Suppress("unused")
     fun onItemAttemptDimensionTransition(event: EntityPortalEnterEvent) {
+
         if (event.getEntity() !is Item)
             return
+
         val item = event.entity as Item
         if (getOwner(item) != null || item.owner != null) event.isCancelled = true
+
     }
 
     companion object {

@@ -1,19 +1,19 @@
-package xyz.devvydont.smprpg.listeners.crafting;
+package xyz.devvydont.smprpg.listeners.crafting
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
-import xyz.devvydont.smprpg.events.crafting.PrepareItemCraftTransmuteEvent;
-import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
-
-import java.util.ArrayList;
+import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
+import org.bukkit.event.inventory.PrepareItemCraftEvent
+import org.bukkit.inventory.ItemStack
+import xyz.devvydont.smprpg.events.crafting.PrepareItemCraftTransmuteEvent
+import xyz.devvydont.smprpg.services.ItemService
+import xyz.devvydont.smprpg.services.ItemService.Companion.blueprint
+import xyz.devvydont.smprpg.services.ItemService.Companion.clean
+import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 
 /**
- * The Bukkit recipe API has a serious issue. When using the {@link org.bukkit.inventory.RecipeChoice.ExactChoice}
+ * The Bukkit recipe API has a serious issue. When using the [org.bukkit.inventory.RecipeChoice.ExactChoice]
  * recipe choice for recipes, which our plugin uses for custom item recipes, ANY sort of extra underlying item
  * component modifications will cause the test function to fail for a crafting ingredient. This is a problem, as it
  * makes certain items unable to be upgraded after being enchanted/reforged.
@@ -31,75 +31,85 @@ import java.util.ArrayList;
  * - Trigger an item data update on the new copy. This should completely recalculate the item state while keeping things such as enchantments and reforges.
  * - Manually set the crafting result.
  */
-public class CraftingTransmuteUpgradeFix extends ToggleableListener {
-
+class CraftingTransmuteUpgradeFix : ToggleableListener() {
     /**
      * The logic for the fix outlined above.
-     * @param event The {@link PrepareItemCraftEvent} event that provides us with relevant context.
+     * @param event The [PrepareItemCraftEvent] event that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void __onAttemptPerformTransmuteUpgradeRecipe(PrepareItemCraftEvent event) {
-
+    @Suppress("unused")
+    private fun onAttemptPerformTransmuteUpgradeRecipe(event: PrepareItemCraftEvent) {
         // If there's a recipe involved, there's nothing to check.
-        if (event.getRecipe() != null)
-            return;
+
+        if (event.recipe != null)
+            return
 
         // Find potential transmutable items, and construct a new crafting matrix with clean versions of items.
-        var transmutableIngredients = new ArrayList<ItemStack>();
-        var originalGrid = event.getInventory().getMatrix();  // Empty slots will be null. Can either have a length of 4 or 9.
-        var cleanGrid = new ItemStack[originalGrid.length];
+        val transmutableIngredients = ArrayList<ItemStack?>()
+        val originalGrid = event.inventory.matrix // Empty slots will be null. Can either have a length of 4 or 9.
+
+        val air = ItemStack.of(Material.AIR)
+        var cleanGrid: Array<ItemStack>
+        cleanGrid = if (originalGrid.size == 4)
+            arrayOf(air, air, air, air)
+        else
+            arrayOf(air, air, air, air, air, air, air, air, air)
 
         // Check the original matrix, and construct a copy that contains clean ingredients. Keep track of transmutable ingredients as well.
-        for (var i = 0; i < originalGrid.length; i++) {
-
-            var ingredient = originalGrid[i];
+        for (i in originalGrid.indices) {
+            val ingredient = originalGrid[i]
 
             // Check if the slot is air/empty.
             if (ingredient == null)
-                continue;
+                continue
 
             // Check if it's transmutable. This can easily be figured out if it doesn't match its clean counterpart.
-            var cleanVersion = ItemService.clean(ingredient);
+            val cleanVersion = clean(ingredient)
             if (!ingredient.isSimilar(cleanVersion))
-                transmutableIngredients.add(ingredient);
+                transmutableIngredients.add(ingredient)
 
             // Save the clean version.
-            cleanGrid[i] = cleanVersion;
+            cleanGrid[i] = cleanVersion
         }
 
         // We cannot continue if there are multiple transmutable candidates.
-        if (transmutableIngredients.size() > 1)
-            return;
+        if (transmutableIngredients.size > 1)
+            return
 
         // We have a recipe that is potentially a transmutable upgrade. In order to recipe check, we need a world instance.
         // First try the inventory location, but if that doesn't work, just grab a viewer location.
-        var loc = event.getInventory().getLocation();
-        if (loc == null && !event.getInventory().getViewers().isEmpty())
-            loc = event.getInventory().getViewers().getFirst().getLocation();
+        var loc = event.inventory.location
+        if (loc == null && !event.inventory.viewers.isEmpty()) loc =
+            event.inventory.viewers.first().location
 
         // If we still don't have a location, just abort.
-        if (loc == null)
-            return;
+        if (loc == null) return
 
         // Now, perform a recipe check against the clean grid. This MUST be a 3x3 grid. If it's 2x2, convert it to 3x3.
-        if (cleanGrid.length == 4)
-            cleanGrid = new @Nullable ItemStack[]{cleanGrid[0], cleanGrid[1], null, cleanGrid[2], cleanGrid[3], null, null, null, null};
-        var recipe = Bukkit.getCraftingRecipe(cleanGrid, loc.getWorld());
+        if (cleanGrid.size == 4)
+            cleanGrid = arrayOf(cleanGrid[0], cleanGrid[1], air, cleanGrid[2], cleanGrid[3], air, air, air, air)
+
+        val recipe = Bukkit.getCraftingRecipe(cleanGrid, loc.getWorld())
 
         // If null, then there's no recipe. We tried...
         if (recipe == null)
-            return;
+            return
 
         // We have a recipe! Given the recipe's result, find its blueprint so we transmute the item.
-        var resultBlueprint = ItemService.blueprint(recipe.getResult());
-        var resultOverride = ItemService.transmute(transmutableIngredients.getFirst(), resultBlueprint);
+        val resultBlueprint = blueprint(recipe.result)
+        val resultOverride = ItemService.transmute(transmutableIngredients.first()!!, resultBlueprint)
 
         // Call an event that the plugin can hook into since we don't want to repeat this gross logic again.
-        var fixedEvent = new PrepareItemCraftTransmuteEvent(recipe, event.getInventory(), event.getView(), transmutableIngredients.getFirst(), resultOverride);
+        val fixedEvent = PrepareItemCraftTransmuteEvent(
+            recipe,
+            event.inventory,
+            event.view,
+            transmutableIngredients.first()!!,
+            resultOverride
+        )
         if (!fixedEvent.callEvent())
-            return;
+            return
 
-        event.getInventory().setResult(fixedEvent.getRecipeResult());
+        event.inventory.result = fixedEvent.recipeResult
     }
-
 }
