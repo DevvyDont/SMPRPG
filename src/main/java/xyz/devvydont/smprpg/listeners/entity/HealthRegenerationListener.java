@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.listeners.entity;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;

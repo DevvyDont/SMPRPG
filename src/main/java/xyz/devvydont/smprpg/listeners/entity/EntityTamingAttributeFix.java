@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners.pets;
+package xyz.devvydont.smprpg.listeners.entity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

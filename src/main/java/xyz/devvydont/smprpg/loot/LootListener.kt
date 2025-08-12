@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.loot.LootTables
 import xyz.devvydont.smprpg.enchantments.calculator.EnchantmentCalculator
 import xyz.devvydont.smprpg.items.CustomItemType
-import xyz.devvydont.smprpg.listeners.StructureEntitySpawnListener
+import xyz.devvydont.smprpg.listeners.entity.StructureEntitySpawnListener
 import xyz.devvydont.smprpg.services.ItemService.Companion.generate
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import java.util.*

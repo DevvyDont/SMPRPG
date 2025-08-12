@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.listeners.entity;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;

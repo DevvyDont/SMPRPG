@@ -11,8 +11,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
-import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.AttributeService;
+import xyz.devvydont.smprpg.services.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 
 /**

@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.listeners.damage;
 
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;

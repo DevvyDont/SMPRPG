@@ -39,8 +39,8 @@ import xyz.devvydont.smprpg.entity.player.LeveledPlayer
 import xyz.devvydont.smprpg.entity.vanilla.*
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent
 import xyz.devvydont.smprpg.listeners.damage.ShulkerDefenseModeFix
-import xyz.devvydont.smprpg.listeners.pets.EntityTamingAttributeFix
-import xyz.devvydont.smprpg.listeners.pets.TamedEntityFeedFix
+import xyz.devvydont.smprpg.listeners.entity.EntityTamingAttributeFix
+import xyz.devvydont.smprpg.listeners.entity.TamedEntityFeedFix
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.formatting.Symbols
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener

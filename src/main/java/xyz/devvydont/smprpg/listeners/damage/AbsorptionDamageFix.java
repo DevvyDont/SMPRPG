@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.listeners.damage;
 
 import org.bukkit.Particle;
 import org.bukkit.Sound;

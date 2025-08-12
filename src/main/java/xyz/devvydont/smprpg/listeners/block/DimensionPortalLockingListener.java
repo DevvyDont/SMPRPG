@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.listeners.block;
 
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.GameMode;

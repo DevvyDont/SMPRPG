@@ -20,7 +20,7 @@ import xyz.devvydont.smprpg.attribute.AttributeCategory;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
-import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
+import xyz.devvydont.smprpg.services.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.services.EntityService;

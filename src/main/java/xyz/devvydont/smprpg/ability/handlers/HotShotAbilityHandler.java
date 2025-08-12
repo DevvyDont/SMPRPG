@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.ability.AbilityContext;
 import xyz.devvydont.smprpg.ability.AbilityHandler;
-import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
+import xyz.devvydont.smprpg.services.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.HashMap;

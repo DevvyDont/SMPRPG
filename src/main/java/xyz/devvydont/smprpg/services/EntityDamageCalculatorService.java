@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.listeners;
+package xyz.devvydont.smprpg.services;
 
 import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
@@ -22,7 +22,7 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent;
 import xyz.devvydont.smprpg.listeners.damage.CriticalDamageListener;
 import xyz.devvydont.smprpg.listeners.damage.DamagePopupListener;
-import xyz.devvydont.smprpg.services.*;
+import xyz.devvydont.smprpg.listeners.damage.EnvironmentalDamageListener;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
