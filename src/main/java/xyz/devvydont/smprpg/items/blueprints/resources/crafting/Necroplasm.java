@@ -48,7 +48,7 @@ public class Necroplasm extends CustomItemBlueprint implements IHeaderDescribabl
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override

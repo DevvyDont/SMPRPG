@@ -80,7 +80,7 @@ public class MinnowRod extends CustomAttributeItem implements IBreakableEquipmen
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType() + "_recipe");
     }
 
     @Override

@@ -109,7 +109,7 @@ public class CrystallizedReforge extends ReforgeBase implements Listener {
 
         // Damage the targets on the next tick if they are not dead.
         double finalDamage = damage;
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), task -> {
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), task -> {
             for (var target : targets) {
                 if (target.isDead())
                     continue;

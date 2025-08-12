@@ -51,10 +51,8 @@ import xyz.devvydont.smprpg.items.blueprints.potion.PotionBlueprint
 import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*
 import xyz.devvydont.smprpg.items.interfaces.*
-import xyz.devvydont.smprpg.items.listeners.AbilityCastingListener
-import xyz.devvydont.smprpg.items.listeners.BackpackInteractionListener
-import xyz.devvydont.smprpg.items.listeners.ExperienceBottleListener
-import xyz.devvydont.smprpg.items.listeners.ShieldBlockingListener
+import xyz.devvydont.smprpg.items.listeners.*
+import xyz.devvydont.smprpg.listeners.crafting.CustomItemFurnacePreventions
 import xyz.devvydont.smprpg.reforge.ReforgeBase
 import xyz.devvydont.smprpg.reforge.ReforgeType
 import xyz.devvydont.smprpg.util.attributes.AttributeUtil
@@ -92,6 +90,8 @@ class ItemService : IService, Listener {
         listeners.add(ExperienceBottleListener())
         listeners.add(BackpackInteractionListener())
         listeners.add(AbilityCastingListener())
+        listeners.add(RareItemDropPreventionListener())
+        listeners.add(CustomItemFurnacePreventions())
     }
 
     @Throws(RuntimeException::class)
@@ -680,6 +680,16 @@ class ItemService : IService, Listener {
             lore.addAll(blueprint.getHeader(itemStack))
         }
 
+        // Check if this is furnace fuel.
+        if (blueprint is IFurnaceFuel) {
+            lore.add(ComponentUtils.EMPTY)
+            lore.add(ComponentUtils.merge(
+                ComponentUtils.create("Burns for "),
+                ComponentUtils.create(String.format("%ds", blueprint.burnTime/20), NamedTextColor.GOLD),
+                ComponentUtils.create(" in furnaces ")
+            ));
+        }
+
         // Check if this is a reforge applicator.
         if (blueprint is ReforgeApplicator) {
             lore.add(ComponentUtils.EMPTY)
@@ -729,16 +739,17 @@ class ItemService : IService, Listener {
                     ComponentUtils.create(flag.Display + " Fishing", flag.Color)
                 )
             )
-            lore.add(ComponentUtils.EMPTY)
-            lore.add(AbilityUtil.getAbilityComponent("Angler (Passive)"))
-            lore.add(
-                ComponentUtils.merge(
-                    ComponentUtils.create("Does "),
-                    ComponentUtils.create(IFishingRod.CREATURE_MULTIPLIER.toString() + "x damage", NamedTextColor.RED),
-                    ComponentUtils.create(" to "),
-                    ComponentUtils.create("Sea Creatures", SeaCreature.NAME_COLOR)
-                )
-            )
+        }
+
+        if (blueprint is IPassiveProvider) {
+            for (passive in blueprint.passives) {
+                lore.add(ComponentUtils.EMPTY);
+                lore.add(ComponentUtils.merge(
+                        AbilityUtil.getAbilityComponent(MinecraftStringUtils.getTitledString(passive.name)),
+                        ComponentUtils.create(" (Passive)", NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, false)
+                ));
+                lore.add(passive.description);
+            }
         }
 
         // If this item holds experience
@@ -789,6 +800,7 @@ class ItemService : IService, Listener {
         // Is this item compressed?
         if (blueprint is Compressable) {
             val material: Component = blueprint.getCompressionFlow().first().material.component().decoration(TextDecoration.BOLD, true)
+            lore.add(ComponentUtils.EMPTY)
             lore.add(ComponentUtils.create("An ultra compressed"))
             lore.add(ComponentUtils.create("collection of ").append(material))
             lore.add(ComponentUtils.EMPTY)
@@ -1269,7 +1281,15 @@ class ItemService : IService, Listener {
     @Suppress("unused")
     private fun onPlayerDamageItem(event: PlayerItemDamageEvent) {
         // Durability changes are always 1
-        if (event.damage > 0) event.damage = 1
+        if (event.damage > 0)
+            event.damage = 1
+
+
+        Bukkit.getScheduler().runTaskLater(
+            SMPRPG.plugin,
+            Runnable { getBlueprint(event.item).updateItemData(event.item) },
+            TickTime.INSTANTANEOUSLY
+        )
     }
 
     @EventHandler
@@ -1283,28 +1303,6 @@ class ItemService : IService, Listener {
 
         // If this item is a custom item, don't allow it to be placed!!!
         if (blueprint.isCustom()) event.isCancelled = true
-    }
-
-    /*
-     * We never want to allow players to cook custom items.
-     */
-    @EventHandler(priority = EventPriority.LOWEST)
-    @Suppress("unused")
-    private fun onSmelt(event: FurnaceSmeltEvent) {
-        // Custom item? Make it so it never cooks
-
-        if (getBlueprint(event.source).isCustom()) event.isCancelled = true
-    }
-
-    /*
-     * We never want to allow players to cook custom items.
-     */
-    @EventHandler
-    @Suppress("unused")
-    private fun onSmeltCustomItem(event: FurnaceStartSmeltEvent) {
-        // Custom item? Make it so it never cooks
-
-        if (getBlueprint(event.getSource()).isCustom()) event.totalCookTime = 999999
     }
 
     companion object {

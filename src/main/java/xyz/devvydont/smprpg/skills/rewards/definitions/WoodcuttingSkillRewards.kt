@@ -7,6 +7,7 @@ import xyz.devvydont.smprpg.skills.rewards.SkillRewardContainer
 
 class WoodcuttingSkillRewards : SkillRewardContainer() {
     init {
+
         // Add fortune every level
         this.addAttributeRewardEveryLevel(
             AttributeWrapper.WOODCUTTING_FORTUNE,
@@ -22,6 +23,7 @@ class WoodcuttingSkillRewards : SkillRewardContainer() {
             SkillGlobals.CRITICAL_RATING_LEVEL_FREQUENCY
         )
 
+
         // Loop every 2 levels and add def.
         this.addAttributeRewardEveryXLevels(
             AttributeWrapper.DEFENSE,
@@ -30,12 +32,22 @@ class WoodcuttingSkillRewards : SkillRewardContainer() {
             SkillGlobals.DEFENSE_LEVEL_FREQUENCY
         )
 
+
         // Typical HP every level
         this.addScalingAttributeRewardEveryXLevels(
             AttributeWrapper.HEALTH,
             AttributeModifier.Operation.ADD_NUMBER,
             SkillGlobals.HP_PER_5_LEVELS,
             SkillGlobals.HP_LEVEL_FREQUENCY
+        )
+
+
+        // Loop every 10 levels and add lumbering.
+        this.addAttributeRewardEveryXLevels(
+            AttributeWrapper.LUMBERING,
+            AttributeModifier.Operation.ADD_NUMBER,
+            SkillGlobals.LUMBERING_PER_10_LEVELS.toDouble(),
+            SkillGlobals.LUMBERING_LEVEL_FREQUENCY
         )
 
         // Give coins for every level.

@@ -115,7 +115,7 @@ public class MultiBlockBreakListener extends ToggleableListener {
         int delay = 2;
 
         for (Block block : blocksToBreak) {
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
                 var exp = ForagingExperienceListener.getBaseExperienceForBlock(block);
                 if (exp <= 0)
                     return;

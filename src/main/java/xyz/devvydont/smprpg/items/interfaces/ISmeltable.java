@@ -60,7 +60,7 @@ public interface ISmeltable {
         if (identifier == null)
             throw new IllegalStateException("Smeltable items must either extend VanillaItemBlueprint or CustomItemBlueprint.");
 
-        var key = new NamespacedKey(SMPRPG.getInstance(), identifier + "_smelt_recipe");
+        var key = new NamespacedKey(SMPRPG.getPlugin(), identifier + "_smelt_recipe");
         if (smeltable.getRecipeType().equals(RecipeType.BLASTING))
             return new BlastingRecipe(key, blueprint.generate(), smeltable.getIngredient(), smeltable.getExperience(), (int) smeltable.getCookingTime());
         if (smeltable.getRecipeType().equals(RecipeType.SMOKING))

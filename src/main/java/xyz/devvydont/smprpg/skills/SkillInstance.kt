@@ -2,16 +2,19 @@ package xyz.devvydont.smprpg.skills
 
 import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataType
+import xyz.devvydont.smprpg.attribute.AttributeWrapper
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent.ExperienceSource
 import xyz.devvydont.smprpg.events.skills.SkillExperiencePostGainEvent
 import xyz.devvydont.smprpg.events.skills.SkillLevelUpEvent
+import xyz.devvydont.smprpg.services.AttributeService
 import xyz.devvydont.smprpg.skills.SkillGlobals.getCumulativeExperienceForLevel
 import xyz.devvydont.smprpg.skills.SkillGlobals.getExperienceForLevel
 import xyz.devvydont.smprpg.skills.SkillGlobals.getLevelForExperience
 import xyz.devvydont.smprpg.skills.SkillGlobals.totalExperienceCap
 import xyz.devvydont.smprpg.skills.rewards.ISkillReward
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 /**
  * Skill instances are helper instances to interface with skill modification on entities.
@@ -74,8 +77,11 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
         // Add the experience and take note of what level we are before and after
         val oldLevel = this.level
         val expCap = totalExperienceCap
-        val newExp = this.experience + event.experienceEarned
-        this.experience = min(expCap, newExp)
+        var expEarned = event.experienceEarned.toDouble()
+        expEarned *= 1.0 + (getProficiencyStacks() / 100.0)
+        event.setExperienceEarned(expEarned.roundToInt())
+        val newExp: Double = this.experience + expEarned
+        this.experience = min(expCap, newExp.roundToInt())
         val newLevel = this.level
 
         // Combo increasing
@@ -143,5 +149,10 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
      */
     fun getRewards(level: Int): MutableCollection<ISkillReward> {
         return this.type.rewards.getRewardsForLevel(level)
+    }
+
+    fun getProficiencyStacks(): Double {
+        val proficiencyInstance = AttributeService.instance.getOrCreateAttribute(owner, AttributeWrapper.PROFICIENCY);
+        return proficiencyInstance.getValue();
     }
 }

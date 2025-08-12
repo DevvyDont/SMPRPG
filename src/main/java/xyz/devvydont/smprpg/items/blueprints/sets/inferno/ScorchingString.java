@@ -7,6 +7,7 @@ import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.items.interfaces.ISmeltable;
+import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
 public class ScorchingString extends CustomItemBlueprint implements ISmeltable, ISellable {

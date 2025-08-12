@@ -52,16 +52,16 @@ class MagicExperienceListener : Listener {
 
         // Find a potion type addition
         when (item.type) {
-            Material.LINGERING_POTION -> exp += 25
-            Material.SPLASH_POTION -> exp += 10
+            Material.LINGERING_POTION -> exp += 50
+            Material.SPLASH_POTION -> exp += 25
             else -> {}
         }
 
         // Find a potion effect addition
         if (meta.basePotionType != null) {
             when (meta.basePotionType) {
-                PotionType.WATER -> exp += 1
-                PotionType.MUNDANE, PotionType.AWKWARD, PotionType.THICK -> exp += 2
+                PotionType.WATER -> exp += 2
+                PotionType.MUNDANE, PotionType.AWKWARD, PotionType.THICK -> exp += 5
                 else -> {}
             }
         }
@@ -70,11 +70,11 @@ class MagicExperienceListener : Listener {
         val potionType = meta.basePotionType
         if (potionType != null)
             for (effect in potionType.potionEffects)
-                exp += ((effect.amplifier + 1) * effect.duration / 25)
+                exp += ((effect.amplifier + 1) * effect.duration / 10)
 
         // Consider the extra potion effects
         for (effect in meta.customEffects)
-            exp += ((effect.amplifier + 1) * effect.duration / 50)
+            exp += ((effect.amplifier + 1) * effect.duration / 20)
 
         return exp
     }
@@ -239,9 +239,8 @@ class MagicExperienceListener : Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
     private fun onPickupExperience(event: PlayerPickupExperienceEvent) {
-        val exp = max(1, event.experienceOrb.experience / 10)
         val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(event.getPlayer())
-        player.magicSkill.addExperience(exp, ExperienceSource.XP)
+        player.magicSkill.addExperience(1, ExperienceSource.XP)
     }
 
 

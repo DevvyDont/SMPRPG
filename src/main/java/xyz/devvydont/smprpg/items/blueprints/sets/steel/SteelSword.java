@@ -75,7 +75,7 @@ public class SteelSword extends CustomAttributeItem implements ICraftable, IBrea
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

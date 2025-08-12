@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.recipe.CraftingBookCategory;

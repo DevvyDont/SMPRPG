@@ -48,12 +48,14 @@ class ForagingExperienceListener : Listener {
     }
 
     companion object {
+
+        @JvmStatic
         fun getBaseExperienceForBlock(block: Block): Int {
             val exp = when (block.type) {
                 Material.CHORUS_FLOWER -> 20
                 Material.CHORUS_PLANT -> 15
-                Material.CRIMSON_STEM, Material.WARPED_STEM, Material.NETHER_WART_BLOCK, Material.WARPED_WART_BLOCK, Material.STRIPPED_CRIMSON_STEM, Material.STRIPPED_WARPED_STEM -> 14
-                Material.CHERRY_LOG, Material.ACACIA_LOG, Material.MANGROVE_LOG, Material.MANGROVE_ROOTS, Material.PALE_OAK_LOG -> 12
+                Material.CRIMSON_STEM, Material.WARPED_STEM, Material.NETHER_WART_BLOCK, Material.WARPED_WART_BLOCK, Material.STRIPPED_CRIMSON_STEM, Material.STRIPPED_WARPED_STEM, Material.CRIMSON_HYPHAE, Material.WARPED_HYPHAE -> 14
+                Material.CHERRY_LOG, Material.ACACIA_LOG, Material.MANGROVE_LOG, Material.MANGROVE_ROOTS, Material.PALE_OAK_LOG, Material.CHERRY_WOOD, Material.ACACIA_WOOD, Material.MANGROVE_WOOD, Material.PALE_OAK_WOOD -> 12
                 Material.BIRCH_LOG, Material.OAK_LOG, Material.JUNGLE_LOG, Material.SPRUCE_LOG, Material.DARK_OAK_LOG -> 10
                 Material.STRIPPED_ACACIA_LOG, Material.STRIPPED_ACACIA_WOOD, Material.STRIPPED_BAMBOO_BLOCK, Material.STRIPPED_BIRCH_LOG, Material.STRIPPED_BIRCH_WOOD, Material.STRIPPED_CHERRY_LOG, Material.STRIPPED_CHERRY_WOOD, Material.STRIPPED_CRIMSON_HYPHAE, Material.STRIPPED_DARK_OAK_LOG, Material.STRIPPED_DARK_OAK_WOOD, Material.STRIPPED_JUNGLE_LOG, Material.STRIPPED_JUNGLE_WOOD, Material.STRIPPED_MANGROVE_LOG, Material.STRIPPED_MANGROVE_WOOD, Material.STRIPPED_OAK_LOG, Material.STRIPPED_OAK_WOOD, Material.STRIPPED_SPRUCE_LOG, Material.STRIPPED_SPRUCE_WOOD, Material.STRIPPED_WARPED_HYPHAE, Material.STRIPPED_PALE_OAK_LOG, Material.STRIPPED_PALE_OAK_WOOD -> 5
                 Material.ACACIA_PLANKS, Material.BAMBOO_PLANKS, Material.BIRCH_PLANKS, Material.CHERRY_PLANKS, Material.CRIMSON_PLANKS, Material.DARK_OAK_PLANKS, Material.JUNGLE_PLANKS, Material.MANGROVE_PLANKS, Material.OAK_PLANKS, Material.SPRUCE_PLANKS, Material.WARPED_PLANKS -> 2

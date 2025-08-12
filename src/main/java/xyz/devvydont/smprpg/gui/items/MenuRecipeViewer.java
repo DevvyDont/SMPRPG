@@ -5,20 +5,15 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
-import org.bukkit.block.Campfire;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.*;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.gui.InterfaceUtil;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
-import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
-import xyz.devvydont.smprpg.items.interfaces.ISmeltable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.services.RecipeService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
@@ -64,7 +59,7 @@ public class MenuRecipeViewer extends MenuBase {
         super.handleInventoryOpened(event);
         event.titleOverride(ComponentUtils.merge(ComponentUtils.create("Recipes for: "), result.displayName()));
         this.render();
-        Bukkit.getScheduler().runTaskTimer(SMPRPG.getInstance(), task -> {
+        Bukkit.getScheduler().runTaskTimer(SMPRPG.getPlugin(), task -> {
 
             // If nobody is viewing us, we can stop the task.
             if (this.inventory.getViewers().isEmpty()) {

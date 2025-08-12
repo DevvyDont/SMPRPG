@@ -464,6 +464,9 @@ class EnchantmentService : IService, Listener {
         val FELLING: CustomEnchantment = FellingEnchantment("felling")
 
         @JvmField
+        val CHOPPING: CustomEnchantment = ChoppingEnchantment("chopping")
+
+        @JvmField
         val HARVESTING: CustomEnchantment = HarvestingEnchantment("harvesting")
 
         @JvmField
@@ -523,6 +526,7 @@ class EnchantmentService : IService, Listener {
             FORTUNE,
             HARVESTING,
             FELLING,
+            CHOPPING,
             FROST_WALKER,
             IMPALING,
             KNOCKBACK,

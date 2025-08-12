@@ -7,11 +7,17 @@ import xyz.devvydont.smprpg.skills.rewards.SkillRewardContainer
 
 class FishingSkillRewards : SkillRewardContainer() {
     init {
+
         // Add fishing rating every level.
         this.addAttributeRewardEveryLevel(
             AttributeWrapper.FISHING_RATING,
             AttributeModifier.Operation.ADD_NUMBER,
             SkillGlobals.FORTUNE_PER_LEVEL
+        )
+        this.addAttributeRewardEveryLevel(
+            AttributeWrapper.FISHING_SPEED,
+            AttributeModifier.Operation.ADD_NUMBER,
+            SkillGlobals.FISHING_SPEED_PER_LEVEL.toDouble()
         )
 
         // Add sea creature chance and treasure chance every 4 levels.
@@ -24,9 +30,10 @@ class FishingSkillRewards : SkillRewardContainer() {
         this.addAttributeRewardEveryXLevels(
             AttributeWrapper.FISHING_TREASURE_CHANCE,
             AttributeModifier.Operation.ADD_NUMBER,
-            SkillGlobals.FISHING_CHANCE_PER_4_LEVEL,
+            SkillGlobals.FISHING_CHANCE_PER_4_LEVEL / 4.0,
             SkillGlobals.FISHING_CHANCE_FREQUENCY
         )
+
 
         // Typical HP every level
         this.addScalingAttributeRewardEveryXLevels(

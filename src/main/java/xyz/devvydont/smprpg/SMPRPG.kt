@@ -8,6 +8,7 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import xyz.devvydont.smprpg.effects.services.SpecialEffectService
 import xyz.devvydont.smprpg.listeners.*
+import xyz.devvydont.smprpg.listeners.block.MultiBlockBreakListener
 import xyz.devvydont.smprpg.listeners.block.TrialChamberVaultFix
 import xyz.devvydont.smprpg.listeners.damage.SlimeRapidAttackFixListener
 import xyz.devvydont.smprpg.loot.LootListener
@@ -15,9 +16,6 @@ import xyz.devvydont.smprpg.services.*
 import xyz.devvydont.smprpg.util.animations.AnimationService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
-import kotlin.collections.ArrayList
-import kotlin.collections.MutableCollection
-import kotlin.collections.MutableList
 
 class SMPRPG : JavaPlugin() {
     /**
@@ -91,6 +89,7 @@ class SMPRPG : JavaPlugin() {
         generalListeners.add(LootListener()) // Overrides vanilla loot tables by injecting our items into it.
         generalListeners.add(TrialChamberVaultFix()) // Allows trial chambers to work with our custom item system.
         generalListeners.add(SlimeRapidAttackFixListener()) // Fixes the vanilla bug of slimes being able to attack every tick.
+        generalListeners.add(MultiBlockBreakListener()) // Fixes the vanilla bug of slimes being able to attack every tick.
 
         // Uncomment this if you want some debugging events.
 //        generalListeners.add(new DebuggingListeners());  // Enables some debugging functionality.

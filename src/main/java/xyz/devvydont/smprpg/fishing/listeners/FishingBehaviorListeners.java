@@ -12,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.FixedMetadataValue;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.fishing.calculator.FishLootCalculator;
 import xyz.devvydont.smprpg.fishing.events.FishingLootGenerateEvent;
@@ -19,6 +20,7 @@ import xyz.devvydont.smprpg.fishing.tasks.FishHookBehaviorTask;
 import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.AttributeService;
+import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 import xyz.devvydont.smprpg.util.persistence.KeyStore;
@@ -137,7 +139,7 @@ public class FishingBehaviorListeners extends ToggleableListener {
 
         // If this rod is nothing special, we can simply ignore it. It will act like a vanilla fishing rod.
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL))
-            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
 
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL) && rodBlueprint.getFishingFlags().size() == 1)
             return;
