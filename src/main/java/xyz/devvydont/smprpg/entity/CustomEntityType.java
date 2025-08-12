@@ -101,21 +101,62 @@ public enum CustomEntityType implements IMenuDisplayable {
     VOIDLURKER(EntityType.SHULKER, "Voidlurker",
             55, 20_000, 1000, Voidlurker::new),
 
-    // Fishing creatures.
+    // Water fishing creatures.
     MINNOW(EntityType.SILVERFISH, "Minnow",
-            5, 120, 10, Minnow::new),
+            5, 500, 10, Minnow::new),
     SNAPPING_TURTLE(EntityType.TURTLE, "Snapping Turtle",
-            10, 200, 25, SnappingTurtle::new),
-    SEA_BEAR(EntityType.POLAR_BEAR, "Sea Bear",
-            20, 500, 45, SeaBear::new),
+            10, 1_250, 25, SnappingTurtle::new),
     SHARK(EntityType.DOLPHIN, "Shark",
-            25, 1_200, 110, Shark::new),
+            15, 2_250, 45, Shark::new),
+    SEA_HAG(EntityType.WITCH, "Sea Hag",
+            20, 3_000, 65, SeaHag::new),
+    SEA_BEAR(EntityType.POLAR_BEAR, "Sea Bear",
+            30, 7_500, 150, SeaBear::new),
+    SCUBA_DROWNED(EntityType.DROWNED, "Scuba Drowned",
+            40, 20_000, 500, ScubaDrowned::new),
 
+    // Water "boss"
+    KRAKEN(EntityType.GUARDIAN, "Kraken",
+            55, 15_000_000, 1500, Kraken::new),
+
+    // Lava fishing creatures.
     CINDERLING(EntityType.MAGMA_CUBE, "Cinderling",
-            20, 650, 50, Cinderling::new),
+            20, 2_750, 50, Cinderling::new),
+
+    IMP(EntityType.BLAZE, "Imp",
+            25, 4_000, 80, Imp::new),
+
+    GHOST_KRAKEN(EntityType.GHAST, "Ghost Kraken",
+            30, 6_500, 300, GhostKraken::new),
+
+    FIRE_GIANT(EntityType.IRON_GOLEM, "Fire Giant",
+            40, 25_000, 600, FireGiant::new),
+
+    FLAMING_SIREN(EntityType.BOGGED, "Flaming Siren",
+            50, 50_000, 1_000, FlamingSiren::new),
+
+    MAGMAPOTAMUS(EntityType.HOGLIN, "Magmapotamus",
+            60, 125_000, 2_500, Magmapotamus::new),
+
+    // Lava fishing "boss"
+    TYPHON(EntityType.PHANTOM, "Typhon",
+            90, 400_000_000, 30_000, Typhon::new),
+
 
     ECHO_RAY(EntityType.PHANTOM, "Echo Ray",
-            40, 3_500, 450, EchoRay::new),
+            40, 20_000, 500, EchoRay::new),
+
+    CHORUS_SLUG(EntityType.ENDERMITE, "Chorus Slug",
+            45, 35_000, 700, ChorusSlug::new),
+
+    SPACE_PIG(EntityType.PIG, "Space Pig",
+            50, 50_000, 1_000, SpacePig::new),
+
+    END_CUBE(EntityType.SHULKER, "Ç̵̻͆͒Ǘ̷̾́͝B̶̄́̒̒Ẻ̷̹͓̋ ",
+            75, 500_000, 12_500, EndCube::new),
+
+    NIDHOGG(EntityType.PHANTOM, "Níðhöggr",
+            100, 1_000_000_000, 90_000, Nidhogg::new),
 
     TEST_ZOMBIE(EntityType.ZOMBIE, "Test Zombie",
             5, 120, 15,
@@ -283,6 +324,21 @@ public enum CustomEntityType implements IMenuDisplayable {
             case CINDERLING -> Material.MAGMA_CREAM;
             case ECHO_RAY -> Material.PHANTOM_MEMBRANE;
             case SHARK -> Material.PRISMARINE_SHARD;
+            case CHORUS_SLUG -> Material.ENDERMITE_SPAWN_EGG;
+            case NIDHOGG -> Material.DRAGON_HEAD;
+            case END_CUBE -> Material.SHULKER_BOX;
+            case SPACE_PIG -> Material.PORKCHOP;
+            case VOIDLURKER -> Material.SHULKER_SHELL;
+            case VOIDSPINNER -> Material.STRING;
+            case IMP -> Material.RED_DYE;
+            case KRAKEN -> Material.TRIDENT;
+            case TYPHON -> Material.BLAZE_SPAWN_EGG;
+            case SEA_HAG -> Material.WITHER_SPAWN_EGG;
+            case GHOST_KRAKEN -> Material.GHAST_SPAWN_EGG;
+            case FIRE_GIANT -> Material.RESIN_BRICK;
+            case MAGMAPOTAMUS -> Material.HOGLIN_SPAWN_EGG;
+            case FLAMING_SIREN -> Material.BOGGED_SPAWN_EGG;
+            case SCUBA_DROWNED -> Material.DROWNED_SPAWN_EGG;
             default -> Material.SKELETON_SKULL;
         };
     }

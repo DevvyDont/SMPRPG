@@ -8,6 +8,7 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeType;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
@@ -335,7 +336,10 @@ public class AttributeUtil {
      *
      * @return
      */
-    public static int getPowerBonus(ItemMeta meta) {
+    public static int getPowerBonus(@Nullable ItemMeta meta) {
+
+        if (meta == null)
+            return 0;
 
         int sum = 0;
 

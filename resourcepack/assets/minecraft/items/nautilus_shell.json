@@ -1,0 +1,27 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/nautilus_shell"
+        },
+        "cases": [
+            {
+                "when": "smprpg:neptunes_conch",
+                "model": {
+                    "type": "minecraft:condition",
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "minecraft:item/nautilus_shell"
+                    },
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "tools:item/neptune_conch_toot"
+                    },
+                    "property": "minecraft:using_item"
+                }
+            }
+        ]
+    }
+}

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Shark extends SeaCreature<LivingEntity> {
 
-    public static final int RATING_REQUIREMENT = 175;
+    public static final int RATING_REQUIREMENT = 120;
 
     public Shark(LivingEntity entity, CustomEntityType entityType) {
         super(entity, entityType);
@@ -30,8 +30,8 @@ public class Shark extends SeaCreature<LivingEntity> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-            new QuantityLootDrop(ItemService.generate(CustomItemType.SHARK_FIN), 1, 1, this),
-            new ChancedItemDrop(ItemService.generate(CustomItemType.HYPNOTIC_EYE), 20, this)
+            new ChancedItemDrop(ItemService.generate(CustomItemType.SHARK_FIN), 1, this),
+            new ChancedItemDrop(ItemService.generate(CustomItemType.PREDATOR_TOOTH), 50, this)
         );
     }
 }

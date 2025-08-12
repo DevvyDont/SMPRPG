@@ -1,0 +1,20 @@
+{
+  "layers": {
+    "wings": [
+      {
+        "texture": "armor:elderflame",
+        "use_player_texture": false
+      }
+	],
+    "humanoid": [
+      {
+        "texture": "armor:elderflame"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:elderflame"
+      }
+    ]
+  }
+}

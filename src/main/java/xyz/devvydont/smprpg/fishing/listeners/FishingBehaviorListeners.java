@@ -5,7 +5,6 @@ import io.papermc.paper.event.entity.EntityEquipmentChangedEvent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +12,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.metadata.FixedMetadataValue;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.fishing.calculator.FishLootCalculator;
 import xyz.devvydont.smprpg.fishing.events.FishingLootGenerateEvent;
@@ -21,7 +19,6 @@ import xyz.devvydont.smprpg.fishing.tasks.FishHookBehaviorTask;
 import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.services.AttributeService;
-import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 import xyz.devvydont.smprpg.util.persistence.KeyStore;
@@ -105,18 +102,21 @@ public class FishingBehaviorListeners extends ToggleableListener {
     private void __onStartFishWithSpecialRod(PlayerFishEvent event) {
 
         // If this hook is associated with a task already, offset the logic to the task. Not this.
-        var hook = tasks.get(event.getHook().getUniqueId());
+        int baseMaxWait = (int) TickTime.seconds(30);
+        int fishingSpeed;
+
+        var speedAtrInst = AttributeService.getInstance().getOrCreateAttribute(event.getPlayer(), AttributeWrapper.FISHING_SPEED);
+        fishingSpeed = (int) speedAtrInst.getValue();
+
+        var hookEntity = event.getHook();
+        int maxWait = (baseMaxWait - fishingSpeed);
+        hookEntity.setMinWaitTime(Math.max(1, (int) (maxWait/2)));
+        hookEntity.setMaxWaitTime(Math.max(1, maxWait));
+
+        var hook = tasks.get(hookEntity.getUniqueId());
         if (hook != null) {
             hook.handleFishingEvent(event);
             return;
-        }
-
-        // We know we don't have a task. If a normal fishing event fires, this is probably a safe time to
-        // force tag the fishing hook as a normal fishing hook so it doesn't catch lava/void fish in normal circumstances.
-        if (event.getState().equals(PlayerFishEvent.State.LURED)) {
-            for (var flag : IFishingRod.FishingFlag.values())
-                event.getHook().removeMetadata(flag.toString(), SMPRPG.getPlugin());
-            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
         }
 
         // Filter out events where we aren't casting a fishing line to start the process.
@@ -135,16 +135,14 @@ public class FishingBehaviorListeners extends ToggleableListener {
         if (!(blueprint instanceof IFishingRod rodBlueprint))
             return;
 
-        // We have two jobs. Start a ticking behavior task to simulate fishing in contexts where fishing isn't supported,
-        // and tag the fishing hook with the flags that it's allowed to fish for.
-        for (var flag : rodBlueprint.getFishingFlags())
-            event.getHook().setMetadata(flag.name(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
-
         // If this rod is nothing special, we can simply ignore it. It will act like a vanilla fishing rod.
+        if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL))
+            event.getHook().setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.NORMAL) && rodBlueprint.getFishingFlags().size() == 1)
             return;
 
-        hook = FishHookBehaviorTask.create(event.getHook());
+        hook = FishHookBehaviorTask.create(event.getHook(), rodBlueprint.getFishingFlags());
 
         // Customize the hook's behavior to suit the fishing rod depending on the flags present.
         if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.LAVA) && rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))
@@ -153,8 +151,6 @@ public class FishingBehaviorListeners extends ToggleableListener {
             hook.setOptions(FishHookBehaviorTask.LAVA_OPTIONS);
         else if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))
             hook.setOptions(FishHookBehaviorTask.VOID_OPTIONS);
-
-        hook.setLure(fishingRod.getEnchantmentLevel(Enchantment.LURE));
 
         tasks.put(event.getHook().getUniqueId(), hook);
     }

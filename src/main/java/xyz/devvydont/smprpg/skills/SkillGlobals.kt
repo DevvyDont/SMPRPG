@@ -160,8 +160,9 @@ object SkillGlobals {
     const val REGENERATION_LEVEL_FREQUENCY: Int = 2
 
     // Fishing skill gives fishing chances every 4 levels.
-    const val FISHING_CHANCE_PER_4_LEVEL: Double = 0.2
+    const val FISHING_CHANCE_PER_4_LEVEL: Double = 0.8
     const val FISHING_CHANCE_FREQUENCY: Int = 4
+    const val FISHING_SPEED_PER_LEVEL: Int = 1
 
     // The magic skill gives intelligence and luck.
     const val INT_PER_LEVEL: Double = 5.0
@@ -175,6 +176,9 @@ object SkillGlobals {
     // Woodcutting gives a small defense and critical rating boost.
     const val DEFENSE_LEVEL_FREQUENCY: Int = 2
     const val DEFENSE_PER_2_LEVELS: Double = 4.0
+    const val LUMBERING_LEVEL_FREQUENCY: Int = 10
+    const val LUMBERING_PER_10_LEVELS: Int = 1
+
 
     /**
      * Used for scaling attribute rewards. Higher levels will result in better attributes.

@@ -24,7 +24,8 @@ public class SaltyReforge extends ReforgeBase {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, -20 + rarity.ordinal() * 5),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, .4 + rarity.ordinal() * .2),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .4 + rarity.ordinal() * .2)
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .2 + rarity.ordinal() * .1),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 10 + rarity.ordinal() * 2)
         );
     }
 

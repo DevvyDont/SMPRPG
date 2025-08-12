@@ -1,38 +1,36 @@
 package xyz.devvydont.smprpg.enchantments.definitions;
 
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.keys.EnchantmentKeys;
 import io.papermc.paper.registry.keys.tags.ItemTypeTagKeys;
+import io.papermc.paper.registry.set.RegistryKeySet;
+import io.papermc.paper.registry.set.RegistrySet;
 import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
+import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.enchantments.EnchantmentRarity;
-import xyz.devvydont.smprpg.enchantments.EnchantmentUtil;
-import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent;
+import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
+import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
+import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public class ProficientEnchantment extends CustomEnchantment implements Listener {
+import java.util.Collection;
+import java.util.List;
 
-    public static final int PERCENT_PER_LEVEL = 5;
-
-    /**
-     * Gets the level of proficiency a certain sum of levels will grant. Keep in mind that this enchantment can stack
-     * levels from armor, offhand, and main hand meaning that the max possible "level" of this enchantment can be
-     * percentPerLevel * maxLevel * 6 (+600% if max level is 10 and we have 10% increase per level)
-     *
-     * @param level
-     * @return
-     */
-    public static int getProficiencyPercentIncrease(int level) {
-        return PERCENT_PER_LEVEL * level;
-    }
+public class ProficientEnchantment extends CustomEnchantment implements AttributeEnchantment {
 
     public ProficientEnchantment(String id) {
         super(id);
+    }
+
+    public static int getProficiency(int level) {
+        return level * 5;
     }
 
     @Override
@@ -43,21 +41,18 @@ public class ProficientEnchantment extends CustomEnchantment implements Listener
     @Override
     public @NotNull Component getDescription() {
         return ComponentUtils.merge(
-            ComponentUtils.create("Increases skill experience gains by "),
-            ComponentUtils.create("+" + getProficiencyPercentIncrease(getLevel()) + "%", NamedTextColor.GREEN),
-            ComponentUtils.create(" (stacks!)", NamedTextColor.DARK_GRAY)
+                ComponentUtils.create("Increases "),
+                ComponentUtils.create(AttributeWrapper.PROFICIENCY.DisplayName, NamedTextColor.GOLD),
+                ComponentUtils.create(" by "),
+                ComponentUtils.create(String.format("+%d", getProficiency(getLevel())), NamedTextColor.GREEN)
         );
     }
 
     @Override
-    public TagKey<ItemType> getItemTypeTag() {
-        return ItemTypeTagKeys.ENCHANTABLE_VANISHING;  // Anything that can be enchanted basically
-    }
+    public TagKey<ItemType> getItemTypeTag() { return ItemTypeTagKeys.ENCHANTABLE_VANISHING; }
 
     @Override
-    public int getAnvilCost() {
-        return 1;
-    }
+    public int getAnvilCost() { return 1; }
 
     @Override
     public int getMaxLevel() {
@@ -79,20 +74,36 @@ public class ProficientEnchantment extends CustomEnchantment implements Listener
         return 22;
     }
 
-    @EventHandler
-    public void onObtainSkillExperience(SkillExperienceGainEvent event) {
+    /**
+     * What kind of attribute container is this? Items can have multiple containers of stats that stack
+     * to prevent collisions
+     *
+     * @return
+     */
+    @Override
+    public AttributeModifierType getAttributeModifierType() {
+        return AttributeModifierType.ENCHANTMENT;
+    }
 
-        // Ignore experience gained from commands, otherwise the skill set command will behave wonky.
-        if (event.getSource().equals(SkillExperienceGainEvent.ExperienceSource.COMMANDS))
-            return;
+    /**
+     * What modifiers themselves will be contained on the item if there are no variables to affect them?
+     *
+     * @return
+     */
+    @Override
+    public Collection<AttributeEntry> getHeldAttributes() {
+        return List.of(
+                AttributeEntry.additive(AttributeWrapper.PROFICIENCY, getProficiency(getLevel()))
+        );
+    }
 
-        int totalLevels = EnchantmentUtil.getWornEnchantLevel(this, event.getPlayer().getEquipment());
-        totalLevels += EnchantmentUtil.getHoldingEnchantLevel(this, EquipmentSlotGroup.HAND, event.getPlayer().getEquipment());
-        if (totalLevels <= 0)
-            return;
-
-        double exp = event.getExperienceEarned();
-        exp *= (getProficiencyPercentIncrease(totalLevels) / 100.0 + 1.0);
-        event.setExperienceEarned((int) Math.round(exp));
+    /**
+     * How much should we increase the power rating of an item if this container is present?
+     *
+     * @return
+     */
+    @Override
+    public int getPowerRating() {
+        return getLevel() / 3;
     }
 }

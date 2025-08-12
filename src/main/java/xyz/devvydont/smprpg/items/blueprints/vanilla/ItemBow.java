@@ -10,7 +10,7 @@ import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.VanillaAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +46,6 @@ public class ItemBow extends VanillaAttributeItem implements IBreakableEquipment
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.WOOD_TOOL_DURABILITY;
+        return ToolGlobals.WOOD_TOOL_DURABILITY;
     }
 }

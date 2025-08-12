@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class EchoRay extends SeaCreature<LivingEntity> {
-
     /**
      * An unsafe constructor to use to allow dynamic creation of custom entities.
      * This is specifically used as a casting hack for the CustomEntityType enum in order to dynamically create
@@ -31,4 +30,5 @@ public class EchoRay extends SeaCreature<LivingEntity> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ECHO_MEMBRANE), 2, this)
         );
     }
+
 }

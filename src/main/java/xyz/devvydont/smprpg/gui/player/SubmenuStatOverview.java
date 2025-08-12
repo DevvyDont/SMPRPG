@@ -218,7 +218,9 @@ public class SubmenuStatOverview extends MenuBase {
             case MINING_REACH -> Material.BRUSH;
             case MINING_FORTUNE -> Material.DIAMOND;
             case FARMING_FORTUNE -> Material.WHEAT;
+            case LUMBERING -> Material.IRON_AXE;
             case WOODCUTTING_FORTUNE -> Material.OAK_LOG;
+            case FISHING_SPEED -> Material.PRISMARINE;
             case FISHING_RATING -> Material.FISHING_ROD;
             case FISHING_CREATURE_CHANCE -> Material.DROWNED_SPAWN_EGG;
             case FISHING_TREASURE_CHANCE -> Material.GOLD_BLOCK;
@@ -236,6 +238,7 @@ public class SubmenuStatOverview extends MenuBase {
             case KNOCKBACK_RESISTANCE -> Material.SHIELD;
             case CRITICAL_CHANCE -> Material.GOLDEN_AXE;
             case CRITICAL_DAMAGE -> Material.DIAMOND_AXE;
+            case PROFICIENCY -> Material.EXPERIENCE_BOTTLE;
             default -> Material.BARRIER;
         };
     }

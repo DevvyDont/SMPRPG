@@ -441,6 +441,9 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
         if (!(_entity instanceof LivingEntity living))
             return;
 
+        if (living.isDead())
+            return;
+
         living.setHealth(getMaxHp());
         updateNametag();
     }
@@ -494,6 +497,9 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
     public void setHealthPercentage(double percentage) {
 
         if (!(_entity instanceof LivingEntity living))
+            return;
+
+        if (living.isDead())
             return;
 
         living.setHealth(getMaxHp() * Math.max(0, Math.min(1.0, percentage)));

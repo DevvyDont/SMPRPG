@@ -13,6 +13,20 @@
                     "type": "model",
                     "model": "tools:item/netherite_hatchet"
                 }
+            },
+            {
+                "when": "smprpg:dragonsteel_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/dragonsteel_axe"
+                }
+            },
+            {
+                "when": "smprpg:dragonsteel_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/dragonsteel_hatchet"
+                }
             }
         ]
     }

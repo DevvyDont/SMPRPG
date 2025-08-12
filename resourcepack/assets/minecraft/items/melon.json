@@ -1,0 +1,44 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "block/melon"
+        },
+        "cases": [
+            {
+                "when": "smprpg:premium_melon",
+                "model": {
+                    "type": "minecraft:composite",
+                    "models": [
+						{
+							"type": "minecraft:model",
+							"model": "block/melon"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "universal:overlay/uncommon_star"
+						}
+					]
+                }
+            },
+            {
+                "when": "smprpg:enchanted_melon",
+                "model": {
+                    "type": "minecraft:composite",
+                    "models": [
+						{
+							"type": "minecraft:model",
+							"model": "block/melon"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "universal:overlay/epic_star"
+						}
+					]
+                }
+            }
+        ]
+    }
+}

@@ -11,12 +11,13 @@ import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 
 import java.util.Collection;
 import java.util.List;
 
-public class DraconicCrystal extends CustomItemBlueprint implements ICraftable, ICustomTextured {
+public class DraconicCrystal extends CustomItemBlueprint implements ICraftable, ICustomTextured, ISellable {
 
     public DraconicCrystal(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -55,5 +56,17 @@ public class DraconicCrystal extends CustomItemBlueprint implements ICraftable, 
     @Override
     public Collection<ItemStack> unlockedBy() {
         return List.of(itemService.getCustomItem(CustomItemType.DRAGON_SCALES));
+    }
+
+    /**
+     * Given this item stack, how much should it be able to sell for?
+     * Keep in mind that the size of the stack needs to considered as well!
+     *
+     * @param item The item that can be sold.
+     * @return The worth of the item.
+     */
+    @Override
+    public int getWorth(ItemStack item) {
+        return 300_000 * item.getAmount();
     }
 }

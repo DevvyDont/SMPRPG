@@ -244,6 +244,15 @@ public enum AttributeWrapper {
                     create(".")
             )),
 
+    LUMBERING("Lumbering",
+            AttributeCategory.FORAGING,
+            AttributeType.HELPFUL,
+            merge(
+                    create("Affects the number of "),
+                    create("extra connected logs", YELLOW),
+                    create(" you can break at a time.")
+            )),
+
     WOODCUTTING_FORTUNE("Splintering",
             AttributeCategory.FORAGING,
             AttributeType.HELPFUL,
@@ -251,6 +260,15 @@ public enum AttributeWrapper {
                     create("Affects the amount of drops received from "),
                     create("cutting trees", YELLOW),
                     create(".")
+            )),
+
+    FISHING_SPEED("Fishing Speed",
+            AttributeCategory.FISHING,
+            AttributeType.HELPFUL,
+            merge(
+                    create("The speed of your "),
+                    create("fishing bobbers", BLUE),
+                    create(" while fishing.")
             )),
 
     FISHING_RATING("Reeling",
@@ -428,6 +446,15 @@ public enum AttributeWrapper {
                 create("How "),
                 create("big or small", LIGHT_PURPLE),
                 create(" you are.")
+            )),
+
+    PROFICIENCY("Proficiency",
+            AttributeCategory.SPECIAL,
+            AttributeType.HELPFUL,
+            merge(
+                    create("How much extra "),
+                    create("skill experience", GREEN),
+                    create(" you earn.")
             )),
 
     ZOMBIE_REINFORCEMENTS(Attribute.SPAWN_REINFORCEMENTS,

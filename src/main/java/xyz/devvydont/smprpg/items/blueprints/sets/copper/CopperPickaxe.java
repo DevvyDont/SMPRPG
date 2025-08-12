@@ -2,6 +2,8 @@ package xyz.devvydont.smprpg.items.blueprints.sets.copper;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Tool;
+import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -21,7 +23,7 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.crafting.builders.PickaxeRecipe;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,14 +33,11 @@ import static xyz.devvydont.smprpg.items.blueprints.vanilla.ItemPickaxe.PICKAXE_
 
 public class CopperPickaxe extends CustomAttributeItem implements IBreakableEquipment, ICraftable {
 
-    @NotNull
-    private final static Tool TOOL_COMPONENT;
-
-    static {
-        var _toolComp = of(Material.STONE_PICKAXE).getData(DataComponentTypes.TOOL);
-        assert _toolComp != null;
-        TOOL_COMPONENT = _toolComp;
-    }
+    public static final Tool TOOL_COMP = Tool.tool()
+            .defaultMiningSpeed(1.0f)
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_STONE_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_PICKAXE), 5.0f, TriState.TRUE))
+            .build();
 
     public CopperPickaxe(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -48,7 +47,6 @@ public class CopperPickaxe extends CustomAttributeItem implements IBreakableEqui
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, ItemPickaxe.getPickaxeDamage(Material.WOODEN_PICKAXE)),
-                new MultiplicativeAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, .1),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, PICKAXE_ATTACK_SPEED_DEBUFF / 2),
                 new AdditiveAttributeEntry(AttributeWrapper.MINING_FORTUNE, ItemPickaxe.getPickaxeFortune(Material.WOODEN_PICKAXE))
         );
@@ -71,7 +69,7 @@ public class CopperPickaxe extends CustomAttributeItem implements IBreakableEqui
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.COPPER_TOOL_DURABILITY;
+        return ToolGlobals.COPPER_TOOL_DURABILITY;
     }
 
     @Override
@@ -82,7 +80,7 @@ public class CopperPickaxe extends CustomAttributeItem implements IBreakableEqui
     @Override
     public void updateItemData(ItemStack itemStack) {
         super.updateItemData(itemStack);
-        itemStack.setData(DataComponentTypes.TOOL, TOOL_COMPONENT);
+        itemStack.setData(DataComponentTypes.TOOL, TOOL_COMP);
     }
 
     @Override

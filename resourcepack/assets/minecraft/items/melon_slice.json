@@ -1,0 +1,44 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/melon_slice"
+        },
+        "cases": [
+            {
+                "when": "smprpg:premium_melon_slice",
+                "model": {
+                    "type": "minecraft:composite",
+                    "models": [
+						{
+							"type": "minecraft:model",
+							"model": "item/melon_slice"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "universal:overlay/common_star"
+						}
+					]
+                }
+            },
+            {
+                "when": "smprpg:enchanted_melon_slice",
+                "model": {
+                    "type": "minecraft:composite",
+                    "models": [
+						{
+							"type": "minecraft:model",
+							"model": "item/melon_slice"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "universal:overlay/rare_star"
+						}
+					]
+                }
+            }
+        ]
+    }
+}

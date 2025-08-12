@@ -5,9 +5,7 @@ import com.google.common.collect.Multimap;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
-import xyz.devvydont.smprpg.entity.fishing.SeaBear;
-import xyz.devvydont.smprpg.entity.fishing.Shark;
-import xyz.devvydont.smprpg.entity.fishing.SnappingTurtle;
+import xyz.devvydont.smprpg.entity.fishing.*;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootBase;
 import xyz.devvydont.smprpg.fishing.loot.FishingLootType;
 import xyz.devvydont.smprpg.fishing.loot.ItemStackFishingLoot;
@@ -448,9 +446,16 @@ public class FishingRewardRegistry {
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
                         .build(),
 
-                new ItemStackFishingLoot.Builder(Material.END_CRYSTAL)
+                new ItemStackFishingLoot.Builder(CustomItemType.SUMMONING_CRYSTAL)
                         .withMinecraftExperience(50)
-                        .withSkillExperience(200)
+                        .withSkillExperience(1000)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .build(),
+
+                new ItemStackFishingLoot.Builder(CustomItemType.HEART_OF_THE_VOID)
+                        .withRequirement(FishingLootRequirement.quality(650))
+                        .withMinecraftExperience(500)
+                        .withSkillExperience(5000)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
                         .build()
         );
@@ -462,43 +467,160 @@ public class FishingRewardRegistry {
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.MINNOW)
                         .withMinecraftExperience(10)
                         .withSkillExperience(100)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SNAPPING_TURTLE)
                         .withMinecraftExperience(25)
                         .withSkillExperience(200)
+                        .withWeight(UNCOMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(SnappingTurtle.REQUIREMENT))
                         .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
-                new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_BEAR)
-                        .withMinecraftExperience(50)
-                        .withSkillExperience(500)
-                        .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
-                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
-                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
-                        .build(),
-
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.SHARK)
-                        .withMinecraftExperience(75)
-                        .withSkillExperience(600)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(400)
+                        .withWeight(UNCOMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.quality(Shark.RATING_REQUIREMENT))
                         .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
                         .build(),
 
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_HAG)
+                        .withMinecraftExperience(100)
+                        .withSkillExperience(750)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.quality(SeaHag.RATING_REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SEA_BEAR)
+                        .withMinecraftExperience(150)
+                        .withSkillExperience(1_250)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.quality(SeaBear.REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.TEMPERATE))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SCUBA_DROWNED)
+                        .withMinecraftExperience(300)
+                        .withSkillExperience(8_000)
+                        .withWeight(EPIC_WEIGHT)
+                        .withRequirement(FishingLootRequirement.quality(ScubaDrowned.RATING_REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.KRAKEN)
+                        .withMinecraftExperience(500)
+                        .withSkillExperience(17_500)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withRequirement(FishingLootRequirement.quality(Kraken.RATING_REQUIREMENT))
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.NORMAL))
+                        .withRequirement(FishingLootRequirement.biomes(BiomeChoiceRequirement.BiomeGroup.OCEAN))
+                        .build(),
+
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.CINDERLING)
                         .withMinecraftExperience(50)
                         .withSkillExperience(250)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.IMP)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(300)
+                        .withWeight(COMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(200))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.GHOST_KRAKEN)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(650)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(300))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.FIRE_GIANT)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(750)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(375))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.FLAMING_SIREN)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(7000)
+                        .withWeight(EPIC_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.biome(Biome.SOUL_SAND_VALLEY))
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.MAGMAPOTAMUS)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(2500)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(600))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.SCORCHING))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.TYPHON)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(20_000)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.LAVA))
+                        .withRequirement(FishingLootRequirement.quality(900))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.SCORCHING))
                         .build(),
 
                 new SeaCreatureFishingLoot.Builder(CustomEntityType.ECHO_RAY)
                         .withMinecraftExperience(50)
                         .withSkillExperience(500)
+                        .withWeight(COMMON_WEIGHT)
                         .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.CHORUS_SLUG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(1000)
+                        .withWeight(UNCOMMON_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.quality(400))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.SPACE_PIG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(2_500)
+                        .withWeight(RARE_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
+                        .withRequirement(FishingLootRequirement.quality(500))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.END_CUBE)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(20_000)
+                        .withWeight(EPIC_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
+                        .withRequirement(FishingLootRequirement.quality(700))
+                        .build(),
+
+                new SeaCreatureFishingLoot.Builder(CustomEntityType.NIDHOGG)
+                        .withMinecraftExperience(50)
+                        .withSkillExperience(50_000)
+                        .withWeight(LEGENDARY_WEIGHT)
+                        .withRequirement(FishingLootRequirement.rod(IFishingRod.FishingFlag.VOID))
+                        .withRequirement(FishingLootRequirement.temperature(TemperatureReading.FREEZING))
+                        .withRequirement(FishingLootRequirement.quality(1050))
                         .build()
         );
 

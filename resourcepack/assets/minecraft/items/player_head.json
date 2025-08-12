@@ -1,0 +1,22 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+			"type": "minecraft:special",
+			"base": "minecraft:item/template_skull",
+			"model": {
+			  "type": "minecraft:player_head"
+			}
+        },
+        "cases": [
+            {
+                "when": "smprpg:iridescent_lens",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/iridescent_lens"
+                }
+            }
+        ]
+    }
+}

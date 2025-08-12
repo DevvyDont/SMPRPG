@@ -11,6 +11,7 @@ import xyz.devvydont.smprpg.items.blueprints.charms.StrengthCharm;
 import xyz.devvydont.smprpg.items.blueprints.debug.*;
 import xyz.devvydont.smprpg.items.blueprints.economy.CustomItemCoin;
 import xyz.devvydont.smprpg.items.blueprints.equipment.*;
+import xyz.devvydont.smprpg.items.blueprints.equipment.EnderPack;
 import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.food.*;
 import xyz.devvydont.smprpg.items.blueprints.misc.DeathCertificate;
@@ -19,10 +20,12 @@ import xyz.devvydont.smprpg.items.blueprints.potion.ExperienceBottle;
 import xyz.devvydont.smprpg.items.blueprints.reforge.VoidRelic;
 import xyz.devvydont.smprpg.items.blueprints.resources.EmptyBlueprint;
 import xyz.devvydont.smprpg.items.blueprints.resources.SellableResource;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.DraconicCrystal;
-import xyz.devvydont.smprpg.items.blueprints.resources.crafting.WarpCatalyst;
+import xyz.devvydont.smprpg.items.blueprints.resources.crafting.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.MelonBlueprintFamily;
 import xyz.devvydont.smprpg.items.blueprints.resources.farming.SugarCaneBlueprintFamily;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.AstralFilament;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.EtherealFiber;
+import xyz.devvydont.smprpg.items.blueprints.resources.fishing.HolomokuCrest;
 import xyz.devvydont.smprpg.items.blueprints.resources.mining.*;
 import xyz.devvydont.smprpg.items.blueprints.resources.mob.*;
 import xyz.devvydont.smprpg.items.blueprints.reusable.SimpleTexturedItem;
@@ -43,6 +46,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.cobblestone.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.copper.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondBow;
 import xyz.devvydont.smprpg.items.blueprints.sets.diamond.DiamondHatchet;
+import xyz.devvydont.smprpg.items.blueprints.sets.dragonsteel.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.elderflame.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emberclad.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldBoots;
@@ -52,6 +56,10 @@ import xyz.devvydont.smprpg.items.blueprints.sets.emerald.EmeraldLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledAxe;
 import xyz.devvydont.smprpg.items.blueprints.sets.exiled.ExiledCrossbow;
 import xyz.devvydont.smprpg.items.blueprints.sets.fishing.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.holomoku.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.ruination.*;
+import xyz.devvydont.smprpg.items.blueprints.sets.fishing.xenohunter.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.forsaken.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.gold.GoldHatchet;
 import xyz.devvydont.smprpg.items.blueprints.sets.imperium.ImperiumBoots;
@@ -118,6 +126,7 @@ import xyz.devvydont.smprpg.items.blueprints.sets.snowfall.SnowfallLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.MagmaHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.SpaceHelmet;
 import xyz.devvydont.smprpg.items.blueprints.sets.special.SquidHelmet;
+import xyz.devvydont.smprpg.items.blueprints.sets.steel.*;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadBoots;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadChestplate;
 import xyz.devvydont.smprpg.items.blueprints.sets.undead.UndeadHelmet;
@@ -133,7 +142,6 @@ import xyz.devvydont.smprpg.items.blueprints.sets.valiant.ValiantLeggings;
 import xyz.devvydont.smprpg.items.blueprints.sets.wood.WoodHatchet;
 import xyz.devvydont.smprpg.items.blueprints.storage.*;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
-import xyz.devvydont.smprpg.items.tools.ItemHatchet;
 
 public enum CustomItemType {
 
@@ -315,9 +323,9 @@ public enum CustomItemType {
     WARP_CATALYST("Warp Catalyst", ItemRarity.EPIC, WarpCatalyst.class),
 
     // ELDERFLAME
-    ELDERFLAME_HELMET(    "Elderflame Helmet",     Material.NETHERITE_HELMET,    ItemRarity.LEGENDARY, ElderflameHelmet.class),
-    ELDERFLAME_CHESTPLATE("Elderflame Wings",      Material.ELYTRA,              ItemRarity.LEGENDARY, ElderflameChestplate.class),
-    ELDERFLAME_LEGGINGS(  "Elderflame Leggings",   Material.NETHERITE_LEGGINGS,  ItemRarity.LEGENDARY, ElderflameLeggings.class),
+    ELDERFLAME_HELMET(    "Elderflame Helmet",     Material.LEATHER_HELMET,    ItemRarity.LEGENDARY, ElderflameHelmet.class),
+    ELDERFLAME_CHESTPLATE("Elderflame Wings",      Material.LEATHER_CHESTPLATE,              ItemRarity.LEGENDARY, ElderflameChestplate.class),
+    ELDERFLAME_LEGGINGS(  "Elderflame Leggings",   Material.LEATHER_LEGGINGS,  ItemRarity.LEGENDARY, ElderflameLeggings.class),
     ELDERFLAME_BOOTS(     "Elderflame Boots",      Material.LEATHER_BOOTS,       ItemRarity.LEGENDARY, ElderflameBoots.class),
     ELDERFLAME_DAGGER("Elderflame Dagger", Material.DIAMOND_SWORD, ItemRarity.LEGENDARY, ElderflameDagger.class),
     VOID_RELIC("Void Relic", ItemRarity.LEGENDARY, VoidRelic.class),
@@ -353,32 +361,84 @@ public enum CustomItemType {
     PRELUDE_LEGGINGS(  "Prelude to Chaos Leggings",       Material.NETHERITE_LEGGINGS,   ItemRarity.LEGENDARY,  PreludeLeggings.class),
     PRELUDE_BOOTS(     "Prelude to Chaos Boots",          Material.NETHERITE_BOOTS,      ItemRarity.LEGENDARY,  PreludeBoots.class),
     
-    // FISHING SETS
+    // ALL AROUND FISHING
     MURKY_HELMET(    "Murky Helmet",     Material.LEATHER_HELMET,     ItemRarity.COMMON, MurkySet.class),
     MURKY_CHESTPLATE("Murky Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.COMMON, MurkySet.class),
     MURKY_LEGGINGS(  "Murky Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.COMMON, MurkySet.class),
     MURKY_BOOTS(     "Murky Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MurkySet.class),
 
-    // FISHING SETS
-    MINNOW_HELMET(    "Minnow Helmet",     Material.LEATHER_HELMET,     ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.UNCOMMON, MinnowSet.class),
-    MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.UNCOMMON, false, 4_500),
+    // SEA CREATURE FISHING
+    MINNOW_SCALE("Minnow Scale", Material.LIGHT_GRAY_DYE, ItemRarity.COMMON, false, 2_000),
+    MINNOW_HELMET(    "Minnow Helmet",     Material.LEATHER_HELMET,     ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_CHESTPLATE("Minnow Chestplate", Material.LEATHER_CHESTPLATE, ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_LEGGINGS(  "Minnow Leggings",   Material.LEATHER_LEGGINGS,   ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_BOOTS(     "Minnow Boots",      Material.LEATHER_BOOTS,      ItemRarity.COMMON, MinnowSet.class),
+    MINNOW_ROD("Minnow Rod", Material.FISHING_ROD, ItemRarity.COMMON, MinnowRod.class),
+
+    HOLOMOKU_CREST("Holomoku Crest", Material.NAUTILUS_SHELL, ItemRarity.UNCOMMON, true, HolomokuCrest.class),
+    HOLOMOKU_HELMET("Holomoku Helmet",         Material.DIAMOND_HELMET,     ItemRarity.UNCOMMON, HolomokuHelmet.class),
+    HOLOMOKU_CHESTPLATE("Holomoku Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.UNCOMMON, HolomokuChestplate.class),
+    HOLOMOKU_LEGGINGS("Holomoku Leggings",     Material.DIAMOND_LEGGINGS,   ItemRarity.UNCOMMON, HolomokuLeggings.class),
+    HOLOMOKU_BOOTS("Holomoku Boots",           Material.DIAMOND_BOOTS,      ItemRarity.UNCOMMON, HolomokuBoots.class),
+    HOLOMOKU_ROD("Holomoku Rod",               Material.FISHING_ROD,        ItemRarity.UNCOMMON, HolomokuRod.class),
+
+    HEXED_CLOTH("Hexed Cloth", Material.DRIED_KELP, ItemRarity.UNCOMMON, true, 8_000),
+    RAW_TRIDENTITE_CHUNK("Raw Tridentite Chunk", Material.CYAN_DYE, ItemRarity.RARE, true, TridentiteChunk.class),
+    TRIDENTITE("Tridentite", Material.IRON_INGOT, ItemRarity.RARE, Tridentite.class),
+    RUINATION_HELMET("Ruination Helmet",         Material.DIAMOND_HELMET,     ItemRarity.RARE, RuinationHelmet.class),
+    RUINATION_CHESTPLATE("Ruination Chestplate", Material.DIAMOND_CHESTPLATE, ItemRarity.RARE, RuinationChestplate.class),
+    RUINATION_LEGGINGS("Ruination Leggings",     Material.DIAMOND_LEGGINGS,   ItemRarity.RARE, RuinationLeggings.class),
+    RUINATION_BOOTS("Ruination Boots",           Material.DIAMOND_BOOTS,      ItemRarity.RARE, RuinationBoots.class),
+    RUINATION_ROD("Ruination Rod",               Material.FISHING_ROD,        ItemRarity.RARE, RuinationRod.class),
+
+    MIDNIGHT_HIDE("Midnight Hide", Material.LEATHER, ItemRarity.UNCOMMON, true, 15_000),
+    DEEP_SEA_BARNACLE("Deep Sea Barnacle", Material.PHANTOM_MEMBRANE, ItemRarity.UNCOMMON, true, 15_000),
+    SPOOKY_TENDRIL("Spooky Tendril", Material.RABBIT_HIDE, ItemRarity.UNCOMMON, true, 15_000),
+    BRIMSTONE_RESIN("Brimstone Resin", Material.RESIN_BRICK, ItemRarity.UNCOMMON, true, 15_000),
+    NECROPLASM("Necroplasm",           Material.BLACK_DYE, ItemRarity.RARE, true, Necroplasm.class),
+    LUCIFUGOUS_THREAD("Lucifugous Thread", Material.STRING,    ItemRarity.EPIC, true, LucifugousThread.class),
+    LUCIFUGOUS_BINDING(  "Lucifugous Binding",    Material.NETHERITE_SCRAP,     ItemRarity.EPIC, true, LucifugousBinding.class),
+    NOCTURNUM_HELMET(    "Nocturnum Helmet",     Material.NETHERITE_HELMET,     ItemRarity.EPIC, NocturnumHelmet.class),
+    NOCTURNUM_CHESTPLATE("Nocturnum Chestplate", Material.NETHERITE_CHESTPLATE, ItemRarity.EPIC, NocturnumChestplate.class),
+    NOCTURNUM_LEGGINGS(  "Nocturnum Leggings",   Material.NETHERITE_LEGGINGS,   ItemRarity.EPIC, NocturnumLeggings.class),
+    NOCTURNUM_BOOTS(     "Nocturnum Boots",      Material.LEATHER_BOOTS,        ItemRarity.EPIC, NocturnumBoots.class),
+    NOCTURNUM_ROD("Nocturnum Rod", Material.FISHING_ROD, ItemRarity.EPIC, NocturnumRod.class),
+
+    HEART_OF_THE_VOID(    "Heart of the Void",      Material.HEART_OF_THE_SEA, ItemRarity.RARE, true, 50_000),
+    DISSIPATING_SEA_SHELL("Dissipating Sea Shell",  Material.GUNPOWDER,        ItemRarity.UNCOMMON, true, 15_000),
+    ERRATIC_SLIME(        "Erratic Slime",          Material.DRAGON_BREATH,    ItemRarity.UNCOMMON, true, 15_000),
+    IMPOSSIBLE_GEOMETRY(  "Impossible Geometry",    Material.FIREWORK_STAR,    ItemRarity.RARE, ImpossibleGeometry.class),
+    FLAMEBROILED_PORKCHOP("Flame-broiled Porkchop", Material.COOKED_PORKCHOP,  ItemRarity.RARE, FlamebroiledPorkchop.class),
+    XENOMATTER(          "Xenomatter",              Material.PHANTOM_MEMBRANE, ItemRarity.EPIC, true, Xenomatter.class),
+    LATTICED_XENOMATTER( "Latticed Xenomatter",     Material.ECHO_SHARD,       ItemRarity.EPIC, true, LatticedXenomatter.class),
+    STRANGE_FIBER(        "Strange Fiber",          Material.STRING,               ItemRarity.LEGENDARY, true, StrangeFiber.class),
+    STRANGE_BINDING(      "Strange Binding",        Material.HEAVY_CORE,           ItemRarity.LEGENDARY, true, StrangeBinding.class),
+    XENOHUNTER_HELMET(    "Xenohunter Helmet",      Material.NETHERITE_HELMET,     ItemRarity.LEGENDARY, XenohunterHelmet.class),
+    XENOHUNTER_CHESTPLATE("Xenohunter Chestplate",  Material.NETHERITE_CHESTPLATE, ItemRarity.LEGENDARY, XenohunterChestplate.class),
+    XENOHUNTER_LEGGINGS(  "Xenohunter Leggings",    Material.NETHERITE_LEGGINGS,   ItemRarity.LEGENDARY, XenohunterLeggings.class),
+    XENOHUNTER_BOOTS(     "Xenohunter Boots",       Material.NETHERITE_BOOTS,      ItemRarity.LEGENDARY, XenohunterBoots.class),
+    XENOHUNTER_ROD(       "Xenohunter Rod",         Material.FISHING_ROD,          ItemRarity.LEGENDARY, XenohunterRod.class),
 
     IRON_ROD("Iron Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
-    GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, WaterRod.class),
     DIAMOND_ROD("Diamond Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, WaterRod.class),
     PRISMARINE_ROD("Prismarine Rod", Material.FISHING_ROD, ItemRarity.RARE, WaterRod.class),
+
+    GOLD_ROD("Gold Rod", Material.FISHING_ROD, ItemRarity.COMMON, LavaRod.class),
+    STEEL_ROD("Steel Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, LavaRod.class),
     NETHERITE_ROD("Netherite Rod", Material.FISHING_ROD, ItemRarity.RARE, LavaRod.class),
     SPITFIRE_ROD("Spitfire Rod", Material.FISHING_ROD, ItemRarity.EPIC, LavaRod.class),
 
-    SHARK_FIN("Shark Fin", Material.PRISMARINE_SHARD, ItemRarity.RARE, true, 5000),
-    CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.RARE, true, 7500),
-    ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 15000),
+    SHARK_FIN("Shark Fin", Material.PRISMARINE_SHARD, ItemRarity.UNCOMMON, true, 5000),
+    CINDERITE("Cinderite", Material.BLAZE_POWDER, ItemRarity.UNCOMMON, true, 7500),
+    ECHO_MEMBRANE("Echo Membrane", Material.PHANTOM_MEMBRANE, ItemRarity.UNCOMMON, true, 15000),
 
+    ENDSTONE_ROD("Endstone Rod", Material.FISHING_ROD, ItemRarity.COMMON, VoidRod.class),
+    ENDER_ROD("Ender Rod", Material.FISHING_ROD, ItemRarity.UNCOMMON, VoidRod.class),
     COMET_ROD("Comet Rod", Material.FISHING_ROD, ItemRarity.RARE, VoidRod.class),
     NEBULA_ROD("Nebula Rod", Material.FISHING_ROD, ItemRarity.EPIC, VoidRod.class),
+
+    ASTRAL_FILAMENT("Astral Filament", Material.STRING, ItemRarity.RARE, AstralFilament.class),
+    ETHEREAL_FIBER("Ethereal Fiber", Material.STRING, ItemRarity.EPIC, EtherealFiber.class),
 
     // ELYTRAS
     PHANTOM_WINGS("Phantom Wings", Material.ELYTRA, ItemRarity.RARE, PhantomWings.class),
@@ -400,16 +460,27 @@ public enum CustomItemType {
     COPPER_HATCHET("Copper Hatchet",    Material.WOODEN_AXE,    ItemRarity.COMMON,   CopperHatchet.class),
     IRON_HATCHET("Iron Hatchet",      Material.IRON_AXE,      ItemRarity.COMMON,   IronHatchet.class),
     GOLD_HATCHET("Golden Hatchet",      Material.GOLDEN_AXE,    ItemRarity.COMMON,   GoldHatchet.class),
-    DIAMOND_HATCHET("Diamond Hatchet",   Material.DIAMOND_AXE,   ItemRarity.UNCOMMON, DiamondHatchet.class),
-    NETHERITE_HATCHET("Netherite Hatchet", Material.NETHERITE_AXE, ItemRarity.RARE,     NetheriteHatchet.class),
+    DIAMOND_HATCHET("Diamond Hatchet",   Material.DIAMOND_AXE,   ItemRarity.RARE, DiamondHatchet.class),
+    NETHERITE_HATCHET("Netherite Hatchet", Material.NETHERITE_AXE, ItemRarity.EPIC,     NetheriteHatchet.class),
+
+    // STEEL TOOLS
+    STEEL_PICKAXE("Steel Pickaxe",      Material.IRON_PICKAXE,      ItemRarity.UNCOMMON,   SteelPickaxe.class),
+    STEEL_AXE("Steel Axe",              Material.IRON_AXE,          ItemRarity.UNCOMMON,   SteelAxe.class),
+    STEEL_HATCHET("Steel Hatchet",      Material.IRON_AXE,          ItemRarity.UNCOMMON,   SteelHatchet.class),
+    STEEL_SWORD("Steel Sword",          Material.IRON_SWORD,        ItemRarity.UNCOMMON,   SteelSword.class),
+    STEEL_HOE("Steel Hoe",              Material.IRON_HOE,          ItemRarity.UNCOMMON,   SteelHoe.class),
+    STEEL_SHOVEL("Steel Shovel",        Material.IRON_SHOVEL,       ItemRarity.UNCOMMON,   SteelShovel.class),
 
     // EXILED SET
     EXILED_CROSSBOW("Exiled Crossbow", Material.CROSSBOW, ItemRarity.EPIC,  ExiledCrossbow.class),
     EXILED_AXE("Exiled Axe", Material.IRON_AXE, ItemRarity.EPIC,  ExiledAxe.class),
 
     // MISC TOOLS
+    PORTACRAFTER("Port-A-Crafter", ItemRarity.UNCOMMON, Portacrafter.class),
+    ENDER_PACK("Ender Pack", ItemRarity.EPIC, EnderPack.class),
     SQUID_HELMET("Squid Helmet", ItemRarity.RARE, SquidHelmet.class),
     MAGMA_HELMET("Magma Helmet", ItemRarity.RARE, MagmaHelmet.class),
+    EVERLASTING_WATER_BUCKET("Everlasting Water Bucket", Material.WATER_BUCKET, ItemRarity.RARE, EverlastingWaterBucket.class),
     GRAPPLING_HOOK("Grappling Hook", Material.FISHING_ROD, ItemRarity.RARE, GrapplingHook.class),
     CRYSTALLIZED_SUGAR("Crystallized Sugar", Material.SUGAR, ItemRarity.RARE, true, CrystallizedSugarBlueprint.class),
 
@@ -495,8 +566,17 @@ public enum CustomItemType {
     TWILIGHT_ANGLERFISH("Twilight Angler Fish",    Material.TROPICAL_FISH, ItemRarity.LEGENDARY,     FishBlueprint.class),
     COSMIC_CUTTLEFISH("Cosmic Cuttlefish",          Material.TROPICAL_FISH, ItemRarity.LEGENDARY,     FishBlueprint.class),
 
+    COMMON_FISH_ESSENCE("Fish Essence", Material.GUNPOWDER, ItemRarity.COMMON, false, 50),
+    UNCOMMON_FISH_ESSENCE("Fish Essence", Material.SUGAR, ItemRarity.UNCOMMON, false, 300),
+    RARE_FISH_ESSENCE("Fish Essence", Material.BLUE_DYE, ItemRarity.RARE, false, 4_000),
+    EPIC_FISH_ESSENCE("Fish Essence", Material.REDSTONE, ItemRarity.EPIC, false, 20_000),
+    LEGENDARY_FISH_ESSENCE("Fish Essence", Material.GLOWSTONE_DUST, ItemRarity.LEGENDARY, false, 100_000),
+    MYTHIC_FISH_ESSENCE("Fish Essence", Material.AXOLOTL_SPAWN_EGG, ItemRarity.MYTHIC, true, 500_000),
+    DIVINE_FISH_ESSENCE("Fish Essence", Material.ALLAY_SPAWN_EGG, ItemRarity.DIVINE, true, 2_500_000),
+    TRANSCENDENT_FISH_ESSENCE("Fish Essence", Material.MAGMA_CUBE_SPAWN_EGG, ItemRarity.TRANSCENDENT, true, 10_000_000),
+
     // FISH STUFF
-    CAVIAR("Caviar", Material.PHANTOM_MEMBRANE, ItemRarity.EPIC, true, 25_000),
+    CAVIAR("Caviar", Material.PHANTOM_MEMBRANE, ItemRarity.EPIC, true, Caviar.class),
 
     // FOOD
     STALE_BREAD("Stale Bread", Material.BREAD, ItemRarity.COMMON, StaleBread.class),
@@ -686,12 +766,15 @@ public enum CustomItemType {
     JUPITER_CRYSTAL("Jupiter Crystal", Material.PRISMARINE_CRYSTALS, ItemRarity.RARE, true, 1000),
     JUPITERS_ARTIFACT("Jupiter's Artifact", ItemRarity.EPIC, JupiterArtifact.class),
     IRIDESCENT_LENS("Iridescent Lens", ItemRarity.LEGENDARY, IridescentLens.class),
+    PREDATOR_TOOTH("Predator Tooth", ItemRarity.LEGENDARY, PredatorTooth.class),
     HYPNOTIC_EYE("Hypnotic Eye", ItemRarity.LEGENDARY, HypnoticEye.class),
 
     MOSSY_SKULL("Mossy Skull", ItemRarity.EPIC, MossySkull.class),
     GILDED_SKULL("Gilded Skull", ItemRarity.LEGENDARY, GildedSkull.class),
 
     // DRAGON
+    STEEL_INGOT("Steel Ingot", Material.IRON_INGOT, ItemRarity.UNCOMMON, SteelIngot.class),
+    DRAGONSTEEL_INGOT("Dragonsteel Ingot", Material.IRON_INGOT, ItemRarity.EPIC, DragonsteelIngot.class),
     DRAGON_SCALES(   "Dragon Scales",    Material.PHANTOM_MEMBRANE, ItemRarity.RARE, true, 50_000),
     DRACONIC_CRYSTAL("Draconic Crystal", ItemRarity.EPIC, DraconicCrystal.class),
     TRANSMISSION_WAND("Transmission Wand", Material.PRISMARINE_SHARD, ItemRarity.EPIC, TransmissionWand.class),
@@ -701,6 +784,14 @@ public enum CustomItemType {
     VOID_SHARD("Void Shard", Material.ECHO_SHARD, ItemRarity.EPIC, MagicMirrorShard.class),
 
     SUMMONING_CRYSTAL("Summoning Crystal", Material.END_CRYSTAL, ItemRarity.EPIC, true, 50_000),
+
+    // DRAGONSTEEL TOOLS
+    DRAGONSTEEL_PICKAXE("Dragonsteel Pickaxe",      Material.NETHERITE_PICKAXE,      ItemRarity.LEGENDARY,   DragonsteelPickaxe.class),
+    DRAGONSTEEL_AXE("Dragonsteel Axe",              Material.NETHERITE_AXE,          ItemRarity.LEGENDARY,   DragonsteelAxe.class),
+    DRAGONSTEEL_HATCHET("Dragonsteel Hatchet",      Material.NETHERITE_AXE,          ItemRarity.LEGENDARY,   DragonsteelHatchet.class),
+    DRAGONSTEEL_SWORD("Dragonsteel Sword",          Material.NETHERITE_SWORD,        ItemRarity.LEGENDARY,   DragonsteelSword.class),
+    DRAGONSTEEL_HOE("Dragonsteel Hoe",              Material.NETHERITE_HOE,          ItemRarity.LEGENDARY,   DragonsteelHoe.class),
+    DRAGONSTEEL_SHOVEL("Dragonsteel Shovel",        Material.NETHERITE_SHOVEL,       ItemRarity.LEGENDARY,   DragonsteelShovel.class),
 
     // PASSIVE MOBS
     PREMIUM_PORKCHOP("Premium Porkchop", Material.COOKED_PORKCHOP, ItemRarity.UNCOMMON, true, PorkchopFamilyBlueprint.class),

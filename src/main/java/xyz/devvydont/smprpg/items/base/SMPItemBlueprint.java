@@ -360,4 +360,12 @@ public abstract class SMPItemBlueprint {
         itemStack.lore(itemService.renderItemStackLore(itemStack));
     }
 
+    /**
+     * Check if this blueprint is a vanilla wrapper. This is the same as checking if this is an instance of
+     * {@link VanillaItemBlueprint}.
+     * @return true if this is a vanilla item wrapper.
+     */
+    public boolean isVanilla() {
+        return !isCustom();
+    }
 }

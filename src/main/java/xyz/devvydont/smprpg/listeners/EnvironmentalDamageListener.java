@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -10,9 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
-import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
 
 /**
@@ -181,18 +178,30 @@ public class EnvironmentalDamageListener extends ToggleableListener {
      * Since entities can take lots of damage very rapidly, we need to add some iframes to certain damage events so
      * they don't take an absurd amount of damage very quickly.
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onTakeRapidEnvironmentalDamage(EntityDamageEvent event) {
 
         if (!(event.getEntity() instanceof LivingEntity living))
             return;
 
         // If this is a boss, don't do it
-        if (SMPRPG.getService(EntityService.class).getEntityInstance(living) instanceof BossInstance)
+        var wrapper = SMPRPG.getService(EntityService.class).getEntityInstance(living);
+        if (wrapper instanceof BossInstance)
             return;
 
-        if (shouldGiveIFrames(event.getCause()))
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> living.setNoDamageTicks(20), 0);
+        if (shouldGiveIFrames(event.getCause())) {
+            living.setNoDamageTicks(20);
+            if (living.getMaximumNoDamageTicks() == 0)
+                living.setMaximumNoDamageTicks(20);
+        }
+
+        if (!shouldGiveIFrames(event.getCause())) {
+            var armor = living.getAttribute(Attribute.ARMOR);
+            var iframes = 0;
+            if (armor != null)
+                iframes += (int) (armor.getValue() * 2);
+            living.setMaximumNoDamageTicks(wrapper.getInvincibilityTicks() + iframes);
+        }
     }
 
     /**

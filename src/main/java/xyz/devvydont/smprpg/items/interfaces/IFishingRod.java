@@ -1,7 +1,9 @@
 package xyz.devvydont.smprpg.items.interfaces;
 
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Material;
 import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
+import xyz.devvydont.smprpg.gui.enchantments.EnchantmentSortMode;
 
 import java.util.Set;
 
@@ -11,13 +13,23 @@ import java.util.Set;
  */
 public interface IFishingRod {
 
-    int CREATURE_MULTIPLIER = 3;
-
     enum FishingFlag {
         NORMAL("Water", SeaCreature.NAME_COLOR),
         LAVA("Lava", TextColor.color(255, 100, 28)),
         VOID("Void", TextColor.color(69, 56, 94)),
         ;
+
+        /**
+         * Retrieve the next fishing flag after this one. If this is the last, use the first one.
+         * Useful for GUIs.
+         * @return A new fishing flag enum.
+         */
+        public FishingFlag next() {
+            int desiredFlag = this.ordinal() + 1;
+            if (desiredFlag >= FishingFlag.values().length)
+                desiredFlag = 0;
+            return FishingFlag.values()[desiredFlag];
+        }
 
         /**
          * Fishing rods can be complex. Return a proper prefix for the rod when displaying an item tag.
@@ -64,6 +76,19 @@ public interface IFishingRod {
             Display = display;
             Color = color;
         }
+
+        /**
+         * Get the material to display in GUIs.
+         * @return The material.
+         */
+        public Material getMaterial() {
+            return switch (this) {
+                case NORMAL -> Material.WATER_BUCKET;
+                case LAVA -> Material.LAVA_BUCKET;
+                case VOID -> Material.SCULK;
+            };
+        }
+
     }
 
     /**

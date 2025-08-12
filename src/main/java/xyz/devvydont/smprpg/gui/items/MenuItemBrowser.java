@@ -16,7 +16,9 @@ import xyz.devvydont.smprpg.gui.base.MenuBase;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.base.VanillaItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.ISmeltable;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.services.RecipeService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.ArrayList;
@@ -138,7 +140,7 @@ public class MenuItemBrowser extends MenuBase {
 
         // Do vanilla items too.
         for (var material : Material.values()) {
-            if (material.isLegacy() || !material.isItem())
+            if (material.isLegacy() || !material.isItem() || material.equals(Material.AIR))
                 continue;
 
             var simpleName = material.name().toLowerCase().replace(" ", "").replace("_", "").replace("-", "");
@@ -173,27 +175,15 @@ public class MenuItemBrowser extends MenuBase {
             return;
         }
 
-        var blueprint = SMPRPG.getService(ItemService.class).getBlueprint(itemStack);
-
-        // This is a hack for vanilla items. This probably won't work clearly for items with multiple recipes tbh.
-        if (blueprint instanceof VanillaItemBlueprint vanilla) {
-             var recipes = Bukkit.getRecipesFor(ItemStack.of(vanilla.getMaterial()));
-             for (var recipe : recipes)
-                 if (recipe instanceof CraftingRecipe crafting) {
-                     this.openSubMenu(new MenuRecipeViewer(player, this, ICraftable.withOnlyRecipe(crafting), itemStack));
-                     return;
-                 }
-        }
-
-        // Currently, we don't do anything unless the item is craftable, but that is subject to change.
-        // When it does change, that logic goes here.
-        if (!(blueprint instanceof ICraftable craftable)) {
+        // Get a clean version of the item w/o modified lore so that we can properly query recipes.
+        var clean = ItemService.blueprint(itemStack);
+        var recipes = RecipeService.getRecipesFor(clean.generate());
+        if (recipes.isEmpty() || itemStack.getType().equals(Material.AIR)) {
             this.playInvalidAnimation();
             return;
         }
 
-        // Open up a submenu for the crafting recipe.
-        this.openSubMenu(new MenuRecipeViewer(player, this, craftable, itemStack));
+        new MenuRecipeViewer(this.player, this, recipes, itemStack).openMenu();
     }
 
     /**
@@ -241,7 +231,7 @@ public class MenuItemBrowser extends MenuBase {
             lore.addFirst(ComponentUtils.EMPTY);
 
             // If this ingredient can be crafted, insert the craftable tooltip.
-            if (blueprint instanceof ICraftable)
+            if (blueprint instanceof ICraftable || blueprint instanceof ISmeltable)
                 item.editMeta(meta -> meta.lore(lore));
 
             this.setButton(slot, item, event -> this.handleClick(event, item));

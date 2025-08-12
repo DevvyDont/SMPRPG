@@ -2,6 +2,7 @@ package xyz.devvydont.smprpg.fishing.gui;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -18,7 +19,10 @@ import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.fishing.utils.FishingGallery;
 import xyz.devvydont.smprpg.gui.InterfaceUtil;
 import xyz.devvydont.smprpg.gui.base.MenuBase;
+import xyz.devvydont.smprpg.gui.enchantments.EnchantmentSortMode;
 import xyz.devvydont.smprpg.items.ItemRarity;
+import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
+import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
@@ -27,6 +31,8 @@ import xyz.devvydont.smprpg.util.persistence.PDCAdapters;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static xyz.devvydont.smprpg.util.formatting.ComponentUtils.*;
@@ -43,11 +49,39 @@ public class FishingPoolViewerMenu extends MenuBase {
     private FishingLootType type;
     private int offset;  // The offset is how far to "skip" when displaying items. Used for pagination.
 
+    private IFishingRod.FishingFlag flag = IFishingRod.FishingFlag.NORMAL;
+
     public FishingPoolViewerMenu(@NotNull Player player, MenuBase parentMenu, FishingLootType type) {
         super(player, 6, parentMenu);
         this.type = type;
         this.sounds.setMenuClose(Sound.ITEM_BUCKET_EMPTY, 1, .5f);
+
+        // Before attempting to render for the first time, attempt to automatically work out what fishing rod they
+        // are holding. Not 100% sure how I feel about this behavior, but it seems like it's convenient.
+        predictHeldFishingType();
+
         render();
+    }
+
+    /**
+     * Predicts what fishing flag the user probably wants to query when we first open the menu.
+     * Modifies the current fishing mode instance variable.
+     */
+    private void predictHeldFishingType() {
+
+        // As a fallback, use normal fishing.
+        flag = IFishingRod.FishingFlag.NORMAL;
+        // Check both hands, but check offhand first since it is lower priority.
+        var offhand = player.getInventory().getItemInOffHand();
+        if (!offhand.getType().equals(Material.AIR) && ItemService.blueprint(offhand) instanceof IFishingRod rod){
+            var first = rod.getFishingFlags().stream().findFirst();
+            first.ifPresent(fishingFlag -> flag = fishingFlag);
+        }
+        var main = player.getInventory().getItemInMainHand();
+        if (!main.getType().equals(Material.AIR) && ItemService.blueprint(main) instanceof IFishingRod rod){
+            var first = rod.getFishingFlags().stream().findFirst();
+            first.ifPresent(fishingFlag -> flag = fishingFlag);
+        }
     }
 
     /**
@@ -71,6 +105,20 @@ public class FishingPoolViewerMenu extends MenuBase {
 
             this.setSlot(i, generateLootDisplay(lootIterator.next()));
         }
+
+        // Mode.
+        this.setButton(50, generateModeButton(), e -> {
+            this.setFlag(this.getFlag().next());
+
+            // Play a cute sound based on the type.
+            switch (getFlag()) {
+                case NORMAL -> player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_SPLASH, 1, 1.5f);
+                case LAVA -> player.playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 1, .75f);
+                case VOID -> player.playSound(player.getLocation(), Sound.ENTITY_WARDEN_TENDRIL_CLICKS, 1, 1.5f);
+            }
+
+            render();
+        });
 
         // Back + pagination.
         this.setBackButton(49);
@@ -135,7 +183,7 @@ public class FishingPoolViewerMenu extends MenuBase {
             name = create("???", RED);
 
         // Various calculator utilities that provide useful information.
-        var ctx = new FishingContext(this.player, null, this.player.getLocation(), null);
+        var ctx = new FishingContext(this.player, null, this.player.getLocation(), Collections.singleton(flag));
         var lootPool = new FishingLootPool(ctx, this.getType());
         var selector = new FishingLootTypeSelector(ctx);
         var chance = lootPool.getLootChance(loot);
@@ -171,6 +219,32 @@ public class FishingPoolViewerMenu extends MenuBase {
         lore.add(create("Affected by your current attributes and location!", DARK_GRAY));
 
         item.lore(ComponentUtils.cleanItalics(lore));
+        item.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, chance > 0);
+
+        return item;
+    }
+
+    /**
+     * Generates the button responsible for displaying the current flag mode.
+     * @return An ItemStack representing the button used for determining fishing flag behavior.
+     */
+    private @NotNull ItemStack generateModeButton() {
+
+        ItemStack item = createNamedItem(flag.getMaterial(), ComponentUtils.create("Change Fishing Mode", NamedTextColor.GOLD));
+        List<Component> lore = new ArrayList<>();
+        lore.add(ComponentUtils.EMPTY);
+        lore.add(ComponentUtils.merge(ComponentUtils.create("Current Fishing Mode: "), ComponentUtils.create(flag.Display, flag.Color)));
+        lore.add(ComponentUtils.EMPTY);
+
+        for (var mode : IFishingRod.FishingFlag.values())
+            lore.add(ComponentUtils.create("> " + mode.Display, mode == flag ? NamedTextColor.GREEN : NamedTextColor.DARK_GRAY));
+
+        lore.add(ComponentUtils.EMPTY);
+        lore.add(ComponentUtils.create("Click to cycle through different fishing modes!"));
+
+        item.editMeta(meta -> {
+            meta.lore(ComponentUtils.cleanItalics(lore));
+        });
         return item;
     }
 
@@ -228,5 +302,13 @@ public class FishingPoolViewerMenu extends MenuBase {
     @Override
     protected void handleInventoryOpened(InventoryOpenEvent event) {
         event.titleOverride(Component.text(MinecraftStringUtils.getTitledString(this.type.name() + " Information")));
+    }
+
+    public IFishingRod.FishingFlag getFlag() {
+        return flag;
+    }
+
+    public void setFlag(IFishingRod.FishingFlag flag) {
+        this.flag = flag;
     }
 }

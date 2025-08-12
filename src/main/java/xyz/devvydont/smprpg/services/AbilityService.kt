@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.services
 
+import xyz.devvydont.smprpg.ability.handlers.passive.AbyssalAnnihilationListener
+import xyz.devvydont.smprpg.ability.handlers.passive.AnglerListener
 import xyz.devvydont.smprpg.ability.listeners.HotShotProjectileCollideListener
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 
@@ -18,8 +20,11 @@ class AbilityService : IService {
      */
     @Throws(RuntimeException::class)
     override fun setup() {
-        listeners.add(HotShotProjectileCollideListener()) // Allows the Hot Shot ability to function.
-        for (listener in listeners) listener.start()
+        listeners.add(HotShotProjectileCollideListener())
+        listeners.add(AnglerListener());
+        listeners.add(AbyssalAnnihilationListener());
+        for (listener in listeners)
+            listener.start()
     }
 
     /**

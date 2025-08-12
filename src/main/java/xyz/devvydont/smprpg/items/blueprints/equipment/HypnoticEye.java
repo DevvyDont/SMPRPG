@@ -37,12 +37,12 @@ public class HypnoticEye extends ReforgeStone implements ICustomTextured, ISella
      */
     @Override
     public int getWorth(ItemStack item) {
-        return 75_000 * item.getAmount();
+        return 125_000 * item.getAmount();
     }
 
     @Override
     public ReforgeType getReforgeType() {
-        return ReforgeType.ALLURING;
+        return ReforgeType.SIRENIC;
     }
 
     @Override

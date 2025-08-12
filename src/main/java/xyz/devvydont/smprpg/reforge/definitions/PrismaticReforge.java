@@ -22,9 +22,10 @@ public class PrismaticReforge extends ReforgeBase {
     @Override
     public Collection<AttributeEntry> getAttributeModifiersWithRarity(ItemRarity rarity) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 50 + rarity.ordinal() * 10),
+                AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 20 + rarity.ordinal() * 10),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 1 + rarity.ordinal() * .5),
-                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, 1 + rarity.ordinal() * .5)
+                AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .5 + rarity.ordinal() * .25),
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 25 + rarity.ordinal() * 5)
         );
     }
 

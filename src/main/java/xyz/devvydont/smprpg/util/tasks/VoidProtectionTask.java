@@ -19,14 +19,14 @@ public class VoidProtectionTask extends BukkitRunnable {
      */
     public static void checkAndFloatAboveVoid(Item item) {
 
-        if (!SMPRPG.getService(DropsService.class).hasOwner(item))
+        if (!item.isInvulnerable())
             return;
 
         // If this item spawned in the void in the end, lets make them float at y=1
         if (item.getLocation().getY() < -5) {
             // Turn off gravity, teleport it to y=1, give it no y velocity
             item.setGravity(false);
-            item.teleport(item.getLocation().set(item.getLocation().getX(), 1, item.getLocation().getZ()));
+            item.teleport(item.getLocation().set(item.getLocation().getX(), 0, item.getLocation().getZ()));
             item.setVelocity(item.getVelocity().setY(0));
         }
     }

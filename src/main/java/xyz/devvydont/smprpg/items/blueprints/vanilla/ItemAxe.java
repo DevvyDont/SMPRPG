@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.VanillaAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,13 +45,21 @@ public class ItemAxe extends VanillaAttributeItem implements IBreakableEquipment
 
     public static int getAxeRating(Material material) {
         return switch (material) {
-            case NETHERITE_AXE -> ToolsUtil.NETHERITE_TOOL_POWER;
-            case DIAMOND_AXE -> ToolsUtil.DIAMOND_TOOL_POWER;
-            case GOLDEN_AXE -> ToolsUtil.GOLD_TOOL_POWER;
-            case IRON_AXE -> ToolsUtil.IRON_TOOL_POWER;
-            case STONE_AXE -> ToolsUtil.STONE_TOOL_POWER;
-            case WOODEN_AXE -> ToolsUtil.WOOD_TOOL_POWER;
+            case NETHERITE_AXE -> ToolGlobals.NETHERITE_TOOL_POWER;
+            case DIAMOND_AXE -> ToolGlobals.DIAMOND_TOOL_POWER;
+            case GOLDEN_AXE -> ToolGlobals.GOLD_TOOL_POWER;
+            case IRON_AXE -> ToolGlobals.IRON_TOOL_POWER;
+            case STONE_AXE -> ToolGlobals.STONE_TOOL_POWER;
+            case WOODEN_AXE -> ToolGlobals.WOOD_TOOL_POWER;
             default -> 1;
+        };
+    }
+
+    public static int getAxeLumbering(Material material) {
+        return switch (material) {
+            case NETHERITE_AXE -> 2;
+            case DIAMOND_AXE -> 1;
+            default -> 0;
         };
     }
 
@@ -71,7 +79,8 @@ public class ItemAxe extends VanillaAttributeItem implements IBreakableEquipment
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.STRENGTH, getAxeDamage(material)),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, AXE_ATTACK_SPEED_DEBUFF),
-                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, getAxeFortune(material))
+                new AdditiveAttributeEntry(AttributeWrapper.WOODCUTTING_FORTUNE, getAxeFortune(material)),
+                new AdditiveAttributeEntry(AttributeWrapper.LUMBERING, getAxeLumbering(material))
         );
     }
 
@@ -88,12 +97,12 @@ public class ItemAxe extends VanillaAttributeItem implements IBreakableEquipment
     @Override
     public int getMaxDurability() {
         return switch (material) {
-            case NETHERITE_AXE -> ToolsUtil.NETHERITE_TOOL_DURABILITY;
-            case DIAMOND_AXE -> ToolsUtil.DIAMOND_TOOL_DURABILITY;
-            case GOLDEN_AXE -> ToolsUtil.GOLD_TOOL_DURABILITY;
-            case IRON_AXE -> ToolsUtil.IRON_TOOL_DURABILITY;
-            case STONE_AXE -> ToolsUtil.STONE_TOOL_DURABILITY;
-            case WOODEN_AXE -> ToolsUtil.WOOD_TOOL_DURABILITY;
+            case NETHERITE_AXE -> ToolGlobals.NETHERITE_TOOL_DURABILITY;
+            case DIAMOND_AXE -> ToolGlobals.DIAMOND_TOOL_DURABILITY;
+            case GOLDEN_AXE -> ToolGlobals.GOLD_TOOL_DURABILITY;
+            case IRON_AXE -> ToolGlobals.IRON_TOOL_DURABILITY;
+            case STONE_AXE -> ToolGlobals.STONE_TOOL_DURABILITY;
+            case WOODEN_AXE -> ToolGlobals.WOOD_TOOL_DURABILITY;
             default -> 50_000;
         };
     }

@@ -1,5 +1,8 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.iron;
 
+import io.papermc.paper.datacomponent.item.Tool;
+import io.papermc.paper.registry.keys.tags.BlockTypeTagKeys;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
@@ -14,12 +17,19 @@ import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.tools.ItemHatchet;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.items.ToolsUtil;
+import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
 import java.util.Collection;
 import java.util.List;
 
 public class IronHatchet extends ItemHatchet implements ICraftable, IBreakableEquipment {
+
+    public static final Tool TOOL_COMP = Tool.tool()
+            .defaultMiningSpeed(1.0f)
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.INCORRECT_FOR_IRON_TOOL), 1.0f, TriState.FALSE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_AXE), 6.0f, TriState.TRUE))
+            .addRule(Tool.rule(ToolGlobals.blockRegistry.getTag(BlockTypeTagKeys.MINEABLE_HOE), 4.5f, TriState.TRUE))
+            .build();
 
     public IronHatchet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -34,7 +44,7 @@ public class IronHatchet extends ItemHatchet implements ICraftable, IBreakableEq
     public double getHatchetDamage() { return ItemSword.getSwordDamage(Material.IRON_SWORD) - 7; }
 
     @Override
-    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.IRON_PICKAXE); }
+    public double getHatchetFortune() { return ItemPickaxe.getPickaxeFortune(Material.IRON_PICKAXE) * 0.8; }
 
     @Override
     public NamespacedKey getRecipeKey() {
@@ -62,7 +72,7 @@ public class IronHatchet extends ItemHatchet implements ICraftable, IBreakableEq
 
     @Override
     public int getMaxDurability() {
-        return ToolsUtil.IRON_TOOL_DURABILITY;
+        return ToolGlobals.IRON_TOOL_DURABILITY;
     }
 
 }

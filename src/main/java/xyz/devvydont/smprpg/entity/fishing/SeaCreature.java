@@ -61,7 +61,7 @@ public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T>
 
     @Override
     public SkillExperienceReward generateSkillExperienceReward() {
-        return SkillExperienceReward.of(SkillType.FISHING, (int) (getLevel() * 250 * getSkillExperienceMultiplier()));
+        return SkillExperienceReward.of(SkillType.FISHING, (int) (getLevel() * 20 * getSkillExperienceMultiplier()));
     }
 
     /**
@@ -86,30 +86,6 @@ public class SeaCreature<T extends LivingEntity> extends CustomEntityInstance<T>
             team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(_team);
         team.color(NamedTextColor.AQUA);
         return team;
-    }
-
-    /**
-     * When a sea creature takes damage from a fishing rod, 3x the damage.
-     */
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onTakeDamage(CustomEntityDamageByEntityEvent event) {
-
-        if (!event.getDamaged().equals(this._entity))
-            return;
-
-        if (!(event.getDealer() instanceof LivingEntity dealer))
-            return;
-
-        var equipment = dealer.getEquipment();
-        if (equipment == null)
-            return;
-
-        var mainItem = equipment.getItemInMainHand();
-        if (mainItem.getType() == Material.AIR)
-            return;
-
-        if (ItemService.blueprint(mainItem) instanceof IFishingRod)
-            event.multiplyDamage(IFishingRod.CREATURE_MULTIPLIER);
     }
 
     /**

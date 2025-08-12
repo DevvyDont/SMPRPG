@@ -1,0 +1,26 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/iron_ingot"
+        },
+        "cases": [
+            {
+                "when": "smprpg:steel_ingot",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/steel_ingot"
+                }
+            },
+            {
+                "when": "smprpg:dragonsteel_ingot",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/dragonsteel_ingot"
+                }
+            }
+        ]
+    }
+}

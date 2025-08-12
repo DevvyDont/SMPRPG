@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "swords:item/mystbloom_kunai"
                 }
+            },
+            {
+                "when": "smprpg:steel_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/steel_sword"
+                }
             }
         ]
     }

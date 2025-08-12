@@ -39,7 +39,7 @@ public class AbyssalInstinctEnchantment extends CustomEnchantment implements Att
                 ComponentUtils.create("Increases "),
                 ComponentUtils.create(AttributeWrapper.FISHING_CREATURE_CHANCE.DisplayName, SeaCreature.NAME_COLOR),
                 ComponentUtils.create(" rating by "),
-                ComponentUtils.create(String.format("+%.2f", getTreasureChance(getLevel())), NamedTextColor.GREEN)
+                ComponentUtils.create(String.format("+%d", (int)(getTreasureChance(getLevel())*2)), NamedTextColor.GREEN)
         );
     }
 
@@ -87,7 +87,7 @@ public class AbyssalInstinctEnchantment extends CustomEnchantment implements Att
     @Override
     public Collection<AttributeEntry> getHeldAttributes() {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.FISHING_CREATURE_CHANCE, getTreasureChance(getLevel()))
+                new AdditiveAttributeEntry(AttributeWrapper.FISHING_CREATURE_CHANCE, getTreasureChance(getLevel())*2)
         );
     }
 
