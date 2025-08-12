@@ -617,7 +617,8 @@ class ItemService : IService, Listener {
     }
 
     fun getReforge(item: ItemStack?): ReforgeBase? {
-        if (item == null || item.type == Material.AIR || !item.hasItemMeta()) return null
+        if (item == null || item.type == Material.AIR || !item.hasItemMeta())
+            return null
 
         return getReforge(item.itemMeta)
     }

@@ -70,7 +70,7 @@ public class MenuReforgeBrowser extends MenuBase {
         lore.addAll(reforge.formatAttributeModifiersWithRarity(ItemRarity.RARE));
         lore.add(ComponentUtils.EMPTY);
         lore.add(ComponentUtils.create("Valid Equipment:", NamedTextColor.BLUE));
-        for (ItemClassification clazz : type.getAllowedItems())
+        for (ItemClassification clazz : type.allowedItems)
             lore.add(ComponentUtils.create("- " + MinecraftStringUtils.getTitledString(clazz.name())));
         button.lore(ComponentUtils.cleanItalics(lore));
         return button;

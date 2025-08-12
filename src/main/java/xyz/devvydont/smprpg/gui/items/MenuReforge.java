@@ -86,7 +86,7 @@ public class MenuReforge extends MenuBase {
         var blueprint = SMPRPG.getService(ItemService.class).getBlueprint(input);
 
         // Is this item not able to receive a reforge?
-        if (getRandomReforge(blueprint.getItemClassification(), blueprint.getReforgeType(input)).getType().equals(ReforgeType.ERROR)) {
+        if (getRandomReforge(blueprint.getItemClassification(), blueprint.getReforgeType(input)).type.equals(ReforgeType.ERROR)) {
             lore.add(ComponentUtils.EMPTY);
             lore.add(ComponentUtils.create("This item cannot be reforged!", NamedTextColor.RED));
             anvil.editMeta(meta -> {
@@ -178,7 +178,7 @@ public class MenuReforge extends MenuBase {
         // Analyze the current reforge on the gear and determine if we can even roll another reforge without erroring
         ReforgeType currentReforgeType = blueprint.getReforgeType(item);
         ReforgeBase newReforge = getRandomReforge(blueprint.getItemClassification(), currentReforgeType);
-        boolean success = !newReforge.getType().equals(ReforgeType.ERROR);
+        boolean success = !newReforge.type.equals(ReforgeType.ERROR);
 
         // Determine if we can afford this reforge
         int cost = getReforgeCost(blueprint.getRarity(item));
