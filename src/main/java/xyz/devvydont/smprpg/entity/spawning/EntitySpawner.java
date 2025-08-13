@@ -327,6 +327,13 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
 
     @Override
     public void cleanup() {
+
+        for (var entity : spawned.entrySet()) {
+            var bukkitEntity = Bukkit.getEntity(entity.getKey());
+            if (bukkitEntity != null)
+                bukkitEntity.remove();
+        }
+
         if (tickTask != null)
             tickTask.cancel();
 

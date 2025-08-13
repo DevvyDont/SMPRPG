@@ -76,7 +76,7 @@ public class ItemStackFishingLoot extends FishingLootBase {
     }
 
     @Override
-    public Material getDisplayMaterial() {
+    public @NotNull Material getDisplayMaterial() {
 
         // Try and query multiple aspects of the item first, but use its raw material as a fallback always.
         var key = this.item.getData(DataComponentTypes.ITEM_MODEL);

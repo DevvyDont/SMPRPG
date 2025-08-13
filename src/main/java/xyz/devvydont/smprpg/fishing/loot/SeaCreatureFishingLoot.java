@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
@@ -61,7 +62,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
     }
 
     @Override
-    public Material getDisplayMaterial() {
+    public @NotNull Material getDisplayMaterial() {
         return customEntityType.getDisplayMaterial();
     }
 
