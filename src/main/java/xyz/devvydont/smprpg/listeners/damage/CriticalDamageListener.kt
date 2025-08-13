@@ -58,7 +58,7 @@ class CriticalDamageListener : ToggleableListener() {
 
         if (event.projectile !is AbstractArrow)
             return
-        val arrow = event.entity as AbstractArrow
+        val arrow = event.projectile as AbstractArrow
 
         // Do a crit chance check.
         val crit = instance.getAttribute(event.getEntity(), AttributeWrapper.CRITICAL_CHANCE)
