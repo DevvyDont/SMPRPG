@@ -206,7 +206,7 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
     @EventHandler
     public void onDamageReceivedWhileCrystalsActive(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDamaged().equals(_entity)))
+        if (!(event.damaged.equals(_entity)))
             return;
 
         var dragonBattle = _entity.getWorld().getEnderDragonBattle();

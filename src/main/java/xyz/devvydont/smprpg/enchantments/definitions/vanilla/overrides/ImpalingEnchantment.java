@@ -81,14 +81,14 @@ public class ImpalingEnchantment extends VanillaEnchantment implements Listener 
     @EventHandler
     public void onWaterDamage(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity dealer))
+        if (!(event.dealer instanceof LivingEntity dealer))
             return;
 
-        if (!(event.getDamaged() instanceof LivingEntity damaged))
+        if (!(event.damaged instanceof LivingEntity damaged))
             return;
 
         // Check if the damaged entity is either a sea creature or wet.
-        var valid = event.getDamaged().isInWater() || event.getDamaged().isInRain();
+        var valid = event.damaged.isInWater() || event.damaged.isInRain();
         if (SMPRPG.getService(EntityService.class).getEntityInstance(damaged) instanceof SeaCreature)
             valid = true;
 

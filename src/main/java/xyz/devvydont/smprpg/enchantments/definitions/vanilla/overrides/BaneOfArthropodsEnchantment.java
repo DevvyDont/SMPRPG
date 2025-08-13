@@ -90,11 +90,11 @@ public class BaneOfArthropodsEnchantment extends VanillaEnchantment implements L
     public void onDamageArthropod(CustomEntityDamageByEntityEvent event) {
 
         // Skip non arthropods
-        if (!isArthropod(event.getDamaged().getType()))
+        if (!isArthropod(event.damaged.getType()))
             return;
 
         // Skip entity if they aren't alive
-        if (!(event.getDealer() instanceof LivingEntity dealer))
+        if (!(event.dealer instanceof LivingEntity dealer))
             return;
 
         int level = EnchantmentUtil.getHoldingEnchantLevel(getEnchantment(), EquipmentSlotGroup.HAND, dealer.getEquipment());

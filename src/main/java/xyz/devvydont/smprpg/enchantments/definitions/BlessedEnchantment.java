@@ -85,11 +85,11 @@ public class BlessedEnchantment extends CustomEnchantment implements Listener {
     public void onDamageDealtInNether(CustomEntityDamageByEntityEvent event) {
 
         // Skip if not in nether
-        if (!event.getDamaged().getWorld().getEnvironment().equals(World.Environment.NETHER))
+        if (!event.damaged.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 
         // Skip entity if they aren't alive
-        if (!(event.getDealer() instanceof LivingEntity dealer))
+        if (!(event.dealer instanceof LivingEntity dealer))
             return;
 
         int level = EnchantmentUtil.getHoldingEnchantLevel(getEnchantment(), EquipmentSlotGroup.HAND, dealer.getEquipment());

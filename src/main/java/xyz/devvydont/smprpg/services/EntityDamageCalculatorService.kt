@@ -504,7 +504,7 @@ class EntityDamageCalculatorService : Listener, IService {
         // we are getting shot by a bow.
 
         val damaged = event.getEntity()
-        var dealer: Entity? = event.damager
+        var dealer = event.damager
 
         var projectile: Projectile? = null
 
@@ -513,15 +513,17 @@ class EntityDamageCalculatorService : Listener, IService {
             projectile = dealer as Projectile
 
             // If this projectile sourced from something else, use that instead
-            if (projectile.shooter is LivingEntity) dealer = projectile.shooter as Entity?
+            if (projectile.shooter is LivingEntity)
+                dealer = projectile.shooter as Entity
         }
 
         // Call the event and check if it is canceled for any reason.
         val eventWrapper = CustomEntityDamageByEntityEvent(event, damaged, dealer, projectile)
         eventWrapper.callEvent()
-        if (eventWrapper.isCancelled) return
+        if (eventWrapper.isCancelled)
+            return
 
-        event.setDamage(EntityDamageEvent.DamageModifier.BASE, eventWrapper.getFinalDamage())
+        event.setDamage(EntityDamageEvent.DamageModifier.BASE, eventWrapper.finalDamage)
     }
 
     /**

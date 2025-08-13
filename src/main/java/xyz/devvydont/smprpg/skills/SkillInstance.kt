@@ -79,7 +79,7 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
         val expCap = totalExperienceCap
         var expEarned = event.experienceEarned.toDouble()
         expEarned *= 1.0 + (getProficiencyStacks() / 100.0)
-        event.setExperienceEarned(expEarned.roundToInt())
+        event.experienceEarned = expEarned.roundToInt()
         val newExp: Double = this.experience + expEarned
         this.experience = min(expCap, newExp.roundToInt())
         val newLevel = this.level
@@ -94,7 +94,7 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
 
         // If we happened to increase our level, call another event for listeners to react to
         if (leveledUp)
-            SkillLevelUpEvent(this, oldLevel).callEvent()
+            SkillLevelUpEvent(source, this, oldLevel).callEvent()
     }
 
     val level: Int

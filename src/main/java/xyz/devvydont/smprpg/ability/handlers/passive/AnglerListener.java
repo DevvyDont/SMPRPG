@@ -24,17 +24,17 @@ public class AnglerListener extends ToggleableListener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onTakeDamage(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity dealer))
+        if (!(event.dealer instanceof LivingEntity dealer))
             return;
 
-        if (!(event.getDamaged() instanceof LivingEntity damaged))
+        if (!(event.damaged instanceof LivingEntity damaged))
             return;
 
         if (!(SMPRPG.getService(EntityService.class).getEntityInstance(damaged) instanceof SeaCreature<?>))
             return;
 
         // Edge case. Is this a trident that has the item? This is valid.
-        if (event.getProjectile() instanceof Trident trident) {
+        if (event.projectile instanceof Trident trident) {
             if (ItemService.blueprint(trident.getItemStack()) instanceof IPassiveProvider passiveProvider) {
                 if (passiveProvider.getPassives().contains(Passive.ABYSSAL_ANNIHILATION)) {
                     event.multiplyDamage(MULTIPLIER);

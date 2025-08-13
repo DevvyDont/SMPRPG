@@ -137,10 +137,10 @@ public class ProtocolArmorSet extends CustomAttributeItem implements IEquippable
     @EventHandler
     public void __onTakeDamageInEnd(CustomEntityDamageByEntityEvent event) {
 
-        if (!event.getDamaged().getWorld().getEnvironment().equals(World.Environment.THE_END))
+        if (!event.damaged.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 
-        if (!(event.getDamaged() instanceof LivingEntity living))
+        if (!(event.damaged instanceof LivingEntity living))
             return;
 
         var equipment = living.getEquipment();

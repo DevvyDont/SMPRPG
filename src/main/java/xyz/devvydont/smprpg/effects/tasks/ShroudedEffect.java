@@ -110,7 +110,7 @@ public class ShroudedEffect extends SpecialEffectTask implements Listener {
     public void onPlayerDealDamage(CustomEntityDamageByEntityEvent event) {
 
         // Ignore non players
-        if (!(event.getDealer() instanceof Player eventPlayer))
+        if (!(event.dealer instanceof Player eventPlayer))
             return;
 
         if (!eventPlayer.equals(getPlayer()))

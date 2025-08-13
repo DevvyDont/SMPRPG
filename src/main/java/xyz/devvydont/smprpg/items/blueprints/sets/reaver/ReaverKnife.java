@@ -75,16 +75,16 @@ public class ReaverKnife extends CustomAttributeItem implements IBreakableEquipm
     @EventHandler
     public void onRollWitherSkull(CustomItemDropRollEvent event) {
 
-        if (event.getTool() == null || event.getTool().getType().equals(Material.AIR))
+        if (event.tool == null || event.tool.getType().equals(Material.AIR))
             return;
 
-        if (!isItemOfType(event.getTool()))
+        if (!isItemOfType(event.tool))
             return;
 
         SMPItemBlueprint drop = itemService.getBlueprint(event.getDrop());
         if (drop.isCustom() || !event.getDrop().getType().equals(Material.WITHER_SKELETON_SKULL))
             return;
 
-        event.setChance(event.getChance() * WITHER_SKULL_BOOST);
+        event.chance = event.chance * WITHER_SKULL_BOOST;
     }
 }

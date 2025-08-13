@@ -158,7 +158,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
      */
     @EventHandler
     public void __onDragonRespawn(LeveledEntitySpawnEvent event) {
-        if (!(event.getEntity() instanceof LeveledDragon dragon))
+        if (!(event.entity instanceof LeveledDragon dragon))
             return;
 
         dragon.setSummoned(true);

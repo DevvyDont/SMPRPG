@@ -77,7 +77,7 @@ class DamagePopupListener : ToggleableListener() {
         val type = if (event.isCritical) PopupType.CRITICAL else PopupType.DAMAGE
 
         // We can spawn the popup. The final damage will essentially be what displays.
-        spawnTextPopup(living.eyeLocation, event.getFinalDamage(), type)
+        spawnTextPopup(living.eyeLocation, event.finalDamage, type)
     }
 
     /**

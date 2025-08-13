@@ -80,7 +80,7 @@ public class ItemMace extends VanillaAttributeItem implements IBreakableEquipmen
     private void __onMaceDamage(CustomEntityDamageByEntityEvent event) {
 
         // Can the damaging entity hold equipment?
-        if (!(event.getDealer() instanceof LivingEntity livingEntity))
+        if (!(event.dealer instanceof LivingEntity livingEntity))
             return;
 
         var equipment = livingEntity.getEquipment();

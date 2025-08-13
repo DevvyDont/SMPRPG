@@ -87,7 +87,7 @@ public class DensityEnchantment extends VanillaEnchantment implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onFallingMaceDamage(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof Player player))
+        if (!(event.dealer instanceof Player player))
             return;
 
         if (player.getFallDistance() <= 3.0)

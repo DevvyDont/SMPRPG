@@ -77,10 +77,10 @@ public class ExecuteEnchantment extends CustomEnchantment implements Listener {
     @EventHandler
     private void __onDealDamageWithExecute(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity living) || living.getEquipment() == null)
+        if (!(event.dealer instanceof LivingEntity living) || living.getEquipment() == null)
             return;
 
-        if (!(event.getDamaged() instanceof LivingEntity victim) || victim.getAttribute(Attribute.MAX_HEALTH) == null)
+        if (!(event.damaged instanceof LivingEntity victim) || victim.getAttribute(Attribute.MAX_HEALTH) == null)
             return;
 
         // Are they over the threshold?

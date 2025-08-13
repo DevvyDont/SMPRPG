@@ -87,7 +87,7 @@ public class LeechEnchantment extends CustomEnchantment implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerLeechedEntity(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof Player player))
+        if (!(event.dealer instanceof Player player))
             return;
 
         AttributeInstance maxHP = player.getAttribute(Attribute.MAX_HEALTH);
@@ -101,6 +101,6 @@ public class LeechEnchantment extends CustomEnchantment implements Listener {
 
         // Heal for a percentage of their max HP
         player.heal(getLifestealPercent(leechLevels) / 100.0 * maxHP.getValue(), EntityRegainHealthEvent.RegainReason.CUSTOM);
-        player.getWorld().playSound(event.getDamaged(), Sound.BLOCK_LAVA_POP, .3f, 1.75f);
+        player.getWorld().playSound(event.damaged, Sound.BLOCK_LAVA_POP, .3f, 1.75f);
     }
 }
