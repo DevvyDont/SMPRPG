@@ -90,7 +90,6 @@ class ItemService : IService, Listener {
         listeners.add(ExperienceBottleListener())
         listeners.add(BackpackInteractionListener())
         listeners.add(AbilityCastingListener())
-        listeners.add(RareItemDropPreventionListener())
         listeners.add(CustomItemFurnacePreventions())
     }
 

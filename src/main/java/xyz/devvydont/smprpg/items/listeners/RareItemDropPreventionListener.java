@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.listeners;
 
-import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Sound;
@@ -8,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +21,11 @@ import java.util.UUID;
 
 /**
  * This listener will prevent players from dropping items that are considered expensive.
+ * This listener does not work as intended, but some day in the future should be refactored so it works correctly
+ * as double tapping behavior is desirable. Currently, it is near impossible to implement this feature without
+ * introducing some possible item deletion bug due to the nature of how item dropping behavior works.
  */
+@Deprecated
 public class RareItemDropPreventionListener extends ToggleableListener {
 
     private static final long DROP_COOLDOWN = 500L;
