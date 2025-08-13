@@ -6,7 +6,7 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-import xyz.devvydont.smprpg.effects.services.SpecialEffectService
+import xyz.devvydont.smprpg.services.SpecialEffectService
 import xyz.devvydont.smprpg.listeners.block.DimensionPortalLockingListener
 import xyz.devvydont.smprpg.listeners.block.MultiBlockBreakListener
 import xyz.devvydont.smprpg.listeners.block.TrialChamberVaultFix
