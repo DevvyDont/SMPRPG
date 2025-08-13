@@ -39,7 +39,6 @@ import org.bukkit.scheduler.BukkitRunnable
 import org.checkerframework.checker.index.qual.NonNegative
 import org.checkerframework.checker.index.qual.Positive
 import xyz.devvydont.smprpg.SMPRPG
-import xyz.devvydont.smprpg.entity.fishing.SeaCreature
 import xyz.devvydont.smprpg.items.CustomItemType
 import xyz.devvydont.smprpg.items.ItemRarity
 import xyz.devvydont.smprpg.items.SMPItemQuery
@@ -830,7 +829,7 @@ class ItemService : IService, Listener {
                 lore.add(ComponentUtils.EMPTY)
                 lore.add(
                     ComponentUtils.merge(
-                        AbilityUtil.getAbilityComponent(ability.ability.name),
+                        AbilityUtil.getAbilityComponent(ability.ability.friendlyName),
                         ComponentUtils.create(
                             String.format(" (%s)", ability.activation.displayName),
                             NamedTextColor.DARK_GRAY

@@ -1,16 +1,12 @@
 package xyz.devvydont.smprpg.items.listeners;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.TileState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.ability.Ability;
 import xyz.devvydont.smprpg.ability.AbilityContext;
 import xyz.devvydont.smprpg.items.interfaces.IAbilityCaster;
 import xyz.devvydont.smprpg.services.ActionBarService;
@@ -120,7 +116,7 @@ public class AbilityCastingListener extends ToggleableListener {
 
             // Check if the cost is met.
             if (!ability.cost().canUse(player)) {
-                SMPRPG.getService(ActionBarService.class).addActionBarComponent(event.getPlayer(), ActionBarService.ActionBarSource.MISC, ComponentUtils.create("NOT ENOUGH " + ability.cost().resource().name(), NamedTextColor.RED), 1);
+                SMPRPG.getService(ActionBarService.class).addActionBarComponent(event.getPlayer(), ActionBarService.ActionBarSource.MISC, ComponentUtils.create("NOT ENOUGH " + ability.cost().resource.name(), NamedTextColor.RED), 1);
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, .3f, .5f);
                 return;
             }
@@ -134,9 +130,9 @@ public class AbilityCastingListener extends ToggleableListener {
                     event.getPlayer(),
                     ActionBarService.ActionBarSource.MISC,
                     ComponentUtils.merge(
-                            ComponentUtils.create(ability.ability().getName(), NamedTextColor.GOLD),
+                            ComponentUtils.create(ability.ability().getFriendlyName(), NamedTextColor.GOLD),
                             ComponentUtils.SPACE,
-                            ComponentUtils.create("-" + ability.cost().amount() + ability.cost().resource().getSymbol(), ability.cost().resource().getColor())),
+                            ComponentUtils.create("-" + ability.cost().amount + ability.cost().resource.getSymbol(), ability.cost().resource.getColor())),
                     3);
             player.getPlayer().setCooldown(item, (int) caster.getCooldown(item));
         }
