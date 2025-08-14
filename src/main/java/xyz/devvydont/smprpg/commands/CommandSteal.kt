@@ -28,42 +28,44 @@ class CommandSteal : ICommandAdvanced {
         return root.build()
     }
 
+    /**
+     * Executes the steal logic when we know who we want to steal from.
+     */
     private fun executeSteal(ctx: CommandContext<CommandSourceStack>): Int {
-        val playerSelector = ctx.getArg<PlayerSelectorArgumentResolver>("player").resolve(ctx.source)
-        if (playerSelector.isEmpty()) {
+
+        val victim = ctx.getArg<PlayerSelectorArgumentResolver>("player")
+            .resolve(ctx.source)
+            .firstOrNull()
+        if (victim == null) {
             ctx.source.sender.sendMessage(ComponentUtils.error("Could not find that player!"))
             return Command.SINGLE_SUCCESS
         }
 
-        var destination: Player? = null
-        if (ctx.source.sender is Player)
-            destination = ctx.source.sender as Player
-
-        if (destination != null) {
-            destination.inventory.clear()
-            destination.enderChest.clear()
-        }
-
-        val player = playerSelector.first()
-
-        if (player == destination) {
+        // The destination is the player (if it was a player...) that is receiving the items.
+        val thief = ctx.source.executor as? Player
+        if (victim == thief) {
             ctx.source.sender.sendMessage(ComponentUtils.error("You cannot steal your own inventory!"))
             return Command.SINGLE_SUCCESS
         }
 
-        val invContents = player.inventory.contents
-        val enderContents = player.enderChest.contents
-        player.inventory.clear()
-        player.enderChest.clear()
-
-        if (destination != null) {
-            destination.inventory.contents = invContents
-            destination.enderChest.contents = enderContents
-            destination.playSound(destination.location, Sound.BLOCK_ENDER_CHEST_CLOSE, 1f, 1f)
+        if (thief != null) {
+            thief.inventory.clear()
+            thief.enderChest.clear()
         }
 
-        ctx.source.sender.sendMessage(ComponentUtils.success("Stole ${player.name}'s inventory and ender chest!"))
-        player.sendMessage(ComponentUtils.error("${ctx.source.sender.name} stole your inventory!"))
+        val invContents = victim.inventory.contents
+        val enderContents = victim.enderChest.contents
+        victim.inventory.clear()
+        victim.enderChest.clear()
+
+        if (thief != null) {
+            thief.inventory.contents = invContents
+            thief.enderChest.contents = enderContents
+            thief.playSound(thief.location, Sound.BLOCK_ENDER_CHEST_CLOSE, 1f, 1f)
+        }
+
+        thief?.sendMessage(ComponentUtils.success("Stole ${victim.name}'s inventory and ender chest!"))
+        victim.sendMessage(ComponentUtils.error("${thief?.name ?: "Someone"} stole your inventory!"))
         return Command.SINGLE_SUCCESS
     }
 
