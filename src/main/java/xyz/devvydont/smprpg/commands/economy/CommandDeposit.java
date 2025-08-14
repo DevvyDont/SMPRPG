@@ -3,15 +3,14 @@ package xyz.devvydont.smprpg.commands.economy;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.economy.MenuDeposit;
 
 import java.util.Collection;
 import java.util.List;
 
 
-public final class CommandDeposit extends PlayerCommandBase {
+public final class CommandDeposit extends CommandSimplePlayer {
     public CommandDeposit(String name) {
         super(name);
     }

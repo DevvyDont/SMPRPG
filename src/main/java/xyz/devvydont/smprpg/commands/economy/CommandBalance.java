@@ -7,11 +7,11 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.services.EconomyService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public class CommandBalance extends CommandBase {
+public class CommandBalance extends CommandSimple {
 
     public CommandBalance(String name) {
         super(name);

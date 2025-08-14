@@ -11,11 +11,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class CommandBase implements BasicCommand {
+/**
+ * A simple command handler. This is to be replaced with the new tree style command builder.
+ * See {@link CommandSteal} for a great reference.
+ */
+@Deprecated
+public abstract class CommandSimple implements BasicCommand, ICommand {
 
     private String name;
 
-    public CommandBase(String name) {
+    public CommandSimple(String name) {
         this.name = name;
     }
 

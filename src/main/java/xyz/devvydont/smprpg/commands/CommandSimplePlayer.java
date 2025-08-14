@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public abstract class PlayerCommandBase extends CommandBase {
-    public PlayerCommandBase(String name) {
+public abstract class CommandSimplePlayer extends CommandSimple {
+    public CommandSimplePlayer(String name) {
         super(name);
     }
 

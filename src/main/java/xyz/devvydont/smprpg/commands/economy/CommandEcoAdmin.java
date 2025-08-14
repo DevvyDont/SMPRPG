@@ -6,13 +6,13 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.services.EconomyService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
 
-public class CommandEcoAdmin extends CommandBase {
+public class CommandEcoAdmin extends CommandSimple {
 
     public CommandEcoAdmin(String name) {
         super(name);

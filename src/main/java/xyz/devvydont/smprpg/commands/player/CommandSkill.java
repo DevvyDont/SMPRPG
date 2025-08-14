@@ -7,7 +7,7 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer;
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent;
 import xyz.devvydont.smprpg.services.EntityService;
@@ -21,7 +21,7 @@ import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandSkill extends CommandBase {
+public class CommandSkill extends CommandSimple {
 
     public CommandSkill(String name) {
         super(name);

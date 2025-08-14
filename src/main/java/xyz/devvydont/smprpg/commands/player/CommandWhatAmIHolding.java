@@ -9,15 +9,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.services.ChatService;
-import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
 import java.util.List;
 
-public class CommandWhatAmIHolding extends CommandBase {
+public class CommandWhatAmIHolding extends CommandSimple {
 
     public CommandWhatAmIHolding(String name) {
         super(name);

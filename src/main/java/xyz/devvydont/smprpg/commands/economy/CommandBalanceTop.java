@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.services.ChatService;
 import xyz.devvydont.smprpg.services.EconomyService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.*;
 
-public class CommandBalanceTop extends CommandBase {
+public class CommandBalanceTop extends CommandSimple {
 
     private record PlayerBalanceEntry(OfflinePlayer player, int balance) {
     }

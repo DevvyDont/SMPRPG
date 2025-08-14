@@ -26,7 +26,6 @@ class HotShotProjectileCollideListener : ToggleableListener() {
     @Suppress("unused")
     private fun onFireballExplode(event: EntityExplodeEvent) {
         // If this isn't an inferno projectile we don't care
-
         if (!HotShotAbilityHandler.Companion.isInfernoProjectile(event.getEntity())) return
 
         var source: Player? = null

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimple;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class CommandAttribute extends CommandBase {
+public class CommandAttribute extends CommandSimple {
 
     public static final List<String> SUBCOMMANDS = List.of("base", "get", "modifier");
     

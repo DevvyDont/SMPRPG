@@ -2,19 +2,16 @@ package xyz.devvydont.smprpg.commands.player;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.player.InterfaceStats;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
 import java.util.Collection;
 import java.util.List;
 
-public class CommandStatistics extends PlayerCommandBase {
+public class CommandStatistics extends CommandSimplePlayer {
     public CommandStatistics(String name) {
         super(name);
     }

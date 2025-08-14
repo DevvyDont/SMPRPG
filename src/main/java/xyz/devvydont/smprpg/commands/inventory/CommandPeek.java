@@ -4,13 +4,11 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.player.MenuInventoryPeek;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public class CommandPeek extends PlayerCommandBase {
+public class CommandPeek extends CommandSimplePlayer {
     public CommandPeek(String name) {
         super(name);
     }
