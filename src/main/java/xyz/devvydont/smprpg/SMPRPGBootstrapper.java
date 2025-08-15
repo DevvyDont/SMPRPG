@@ -42,7 +42,7 @@ public class SMPRPGBootstrapper implements PluginBootstrap {
                 new CommandPeek("peek"),
                 new CommandTrashItems("trash"),
                 new CommandEnchantments("enchantments"),
-                new CommandReforges("reforges"),
+                new CommandReforges("reforges")
         };
 
         var manager = context.getLifecycleManager();

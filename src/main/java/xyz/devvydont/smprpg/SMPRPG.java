@@ -135,6 +135,7 @@ public final class SMPRPG extends JavaPlugin {
         services.add(new ActionBarService());  // Broadcasts player information to player action bars.
         services.add(new UnstableListenersService());  // Implements some listeners that depend on ProtocolLib.
         services.add(new AnimationService());  // Mainly provides GUIs with an easy-to-use animation API.
+        services.add(new BlockBreakingService());  // Handles custom breaking tech
 
         // Start all the services. Make sure nothing goes wrong.
         for (var service : services) {
