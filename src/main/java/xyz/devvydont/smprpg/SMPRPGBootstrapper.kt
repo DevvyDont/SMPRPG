@@ -8,13 +8,13 @@ import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 import xyz.devvydont.smprpg.commands.CommandSimple
-import xyz.devvydont.smprpg.commands.CommandSteal
+import xyz.devvydont.smprpg.commands.admin.CommandSteal
 import xyz.devvydont.smprpg.commands.ICommand
 import xyz.devvydont.smprpg.commands.ICommandAdvanced
+import xyz.devvydont.smprpg.commands.admin.CommandAttribute
 import xyz.devvydont.smprpg.commands.admin.CommandSimulateFishing
 import xyz.devvydont.smprpg.commands.economy.*
 import xyz.devvydont.smprpg.commands.enchantments.CommandEnchantments
-import xyz.devvydont.smprpg.commands.entity.CommandAttribute
 import xyz.devvydont.smprpg.commands.entity.CommandSummon
 import xyz.devvydont.smprpg.commands.inventory.CommandPeek
 import xyz.devvydont.smprpg.commands.items.CommandGiveItem
@@ -31,7 +31,6 @@ class SMPRPGBootstrapper : PluginBootstrap {
 
             // Old commands to be moved to the new API.
             CommandMenu("menu"),
-            CommandAttribute("attribute"),
             CommandEcoAdmin("eco"),
             CommandBalance("balance"),
             CommandBalanceTop("balancetop"),
@@ -53,7 +52,8 @@ class SMPRPGBootstrapper : PluginBootstrap {
             CommandReforges("reforges"),
 
             // New commands that use the new API.
-            CommandSteal()
+            CommandSteal(),
+            CommandAttribute()
         )
 
         val manager: LifecycleEventManager<BootstrapContext> = context.lifecycleManager

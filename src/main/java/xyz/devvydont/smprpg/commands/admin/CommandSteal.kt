@@ -1,4 +1,4 @@
-package xyz.devvydont.smprpg.commands
+package xyz.devvydont.smprpg.commands.admin
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.context.CommandContext
@@ -9,6 +9,7 @@ import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver
 import org.bukkit.Sound
 import org.bukkit.entity.Player
+import xyz.devvydont.smprpg.commands.ICommandAdvanced
 import xyz.devvydont.smprpg.extensions.getArg
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
