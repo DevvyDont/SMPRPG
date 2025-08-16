@@ -8,7 +8,7 @@ import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.formatting.Symbols
 import java.text.DecimalFormat
-import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 /**
  * Acts as a middleman between performing transactions for player currency
@@ -48,7 +48,7 @@ class EconomyService : IService {
      * @return boolean, true if successful
      */
     fun addMoney(player: OfflinePlayer, amount: Double): Boolean {
-        val response = economy!!.depositPlayer(player, amount.roundToInt().toDouble())
+        val response = economy!!.depositPlayer(player, amount.roundToLong().toDouble())
         plugin.logger.finest(
             String.format(
                 "Server has paid %s %.0f coins, balance is now %.0f",
@@ -68,7 +68,7 @@ class EconomyService : IService {
      * @return boolean, true if successful
      */
     fun takeMoney(player: OfflinePlayer, amount: Double): Boolean {
-        val response = economy!!.withdrawPlayer(player, amount.roundToInt().toDouble())
+        val response = economy!!.withdrawPlayer(player, amount.roundToLong().toDouble())
         plugin.logger.info(
             String.format(
                 "Server has attempted to take %s's %.0f coins, balance is now %.0f (%s-%s)",
@@ -93,7 +93,7 @@ class EconomyService : IService {
      * @param player The player to take money from.
      * @param cost The amount of money to take from the player.
      */
-    fun spendMoney(player: Player, cost: Int) {
+    fun spendMoney(player: Player, cost: Long) {
         this.takeMoney(player, cost.toDouble())
         player.sendMessage(
             ComponentUtils.merge(
@@ -105,12 +105,16 @@ class EconomyService : IService {
     }
 
     /**
-     * See a player's balance, this is represented in "coins" and is always an integer.
-     * @param player Player to query balance of
-     * @return an int represented rounded balance of a player
+     * Sets the player's balance.
+     * Returns true if the operation was successful, false otherwise.
      */
-    fun getMoney(player: Player?): Int {
-        return economy!!.getBalance(player).roundToInt()
+    fun setMoney(player: Player, amount: Double): Boolean {
+        val balance = getMoney(player)
+        val success: Boolean = if (balance < amount)
+            addMoney(player, amount-balance);
+        else
+            takeMoney(player, balance-amount);
+        return success
     }
 
     /**
@@ -118,8 +122,17 @@ class EconomyService : IService {
      * @param player Player to query balance of
      * @return an int represented rounded balance of a player
      */
-    fun getMoney(player: OfflinePlayer?): Int {
-        return economy!!.getBalance(player).roundToInt()
+    fun getMoney(player: Player?): Long {
+        return economy!!.getBalance(player).roundToLong()
+    }
+
+    /**
+     * See a player's balance, this is represented in "coins" and is always an integer.
+     * @param player Player to query balance of
+     * @return an int represented rounded balance of a player
+     */
+    fun getMoney(player: OfflinePlayer?): Long {
+        return economy!!.getBalance(player).roundToLong()
     }
 
     /**
@@ -151,6 +164,17 @@ class EconomyService : IService {
          */
         @JvmStatic
         fun formatMoney(amount: Long): String {
+            val number = DecimalFormat("###,###,###,###,###,###,###").format(amount)
+            return String.format("%s%s", number, Symbols.COIN)
+        }
+
+        /**
+         * Formats a string for display across the plugin, this method specifically some number
+         * @param amount The amount you want to format.
+         * @return A clean user readable formatted representation of the money amount.
+         */
+        @JvmStatic
+        fun formatMoney(amount: Double): String {
             val number = DecimalFormat("###,###,###,###,###,###,###").format(amount)
             return String.format("%s%s", number, Symbols.COIN)
         }

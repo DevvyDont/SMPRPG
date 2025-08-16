@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandSimple;
+import xyz.devvydont.smprpg.commands.LegacyCommand;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CommandGiveItem extends CommandSimple {
+public class CommandGiveItem extends LegacyCommand {
 
     public CommandGiveItem(String name) {
         super(name);

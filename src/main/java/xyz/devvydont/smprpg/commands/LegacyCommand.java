@@ -17,11 +17,11 @@ import java.util.List;
  * See {@link CommandSteal} for a great reference.
  */
 @Deprecated
-public abstract class CommandSimple implements BasicCommand, ICommand {
+public abstract class LegacyCommand implements BasicCommand, ICommandBase {
 
     private String name;
 
-    public CommandSimple(String name) {
+    public LegacyCommand(String name) {
         this.name = name;
     }
 

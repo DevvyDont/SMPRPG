@@ -19,9 +19,8 @@ import org.bukkit.attribute.Attributable
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.Entity
 import org.bukkit.inventory.EquipmentSlotGroup
-import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.attribute.AttributeWrapper
-import xyz.devvydont.smprpg.commands.ICommandAdvanced
+import xyz.devvydont.smprpg.commands.ICommand
 import xyz.devvydont.smprpg.extensions.getArg
 import xyz.devvydont.smprpg.extensions.queryEnum
 import xyz.devvydont.smprpg.services.AttributeService
@@ -33,7 +32,7 @@ import java.util.concurrent.CompletableFuture
  * This command has bulk edit support as well using Minecraft's "selector" arguments (@e, @a etc.) so that the user
  * may perform mass attribute queries/edits on multiple entities, even for custom attributes.
  */
-class CommandAttribute : ICommandAdvanced {
+class CommandAttribute : ICommand {
 
     /**
      * Get the root of the command builder.

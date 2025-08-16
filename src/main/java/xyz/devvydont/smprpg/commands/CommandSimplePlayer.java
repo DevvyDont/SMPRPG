@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-public abstract class CommandSimplePlayer extends CommandSimple {
+public abstract class CommandSimplePlayer extends LegacyCommand {
     public CommandSimplePlayer(String name) {
         super(name);
     }

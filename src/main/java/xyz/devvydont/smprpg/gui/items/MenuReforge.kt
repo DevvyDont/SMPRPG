@@ -28,7 +28,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import java.util.function.Consumer
 
 class MenuReforge(player: Player) : MenuBase(player, ROWS) {
-    fun getReforgeCost(rarity: ItemRarity): Int {
+    fun getReforgeCost(rarity: ItemRarity): Long {
         return when (rarity) {
             ItemRarity.COMMON -> 250
             ItemRarity.UNCOMMON -> 500
@@ -41,7 +41,7 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
         }
     }
 
-    val balance: Int
+    val balance: Long
         /**
          * Shortcut method to get the balance of the player who owns this inventory.
          * @return The balance of the player

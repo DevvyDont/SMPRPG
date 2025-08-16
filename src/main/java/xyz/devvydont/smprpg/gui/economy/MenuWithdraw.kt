@@ -20,7 +20,7 @@ import kotlin.math.min
 
 class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
     private var totalWithdrawn = 0
-    private val coins: Array<CustomItemCoin> = arrayOf<CustomItemCoin>(
+    private val coins: Array<CustomItemCoin> = arrayOf(
         SMPRPG.getService(ItemService::class.java).getBlueprint(CustomItemType.COPPER_COIN) as CustomItemCoin,
         SMPRPG.getService(ItemService::class.java).getBlueprint(CustomItemType.SILVER_COIN) as CustomItemCoin,
         SMPRPG.getService(ItemService::class.java).getBlueprint(CustomItemType.GOLD_COIN) as CustomItemCoin,
@@ -115,11 +115,11 @@ class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
         val coinStack = coin.generate()
         val currentBalance = this.economyService.getMoney(this.player)
         val maxCoinsPlayerCanAfford = currentBalance / coin.getWorth(coinStack)
-        val amountOfCoinsToGive = min(desiredStackSize, maxCoinsPlayerCanAfford)
+        val amountOfCoinsToGive = min(desiredStackSize.toLong(), maxCoinsPlayerCanAfford)
         val totalCost = amountOfCoinsToGive * coin.getWorth(coinStack)
 
         // Ensure the player has enough money.
-        if (amountOfCoinsToGive == 0 || currentBalance < totalCost) {
+        if (amountOfCoinsToGive == 0L || currentBalance < totalCost) {
             this.playInvalidAnimation()
             this.player.sendMessage(ComponentUtils.error("You cannot afford to withdrawal this coin."))
             return
@@ -135,7 +135,7 @@ class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
 
         // Spin up the money printer and make some coins.
         val mintedCoins = coin.generate()
-        mintedCoins.amount = amountOfCoinsToGive
+        mintedCoins.amount = amountOfCoinsToGive.toInt()
 
         // Hand out the money to the player.
         val overflowItems = this.player.inventory.addItem(mintedCoins)
@@ -156,7 +156,7 @@ class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
         )
 
         // Add to the running total
-        this.totalWithdrawn += totalCost
+        this.totalWithdrawn += totalCost.toInt()
         this.renderMenu()
         this.playSuccessAnimation()
     }

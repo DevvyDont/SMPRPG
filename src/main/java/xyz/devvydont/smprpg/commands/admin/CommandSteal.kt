@@ -9,7 +9,7 @@ import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver
 import org.bukkit.Sound
 import org.bukkit.entity.Player
-import xyz.devvydont.smprpg.commands.ICommandAdvanced
+import xyz.devvydont.smprpg.commands.ICommand
 import xyz.devvydont.smprpg.extensions.getArg
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
@@ -17,7 +17,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
  * A simple command that allows someone with admin privileges to "steal" a player's inventory and ender chest.
  * This is more of a silly command that can be used in the event of someone needing their items taken from them.
  */
-class CommandSteal : ICommandAdvanced {
+class CommandSteal : ICommand {
 
     override fun getRoot() : LiteralCommandNode<CommandSourceStack> {
         val root = Commands.literal("steal")
