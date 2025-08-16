@@ -241,7 +241,7 @@ public class BlockDamage {
 //    		block.getWorld().dropItem(block.getLocation(), drop);	
 //    	}
 
-		block.getWorld().playSound(block.getLocation(), block.getBlockData().getSoundGroup().getBreakSound(), 1.0f, 1.0f);
+		block.getWorld().playSound(block.getLocation(), block.getBlockData().getSoundGroup().getBreakSound(), 1.0f, 0.8f);
 		var particle = new ParticleBuilder(Particle.BLOCK)
 				.location(block.getLocation().toCenterLocation())
 				.data(block.getBlockData())
