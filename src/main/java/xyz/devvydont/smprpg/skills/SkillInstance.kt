@@ -78,7 +78,8 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
         val oldLevel = this.level
         val expCap = totalExperienceCap
         var expEarned = event.experienceEarned.toDouble()
-        expEarned *= 1.0 + (getProficiencyStacks() / 100.0)
+        if (source != ExperienceSource.COMMANDS)
+            expEarned *= 1.0 + (getProficiencyStacks() / 100.0)
         event.experienceEarned = expEarned.roundToInt()
         val newExp: Double = this.experience + expEarned
         this.experience = min(expCap, newExp.roundToInt())
