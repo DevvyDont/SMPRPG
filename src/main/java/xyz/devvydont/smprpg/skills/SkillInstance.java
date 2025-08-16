@@ -2,12 +2,15 @@ package xyz.devvydont.smprpg.skills;
 
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.player.ProfileDifficulty;
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent;
 import xyz.devvydont.smprpg.events.skills.SkillExperiencePostGainEvent;
 import xyz.devvydont.smprpg.events.skills.SkillLevelUpEvent;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.skills.rewards.ISkillReward;
+import xyz.devvydont.smprpg.services.DifficultyService;
 
 import java.util.Collection;
 
@@ -76,6 +79,19 @@ public class SkillInstance {
     }
 
     /**
+     * Given a difficulty, determine the skill experience multiplier.
+     * @param difficulty The difficulty a player is on.
+     * @return The multiplier of skill experience they gain.
+     */
+    public static float getSkillExperienceMultiplier(ProfileDifficulty difficulty) {
+        return switch (difficulty) {
+            case EASY -> 1.25f;
+            case HARD -> 0.75f;
+            default -> 1.0f;
+        };
+    }
+
+    /**
      * Add experience to the owning player. Automatically handles level up and event calling logic for you.
      * @param experience The amount of experience to add.
      * @param source The source of the experience.
@@ -88,10 +104,14 @@ public class SkillInstance {
         if (event.isCancelled() || event.getExperienceEarned() <= 0)
             return;
 
+        var difficulty = SMPRPG.getService(DifficultyService.class).getDifficulty(getOwner());
+        double difficultyModifier = getSkillExperienceMultiplier(difficulty);
+
         // Add the experience and take note of what level we are before and after
         int oldLevel = getLevel();
         int expCap = SkillGlobals.getTotalExperienceCap();
         double expEarned = event.getExperienceEarned();
+        expEarned *= difficultyModifier;
         expEarned *= 1.0 + (getProficiencyStacks() / 100.0);
         event.setExperienceEarned((int) Math.round(expEarned));
         double newExp = getExperience() + expEarned;

@@ -21,18 +21,6 @@ public class DifficultyService implements IService, Listener {
 
     public final static NamespacedKey DIFFICULTY_MODIFIER_KEY = new NamespacedKey(SMPRPG.getInstance(), "difficulty_modifier");
 
-    /**
-     * Given a difficulty, determine the skill experience multiplier.
-     * @param difficulty The difficulty a player is on.
-     * @return The multiplier of skill experience they gain.
-     */
-    public static float getSkillExperienceMultiplier(ProfileDifficulty difficulty) {
-        return switch (difficulty) {
-            case EASY -> 1.25f;
-            case HARD -> 0.75f;
-            default -> 1.0f;
-        };
-    }
 
     /**
      * Given a difficulty, determine the incoming damage multiplier.
@@ -150,17 +138,6 @@ public class DifficultyService implements IService, Listener {
         var gui = new MenuDifficultyChooser(event.getPlayer());
         gui.openMenu();
         gui.lock();
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    private void __onPlayerEarnSkillExperience(SkillExperienceGainEvent event) {
-
-        // Ignore experience gained from commands, otherwise the skill set command will behave wonky.
-        if (event.getSource().equals(SkillExperienceGainEvent.ExperienceSource.COMMANDS))
-            return;
-
-        var multiplier = getSkillExperienceMultiplier(getDifficulty(event.getPlayer()));
-        event.multiplyExperienceEarned(multiplier);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
