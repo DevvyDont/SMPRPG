@@ -2,7 +2,6 @@ package xyz.devvydont.smprpg.entity.bosses;
 
 import com.destroystokyo.paper.event.entity.EnderDragonFireballHitEvent;
 import net.kyori.adventure.bossbar.BossBar;
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
@@ -16,7 +15,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
-import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.services.SpecialEffectService;
 import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
@@ -206,7 +205,7 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
     @EventHandler
     public void onDamageReceivedWhileCrystalsActive(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDamaged().equals(_entity)))
+        if (!(event.damaged.equals(_entity)))
             return;
 
         var dragonBattle = _entity.getWorld().getEnderDragonBattle();

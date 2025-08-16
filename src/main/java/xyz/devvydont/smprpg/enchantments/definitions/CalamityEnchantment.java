@@ -77,7 +77,7 @@ public class CalamityEnchantment extends CustomEnchantment implements Listener {
     @EventHandler
     public void onDealDamageWithCalamity(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity living) || living.getEquipment() == null)
+        if (!(event.dealer instanceof LivingEntity living) || living.getEquipment() == null)
             return;
 
         // Are they over the threshold?

@@ -162,7 +162,7 @@ public class VoidstridingBlessing extends CustomEnchantment implements Listener 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onServerLaunch(ServerLoadEvent event)
     {
-        Bukkit.getScheduler().runTaskTimer(SMPRPG.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimer(SMPRPG.getPlugin(), () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 damageBoots(player);
             }

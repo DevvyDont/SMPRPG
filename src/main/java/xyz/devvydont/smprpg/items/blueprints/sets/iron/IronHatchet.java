@@ -48,7 +48,7 @@ public class IronHatchet extends ItemHatchet implements ICraftable, IBreakableEq
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

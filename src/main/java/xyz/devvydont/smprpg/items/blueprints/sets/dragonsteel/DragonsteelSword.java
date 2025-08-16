@@ -93,7 +93,7 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override
@@ -121,15 +121,15 @@ public class DragonsteelSword extends CustomAttributeItem implements ICraftable,
     @EventHandler
     public void onRollWitherSkull(CustomItemDropRollEvent event) {
 
-        if (event.getTool() == null || event.getTool().getType().equals(Material.AIR))
+        if (event.tool == null || event.tool.getType().equals(Material.AIR))
             return;
 
-        if (!isItemOfType(event.getTool()))
+        if (!isItemOfType(event.tool))
             return;
 
         SMPItemBlueprint drop = itemService.getBlueprint(event.getDrop());
         if (drop.equals(itemService.getBlueprint(CustomItemType.SUMMONING_CRYSTAL)))
-            event.setChance(event.getChance() * SUMMONING_CRYSTAL_BOOST);;
+            event.chance = event.chance * SUMMONING_CRYSTAL_BOOST;;
     }
 
 }

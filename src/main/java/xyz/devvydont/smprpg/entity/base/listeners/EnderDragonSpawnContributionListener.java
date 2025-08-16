@@ -23,7 +23,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.services.SpecialEffectService;
 import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.bosses.LeveledDragon;
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent;
@@ -158,7 +158,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
      */
     @EventHandler
     public void __onDragonRespawn(LeveledEntitySpawnEvent event) {
-        if (!(event.getEntity() instanceof LeveledDragon dragon))
+        if (!(event.entity instanceof LeveledDragon dragon))
             return;
 
         dragon.setSummoned(true);
@@ -198,7 +198,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
                 crystalPlacers.remove(entry.getKey(), crystal);
 
                 // Spawn the item later or else the explosion will kill it...
-                Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> event.getEntity().getWorld().dropItem(event.getEntity().getLocation().add(0, 1, 0), itemStack, i ->{
+                Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> event.getEntity().getWorld().dropItem(event.getEntity().getLocation().add(0, 1, 0), itemStack, i ->{
                     i.setInvulnerable(true);
                     i.setGravity(false);
                 }), TickTime.INSTANTANEOUSLY);
@@ -295,7 +295,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
         }
 
         // Run a task on the next tick to find the crystal. If we don't find it, we can assume we haven't placed a crystal.
-        Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
 
             var targetBlock = event.getClickedBlock().getRelative(BlockFace.UP);
             var crystal = getCrystalOnBlock(targetBlock);
@@ -331,7 +331,7 @@ public class EnderDragonSpawnContributionListener extends ToggleableListener {
                 return;
 
             // If this was the 8th crystal, the dragon is probably going to spawn...
-            Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), () -> {
                 nearbyPlayers.playSound(Sound.sound().type(SoundEventKeys.BLOCK_TRIAL_SPAWNER_ABOUT_TO_SPAWN_ITEM).pitch(.5f).build());
                 nearbyPlayers.sendMessage(ComponentUtils.alert(ComponentUtils.merge(
                         ComponentUtils.create("ALL CRYSTALS PLACED!!!").color(NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD),

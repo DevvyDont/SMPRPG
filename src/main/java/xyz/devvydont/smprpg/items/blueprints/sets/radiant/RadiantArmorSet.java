@@ -60,7 +60,7 @@ public abstract class RadiantArmorSet extends CustomAttributeItem implements IBr
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey());
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey());
     }
 
     @Override

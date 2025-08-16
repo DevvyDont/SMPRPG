@@ -3,7 +3,6 @@ package xyz.devvydont.smprpg.items.blueprints.sets.redstone;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -58,7 +57,7 @@ public abstract class RedstoneArmorSet extends CustomAttributeItem implements IB
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

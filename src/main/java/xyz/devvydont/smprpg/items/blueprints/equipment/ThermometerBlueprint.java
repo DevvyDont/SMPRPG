@@ -78,7 +78,7 @@ public class ThermometerBlueprint extends CustomItemBlueprint implements Listene
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), "thermometer_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), "thermometer_recipe");
     }
 
     @Override

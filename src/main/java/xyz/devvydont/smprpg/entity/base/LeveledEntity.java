@@ -16,7 +16,7 @@ import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.EntityGlobals;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
-import xyz.devvydont.smprpg.listeners.EntityDamageCalculatorService;
+import xyz.devvydont.smprpg.services.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.skills.SkillType;
@@ -38,7 +38,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
     protected EntityConfiguration _config = EntityConfiguration.DEFAULT;
 
     public LeveledEntity(Entity entity) {
-        this._plugin =  SMPRPG.getInstance();
+        this._plugin =  SMPRPG.getPlugin();
         this._entity = (T) entity;
     }
 

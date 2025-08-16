@@ -651,10 +651,10 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     public void onPVPDuringBoss(CustomEntityDamageByEntityEvent event) {
 
         // Only listen to PVP.
-        if (!(event.getDealer() instanceof Player dealer))
+        if (!(event.dealer instanceof Player dealer))
             return;
 
-        if (!(event.getDamaged() instanceof Player damaged))
+        if (!(event.damaged instanceof Player damaged))
             return;
 
         // We know this is PVP. If either character is participating in this fight, cancel.
@@ -704,17 +704,17 @@ public abstract class BossInstance<T extends LivingEntity> extends LeveledEntity
     @EventHandler
     public void __onRollForDrops(CustomItemDropRollEvent event) {
 
-        if (!event.getSource().equals(this))
+        if (!event.source.equals(this))
             return;
 
         // This loot roll involves us! Check if the player rolling is present.
-        var contributionRating = getSpawnContribution().get(event.getPlayer().getUniqueId());
+        var contributionRating = getSpawnContribution().get(event.player.getUniqueId());
         if (contributionRating == null)
             return;
 
         // This player contributed to our spawn. Let's boost the chance. By default, we say that for every .01
         // contribution rating, they get a 1% boost.
-        var newChance = event.getChance() * (contributionRating+1);
-        event.setChance(newChance);
+        var newChance = event.chance * (contributionRating+1);
+        event.chance = newChance;
     }
 }

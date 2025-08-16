@@ -84,7 +84,7 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override
@@ -113,11 +113,11 @@ public class ForsakenCutlass extends CustomAttributeItem implements Listener, IH
     public void __onAttackWithCutlass(CustomEntityDamageByEntityEvent event) {
 
         // Can the attacked entity have potion effects?
-        if (!(event.getDamaged() instanceof LivingEntity attacked))
+        if (!(event.damaged instanceof LivingEntity attacked))
             return;
 
         // Did the attacker use the cutlass?
-        if (!(event.getDealer() instanceof LivingEntity living))
+        if (!(event.dealer instanceof LivingEntity living))
             return;
 
         if (living.getEquipment() == null)

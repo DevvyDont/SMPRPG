@@ -4,7 +4,7 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.items.MenuItemBrowser;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CommandSearchItem extends PlayerCommandBase {
+public class CommandSearchItem extends CommandSimplePlayer {
 
     public CommandSearchItem(String name) {
         super(name);

@@ -64,7 +64,7 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), "transmission_wand_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), "transmission_wand_recipe");
     }
 
     @Override

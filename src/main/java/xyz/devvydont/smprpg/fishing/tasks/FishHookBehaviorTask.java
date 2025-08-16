@@ -152,7 +152,7 @@ public class FishHookBehaviorTask extends BukkitRunnable {
     public static FishHookBehaviorTask create(FishHook hook, final Set<IFishingRod.FishingFlag> allowedFishingFlags) {
         var instance = new FishHookBehaviorTask(hook);
         instance.setAllowedFishingFlags(allowedFishingFlags);
-        instance.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
+        instance.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
         return instance;
     }
 
@@ -516,12 +516,12 @@ public class FishHookBehaviorTask extends BukkitRunnable {
         // Update the metadata of the hook to only filter for drops that we want. This is only necessary for
         // complex fishing rods!
         for (var flag : IFishingRod.FishingFlag.values())
-            hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
+            hook.removeMetadata(flag.toString(), SMPRPG.getPlugin());
 
         if (LAVA_PREDICATE.check(location))
-            hook.setMetadata(IFishingRod.FishingFlag.LAVA.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+            hook.setMetadata(IFishingRod.FishingFlag.LAVA.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
         if (VOID_PREDICATE.check(location))
-            hook.setMetadata(IFishingRod.FishingFlag.VOID.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+            hook.setMetadata(IFishingRod.FishingFlag.VOID.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
     }
 
     /**
@@ -530,8 +530,8 @@ public class FishHookBehaviorTask extends BukkitRunnable {
     public void unanchor() {
         this.anchor = null;
         for (var flag : IFishingRod.FishingFlag.values())
-            hook.removeMetadata(flag.toString(), SMPRPG.getInstance());
-        hook.setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getInstance(), true));
+            hook.removeMetadata(flag.toString(), SMPRPG.getPlugin());
+        hook.setMetadata(IFishingRod.FishingFlag.NORMAL.toString(), new FixedMetadataValue(SMPRPG.getPlugin(), true));
     }
 
     /**

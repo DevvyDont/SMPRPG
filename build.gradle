@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'org.jetbrains.kotlin.jvm'
+    id 'com.gradleup.shadow' version '9.0.0-rc3'
 }
 
 group = 'xyz.devvydont'
@@ -30,13 +32,12 @@ dependencies {
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "5.3.0";
     implementation 'com.google.code.gson:gson:2.13.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 def targetJavaVersion = 21
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
     if (JavaVersion.current() < javaVersion) {
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
@@ -51,8 +52,16 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks {
+    shadowJar {
+        relocate("kotlin", "xyz.devvydont.libs.kotlin")
+        relocate("kotlinx", "xyz.devvydont.libs.kotlinx")
+    }
+    build {
+        dependsOn(shadowJar)
+    }
     runServer {
         minecraftVersion("1.21.8")
+        jvmArgs("-XX:+UseParallelGC")
     }
 }
 
@@ -63,5 +72,8 @@ processResources {
     filesMatching('paper-plugin.yml') {
         expand props
     }
+}
+kotlin {
+    jvmToolchain(21)
 }
 

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
@@ -32,7 +33,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
         // Spawn the entity. This can fail, but we allow null returns if something breaks.
         var entity = SMPRPG.getService(EntityService.class).spawnCustomEntity(customEntityType, ctx.getLocation());
         if (entity == null) {
-            SMPRPG.getInstance().getLogger().severe("Failed to generate custom sea creature for fishing event of type " + customEntityType);
+            SMPRPG.getPlugin().getLogger().severe("Failed to generate custom sea creature for fishing event of type " + customEntityType);
             return null;
         }
 
@@ -53,7 +54,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
      */
     @Override
     public NamespacedKey getKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), customEntityType.key());
+        return new NamespacedKey(SMPRPG.getPlugin(), customEntityType.key());
     }
 
     public CustomEntityType getCustomEntityType() {
@@ -61,7 +62,7 @@ public class SeaCreatureFishingLoot extends FishingLootBase {
     }
 
     @Override
-    public Material getDisplayMaterial() {
+    public @NotNull Material getDisplayMaterial() {
         return customEntityType.getDisplayMaterial();
     }
 

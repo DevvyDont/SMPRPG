@@ -359,7 +359,7 @@ public class LeveledPlayer extends LeveledEntity<Player> implements Listener {
 
     private void startManaTask() {
         killManaTask();
-        _manaRegenerateTask = Bukkit.getScheduler().runTaskTimer(SMPRPG.getInstance(), this::regenerateMana, 0, MANA_REGENERATE_FREQUENCY);
+        _manaRegenerateTask = Bukkit.getScheduler().runTaskTimer(SMPRPG.getPlugin(), this::regenerateMana, 0, MANA_REGENERATE_FREQUENCY);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

@@ -58,7 +58,7 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
             this.level = level;
         }
 
-        private static NamespacedKey key = new NamespacedKey(SMPRPG.getInstance(), "spawner-options");
+        private static NamespacedKey key = new NamespacedKey(SMPRPG.getPlugin(), "spawner-options");
 
         Map<CustomEntityType, SpawnerEntry> entries;
 
@@ -327,6 +327,13 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
 
     @Override
     public void cleanup() {
+
+        for (var entity : spawned.entrySet()) {
+            var bukkitEntity = Bukkit.getEntity(entity.getKey());
+            if (bukkitEntity != null)
+                bukkitEntity.remove();
+        }
+
         if (tickTask != null)
             tickTask.cancel();
 

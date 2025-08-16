@@ -34,7 +34,7 @@ public class QuantityLootDrop implements LootDrop {
         if (event.isCancelled())
             return null;
 
-        count = event.getAmount();
+        count = event.amount;
         count *= (int) Math.round(chanceDecay);
         if (count <= 0)
             return null;

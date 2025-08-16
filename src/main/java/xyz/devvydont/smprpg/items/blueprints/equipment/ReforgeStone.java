@@ -59,7 +59,7 @@ public abstract class ReforgeStone extends CustomItemBlueprint implements Reforg
         lines.add(ComponentUtils.create("Results vary based on item rarity!", NamedTextColor.DARK_GRAY));
         lines.add(ComponentUtils.EMPTY);
         lines.add(ComponentUtils.create("Valid Equipment:", NamedTextColor.BLUE));
-        for (ItemClassification clazz : getReforgeType().getAllowedItems())
+        for (ItemClassification clazz : getReforgeType().allowedItems)
             lines.add(ComponentUtils.create("- " + MinecraftStringUtils.getTitledString(clazz.name())));
         lines.add(ComponentUtils.EMPTY);
         lines.add(ComponentUtils.create("Application Cost:", NamedTextColor.BLUE));

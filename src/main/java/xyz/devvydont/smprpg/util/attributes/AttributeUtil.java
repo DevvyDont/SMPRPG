@@ -344,7 +344,7 @@ public class AttributeUtil {
         int sum = 0;
 
         // This can happen when something tries to update too fast
-        if (SMPRPG.getInstance() == null)
+        if (SMPRPG.getPlugin() == null)
             return sum;
 
         // Get the reforge on the item and see if it has a power rating

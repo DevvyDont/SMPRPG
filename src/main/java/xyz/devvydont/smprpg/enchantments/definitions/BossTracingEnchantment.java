@@ -153,6 +153,6 @@ public class BossTracingEnchantment extends CustomEnchantment implements Listene
         if (tracing <= 0)
             return;
 
-        new HomingArrowTask(event.getProjectile(), tracing).runTaskTimer(SMPRPG.getInstance(), 10, 1);
+        new HomingArrowTask(event.getProjectile(), tracing).runTaskTimer(SMPRPG.getPlugin(), 10, 1);
     }
 }

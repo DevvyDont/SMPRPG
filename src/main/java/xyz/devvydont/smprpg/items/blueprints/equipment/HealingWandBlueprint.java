@@ -116,7 +116,7 @@ public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilit
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override

@@ -33,7 +33,7 @@ public class HolomokuCrest extends CustomItemBlueprint implements ICraftable, IS
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "_recipe");
     }
 
     @Override

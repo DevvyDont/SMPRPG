@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
@@ -300,7 +301,7 @@ public enum CustomEntityType implements IMenuDisplayable {
     }
 
     @Override
-    public Material getDisplayMaterial() {
+    public @NotNull Material getDisplayMaterial() {
         return switch (this) {
             case REFORGE_NPC -> Material.ANVIL;
             case CASTLE_DWELLER -> Material.WOODEN_SHOVEL;

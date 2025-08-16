@@ -48,7 +48,7 @@ public class EntityDeleter extends CustomItemBlueprint implements Listener {
     @EventHandler
     public void onInteract(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof Player player))
+        if (!(event.dealer instanceof Player player))
             return;
 
         var mainHandItem = player.getInventory().getItemInMainHand();
@@ -58,10 +58,10 @@ public class EntityDeleter extends CustomItemBlueprint implements Listener {
         if (!isItemOfType(mainHandItem))
             return;
 
-        if (event.getDamaged() instanceof Player)
+        if (event.damaged instanceof Player)
             return;
 
-        event.getDamaged().remove();
-        player.sendMessage(event.getDamaged().name().append(Component.text(" deleted!", NamedTextColor.GREEN)));
+        event.damaged.remove();
+        player.sendMessage(event.damaged.name().append(Component.text(" deleted!", NamedTextColor.GREEN)));
     }
 }

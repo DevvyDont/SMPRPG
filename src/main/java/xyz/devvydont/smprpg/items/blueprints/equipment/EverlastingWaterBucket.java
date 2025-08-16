@@ -58,7 +58,7 @@ public class EverlastingWaterBucket extends CustomItemBlueprint implements IHead
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override
@@ -107,7 +107,7 @@ public class EverlastingWaterBucket extends CustomItemBlueprint implements IHead
             if (block.getBlockData() instanceof Waterlogged waterlog) {
                 waterlog.setWaterlogged(true);  // Can't unwaterlog if bucket is always full, force true.
                 block.setBlockData(waterlog);
-                Bukkit.getScheduler().runTaskLater(SMPRPG.getInstance(), block::fluidTick, TickTime.HALF_SECOND);  // Half second isn't completely accurate, but its a very close approximation.
+                Bukkit.getScheduler().runTaskLater(SMPRPG.getPlugin(), block::fluidTick, TickTime.HALF_SECOND);  // Half second isn't completely accurate, but its a very close approximation.
             } else {
                 event.getPlayer().getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.WATER);
             }

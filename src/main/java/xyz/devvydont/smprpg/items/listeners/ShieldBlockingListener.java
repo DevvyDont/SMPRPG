@@ -20,7 +20,7 @@ public class ShieldBlockingListener extends ToggleableListener {
     public void onBlockDamageWithShield(CustomEntityDamageByEntityEvent event) {
 
         // Is the receiver a player?
-        if (!(event.getDamaged() instanceof Player player))
+        if (!(event.damaged instanceof Player player))
             return;
 
         // Are they blocking?

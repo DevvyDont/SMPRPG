@@ -84,7 +84,7 @@ public class LootingEnchantment extends VanillaEnchantment implements Listener {
     @EventHandler
     public void onItemQuantityRoll(CustomItemQuantityRollDropEvent event) {
 
-        int looting = EnchantmentUtil.getEnchantLevel(Enchantment.LOOTING, event.getTool());
+        int looting = EnchantmentUtil.getEnchantLevel(Enchantment.LOOTING, event.tool);
         if (looting < 1)
             return;
 
@@ -93,6 +93,6 @@ public class LootingEnchantment extends VanillaEnchantment implements Listener {
             return;
 
         int extraDrops = (int) Math.round(Math.random()*looting+1);
-        event.setAmount(event.getAmount() + extraDrops);
+        event.amount = event.amount + extraDrops;
     }
 }

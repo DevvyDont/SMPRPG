@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.blueprints.equipment;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
@@ -40,7 +39,7 @@ public class SmolderingCoreBlueprint extends ReforgeStone implements ICraftable,
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

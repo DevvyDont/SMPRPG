@@ -51,7 +51,7 @@ public abstract class CustomItemBlueprint extends SMPItemBlueprint {
     public void updateItemData(ItemMeta meta) {
 
         // Apply the key to the item so the plugin knows this item is custom
-        meta.getPersistentDataContainer().set(itemService.ITEM_TYPE_KEY, PersistentDataType.STRING, getCustomItemType().getKey());
+        meta.getPersistentDataContainer().set(itemService.getItemTypeKey(), PersistentDataType.STRING, getCustomItemType().getKey());
         super.updateItemData(meta);
     }
 

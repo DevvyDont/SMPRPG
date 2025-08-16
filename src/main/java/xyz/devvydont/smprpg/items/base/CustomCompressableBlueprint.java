@@ -41,7 +41,7 @@ public abstract class CustomCompressableBlueprint extends CustomItemBlueprint im
      * @return
      */
     private NamespacedKey generateRecipeKey(CompressionRecipeMember member, boolean compress) {
-        return new NamespacedKey(SMPRPG.getInstance(), member.generateRecipeName(compress));
+        return new NamespacedKey(SMPRPG.getPlugin(), member.generateRecipeName(compress));
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class CustomCompressableBlueprint extends CustomItemBlueprint im
 
             // Is this recipe already registered?
             NamespacedKey recipeKey = generateRecipeKey(current, true);
-            if (SMPRPG.getInstance().getServer().getRecipe(recipeKey) != null)
+            if (SMPRPG.getPlugin().getServer().getRecipe(recipeKey) != null)
                 continue;
 
             // Register the current item to craft into the next item by making a shapeless recipe of the defined amount.
@@ -74,7 +74,7 @@ public abstract class CustomCompressableBlueprint extends CustomItemBlueprint im
             recipe.setIngredient('m', current.getMaterial().get(itemService));
             recipe.setCategory(CraftingBookCategory.MISC);
             recipe.setGroup(getCompressionFlow().get(0).getMaterial().key());
-            if (SMPRPG.getInstance().getServer().addRecipe(recipe))
+            if (SMPRPG.getPlugin().getServer().addRecipe(recipe))
                 recipes.add(recipe);
         }
 
@@ -98,7 +98,7 @@ public abstract class CustomCompressableBlueprint extends CustomItemBlueprint im
 
             // Is this recipe already registered?
             NamespacedKey recipeKey = generateRecipeKey(current, false);
-            if (SMPRPG.getInstance().getServer().getRecipe(recipeKey) != null)
+            if (SMPRPG.getPlugin().getServer().getRecipe(recipeKey) != null)
                 continue;
 
             // Register the current item to craft into the next item by making a shapeless recipe of the defined amount.
@@ -109,7 +109,7 @@ public abstract class CustomCompressableBlueprint extends CustomItemBlueprint im
             recipe.setIngredient('m', current.getMaterial().get(itemService));
             recipe.setCategory(CraftingBookCategory.MISC);
             recipe.setGroup(getCompressionFlow().get(0).getMaterial().key());
-            if (SMPRPG.getInstance().getServer().addRecipe(recipe))
+            if (SMPRPG.getPlugin().getServer().addRecipe(recipe))
                 recipes.add(recipe);
         }
 

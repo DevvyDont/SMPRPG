@@ -8,7 +8,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.CommandBase;
+import xyz.devvydont.smprpg.commands.LegacyCommand;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CommandSummon extends CommandBase {
+public class CommandSummon extends LegacyCommand {
 
     public CommandSummon(String name) {
         super(name);

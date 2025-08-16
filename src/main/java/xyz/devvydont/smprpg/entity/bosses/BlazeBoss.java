@@ -22,7 +22,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
-import xyz.devvydont.smprpg.effects.services.SpecialEffectService;
+import xyz.devvydont.smprpg.services.SpecialEffectService;
 import xyz.devvydont.smprpg.effects.tasks.OverheatingEffect;
 import xyz.devvydont.smprpg.effects.tasks.TetheredEffect;
 import xyz.devvydont.smprpg.entity.CustomEntityType;

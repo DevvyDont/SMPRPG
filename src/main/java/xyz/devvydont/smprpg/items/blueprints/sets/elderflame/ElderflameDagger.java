@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.elderflame;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -17,7 +16,6 @@ import xyz.devvydont.smprpg.items.attribute.MultiplicativeAttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
 import xyz.devvydont.smprpg.items.interfaces.ICraftable;
-import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 
 import java.util.Collection;
@@ -79,7 +77,7 @@ public class ElderflameDagger extends CustomAttributeItem implements ICraftable,
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override

@@ -93,14 +93,14 @@ public class FirstStrikeEnchantment extends CustomEnchantment implements Listene
     @EventHandler(ignoreCancelled = true)
     public void onDealDamage(CustomEntityDamageByEntityEvent event) {
 
-        if (!(event.getDealer() instanceof LivingEntity living) || living.getEquipment() == null)
+        if (!(event.dealer instanceof LivingEntity living) || living.getEquipment() == null)
             return;
 
         // Is this the first hit?
-        if (!(SMPRPG.getService(EntityService.class).getEntityInstance(event.getDamaged()) instanceof IDamageTrackable trackable))
+        if (!(SMPRPG.getService(EntityService.class).getEntityInstance(event.damaged) instanceof IDamageTrackable trackable))
             return;
 
-        int numHits = trackable.getDamageTracker().getNumberOfHitsDealtByEntity(event.getDealer());
+        int numHits = trackable.getDamageTracker().getNumberOfHitsDealtByEntity(event.dealer);
         if (numHits > 0)
             return;
 

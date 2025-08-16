@@ -1,6 +1,5 @@
 package xyz.devvydont.smprpg.items.blueprints.resources.crafting;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
@@ -37,7 +36,7 @@ public class DraconicCrystal extends CustomItemBlueprint implements ICraftable, 
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), getCustomItemType().getKey() + "-recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
     }
 
     @Override

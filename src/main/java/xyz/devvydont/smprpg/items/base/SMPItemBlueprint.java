@@ -105,7 +105,7 @@ public abstract class SMPItemBlueprint {
         ReforgeBase reforge = getReforge(item);
         if (reforge == null)
             return null;
-        return reforge.getType();
+        return reforge.type;
     }
 
     public boolean isReforged(ItemStack item) {
@@ -132,7 +132,7 @@ public abstract class SMPItemBlueprint {
         if (reforge == null)
             return "";
 
-        return reforge.getType().display() + " ";
+        return reforge.type.display() + " ";
     }
 
     /**
@@ -207,7 +207,7 @@ public abstract class SMPItemBlueprint {
             return List.of();
 
         List<Component> lines = new ArrayList<>();
-        lines.add(ComponentUtils.create(reforge.getType().display() + " Reforge", NamedTextColor.BLUE));
+        lines.add(ComponentUtils.create(reforge.type.display() + " Reforge", NamedTextColor.BLUE));
         lines.addAll(reforge.getDescription());
         return lines;
     }

@@ -16,7 +16,7 @@ import xyz.devvydont.smprpg.services.ItemService;
 public class DropFireworkTask extends BukkitRunnable {
 
     public static void start(Item item) {
-        new DropFireworkTask(item).runTaskTimer(SMPRPG.getInstance(), (long)(Math.random()*20), 40L);
+        new DropFireworkTask(item).runTaskTimer(SMPRPG.getPlugin(), (long)(Math.random()*20), 40L);
     }
 
     private final Item item;

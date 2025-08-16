@@ -3,13 +3,13 @@ package xyz.devvydont.smprpg.commands.enchantments;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.enchantments.EnchantmentMenu;
 
 import java.util.Collection;
 import java.util.List;
 
-public class CommandEnchantments extends PlayerCommandBase {
+public class CommandEnchantments extends CommandSimplePlayer {
 
     public CommandEnchantments(String name) {
         super(name);

@@ -44,7 +44,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
         NETHER_SPAWN("Nether spawn", NamedTextColor.RED),
         END_SPAWN("End spawn", NamedTextColor.LIGHT_PURPLE);
 
-        private final NamespacedKey key = new NamespacedKey(SMPRPG.getInstance(), this.name().toLowerCase());
+        private final NamespacedKey key = new NamespacedKey(SMPRPG.getPlugin(), this.name().toLowerCase());
         private final String locationName;
         private final NamedTextColor color;
 
@@ -112,7 +112,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
 
     @Override
     public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), this.getCustomItemType().getKey() + "_recipe");
+        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     @Override

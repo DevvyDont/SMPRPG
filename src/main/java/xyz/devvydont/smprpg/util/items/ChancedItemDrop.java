@@ -61,10 +61,10 @@ public class ChancedItemDrop implements LootDrop {
         event.callEvent();
 
         // RNG roll
-        double chance = event.getChance() * chanceDecay;
+        double chance = event.chance * chanceDecay;
         if (Math.random() < chance) {
             ItemStack reward = getItemCopy();
-            new CustomChancedItemDropSuccessEvent(player, event.getChance(), reward, getSource()).callEvent();
+            new CustomChancedItemDropSuccessEvent(player, event.chance, reward, getSource()).callEvent();
             return List.of(reward);
         }
 

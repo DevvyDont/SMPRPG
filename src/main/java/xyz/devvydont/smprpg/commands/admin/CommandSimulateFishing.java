@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
-import xyz.devvydont.smprpg.commands.PlayerCommandBase;
+import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
@@ -21,7 +21,7 @@ import java.time.Duration;
 /**
  * Simulates fishing casts for debugging purposes.
  */
-public class CommandSimulateFishing extends PlayerCommandBase {
+public class CommandSimulateFishing extends CommandSimplePlayer {
 
     public CommandSimulateFishing(String name) {
         super(name);
@@ -67,7 +67,7 @@ public class CommandSimulateFishing extends PlayerCommandBase {
                 if (tick >= casts)
                     cancel();
             }
-        }.runTaskTimer(SMPRPG.getInstance(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
+        }.runTaskTimer(SMPRPG.getPlugin(), TickTime.INSTANTANEOUSLY, TickTime.TICK);
     }
 
     @Override

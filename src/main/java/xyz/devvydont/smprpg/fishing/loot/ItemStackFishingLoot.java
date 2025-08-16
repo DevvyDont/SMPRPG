@@ -12,7 +12,6 @@ import xyz.devvydont.smprpg.fishing.utils.FishingContext;
 import xyz.devvydont.smprpg.fishing.loot.requirements.FishingLootRequirement;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
-import xyz.devvydont.smprpg.items.blueprints.fishing.FishBlueprint;
 import xyz.devvydont.smprpg.services.DropsService;
 import xyz.devvydont.smprpg.services.ItemService;
 
@@ -61,7 +60,7 @@ public class ItemStackFishingLoot extends FishingLootBase {
      */
     @Override
     public NamespacedKey getKey() {
-        return new NamespacedKey(SMPRPG.getInstance(), key);
+        return new NamespacedKey(SMPRPG.getPlugin(), key);
     }
 
     public ItemStack getItem() {
@@ -77,7 +76,7 @@ public class ItemStackFishingLoot extends FishingLootBase {
     }
 
     @Override
-    public Material getDisplayMaterial() {
+    public @NotNull Material getDisplayMaterial() {
 
         // Try and query multiple aspects of the item first, but use its raw material as a fallback always.
         var key = this.item.getData(DataComponentTypes.ITEM_MODEL);

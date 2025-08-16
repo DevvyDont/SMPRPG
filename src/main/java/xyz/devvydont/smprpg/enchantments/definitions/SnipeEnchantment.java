@@ -83,10 +83,10 @@ public class SnipeEnchantment extends CustomEnchantment implements Listener {
         if (!event.getVanillaCause().equals(EntityDamageEvent.DamageCause.PROJECTILE))
             return;
 
-        if (!(event.getProjectile() instanceof AbstractArrow arrow))
+        if (!(event.projectile instanceof AbstractArrow arrow))
             return;
 
-        if (!(event.getDealer() instanceof LivingEntity living) || living.getEquipment() == null)
+        if (!(event.dealer instanceof LivingEntity living) || living.getEquipment() == null)
             return;
 
         // Retrieve the higher snipe level of the two hands to determine which one to use
