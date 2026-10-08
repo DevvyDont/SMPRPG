@@ -1,0 +1,31 @@
+{
+  "values": [
+    "minecraft:protection",
+    "minecraft:blast_protection",
+    "minecraft:projectile_protection",
+    "minecraft:looting",
+
+    "smprpg:aerial_affinity",
+    "smprpg:calamity",
+    "smprpg:execute",
+    "smprpg:first_strike",
+    "smprpg:double_tap",
+    "smprpg:execute",
+    "smprpg:muffle",
+    "smprpg:prosecute",
+    "smprpg:genesis",
+    "smprpg:tracing",
+    "smprpg:burden",
+    "smprpg:leech",
+    "smprpg:syphon",
+    "smprpg:proficient",
+    "smprpg:fortuity",
+    "smprpg:speedster",
+
+    "smprpg:one_for_all",
+
+    "smprpg:voidstriding",
+    "smprpg:telekinesis",
+    "smprpg:keeping"
+  ]
+}

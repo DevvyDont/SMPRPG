@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- '  M'
+- ' H '
+- 'H  '
+ingredients:
+  H: smprpg:steel_tool_shaft
+  M: smprpg:adamantium_ingot
+result:
+  item: smprpg:adamantium_spear
+  amount: 1
+unlocked_by:
+- smprpg:adamantium_ingot

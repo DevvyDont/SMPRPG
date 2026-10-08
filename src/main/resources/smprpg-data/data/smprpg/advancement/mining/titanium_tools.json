@@ -1,0 +1,47 @@
+{
+  "parent": "smprpg:mining/mithril_tools",
+  "criteria": {
+    "titanium_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "titanium_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.titanium_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:custom_model_data": {
+          "strings": [
+            "smprpg:titanium_pickaxe"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "minecraft:diamond_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.titanium_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "titanium_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

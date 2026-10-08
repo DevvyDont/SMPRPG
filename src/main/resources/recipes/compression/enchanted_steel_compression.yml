@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:enchanted_steel
+- item: smprpg:enchanted_steel_block
+  amount: 9
+- item: smprpg:steel_singularity
+  amount: 9

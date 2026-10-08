@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:aetherium_ingot
+result:
+  item: smprpg:aetherium_boots
+  amount: 1
+unlocked_by:
+- smprpg:aetherium_ingot

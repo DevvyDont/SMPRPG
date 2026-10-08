@@ -1,0 +1,25 @@
+{
+  "parent": "smprpg:aether/find_golden_oak_island",
+  "criteria": {
+    "harvest_golden_apple": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.harvest_golden_apple.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:golden_apple"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.harvest_golden_apple.title"
+    }
+  },
+  "requirements": [
+    [
+      "harvest_golden_apple"
+    ]
+  ]
+}

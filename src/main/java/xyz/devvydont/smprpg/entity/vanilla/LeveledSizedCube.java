@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Slime;
 import xyz.devvydont.smprpg.entity.EntityGlobals;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
 
@@ -46,5 +47,12 @@ public class LeveledSizedCube extends VanillaEntity<Slime> {
      */
     private double getAttributeMultiplier() {
         return (_entity.getSize() + 1) * SIZE_ATTRIBUTE_MODIFIER;
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.CUBIC);
+
+        super.setup();
     }
 }

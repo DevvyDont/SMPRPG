@@ -1,0 +1,13 @@
+type: compression
+tiers:
+- minecraft:pumpkin
+- item: smprpg:premium_pumpkin
+  amount: 9
+- item: smprpg:premium_carved_pumpkin
+  amount: 9
+- item: smprpg:enchanted_pumpkin
+  amount: 9
+- item: smprpg:enchanted_carved_pumpkin
+  amount: 9
+- item: smprpg:pumpkin_singularity
+  amount: 9

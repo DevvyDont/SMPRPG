@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.charms;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -29,14 +30,16 @@ public class LuckyCharm extends CustomAttributeItem implements IModelOverridden 
     }
 
     @Override
-    public Material getDisplayMaterial() {
-        return Material.TOTEM_OF_UNDYING;
+    public Key getDisplayKey() {
+        return IModelOverridden.ofMaterial(Material.TOTEM_OF_UNDYING);
     }
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.LUCK, 30)
+                AttributeEntry.additive(AttributeWrapper.MINING_FORTUNE, 50),
+                AttributeEntry.additive(AttributeWrapper.FARMING_FORTUNE, 50),
+                AttributeEntry.additive(AttributeWrapper.WOODCUTTING_FORTUNE, 50)
         );
     }
 

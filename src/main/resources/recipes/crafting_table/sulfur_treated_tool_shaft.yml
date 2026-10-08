@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- t
+- s
+- t
+ingredients:
+  s: smprpg:enchanted_sulfur
+  t: smprpg:tungsten_block
+result:
+  item: smprpg:sulfur_treated_tool_shaft
+  amount: 1
+unlocked_by:
+- smprpg:tungsten_ingot
+- smprpg:sulfur

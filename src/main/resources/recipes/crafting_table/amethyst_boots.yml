@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:enchanted_amethyst
+result:
+  item: smprpg:amethyst_boots
+  amount: 1
+unlocked_by:
+- minecraft:amethyst_shard

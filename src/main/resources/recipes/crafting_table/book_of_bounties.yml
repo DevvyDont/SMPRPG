@@ -1,0 +1,12 @@
+﻿type: shaped
+pattern:
+  - pp
+  - pP
+ingredients:
+  p: minecraft:paper
+  P: smprpg:enchanted_golden_carrot
+result:
+  item: smprpg:book_of_bounties
+  amount: 1
+unlocked_by:
+  - minecraft:carrot

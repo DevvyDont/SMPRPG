@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Shulker;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -28,6 +29,14 @@ public class Voidlurker extends CustomEntityInstance<Shulker> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_SHULKER_SHELL), 100, this),
                 new ChancedItemDrop(ItemService.generate(Material.SHULKER_SHELL), 2, this)
         );
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.CUBIC);
+
+        super.setup();
     }
 
 }

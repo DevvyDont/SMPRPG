@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- d
+- d
+ingredients:
+  d: minecraft:diamond
+result:
+  item: smprpg:diamond_tool_rod
+  amount: 1
+unlocked_by:
+- minecraft:diamond

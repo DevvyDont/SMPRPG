@@ -1,0 +1,33 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/diamond_shovel"
+        },
+        "cases": [
+            {
+                "when": "smprpg:mithril_shovel",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/mithril_shovel"
+                }
+            },
+            {
+                "when": "smprpg:titanium_shovel",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/titanium_shovel"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_shovel",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/adamantium_shovel"
+                }
+            }
+        ]
+    }
+}

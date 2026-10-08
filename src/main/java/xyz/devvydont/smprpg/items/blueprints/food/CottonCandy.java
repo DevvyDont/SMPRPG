@@ -5,6 +5,7 @@ import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -32,21 +33,21 @@ public class CottonCandy extends CustomItemBlueprint implements IEdible, ISellab
 
     @Override
     public int getNutrition(ItemStack item) {
-        return 4;
+        return 5;
     }
 
     @Override
     public float getSaturation(ItemStack item) {
-        return 2;
+        return 10;
     }
 
     @Override
     public boolean canAlwaysEat(ItemStack item) {
-        return false;
+        return true;
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(.8f)
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(new PotionEffect(PotionEffectType.JUMP_BOOST, 20*45, 0, true, true)), .2f))

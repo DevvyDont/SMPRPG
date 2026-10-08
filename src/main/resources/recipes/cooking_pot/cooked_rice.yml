@@ -1,0 +1,8 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:rice"
+time: 100
+result: "smprpg:cooked_rice"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 20

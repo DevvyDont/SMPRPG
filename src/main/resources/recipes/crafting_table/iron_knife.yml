@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- i
+- s
+ingredients:
+  s: minecraft:stick
+  i: minecraft:iron_ingot
+result:
+  item: smprpg:iron_knife
+  amount: 1
+unlocked_by:
+- minecraft:iron_ingot

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
+    id("xyz.jpenilla.run-paper") version "3.0.0"
     id 'org.jetbrains.kotlin.jvm'
     id 'com.gradleup.shadow' version '9.0.0-rc3'
 }
@@ -25,22 +26,45 @@ repositories {
     }
     maven { url 'https://jitpack.io' }
     maven { url "https://repo.dmulloy2.net/repository/public/" }
+    maven { url "https://repo.momirealms.net/releases" }
+
+    maven {url "https://maven.blamejared.com/" } // For transitive dependency in bettermodel-fabric
+    maven { url "https://maven.nucleoid.xyz/" } // For transitive dependency in bettermodel-fabric
+    maven { url "https://maven.enginehub.org/repo/" }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("26.1.2.build.+")
+    //compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
+
     compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
     compileOnly 'net.dmulloy2:ProtocolLib:5.4.0'
     implementation 'com.google.code.gson:gson:2.13.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    compileOnly("net.momirealms:craft-engine-core:26.7")
+    compileOnly("net.momirealms:craft-engine-bukkit:26.7")
+    compileOnly("net.momirealms:craft-engine-adventure:26.7")
+
+    compileOnly("io.github.toxicity188:bettermodel-bukkit-api:3.0.2") // bukkit(spigot, paper, etc) api
+
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.17'
+
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     if (JavaVersion.current() < javaVersion) {
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
+}
+
+paperweight {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.getMOJANG_PRODUCTION()
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -53,19 +77,32 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks {
     shadowJar {
-        relocate("kotlin", "xyz.devvydont.libs.kotlin")
-        relocate("kotlinx", "xyz.devvydont.libs.kotlinx")
+        def isDevRun = project.hasProperty("dev") || gradle.startParameter.taskNames.any { it.contains("runServer") }
+        if (!isDevRun) {
+            relocate("kotlin", "xyz.devvydont.libs.kotlin")
+            relocate("kotlinx", "xyz.devvydont.libs.kotlinx")
+        }
     }
     build {
         dependsOn(shadowJar)
     }
     runServer {
-        minecraftVersion("1.21.8")
+        minecraftVersion("26.1.2")
         jvmArgs("-XX:+UseParallelGC")
     }
 }
 
+tasks.register('zipResourcePack', Zip) {
+    from 'resourcepack'
+    archiveFileName = 'resourcepack.zip'
+    destinationDirectory = layout.buildDirectory.dir('generated-resources')
+}
+
 processResources {
+    dependsOn zipResourcePack
+    from(layout.buildDirectory.dir('generated-resources')) {
+        include 'resourcepack.zip'
+    }
     def props = [version: version]
     inputs.properties props
     filteringCharset 'UTF-8'
@@ -74,6 +111,6 @@ processResources {
     }
 }
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(targetJavaVersion)
 }
 

@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:dirt
+- item: smprpg:compressed_dirt
+  amount: 9
+- item: smprpg:double_compressed_dirt
+  amount: 9
+- item: smprpg:enchanted_dirt
+  amount: 9
+- item: smprpg:dirt_singularity
+  amount: 9

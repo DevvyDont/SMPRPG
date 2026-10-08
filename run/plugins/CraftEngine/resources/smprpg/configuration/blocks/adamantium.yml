@@ -1,0 +1,149 @@
+items:
+  smprpg:adamantium_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.adamantium_ore>
+    model: smprpg:block/overworld/adamantium_ore
+    behavior:
+      type: block_item
+      block: smprpg:adamantium_ore
+  smprpg:raw_adamantium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_adamantium_block>
+    model: smprpg:block/overworld/raw_adamantium_block
+    behavior:
+      type: block_item
+      block: smprpg:raw_adamantium_block
+  smprpg:adamantium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.adamantium_block>
+    model: smprpg:block/overworld/adamantium_block
+    behavior:
+      type: block_item
+      block: smprpg:adamantium_block
+  smprpg:raw_adamantium:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_adamantium>
+      pdc:
+        smprpg:item-type: raw_adamantium
+        smprpg:sell-value: 500
+    model: smprpg:item/materials/raw_adamantium
+  smprpg:adamantium_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.adamantium_ingot>
+      pdc:
+        smprpg:item-type: adamantium_ingot
+        smprpg:sell-value: 2000
+    model: smprpg:item/materials/adamantium_ingot
+
+blocks:
+  smprpg:adamantium_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/adamantium_ore
+    settings:
+      template:
+      - smprpg:settings/solid_1x1x1
+      - smprpg:data/breaking_power_5
+      - smprpg:sound/adamantium_ore
+      require-correct-tools: true
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        hardness: 150.0
+        resistance: 1200.0
+        instrument: basedrum
+        map-color: 11
+    events:
+      - on: break
+        functions:
+          - type: run
+            delay: 1
+            functions:
+              - type: place_block
+                block-state: "minecraft:bedrock"
+
+  smprpg:raw_adamantium_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/raw_adamantium_block
+    settings:
+      template:
+        - smprpg:settings/raw_metal_block
+        - smprpg:data/breaking_power_5
+      overrides:
+        hardness: 50.0
+        resistance: 1200.0
+        map-color: 7
+
+  smprpg:adamantium_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/adamantium_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_5
+        - smprpg:data/beacon_usable
+      overrides:
+        hardness: 50.0
+        resistance: 1200.0
+        instrument: bass
+        map-color: 7
+
+placed-features:
+  smprpg:ore_adamantium:
+    dimension:
+      - minecraft:overworld
+    feature:
+      type: minecraft:scattered_ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 3
+        targets:
+          - state:
+              Name: smprpg:adamantium_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:grimstone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 2
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: -60
+          min_inclusive:
+            absolute: -62
+
+recipes:
+  smprpg:adamantium_from_blasting_raw_adamantium:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: adamantium
+    time: 800
+    ingredient: smprpg:raw_adamantium
+    result:
+      id: smprpg:adamantium_ingot
+      count: 1
+  smprpg:adamantium_from_blasting_adamantium_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 800
+    ingredient: smprpg:adamantium_ore
+    result:
+      id: smprpg:adamantium_ingot
+      count: 1

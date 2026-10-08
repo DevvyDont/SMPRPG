@@ -1,0 +1,481 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/poisonous_potato"
+        },
+        "cases": [
+			{
+                "when": "smprpg:silver_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/silver_ore"
+                }
+            },
+			{
+                "when": "smprpg:deepslate_silver_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/deepslate_silver_ore"
+                }
+            },
+			{
+                "when": "smprpg:silver_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/silver_block"
+                }
+            },
+						{
+                "when": "smprpg:enchanted_silver_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/silver_block"
+                }
+            },
+			{
+                "when": "smprpg:raw_silver_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_silver_block"
+                }
+            },
+			{
+                "when": "smprpg:tin_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tin_ore"
+                }
+            },
+			{
+                "when": "smprpg:deepslate_tin_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/deepslate_tin_ore"
+                }
+            },
+			{
+                "when": "smprpg:tin_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tin_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_tin_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tin_block"
+                }
+            },
+			{
+                "when": "smprpg:raw_tin_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_tin_block"
+                }
+            },
+			{
+                "when": "smprpg:rose_gold_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rose_gold_block"
+                }
+            },
+			{
+                "when": "smprpg:bronze_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/bronze_block"
+                }
+            },
+			{
+                "when": "smprpg:steel_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/steel_block"
+                }
+            },
+			{
+                "when": "smprpg:sparse_mithril_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/sparse_mithril_ore"
+                }
+            },
+			{
+                "when": "smprpg:mithril_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/mithril_ore"
+                }
+            },
+			{
+                "when": "smprpg:dense_mithril_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/dense_mithril_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_mithril_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_mithril_block"
+                }
+            },
+			{
+                "when": "smprpg:mithril_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/mithril_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_mithril_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/mithril_block"
+                }
+            },
+			{
+                "when": "smprpg:titanium_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/titanium_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_titanium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_titanium_block"
+                }
+            },
+			{
+                "when": "smprpg:titanium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/titanium_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_titanium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/titanium_block"
+                }
+            },
+			{
+                "when": "smprpg:adamantium_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/bedrock_adamantium_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_adamantium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_adamantium_block"
+                }
+            },
+			{
+                "when": "smprpg:adamantium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/adamantium_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_adamantium_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/adamantium_block"
+                }
+            },
+			{
+                "when": "smprpg:sulfur_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/sulfur_ore"
+                }
+            },
+			{
+                "when": "smprpg:sulfur_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/sulfur_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_sulfur_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/sulfur_block"
+                }
+            },
+			{
+                "when": "smprpg:onyx_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/onyx_ore"
+                }
+            },
+			{
+                "when": "smprpg:onyx_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/onyx_block"
+                }
+            },
+			{
+                "when": "smprpg:tungsten_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tungsten_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_tungsten_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_tungsten_block"
+                }
+            },
+			{
+                "when": "smprpg:tungsten_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tungsten_block"
+                }
+            },
+			{
+                "when": "smprpg:enchanted_tungsten_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/tungsten_block"
+                }
+            },
+			{
+                "when": "smprpg:cobalt_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/cobalt_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_cobalt_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_cobalt_block"
+                }
+            },
+			{
+                "when": "smprpg:cobalt_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/cobalt_block"
+                }
+            },
+			{
+                "when": "smprpg:orichalcum_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/orichalcum_ore"
+                }
+            },
+			{
+                "when": "smprpg:raw_orichalcum_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/raw_orichalcum_block"
+                }
+            },
+			{
+                "when": "smprpg:orichalcum_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/orichalcum_block"
+                }
+            },
+            {
+                "when": "smprpg:dragonsteel_block",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/dragonsteel_block"
+                }
+            },
+			{
+                "when": "smprpg:reforge_table",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/reforge_table"
+                }
+            },
+			{
+                "when": "smprpg:grimstone",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone"
+                }
+            },
+			{
+                "when": "smprpg:cobbled_grimstone",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/cobbled_grimstone"
+                }
+            },
+			{
+                "when": "smprpg:grimstone_diamond_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone_diamond_ore"
+                }
+            },
+			{
+                "when": "smprpg:grimstone_iron_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone_iron_ore"
+                }
+            },
+			{
+                "when": "smprpg:grimstone_gold_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone_gold_ore"
+                }
+            },
+			{
+                "when": "smprpg:grimstone_silver_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone_silver_ore"
+                }
+            },
+			{
+                "when": "smprpg:grimstone_lapis_ore",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/grimstone_lapis_ore"
+                }
+            },
+			{
+                "when": "smprpg:rune_blank",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_blank"
+                }
+            },
+			{
+                "when": "smprpg:rune_blank_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_blank"
+                }
+            },
+			{
+                "when": "smprpg:rune_potential",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_potential"
+                }
+            },
+			{
+                "when": "smprpg:rune_potential_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_potential"
+                }
+            },
+			{
+                "when": "smprpg:rune_ambition",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_ambition"
+                }
+            },
+			{
+                "when": "smprpg:rune_ambition_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_ambition"
+                }
+            },
+			{
+                "when": "smprpg:rune_memorization",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_memorization"
+                }
+            },
+			{
+                "when": "smprpg:rune_memorization_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_memorization"
+                }
+            },
+			{
+                "when": "smprpg:rune_greed",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_greed"
+                }
+            },
+			{
+                "when": "smprpg:rune_greed_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_greed"
+                }
+            },
+			{
+                "when": "smprpg:rune_insight",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_insight"
+                }
+            },
+			{
+                "when": "smprpg:rune_insight_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_insight"
+                }
+            },
+			{
+                "when": "smprpg:rune_fortuity",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_fortuity"
+                }
+            },
+			{
+                "when": "smprpg:rune_fortuity_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_fortuity"
+                }
+            },
+			{
+                "when": "smprpg:rune_divinity",
+                "model": {
+                    "type": "model",
+                    "model": "blocks:block/rune_divinity"
+                }
+            },
+			{
+                "when": "smprpg:rune_divinity_ui",
+                "model": {
+                    "type": "model",
+                    "model": "ui:item/rune_divinity"
+                }
+            }
+        ]
+    }
+}

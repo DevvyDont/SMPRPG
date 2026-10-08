@@ -97,10 +97,15 @@ public abstract class BackpackBase extends CustomItemBlueprint implements IHeade
 
         // If this item has no stored items, initialize it.
         List<ItemStack> items;
-        if (data == null || data.contents().isEmpty())
+        if (data == null || data.contents().isEmpty()) {
             items = initialize(container);
-        else
-            items = new ArrayList<>(data.contents());
+        } else {
+            // Legacy backpacks may contain null entries from before Paper disallowed null ItemStacks.
+            // Normalize them to air so no consumer ever has to null check stored items.
+            items = new ArrayList<>();
+            for (var item : data.contents())
+                items.add(item == null ? ItemStack.of(Material.AIR) : item);
+        }
 
         // Fill empty spaces with air.
         while (items.size() < this.getSlots())

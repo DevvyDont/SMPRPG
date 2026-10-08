@@ -1,0 +1,1313 @@
+items:
+  smprpg:cutting_board:
+    settings:
+      fuel-time: 300
+    data:
+      item-name: <!i><lang:item.smprpg.cutting_board>
+      pdc:
+        smprpg:item-type: cutting_board
+    model: smprpg:block/interactables/cutting_board
+    behavior:
+      type: block_item
+      block: smprpg:cutting_board
+  smprpg:cooking_pot:
+    data:
+      item-name: <!i><lang:item.smprpg.cooking_pot>
+      pdc:
+        smprpg:item-type: cooking_pot
+    model: smprpg:block/interactables/cooking_pot
+    behavior:
+      type: block_item
+      block: smprpg:cooking_pot
+  smprpg:iron_knife:
+    material: iron_sword
+    model:
+      template: smprpg:model/handheld
+      arguments:
+        model: smprpg:item/tools/iron_knife
+        texture: smprpg:item/tools/iron_knife
+    tags:
+      - smprpg:knives
+    data:
+      item-name: <!i><lang:item.smprpg.iron_knife>
+      max_damage: 320
+      pdc:
+        smprpg:item-type: iron_knife
+  smprpg:kitchen_tiles:
+    data:
+      item-name: <!i><lang:item.smprpg.kitchen_tiles>
+      pdc:
+        smprpg:item-type: kitchen_tiles
+    model: smprpg:block/decoration/kitchen_tiles
+    behavior:
+      type: block_item
+      block: smprpg:kitchen_tiles
+  smprpg:rope_coil:
+    data:
+      item-name: <!i><lang:item.smprpg.rope_coil>
+      pdc:
+        smprpg:item-type: rope_coil
+    model: smprpg:block/decoration/rope_coil
+    behavior:
+      type: block_item
+      block: smprpg:rope_coil
+  smprpg:straw:
+    data:
+      item-name: <!i><lang:item.smprpg.straw>
+      pdc:
+        smprpg:item-type: straw
+        smprpg:sell-value: 1
+    texture: smprpg:item/materials/straw
+
+items#ingredients:
+  smprpg:ground_beef:
+    data:
+      item-name: <!i><lang:item.smprpg.ground_beef>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: ground_beef
+        smprpg:sell-value: 1
+    texture: smprpg:item/consumables/ingredients/ground_beef
+  smprpg:cooked_ground_beef:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_ground_beef>
+      food:
+        nutrition: 4
+      pdc:
+        smprpg:item-type: cooked_ground_beef
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/cooked_ground_beef
+  smprpg:beef_patty:
+    data:
+      item-name: <!i><lang:item.smprpg.beef_patty>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: beef_patty
+        smprpg:sell-value: 1
+    texture: smprpg:item/consumables/ingredients/beef_patty
+  smprpg:cooked_beef_patty:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_beef_patty>
+      food:
+        nutrition: 4
+      pdc:
+        smprpg:item-type: cooked_beef_patty
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/cooked_beef_patty
+  smprpg:steak_strips:
+    data:
+      item-name: <!i><lang:item.smprpg.steak_strips>
+      food:
+        nutrition: 4
+      pdc:
+        smprpg:item-type: steak_strips
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/steak_strips
+  smprpg:bacon:
+    data:
+      item-name: <!i><lang:item.smprpg.bacon>
+      food:
+        nutrition: 2
+      pdc:
+        smprpg:item-type: bacon
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/bacon
+  smprpg:cooked_bacon:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_bacon>
+      food:
+        nutrition: 4
+      pdc:
+        smprpg:item-type: cooked_bacon
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/cooked_bacon
+  smprpg:bone_broth:
+    data:
+      item-name: <!i><lang:item.smprpg.bone_broth>
+      food:
+        nutrition: 2
+      pdc:
+        smprpg:item-type: bone_broth
+    texture: smprpg:item/consumables/farmers_delight/bone_broth
+  smprpg:chicken_cuts:
+    data:
+      item-name: <!i><lang:item.smprpg.chicken_cuts>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: chicken_cuts
+    texture: smprpg:item/consumables/ingredients/chicken_cuts
+  smprpg:cooked_chicken_cuts:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_chicken_cuts>
+      food:
+        nutrition: 3
+      pdc:
+        smprpg:item-type: cooked_chicken_cuts
+    texture: smprpg:item/consumables/ingredients/cooked_chicken_cuts
+  smprpg:cod_filet:
+    data:
+      item-name: <!i><lang:item.smprpg.cod_filet>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: cod_filet
+    texture: smprpg:item/consumables/ingredients/chicken_cuts
+  smprpg:cooked_cod_filet:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_cod_filet>
+      food:
+        nutrition: 3
+      pdc:
+        smprpg:item-type: cooked_cod_filet
+    texture: smprpg:item/consumables/ingredients/cooked_cod_filet
+  smprpg:cooked_ground_pork:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_ground_pork>
+      food:
+        nutrition: 2
+      pdc:
+        smprpg:item-type: cooked_ground_pork
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/cooked_ground_pork
+  smprpg:salmon_filet:
+    data:
+      item-name: <!i><lang:item.smprpg.salmon_filet>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: salmon_filet
+    texture: smprpg:item/consumables/ingredients/chicken_cuts
+  smprpg:cooked_salmon_filet:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_salmon_filet>
+      food:
+        nutrition: 3
+      pdc:
+        smprpg:item-type: cooked_salmon_filet
+    texture: smprpg:item/consumables/ingredients/cooked_salmon_filet
+  smprpg:mutton_chops:
+    data:
+      item-name: <!i><lang:item.smprpg.mutton_chops>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: mutton_chops
+    texture: smprpg:item/consumables/ingredients/mutton_chops
+  smprpg:cooked_mutton_chops:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_mutton_chops>
+      food:
+        nutrition: 3
+      pdc:
+        smprpg:item-type: cooked_mutton_chops
+    texture: smprpg:item/consumables/ingredients/cooked_mutton_chops
+  smprpg:fried_egg:
+    data:
+      item-name: <!i><lang:item.smprpg.fried_egg>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: fried_egg
+    texture: smprpg:item/consumables/ingredients/fried_egg
+  smprpg:ground_pork:
+    data:
+      item-name: <!i><lang:item.smprpg.ground_pork>
+      food:
+        nutrition: 2
+      pdc:
+        smprpg:item-type: ground_pork
+        smprpg:sell-value: 2
+    texture: smprpg:item/consumables/ingredients/ground_pork
+  smprpg:ham:
+    data:
+      item-name: <!i><lang:item.smprpg.ham>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: ham
+    texture: smprpg:item/consumables/ingredients/ham
+  smprpg:milk_bottle:
+    data:
+      item-name: <!i><lang:item.smprpg.milk_bottle>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: milk_bottle
+    texture: smprpg:item/consumables/ingredients/milk_bottle
+  smprpg:pie_crust:
+    data:
+      item-name: <!i><lang:item.smprpg.pie_crust>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pie_crust
+    texture: smprpg:item/consumables/ingredients/pie_crust
+  smprpg:raw_pasta:
+    data:
+      item-name: <!i><lang:item.smprpg.pie_crust>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pie_crust
+    texture: smprpg:item/consumables/ingredients/pie_crust
+  smprpg:pumpkin_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.pumpkin_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pumpkin_slice
+    texture: smprpg:item/consumables/ingredients/pumpkin_slice
+  smprpg:tomato_sauce:
+    data:
+      item-name: <!i><lang:item.smprpg.tomato_sauce>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: tomato_sauce
+    texture: smprpg:item/consumables/ingredients/tomato_sauce
+  smprpg:wheat_dough:
+    data:
+      item-name: <!i><lang:item.smprpg.wheat_dough>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: wheat_dough
+    texture: smprpg:item/consumables/ingredients/wheat_dough
+
+blocks:
+  smprpg:cutting_board:
+    states:
+      properties:
+        facing:
+          type: horizontal_direction
+      appearances:
+        north:
+          state: minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]
+          entity-renderer:
+              - type: item_display
+                item: smprpg:cutting_board
+        south:
+          state: minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cutting_board
+              yaw: 180
+        east:
+          state: minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cutting_board
+              yaw: 90
+        west:
+          state: minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cutting_board
+              yaw: 270
+      variants:
+        facing=north:
+          appearance: north
+        facing=east:
+          appearance: east
+        facing=west:
+          appearance: west
+        facing=south:
+          appearance: south
+    settings:
+      template:
+        - smprpg:settings/planks
+        - smprpg:settings/transparent_1x1x1
+      require-correct-tools: false
+      map-color: 13
+    behaviors:
+      - type: sturdy_base_block
+        direction: down
+        support-types:
+          - center
+      - type: smprpg:cutting_board
+  smprpg:cooking_pot:
+    loot:
+      template: smprpg:loot_table/self
+    states:
+      properties:
+        facing:
+          type: horizontal_direction
+      appearances:
+        north:
+          state: minecraft:player_head[rotation=0]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cooking_pot
+        east:
+          state: minecraft:player_head[rotation=0]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cooking_pot
+              rotation: 90
+        south:
+          state: minecraft:player_head[rotation=0]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cooking_pot
+              rotation: 180
+        west:
+          state: minecraft:player_head[rotation=0]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:cooking_pot
+              rotation: 270
+      variants:
+        facing=north:
+          appearance: north
+        facing=east:
+          appearance: east
+        facing=south:
+          appearance: south
+        facing=west:
+          appearance: west
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:settings/transparent_1x1x1
+        - smprpg:sound/lantern
+      require-correct-tools: false
+      map-color: 11
+    behaviors:
+      - type: smprpg:cooking_pot
+  smprpg:kitchen_tiles:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/decoration/kitchen_tiles
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:settings/solid_1x1x1
+        - smprpg:sound/stone
+        - smprpg:data/breaking_power_1
+      map-color: 29
+  smprpg:rope_coil:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:sound/wool
+        - smprpg:hardness/wool
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      tags: [ "smprpg:mineable/shears" ]
+    states:
+      template: smprpg:block_state/pillar
+      arguments:
+        texture_top_path: smprpg:block/decoration/rope_block_top
+        texture_side_path: smprpg:block/decoration/rope_block_side
+        model_vertical_path: smprpg:block/decoration/rope_coil
+        model_horizontal_path: smprpg:block/decoration/rope_coil_horizontal
+
+items#cabinets:
+  smprpg:acacia_cabinet:
+    settings:
+      fuel-time: 300
+    data:
+      item-name: <!i><lang:item.smprpg.acacia_cabinet>
+      #pdc:
+      #  smprpg:item-type: acacia_cabinet
+    model:
+      template: smprpg:model/cube
+      arguments:
+        model: smprpg:block/cabinets/acacia_cabinet
+        particle_texture: smprpg:block/cabinets/acacia_cabinet_side
+        down_texture: smprpg:block/cabinets/acacia_cabinet_side
+        east_texture: smprpg:block/cabinets/acacia_cabinet_side
+        west_texture: smprpg:block/cabinets/acacia_cabinet_side
+        north_texture: smprpg:block/cabinets/acacia_cabinet_front
+        south_texture: smprpg:block/cabinets/acacia_cabinet_side
+        up_texture: smprpg:block/cabinets/acacia_cabinet_side
+    behavior:
+      type: block_item
+      block: smprpg:acacia_cabinet
+  smprpg:acacia_cabinet_open:
+    model:
+      template: smprpg:model/cube
+      arguments:
+        model: smprpg:block/cabinets/acacia_cabinet_open
+        particle_texture: smprpg:block/cabinets/acacia_cabinet_side
+        down_texture: smprpg:block/cabinets/acacia_cabinet_side
+        east_texture: smprpg:block/cabinets/acacia_cabinet_side
+        west_texture: smprpg:block/cabinets/acacia_cabinet_side
+        north_texture: smprpg:block/cabinets/acacia_cabinet_front_open
+        south_texture: smprpg:block/cabinets/acacia_cabinet_side
+        up_texture: smprpg:block/cabinets/acacia_cabinet_side
+
+blocks#cabinets:
+  smprpg:acacia_cabinet:
+    states:
+      template: smprpg:block_state/cabinet
+      arguments:
+        item_closed: smprpg:acacia_cabinet
+        item_open: smprpg:acacia_cabinet_open
+    settings:
+      template:
+        - smprpg:settings/planks
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      map-color: 15
+    behaviors:
+      - type: simple_storage_block
+        title: "Acacia Cabinet"
+        rows: 4
+        sounds:
+          open: minecraft:block.wooden_trapdoor.open
+          close: minecraft:block.wooden_trapdoor.close
+        has_signal: true
+        allow_input: true
+        allow_output: true
+    events:
+      template: smprpg:events/swing_main_hand
+
+recipes:
+  smprpg:cutting_board:
+    type: shaped
+    category: misc
+    pattern:
+      - SPP
+      - SPP
+    ingredients:
+      S: minecraft:stick
+      P: "#minecraft:planks"
+    result:
+      id: smprpg:cutting_board
+      count: 1
+  smprpg:cooking_pot:
+    type: shaped
+    category: misc
+    pattern:
+      - ISI
+      - CBC
+      - III
+    ingredients:
+      I: minecraft:iron_ingot
+      C: minecraft:copper_ingot
+      S: minecraft:stick
+      B: minecraft:water_bucket
+    result:
+      id: smprpg:cooking_pot
+      count: 1
+  smprpg:kitchen_tiles:
+    type: shaped
+    category: building
+    pattern:
+      - BW
+      - WB
+    ingredients:
+      B: smprpg:smoky_quartz
+      W: minecraft:quartz
+    result:
+      id: smprpg:kitchen_tiles
+      count: 1
+  smprpg:rope_to_rope_coil:
+    type: shaped
+    category: building
+    pattern:
+      - RRR
+      - RRR
+      - RRR
+    ingredients:
+      R: smprpg:rope
+    result:
+      id: smprpg:rope_coil
+      count: 1
+  smprpg:rope_coil_to_rope:
+    type: shapeless
+    category: building
+    ingredients:
+      - smprpg:rope_coil
+    result:
+      id: smprpg:rope
+      count: 9
+  smprpg:rope_from_straw:
+    type: shaped
+    category: building
+    pattern:
+      - SS
+      - SS
+    ingredients:
+      S: smprpg:straw
+    result:
+      id: smprpg:rope
+      count: 2
+
+items#food:
+  smprpg:apple_cider:
+    data:
+      item-name: <!i><lang:item.smprpg.apple_cider>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: apple_cider
+    texture: smprpg:item/consumables/farmers_delight/apple_cider
+  smprpg:apple_pie:
+    data:
+      item-name: <!i><lang:item.smprpg.apple_pie>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: apple_pie
+    texture: smprpg:item/consumables/farmers_delight/apple_pie
+  smprpg:apple_pie_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.apple_pie_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: apple_pie_slice
+    texture: smprpg:item/consumables/farmers_delight/apple_pie_slice
+  smprpg:bacon_and_eggs:
+    data:
+      item-name: <!i><lang:item.smprpg.bacon_and_eggs>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: bacon_and_eggs
+    texture: smprpg:item/consumables/farmers_delight/bacon_and_eggs
+  smprpg:bacon_sandwich:
+    data:
+      item-name: <!i><lang:item.smprpg.bacon_sandwich>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: bacon_sandwich
+    texture: smprpg:item/consumables/farmers_delight/bacon_sandwich
+  smprpg:baked_cod_stew:
+    data:
+      item-name: <!i><lang:item.smprpg.baked_cod_stew>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: baked_cod_stew
+    texture: smprpg:item/consumables/farmers_delight/baked_cod_stew
+  smprpg:barbecue_stick:
+    data:
+      item-name: <!i><lang:item.smprpg.barbecue_stick>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: barbecue_stick
+    texture: smprpg:item/consumables/farmers_delight/barbecue_stick
+  smprpg:cabbage_rolls:
+    data:
+      item-name: <!i><lang:item.smprpg.cabbage_rolls>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: cabbage_rolls
+    texture: smprpg:item/consumables/farmers_delight/cabbage_rolls
+  smprpg:cake_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.cake_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: cake_slice
+    texture: smprpg:item/consumables/farmers_delight/cake_slice
+  smprpg:chicken_sandwich:
+    data:
+      item-name: <!i><lang:item.smprpg.chicken_sandwich>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: chicken_sandwich
+    texture: smprpg:item/consumables/farmers_delight/chicken_sandwich
+  smprpg:chicken_soup:
+    data:
+      item-name: <!i><lang:item.smprpg.chicken_soup>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: chicken_soup
+    texture: smprpg:item/consumables/farmers_delight/chicken_soup
+  smprpg:chocolate_pie:
+    data:
+      item-name: <!i><lang:item.smprpg.chocolate_pie>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: chocolate_pie
+    texture: smprpg:item/consumables/farmers_delight/chocolate_pie
+  smprpg:chocolate_pie_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.chocolate_pie_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: chocolate_pie_slice
+    texture: smprpg:item/consumables/farmers_delight/chocolate_pie_slice
+  smprpg:cod_roll:
+    data:
+      item-name: <!i><lang:item.smprpg.cod_roll>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: cod_roll
+    texture: smprpg:item/consumables/farmers_delight/cod_roll
+  smprpg:cooked_rice:
+    data:
+      item-name: <!i><lang:item.smprpg.cooked_rice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: cooked_rice
+    texture: smprpg:item/consumables/farmers_delight/cooked_rice
+  smprpg:dog_food:
+    data:
+      item-name: <!i><lang:item.smprpg.dog_food>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: dog_food
+    texture: smprpg:item/consumables/farmers_delight/dog_food
+  smprpg:dumplings:
+    data:
+      item-name: <!i><lang:item.smprpg.dumplings>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: dumplings
+    texture: smprpg:item/consumables/farmers_delight/dumplings
+  smprpg:egg_sandwich:
+    data:
+      item-name: <!i><lang:item.smprpg.egg_sandwich>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: egg_sandwich
+    texture: smprpg:item/consumables/farmers_delight/egg_sandwich
+  smprpg:fish_stew:
+    data:
+      item-name: <!i><lang:item.smprpg.fish_stew>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: fish_stew
+    texture: smprpg:item/consumables/farmers_delight/fish_stew
+  smprpg:fried_rice:
+    data:
+      item-name: <!i><lang:item.smprpg.fried_rice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: fried_rice
+    texture: smprpg:item/consumables/farmers_delight/fried_rice
+  smprpg:fruit_salad:
+    data:
+      item-name: <!i><lang:item.smprpg.fruit_salad>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: fruit_salad
+    texture: smprpg:item/consumables/farmers_delight/fruit_salad
+  smprpg:gleaming_salad:
+    data:
+      item-name: <!i><lang:item.smprpg.gleaming_salad>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: gleaming_salad
+    texture: smprpg:item/consumables/farmers_delight/gleaming_salad
+  smprpg:glow_berry_custard:
+    data:
+      item-name: <!i><lang:item.smprpg.glow_berry_custard>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: glow_berry_custard
+    texture: smprpg:item/consumables/farmers_delight/glow_berry_custard
+  smprpg:grilled_salmon:
+    data:
+      item-name: <!i><lang:item.smprpg.grilled_salmon>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: grilled_salmon
+    texture: smprpg:item/consumables/farmers_delight/grilled_salmon
+  smprpg:hamburger:
+    data:
+      item-name: <!i><lang:item.smprpg.hamburger>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: hamburger
+    texture: smprpg:item/consumables/farmers_delight/hamburger
+  smprpg:honey_cookie:
+    data:
+      item-name: <!i><lang:item.smprpg.honey_cookie>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: honey_cookie
+    texture: smprpg:item/consumables/farmers_delight/honey_cookie
+  smprpg:honey_glazed_ham:
+    data:
+      item-name: <!i><lang:item.smprpg.honey_glazed_ham>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: honey_glazed_ham
+    texture: smprpg:item/consumables/farmers_delight/honey_glazed_ham
+  smprpg:horse_feed:
+    data:
+      item-name: <!i><lang:item.smprpg.horse_feed>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: horse_feed
+    texture: smprpg:item/consumables/farmers_delight/horse_feed
+  smprpg:hot_cocoa:
+    data:
+      item-name: <!i><lang:item.smprpg.hot_cocoa>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: hot_cocoa
+    texture: smprpg:item/consumables/farmers_delight/hot_cocoa
+  smprpg:kelp_roll:
+    data:
+      item-name: <!i><lang:item.smprpg.kelp_roll>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: kelp_roll
+    texture: smprpg:item/consumables/farmers_delight/kelp_roll
+  smprpg:kelp_roll_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.kelp_roll_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: kelp_roll_slice
+    texture: smprpg:item/consumables/farmers_delight/kelp_roll_slice
+  smprpg:melon_juice:
+    data:
+      item-name: <!i><lang:item.smprpg.melon_juice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: melon_juice
+    texture: smprpg:item/consumables/farmers_delight/melon_juice
+  smprpg:melon_popsicle:
+    data:
+      item-name: <!i><lang:item.smprpg.melon_popsicle>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: melon_popsicle
+    texture: smprpg:item/consumables/farmers_delight/melon_popsicle
+  smprpg:mixed_salad:
+    data:
+      item-name: <!i><lang:item.smprpg.mixed_salad>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: mixed_salad
+    texture: smprpg:item/consumables/farmers_delight/mixed_salad
+  smprpg:mushroom_rice:
+    data:
+      item-name: <!i><lang:item.smprpg.mushroom_rice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: mushroom_rice
+    texture: smprpg:item/consumables/farmers_delight/mushroom_rice
+  smprpg:mutton_wrap:
+    data:
+      item-name: <!i><lang:item.smprpg.mutton_wrap>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: mutton_wrap
+    texture: smprpg:item/consumables/farmers_delight/mutton_wrap
+  smprpg:nether_salad:
+    data:
+      item-name: <!i><lang:item.smprpg.nether_salad>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: nether_salad
+    texture: smprpg:item/consumables/farmers_delight/nether_salad
+  smprpg:noodle_soup:
+    data:
+      item-name: <!i><lang:item.smprpg.noodle_soup>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: noodle_soup
+    texture: smprpg:item/consumables/farmers_delight/noodle_soup
+  smprpg:onion_soup:
+    data:
+      item-name: <!i><lang:item.smprpg.onion_soup>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: onion_soup
+    texture: smprpg:item/consumables/farmers_delight/onion_soup
+  smprpg:pasta_with_meatballs:
+    data:
+      item-name: <!i><lang:item.smprpg.pasta_with_meatballs>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pasta_with_meatballs
+    texture: smprpg:item/consumables/farmers_delight/pasta_with_meatballs
+  smprpg:pasta_with_mutton_chop:
+    data:
+      item-name: <!i><lang:item.smprpg.pasta_with_mutton_chop>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pasta_with_mutton_chop
+    texture: smprpg:item/consumables/farmers_delight/pasta_with_mutton_chop
+  smprpg:pumpkin_pie_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.pumpkin_pie_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pumpkin_pie_slice
+    texture: smprpg:item/consumables/farmers_delight/pumpkin_pie_slice
+  smprpg:pumpkin_soup:
+    data:
+      item-name: <!i><lang:item.smprpg.pumpkin_soup>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: pumpkin_soup
+    texture: smprpg:item/consumables/farmers_delight/pumpkin_soup
+  smprpg:ratatouille:
+    data:
+      item-name: <!i><lang:item.smprpg.ratatouille>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: ratatouille
+    texture: smprpg:item/consumables/farmers_delight/ratatouille
+  smprpg:roast_chicken:
+    data:
+      item-name: <!i><lang:item.smprpg.roast_chicken>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: roast_chicken
+    texture: smprpg:item/consumables/farmers_delight/roast_chicken
+  smprpg:roasted_mutton_chops:
+    data:
+      item-name: <!i><lang:item.smprpg.roasted_mutton_chops>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: roasted_mutton_chops
+    texture: smprpg:item/consumables/farmers_delight/roasted_mutton_chops
+  smprpg:salmon_roll:
+    data:
+      item-name: <!i><lang:item.smprpg.salmon_roll>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: salmon_roll
+    texture: smprpg:item/consumables/farmers_delight/salmon_roll
+  smprpg:shepherds_pie:
+    data:
+      item-name: <!i><lang:item.smprpg.shepherds_pie>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: shepherds_pie
+    texture: smprpg:item/consumables/farmers_delight/shepherds_pie
+  smprpg:smoked_ham:
+    data:
+      item-name: <!i><lang:item.smprpg.smoked_ham>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: smoked_ham
+    texture: smprpg:item/consumables/farmers_delight/smoked_ham
+  smprpg:squid_ink_pasta:
+    data:
+      item-name: <!i><lang:item.smprpg.squid_ink_pasta>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: squid_ink_pasta
+    texture: smprpg:item/consumables/farmers_delight/squid_ink_pasta
+  smprpg:steak_and_potatoes:
+    data:
+      item-name: <!i><lang:item.smprpg.steak_and_potatoes>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: steak_and_potatoes
+    texture: smprpg:item/consumables/farmers_delight/steak_and_potatoes
+  smprpg:stuffed_potato:
+    data:
+      item-name: <!i><lang:item.smprpg.stuffed_potato>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: stuffed_potato
+    texture: smprpg:item/consumables/farmers_delight/stuffed_potato
+  smprpg:stuffed_pumpkin:
+    data:
+      item-name: <!i><lang:item.smprpg.stuffed_pumpkin>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: stuffed_pumpkin
+    texture: smprpg:item/consumables/farmers_delight/stuffed_pumpkin
+  smprpg:sweet_berry_cheesecake:
+    data:
+      item-name: <!i><lang:item.smprpg.sweet_berry_cheesecake>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: sweet_berry_cheesecake
+    texture: smprpg:item/consumables/farmers_delight/sweet_berry_cheesecake
+  smprpg:sweet_berry_cheesecake_slice:
+    data:
+      item-name: <!i><lang:item.smprpg.sweet_berry_cheesecake_slice>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: sweet_berry_cheesecake_slice
+    texture: smprpg:item/consumables/farmers_delight/sweet_berry_cheesecake_slice
+  smprpg:sweet_berry_cookie:
+    data:
+      item-name: <!i><lang:item.smprpg.sweet_berry_cookie>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: sweet_berry_cookie
+    texture: smprpg:item/consumables/farmers_delight/sweet_berry_cookie
+  smprpg:vegetable_noodles:
+    data:
+      item-name: <!i><lang:item.smprpg.vegetable_noodles>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: vegetable_noodles
+    texture: smprpg:item/consumables/farmers_delight/vegetable_noodles
+  smprpg:vegetable_soup:
+    data:
+      item-name: <!i><lang:item.smprpg.vegetable_soup>
+      food:
+        nutrition: 1
+      pdc:
+        smprpg:item-type: vegetable_soup
+    texture: smprpg:item/consumables/farmers_delight/vegetable_soup
+
+items#rope:
+  smprpg:rope_display_base:
+    data:
+      item-name: <!i><lang:item.smprpg.rope_display_base>
+    model: smprpg:block/decoration/rope
+  smprpg:rope_display_connection:
+    data:
+      item-name: <!i><lang:item.smprpg.rope_display_connection>
+    model: smprpg:block/decoration/rope_connection
+  smprpg:rope:
+    texture: smprpg:item/materials/rope
+    data:
+      item-name: <!i><lang:item.smprpg.rope>
+      pdc:
+        smprpg:item-type: rope
+    behavior:
+      type: smprpg:rope_block_item
+      block: smprpg:rope
+
+blocks#rope:
+  smprpg:rope:
+    states:
+      properties:
+        north:
+          type: boolean
+          default: false
+        east:
+          type: boolean
+          default: false
+        south:
+          type: boolean
+          default: false
+        west:
+          type: boolean
+          default: false
+      appearances:
+        north=true,east=true,south=true,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=true,east=true,south=true,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+        north=true,east=true,south=false,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=true,east=false,south=true,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=true,east=true,south=false,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+        north=true,east=false,south=true,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+        north=true,east=false,south=false,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=false,east=true,south=true,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=false,east=true,south=true,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+        north=false,east=true,south=false,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=false,east=false,south=true,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=true,east=false,south=false,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -180
+        north=false,east=true,south=false,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -90
+        north=false,east=false,south=true,west=false:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+        north=false,east=false,south=false,west=true:
+          state: cave_vines[age=25,berries=false]
+          entity-renderer:
+            - type: item_display
+              item: smprpg:rope_display_connection
+              yaw: -270
+        north=false,east=false,south=false,west=false:
+          state: cave_vines[age=25,berries=false]
+      variants:
+        north=true,east=true,south=true,west=true:
+          appearance: north=true,east=true,south=true,west=true
+        north=true,east=true,south=true,west=false:
+          appearance: north=true,east=true,south=true,west=false
+        north=true,east=true,south=false,west=true:
+          appearance: north=true,east=true,south=false,west=true
+        north=true,east=false,south=true,west=true:
+          appearance: north=true,east=false,south=true,west=true
+        north=true,east=true,south=false,west=false:
+          appearance: north=true,east=true,south=false,west=false
+        north=true,east=false,south=true,west=false:
+          appearance: north=true,east=false,south=true,west=false
+        north=true,east=false,south=false,west=true:
+          appearance: north=true,east=false,south=false,west=true
+        north=false,east=true,south=true,west=true:
+          appearance: north=false,east=true,south=true,west=true
+        north=false,east=true,south=true,west=false:
+          appearance: north=false,east=true,south=true,west=false
+        north=false,east=true,south=false,west=true:
+          appearance: north=false,east=true,south=false,west=true
+        north=false,east=false,south=true,west=true:
+          appearance: north=false,east=false,south=true,west=true
+        north=true,east=false,south=false,west=false:
+          appearance: north=true,east=false,south=false,west=false
+        north=false,east=true,south=false,west=false:
+          appearance: north=false,east=true,south=false,west=false
+        north=false,east=false,south=true,west=false:
+          appearance: north=false,east=false,south=true,west=false
+        north=false,east=false,south=false,west=true:
+          appearance: north=false,east=false,south=false,west=true
+        north=false,east=false,south=false,west=false:
+          appearance: north=false,east=false,south=false,west=false
+    settings:
+      template:
+        - smprpg:sound/wool
+      push-reaction: block
+      hardness: 0.3
+      resistance: 0.3
+      map-color: 13
+      tags:
+        - smprpg:rope_connections
+        - smprpg:mineable/shears
+        - minecraft:climbable
+    loot:
+      template: smprpg:loot_table/self
+    behaviors:
+      - type: fence_block
+        connectable-block-tag: smprpg:rope_connections
+        can-leash: false
+
+recipes#food:
+  smprpg:beef_patty:
+    type: shaped
+    category: misc
+    pattern:
+      - BB
+    ingredients:
+      B: smprpg:ground_beef
+    result:
+      id: smprpg:beef_patty
+      count: 2
+  smprpg:cooked_ground_beef_patty_furnace:
+    type: smelting
+    experience: 0.0
+    category: food
+    time: 200
+    ingredient: smprpg:ground_beef
+    result:
+      id: smprpg:cooked_ground_beef
+      count: 1
+  smprpg:cooked_ground_beef_smoking:
+    type: smoking
+    experience: 0.0
+    category: food
+    time: 100
+    ingredient: smprpg:ground_beef
+    result:
+      id: smprpg:cooked_ground_beef
+      count: 1
+  smprpg:cooked_ground_beef_campfire:
+    type: campfire_cooking
+    experience: 0.0
+    category: food
+    time: 600
+    ingredient: smprpg:ground_beef
+    result:
+      id: smprpg:cooked_ground_beef
+      count: 1
+  smprpg:cooked_beef_patty_furnace:
+    type: smelting
+    experience: 0.0
+    category: food
+    time: 200
+    ingredient: smprpg:beef_patty
+    result:
+      id: smprpg:cooked_beef_patty
+      count: 1
+  smprpg:cooked_beef_patty_smoking:
+    type: smoking
+    experience: 0.0
+    category: food
+    time: 100
+    ingredient: smprpg:beef_patty
+    result:
+      id: smprpg:cooked_beef_patty
+      count: 1
+  smprpg:cooked_beef_patty_campfire:
+    type: campfire_cooking
+    experience: 0.0
+    category: food
+    time: 600
+    ingredient: smprpg:beef_patty
+    result:
+      id: smprpg:cooked_beef_patty
+      count: 1
+  smprpg:melon_juice_crafting:
+    type: shapeless
+    category: misc
+    ingredients:
+      - minecraft:melon_slice
+      - minecraft:melon_slice
+      - minecraft:melon_slice
+      - minecraft:melon_slice
+      - minecraft:sugar
+      - minecraft:glass_bottle
+    result:
+      id: smprpg:melon_juice
+      count: 1

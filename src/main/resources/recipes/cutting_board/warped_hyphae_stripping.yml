@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:warped_hyphae"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_warped_hyphae", amount: 1, chance: 1.0 }

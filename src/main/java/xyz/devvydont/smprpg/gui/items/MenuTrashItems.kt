@@ -11,12 +11,23 @@ import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.gui.base.MenuBase
 import xyz.devvydont.smprpg.services.ItemService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
-import java.lang.String
+import xyz.devvydont.smprpg.util.formatting.Symbols
 
 class MenuTrashItems(player: Player) : MenuBase(player, 6) {
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
         // Prepare the inventory
-        event.titleOverride(ComponentUtils.create("Trash Items", NamedTextColor.BLACK))
+        event.titleOverride(
+            ComponentUtils.merge(
+                ComponentUtils.create(
+                    Symbols.OFFSET_NEG_32 + Symbols.OFFSET_NEG_16 + Symbols.TRASH_MENU,
+                    NamedTextColor.WHITE
+                ),
+                ComponentUtils.create(
+                    Symbols.OFFSET_NEG_128 + Symbols.OFFSET_NEG_32 + Symbols.OFFSET_NEG_8 + Symbols.OFFSET_NEG_4 + "Trash Items",
+                    Symbols.INVENTORY_TITLE_COLOR
+                )
+            )
+        )
         this.setMaxStackSize(100)
 
         // Render the UI
@@ -26,13 +37,13 @@ class MenuTrashItems(player: Player) : MenuBase(player, 6) {
     override fun handleInventoryClicked(event: InventoryClickEvent) {
         event.isCancelled = false
 
-        val item = event.currentItem
-        if (item == null) return
+        if (event.currentItem == null) return
 
-        val itemBlueprint = SMPRPG.getService(ItemService::class.java).getBlueprint(item)
+        val itemBlueprint =
+            SMPRPG.getService(ItemService::class.java).getBlueprint(event.currentItem!!)
         // If the item clicked is enchanted or reforged, we should prevent the item from being shift clicked.
-        if (event.isShiftClick && (!event.getCurrentItem()!!.enchantments.isEmpty() || itemBlueprint.isReforged(
-                event.getCurrentItem()
+        if (event.isShiftClick && (!event.currentItem!!.enchantments.isEmpty() || itemBlueprint.isReforged(
+                event.currentItem
             ))
         ) {
             val error = ComponentUtils.merge(
@@ -60,7 +71,7 @@ class MenuTrashItems(player: Player) : MenuBase(player, 6) {
             ComponentUtils.success(
                 ComponentUtils.merge(
                     ComponentUtils.create("You trashed ", NamedTextColor.GREEN),
-                    ComponentUtils.create(String.valueOf(itemCount), NamedTextColor.AQUA),
+                    ComponentUtils.create(itemCount.toString(), NamedTextColor.AQUA),
                     ComponentUtils.create(" items!", NamedTextColor.GREEN)
                 )
             )

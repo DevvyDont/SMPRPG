@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:blast_protection",
+    "minecraft:feather_falling",
+    "minecraft:fire_protection",
+    "minecraft:projectile_protection",
+    "minecraft:protection",
+
+    "smprpg:calamity",
+    "smprpg:hearty",
+    "smprpg:speedster",
+    "smprpg:vitality"
+  ]
+}

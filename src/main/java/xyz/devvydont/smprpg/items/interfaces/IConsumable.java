@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 public interface IConsumable {
 
+    @NotNull
     Consumable getConsumableComponent(ItemStack item);
 
     static List<Component> generateEffectComponent(ConsumeEffect effect) {

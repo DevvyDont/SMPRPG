@@ -38,6 +38,18 @@ public class DamageTracker {
     }
 
     /**
+     * Gets the total number of times this entity has been hit, regardless of who hit them
+     * @return The amount of times this entity has been hit in its lifetime
+     */
+    public int getTotalNumberOfHits() {
+        var retVal = 0;
+        for (var hits : hitTracker.values()) {
+            retVal += hits;
+        }
+        return retVal;
+    }
+
+    /**
      * Adds damage dealt to this entity to its tracker to be retrieved later if desired
      * @param entity The entity that dealt damage.
      * @param damage The amount of damage.

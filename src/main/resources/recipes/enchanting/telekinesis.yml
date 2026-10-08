@@ -1,0 +1,14 @@
+type: enchanting
+enchantment: telekinesis
+levels:
+  '1':
+    power: 20
+    ingredients:
+    - item: smprpg:enchanted_ender_pearl
+      amount: 16
+    - item: smprpg:enchanted_amethyst_block
+      amount: 4
+    - item: smprpg:spellbound_cloth
+      amount: 4
+    - item: smprpg:enchanted_lapis
+      amount: 16

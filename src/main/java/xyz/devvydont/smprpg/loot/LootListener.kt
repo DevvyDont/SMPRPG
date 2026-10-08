@@ -1,5 +1,6 @@
 package xyz.devvydont.smprpg.loot
 
+import io.papermc.paper.datacomponent.DataComponentTypes
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.EnchantmentOffer
@@ -7,14 +8,21 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.world.LootGenerateEvent
 import org.bukkit.generator.structure.GeneratedStructure
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.loot.LootTable
 import org.bukkit.loot.LootTables
+import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.enchantments.calculator.EnchantmentCalculator
+import xyz.devvydont.smprpg.enchantments.definitions.vanilla.overrides.EfficiencyEnchantment
 import xyz.devvydont.smprpg.items.CustomItemType
+import xyz.devvydont.smprpg.items.blueprints.resources.scrolls.DynamicEnchantingScroll
 import xyz.devvydont.smprpg.listeners.entity.StructureEntitySpawnListener
+import xyz.devvydont.smprpg.services.EnchantmentService
 import xyz.devvydont.smprpg.services.ItemService.Companion.generate
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import java.util.*
+import kotlin.math.roundToInt
 
 /**
  * Class responsible for hooking into chest loot generation events and populating them with overrides if desired
@@ -25,20 +33,30 @@ class LootListener : ToggleableListener() {
         HashMap<NamespacedKey?, CustomLootTable?>()
 
     init {
+        val SCROLL_EFFICIENCY = DynamicEnchantingScroll.getScrollWithEnchantment(EnchantmentService.EFFICIENCY)
+        val SCROLL_FORTUNE = DynamicEnchantingScroll.getScrollWithEnchantment(EnchantmentService.FORTUNE)
+        val SCROLL_BLESSED = DynamicEnchantingScroll.getScrollWithEnchantment(EnchantmentService.BLESSED)
+
+
         lootTableAdditions.put(
             LootTables.ABANDONED_MINESHAFT.key, CustomLootTable(
-                LootTableMember(generate(CustomItemType.COPPER_HELMET)).withChance(.1f).withEnchants(true, 20),
-                LootTableMember(generate(CustomItemType.COPPER_CHESTPLATE)).withChance(.1f).withEnchants(true, 20),
-                LootTableMember(generate(CustomItemType.COPPER_LEGGINGS)).withChance(.1f).withEnchants(true, 20),
-                LootTableMember(generate(CustomItemType.COPPER_BOOTS)).withChance(.1f).withEnchants(true, 20),
                 LootTableMember(generate(CustomItemType.GRAPPLING_HOOK)).withChance(.005f),
-                LootTableMember(generate(CustomItemType.SILVER_COIN)).withChance(.2f).withMax(5)
+                LootTableMember(generate(CustomItemType.SILVER_COIN)).withChance(.2f).withMax(5),
+                LootTableMember(SCROLL_EFFICIENCY).withChance(.2f).withMax(3),
+                LootTableMember(SCROLL_FORTUNE).withChance(.2f).withMax(2),
             )
         )
 
         lootTableAdditions.put(
             LootTables.SIMPLE_DUNGEON.key, CustomLootTable(
                 LootTableMember(generate(CustomItemType.GRAPPLING_HOOK)).withChance(.005f),
+                LootTableMember(generate(CustomItemType.SILVER_COIN)).withChance(.2f).withMax(5)
+            )
+        )
+
+        lootTableAdditions.put(
+            LootTables.RUINED_PORTAL.key, CustomLootTable(
+                LootTableMember(SCROLL_BLESSED).withChance(.2f).withMax(2),
                 LootTableMember(generate(CustomItemType.SILVER_COIN)).withChance(.2f).withMax(5)
             )
         )
@@ -76,13 +94,25 @@ class LootListener : ToggleableListener() {
             return
         val player = event.entity as Player
 
-        // Wipe emeralds from chests.
         for (item in event.loot.stream().toList()) {
+            // Wipe emeralds from chests.
             if (item.type == Material.EMERALD) {
                 event.loot.remove(item)
                 val shard = ItemStack(Material.AMETHYST_SHARD)
                 shard.amount = item.amount
                 event.loot.add(shard)
+            }
+
+            // Convert Enchanted Books into scrolls.
+            if (item.type == Material.ENCHANTED_BOOK) {
+                var enchants = item.getData(DataComponentTypes.STORED_ENCHANTMENTS)?.enchantments()
+                if (enchants != null) {
+                    // Grab first enchant off the scroll, that's what we will use
+                    var customEnch = SMPRPG.getService(EnchantmentService::class.java).getEnchantment(enchants.keys.random())
+                    event.loot.remove(item)
+                    val scroll = DynamicEnchantingScroll.getScrollWithEnchantment(customEnch!!)
+                    event.loot.add(scroll)
+                }
             }
         }
 

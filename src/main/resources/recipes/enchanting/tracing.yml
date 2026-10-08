@@ -1,0 +1,47 @@
+type: enchanting
+enchantment: tracing
+levels:
+  '1':
+    power: 35
+    ingredients:
+    - item: smprpg:jupiter_crystal
+      amount: 5
+    - item: minecraft:redstone
+      amount: 32
+    - item: minecraft:quartz
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 8
+  '2':
+    power: 50
+    ingredients:
+    - item: smprpg:premium_nether_star
+      amount: 1
+    - item: smprpg:enchanted_redstone
+      amount: 4
+    - item: smprpg:enchanted_quartz
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 16
+  '3':
+    power: 65
+    ingredients:
+    - item: smprpg:inferno_remnant
+      amount: 2
+    - item: smprpg:enchanted_redstone
+      amount: 8
+    - item: smprpg:enchanted_quartz
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 8
+  '4':
+    power: 80
+    ingredients:
+    - item: smprpg:draconic_crystal
+      amount: 4
+    - item: smprpg:enchanted_redstone_block
+      amount: 2
+    - item: smprpg:enchanted_quartz_block
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 16

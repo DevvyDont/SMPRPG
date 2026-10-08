@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:deepslate_singularity
+result:
+  item: smprpg:bedrock_boots
+  amount: 1
+unlocked_by:
+- minecraft:cobbled_deepslate

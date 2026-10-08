@@ -1,29 +1,45 @@
 package xyz.devvydont.smprpg
 
+import io.papermc.paper.threadedregions.scheduler.AsyncScheduler
 import net.kyori.adventure.text.TextComponent
 import net.kyori.adventure.text.format.NamedTextColor
+import net.momirealms.craftengine.core.item.recipe.result.PostProcessors
+import net.momirealms.craftengine.core.plugin.CraftEngine
+import net.momirealms.craftengine.core.plugin.locale.MessageConstants
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-import xyz.devvydont.smprpg.services.SpecialEffectService
-import xyz.devvydont.smprpg.listeners.block.DimensionPortalLockingListener
-import xyz.devvydont.smprpg.listeners.block.MultiBlockBreakListener
-import xyz.devvydont.smprpg.listeners.block.TrialChamberVaultFix
-import xyz.devvydont.smprpg.listeners.crafting.AnvilEnchantmentCombinationFixListener
-import xyz.devvydont.smprpg.listeners.damage.AbsorptionDamageFix
-import xyz.devvydont.smprpg.services.EntityDamageCalculatorService
-import xyz.devvydont.smprpg.listeners.damage.EnvironmentalDamageListener
-import xyz.devvydont.smprpg.listeners.entity.HealthScaleListener
-import xyz.devvydont.smprpg.listeners.damage.PvPListener
-import xyz.devvydont.smprpg.listeners.damage.SlimeRapidAttackFixListener
+import xyz.devvydont.smprpg.ability.listeners.PlayerFreezeService
+import xyz.devvydont.smprpg.block.behaviors.SMPRPGBlockBehaviors
+import xyz.devvydont.smprpg.block.behaviors.SMPRPGItemBehaviors
+import xyz.devvydont.smprpg.gui.items.search.ItemBrowserCache
+import xyz.devvydont.smprpg.items.CraftEngineItemSource
+import xyz.devvydont.smprpg.items.listeners.ToolListeners
+import xyz.devvydont.smprpg.listeners.advancement.AdvancementTriggerListener
+import xyz.devvydont.smprpg.listeners.block.*
+import xyz.devvydont.smprpg.listeners.crafting.AnvilMenuListener
+import xyz.devvydont.smprpg.listeners.crafting.CraftingTableMenuListener
+import xyz.devvydont.smprpg.listeners.damage.*
+import xyz.devvydont.smprpg.listeners.entity.CatPufferfishPoisonListener
 import xyz.devvydont.smprpg.listeners.entity.HealthRegenerationListener
+import xyz.devvydont.smprpg.listeners.entity.HealthScaleListener
+import xyz.devvydont.smprpg.listeners.entity.PlayerInputListener
+import xyz.devvydont.smprpg.listeners.entity.PlayerInventoryButtonsListener
 import xyz.devvydont.smprpg.listeners.entity.StructureEntitySpawnListener
+import xyz.devvydont.smprpg.listeners.item.EquipmentRequirementValidationListener
+import xyz.devvydont.smprpg.listeners.item.ItemDurabilityListener
+import xyz.devvydont.smprpg.listeners.nametag.NameTagListener
 import xyz.devvydont.smprpg.loot.LootListener
+import xyz.devvydont.smprpg.market.MarketService
 import xyz.devvydont.smprpg.services.*
+import xyz.devvydont.smprpg.skills.CraftEngineLevelerProvider
 import xyz.devvydont.smprpg.util.animations.AnimationService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
+import xyz.devvydont.smprpg.util.time.TickTime
+import net.momirealms.craftengine.core.util.Key as CEKey
+
 
 class SMPRPG : JavaPlugin() {
     /**
@@ -45,6 +61,7 @@ class SMPRPG : JavaPlugin() {
 
     override fun onEnable() {
         INSTANCE = this
+        saveDefaultConfig()
 
         // Instantiate services. As a programmer, if you create a service class in the codebase you should have it
         // instantiated here no matter what to prevent runtime exceptions from nonexistent services.
@@ -67,6 +84,14 @@ class SMPRPG : JavaPlugin() {
         services.add(ActionBarService()) // Broadcasts player information to player action bars.
         services.add(UnstableListenersService()) // Implements some listeners that depend on ProtocolLib.
         services.add(AnimationService()) // Mainly provides GUIs with an easy-to-use animation API.
+        services.add(BlockBreakingService())
+        services.add(WardrobeService()) // Manages wardrobe slot upgrades and progression.
+        services.add(PlayerFreezeService()) // Manages player freezing, for NPCs, abilities, etc.
+        services.add(MarketService()) // Manages the auction house and bazaar marketplace systems.
+        services.add(SlayerService()) // Manages slayer quests
+        services.add(LootService()) // Manages client sided, refreshable loot containers
+        services.add(AetherDimensionService()) // Manages Aether dimensional interactions
+        services.add(CropCritterService()) // Manages Crop Critter spawning and heartbeats
 
         // Start all the services. Make sure nothing goes wrong.
         for (service in services) {
@@ -91,24 +116,78 @@ class SMPRPG : JavaPlugin() {
         generalListeners.add(HealthRegenerationListener()) // Scales HP regeneration based on max HP.
         generalListeners.add(AbsorptionDamageFix()) // Makes absorption work correctly.
         generalListeners.add(DimensionPortalLockingListener()) // Implements dimension requirements.
-        generalListeners.add(AnvilEnchantmentCombinationFixListener()) // Makes anvil combinations work.
+        generalListeners.add(AnvilMenuListener()) // Replaces the vanilla anvil GUI with our custom anvil menu.
+        generalListeners.add(CraftingTableMenuListener()) // Replaces the vanilla crafting table with our custom crafting menu.
         generalListeners.add(PvPListener()) // Disables PVP in certain contexts.
         generalListeners.add(StructureEntitySpawnListener()) // Allows entities to spawn as the level of the structure they're in.
         generalListeners.add(LootListener()) // Overrides vanilla loot tables by injecting our items into it.
         generalListeners.add(TrialChamberVaultFix()) // Allows trial chambers to work with our custom item system.
         generalListeners.add(SlimeRapidAttackFixListener()) // Fixes the vanilla bug of slimes being able to attack every tick.
         generalListeners.add(MultiBlockBreakListener()) // Fixes the vanilla bug of slimes being able to attack every tick.
+        generalListeners.add(MeleeVisualListener())  // Visuals melee attack particles for weapons like staffs
+        generalListeners.add(XPOrbDisablerListener())  // Overrides experience orb drops, as to disable vanilla EXP
+        generalListeners.add(ItemDurabilityListener())  // Prevents items from fully breaking, capping them at 1 durability remaining.
+        generalListeners.add(EquipmentRequirementValidationListener())  // Validates skill requirements, disallowing items to be used if you do not meet requirements.
+        generalListeners.add(UnderwaterArrowListener())  // Listens for arrows that are shot underwater
+        generalListeners.add(CraftEngineBlockEventListener())  // Listens for custom "events" sent by CraftEngine
+        generalListeners.add(AscendingBlockListener())  // Listens for transitions regarding the Aether, including portal manufacture
+        generalListeners.add(AdvancementTriggerListener())  // Listens for bukkit events to award advancement criterion
+        generalListeners.add(PlayerInventoryButtonsListener())  // Listens for events regarding player inventory buttons.
+        generalListeners.add(CustomNoteblockSoundListener())  // Listens for custom note block instruments
+        generalListeners.add(PlayerInputListener())  // Listens for player inputs
+        generalListeners.add(CatPufferfishPoisonListener())  // Feeding our pufferfish to a cat poisons it.
+        generalListeners.add(NameTagListener())  // Restores name tag usage (dialog + PDC) now that the vanilla anvil GUI is gone.
+        generalListeners.add(ToolListeners())  // Listens for events related to tool progression/management
 
         // Uncomment this if you want some debugging events.
 //        generalListeners.add(new DebuggingListeners());  // Enables some debugging functionality.
 
         // Start all of them.
         for (listener in generalListeners) listener.start()
+
+        // Begin gradually indexing the item browser registry (used by /search). This spreads the expensive item
+        // generation across many ticks instead of freezing the server the first time someone opens the browser.
+        ItemBrowserCache.beginBuild()
+
+
+        // CraftEngine Compat
+
+        // Leveler provider, allows us to add skill xp with CraftEngine script functions
+        CraftEngine.instance().compatibilityManager().registerLevelerProvider(CraftEngineLevelerProvider("smprpg"))
+
+        // Item source provider, allows us to use items generated via the ItemService in CraftEngine contexts.
+        //CraftEngine.instance().compatibilityManager().registerItemSource(CraftEngineItemSource("smprpg"))
+
+
+
+        // Initialize our CraftEngine block behaviors
+        // TODO: This can be deleted if we ever directly access this class, we never do so currently
+        SMPRPGBlockBehaviors()
+        SMPRPGItemBehaviors()
+        Bukkit.getScheduler().runTaskLater(this, Runnable {
+            // Reloads CraftEngine's config, since we need to have config available both before and after plugin load.
+            Bukkit.getServer().dispatchCommand(
+                Bukkit.getServer().consoleSender,
+                "ce reload"
+            )
+        }, TickTime.TICK)
     }
 
     override fun onDisable() {
+        ItemBrowserCache.shutdown()
         for (service in services) service.cleanup()
         for (listener in generalListeners) listener.stop()
+    }
+
+    override fun onLoad() {
+        val pack = this.server.datapackManager.getPack(pluginMeta.name + "/provided")
+        if (pack != null) {
+            if (pack.isEnabled) {
+                this.logger.info("The datapack loaded successfully!")
+            } else {
+                this.logger.warning("The datapack failed to load.")
+            }
+        }
     }
 
     companion object {

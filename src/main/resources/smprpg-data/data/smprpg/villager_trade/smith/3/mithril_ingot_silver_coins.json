@@ -1,0 +1,27 @@
+{
+  "wants": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "mithril_ingot"
+        }
+      }
+    },
+    "count": 32
+  },
+  "gives": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "silver_coin"
+        }
+      }
+    },
+    "count": 72
+  },
+  "max_uses": 12,
+  "reputation_discount": 0.05,
+  "xp": 10.0
+}

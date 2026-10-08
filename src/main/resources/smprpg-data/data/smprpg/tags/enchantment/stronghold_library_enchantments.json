@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#smprpg:melee_loot_generic_enchantments",
+    "#smprpg:archery_loot_generic_enchantments",
+    "#smprpg:armor_loot_generic_enchantments",
+
+    "smprpg:amplification",
+    "smprpg:keeping",
+    "smprpg:mercy",
+    "smprpg:telekinesis"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/rotten_flesh"
+        },
+        "cases": [
+            {
+                "when": "smprpg:necrotic_flesh",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/necrotic_flesh"
+                }
+            },
+			{
+                "when": "smprpg:premium_necrotic_flesh",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/necrotic_flesh"
+                }
+            },
+			            {
+                "when": "smprpg:enchanted_necrotic_flesh",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/necrotic_flesh"
+                }
+            },
+			{
+                "when": "smprpg:necrotic_flesh_singularity",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/necrotic_flesh"
+                }
+            },
+			{
+                "when": "smprpg:reviled_viscera",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/reviled_viscera"
+                }
+            },
+			{
+                "when": "smprpg:visceral_amalgamation",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/visceral_amalgamation"
+                }
+            }
+        ]
+    }
+}

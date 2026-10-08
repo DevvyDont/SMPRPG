@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "smprpg:item/augment_stones/common_repair_core"
+    }
+}

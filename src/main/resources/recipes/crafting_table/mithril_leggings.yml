@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:mithril_ingot
+result:
+  item: smprpg:mithril_leggings
+  amount: 1
+unlocked_by:
+- smprpg:mithril_ingot

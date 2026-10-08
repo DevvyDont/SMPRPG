@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:ink_sac
+- item: smprpg:premium_ink_sac
+  amount: 9
+- item: smprpg:enchanted_ink_sac
+  amount: 9

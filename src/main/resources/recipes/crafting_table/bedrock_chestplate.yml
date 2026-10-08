@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:deepslate_singularity
+result:
+  item: smprpg:bedrock_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:cobbled_deepslate

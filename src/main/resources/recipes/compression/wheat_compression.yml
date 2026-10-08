@@ -1,0 +1,15 @@
+type: compression
+tiers:
+- minecraft:wheat
+- item: minecraft:hay_block
+  amount: 9
+- item: smprpg:premium_wheat
+  amount: 9
+- item: smprpg:premium_hay_block
+  amount: 9
+- item: smprpg:enchanted_wheat
+  amount: 9
+- item: smprpg:enchanted_hay_block
+  amount: 9
+- item: smprpg:wheat_singularity
+  amount: 9

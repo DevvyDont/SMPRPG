@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- pip
+- ici
+- pip
+ingredients:
+  p: smprpg:enchanted_amethyst_block
+  c: smprpg:warp_catalyst
+  i: smprpg:enchanted_iron_block
+result:
+  item: smprpg:magic_mirror
+  amount: 1
+unlocked_by:
+- minecraft:ender_pearl

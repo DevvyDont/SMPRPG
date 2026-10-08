@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:enchanted_lapis
+result:
+  item: smprpg:luxe_helmet
+  amount: 1
+unlocked_by:
+- minecraft:lapis_lazuli

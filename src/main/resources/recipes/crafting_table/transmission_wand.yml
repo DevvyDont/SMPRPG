@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' m '
+- ' r '
+- ' r '
+ingredients:
+  r: smprpg:draconic_crystal
+  m: smprpg:warp_catalyst
+result:
+  item: smprpg:transmission_wand
+  amount: 1
+unlocked_by:
+- smprpg:draconic_crystal

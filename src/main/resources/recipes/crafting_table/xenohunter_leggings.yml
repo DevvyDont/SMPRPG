@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- btb
+- tlt
+- b b
+ingredients:
+  b: smprpg:strange_binding
+  t: smprpg:strange_fiber
+  l: smprpg:nocturnum_leggings
+result:
+  item: smprpg:xenohunter_leggings
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "l"

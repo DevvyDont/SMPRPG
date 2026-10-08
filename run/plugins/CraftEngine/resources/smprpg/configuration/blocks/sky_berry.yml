@@ -1,0 +1,146 @@
+items:
+  smprpg:sky_berry:
+    data:
+      item-name: <!i><lang:item.smprpg.sky_berry>
+      pdc:
+        smprpg:item-type: sky_berry
+        smprpg:sell-value: 4
+    behavior:
+      - type: compostable_item
+        chance: 0.3
+      - type: block_item
+        block: smprpg:sky_berry_bush
+    texture: smprpg:item/crop/sky_berry
+
+blocks:
+  smprpg:sky_berry_bush:
+    settings:
+      template:
+        - smprpg:settings/crop
+        - smprpg:sound/bush_crop
+      overrides:
+        item: smprpg:sky_berry
+        push-reaction: destroy
+        map-color: 31
+        is-randomly-ticking: true
+    behavior:
+      - type: liquid_flowable_block
+      - type: bush_block
+        bottom-block-tags:
+          - smprpg:aether_dirt
+      - type: crop_block
+        grow-speed: 0.25
+        light-requirement: 9
+        is-bone-meal-target: true
+        bone-meal-age-bonus: 1
+    events:
+      - on: right_click
+        functions:
+          - type: run
+            functions:
+              - type: update_block_property
+                properties:
+                  age: 1
+              - type: drop_loot
+                loot:
+                  pools:
+                    - rolls: 1
+                      entries:
+                        - type: item
+                          item: smprpg:sky_berry
+                  functions:
+                    type: set_count
+                    count: 2
+              - type: play_sound
+                sound: minecraft:block.sweet_berry_bush.pick_berries
+                target: self
+                source: block
+              - type: leveler_exp
+                plugin: smprpg
+                leveler: farming
+                count: 6
+            conditions:
+              - type: match_block_property
+                properties:
+                  age: 3
+              - type: inverted
+                term:
+                  type: match_item
+                  id: minecraft:bone_meal
+          - type: run
+            functions:
+              - type: update_block_property
+                properties:
+                  age: 1
+              - type: drop_loot
+                loot:
+                  pools:
+                    - rolls: 1
+                      entries:
+                        - type: item
+                          item: smprpg:sky_berry
+              - type: play_sound
+                sound: minecraft:block.sweet_berry_bush.pick_berries
+                target: self
+                source: block
+              - type: leveler_exp
+                plugin: smprpg
+                leveler: farming
+                count: 3
+            conditions:
+              - type: match_block_property
+                properties:
+                  age: 2
+              - type: inverted
+                term:
+                  type: match_item
+                  id: minecraft:bone_meal
+    states:
+      id: 460
+      properties:
+        age:
+          type: int
+          default: 0
+          range: 0~3
+      appearances:
+        stage_0:
+          auto-state: cave_vine
+          models:
+            - path: smprpg:block/crop/sky_berry_bush_stage0
+              generation:
+                parent: minecraft:block/cross
+                textures:
+                  cross: smprpg:block/crop/sky_berry_bush_stage0
+        stage_1:
+          auto-state: cave_vine
+          models:
+            - path: smprpg:block/crop/sky_berry_bush_stage1
+              generation:
+                parent: minecraft:block/cross
+                textures:
+                  cross: smprpg:block/crop/sky_berry_bush_stage1
+        stage_2:
+          auto-state: cave_vine
+          models:
+            - path: smprpg:block/crop/sky_berry_bush_stage2
+              generation:
+                parent: minecraft:block/cross
+                textures:
+                  cross: smprpg:block/crop/sky_berry_bush_stage2
+        stage_3:
+          state: minecraft:cave_vines[age=25,berries=true]
+          models:
+            - path: smprpg:block/crop/sky_berry_bush_stage3
+              generation:
+                parent: minecraft:block/cross
+                textures:
+                  cross: smprpg:block/crop/sky_berry_bush_stage3
+      variants:
+        age=0:
+          appearance: stage_0
+        age=1:
+          appearance: stage_1
+        age=2:
+          appearance: stage_2
+        age=3:
+          appearance: stage_3

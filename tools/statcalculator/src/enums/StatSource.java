@@ -84,6 +84,32 @@ public enum StatSource {
     }
 
     /**
+     * Like {@link #generateStatDistribution(int)}, but only across GEAR sources (armor, charm, enchantments).
+     * Skills are handled as a fixed, known HP contribution (+2/level) outside of this proportional pool,
+     * so they are excluded here and the remaining sources are renormalized to sum to 1.
+     * @param level The level of the player.
+     * @return The fraction of the gear stat pool each gear source should contribute (SKILLS maps to 0).
+     */
+    public static Map<StatSource, Double> generateGearStatDistribution(int level) {
+        var map = new HashMap<StatSource, Double>();
+        var totalWeight = 0;
+
+        for (var stat : StatSource.values())
+            if (stat != SKILLS)
+                totalWeight += stat.CalculateWeight(level);
+
+        for (var stat : StatSource.values()) {
+            if (stat == SKILLS || totalWeight == 0) {
+                map.put(stat, 0.0);
+                continue;
+            }
+            map.put(stat, (double) stat.CalculateWeight(level) / totalWeight);
+        }
+
+        return map;
+    }
+
+    /**
      * A one off function, but still technically a stat source. How much damage should a weapon be expected to do?
      * Weapons will linearly increase in power from 10-500 base DPS, but a player's stats will do most of the heavy
      * lifting. It's good to define a solid anchor point however.

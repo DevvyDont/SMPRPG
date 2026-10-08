@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:obsidian
+- item: smprpg:compressed_obsidian
+  amount: 9
+- item: smprpg:enchanted_obsidian
+  amount: 9

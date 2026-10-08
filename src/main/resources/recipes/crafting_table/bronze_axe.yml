@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'MM '
+- 'MH '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:bronze_ingot
+result:
+  item: smprpg:bronze_axe
+  amount: 1
+unlocked_by:
+- smprpg:bronze_ingot

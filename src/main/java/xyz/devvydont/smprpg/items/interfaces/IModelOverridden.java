@@ -3,7 +3,10 @@ package xyz.devvydont.smprpg.items.interfaces;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import xyz.devvydont.smprpg.SMPRPG;
+import xyz.devvydont.smprpg.items.CustomItemType;
 
 public interface IModelOverridden {
 
@@ -12,7 +15,7 @@ public interface IModelOverridden {
      * This allows you to change how an item looks without affecting its behavior.
      * @return The material this item should render as.
      */
-    Material getDisplayMaterial();
+    Key getDisplayKey();
 
     /**
      * Retrieve the model data of a material. Can be used as a shortcut for filling out this interface.
@@ -21,5 +24,13 @@ public interface IModelOverridden {
      */
     static Key ofMaterial(Material material) {
         return ItemStack.of(material).getData(DataComponentTypes.ITEM_MODEL);
+    }
+
+    static Key ofItemType(CustomItemType type) {
+        return new NamespacedKey(SMPRPG.getPlugin(), type.getKey());
+    }
+
+    static Key ofItemTypeInDirectory(CustomItemType type, String directory) {
+        return new NamespacedKey(SMPRPG.getPlugin(), directory + "/" + type.getKey());
     }
 }

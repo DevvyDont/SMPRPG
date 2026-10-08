@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:leather
+- item: smprpg:premium_leather
+  amount: 9
+- item: smprpg:enchanted_leather
+  amount: 9

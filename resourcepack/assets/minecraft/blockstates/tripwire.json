@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "minecraft:block/air"
+    }
+  }
+}

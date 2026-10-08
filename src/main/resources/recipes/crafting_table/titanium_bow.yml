@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:titanium_ingot
+result:
+  item: smprpg:titanium_bow
+  amount: 1
+unlocked_by:
+- smprpg:titanium_ingot

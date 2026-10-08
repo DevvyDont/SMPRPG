@@ -1,0 +1,48 @@
+type: enchanting
+enchantment: double_tap
+levels:
+  '1':
+    power: 2
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 16
+    - item: minecraft:redstone
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 21
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 64
+    - item: minecraft:redstone_block
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 40
+    ingredients:
+    - item: minecraft:copper_block
+      amount: 16
+    - item: minecraft:redstone_block
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 60
+    ingredients:
+    - item: smprpg:enchanted_copper
+      amount: 16
+    - item: smprpg:enchanted_redstone
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_copper_block
+      amount: 4
+    - item: smprpg:enchanted_redstone_block
+      amount: 4
+    - item: smprpg:enchanted_lapis
+      amount: 16

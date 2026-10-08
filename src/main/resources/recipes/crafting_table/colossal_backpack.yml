@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mbm
+- mmm
+ingredients:
+  b: smprpg:gigantic_backpack
+  m: smprpg:enchanted_shulker_shell
+result:
+  item: smprpg:colossal_backpack
+  amount: 1
+unlocked_by:
+- smprpg:enchanted_shulker_shell
+upgrade: "b"

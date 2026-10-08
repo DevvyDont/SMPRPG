@@ -1,0 +1,202 @@
+items#smoky_quartz:
+  smprpg:smoky_quartz_block:
+    data:
+      item-name: <!i><lang:item.smprpg.smoky_quartz_block>
+      pdc:
+        smprpg:item-type: smoky_quartz_block
+    model: smprpg:block/end/smoky_quartz_block
+    behavior:
+      type: block_item
+      block: smprpg:smoky_quartz_block
+  smprpg:smooth_smoky_quartz:
+    data:
+      item-name: <!i><lang:item.smprpg.smooth_smoky_quartz>
+      pdc:
+        smprpg:item-type: smooth_smoky_quartz
+    model: smprpg:block/end/smooth_smoky_quartz
+    behavior:
+      type: block_item
+      block: smprpg:smooth_smoky_quartz
+  smprpg:smoky_quartz_bricks:
+    data:
+      item-name: <!i><lang:item.smprpg.smoky_quartz_bricks>
+      pdc:
+        smprpg:item-type: smoky_quartz_bricks
+    model: smprpg:block/end/smoky_quartz_bricks
+    behavior:
+      type: block_item
+      block: smprpg:smoky_quartz_bricks
+  smprpg:smoky_quartz_pillar:
+    data:
+      item-name: <!i><lang:item.smprpg.smoky_quartz_pillar>
+      pdc:
+        smprpg:item-type: smoky_quartz_pillar
+    model: smprpg:block/end/smoky_quartz_pillar
+    behavior:
+      type: block_item
+      block: smprpg:smoky_quartz_pillar
+  smprpg:chiseled_smoky_quartz_block:
+    data:
+      item-name: <!i><lang:item.smprpg.chiseled_smoky_quartz_block>
+      pdc:
+        smprpg:item-type: chiseled_smoky_quartz_block
+    model: smprpg:block/end/chiseled_smoky_quartz_block
+    behavior:
+      type: block_item
+      block: smprpg:chiseled_smoky_quartz_block
+
+blocks#smoky_quartz:
+  smprpg:smoky_quartz_block:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/smoky_quartz_block
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+  smprpg:smooth_smoky_quartz:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/smooth_smoky_quartz
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+  smprpg:smoky_quartz_bricks:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/smoky_quartz_bricks
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+  smprpg:smoky_quartz_pillar:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+    states:
+      template: smprpg:block_state/pillar
+      arguments:
+        texture_top_path: smprpg:block/end/smoky_quartz_pillar_top
+        texture_side_path: smprpg:block/end/smoky_quartz_pillar
+        model_vertical_path: smprpg:block/end/smoky_quartz_pillar
+        model_horizontal_path: smprpg:block/end/smoky_quartz_pillar_horizontal
+  smprpg:chiseled_smoky_quartz_block:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/chiseled_smoky_quartz_block
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+
+recipes:
+  smprpg:smoky_quartz_block:
+    type: shaped
+    category: building
+    group: smoky_quartz
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      S: smprpg:smoky_quartz
+    pattern:
+      - SS
+      - SS
+    result:
+      id: smprpg:smoky_quartz_block
+      count: 1
+  smprpg:smoky_quartz_bricks:
+    type: shaped
+    category: building
+    group: smoky_quartz
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      S: smprpg:smoky_quartz_block
+    pattern:
+      - SS
+      - SS
+    result:
+      id: smprpg:smoky_quartz_bricks
+      count: 4
+  smprpg:smoky_quartz_pillar:
+    type: shaped
+    category: building
+    group: smoky_quartz
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      S: smprpg:smoky_quartz_block
+    pattern:
+      - S
+      - S
+    result:
+      id: smprpg:smoky_quartz_pillar
+      count: 2
+  smprpg:chiseled_smoky_quartz_block:  # TODO: Update with slabs in recipe
+    type: shaped
+    category: building
+    group: smoky_quartz
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      S: smprpg:smoky_quartz_block
+    pattern:
+      - SS
+    result:
+      id: smprpg:chiseled_smoky_quartz_block
+      count: 2
+  smprpg:smelting_smooth_smoky_quartz:
+    type: smelting
+    experience: 0.0
+    category: misc
+    group: smoky_quartz
+    time: 200
+    ingredient: smprpg:smoky_quartz_block
+    result:
+      id: smprpg:smooth_smoky_quartz
+      count: 1

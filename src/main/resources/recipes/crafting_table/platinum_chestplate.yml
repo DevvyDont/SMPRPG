@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:platinum_ingot
+result:
+  item: smprpg:platinum_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:platinum_ingot

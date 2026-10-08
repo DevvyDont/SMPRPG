@@ -1,0 +1,30 @@
+{
+  "parent": "smprpg:mining/iron_tools",
+  "criteria": {
+    "blast_furnace": {
+      "conditions": {
+        "recipe_id": "minecraft:blast_furnace"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.blast_furnace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:blast_furnace"
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.smprpg.mining.blast_furnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "blast_furnace"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

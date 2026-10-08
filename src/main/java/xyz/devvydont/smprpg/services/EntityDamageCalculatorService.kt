@@ -4,6 +4,8 @@ import org.bukkit.*
 import org.bukkit.attribute.Attributable
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeInstance
+import org.bukkit.damage.DamageSource
+import org.bukkit.damage.DamageType
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -22,6 +24,8 @@ import org.bukkit.potion.PotionEffectType
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.attribute.AttributeWrapper
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent
+import xyz.devvydont.smprpg.events.MeleeAttackEvent
+import xyz.devvydont.smprpg.items.interfaces.IMageBeam
 import xyz.devvydont.smprpg.listeners.damage.CriticalDamageListener
 import xyz.devvydont.smprpg.listeners.damage.DamagePopupListener
 import xyz.devvydont.smprpg.listeners.damage.EnvironmentalDamageListener
@@ -164,8 +168,25 @@ class EntityDamageCalculatorService : Listener, IService {
         if (attack == null)
             return
 
+        var damage = attack.value;
+        val equipment = dealer.equipment;
+        if (equipment != null) {
+            val bp = blueprint(equipment.itemInMainHand);
+            if (bp is IMageBeam) {
+                if (dealer is Player) {
+                    val playerWrapper = SMPRPG.getService(EntityService::class.java).getPlayerInstance(dealer)
+                    val int = playerWrapper.mana;
+                    val arcRatingInst = instance.getOrCreateAttribute(dealer, AttributeWrapper.ARCANE_RATING)
+                    damage = getIntelligenceScaledDamage(damage, int, arcRatingInst.value)
+                    playerWrapper.useMana(bp.manaCost)
+                    val meleeAttackEvent = MeleeAttackEvent(playerWrapper, bp)
+                    meleeAttackEvent.callEvent();
+                }
+            }
+        }
+
         // Set the damage
-        event.setDamage(EntityDamageEvent.DamageModifier.BASE, attack.value)
+        event.setDamage(EntityDamageEvent.DamageModifier.BASE, damage)
     }
 
     /*
@@ -246,7 +267,7 @@ class EntityDamageCalculatorService : Listener, IService {
         val hand: ItemStack = dealer.equipment!!.itemInMainHand
         val handBlueprint = blueprint(hand)
         if (hand.type != Material.AIR) {
-            if (SMPRPG.getService(ItemService::class.java).getBlueprint(hand).getItemClassification().isBow) {
+            if (SMPRPG.getService(ItemService::class.java).getBlueprint(hand).itemClassification.isBow) {
                 event.setDamage(EntityDamageEvent.DamageModifier.BASE, event.damage * .05)
                 dealer.sendMessage(ComponentUtils.error("That's not how you use this weapon..."))
                 dealer.world.playSound(dealer.location, Sound.ENTITY_ENDERMAN_HURT, 1f, 1.25f)
@@ -256,7 +277,7 @@ class EntityDamageCalculatorService : Listener, IService {
 
         // 95% damage reduction for abusing bow attributes or trying to dual wield weapons.
         val offHandBlueprint = blueprint(dealer.equipment!!.itemInOffHand)
-        if (isTryingToBowStackExploit(dealer) || handBlueprint.getItemClassification().isWeapon && offHandBlueprint.getItemClassification().isWeapon) {
+        if (isTryingToBowStackExploit(dealer) || handBlueprint.itemClassification.isWeapon && offHandBlueprint.itemClassification.isWeapon) {
             event.setDamage(EntityDamageEvent.DamageModifier.BASE, event.damage * .05)
             dealer.sendMessage(ComponentUtils.error("You seem to be struggling trying to deal damage with the items you are holding..."))
             dealer.world.playSound(dealer.location, Sound.ENTITY_ENDERMAN_HURT, 1f, 1.25f)
@@ -326,7 +347,7 @@ class EntityDamageCalculatorService : Listener, IService {
             val handBlueprint = blueprint(event.getEntity().equipment!!.itemInMainHand)
             val offhandBlueprint = blueprint(event.getEntity().equipment!!.itemInOffHand)
             isDualWieldingWeapons =
-                handBlueprint.getItemClassification().isWeapon && offhandBlueprint.getItemClassification().isWeapon
+                handBlueprint.itemClassification.isWeapon && offhandBlueprint.itemClassification.isWeapon
         }
 
         if (isTryingToBowStackExploit(event.getEntity()) || isDualWieldingWeapons) {
@@ -380,7 +401,7 @@ class EntityDamageCalculatorService : Listener, IService {
             val handBlueprint = blueprint(equipment.itemInMainHand)
             val offhandBlueprint = blueprint(equipment.itemInOffHand)
             isDualWieldingWeapons =
-                handBlueprint.getItemClassification().isWeapon && offhandBlueprint.getItemClassification().isWeapon
+                handBlueprint.itemClassification.isWeapon && offhandBlueprint.itemClassification.isWeapon
         }
 
         if (isTryingToBowStackExploit(shooter) || isDualWieldingWeapons) {
@@ -564,7 +585,7 @@ class EntityDamageCalculatorService : Listener, IService {
         if (event.originalEvent.cause != DamageCause.ENTITY_ATTACK)
             return
 
-        val cooldown: Float = player.attackCooldown
+        val cooldown: Float = getMeleeAttackCharge(player)
 
         // Is the player on cooldown? Don't do anything if they are dealing full damage hit.
         // If the player was *close enough* then allow vanilla Minecraft's damage rules for damage reduction.
@@ -616,7 +637,7 @@ class EntityDamageCalculatorService : Listener, IService {
         // Ignore this event if another player is causing this. PVP is unaffected.
         if (event.dealer is Player)
             return
-        val player = event.dealer as Player
+        val player = event.damaged
 
         // Multiply their difficulty damage multiplier.
         val multiplier = getDamageMultiplier(SMPRPG.getService(DifficultyService::class.java).getDifficulty(player))
@@ -683,9 +704,9 @@ class EntityDamageCalculatorService : Listener, IService {
             // Analyze what's in both hands and update accordingly if a bow is present.
             val mainHand = entity.equipment!!.itemInMainHand
             val offHand = entity.equipment!!.itemInOffHand
-            if (SMPRPG.getService(ItemService::class.java).getBlueprint(mainHand).getItemClassification().isBow)
+            if (SMPRPG.getService(ItemService::class.java).getBlueprint(mainHand).itemClassification.isBow)
                 map.put(EquipmentSlotGroup.MAINHAND, true)
-            if (SMPRPG.getService(ItemService::class.java).getBlueprint(offHand).getItemClassification().isBow)
+            if (SMPRPG.getService(ItemService::class.java).getBlueprint(offHand).itemClassification.isBow)
                 map.put(EquipmentSlotGroup.OFFHAND, true)
 
             val wieldingMainHand = map.getOrDefault(EquipmentSlotGroup.MAINHAND, false)
@@ -722,7 +743,7 @@ class EntityDamageCalculatorService : Listener, IService {
 
             // At this point, we know we are off-handing a bow. Are we attempting to hold a stat increasing weapon in our main hand as well?
             val blueprint = SMPRPG.getService(ItemService::class.java).getBlueprint(main)
-            return blueprint.getItemClassification().isWeapon
+            return blueprint.itemClassification.isWeapon
 
             // We seem to be innocent...
         }
@@ -763,6 +784,26 @@ class EntityDamageCalculatorService : Listener, IService {
         @JvmStatic
         fun calculateEffectiveHealth(health: Double, defense: Double): Double {
             return health / calculateDefenseDamageMultiplier(defense)
+        }
+
+        /**
+         * Given a base damage value, intelligence amount, and magic scaling factory, calculates the magic scaled damage.
+         */
+        @JvmStatic
+        fun getIntelligenceScaledDamage(baseDmg: Double, intelligence: Double, factor: Double): Double {
+            return baseDmg * (1 + ((intelligence / 100.0) * (factor / 100.0)))
+        }
+
+        /**
+         * Returns the player's attack-strength charge (0.0-1.0) captured at the moment of their last
+         * swing. Damage and crit logic must use this instead of the live [Player.getAttackCooldown],
+         * which recent Paper builds reset to zero before the damage event fires.
+         * @param player The player whose captured melee charge to retrieve.
+         * @return The captured charge, in the range [0.0, 1.0].
+         */
+        @JvmStatic
+        fun getMeleeAttackCharge(player: Player): Float {
+            return SMPRPG.getService(EntityService::class.java).getPlayerInstance(player).lastMeleeAttackCharge
         }
     }
 }

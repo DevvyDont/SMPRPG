@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- isi
+- sts
+- isi
+ingredients:
+  s: minecraft:string
+  t: smprpg:wardrobe_slot_common
+  i: minecraft:iron_ingot
+result:
+  item: smprpg:wardrobe_slot_uncommon
+  amount: 1
+unlocked_by:
+- smprpg:wardrobe_slot_common
+upgrade: "t"

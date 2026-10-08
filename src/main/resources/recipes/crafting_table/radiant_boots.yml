@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:enchanted_glowstone
+result:
+  item: smprpg:radiant_boots
+  amount: 1
+unlocked_by:
+- minecraft:glowstone

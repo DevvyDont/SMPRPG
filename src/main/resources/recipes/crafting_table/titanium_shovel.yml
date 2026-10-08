@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' H '
+- ' H '
+ingredients:
+  H: smprpg:steel_tool_shaft
+  M: smprpg:titanium_ingot
+result:
+  item: smprpg:titanium_shovel
+  amount: 1
+unlocked_by:
+- smprpg:titanium_ingot

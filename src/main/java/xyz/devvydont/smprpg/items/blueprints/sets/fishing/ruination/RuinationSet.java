@@ -1,17 +1,16 @@
-package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
+package xyz.devvydont.smprpg.items.blueprints.sets.fishing.ruination;
 
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
-import xyz.devvydont.smprpg.SMPRPG;
+import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
+import xyz.devvydont.smprpg.items.interfaces.IRepairable;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
 import xyz.devvydont.smprpg.services.ItemService;
 
@@ -19,18 +18,21 @@ import java.util.Collection;
 import java.util.List;
 
 
-public abstract class RuinationSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, ICraftable {
+public abstract class RuinationSet extends CustomAttributeItem implements IBreakableEquipment, ITrimmable, IRepairable {
 
     public static int POWER = 40;
 
     // Crafting components to be created.
     public static CustomItemType UPGRADE_MATERIAL = CustomItemType.TRIDENTITE;
 
+    @Override
+    public @NotNull Collection<@NotNull ItemStack> getRepairMaterial() {
+        return List.of(itemService.getCustomItem(UPGRADE_MATERIAL));
+    }
+
     public RuinationSet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
-
-    public abstract int getHealth();
 
     public abstract int getDefense();
 
@@ -50,7 +52,6 @@ public abstract class RuinationSet extends CustomAttributeItem implements IBreak
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, getDefense()),
-                AttributeEntry.additive(AttributeWrapper.HEALTH, getHealth()),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 3),
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 35),
                 AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
@@ -79,20 +80,6 @@ public abstract class RuinationSet extends CustomAttributeItem implements IBreak
     @Override
     public TrimMaterial getTrimMaterial() {
         return TrimMaterial.NETHERITE;
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.RAW_TRIDENTITE_CHUNK));
     }
 
     @Override

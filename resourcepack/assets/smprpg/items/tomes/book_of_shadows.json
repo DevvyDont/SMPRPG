@@ -1,0 +1,24 @@
+{
+  "model": {
+	"type": "minecraft:select",
+	"cases": [
+	  {
+		"model": {
+		  "type": "minecraft:model",
+		  "model": "tools:item/book_of_shadows_ui"
+		},
+		"when": [
+		  "gui",
+		  "ground",
+		  "fixed",
+		  "on_shelf"
+		]
+	  }
+	],
+	"fallback": {
+	  "type": "minecraft:model",
+	  "model": "tools:item/book_of_shadows"
+	},
+	"property": "minecraft:display_context"
+  }
+}

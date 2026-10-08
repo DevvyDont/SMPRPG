@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/spear_in_hand",
+  "textures": {
+    "layer0": "spears:item/rose_gold_spear_in_hand"
+  }
+}

@@ -15,6 +15,20 @@
                 }
             },
             {
+                "when": "smprpg:silver_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/silver_axe"
+                }
+            },
+            {
+                "when": "smprpg:silver_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/silver_hatchet"
+                }
+            },
+            {
                 "when": "smprpg:steel_axe",
                 "model": {
                     "type": "model",
@@ -26,6 +40,20 @@
                 "model": {
                     "type": "model",
                     "model": "tools:item/steel_hatchet"
+                }
+            },
+            {
+                "when": "smprpg:tin_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/tin_axe"
+                }
+            },
+            {
+                "when": "smprpg:tin_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/tin_hatchet"
                 }
             }
         ]

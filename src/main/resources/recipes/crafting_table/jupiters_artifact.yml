@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- fff
+- fdf
+- fff
+ingredients:
+  d: minecraft:diamond
+  f: smprpg:jupiter_crystal
+result:
+  item: smprpg:jupiters_artifact
+  amount: 1
+unlocked_by:
+- smprpg:jupiter_crystal

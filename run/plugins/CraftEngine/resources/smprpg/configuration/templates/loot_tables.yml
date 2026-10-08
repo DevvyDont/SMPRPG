@@ -1,0 +1,352 @@
+templates:
+  # Drop only a specific item.
+  # Suitable for the vast majority of loot items.
+  # Only requires the template ID to be filled in during use, with no parameter requirements.
+
+  # template: smprpg:loot_table/self
+  smprpg:loot_table/basic:
+    pools:
+      - rolls: 1
+        conditions:
+          - type: survives_explosion
+        entries:
+          - type: item
+            item: ${item}
+        functions:
+          - type: apply_data
+            data:
+              pdc:
+                smprpg:item-type: ${item-id}
+          - type: set_count
+            add: false
+            count: ${count:-1}
+
+  # Drop itself.
+  # Suitable for the vast majority of loot items.
+  # Only requires the template ID to be filled in during use, with no parameter requirements.
+
+  # template: smprpg:loot_table/self
+  smprpg:loot_table/self:
+    pools:
+      - rolls: 1
+        conditions:
+          - type: survives_explosion
+        entries:
+          - type: item
+            item: ${__NAMESPACE__}:${__ID__}
+        functions:
+          template:
+            smprpg:data/mark_smprpg_item_in_loot
+
+
+  # When Silk Touch is used, it drops the ore block itself. When Fortune is used, it increases the drops of the materials.
+
+  # Honestly though, this won't matter since we override it on the server anyways.
+
+  # template: smprpg:loot_table/ore
+  # arguments:
+  #   ore_block: the ore block
+  #   ore_drop: the drops of the ore material
+  #   ore_drop_count: the amount of the ore materials
+  smprpg:loot_table/ore:
+    pools:
+      - rolls: 1
+        entries:
+          - type: alternatives
+            children:
+              - type: item
+                item: ${ore_block}
+                conditions:
+                  - type: enchantment
+                    predicate: minecraft:silk_touch>=1
+              - type: item
+                item: ${ore_drop}
+                functions:
+                  - type: set_count
+                    count: ${ore_drop_count:-1}
+                    add: false
+                  - type: apply_bonus
+                    enchantment: minecraft:fortune
+                    formula:
+                      type: ore_drops
+                  - type: explosion_decay
+
+  # template: smprpg:loot_table/seed_crop
+  # arguments:
+  #   crop_item: the mature crop item
+  #   crop_item_count: quantity of mature crop items
+  #   crop_seed: the seed item of the crop
+  #   extra_seed_count: additional seeds dropped when crop reaches maturity
+  #   ripe_age: the max age
+  smprpg:loot_table/seed_crop:
+    pools:
+      - rolls: 1
+        entries:
+          - type: alternatives
+            children:
+              - type: item
+                item: ${crop_item_namespace}:${crop_item}
+                conditions:
+                  - type: match_block_property
+                    properties:
+                      age: ${ripe_age}
+                functions:
+                  - type: set_count
+                    add: false
+                    count: ${crop_item_count:-1}
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${crop_item_namespace}:${crop_item}
+              - type: item
+                item: ${crop_seed_namespace}:${crop_seed}
+                functions:
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${crop_seed_namespace}:${crop_seed}
+      - rolls: 1
+        conditions:
+          - type: match_block_property
+            properties:
+              age: ${ripe_age}
+        entries:
+          - type: item
+            item: ${crop_seed_namespace}:${crop_seed}
+            functions:
+              - type: apply_bonus
+                enchantment: smprpg:harvesting
+                formula:
+                  type: binomial_with_bonus_count
+                  extra: ${extra_seed_count:-3}
+                  probability: 0.5714286
+        functions:
+          template: smprpg:data/mark_smprpg_item_in_loot_with_id
+          arguments::id: ${crop_seed_namespace}:${crop_seed}
+
+  # Drop slabs
+  # When two slabs are stacked, the loot table should be set to drop two items.
+
+  # template: smprpg:loot_table/slab
+  smprpg:loot_table/slab:
+    pools:
+      - rolls: 1
+        entries:
+          - type: item
+            item: ${__NAMESPACE__}:${__ID__}
+            functions:
+              - type: apply_data
+                data:
+                  pdc:
+                    smprpg:item-type: ${__ID__}
+              - type: set_count
+                count: 2
+                add: false
+                conditions:
+                  - type: match_block_property
+                    properties:
+                      type: double
+              - type: explosion_decay
+
+  # Drop the door.
+  # Since a door consists of two blocks, if both of them have drop items, it will cause duplication.
+
+  # template: smprpg:loot_table/door
+  smprpg:loot_table/door:
+    pools:
+      - rolls: 1
+        entries:
+          - type: item
+            item: ${__NAMESPACE__}:${__ID__}
+            conditions:
+              - type: match_block_property
+                properties:
+                  half: lower
+        functions:
+          template:
+            smprpg:data/mark_smprpg_item_in_loot
+
+
+  # Using Silk Touch or shears will cause the leaves block itself to drop.
+  # Using Fortune, however, increases the drop rates of sticks and saplings.
+
+  # template: smprpg:loot_table/leaves
+  # arguments:
+  #   leaves: the leaves block
+  #   sapling: the sapling item
+  smprpg:loot_table/leaves:
+    pools:
+      - rolls: 1
+        entries:
+          - type: alternatives
+            children:
+              - type: item
+                item: ${leaves_namespace}:${leaves_id}
+                conditions:
+                  - type: any_of
+                    terms:
+                      - type: match_item
+                        id: minecraft:shears
+                      - type: enchantment
+                        predicate: minecraft:silk_touch>=1
+                functions:
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${leaves_id}
+              - type: item
+                item: ${sapling_namespace}:${sapling_id}
+                conditions:
+                  - type: survives_explosion
+                  - type: table_bonus
+                    enchantment: minecraft:fortune
+                    chances:
+                      - 0.05
+                      - 0.0625
+                      - 0.083333333
+                      - 0.1
+                functions:
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${sapling_id}
+      - rolls: 1
+        conditions:
+          - type: inverted
+            term:
+              type: any_of
+              terms:
+                - type: match_item
+                  id: minecraft:shears
+                - type: enchantment
+                  predicate: minecraft:silk_touch>=1
+        entries:
+          - type: item
+            item: minecraft:stick
+            conditions:
+              - type: table_bonus
+                enchantment: minecraft:fortune
+                chances:
+                  - 0.02
+                  - 0.022222222
+                  - 0.025
+                  - 0.033333333
+                  - 0.1
+            functions:
+              - type: set_count
+                count:
+                  type: uniform
+                  min: 1
+                  max: 2
+              - type: explosion_decay
+
+  # Using Silk Touch or shears will cause the leaves block itself to drop.
+  # Using Fortune, however, increases the drop rates of sticks and saplings.
+
+  # template: smprpg:loot_table/leaves
+  # arguments:
+  #   leaves: the leaves block
+  #   sapling: the sapling item
+  smprpg:loot_table/fruit_leaves:
+    pools:
+      - rolls: 1
+        entries:
+          - type: alternatives
+            children:
+              - type: item
+                item: ${leaves_namespace}:${leaves_id}
+                conditions:
+                  - type: any_of
+                    terms:
+                      - type: match_item
+                        id: minecraft:shears
+                      - type: enchantment
+                        predicate: minecraft:silk_touch>=1
+                functions:
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${leaves_id}
+              - type: item
+                item: ${sapling_namespace}:${sapling_id}
+                conditions:
+                  - type: survives_explosion
+                  - type: table_bonus
+                    enchantment: smprpg:felling
+                    chances:
+                      - 0.05
+                      - 0.0625
+                      - 0.083333333
+                      - 0.1
+                functions:
+                  - type: apply_data
+                    template: smprpg:data/mark_smprpg_item_with_id
+                    arguments::id: ${sapling_id}
+      - rolls: 1
+        conditions:
+          - type: inverted
+            term:
+              type: any_of
+              terms:
+                - type: match_item
+                  id: minecraft:shears
+                - type: enchantment
+                  predicate: minecraft:silk_touch>=1
+        entries:
+          - type: item
+            item: ${fruit_namespace}:${fruit_id}
+            functions:
+              - type: apply_data
+                template: smprpg:data/mark_smprpg_item_with_id
+                arguments::id: ${fruit_id}
+      - rolls: 1
+        conditions:
+          - type: inverted
+            term:
+              type: any_of
+              terms:
+                - type: match_item
+                  id: minecraft:shears
+                - type: enchantment
+                  predicate: minecraft:silk_touch>=1
+        entries:
+          - type: item
+            item: minecraft:stick
+            conditions:
+              - type: table_bonus
+                enchantment: minecraft:fortune
+                chances:
+                  - 0.02
+                  - 0.022222222
+                  - 0.025
+                  - 0.033333333
+                  - 0.1
+            functions:
+              - type: set_count
+                count:
+                  type: uniform
+                  min: 1
+                  max: 2
+              - type: explosion_decay
+
+  smprpg:data/mark_smprpg_item_in_loot:
+    - type: apply_data
+      data:
+        pdc:
+          smprpg:item-type: ${__ID__}
+
+  smprpg:data/mark_smprpg_item_in_loot_with_id:
+    - type: apply_data
+      data:
+        pdc:
+          smprpg:item-type: ${id}
+          
+  smprpg:data/mark_smprpg_item:
+    data:
+      pdc:
+        smprpg:item-type: ${__ID__}
+
+  smprpg:data/mark_smprpg_item_with_id:
+    data:
+      pdc:
+        smprpg:item-type: ${id}
+
+  smprpg:data/sell_value:
+    data:
+      pdc:
+        smprpg:sell-value: ${worth}

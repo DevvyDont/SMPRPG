@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- gdg
+- dtd
+- gdg
+ingredients:
+  d: minecraft:diamond
+  t: smprpg:wardrobe_slot_uncommon
+  g: minecraft:gold_ingot
+result:
+  item: smprpg:wardrobe_slot_rare
+  amount: 1
+unlocked_by:
+- smprpg:wardrobe_slot_uncommon
+upgrade: "t"

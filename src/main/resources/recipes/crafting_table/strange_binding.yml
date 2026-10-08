@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' bn'
+- bnb
+- 'nb '
+ingredients:
+  b: smprpg:dragonsteel_ingot
+  n: smprpg:latticed_xenomatter
+result:
+  item: smprpg:strange_binding
+  amount: 1
+unlocked_by:
+- smprpg:latticed_xenomatter

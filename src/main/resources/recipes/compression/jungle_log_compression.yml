@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:jungle_log
+- item: smprpg:premium_jungle_log
+  amount: 9
+- item: smprpg:enchanted_jungle_log
+  amount: 9
+- item: smprpg:jungle_log_singularity
+  amount: 9

@@ -1,11 +1,14 @@
 package xyz.devvydont.smprpg.skills.listeners
 
+import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
+import net.momirealms.craftengine.core.block.ImmutableBlockState
+import net.momirealms.craftengine.core.util.Key as CEKey
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.World
 import org.bukkit.block.BlockFace
 import org.bukkit.block.data.Ageable
 import org.bukkit.entity.EntityType
-import org.bukkit.entity.ExperienceOrb
 import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -21,12 +24,17 @@ import org.bukkit.event.world.StructureGrowEvent
 import org.bukkit.inventory.ItemStack
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
+import xyz.devvydont.smprpg.block.CraftEngineBlockEnums
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent
+import xyz.devvydont.smprpg.items.CustomItemType
+import xyz.devvydont.smprpg.items.base.CustomItemBlueprint
+import xyz.devvydont.smprpg.items.blueprints.craftengine.CraftEngineBlueprint
 import xyz.devvydont.smprpg.services.DropsService
 import xyz.devvydont.smprpg.services.EntityService
+import xyz.devvydont.smprpg.services.ItemService
+import xyz.devvydont.smprpg.util.craftengine.CraftEngineHelpers
+import xyz.devvydont.smprpg.util.persistence.KeyStore
 import xyz.devvydont.smprpg.util.world.ChunkUtil
-import java.util.function.Consumer
-import kotlin.math.max
 
 class FarmingExperienceListener : Listener {
 
@@ -48,18 +56,18 @@ class FarmingExperienceListener : Listener {
 
         val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(event.getPlayer())
         player.farmingSkill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.HARVEST)
-        val loc = event.harvestedBlock.location
-        val expToDrop = max(1, exp / 10)
-        loc.getWorld().spawn(
-            loc,
-            ExperienceOrb::class.java,
-            Consumer { orb: ExperienceOrb -> orb.experience = expToDrop })
+        // val loc = event.harvestedBlock.location
+        // val expToDrop = max(1, exp / 10)
+        // loc.getWorld().spawn(
+        //     loc,
+        //     ExperienceOrb::class.java,
+        //     Consumer { orb: ExperienceOrb -> orb.experience = expToDrop })
     }
 
-    private fun getExperienceForDrops(drops: MutableCollection<ItemStack>, environment: World.Environment): Int {
-        val multiplier: Double = when (environment) {
-            World.Environment.NETHER -> 1.2
-            World.Environment.THE_END -> 1.5
+    private fun getExperienceForDrops(drops: MutableCollection<ItemStack>, dimKey: NamespacedKey): Int {
+        val multiplier: Double = when (dimKey) {
+            KeyStore.DIM_NETHER, KeyStore.DIM_AETHER -> 1.2
+            KeyStore.DIM_END -> 1.5
             else -> 1.0
         }
 
@@ -70,36 +78,56 @@ class FarmingExperienceListener : Listener {
         return (exp * multiplier).toInt()
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     @Suppress("unused")
-    private fun onHarvestBlock(event: BlockBreakEvent) {
-        val isAgeable = event.getBlock().blockData is Ageable
+    private fun onHarvestBlock(event: BlockDropItemEvent) {
+        val block = event.block
+        var customBlockState : ImmutableBlockState? = null
+        var isAgeable = false
+        if (CraftEngineBlocks.isCustomBlock(block)) {
+            customBlockState = CraftEngineBlocks.getCustomBlockState(block)
+            if (customBlockState != null) {
+                if (customBlockState.customBlockState().getProperty<Int>("age") != null)
+                    isAgeable = true
+            }
+        }
+        else isAgeable = block.blockData is Ageable
 
         // If this block is marked as skill invalid, we have some things we need to do.
-        if (ChunkUtil.isBlockSkillInvalid(event.getBlock()))
+        if (ChunkUtil.isBlockSkillInvalid(block))
             // If this block does not have age states, we don't have to consider anything. past this point
             if (!isAgeable)
                 return
         
         // Loop through every drop from breaking this block and award XP
+        val droppedItemStacks = mutableListOf<ItemStack>()
+        for (item in event.items)
+            droppedItemStacks.add(item.itemStack)
         val exp = getExperienceForDrops(
-            event.getBlock().getDrops(event.player.inventory.itemInMainHand, event.player),
-            event.player.world.environment
+            droppedItemStacks, event.player.world.key
         )
         if (exp <= 0)
             return
 
         // If the block is ageable don't give xp unless it is fully matured
-        if (event.getBlock().blockData is Ageable) {
+        if (event.block.blockData is Ageable) {
             val ageable = event.block.blockData as Ageable
             if (ageable.maximumAge != ageable.age)
                 return
         }
 
+        // Do checks for custom ageable blocks
+        if (isAgeable && customBlockState != null) {
+            val maxAge = getCustomCropMaxAge(CraftEngineHelpers.getBlockKey(block))
+            val currentAge = customBlockState.customBlockState().getProperty<Int>("age")
+            if (currentAge != maxAge)
+                return
+        }
+
         val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(event.player)
         player.farmingSkill.addExperience(exp, SkillExperienceGainEvent.ExperienceSource.HARVEST)
-        val expToDrop = max(1, exp / 10)
-        event.expToDrop = expToDrop
+        // val expToDrop = max(1, exp / 10)
+        // event.expToDrop = expToDrop
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -160,7 +188,7 @@ class FarmingExperienceListener : Listener {
 
             plugin.server.scheduler.runTaskLater(plugin, Runnable runTaskLater@{
                 // Create the items that this block would drop if it were broken properly, and add loot tags.
-                val laterDrops: MutableList<ItemStack> = ArrayList<ItemStack>(block.getDrops(tool))
+                val laterDrops: MutableList<ItemStack> = ArrayList(block.getDrops(tool))
                 val dropEntities = ArrayList<Item>()
                 for (drop in laterDrops) dropEntities.add(block.world.dropItemNaturally(block.location, drop))
 
@@ -184,7 +212,7 @@ class FarmingExperienceListener : Listener {
                 if (!ChunkUtil.isBlockSkillInvalid(block)) farming.addExperience(
                     getExperienceForDrops(
                         laterDrops,
-                        block.world.environment
+                        block.world.key
                     ), SkillExperienceGainEvent.ExperienceSource.HARVEST
                 )
 
@@ -228,37 +256,101 @@ class FarmingExperienceListener : Listener {
         }
 
         fun getExperienceValue(item: ItemStack): Int {
-            val experience = when (item.type) {
-                Material.FLOWERING_AZALEA, Material.FLOWERING_AZALEA_LEAVES, Material.POPPY, Material.ROSE_BUSH, Material.TALL_GRASS, Material.SHORT_GRASS, Material.SEAGRASS, Material.TALL_SEAGRASS, Material.DANDELION, Material.BLUE_ORCHID, Material.ALLIUM, Material.AZURE_BLUET, Material.RED_TULIP, Material.ORANGE_TULIP, Material.PINK_TULIP, Material.WHITE_TULIP, Material.OXEYE_DAISY, Material.CORNFLOWER, Material.LILY_OF_THE_VALLEY, Material.LILY_PAD, Material.PINK_PETALS, Material.LILAC, Material.PEONY, Material.KELP, Material.KELP_PLANT -> 1
-                Material.PITCHER_PLANT, Material.PITCHER_CROP, Material.PITCHER_POD -> 2
-                Material.COCOA_BEANS -> 1
-                Material.GLOW_BERRIES, Material.SWEET_BERRIES -> 3
-                Material.BROWN_MUSHROOM, Material.RED_MUSHROOM, Material.DEAD_BUSH -> 3
-                Material.SPORE_BLOSSOM -> 7
-                Material.BAMBOO -> 2
-                Material.BROWN_MUSHROOM_BLOCK, Material.RED_MUSHROOM_BLOCK -> 21
-                Material.SEA_PICKLE -> 3
-                Material.CRIMSON_FUNGUS, Material.WARPED_FUNGUS -> 4
-                Material.WITHER_ROSE -> 6
-                Material.MELON -> 5
-                Material.MELON_SLICE -> 1
-                Material.MELON_SEEDS -> 1
-                Material.PUMPKIN -> 5
-                Material.PUMPKIN_SEEDS -> 1
-                Material.BEETROOT, Material.BEETROOTS -> 3
-                Material.BEETROOT_SEEDS -> 1
-                Material.TORCHFLOWER, Material.TORCHFLOWER_CROP -> 7
-                Material.TORCHFLOWER_SEEDS -> 1
-                Material.WHEAT -> 4
-                Material.WHEAT_SEEDS -> 1
-                Material.CARROT, Material.CARROTS, Material.POTATO, Material.POTATOES -> 3
-                Material.NETHER_WART -> 5
-                Material.SUGAR_CANE -> 2
-                Material.CACTUS -> 5
-                else -> 0
+            var experience : Int
+            val bp = ItemService.blueprint(item)
+            if (bp is CraftEngineBlueprint) {
+                experience = when (bp.customItemType) {
+                    CustomItemType.TOMATO -> 4
+                    CustomItemType.TOMATO_SEEDS -> 1
+                    CustomItemType.ONION -> 5
+                    CustomItemType.CABBAGE -> 6
+                    CustomItemType.RICE -> 5
+                    CustomItemType.PUFFBLOOM, CustomItemType.VIOLET, CustomItemType.RAINBOW_LILY -> 2
+                    CustomItemType.SKY_BERRY -> 3
+                    CustomItemType.SQUASH -> 8
+                    CustomItemType.HALVED_SQUASH -> 4
+                    else -> 0
+                }
+            }
+            else {
+                experience = when (item.type) {
+                    Material.FLOWERING_AZALEA, Material.FLOWERING_AZALEA_LEAVES, Material.POPPY, Material.ROSE_BUSH, Material.TALL_GRASS, Material.SHORT_GRASS, Material.SEAGRASS, Material.TALL_SEAGRASS, Material.DANDELION, Material.BLUE_ORCHID, Material.ALLIUM, Material.AZURE_BLUET, Material.RED_TULIP, Material.ORANGE_TULIP, Material.PINK_TULIP, Material.WHITE_TULIP, Material.OXEYE_DAISY, Material.CORNFLOWER, Material.LILY_OF_THE_VALLEY, Material.LILY_PAD, Material.PINK_PETALS, Material.LILAC, Material.PEONY, Material.KELP, Material.KELP_PLANT -> 1
+                    Material.PITCHER_PLANT, Material.PITCHER_CROP, Material.PITCHER_POD -> 2
+                    Material.COCOA_BEANS -> 1
+                    Material.GLOW_BERRIES, Material.SWEET_BERRIES -> 3
+                    Material.BROWN_MUSHROOM, Material.RED_MUSHROOM, Material.DEAD_BUSH -> 3
+                    Material.SPORE_BLOSSOM -> 7
+                    Material.BAMBOO -> 2
+                    Material.BROWN_MUSHROOM_BLOCK, Material.RED_MUSHROOM_BLOCK -> 21
+                    Material.SEA_PICKLE -> 3
+                    Material.CRIMSON_FUNGUS, Material.WARPED_FUNGUS -> 4
+                    Material.WITHER_ROSE -> 6
+                    Material.MELON -> 5
+                    Material.MELON_SLICE -> 1
+                    Material.MELON_SEEDS -> 1
+                    Material.PUMPKIN -> 5
+                    Material.PUMPKIN_SEEDS -> 1
+                    Material.BEETROOT, Material.BEETROOTS -> 3
+                    Material.BEETROOT_SEEDS -> 1
+                    Material.TORCHFLOWER, Material.TORCHFLOWER_CROP -> 7
+                    Material.TORCHFLOWER_SEEDS -> 1
+                    Material.WHEAT -> 4
+                    Material.WHEAT_SEEDS -> 1
+                    Material.CARROT, Material.CARROTS, Material.POTATO, Material.POTATOES -> 3
+                    Material.NETHER_WART -> 5
+                    Material.SUGAR_CANE -> 2
+                    Material.CACTUS -> 5
+                    Material.APPLE -> 5
+                    Material.GOLDEN_APPLE -> 12
+                    else -> 0
+                }
             }
 
             return experience * item.amount
+        }
+
+        fun getCustomCropMaxAge(blockKey: CEKey?) : Int {
+            return when (blockKey) {
+                CraftEngineBlockEnums.TOMATO_PLANT.key -> 2
+                CraftEngineBlockEnums.ONION_PLANT.key -> 3
+                CraftEngineBlockEnums.RICE_PLANT.key -> 3
+                CraftEngineBlockEnums.CABBAGE_PLANT.key -> 7
+                CraftEngineBlockEnums.SKY_BERRY_BUSH.key -> 3
+                else -> -1
+            }
+        }
+
+        fun getVanillaCropMaxAge(type: Material) : Int {
+            return when (type) {
+                Material.WHEAT -> 7
+                Material.CARROTS -> 7
+                Material.POTATOES -> 7
+                Material.BEETROOTS -> 3
+                Material.NETHER_WART -> 3
+                Material.COCOA -> 2
+                Material.SWEET_BERRY_BUSH -> 3
+                Material.MELON_STEM -> 7
+                Material.PUMPKIN_STEM -> 7
+                Material.CAVE_VINES_PLANT -> 25
+                Material.KELP_PLANT -> 25
+                Material.CHORUS_FLOWER -> 5
+                Material.TORCHFLOWER_CROP -> 1
+                Material.PITCHER_CROP -> 1
+                Material.SUGAR_CANE -> 9
+                Material.CACTUS -> 9
+
+                Material.OAK_SAPLING -> 1
+                Material.SPRUCE_SAPLING -> 1
+                Material.BIRCH_SAPLING -> 1
+                Material.JUNGLE_SAPLING -> 1
+                Material.DARK_OAK_SAPLING -> 1
+                Material.ACACIA_SAPLING -> 1
+                Material.MANGROVE_PROPAGULE -> 4
+                Material.CHERRY_SAPLING -> 1
+                Material.PALE_OAK_SAPLING -> 1
+                Material.BAMBOO -> 1
+                else -> 1
+            }
         }
     }
 }

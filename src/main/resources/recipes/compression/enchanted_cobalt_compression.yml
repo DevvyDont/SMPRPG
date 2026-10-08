@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:enchanted_cobalt
+- item: smprpg:enchanted_cobalt_block
+  amount: 9
+- item: smprpg:cobalt_singularity
+  amount: 9

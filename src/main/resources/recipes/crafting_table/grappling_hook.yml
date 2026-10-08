@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- '  T'
+- ' HS'
+- H S
+ingredients:
+  S: smprpg:enchanted_string
+  T: minecraft:tripwire_hook
+  H: minecraft:stick
+result:
+  item: smprpg:grappling_hook
+  amount: 1
+unlocked_by:
+- minecraft:string

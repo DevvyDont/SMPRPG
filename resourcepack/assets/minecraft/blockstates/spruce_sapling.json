@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/spruce_sapling"
+    },
+	"stage=1": {
+	  "model": "minecraft:block/air"
+	}
+  }
+}

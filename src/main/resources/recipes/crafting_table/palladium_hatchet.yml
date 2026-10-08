@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'M  '
+- 'MH '
+- ' H '
+ingredients:
+  H: smprpg:ambrosium_encrusted_shaft
+  M: smprpg:palladium_ingot
+result:
+  item: smprpg:palladium_hatchet
+  amount: 1
+unlocked_by:
+- smprpg:palladium_ingot

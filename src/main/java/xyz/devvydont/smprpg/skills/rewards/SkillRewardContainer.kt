@@ -101,6 +101,28 @@ abstract class SkillRewardContainer {
     }
 
     /**
+     * Shortcut method to add a flat (non-scaling) attribute to every level of this container.
+     * Grants a flat [amount] per level, accumulating linearly (cumulative = amount * level).
+     * @param attribute The attribute you want to modify.
+     * @param operation The operation you want to use.
+     * @param amount The flat stat amount to grant per level.
+     */
+    protected fun addFlatAttributeRewardEveryLevel(
+        attribute: AttributeWrapper,
+        operation: AttributeModifier.Operation,
+        amount: Double
+    ) {
+        for (i in 1..maxSkillLevel) addReward(
+            i, AttributeReward(
+                attribute,
+                operation,
+                amount * i,
+                amount * (i - 1)
+            )
+        )
+    }
+
+    /**
      * Shortcut method to add a scaling attribute to every certain level of this container.
      * @param attribute The attribute you want to modify.
      * @param operation The operation you want to use.

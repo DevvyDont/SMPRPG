@@ -1,0 +1,7 @@
+{
+	"parent": "smprpg:item/projectiles/damage_aura_projectile",
+    "textures": {
+        "0": "smprpg:item/projectiles/healing_aura_projectile",
+        "particle": "smprpg:item/projectiles/healing_aura_projectile"
+    }
+}

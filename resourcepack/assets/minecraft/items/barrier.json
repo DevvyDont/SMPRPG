@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/barrier"
+        },
+        "cases": [
+			{
+                "when": "smprpg:icon_exit",
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:block/air"
+                }
+            }
+        ]
+    }
+}

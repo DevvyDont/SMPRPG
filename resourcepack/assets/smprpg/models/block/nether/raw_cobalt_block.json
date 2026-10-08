@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "smprpg:block/nether/raw_cobalt_block"
+  }
+}

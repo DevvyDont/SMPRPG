@@ -1,0 +1,176 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "entries": [
+	  {
+        "threshold": 0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/0"
+        }
+      },
+      {
+        "threshold": 0.0435,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/1"
+        }
+      },
+      {
+        "threshold": 0.097,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/2"
+        }
+      },
+      {
+        "threshold": 0.1305,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/3"
+        }
+      },
+      {
+        "threshold": 0.174,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/4"
+        }
+      },
+      {
+        "threshold": 0.2175,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/5"
+        }
+      },
+      {
+        "threshold": 0.261,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/6"
+        }
+      },
+      {
+        "threshold": 0.3045,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/7"
+        }
+      },
+      {
+        "threshold": 0.348,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/8"
+        }
+      },
+      {
+        "threshold": 0.3915,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/9"
+        }
+      },
+      {
+        "threshold": 0.435,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/10"
+        }
+      },
+      {
+        "threshold": 0.4785,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/11"
+        }
+      },
+      {
+        "threshold": 0.522,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/12"
+        }
+      },
+      {
+        "threshold": 0.5655,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/13"
+        }
+      },
+      {
+        "threshold": 0.609,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/14"
+        }
+      },
+      {
+        "threshold": 0.6525,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/15"
+        }
+      },
+      {
+        "threshold": 0.696,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/16"
+        }
+      },
+      {
+        "threshold": 0.7395,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/17"
+        }
+      },
+      {
+        "threshold": 0.783,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/18"
+        }
+      },
+      {
+        "threshold": 0.8265,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/19"
+        }
+      },
+      {
+        "threshold": 0.87,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/20"
+        }
+      },
+      {
+        "threshold": 0.9135,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/21"
+        }
+      },
+      {
+        "threshold": 0.957,
+        "model": {
+          "type": "minecraft:model",
+          "model": "ui:item/progress_arrow/22"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "ui:item/progress_arrow/0"
+    }
+  },
+  "hand_animation_on_swap": false,
+  "oversized_in_gui": true
+}

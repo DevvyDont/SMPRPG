@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - { item: "smprpg:onion", amount: 2 }
+  - "minecraft:bread"
+  - "minecraft:milk_bucket"
+time: 200
+result: "smprpg:onion_soup"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

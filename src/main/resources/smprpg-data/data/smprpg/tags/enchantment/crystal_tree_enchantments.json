@@ -1,0 +1,27 @@
+{
+  "values": [
+    "minecraft:fortune",
+    "minecraft:efficiency",
+    "minecraft:silk_touch",
+    "minecraft:fire_aspect",
+    "minecraft:protection",
+    "minecraft:blast_protection",
+    "minecraft:fire_protection",
+    "minecraft:feather_falling",
+
+    "#smprpg:aether_magic_loot_enchantments",
+
+    "smprpg:felling",
+    "smprpg:harvesting",
+    "smprpg:chopping",
+    "smprpg:hearty",
+    "smprpg:proficient",
+    "smprpg:fortuity",
+    "smprpg:speedster",
+    "smprpg:vigorous",
+
+    "smprpg:miners_fervor",
+
+    "smprpg:telekinesis"
+  ]
+}

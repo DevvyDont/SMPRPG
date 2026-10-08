@@ -1,0 +1,119 @@
+type: enchanting
+enchantment: fortuity
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 4
+    - item: minecraft:gold_block
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 8
+    - item: minecraft:gold_block
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 16
+    - item: minecraft:gold_block
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 32
+    - item: minecraft:gold_block
+      amount: 16
+    - item: minecraft:rabbit_foot
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 64
+    - item: minecraft:gold_block
+      amount: 32
+    - item: minecraft:rabbit_foot
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:enchanted_emerald
+      amount: 16
+    - item: minecraft:gold_block
+      amount: 64
+    - item: minecraft:rabbit_foot
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: smprpg:enchanted_emerald
+      amount: 32
+    - item: smprpg:enchanted_gold
+      amount: 16
+    - item: minecraft:rabbit_foot
+      amount: 16
+    - item: smprpg:orichalcum_ingot
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: smprpg:enchanted_emerald
+      amount: 64
+    - item: smprpg:enchanted_gold
+      amount: 32
+    - item: minecraft:rabbit_foot
+      amount: 32
+    - item: smprpg:orichalcum_ingot
+      amount: 64
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_emerald_block
+      amount: 16
+    - item: smprpg:enchanted_gold
+      amount: 64
+    - item: minecraft:rabbit_foot
+      amount: 64
+    - item: smprpg:orichalcum_block
+      amount: 16
+    - item: smprpg:enchanted_ender_pearl
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_emerald_block
+      amount: 32
+    - item: smprpg:enchanted_gold_block
+      amount: 16
+    - item: minecraft:rabbit_foot
+      amount: 64
+    - item: smprpg:orichalcum_block
+      amount: 32
+    - item: smprpg:enchanted_ender_pearl
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 32

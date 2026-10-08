@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:prismarine_shard
+- item: smprpg:premium_prismarine_shard
+  amount: 9
+- item: smprpg:enchanted_prismarine_shard
+  amount: 9

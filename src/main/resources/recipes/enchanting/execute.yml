@@ -1,0 +1,52 @@
+type: enchanting
+enchantment: execute
+levels:
+  '1':
+    power: 8
+    ingredients:
+    - item: smprpg:necrotic_flesh
+      amount: 16
+    - item: minecraft:iron_ingot
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 26
+    ingredients:
+    - item: smprpg:necrotic_flesh
+      amount: 32
+    - item: smprpg:enchanted_iron
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 44
+    ingredients:
+    - item: smprpg:premium_necrotic_flesh
+      amount: 16
+    - item: smprpg:compressed_obsidian
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 62
+    ingredients:
+    - item: smprpg:enchanted_necrotic_flesh
+      amount: 8
+    - item: smprpg:enchanted_obsidian
+      amount: 8
+    - item: smprpg:adamantium_block
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 8
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:necrotic_flesh_singularity
+      amount: 2
+    - item: smprpg:enchanted_obsidian
+      amount: 16
+    - item: smprpg:enchanted_adamantium
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 16

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:fortune",
+    "minecraft:efficiency",
+    "minecraft:unbreaking",
+    "minecraft:silk_touch",
+
+    "smprpg:chopping",
+    "smprpg:felling",
+    "smprpg:harvesting",
+    "smprpg:vigorous"
+  ]
+}

@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  r'
+- ' ts'
+- r s
+ingredients:
+  r: smprpg:tridentite
+  s: smprpg:enchanted_string
+  t: smprpg:holomoku_rod
+result:
+  item: smprpg:ruination_rod
+  amount: 1
+unlocked_by:
+- smprpg:raw_tridentite_chunk
+upgrade: "t"

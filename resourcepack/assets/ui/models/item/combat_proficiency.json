@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ui:item/stat_icons/combat_proficiency"
+  }
+}

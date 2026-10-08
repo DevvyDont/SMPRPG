@@ -1,0 +1,4 @@
+type: freezer
+input: "minecraft:packed_ice"
+time: 500
+result: "minecraft:blue_ice"

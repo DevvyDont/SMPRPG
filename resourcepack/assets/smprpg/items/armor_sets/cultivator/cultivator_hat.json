@@ -1,0 +1,21 @@
+{
+	"model": {
+		"type": "minecraft:select",
+		"cases": [
+		  {
+			"model": {
+			  "type": "minecraft:model",
+			  "model": "armor:item/cultivator_hat"
+			},
+			"when": [
+			  "head"
+			]
+		  }
+		],
+		"fallback": {
+		  "type": "minecraft:model",
+		  "model": "armor:item/cultivator/cultivator_helmet"
+		},
+		"property": "minecraft:display_context"
+	  }
+}

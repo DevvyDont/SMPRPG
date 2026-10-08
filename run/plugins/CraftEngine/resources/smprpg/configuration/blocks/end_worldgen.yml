@@ -1,0 +1,269 @@
+items:
+  smprpg:smoky_quartz:
+    data:
+      item-name: <!i><lang:item.smprpg.smoky_quartz>
+      pdc:
+        smprpg:item-type: smoky_quartz
+        smprpg:sell-value: 25
+    texture: smprpg:item/materials/smoky_quartz
+  smprpg:smoky_quartz_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.smoky_quartz_ore>
+      pdc:
+        smprpg:item-type: smoky_quartz_ore
+        smprpg:sell-value: 25
+    model: smprpg:block/end/smoky_quartz_ore
+    behavior:
+      type: block_item
+      block: smprpg:smoky_quartz_ore
+  smprpg:nullyium:
+    data:
+      item-name: <!i><lang:item.smprpg.nullyium>
+      pdc:
+        smprpg:item-type: nullyium
+        smprpg:sell-value: 25
+    model:
+      template: smprpg:model/cube
+      arguments:
+        model: smprpg:block/end/nullyium
+        particle_texture: smprpg:block/end/nullyium_top
+        down_texture: minecraft:block/end_stone
+        east_texture: smprpg:block/end/nullyium_side
+        west_texture: smprpg:block/end/nullyium_side
+        north_texture: smprpg:block/end/nullyium_side
+        south_texture: smprpg:block/end/nullyium_side
+        up_texture: smprpg:block/end/nullyium_top
+    behavior:
+      type: block_item
+      block: smprpg:nullyium
+  smprpg:pointer_prism:
+    data:
+      item-name: <!i><lang:item.smprpg.pointer_prism>
+      pdc:
+        smprpg:item-type: pointer_prism
+        smprpg:sell-value: 15
+    texture: smprpg:item/materials/pointer_prism
+  smprpg:pointer_prism_block:
+    data:
+      item-name: <!i><lang:item.smprpg.pointer_prism_block>
+      pdc:
+        smprpg:item-type: pointer_prism_block
+        smprpg:sell-value: 135
+    model: smprpg:block/end/pointer_prism_block
+    behavior:
+      type: block_item
+      block: smprpg:pointer_prism_block
+
+blocks:
+  smprpg:smoky_quartz_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/smoky_quartz_ore
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:data/breaking_power_7
+      map-color: 29
+      overrides:
+        hardness: 15.0
+        resistance: 9.0
+        instrument: basedrum
+  smprpg:nullyium:
+    state:
+      id: 1176
+      auto-state: solid
+      model: smprpg:block/end/nullyium
+    properties:
+      snowy:
+        type: boolean
+        default: false
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/endstone
+      merges:
+        tags:
+          - minecraft:supports_chorus_flower
+          - minecraft:supports_chorus_plant
+          - smprpg:supports_end_vegetation
+      map-color: 16
+      overrides:
+        hardness: 9.0
+        resistance: 9.0
+        instrument: basedrum
+    behaviors:
+      - type: surface_spreading_block
+        required-light: 20  # Effectively prevents spread, but allows for other grass behaviors
+        base-block: minecraft:end_stone
+  smprpg:pointer_prism_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/pointer_prism_block
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/icestone
+        - smprpg:data/breaking_power_7
+      map-color: 31
+      luminance: 15
+      overrides:
+        hardness: 10.0
+        resistance: 3.0
+        instrument: chime
+
+configured-feature:
+  smprpg:pointer_prism_spike:
+    type: 'minecraft:tree'
+    config:
+      ignore_vines: true
+      force_dirt: false
+      minimum_size:
+        type: 'minecraft:two_layers_feature_size'
+        min_clipped_height: 10
+        limit: 1
+        lower_size: 4
+        upper_size: 2
+      dirt_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'minecraft:end_stone'
+      below_trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'minecraft:end_stone'
+      trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:pointer_prism_block'
+      foliage_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:pointer_prism_block'
+      root_placer:
+        type: 'minecraft:mangrove_root_placer'
+        root_provider:
+          type: 'minecraft:weighted_state_provider'
+          entries:
+            - weight: 1
+              data:
+                Name: 'minecraft:end_stone'
+            - weight: 1
+              data:
+                Name: 'smprpg:pointer_prism_block'
+          above_root_placement:
+            above_root_provider:
+              type: 'minecraft:simple_state_provider'
+              state:
+                Name: "smprpg:pointer_prism_block"
+            above_root_placement_chance: 0.5
+        trunk_offset_y: 4
+        mangrove_root_placement:
+          max_root_width: 3
+          max_root_length: 20
+          random_skew_chance: 1
+          can_grow_through: '#minecraft:replaceable'
+          muddy_roots_in: minecraft:mud
+          muddy_roots_provider:
+            type: 'minecraft:weighted_state_provider'
+            entries:
+              - weight: 1
+                data:
+                  Name: 'minecraft:end_stone'
+              - weight: 1
+                data:
+                  Name: 'smprpg:pointer_prism_block'
+      trunk_placer:
+        type: 'minecraft:dark_oak_trunk_placer'
+        base_height: 3
+        height_rand_a: 2
+        height_rand_b: 6
+      foliage_placer:
+        type: 'minecraft:pine_foliage_placer'
+        radius: 1
+        offset: 2
+        height: 4
+      decorators: []
+placed-features:
+  smprpg:ore_smoky_quartz:
+    environment:
+      - minecraft:the_end
+    biome:
+      - minecraft:end_barrens
+      - minecraft:end_highlands
+      - minecraft:end_lowlands
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 14
+        targets:
+          - state:
+              Name: smprpg:smoky_quartz_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:end_stone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 16
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            below_top: 10
+          min_inclusive:
+            above_bottom: 10
+  smprpg:pointer_prism_spike:
+    biome:
+      - minecraft:end_highlands
+    environment:
+      - minecraft:the_end
+    feature: smprpg:pointer_prism_spike
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 2
+      - type: 'minecraft:count'
+        count:
+          type: 'minecraft:weighted_list'
+          distribution:
+            - weight: 10
+              data: 1
+            - weight: 3
+              data: 2
+            - weight: 1
+              data: 3
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: WORLD_SURFACE
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:air'
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:end_stone'
+          offset: [0,-1,0]
+      - type: 'minecraft:biome'
+
+recipes:
+  smprpg:pointer_prism_block:
+    type: shaped
+    category: building
+    group: pointer_prism
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      P: smprpg:pointer_prism
+    pattern:
+      - PPP
+      - PPP
+      - PPP
+    result:
+      id: smprpg:pointer_prism_block
+      count: 1

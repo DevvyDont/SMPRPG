@@ -22,7 +22,5 @@ class DurableReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("to defense")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

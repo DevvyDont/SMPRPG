@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mbm
+- mmm
+ingredients:
+  b: smprpg:large_backpack
+  m: smprpg:premium_shulker_shell
+result:
+  item: smprpg:gigantic_backpack
+  amount: 1
+unlocked_by:
+- smprpg:premium_shulker_shell
+upgrade: "b"

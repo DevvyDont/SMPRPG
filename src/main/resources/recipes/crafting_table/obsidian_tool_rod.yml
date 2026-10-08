@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- o
+- o
+ingredients:
+  o: smprpg:enchanted_obsidian
+result:
+  item: smprpg:obsidian_tool_rod
+  amount: 1
+unlocked_by:
+- minecraft:obsidian

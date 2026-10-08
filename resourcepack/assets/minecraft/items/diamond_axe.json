@@ -13,6 +13,48 @@
                     "type": "model",
                     "model": "tools:item/diamond_hatchet"
                 }
+            },
+            {
+                "when": "smprpg:mithril_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/mithril_hatchet"
+                }
+            },
+            {
+                "when": "smprpg:mithril_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/mithril_axe"
+                }
+            },
+            {
+                "when": "smprpg:titanium_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/titanium_hatchet"
+                }
+            },
+            {
+                "when": "smprpg:titanium_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/titanium_axe"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/adamantium_hatchet"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/adamantium_axe"
+                }
             }
         ]
     }

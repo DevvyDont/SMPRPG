@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:cooked_chicken
+- item: smprpg:premium_chicken
+  amount: 9
+- item: smprpg:enchanted_chicken
+  amount: 9

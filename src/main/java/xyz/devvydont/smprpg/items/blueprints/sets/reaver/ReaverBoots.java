@@ -19,12 +19,12 @@ public class ReaverBoots extends ReaverArmorSet implements IDyeable, ITrimmable 
 
     @Override
     public int getDefense() {
-        return ItemArmor.getDefenseFromMaterial(Material.NETHERITE_BOOTS)+5;
+        return 65;
     }
 
     @Override
     public int getHealth() {
-        return 10;
+        return 0;
     }
 
     @Override

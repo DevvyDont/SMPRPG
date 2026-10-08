@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:abomination"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:abomination"
+      }
+    ]
+  }
+}

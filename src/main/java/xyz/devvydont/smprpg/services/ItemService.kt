@@ -2,13 +2,15 @@ package xyz.devvydont.smprpg.services
 
 import com.destroystokyo.paper.event.inventory.PrepareResultEvent
 import io.papermc.paper.datacomponent.DataComponentTypes
-import io.papermc.paper.datacomponent.item.Consumable
-import io.papermc.paper.datacomponent.item.FoodProperties
+import net.kyori.adventure.key.Key
+import net.kyori.adventure.key.Keyed
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import net.momirealms.craftengine.bukkit.api.BukkitAdaptor
 import org.bukkit.Bukkit
-import org.bukkit.Keyed
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
@@ -23,22 +25,27 @@ import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.ItemMergeEvent
 import org.bukkit.event.entity.ItemSpawnEvent
-import org.bukkit.event.inventory.*
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.inventory.PrepareItemCraftEvent
+import org.bukkit.event.inventory.PrepareSmithingEvent
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerItemDamageEvent
 import org.bukkit.event.world.LootGenerateEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.MerchantRecipe
 import org.bukkit.inventory.Recipe
+import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.meta.ItemMeta
+import org.bukkit.inventory.recipe.CraftingBookCategory
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.checkerframework.checker.index.qual.NonNegative
 import org.checkerframework.checker.index.qual.Positive
 import xyz.devvydont.smprpg.SMPRPG
+import xyz.devvydont.smprpg.entity.player.LeveledPlayer
 import xyz.devvydont.smprpg.items.CustomItemType
 import xyz.devvydont.smprpg.items.ItemRarity
 import xyz.devvydont.smprpg.items.SMPItemQuery
@@ -46,17 +53,25 @@ import xyz.devvydont.smprpg.items.base.ChargedItemBlueprint
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint
 import xyz.devvydont.smprpg.items.base.SMPItemBlueprint
 import xyz.devvydont.smprpg.items.base.VanillaItemBlueprint
+import xyz.devvydont.smprpg.items.blueprints.augment.Recombobulator
+import xyz.devvydont.smprpg.items.blueprints.craftengine.CraftEngineBlueprint
+import xyz.devvydont.smprpg.items.blueprints.equipment.WalletBlueprint
 import xyz.devvydont.smprpg.items.blueprints.potion.PotionBlueprint
+import xyz.devvydont.smprpg.items.blueprints.resources.VanillaCompressibleBlueprint
 import xyz.devvydont.smprpg.items.blueprints.resources.VanillaResource
+import xyz.devvydont.smprpg.items.blueprints.resources.slayer.drops.NecronomiconExcerpts
+import xyz.devvydont.smprpg.items.blueprints.tomes.TomeBlueprint
 import xyz.devvydont.smprpg.items.blueprints.vanilla.*
 import xyz.devvydont.smprpg.items.interfaces.*
 import xyz.devvydont.smprpg.items.listeners.*
+import xyz.devvydont.smprpg.items.tools.drills.FuelTankBlueprint
 import xyz.devvydont.smprpg.listeners.crafting.CustomItemFurnacePreventions
 import xyz.devvydont.smprpg.reforge.ReforgeBase
 import xyz.devvydont.smprpg.reforge.ReforgeType
 import xyz.devvydont.smprpg.util.attributes.AttributeUtil
-import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember
 import xyz.devvydont.smprpg.util.crafting.ItemUtil
+import xyz.devvydont.smprpg.util.crafting.MaterialWrapper
+import xyz.devvydont.smprpg.recipe.CompressionGraph
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils
 import xyz.devvydont.smprpg.util.formatting.Symbols
@@ -65,6 +80,9 @@ import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import xyz.devvydont.smprpg.util.time.TickTime
 import java.lang.reflect.InvocationTargetException
 import java.util.*
+import kotlin.collections.iterator
+import kotlin.math.abs
+import kotlin.math.round
 
 class ItemService : IService, Listener {
 
@@ -90,6 +108,10 @@ class ItemService : IService, Listener {
         listeners.add(BackpackInteractionListener())
         listeners.add(AbilityCastingListener())
         listeners.add(CustomItemFurnacePreventions())
+        listeners.add(VelocitySensitiveItemListener())
+        listeners.add(TomeInteractionListener())
+        listeners.add(WalletListener())
+        listeners.add(PocketCompressorListener())
     }
 
     @Throws(RuntimeException::class)
@@ -99,7 +121,6 @@ class ItemService : IService, Listener {
         val plugin = SMPRPG.plugin
         plugin.logger.info(String.format("Successfully registered %d reforges", reforges.size))
 
-        val recipeCount = countRecipes()
         registerCustomItems()
         plugin.logger.info(
             String.format(
@@ -108,24 +129,8 @@ class ItemService : IService, Listener {
             )
         )
         plugin.logger.info(String.format("Successfully registered %d custom item blueprints", blueprints.size))
-        val postCustomRegisteredRecipeCount = countRecipes()
-        plugin.logger.info(
-            String.format(
-                "Successfully registered %d custom crafting recipes",
-                postCustomRegisteredRecipeCount - recipeCount
-            )
-        )
 
-        val preCompressionRecipeCount = countRecipes()
-        registerCompressionCraftingChains()
-        val postCompressionRecipeCount = countRecipes()
-        plugin.logger.info(
-            String.format(
-                "Successfully registered %d compression recipes",
-                postCompressionRecipeCount - preCompressionRecipeCount
-            )
-        )
-
+        // Crafting and compression recipes are registered from the data-driven registry by RecipeService.
         Bukkit.updateRecipes()
 
         // Make the listeners start working.
@@ -136,12 +141,10 @@ class ItemService : IService, Listener {
         val plugin = SMPRPG.plugin
         plugin.logger.info("Cleaning up ItemService")
 
-        // Unregister all the custom recipes.
-        for (blueprint in blueprints.values) {
-            if (blueprint is ICraftable) plugin.server.removeRecipe((blueprint as ICraftable).getRecipeKey())
-
-            if (blueprint is Compressable) for (key in (blueprint as Compressable).getAllRecipeKeys()) plugin.server
-                .removeRecipe(key)
+        // Unregister all recipes that were registered during setup (craftable, compression, netherite, etc.).
+        for (recipe in registeredRecipes) {
+            val key = (recipe as? Keyed)?.key()?.asString()?.let(NamespacedKey::fromString) ?: continue
+            plugin.server.removeRecipe(key)
         }
 
         // Make the listeners stop functioning.
@@ -168,44 +171,51 @@ class ItemService : IService, Listener {
         registerVanillaMaterialResolver(Material.SHEARS, ItemShears::class.java)
 
         registerVanillaMaterialResolver(Material.WOODEN_SWORD, ItemSword::class.java)
-        registerVanillaMaterialResolver(Material.STONE_SWORD, ItemSword::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_SWORD, ItemSword::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_SWORD, ItemSword::class.java)
         registerVanillaMaterialResolver(Material.IRON_SWORD, ItemSword::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_SWORD, ItemSword::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_SWORD, ItemSword::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_SWORD, ItemSword::class.java)
         registerVanillaMaterialResolver(Material.SHIELD, ItemShield::class.java)
 
         registerVanillaMaterialResolver(Material.TRIDENT, ItemSword::class.java)
 
         registerVanillaMaterialResolver(Material.WOODEN_AXE, ItemAxe::class.java)
-        registerVanillaMaterialResolver(Material.STONE_AXE, ItemAxe::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_AXE, ItemAxe::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_AXE, ItemAxe::class.java)
         registerVanillaMaterialResolver(Material.IRON_AXE, ItemAxe::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_AXE, ItemAxe::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_AXE, ItemAxe::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_AXE, ItemAxe::class.java)
+
+        registerVanillaMaterialResolver(Material.WOODEN_SPEAR, ItemSpear::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_SPEAR, ItemSpear::class.java)
+        registerVanillaMaterialResolver(Material.GOLDEN_SPEAR, ItemSpear::class.java)
+        registerVanillaMaterialResolver(Material.IRON_SPEAR, ItemSpear::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_SPEAR, ItemSpear::class.java)
+        registerVanillaMaterialResolver(Material.NETHERITE_SPEAR, ItemSpear::class.java)
 
         registerVanillaMaterialResolver(Material.BOW, ItemBow::class.java)
         registerVanillaMaterialResolver(Material.CROSSBOW, ItemCrossbow::class.java)
 
         registerVanillaMaterialResolver(Material.WOODEN_PICKAXE, ItemPickaxe::class.java)
-        registerVanillaMaterialResolver(Material.STONE_PICKAXE, ItemPickaxe::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_PICKAXE, ItemPickaxe::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_PICKAXE, ItemPickaxe::class.java)
         registerVanillaMaterialResolver(Material.IRON_PICKAXE, ItemPickaxe::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_PICKAXE, ItemPickaxe::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_PICKAXE, ItemPickaxe::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_PICKAXE, ItemPickaxe::class.java)
 
         registerVanillaMaterialResolver(Material.WOODEN_SHOVEL, ItemShovel::class.java)
-        registerVanillaMaterialResolver(Material.STONE_SHOVEL, ItemShovel::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_SHOVEL, ItemShovel::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_SHOVEL, ItemShovel::class.java)
         registerVanillaMaterialResolver(Material.IRON_SHOVEL, ItemShovel::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_SHOVEL, ItemShovel::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_SHOVEL, ItemShovel::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_SHOVEL, ItemShovel::class.java)
 
         registerVanillaMaterialResolver(Material.WOODEN_HOE, ItemHoe::class.java)
-        registerVanillaMaterialResolver(Material.STONE_HOE, ItemHoe::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_HOE, ItemHoe::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_HOE, ItemHoe::class.java)
         registerVanillaMaterialResolver(Material.IRON_HOE, ItemHoe::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_HOE, ItemHoe::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_HOE, ItemHoe::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_HOE, ItemHoe::class.java)
 
         registerVanillaMaterialResolver(Material.LEATHER_HELMET, ItemArmor::class.java)
@@ -218,6 +228,11 @@ class ItemService : IService, Listener {
         registerVanillaMaterialResolver(Material.CHAINMAIL_LEGGINGS, ItemArmor::class.java)
         registerVanillaMaterialResolver(Material.CHAINMAIL_BOOTS, ItemArmor::class.java)
 
+        registerVanillaMaterialResolver(Material.COPPER_HELMET, ItemArmor::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_CHESTPLATE, ItemArmor::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_LEGGINGS, ItemArmor::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_BOOTS, ItemArmor::class.java)
+
         registerVanillaMaterialResolver(Material.GOLDEN_HELMET, ItemArmor::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_CHESTPLATE, ItemArmor::class.java)
         registerVanillaMaterialResolver(Material.GOLDEN_LEGGINGS, ItemArmor::class.java)
@@ -228,10 +243,10 @@ class ItemService : IService, Listener {
         registerVanillaMaterialResolver(Material.IRON_LEGGINGS, ItemArmor::class.java)
         registerVanillaMaterialResolver(Material.IRON_BOOTS, ItemArmor::class.java)
 
-        registerVanillaMaterialResolver(Material.DIAMOND_HELMET, ItemArmor::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_CHESTPLATE, ItemArmor::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_LEGGINGS, ItemArmor::class.java)
-        registerVanillaMaterialResolver(Material.DIAMOND_BOOTS, ItemArmor::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_HELMET, ItemArmor::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_CHESTPLATE, ItemArmor::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_LEGGINGS, ItemArmor::class.java)
+//        registerVanillaMaterialResolver(Material.DIAMOND_BOOTS, ItemArmor::class.java)
 
         registerVanillaMaterialResolver(Material.NETHERITE_HELMET, ItemArmor::class.java)
         registerVanillaMaterialResolver(Material.NETHERITE_CHESTPLATE, ItemArmor::class.java)
@@ -255,9 +270,91 @@ class ItemService : IService, Listener {
         registerVanillaMaterialResolver(Material.POTION, PotionBlueprint::class.java)
         registerVanillaMaterialResolver(Material.ENDER_PEARL, EnderPearlBlueprint::class.java)
 
+        // Register vanilla materials that are part of compression chains.
+        // Mining — single vanilla base items
+        registerVanillaMaterialResolver(Material.COBBLESTONE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COBBLED_DEEPSLATE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.DIRT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.FLINT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.OBSIDIAN, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.CHARCOAL, VanillaCompressibleBlueprint::class.java)
+        // Mining — two-vanilla-member chains (ingot/dust + block)
+        registerVanillaMaterialResolver(Material.IRON_INGOT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.IRON_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.GOLD_INGOT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.GOLD_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.DIAMOND, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.DIAMOND_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.EMERALD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.EMERALD_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COAL, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COAL_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.AMETHYST_SHARD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.AMETHYST_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_INGOT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COPPER_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.GLOWSTONE_DUST, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.GLOWSTONE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.LAPIS_LAZULI, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.LAPIS_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.NETHERITE_INGOT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.NETHERITE_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.QUARTZ, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.QUARTZ_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.REDSTONE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.REDSTONE_BLOCK, VanillaCompressibleBlueprint::class.java)
+        // Mob — single vanilla base items
+        registerVanillaMaterialResolver(Material.BONE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.GUNPOWDER, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.ROTTEN_FLESH, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.LEATHER, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.FEATHER, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COOKED_CHICKEN, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COOKED_MUTTON, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COOKED_PORKCHOP, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.COOKED_BEEF, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.SPIDER_EYE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.BLAZE_ROD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.BREEZE_ROD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.ECHO_SHARD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.INK_SAC, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.MAGMA_CREAM, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.NAUTILUS_SHELL, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.NETHER_STAR, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.PHANTOM_MEMBRANE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.PRISMARINE_CRYSTALS, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.PRISMARINE_SHARD, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.RABBIT_HIDE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.SHULKER_SHELL, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.STRING, VanillaCompressibleBlueprint::class.java)
+        // Mob — two-vanilla-member chain (slime)
+        registerVanillaMaterialResolver(Material.SLIME_BALL, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.SLIME_BLOCK, VanillaCompressibleBlueprint::class.java)
+        // Farming — vanilla chain members
+        registerVanillaMaterialResolver(Material.MELON_SLICE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.MELON, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.SUGAR_CANE, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.WHEAT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.HAY_BLOCK, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.POTATO, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.CARROT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.BEETROOT, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.PUMPKIN, VanillaCompressibleBlueprint::class.java)
+        // Woodcutting — vanilla chain members
+        registerVanillaMaterialResolver(Material.OAK_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.SPRUCE_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.BIRCH_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.JUNGLE_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.DARK_OAK_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.ACACIA_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.MANGROVE_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.CHERRY_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.PALE_OAK_LOG, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.CRIMSON_STEM, VanillaCompressibleBlueprint::class.java)
+        registerVanillaMaterialResolver(Material.WARPED_STEM, VanillaCompressibleBlueprint::class.java)
+
         // Register vanilla items that should have a sell price.
         for (entry in VanillaResource.getMaterialWorthMap().entries) {
-            // If this item has already been registered by a more specific resolver, don't re-register it...
 
             if (vanillaBlueprintResolver.containsKey(entry.key)) continue
 
@@ -288,63 +385,12 @@ class ItemService : IService, Listener {
             registerCustomItem(blueprint)
         }
 
-        // Now go back through and register item recipes since every item is generated
-        for (blueprint in this.customBlueprints) {
-            if (blueprint is ICraftable) {
-                // Only register it if it is not registered already
-
-                if (plugin.server.getRecipe(blueprint.getRecipeKey()) == null) plugin.server
-                    .addRecipe(blueprint.getCustomRecipe())
-
-                registeredRecipes.add(blueprint.getCustomRecipe())
-            }
-        }
-
-        // Go back through all items and find recipe links, kind of ugly but this will save us computation time
-        for (blueprint in this.customBlueprints) {
-            // If a blueprint is compressible, then the first material in the chain will unlock all the recipes.
-
-            if (blueprint is Compressable) {
-                val firstElement: CompressionRecipeMember? = blueprint.getCompressionFlow().first()
-                if (firstElement == null)
-                    throw IllegalStateException("Missing compression flow members for ${blueprint.javaClass.name}")
-
-                val wrapper = firstElement.material
-
-                if (wrapper.isCustom) {
-                    val recipes =
-                        customItemToRecipeUnlocks.getOrDefault(wrapper.custom, ArrayList<NamespacedKey>())
-                    recipes.addAll(blueprint.getAllRecipeKeys())
-                    customItemToRecipeUnlocks.put(wrapper.custom, recipes)
-                } else {
-                    val recipes =
-                        materialToRecipeUnlocks.getOrDefault(wrapper.vanilla, ArrayList<NamespacedKey>())
-                    recipes.addAll(blueprint.getAllRecipeKeys())
-                    materialToRecipeUnlocks.put(wrapper.vanilla, recipes)
-                }
-            }
-
-            if (blueprint is ICraftable) {
-                for (unlockedBy in blueprint.unlockedBy()) {
-                    val unlockBlueprint = getBlueprint(unlockedBy)
-                    if (unlockBlueprint is CustomItemBlueprint) {
-                        val recipes = customItemToRecipeUnlocks.getOrDefault(
-                            unlockBlueprint.customItemType,
-                            ArrayList<NamespacedKey>()
-                        )
-                        recipes.add(blueprint.getRecipeKey())
-                        customItemToRecipeUnlocks.put(unlockBlueprint.customItemType, recipes)
-                    } else if (unlockBlueprint is VanillaItemBlueprint) {
-                        val recipes = materialToRecipeUnlocks.getOrDefault(
-                            unlockBlueprint.getMaterial(),
-                            ArrayList<NamespacedKey>()
-                        )
-                        recipes.add(blueprint.getRecipeKey())
-                        materialToRecipeUnlocks.put(unlockBlueprint.getMaterial(), recipes)
-                    }
-                }
-            }
-        }
+        // Recipe + unlock registration for every blueprint that provides recipes (craftable items, compression
+        // chain members, etc.) happens uniformly in registerProvidedRecipes(), called once every blueprint exists.
+        registerNetheriteRecipes()
+        Bukkit.getScheduler().runTaskLater(SMPRPG.plugin, Runnable {
+            removeUnusedVanillaRecipes()
+        }, 1L)
     }
 
     private fun registerReforges() {
@@ -387,6 +433,163 @@ class ItemService : IService, Listener {
         return instance
     }
 
+    private fun registerNetheriteRecipes() {
+        val netherite = getCustomItem(Material.NETHERITE_INGOT)
+        val rod = getCustomItem(CustomItemType.SULFUR_TREATED_TOOL_SHAFT)
+        val plugin = SMPRPG.plugin
+
+        val pickRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_pickaxe-recipe"), generate(Material.NETHERITE_PICKAXE))
+        pickRecipe.shape(
+            "nnn",
+            " s ",
+            " s "
+        )
+        pickRecipe.setIngredient('n', netherite)
+        pickRecipe.setIngredient('s', rod)
+        pickRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(pickRecipe)
+
+        val axeRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_axe-recipe"), generate(Material.NETHERITE_AXE))
+        axeRecipe.shape(
+            "nn ",
+            "ns ",
+            " s "
+        )
+        axeRecipe.setIngredient('n', netherite)
+        axeRecipe.setIngredient('s', rod)
+        axeRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(axeRecipe)
+
+        val swordRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_sword-recipe"), generate(Material.NETHERITE_SWORD))
+        swordRecipe.shape(
+            " n ",
+            " n ",
+            " s "
+        )
+        swordRecipe.setIngredient('n', netherite)
+        swordRecipe.setIngredient('s', rod)
+        swordRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(swordRecipe)
+
+        val hoeRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_hoe-recipe"), generate(Material.NETHERITE_HOE))
+        hoeRecipe.shape(
+            "nn ",
+            " s ",
+            " s "
+        )
+        hoeRecipe.setIngredient('n', netherite)
+        hoeRecipe.setIngredient('s', rod)
+        hoeRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(hoeRecipe)
+
+        val shovelRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_shovel-recipe"), generate(Material.NETHERITE_SHOVEL))
+        shovelRecipe.shape(
+            " n ",
+            " s ",
+            " s "
+        )
+        shovelRecipe.setIngredient('n', netherite)
+        shovelRecipe.setIngredient('s', rod)
+        shovelRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(shovelRecipe)
+
+        val spearRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_spear-recipe"), generate(Material.NETHERITE_SPEAR))
+        spearRecipe.shape(
+            "  n",
+            " s ",
+            "s  "
+        )
+        spearRecipe.setIngredient('n', netherite)
+        spearRecipe.setIngredient('s', rod)
+        spearRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(spearRecipe)
+
+        val bootsRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_boots-recipe"), generate(Material.NETHERITE_BOOTS))
+        bootsRecipe.shape(
+            "n n",
+            "n n"
+        )
+        bootsRecipe.setIngredient('n', netherite)
+        bootsRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(bootsRecipe)
+
+        val helmetRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_helmet-recipe"), generate(Material.NETHERITE_HELMET))
+        helmetRecipe.shape(
+            "nnn",
+            "n n"
+        )
+        helmetRecipe.setIngredient('n', netherite)
+        helmetRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(helmetRecipe)
+
+        val leggingsRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_leggings-recipe"), generate(Material.NETHERITE_LEGGINGS))
+        leggingsRecipe.shape(
+            "nnn",
+            "n n",
+            "n n"
+        )
+        leggingsRecipe.setIngredient('n', netherite)
+        leggingsRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(leggingsRecipe)
+
+        val chestplateRecipe = ShapedRecipe(NamespacedKey(plugin, "vanilla_netherite_chestplate-recipe"), generate(Material.NETHERITE_CHESTPLATE))
+        chestplateRecipe.shape(
+            "n n",
+            "nnn",
+            "nnn"
+        )
+        chestplateRecipe.setIngredient('n', netherite)
+        chestplateRecipe.setCategory(CraftingBookCategory.EQUIPMENT)
+        plugin.server.addRecipe(chestplateRecipe)
+
+        registeredRecipes.add(pickRecipe)
+        registeredRecipes.add(axeRecipe)
+        registeredRecipes.add(swordRecipe)
+        registeredRecipes.add(hoeRecipe)
+        registeredRecipes.add(shovelRecipe)
+        registeredRecipes.add(spearRecipe)
+        registeredRecipes.add(bootsRecipe)
+        registeredRecipes.add(helmetRecipe)
+        registeredRecipes.add(leggingsRecipe)
+        registeredRecipes.add(chestplateRecipe)
+    }
+
+    private fun removeUnusedVanillaRecipes() {
+        val plugin = SMPRPG.plugin
+        val mcNs = NamespacedKey.MINECRAFT_NAMESPACE
+
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_pickaxe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_sword"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_axe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_shovel"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_hoe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "stone_spear"))
+
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_pickaxe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_sword"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_axe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_shovel"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_hoe"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_spear"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_helmet"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_chestplate"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_leggings"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "diamond_boots"))
+
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_pickaxe_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_sword_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_axe_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_shovel_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_hoe_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_spear_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_helmet_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_chestplate_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_leggings_smithing"))
+        plugin.server.removeRecipe(NamespacedKey(mcNs, "netherite_boots_smithing"))
+
+        plugin.server.updateRecipes()
+    }
+
     private fun registerCustomItem(blueprint: CustomItemBlueprint) {
         val plugin = SMPRPG.plugin
         plugin.logger.finest(
@@ -397,28 +600,37 @@ class ItemService : IService, Listener {
             )
         )
 
-        blueprints.put(blueprint.customItemType, blueprint)
-        keyMappings.put(blueprint.customItemType.key, blueprint.customItemType)
+        blueprints[blueprint.customItemType] = blueprint
+        keyMappings[blueprint.customItemType.key] = blueprint.customItemType
 
         // If this blueprint needs to hook into events register them.
         if (blueprint is Listener) plugin.server.pluginManager.registerEvents(blueprint, plugin)
     }
 
     /**
-     * Loops through every custom blueprint and checks if it's a "compression chain" class.
-     * These classes contain many recipes to allow compression and decompression of a family of items.
-     * Duplicate recipes may attempt to be registered, but that is checked for in the class.
+     * Registers every recipe contributed by any blueprint (craftable items, compression chain members, etc.) along
+     * with the unlock links that reveal each recipe in the recipe book. This is the single source of truth for recipe
+     * registration so that adding a recipe and wiring up its discovery can never drift apart.
      */
-    private fun registerCompressionCraftingChains() {
-        for (blueprint in blueprints.values) {
-            if (blueprint is Compressable) {
-                registeredRecipes.addAll(blueprint.registerCompressionChain())
+    private fun registerUnlockRecipe(unlockBlueprint: Any, recipeKey: NamespacedKey) {
+        when (unlockBlueprint) {
+            is CustomItemBlueprint -> {
+                customItemToRecipeUnlocks
+                    .getOrPut(unlockBlueprint.customItemType) { ArrayList() }
+                    .add(recipeKey)
+            }
 
-                // todo: make a setting for this
-                // Also do this the other way around to allow decompression
-                registeredRecipes.addAll(blueprint.registerDecompressionChain())
+            is VanillaItemBlueprint -> {
+                materialToRecipeUnlocks
+                    .getOrPut(unlockBlueprint.material) { ArrayList() }
+                    .add(recipeKey)
             }
         }
+    }
+
+    /** Wire a recipe-book unlock so that acquiring [unlockItem] reveals the recipe identified by [recipeKey]. */
+    fun addRecipeUnlock(unlockItem: ItemStack, recipeKey: NamespacedKey) {
+        registerUnlockRecipe(getBlueprint(unlockItem), recipeKey)
     }
 
     fun getItemVersion(item: ItemStack): Int {
@@ -454,8 +666,9 @@ class ItemService : IService, Listener {
             return null
 
         val key = meta.persistentDataContainer.getOrDefault(itemTypeKey, PersistentDataType.STRING, "")
-        if (key.isEmpty())
+        if (key.isEmpty()) {
             return null
+        }
 
         return key
     }
@@ -530,6 +743,21 @@ class ItemService : IService, Listener {
     }
 
     /**
+     * Convenience overload that resolves a vanilla blueprint directly by material rather than by item stack.
+     */
+    fun getVanillaBlueprint(material: Material): VanillaItemBlueprint {
+        val present = vanillaBlueprintResolver[material]
+        if (present != null)
+            return present
+        return registerVanillaMaterialResolver(material, VanillaItemBlueprint::class.java)
+    }
+
+    /**
+     * Returns all registered vanilla blueprints, including those that implement ICompressible.
+     */
+    fun getAllVanillaBlueprints(): Collection<VanillaItemBlueprint> = vanillaBlueprintResolver.values
+
+    /**
      * Given an itemstack, retrieve a blueprint that can interact with the item.
      * When an item is custom, the defined custom item blueprint is returned.
      * When an item is vanilla, a fresh transient VanillaItemBlueprint instance is returned.
@@ -589,6 +817,68 @@ class ItemService : IService, Listener {
 
         // Make a new item
         return getBlueprint(type).generate()
+    }
+
+    /**
+     * Resolve a namespaced item key into a freshly generated ItemStack.
+     * Supports `smprpg:<custom_key>` (custom items) and `minecraft:<material>` (vanilla items).
+     * A bare key with no namespace is assumed to be `minecraft`. Returns null if it does not resolve.
+     *
+     * @param key The namespaced key, e.g. "smprpg:steel_ingot" or "minecraft:gold_ingot".
+     * @return A new ItemStack for the identifier, or null if unknown.
+     */
+    fun resolveIdentifier(key: String): ItemStack? {
+        val (namespace, path) = splitNamespacedKey(key)
+        return when (namespace) {
+            "smprpg" -> getCustomItem(path)
+            "minecraft" -> {
+                val material = Material.matchMaterial("minecraft:$path") ?: return null
+                if (!material.isItem) return null
+                getCustomItem(material)
+            }
+            else -> null
+        }
+    }
+
+    /**
+     * Resolve the namespaced key that best describes an existing item stack.
+     * Custom items return `smprpg:<key>`; everything else returns `minecraft:<material>`.
+     *
+     * @param item The item to identify.
+     * @return The canonical namespaced key for the item.
+     */
+    fun getIdentifier(item: ItemStack): String {
+        val key = getItemKey(item)
+        if (key != null)
+            return "smprpg:$key"
+        return "minecraft:" + item.type.key().value()
+    }
+
+    /**
+     * Test whether an item stack is of the type described by a namespaced key (type-level, ignoring stack
+     * count and NBT such as enchants/reforges). A custom item only matches a `minecraft:` key when it carries
+     * no custom item key, so custom items that render as a vanilla material never falsely match the vanilla one.
+     *
+     * @param item The item to test.
+     * @param key The namespaced key to test against.
+     * @return true if the item is of that type.
+     */
+    fun matchesIdentifier(item: ItemStack, key: String): Boolean {
+        val (namespace, path) = splitNamespacedKey(key)
+        return when (namespace) {
+            "smprpg" -> getItemKey(item) == path
+            "minecraft" -> getItemKey(item) == null && item.type == Material.matchMaterial("minecraft:$path")
+            else -> false
+        }
+    }
+
+    /** Split a "namespace:path" key into its parts, defaulting to the minecraft namespace when none is given. */
+    private fun splitNamespacedKey(key: String): Pair<String, String> {
+        val trimmed = key.trim()
+        val idx = trimmed.indexOf(':')
+        if (idx < 0)
+            return "minecraft" to trimmed.lowercase()
+        return trimmed.substring(0, idx).lowercase() to trimmed.substring(idx + 1).lowercase()
     }
 
     /**
@@ -656,6 +946,7 @@ class ItemService : IService, Listener {
         // The lore that we are going to return at the end.
         val lore: MutableList<Component?> = ArrayList<Component?>()
 
+
         // Check for stats that the item will apply if equipped.
         if (blueprint is IAttributeItem) {
             val power = blueprint.getPowerRating() + AttributeUtil.getPowerBonus(meta)
@@ -665,6 +956,38 @@ class ItemService : IService, Listener {
             )
             lore.add(ComponentUtils.EMPTY)
             lore.addAll(AttributeUtil.getAttributeLore(blueprint, itemStack))
+            if (blueprint is TomeBlueprint) {
+                val numExcerpts = itemStack.persistentDataContainer.getOrDefault(NecronomiconExcerpts.TOME_SPELL_COUNT_MODIFIER, PersistentDataType.INTEGER, 0)
+                var excerptsAddon: Component
+
+                if (numExcerpts > 0) excerptsAddon = ComponentUtils.create(" (+${numExcerpts})", NamedTextColor.DARK_RED)
+                else excerptsAddon = ComponentUtils.EMPTY
+
+                lore.add(ComponentUtils.merge(
+                    ComponentUtils.create("Max Spell Slots: "),
+                    ComponentUtils.create(blueprint.maxSpellSlots.toString(), NamedTextColor.LIGHT_PURPLE),
+                    excerptsAddon
+                ))
+                val cooldownMult = blueprint.cooldownMult
+                if (cooldownMult != 1.0) {
+                    var operator = "+"
+                    var color: TextColor = NamedTextColor.GREEN
+                    if (cooldownMult > 1.0) {
+                        operator = "-"
+                        color = NamedTextColor.RED
+                    }
+                    // TODO: Just turn this into an attribute at some point.
+                    lore.add(
+                        ComponentUtils.merge(
+                            ComponentUtils.create("Casting Recovery: "),
+                            ComponentUtils.create(
+                                operator + round(abs((1.0 - cooldownMult) * 100.0)).toInt().toString() + "%",
+                                color
+                            )
+                        )
+                    )
+                }
+            }
             lore.add(
                 ComponentUtils.create(
                     "Slot: " + blueprint.getActiveSlot().toString().lowercase(Locale.getDefault()),
@@ -686,7 +1009,7 @@ class ItemService : IService, Listener {
                 ComponentUtils.create("Burns for "),
                 ComponentUtils.create(String.format("%ds", blueprint.burnTime/20), NamedTextColor.GOLD),
                 ComponentUtils.create(" in furnaces ")
-            ));
+            ))
         }
 
         // Check if this is a reforge applicator.
@@ -725,6 +1048,19 @@ class ItemService : IService, Listener {
             )
         }
 
+        if (blueprint is IMageBeam) {
+            lore.add(ComponentUtils.EMPTY)
+            lore.add(
+                ComponentUtils.merge(
+                    ComponentUtils.create("Mana Cost: "),
+                    ComponentUtils.create(
+                        (blueprint.manaCost).toString(),
+                        NamedTextColor.AQUA
+                    )
+                )
+            )
+        }
+
         // First, enchants. Are we not forcing glow? Only display enchants when we are not forcing glow (and have some).
         if (!itemStack.enchantments.isEmpty()) lore.addAll(blueprint.getEnchantsComponent(itemStack))
 
@@ -740,14 +1076,23 @@ class ItemService : IService, Listener {
             )
         }
 
+        if (blueprint is ISlayerProficiencyBoost) {
+            lore.add(ComponentUtils.EMPTY)
+            lore.add(ComponentUtils.merge(
+                ComponentUtils.create("Boosts "),
+                ComponentUtils.create(blueprint.slayerToBoost.display(), NamedTextColor.DARK_PURPLE, TextDecoration.BOLD),
+                ComponentUtils.create(" Slayer quest"))
+            )
+            lore.add(ComponentUtils.create("progress by +${blueprint.slayerProficiencyBoost}% per kill"))
+        }
+
         if (blueprint is IPassiveProvider) {
             for (passive in blueprint.passives) {
-                lore.add(ComponentUtils.EMPTY);
+                lore.add(ComponentUtils.EMPTY)
                 lore.add(ComponentUtils.merge(
-                        AbilityUtil.getAbilityComponent(MinecraftStringUtils.getTitledString(passive.name)),
-                        ComponentUtils.create(" (Passive)", NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, false)
-                ));
-                lore.add(passive.description);
+                        AbilityUtil.getAbilityComponent(MinecraftStringUtils.getTitledString(passive.name), passive = true)
+                ))
+                lore.add(passive.description)
             }
         }
 
@@ -776,9 +1121,9 @@ class ItemService : IService, Listener {
 
         // Temp hack, get food and consumable properties for vanilla items.
         // Keeping this here until we get all vanilla items on the same page as custom ones.
-        if (!blueprint.isCustom() && itemStack.getData<FoodProperties?>(DataComponentTypes.FOOD) != null) {
-            val foodData = itemStack.getData<FoodProperties?>(DataComponentTypes.FOOD)
-            val consumableData = itemStack.getData<Consumable?>(DataComponentTypes.CONSUMABLE)
+        val foodData = itemStack.getData(DataComponentTypes.FOOD)
+        val consumableData = itemStack.getData(DataComponentTypes.CONSUMABLE)
+        if (!blueprint.isCustom && foodData != null && consumableData != null) {
             lore.add(ComponentUtils.EMPTY)
             lore.addAll(
                 IEdible.generateEdibilityComponent(
@@ -786,19 +1131,25 @@ class ItemService : IService, Listener {
                     IEdible.fromVanillaData(foodData, consumableData)
                 )
             )
-        } else if (!blueprint.isCustom() && itemStack.getData<Consumable?>(DataComponentTypes.CONSUMABLE) != null) {
-            val consumableData = itemStack.getData<Consumable?>(DataComponentTypes.CONSUMABLE)
-            lore.add(ComponentUtils.EMPTY)
-            lore.addAll(
-                IConsumable.generateConsumabilityComponent(
-                    itemStack
-                ) { i: ItemStack? -> consumableData }
-            )
+        } else if (!blueprint.isCustom && consumableData != null) {
+            val consumableData = itemStack.getData(DataComponentTypes.CONSUMABLE)
+            if (consumableData != null) {
+                lore.add(ComponentUtils.EMPTY)
+                lore.addAll(
+                    IConsumable.generateConsumabilityComponent(
+                        itemStack
+                    ) { i: ItemStack? -> consumableData }
+                )
+            }
         }
 
-        // Is this item compressed?
-        if (blueprint is Compressable) {
-            val material: Component = blueprint.getCompressionFlow().first().material.component().decoration(TextDecoration.BOLD, true)
+        // Is this item compressed (i.e. it decompresses into a lower tier, meaning it is not the base of the chain)?
+        val compressionId = getIdentifier(itemStack)
+        val compressionBase = if (CompressionGraph.isCompressed(compressionId)) resolveIdentifier(CompressionGraph.baseOf(compressionId)) else null
+        if (compressionBase != null) {
+            val material: Component = getBlueprint(compressionBase).getGenericMaterial().component()
+                .decoration(TextDecoration.BOLD, true)
+            val compressedAmount = CompressionGraph.ratioToBase(compressionId)
             lore.add(ComponentUtils.EMPTY)
             lore.add(ComponentUtils.create("An ultra compressed"))
             lore.add(ComponentUtils.create("collection of ").append(material))
@@ -806,18 +1157,16 @@ class ItemService : IService, Listener {
             lore.add(
                 ComponentUtils.create("(1x)  Uncompressed amount: ", NamedTextColor.DARK_GRAY).append(
                     ComponentUtils.create(
-                        MinecraftStringUtils.formatNumber(
-                            blueprint.getCompressedAmount().toLong()
-                        ), NamedTextColor.DARK_GRAY, TextDecoration.BOLD
+                        MinecraftStringUtils.formatNumber(compressedAmount.toLong()),
+                        NamedTextColor.DARK_GRAY, TextDecoration.BOLD
                     )
                 )
             )
             lore.add(
                 ComponentUtils.create("(64x) Uncompressed amount: ", NamedTextColor.DARK_GRAY).append(
                     ComponentUtils.create(
-                        MinecraftStringUtils.formatNumber(blueprint.getCompressedAmount() * 64L),
-                        NamedTextColor.DARK_GRAY,
-                        TextDecoration.BOLD
+                        MinecraftStringUtils.formatNumber(compressedAmount * 64L),
+                        NamedTextColor.DARK_GRAY, TextDecoration.BOLD
                     )
                 )
             )
@@ -869,26 +1218,83 @@ class ItemService : IService, Listener {
             lore.addAll(blueprint.getFooter(itemStack))
         }
 
+        //
+        if (blueprint is ISkillRequirement) {
+            lore.add(ComponentUtils.EMPTY)
+            for (skill in blueprint.skillRequirements) {
+                lore.add(ComponentUtils.merge(
+                    ComponentUtils.create("• Requires ", NamedTextColor.RED),
+                    ComponentUtils.create("${skill.key.displayName} ", skill.key.color),
+                    ComponentUtils.create(skill.value.toString(), NamedTextColor.RED)
+                ))
+            }
+        }
+
         // Durability if the item has it. Ignore charged item blueprints since that is handled in its own class.
         val durabilityComponent = itemStack.getData<@Positive Int?>(DataComponentTypes.MAX_DAMAGE)
         val durabilityUsed = itemStack.getData<@NonNegative Int?>(DataComponentTypes.DAMAGE)
         if (durabilityComponent != null && durabilityUsed != null && (blueprint !is ChargedItemBlueprint)) {
             lore.add(ComponentUtils.EMPTY)
-            lore.add(
-                ComponentUtils.create("Durability: ")
-                    .append(
-                        ComponentUtils.create(
-                            MinecraftStringUtils.formatNumber((durabilityComponent - durabilityUsed).toLong()),
-                            NamedTextColor.RED
-                        )
-                    )
-                    .append(
-                        ComponentUtils.create(
-                            "/" + MinecraftStringUtils.formatNumber(durabilityComponent.toLong()),
-                            NamedTextColor.DARK_GRAY
-                        )
-                    )
-            )
+            if (blueprint is WalletBlueprint) {
+                lore.add(
+                    ComponentUtils.create("Balance: ")
+                        .append(ComponentUtils.create(EconomyService.formatMoney((blueprint.getBalance(itemStack)).toLong()), NamedTextColor.GOLD))
+                        .append(ComponentUtils.create("/" + EconomyService.formatMoney((blueprint.maxCoins).toLong()), NamedTextColor.GOLD))
+                )
+            }
+            else if (blueprint is IFueledEquipment || blueprint is FuelTankBlueprint) {
+                // We need to spoof durability by subtracting 1, since we store as +1 to allow for durability bar rendering.
+                lore.add(
+                    ComponentUtils.create("Fuel: ")
+                        .append(ComponentUtils.create(MinecraftStringUtils.formatNumber((durabilityComponent - durabilityUsed - 1).toLong()), NamedTextColor.RED))
+                        .append(ComponentUtils.create("/" + MinecraftStringUtils.formatNumber((durabilityComponent - 1).toLong()), NamedTextColor.DARK_GRAY))
+                )
+            }
+            else{
+                lore.add(
+                    ComponentUtils.create("Durability: ")
+                        .append(ComponentUtils.create(MinecraftStringUtils.formatNumber((durabilityComponent - durabilityUsed).toLong()), NamedTextColor.RED))
+                        .append(ComponentUtils.create("/" + MinecraftStringUtils.formatNumber(durabilityComponent.toLong()), NamedTextColor.DARK_GRAY))
+                )
+                if (durabilityComponent - durabilityUsed == 1) {
+                    lore.add(ComponentUtils.EMPTY)
+                    lore.add(ComponentUtils.merge(
+                        ComponentUtils.create("This item is ", NamedTextColor.RED),
+                        ComponentUtils.create("BROKEN", NamedTextColor.DARK_RED, TextDecoration.BOLD),
+                        ComponentUtils.create(". Take it to an anvil to repair with:", NamedTextColor.RED),
+                    ))
+
+                    if (blueprint is IRepairable) {
+                        val repMats = mutableListOf<Key>()
+                        val blueprintRepairMaterials = blueprint.repairMaterial.toMutableList()
+                        for (repairMaterial in blueprintRepairMaterials) {
+                            val repairMatBp = blueprint(repairMaterial)
+                            val modelDataId = repairMatBp.customModelDataIdentifier
+                            repMats.add(Key.key("smprpg:item/repair_sprites/${modelDataId.substring(7)}"))
+                        }
+                        var i = 0
+                        for (repMat in repMats) {
+                            lore.add(
+                                ComponentUtils.merge(
+                                    ComponentUtils.atlasSprite(Key.key("minecraft:items"), repMat),
+                                    ComponentUtils.create(" "),
+                                    blueprintRepairMaterials[i].displayName()
+                                )
+                            )
+                            i++
+                        }
+                    }
+                    lore.add(COMMON_REPAIR_CORE_ATLAS_ICON
+                        .append(UNCOMMON_REPAIR_CORE_ATLAS_ICON)
+                        .append(RARE_REPAIR_CORE_ATLAS_ICON)
+                        .append(EPIC_REPAIR_CORE_ATLAS_ICON)
+                        .append(LEGENDARY_REPAIR_CORE_ATLAS_ICON)
+                        .append(ComponentUtils.merge(
+                            ComponentUtils.create(" ["),
+                            ComponentUtils.create("Any Repair Core", NamedTextColor.GREEN)),
+                            ComponentUtils.create("]")))
+                }
+            }
         }
 
         // Damage resistant?
@@ -912,17 +1318,30 @@ class ItemService : IService, Listener {
             )
         }
 
-        var itemCategory: String = blueprint.getItemClassification().name.replace("_", " ")
+        var itemCategory: String = blueprint.itemClassification.name.replace("_", " ")
         // Fishing rods have an extra prefix...
         if (blueprint is IFishingRod) itemCategory = IFishingRod.FishingFlag.prefix(blueprint.getFishingFlags())
             .uppercase(Locale.getDefault()) + " " + itemCategory
 
-        lore.add(
-            blueprint.getRarity(itemStack)
-                .applyDecoration(ComponentUtils.create(blueprint.getRarity(itemStack).name + " " + itemCategory))
-                .decoration(TextDecoration.BOLD, true).color(blueprint.getRarity(itemStack).color)
-        )
-        lore.add(ComponentUtils.create(blueprint.getCustomModelDataIdentifier(), NamedTextColor.DARK_GRAY))
+        if (!itemStack.persistentDataContainer.getOrDefault(Recombobulator.RECOMBOBULATOR_KEY, PersistentDataType.BOOLEAN, false)) {
+            lore.add(
+                blueprint.getRarity(itemStack)
+                    .applyDecoration(ComponentUtils.create(blueprint.getRarity(itemStack).name + " " + itemCategory))
+                    .decoration(TextDecoration.BOLD, true).color(blueprint.getRarity(itemStack).color)
+            )
+        }
+        else {
+            lore.add(
+                ComponentUtils.merge(
+                    ComponentUtils.create("a ", TextColor.color(blueprint.getRarity(itemStack).color), TextDecoration.OBFUSCATED, TextDecoration.BOLD),
+                    blueprint.getRarity(itemStack)
+                        .applyDecoration(ComponentUtils.create(blueprint.getRarity(itemStack).name + " " + itemCategory))
+                        .decoration(TextDecoration.BOLD, true).color(blueprint.getRarity(itemStack).color),
+                    ComponentUtils.create(" b", TextColor.color(blueprint.getRarity(itemStack).color), TextDecoration.OBFUSCATED, TextDecoration.BOLD),
+                )
+            )
+        }
+        lore.add(ComponentUtils.create(blueprint.customModelDataIdentifier, NamedTextColor.DARK_GRAY))
         return ComponentUtils.cleanItalics(lore)
     }
 
@@ -950,12 +1369,36 @@ class ItemService : IService, Listener {
         return itemStack
     }
 
+    /**
+     * Given a player and an item stack, ensure that the player meets the requirements for this item
+     * Unlike the static meetsRequirements method, this method will clear out any attribute modifiers on the item.
+     *
+     * @param player A Player entity
+     * @param itemStack The item to check skill requirements on
+     * @return Whether the player meets requirements for the item.
+     */
+    fun updateItemSkillRequirements(player : Player, itemStack: ItemStack?) : Boolean {
+        if (itemStack == null) return true  // I mean, I guess you can always use nothing?
+
+        val leveledPlayer = SMPRPG.getService(EntityService::class.java).getPlayerInstance(player)
+        val requirementsMet = meetsRequirements(itemStack, leveledPlayer)
+        if (!requirementsMet) AttributeService.instance.clearAttributeModifiers(itemStack)
+
+        return requirementsMet
+    }
+
     private fun discoverRecipesForItem(player: Player, item: ItemStack) {
         val blueprint = getBlueprint(item)
 
-        // If this blueprint is a compression member, discover the recipes for this item
-        if (blueprint is Compressable) {
-            player.discoverRecipes(blueprint.getAllRecipeKeys())
+        // If this blueprint is a compression member, find the chain root and discover all its linked recipes.
+        val chainId = getIdentifier(item)
+        if (CompressionGraph.inChain(chainId)) {
+            val rootStack = resolveIdentifier(CompressionGraph.baseOf(chainId))
+            when (val firstInChain = rootStack?.let { getBlueprint(it) }) {
+                is VanillaItemBlueprint -> materialToRecipeUnlocks[firstInChain.material]?.let { player.discoverRecipes(it) }
+                is CustomItemBlueprint -> customItemToRecipeUnlocks[firstInChain.customItemType]?.let { player.discoverRecipes(it) }
+                else -> {}
+            }
         }
 
         // If this is a vanilla item, see if recipes are discovered by the material
@@ -1029,9 +1472,9 @@ class ItemService : IService, Listener {
 
             // Copy over attributes
             fixedRecipe.uses = trade.uses
-            fixedRecipe.setExperienceReward(trade.hasExperienceReward())
             fixedRecipe.villagerExperience = trade.villagerExperience
             fixedRecipe.priceMultiplier = trade.priceMultiplier
+            fixedRecipe.setExperienceReward(false)
             fixedRecipe.specialPrice = trade.specialPrice
             fixedRecipe.demand = trade.demand
             fixedRecipe.setIgnoreDiscounts(trade.shouldIgnoreDiscounts())
@@ -1165,7 +1608,8 @@ class ItemService : IService, Listener {
         for (input in event.inventory.matrix) {
             if (input == null) continue
 
-            if (this.getItemInformation(input).isCustom) {
+            val ceItem = BukkitAdaptor.adapt(input)
+            if (this.getItemInformation(input).isCustom && !ceItem.isCustomItem) {
                 craftingWithCustomItems = true
                 break
             }
@@ -1179,12 +1623,50 @@ class ItemService : IService, Listener {
 
         // If we are dealing with a recipe that is not in vanilla minecraft, ignore
         val recipe = event.recipe as Keyed
-        if (recipe.key.namespace != NamespacedKey.MINECRAFT)
+        if (recipe.key().namespace() != Key.MINECRAFT_NAMESPACE)
             return
 
         // So now we know we are using a vanilla recipe, and custom items are in the input.
-        // This is probably undesirable as custom items yielding vanilla items should be defined by us.
-        event.inventory.result = null
+        // Custom compression items reuse vanilla materials (e.g. an enchanted iron block is a IRON_BLOCK), so a
+        // vanilla recipe greedily matches them and wins the auto-pick before our compression recipe can. Recover the
+        // intended compression result so the grid auto-resolves; if there is no compression result, fall back to
+        // refusing the craft so custom items can never yield vanilla output through a vanilla recipe.
+        event.inventory.result = resolveCollidingCompressionResult(event.inventory.matrix)
+    }
+
+    /**
+     * Given a crafting matrix that a vanilla recipe matched while it actually contained custom items, work out the
+     * compression result the player intended. Returns null when the matrix is not a uniform compression grid.
+     *
+     * The matrix must hold a single custom [ICompressible] item in every occupied slot; the number of occupied slots
+     * then selects the direction (the compressor input count compresses, a single item decompresses). The amounts are
+     * read straight from the compression model, so this stays in sync with the recipes built in buildCompressionRecipe.
+     */
+    private fun resolveCollidingCompressionResult(matrix: Array<ItemStack?>): ItemStack? {
+        val items = matrix.filterNotNull().filter { it.type != Material.AIR }
+        if (items.isEmpty()) return null
+
+        val ingredient = items.first()
+        // Only custom items collide with vanilla recipes; vanilla compression resolves normally.
+        val ingredientKey = getItemKey(ingredient) ?: return null
+        val id = getIdentifier(ingredient)
+        if (!CompressionGraph.inChain(id)) return null
+
+        // Every occupied slot must hold the exact same custom item for a compression recipe to apply.
+        if (items.any { getItemKey(it) != ingredientKey }) return null
+
+        val occupiedSlots = items.size
+        // A full chain's worth of this item compresses up into the next tier (always one output).
+        CompressionGraph.compressStep(id)?.let { (higherId, inputAmount) ->
+            if (occupiedSlots == inputAmount)
+                return resolveIdentifier(higherId)?.apply { amount = 1 }
+        }
+        // A single item decompresses down into its lower tier (the decompression ratio worth of output).
+        CompressionGraph.decompressStep(id)?.let { (lowerId, ratio) ->
+            if (occupiedSlots == 1)
+                return resolveIdentifier(lowerId)?.apply { amount = ratio }
+        }
+        return null
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -1207,8 +1689,15 @@ class ItemService : IService, Listener {
     fun onInteract(event: PlayerInteractEvent) {
         object : BukkitRunnable() {
             override fun run() {
-                ensureItemStackUpdated(event.getPlayer().inventory.itemInMainHand)
-                ensureItemStackUpdated(event.getPlayer().inventory.itemInOffHand)
+                ensureItemStackUpdated(event.player.inventory.itemInMainHand)
+                ensureItemStackUpdated(event.player.inventory.itemInOffHand)
+
+                updateItemSkillRequirements(event.player, event.player.inventory.itemInMainHand)
+                updateItemSkillRequirements(event.player, event.player.inventory.itemInOffHand)
+                updateItemSkillRequirements(event.player, event.player.inventory.helmet)
+                updateItemSkillRequirements(event.player, event.player.inventory.chestplate)
+                updateItemSkillRequirements(event.player, event.player.inventory.leggings)
+                updateItemSkillRequirements(event.player, event.player.inventory.boots)
             }
         }.runTaskLater(SMPRPG.plugin, 0L)
     }
@@ -1273,22 +1762,7 @@ class ItemService : IService, Listener {
     private fun onPickupItem(event: PlayerAttemptPickupItemEvent) {
         if (!event.flyAtPlayer) return
 
-        discoverRecipesForItem(event.getPlayer(), event.item.itemStack)
-    }
-
-    @EventHandler
-    @Suppress("unused")
-    private fun onPlayerDamageItem(event: PlayerItemDamageEvent) {
-        // Durability changes are always 1
-        if (event.damage > 0)
-            event.damage = 1
-
-
-        Bukkit.getScheduler().runTaskLater(
-            SMPRPG.plugin,
-            Runnable { getBlueprint(event.item).updateItemData(event.item) },
-            TickTime.INSTANTANEOUSLY
-        )
+        discoverRecipesForItem(event.player, event.item.itemStack)
     }
 
     @EventHandler
@@ -1300,8 +1774,13 @@ class ItemService : IService, Listener {
         // Hack for summoning crystals. Allow them to be placed!
         if (blueprint is CustomItemBlueprint && blueprint.customItemType == CustomItemType.SUMMONING_CRYSTAL) return
 
+        if (blueprint is IDamageFromCrops) return
+
+        // Craft Engine items are allowed to handle their own logic.
+        if (blueprint is CraftEngineBlueprint) return
+
         // If this item is a custom item, don't allow it to be placed!!!
-        if (blueprint.isCustom()) event.isCancelled = true
+        if (blueprint.isCustom) event.isCancelled = true
     }
 
     companion object {
@@ -1309,6 +1788,40 @@ class ItemService : IService, Listener {
         // Integer to tag items with whenever we update them to prevent unnecessary work
         const val VERSION: Int = 1
         const val VERSION_NO_UPDATE: Int = -1
+        val SELL_VALUE_KEY: NamespacedKey = NamespacedKey("smprpg", "sell-value")
+        val FREEZER_FUEL_KEY: NamespacedKey = NamespacedKey("smprpg", "freeze-time")
+
+        val COMMON_REPAIR_CORE_ATLAS_ICON = ComponentUtils.atlasSprite(Key.key("minecraft:items"), Key.key("smprpg:item/repair_sprites/common_repair_core"))
+        val UNCOMMON_REPAIR_CORE_ATLAS_ICON = ComponentUtils.atlasSprite(Key.key("minecraft:items"), Key.key("smprpg:item/repair_sprites/uncommon_repair_core"))
+        val RARE_REPAIR_CORE_ATLAS_ICON = ComponentUtils.atlasSprite(Key.key("minecraft:items"), Key.key("smprpg:item/repair_sprites/rare_repair_core"))
+        val EPIC_REPAIR_CORE_ATLAS_ICON = ComponentUtils.atlasSprite(Key.key("minecraft:items"), Key.key("smprpg:item/repair_sprites/epic_repair_core"))
+        val LEGENDARY_REPAIR_CORE_ATLAS_ICON = ComponentUtils.atlasSprite(Key.key("minecraft:items"), Key.key("smprpg:item/repair_sprites/legendary_repair_core"))
+
+        val CRAFT_ENGINE_ID = NamespacedKey("craftengine", "id")
+
+        // Shortcut methods to do very common operations much less verbosely. This instance should always be a singleton
+        // so static method calls like this are designed to be safe.
+
+        /**
+         * Given a material wrapper, retrieve a default ItemStack of the item type.
+         *
+         * @param type The type of item you want
+         * @return an ItemStack instance freshly generated of the type desired
+         */
+        @JvmStatic
+        fun generate(type: MaterialWrapper): ItemStack {
+            return if (type.isCustom)
+                generate(type.custom)
+            else
+                generate(type.vanilla)
+        }
+
+        @JvmStatic
+        fun generate(type: MaterialWrapper, quantity: Int): ItemStack {
+            val item = generate(type)
+            item.amount = quantity
+            return item
+        }
 
         // Shortcut methods to do very common operations much less verbosely. This instance should always be a singleton
         // so static method calls like this are designed to be safe.
@@ -1320,7 +1833,20 @@ class ItemService : IService, Listener {
          */
         @JvmStatic
         fun generate(type: CustomItemType): ItemStack {
-            return SMPRPG.getService(ItemService::class.java).getCustomItem(type)
+            try {
+                return SMPRPG.getService(ItemService::class.java).getCustomItem(type)
+            } catch (e: Exception) {
+                SMPRPG.plugin.logger.severe { "Failed to generate vanilla item for $type" }
+                e.printStackTrace()
+                return ItemStack(Material.AIR)
+            }
+        }
+
+        @JvmStatic
+        fun generate(type: CustomItemType, quantity: Int): ItemStack {
+            val item = generate(type)
+            item.amount = quantity
+            return item
         }
 
         /**
@@ -1331,7 +1857,20 @@ class ItemService : IService, Listener {
          */
         @JvmStatic
         fun generate(material: Material): ItemStack {
-            return SMPRPG.getService(ItemService::class.java).getCustomItem(material)
+            try {
+                return SMPRPG.getService(ItemService::class.java).getCustomItem(material)
+            } catch (e: Exception) {
+                SMPRPG.plugin.logger.severe { "Failed to generate vanilla item for $material" }
+                e.printStackTrace()
+                return ItemStack(Material.AIR)
+            }
+        }
+
+        @JvmStatic
+        fun generate(material: Material, quantity: Int): ItemStack {
+            val item = generate(material)
+            item.amount = quantity
+            return item
         }
 
         /**
@@ -1342,6 +1881,69 @@ class ItemService : IService, Listener {
         @JvmStatic
         fun blueprint(item: ItemStack): SMPItemBlueprint {
             return SMPRPG.getService(ItemService::class.java).getBlueprint(item)
+        }
+
+        /**
+         * Given a vanilla material, retrieve its blueprint that it would map to if it was in item form.
+         * @param item The item to get a blueprint of.
+         * @return The blueprint.
+         */
+        @JvmStatic
+        fun blueprint(item: Material): SMPItemBlueprint {
+            return SMPRPG.getService(ItemService::class.java).getVanillaBlueprint(ItemStack.of(item))
+        }
+
+        /**
+         * Given a vanilla material, retrieve its blueprint that it would map to if it was in item form.
+         * @param item The item to get a blueprint of.
+         * @return The blueprint.
+         */
+        @JvmStatic
+        fun blueprint(item: CustomItemType): SMPItemBlueprint {
+            return SMPRPG.getService(ItemService::class.java).getBlueprint(item)
+        }
+
+        /**
+         * Given an item, return whether it is broken or not
+         * @param item The item to check
+         * @return Whether it is broken or not
+         */
+        @JvmStatic
+        fun isBroken(item: ItemStack) : Boolean {
+            if (blueprint(item) is IBreakableEquipment) {
+                val damage = item.getData(DataComponentTypes.DAMAGE) as Int
+                val maxDamage = item.getData(DataComponentTypes.MAX_DAMAGE) as Int
+                return (damage >= (maxDamage - 1))
+            }
+            return false  // Can't be broken if it isn't breakable.
+        }
+
+        /**
+         * Given an item, return whether the LeveledPlayer can equip/use it
+         * @param item The item to check
+         * @param player The LeveledPlayer instance to check against
+         * @return Whether it can be used or not
+         */
+        @JvmStatic
+        fun meetsRequirements(item: ItemStack, player: LeveledPlayer): Boolean {
+            if (player.player.gameMode == GameMode.CREATIVE) return true
+            val bp = blueprint(item)
+            if (bp is ISkillRequirement) {
+                for (requirement in bp.skillRequirements) {
+                    for (skill in player.skills) {
+                        if (skill.type == requirement.key) {
+                            if (skill.level < requirement.value)
+                                return false
+                        }
+                    }
+                }
+            }
+            return true
+        }
+        @JvmStatic
+        fun meetsRequirements(item: ItemStack, player: Player): Boolean {
+            val leveledPlayer = SMPRPG.getService(EntityService::class.java).getPlayerInstance(player)
+            return meetsRequirements(item, leveledPlayer)
         }
 
         /**
@@ -1378,5 +1980,19 @@ class ItemService : IService, Listener {
             newBlueprint.updateItemData(/* itemStack = */ copy)
             return copy
         }
+
+        @JvmStatic
+        fun isOfSameType(o1: ItemStack, o2: ItemStack): Boolean {
+            return blueprint(o1).isItemOfType(o2)
+        }
+
+        @JvmStatic
+        fun isInternalIdMatch(o1: ItemStack, o2: ItemStack) : Boolean {
+            // TODO: Super hacky, find out why repair items fail an "isSimilar" check, forcing an internal-id comparison
+            return o1.persistentDataContainer.get(NamespacedKey("smprpg", "item-type"), PersistentDataType.STRING).equals(
+                o2.persistentDataContainer.get(NamespacedKey("smprpg", "item-type"), PersistentDataType.STRING))
+        }
     }
 }
+
+

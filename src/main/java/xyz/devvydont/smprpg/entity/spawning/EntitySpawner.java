@@ -27,17 +27,19 @@ import java.util.*;
 
 public class EntitySpawner extends CustomEntityInstance<Entity> implements Listener {
 
-    public record SpawnerEntry (CustomEntityType type, int weight){
+    public record SpawnerEntry (SpawnableEntity entity, int weight){
 
         public String toPrimitive() {
-            return type.name() + ":" + weight;
+            return entity.toKey() + ":" + weight;
         }
 
         public static SpawnerEntry fromPrimitive(String primitive) {
-            String[] split = primitive.split(":");
-            String key = split[0];
-            int weight = Integer.parseInt(split[1]);
-            return new SpawnerEntry(CustomEntityType.valueOf(key), weight);
+            // The weight is the final ':' delimited segment; everything before it is the entity key (which may
+            // itself contain no colon, but we split from the right to stay robust against future key formats).
+            int separator = primitive.lastIndexOf(':');
+            String key = primitive.substring(0, separator);
+            int weight = Integer.parseInt(primitive.substring(separator + 1));
+            return new SpawnerEntry(SpawnableEntity.fromKey(key), weight);
         }
     }
 
@@ -51,7 +53,7 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
 
             this.entries = new HashMap<>();
             for (SpawnerEntry entry : entries)
-                this.entries.put(entry.type, entry);
+                this.entries.put(entry.entity, entry);
 
             this.limit = limit;
             this.radius = radius;
@@ -60,7 +62,7 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
 
         private static NamespacedKey key = new NamespacedKey(SMPRPG.getPlugin(), "spawner-options");
 
-        Map<CustomEntityType, SpawnerEntry> entries;
+        Map<SpawnableEntity, SpawnerEntry> entries;
 
         // How many entities can this spawner manage at once?
         long limit = 5;
@@ -79,18 +81,18 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
             entries.clear();
         }
 
-        public void removeEntity(CustomEntityType type) {
-            entries.remove(type);
+        public void removeEntity(SpawnableEntity entity) {
+            entries.remove(entity);
         }
 
-        public void setWeight(CustomEntityType type, int weight) {
-            removeEntity(type);
-            entries.put(type, new SpawnerEntry(type, weight));
+        public void setWeight(SpawnableEntity entity, int weight) {
+            removeEntity(entity);
+            entries.put(entity, new SpawnerEntry(entity, weight));
         }
 
-        public int getWeight(CustomEntityType type) {
-            if (entries.containsKey(type))
-                return entries.get(type).weight;
+        public int getWeight(SpawnableEntity entity) {
+            if (entries.containsKey(entity))
+                return entries.get(entity).weight;
             return 0;
         }
 
@@ -267,19 +269,20 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
         if (location == null)
             location = _entity.getLocation();
 
-        // Roll for custom entity using weight map
+        // Roll for an entity using the weight map.
         // todo do this more optimally
-        List<CustomEntityType> types = new ArrayList<>();
+        List<SpawnableEntity> types = new ArrayList<>();
         for (SpawnerEntry entry : getOptions().getEntries())
             for (int i = 0; i < entry.weight(); i++)
-                types.add(entry.type);
+                types.add(entry.entity);
+
+        if (types.isEmpty())
+            return;
 
         Collections.shuffle(types);
-        CustomEntityType type = CustomEntityType.TEST_ZOMBIE;
-        if (!types.isEmpty())
-            type = types.getFirst();
+        SpawnableEntity chosen = types.getFirst();
 
-        var instance = SMPRPG.getService(EntityService.class).spawnCustomEntity(type, location);
+        var instance = chosen.spawn(SMPRPG.getService(EntityService.class), location, (int) getOptions().getLevel());
         if (instance == null)
             return;
 
@@ -311,6 +314,17 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
         return (ItemDisplay) _entity;
     }
 
+    // A display spawned while an admin looks up or down inherits their pitch (and yaw), leaving the
+    // beacon tilted. Force a level, forward-facing orientation so spawners always render upright.
+    private static final float UPRIGHT_YAW = 0f;
+    private static final float UPRIGHT_PITCH = 0f;
+
+    private void orientUpright(ItemDisplay display) {
+        // Only adjust rotation; a full teleport re-applies position and is refused by the server while
+        // the entity is still being added to the world (processing a section status update).
+        display.setRotation(UPRIGHT_YAW, UPRIGHT_PITCH);
+    }
+
     @Override
     public void setup() {
         super.setup();
@@ -318,6 +332,7 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
 
         ItemDisplay display = getBlockDisplay();
         display.setItemStack(new ItemStack(Material.BEACON));
+        orientUpright(display);
 
         if (tickTask != null)
             tickTask.cancel();
@@ -326,13 +341,33 @@ public class EntitySpawner extends CustomEntityInstance<Entity> implements Liste
     }
 
     @Override
+    public void updateNametag() {
+        super.updateNametag();
+        _entity.setCustomNameVisible(false);
+    }
+
+    @Override
     public void cleanup() {
 
-        for (var entity : spawned.entrySet()) {
-            var bukkitEntity = Bukkit.getEntity(entity.getKey());
-            if (bukkitEntity != null)
-                bukkitEntity.remove();
-        }
+        // cleanup() can run from within an EntityRemoveFromWorldEvent (e.g. the spawner unloading with
+        // its chunk). The server refuses to remove entities while it is processing section status updates,
+        // so removing the children inline triggers a warning and silently fails. Defer the removal to the
+        // next tick to escape that window. During a plugin disable the scheduler rejects new tasks (and no
+        // chunk tick is in progress), so fall back to removing them immediately.
+        var children = List.copyOf(spawned.keySet());
+        spawned.clear();
+        Runnable removeChildren = () -> {
+            for (var uuid : children) {
+                var bukkitEntity = Bukkit.getEntity(uuid);
+                if (bukkitEntity != null && bukkitEntity.isValid())
+                    bukkitEntity.remove();
+            }
+        };
+
+        if (_plugin.isEnabled())
+            Bukkit.getScheduler().runTask(_plugin, removeChildren);
+        else
+            removeChildren.run();
 
         if (tickTask != null)
             tickTask.cancel();

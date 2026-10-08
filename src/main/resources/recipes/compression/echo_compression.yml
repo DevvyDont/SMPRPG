@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:echo_shard
+- item: smprpg:premium_echo_shard
+  amount: 9
+- item: smprpg:enchanted_echo_shard
+  amount: 9

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#smprpg:has_structure/small_fishing_boat",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "start_pool": "smprpg:small_fishing_boat",
+  "spawn_overrides": {},
+  "size": 1,
+  "start_height": {
+    "absolute": -1
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false,
+  "liquid_settings": "ignore_waterlogging"
+}

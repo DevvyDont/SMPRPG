@@ -1,0 +1,19 @@
+{
+  "values": [
+    "smprpg:wandering_trader/emerald_packed_ice",
+    "smprpg:wandering_trader/emerald_blue_ice",
+    "smprpg:wandering_trader/emerald_gunpowder",
+    "smprpg:wandering_trader/emerald_podzol",
+    "smprpg:wandering_trader/emerald_acacia_log",
+    "smprpg:wandering_trader/emerald_birch_log",
+    "smprpg:wandering_trader/emerald_dark_oak_log",
+    "smprpg:wandering_trader/emerald_jungle_log",
+    "smprpg:wandering_trader/emerald_oak_log",
+    "smprpg:wandering_trader/emerald_spruce_log",
+    "smprpg:wandering_trader/emerald_cherry_log",
+    "smprpg:wandering_trader/emerald_mangrove_log",
+    "smprpg:wandering_trader/emerald_pale_oak_log",
+    "smprpg:wandering_trader/emerald_enchanted_iron_pickaxe",
+    "smprpg:wandering_trader/emerald_long_invisibility_potion"
+  ]
+}

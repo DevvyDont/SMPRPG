@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- sss
+- shs
+- sss
+ingredients:
+  s: smprpg:premium_spell_powder
+  h: smprpg:hexed_cloth
+result:
+  item: smprpg:spellbound_cloth
+  amount: 1
+unlocked_by:
+- smprpg:hexed_cloth
+- smprpg:spell_powder

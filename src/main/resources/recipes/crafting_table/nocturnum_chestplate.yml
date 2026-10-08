@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- bcb
+- ttt
+- btb
+ingredients:
+  b: smprpg:lucifugous_binding
+  c: smprpg:ruination_chestplate
+  t: smprpg:lucifugous_thread
+result:
+  item: smprpg:nocturnum_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "c"

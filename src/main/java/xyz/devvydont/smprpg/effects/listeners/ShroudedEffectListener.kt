@@ -7,8 +7,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerRespawnEvent
+import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.services.SpecialEffectService
 import xyz.devvydont.smprpg.effects.tasks.ShroudedEffect
+import xyz.devvydont.smprpg.services.DifficultyService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 /*
@@ -45,7 +47,17 @@ class ShroudedEffectListener(private val service: SpecialEffectService) : Listen
         if (event.respawnReason == PlayerRespawnEvent.RespawnReason.END_PORTAL)
             return
 
-        val effect = ShroudedEffect(service, event.getPlayer(), 60 * 10)
+        val difficulty = SMPRPG.getService(DifficultyService::class.java).getDifficulty(event.player)
+        val minutes = DifficultyService.getShroudedMinutes(difficulty)
+
+        val effect = ShroudedEffect(service, event.getPlayer(), 60 * minutes)
+        if (DifficultyService.allowedToFlyInShrouded(difficulty))
+            effect.flightAllowed = true
+
+        var flyComponent = ComponentUtils.EMPTY
+        if (DifficultyService.allowedToFlyInShrouded(difficulty))
+            flyComponent = ComponentUtils.create(", and you can fly (but not for free)")
+
         val msg = ComponentUtils.merge(
             ComponentUtils.create("From "),
             ComponentUtils.create("???", NamedTextColor.DARK_RED, TextDecoration.BOLD),
@@ -62,7 +74,9 @@ class ShroudedEffectListener(private val service: SpecialEffectService) : Listen
                     ComponentUtils.create("Death Certificate", NamedTextColor.RED),
                     ComponentUtils.create(" containing information regarding your death and the "),
                     effect.nameComponent,
-                    ComponentUtils.create(" ailment to help you get your items back. Enemies will\nnot target you, and you can fly (but not for free)!\nKeep in mind, "),
+                    ComponentUtils.create(" ailment to help you get your items back.\nEnemies will not target you"),
+                    flyComponent,
+                    ComponentUtils.create("!\nKeep in mind, "),
                     ComponentUtils.create("certain interactions", NamedTextColor.RED),
                     ComponentUtils.create(" are capable of making it expire!")
                 )

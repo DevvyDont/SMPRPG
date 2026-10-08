@@ -1,0 +1,168 @@
+items:
+  smprpg:rune_blank:
+    data:
+      item-name: <!i><lang:item.smprpg.blank_rune>
+    model: smprpg:block/runes/rune_blank
+    behavior:
+      type: block_item
+      block: smprpg:rune_blank
+  smprpg:rune_potential:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_potential>
+    model: smprpg:block/runes/rune_potential
+    behavior:
+      type: block_item
+      block: smprpg:rune_potential
+  smprpg:rune_ambition:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_ambition>
+    model: smprpg:block/runes/rune_ambition
+    behavior:
+      type: block_item
+      block: smprpg:rune_ambition
+  smprpg:rune_memorization:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_memorization>
+    model: smprpg:block/runes/rune_memorization
+    behavior:
+      type: block_item
+      block: smprpg:rune_memorization
+  smprpg:rune_greed:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_greed>
+    model: smprpg:block/runes/rune_greed
+    behavior:
+      type: block_item
+      block: smprpg:rune_greed
+  smprpg:rune_insight:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_insight>
+    model: smprpg:block/runes/rune_insight
+    behavior:
+      type: block_item
+      block: smprpg:rune_insight
+  smprpg:rune_fortuity:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_fortuity>
+    model: smprpg:block/runes/rune_fortuity
+    behavior:
+      type: block_item
+      block: smprpg:rune_fortuity
+  smprpg:rune_divinity:
+    data:
+      item-name: <!i><lang:item.smprpg.rune_divinity>
+    model: smprpg:block/runes/rune_divinity
+    behavior:
+      type: block_item
+      block: smprpg:rune_divinity
+
+blocks:
+  smprpg:rune_blank:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_blank
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+  smprpg:rune_potential:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_potential
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_ambition:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_ambition
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_memorization:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_memorization
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_greed:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_greed
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_insight:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_insight
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_fortuity:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_fortuity
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step
+  smprpg:rune_divinity:
+    state:
+      auto-state: waterlogged_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/runes/rune_divinity
+    settings:
+      template:
+        - smprpg:settings/rune
+        - smprpg:data/breaking_power_4
+    events:
+      template:
+        - smprpg:events/rune_step

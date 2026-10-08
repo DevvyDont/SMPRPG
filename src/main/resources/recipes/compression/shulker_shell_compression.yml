@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:shulker_shell
+- item: smprpg:premium_shulker_shell
+  amount: 9
+- item: smprpg:enchanted_shulker_shell
+  amount: 9

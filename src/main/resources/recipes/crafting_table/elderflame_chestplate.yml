@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:draconic_crystal
+result:
+  item: smprpg:elderflame_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:dragon_scales

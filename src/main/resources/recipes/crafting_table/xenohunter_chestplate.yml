@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- bcb
+- ttt
+- btb
+ingredients:
+  b: smprpg:strange_binding
+  c: smprpg:nocturnum_chestplate
+  t: smprpg:strange_fiber
+result:
+  item: smprpg:xenohunter_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "c"

@@ -1,8 +1,11 @@
 package xyz.devvydont.smprpg.entity.base;
 
+import kr.toxicity.model.api.bone.BoneName;
+import kr.toxicity.model.api.tracker.EntityTracker;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -11,10 +14,12 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.EntityGlobals;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
 import xyz.devvydont.smprpg.services.EntityDamageCalculatorService;
 import xyz.devvydont.smprpg.services.AttributeService;
@@ -26,14 +31,18 @@ import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 import xyz.devvydont.smprpg.util.items.LootDrop;
 import xyz.devvydont.smprpg.util.items.LootSource;
+import xyz.devvydont.smprpg.util.persistence.KeyStore;
 
-import java.util.Collection;
+import java.util.*;
 
 public abstract class LeveledEntity<T extends Entity> implements LootSource {
 
     protected final SMPRPG _plugin;
     protected final T _entity;
     private int _initialLevel;  // The level that was detected at setup time. Never changes after that.
+    public ArrayList<MobType> mobTypes = new ArrayList<>();
+    private boolean _setupFinished = false;
+    public EntityTracker entityTracker = null;
 
     protected EntityConfiguration _config = EntityConfiguration.DEFAULT;
 
@@ -84,6 +93,9 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      */
     public void setup() {
 
+        if (_setupFinished)
+            return;
+
         // Tag this entity class so we can construct it later.
         this.applyPersistentEntityClassTag();
 
@@ -100,6 +112,8 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
         // If this entity is tamed by a player, scale them to their owner. Fails silently if they don't exist.
         if (_entity instanceof Tameable tameable && tameable.getOwnerUniqueId() != null)
             this.copyLevel(Bukkit.getEntity(tameable.getOwnerUniqueId()));
+
+        _setupFinished = true;
     }
 
     /**
@@ -172,6 +186,17 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * Generates the bracketed power component to display in a nametag. This is usually the prefix
      * @return A Component of the current entity level
      */
+    public Component getMobTypesComponent() {
+        Component retVal = ComponentUtils.EMPTY;
+        for (MobType type : mobTypes)
+            retVal = retVal.append(ComponentUtils.create(type.getSymbol(), type.getSymbolColor()));
+        return retVal;
+    }
+
+    /**
+     * Generates the bracketed power component to display in a nametag. This is usually the prefix
+     * @return A Component of the current entity level
+     */
     public Component getPowerComponent() {
         return ComponentUtils.powerLevelPrefix(getLevel());
     }
@@ -181,7 +206,23 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * @return A component representing the name portion of a nametag
      */
     public Component getNameComponent() {
+        String assignedName = getAssignedName();
+        if (assignedName != null)
+            return ComponentUtils.create(assignedName, getNameColor(), TextDecoration.ITALIC);
         return ComponentUtils.create(getEntityName(), getNameColor());
+    }
+
+    /**
+     * The name a player has given this entity using a name tag, or null if it has not been named. Italicizing this
+     * name in the nametag is how we signify a mob has been given a custom name.
+     * @return The player-assigned name, or null if there isn't one.
+     */
+    @Nullable
+    public String getAssignedName() {
+        String assignedName = _entity.getPersistentDataContainer().get(KeyStore.ASSIGNED_NAME, PersistentDataType.STRING);
+        if (assignedName == null || assignedName.isBlank())
+            return null;
+        return assignedName;
     }
 
     /**
@@ -218,6 +259,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
     public Component getFullComponent() {
         return ComponentUtils.merge(
                 getPowerComponent(), ComponentUtils.create(" "),
+                getMobTypesComponent(), ComponentUtils.create(" "),
                 getNameComponent(), ComponentUtils.create(" "),
                 getHealthComponent()
         );
@@ -229,7 +271,8 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
     public void updateNametag() {
 
         // Don't show animals that are lvl 10 or lower unless they are missing HP. Helps FPS with large animal farms.
-        if (this._entity instanceof Animals)
+        // A player-assigned name always shows, otherwise naming a low level animal would appear to do nothing.
+        if (this._entity instanceof Animals && getAssignedName() == null)
             if (this.getLevel() <= 10 && this.getHealthPercentage() >= 1.0) {
                 _entity.setCustomNameVisible(false);
                 return;
@@ -237,6 +280,11 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
 
         _entity.setCustomNameVisible(true);
         _entity.customName(this.getFullComponent());
+        if (entityTracker != null) {
+            entityTracker.bone(BoneName.of("ptag_name"))
+                    .getNametag()
+                    .component(_entity.customName());
+        }
     }
 
     /**
@@ -541,7 +589,8 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * @return
      */
     public int getMinecraftExperienceDropped() {
-        return getLevel() * 3;
+        // return getLevel() * 3;
+        return 0;
     }
 
     /**
@@ -559,7 +608,7 @@ public abstract class LeveledEntity<T extends Entity> implements LootSource {
      * @return
      */
     @Nullable
-    public Collection<LootDrop> getItemDrops() {
+    public Collection<@NotNull LootDrop> getItemDrops() {
         return null;
     }
 

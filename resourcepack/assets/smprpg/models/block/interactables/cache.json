@@ -1,0 +1,106 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "smprpg:block/interactables/titanium_cache_front",
+		"front": "smprpg:block/interactables/titanium_cache_front",
+		"side": "smprpg:block/interactables/titanium_cache_side",
+		"top": "smprpg:block/interactables/titanium_cache_back"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 1],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#front"},
+				"east": {"uv": [0, 0, 15, 16], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"west": {"uv": [1, 0, 16, 16], "texture": "#side"},
+				"up": {"uv": [0, 1, 16, 16], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 15], "texture": "#top"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 3, 1],
+			"faces": {
+				"north": {"uv": [0, 13, 16, 16], "texture": "#front"},
+				"east": {"uv": [0, 13, 1, 16], "texture": "#side"},
+				"south": {"uv": [0, 13, 16, 16], "texture": "#front"},
+				"west": {"uv": [0, 0, 1, 3], "texture": "#side"},
+				"up": {"uv": [0, 13, 16, 14], "texture": "#front"},
+				"down": {"uv": [0, 0, 16, 1], "texture": "#top"}
+			}
+		},
+		{
+			"from": [0, 13, 0],
+			"to": [16, 16, 1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 14, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 3], "texture": "#front"},
+				"east": {"uv": [15, 0, 16, 3], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 3], "texture": "#front"},
+				"west": {"uv": [0, 0, 1, 3], "texture": "#side"},
+				"up": {"uv": [0, 0, 16, 1], "texture": "#top"},
+				"down": {"uv": [0, 2, 16, 3], "texture": "#front"}
+			}
+		},
+		{
+			"from": [0, 3, 0],
+			"to": [3, 13, 1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 4, 0]},
+			"faces": {
+				"north": {"uv": [13, 3, 16, 13], "texture": "#front"},
+				"east": {"uv": [13, 3, 14, 13], "texture": "#front"},
+				"south": {"uv": [0, 3, 3, 13], "texture": "#front"},
+				"west": {"uv": [0, 3, 1, 13], "texture": "#side"},
+				"up": {"uv": [13, 12, 16, 13], "texture": "#front"},
+				"down": {"uv": [13, 3, 16, 4], "texture": "#front"}
+			}
+		},
+		{
+			"from": [13, 3, 0],
+			"to": [16, 13, 1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 3, 0]},
+			"faces": {
+				"north": {"uv": [0, 3, 3, 13], "texture": "#front"},
+				"east": {"uv": [15, 3, 16, 13], "texture": "#side"},
+				"south": {"uv": [13, 3, 16, 13], "texture": "#front"},
+				"west": {"uv": [2, 3, 3, 13], "texture": "#front"},
+				"up": {"uv": [0, 12, 3, 13], "texture": "#front"},
+				"down": {"uv": [0, 3, 3, 4], "texture": "#front"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -135, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, -135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

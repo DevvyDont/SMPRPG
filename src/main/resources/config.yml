@@ -3,17 +3,12 @@
 # skill level to surpass it will result in no rewards.
 max-skill-level: 100
 
-# The skill level required in order to enter the Nether.
-nether-skill-unlock: 15
-
-# The skill level required in order to enter The End.
-end-skill-unlock: 30
-
 # Set these if you want certain dimensions to be locked behind average skill requirements.
 # If you don't want dimensions to be level locked, then set them to 0.
 # Keep in mind that players on "Easy" (Wanderer) can bypass this.
 world_skill_unlocks:
   nether: 15
+  aether: 20
   end: 30
 
 # Set these to when you want certain dimensions to be accessible.
@@ -21,4 +16,6 @@ world_skill_unlocks:
 # Players playing on "Easy" (Wanderer) will be locked behind these as well.
 world_time_unlocks:
   nether: "2025-01-01T00:00:00Z"
+  aether: "2025-01-01T00:00:00Z"
   end: "2025-01-01T00:00:00Z"
+  

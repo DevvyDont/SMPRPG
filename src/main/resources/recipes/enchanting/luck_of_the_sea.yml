@@ -1,0 +1,54 @@
+type: enchanting
+enchantment: luck_of_the_sea
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: smprpg:common_fish_essence
+      amount: 16
+    - item: minecraft:nautilus_shell
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 20
+    ingredients:
+    - item: smprpg:uncommon_fish_essence
+      amount: 16
+    - item: minecraft:nautilus_shell
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 40
+    ingredients:
+    - item: smprpg:rare_fish_essence
+      amount: 16
+    - item: minecraft:prismarine_crystals
+      amount: 16
+    - item: minecraft:heart_of_the_sea
+      amount: 1
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 60
+    ingredients:
+    - item: smprpg:epic_fish_essence
+      amount: 16
+    - item: smprpg:enchanted_nautilus_shell
+      amount: 1
+    - item: minecraft:heart_of_the_sea
+      amount: 2
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:legendary_fish_essence
+      amount: 16
+    - item: smprpg:caviar
+      amount: 4
+    - item: minecraft:heart_of_the_sea
+      amount: 4
+    - item: smprpg:enchanted_lapis
+      amount: 16

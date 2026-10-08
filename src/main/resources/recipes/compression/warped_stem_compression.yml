@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:warped_stem
+- item: smprpg:premium_warped_stem
+  amount: 9
+- item: smprpg:enchanted_warped_stem
+  amount: 9
+- item: smprpg:warped_stem_singularity
+  amount: 9

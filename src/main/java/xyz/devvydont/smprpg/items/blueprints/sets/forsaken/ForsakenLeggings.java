@@ -1,10 +1,8 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.forsaken;
 
-import org.bukkit.inventory.CraftingRecipe;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.builders.LeggingsRecipe;
 
 public class ForsakenLeggings extends ForsakenArmorSet {
 
@@ -34,10 +32,5 @@ public class ForsakenLeggings extends ForsakenArmorSet {
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.LEGGINGS;
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        return new LeggingsRecipe(this, ItemService.generate(ForsakenHelmet.CRAFTING_COMPONENT), generate()).build();
     }
 }

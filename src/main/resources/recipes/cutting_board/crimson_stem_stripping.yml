@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:crimson_stem"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_crimson_stem", amount: 1, chance: 1.0 }

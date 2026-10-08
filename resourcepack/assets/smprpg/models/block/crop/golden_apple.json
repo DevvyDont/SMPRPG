@@ -1,0 +1,6 @@
+{
+  "parent": "smprpg:block/crop/apple",
+  "textures": {
+    "apple": "smprpg:block/crop/golden_apple_crop"
+  }
+}

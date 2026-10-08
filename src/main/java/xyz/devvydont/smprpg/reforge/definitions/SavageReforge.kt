@@ -22,7 +22,7 @@ class SavageReforge(type: ReforgeType) : ReforgeBase(type) {
     }
 
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBoost(rarity).toDouble()),
             MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .05),
             AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, getCritical(rarity).toDouble()),
@@ -37,7 +37,5 @@ class SavageReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("the expense of survivability")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

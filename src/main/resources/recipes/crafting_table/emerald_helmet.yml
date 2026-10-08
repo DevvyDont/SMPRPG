@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: minecraft:emerald_block
+result:
+  item: smprpg:emerald_helmet
+  amount: 1
+unlocked_by:
+- minecraft:emerald

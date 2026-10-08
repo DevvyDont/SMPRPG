@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' g '
+- gcg
+- ' g '
+ingredients:
+  c: smprpg:inferno_remnant
+  g: smprpg:warp_catalyst
+result:
+  item: smprpg:cinder_shard
+  amount: 1
+unlocked_by:
+- smprpg:magic_mirror

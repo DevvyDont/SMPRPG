@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:tungsten_ingot
+result:
+  item: smprpg:tungsten_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:tungsten_ingot

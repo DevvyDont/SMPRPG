@@ -1,0 +1,13 @@
+type: compression
+tiers:
+- minecraft:carrot
+- item: smprpg:premium_carrot
+  amount: 9
+- item: smprpg:premium_golden_carrot
+  amount: 9
+- item: smprpg:enchanted_carrot
+  amount: 9
+- item: smprpg:enchanted_golden_carrot
+  amount: 9
+- item: smprpg:carrot_singularity
+  amount: 9

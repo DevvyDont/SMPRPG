@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:premium_hay_block
+result:
+  item: smprpg:cultivator_hat
+  amount: 1
+unlocked_by:
+- smprpg:premium_hay_block

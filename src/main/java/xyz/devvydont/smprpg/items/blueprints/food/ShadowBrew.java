@@ -3,10 +3,12 @@ package xyz.devvydont.smprpg.items.blueprints.food;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import io.papermc.paper.registry.keys.SoundEventKeys;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -34,12 +36,12 @@ public class ShadowBrew extends CustomItemBlueprint implements ISellable, IEdibl
 
     @Override
     public int getNutrition(ItemStack item) {
-        return 1;
+        return 0;
     }
 
     @Override
     public float getSaturation(ItemStack item) {
-        return 10;
+        return 200;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ShadowBrew extends CustomItemBlueprint implements ISellable, IEdibl
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(
                         new PotionEffect(PotionEffectType.SPEED, (int) TickTime.seconds(30), 2, false, false),
@@ -66,8 +68,8 @@ public class ShadowBrew extends CustomItemBlueprint implements ISellable, IEdibl
      * @return The material this item should render as.
      */
     @Override
-    public Material getDisplayMaterial() {
-        return Material.OMINOUS_BOTTLE;
+    public Key getDisplayKey() {
+        return IModelOverridden.ofMaterial(Material.OMINOUS_BOTTLE);
     }
 
     /**

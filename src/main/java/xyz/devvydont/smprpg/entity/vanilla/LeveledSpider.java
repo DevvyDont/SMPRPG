@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Spider;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -28,6 +29,13 @@ public class LeveledSpider extends VanillaEntity<Spider> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_STRING), 500, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_STRING), 4_000, this)
         );
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.ARTHROPOD);
+
+        super.setup();
     }
 
 }

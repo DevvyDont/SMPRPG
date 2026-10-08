@@ -2,39 +2,32 @@ package xyz.devvydont.smprpg.items.blueprints.resources.mob;
 
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
-import xyz.devvydont.smprpg.items.base.CustomCompressableBlueprint;
-import xyz.devvydont.smprpg.items.interfaces.IEdible;
+import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.IConsumable;
+import xyz.devvydont.smprpg.items.interfaces.IEdible;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
-import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.extensions.ItemExtensionsKt;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implements IEdible, IConsumable {
-
-    public static final List<CompressionRecipeMember> COMPRESSION_FLOW = List.of(
-            new CompressionRecipeMember(new MaterialWrapper(Material.SPIDER_EYE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.PREMIUM_SPIDER_EYE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.ENCHANTED_SPIDER_EYE))
-    );
+public class SpiderEyeFamilyBlueprint extends CustomItemBlueprint implements ISellable, IEdible, IConsumable {
 
     public SpiderEyeFamilyBlueprint(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
-
     @Override
-    public List<CompressionRecipeMember> getCompressionFlow() {
-        return COMPRESSION_FLOW;
+    public int getWorth(ItemStack itemStack) {
+        return ItemExtensionsKt.calculateCompressedWorth(this, itemStack);
     }
 
     @Override
@@ -61,7 +54,7 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
 
         var effects = new ArrayList<ConsumeEffect>();
 
@@ -86,5 +79,4 @@ public class SpiderEyeFamilyBlueprint extends CustomCompressableBlueprint implem
     public ItemClassification getItemClassification() {
         return ItemClassification.CONSUMABLE;
     }
-    
 }

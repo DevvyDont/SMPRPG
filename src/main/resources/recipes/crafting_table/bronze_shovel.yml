@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' H '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:bronze_ingot
+result:
+  item: smprpg:bronze_shovel
+  amount: 1
+unlocked_by:
+- smprpg:bronze_ingot

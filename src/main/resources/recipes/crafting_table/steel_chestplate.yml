@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:steel_ingot
+result:
+  item: smprpg:steel_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot

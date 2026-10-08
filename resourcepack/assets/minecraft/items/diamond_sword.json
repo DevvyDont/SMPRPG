@@ -13,6 +13,34 @@
                     "type": "model",
                     "model": "swords:item/elderflame_dagger"
                 }
+            },
+            {
+                "when": "smprpg:mithril_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/mithril_sword"
+                }
+            },
+            {
+                "when": "smprpg:titanium_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/titanium_sword"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/adamantium_sword"
+                }
+            },
+			{
+                "when": "smprpg:abominable_machete",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/abominable_machete"
+                }
             }
         ]
     }

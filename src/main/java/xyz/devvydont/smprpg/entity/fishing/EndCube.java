@@ -5,10 +5,12 @@ import org.bukkit.entity.Shulker;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
+import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,8 +32,22 @@ public class EndCube extends SeaCreature<Shulker> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.IMPOSSIBLE_GEOMETRY), 1, this)
+                new QuantityLootDrop(ItemService.generate(CustomItemType.IMPOSSIBLE_GEOMETRY), 1, 2, this),
+                new ChancedItemDrop(lureScroll, 150, this),
+                new ChancedItemDrop(abyssalInstinctScroll, 150, this),
+                new ChancedItemDrop(impalingScroll, 150, this),
+                new ChancedItemDrop(luckOfTheSeaScroll, 150, this),
+                new ChancedItemDrop(treasureHunterScroll, 150, this)
         );
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.SEA_CREATURE);
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.CUBIC);
+
+        super.setup();
     }
 
     @Override

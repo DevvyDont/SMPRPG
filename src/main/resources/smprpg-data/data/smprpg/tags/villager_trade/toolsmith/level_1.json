@@ -1,0 +1,20 @@
+{
+  "values": [
+    "#smprpg:common_smith/level_1",
+    "smprpg:toolsmith/1/silver_coin_copper_axe",
+    "smprpg:toolsmith/1/silver_coin_copper_hatchet",
+    "smprpg:toolsmith/1/silver_coin_copper_hoe",
+    "smprpg:toolsmith/1/silver_coin_copper_pickaxe",
+    "smprpg:toolsmith/1/silver_coin_copper_shovel",
+    "smprpg:toolsmith/1/silver_coin_silver_axe",
+    "smprpg:toolsmith/1/silver_coin_silver_hatchet",
+    "smprpg:toolsmith/1/silver_coin_silver_hoe",
+    "smprpg:toolsmith/1/silver_coin_silver_pickaxe",
+    "smprpg:toolsmith/1/silver_coin_silver_shovel",
+    "smprpg:toolsmith/1/silver_coin_tin_axe",
+    "smprpg:toolsmith/1/silver_coin_tin_hatchet",
+    "smprpg:toolsmith/1/silver_coin_tin_hoe",
+    "smprpg:toolsmith/1/silver_coin_tin_pickaxe",
+    "smprpg:toolsmith/1/silver_coin_tin_shovel"
+  ]
+}

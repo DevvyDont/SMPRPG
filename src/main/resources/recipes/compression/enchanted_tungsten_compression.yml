@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:enchanted_tungsten
+- item: smprpg:enchanted_tungsten_block
+  amount: 9
+- item: smprpg:tungsten_singularity
+  amount: 9

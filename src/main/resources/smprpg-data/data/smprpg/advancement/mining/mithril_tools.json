@@ -1,0 +1,47 @@
+{
+  "parent": "smprpg:mining/blast_furnace",
+  "criteria": {
+    "mithril_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "mithril_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.mithril_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:custom_model_data": {
+          "strings": [
+            "smprpg:mithril_pickaxe"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "minecraft:diamond_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.mithril_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "mithril_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

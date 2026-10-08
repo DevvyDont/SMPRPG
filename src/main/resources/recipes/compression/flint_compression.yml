@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:flint
+- item: smprpg:compressed_flint
+  amount: 9
+- item: smprpg:enchanted_flint
+  amount: 9

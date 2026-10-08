@@ -1,0 +1,119 @@
+type: enchanting
+enchantment: unbreaking
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:obsidian
+      amount: 5
+    - item: minecraft:iron_ingot
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:obsidian
+      amount: 10
+    - item: minecraft:iron_ingot
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: minecraft:obsidian
+      amount: 20
+    - item: minecraft:iron_ingot
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:obsidian
+      amount: 40
+    - item: minecraft:iron_ingot
+      amount: 16
+    - item: minecraft:diamond
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:obsidian
+      amount: 80
+    - item: minecraft:iron_ingot
+      amount: 32
+    - item: minecraft:diamond
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:compressed_obsidian
+      amount: 18
+    - item: minecraft:iron_ingot
+      amount: 64
+    - item: minecraft:diamond
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: smprpg:compressed_obsidian
+      amount: 18
+    - item: minecraft:iron_block
+      amount: 15
+    - item: minecraft:diamond
+      amount: 64
+    - item: smprpg:tungsten_ingot
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: smprpg:compressed_obsidian
+      amount: 18
+    - item: minecraft:iron_block
+      amount: 30
+    - item: minecraft:diamond_block
+      amount: 15
+    - item: smprpg:tungsten_ingot
+      amount: 64
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:compressed_obsidian
+      amount: 36
+    - item: minecraft:iron_block
+      amount: 60
+    - item: minecraft:diamond_block
+      amount: 30
+    - item: smprpg:tungsten_block
+      amount: 15
+    - item: smprpg:adamantium_block
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:compressed_obsidian
+      amount: 72
+    - item: smprpg:enchanted_iron
+      amount: 15
+    - item: minecraft:diamond_block
+      amount: 60
+    - item: smprpg:tungsten_block
+      amount: 30
+    - item: smprpg:adamantium_block
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 64

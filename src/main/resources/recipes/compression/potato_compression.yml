@@ -1,0 +1,13 @@
+type: compression
+tiers:
+- minecraft:potato
+- item: smprpg:premium_potato
+  amount: 9
+- item: smprpg:premium_baked_potato
+  amount: 9
+- item: smprpg:enchanted_potato
+  amount: 9
+- item: smprpg:enchanted_baked_potato
+  amount: 9
+- item: smprpg:potato_singularity
+  amount: 9

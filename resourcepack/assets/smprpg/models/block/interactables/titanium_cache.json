@@ -1,0 +1,9 @@
+{
+  "parent": "smprpg:block/interactables/cache",
+  "textures": {
+    "front": "smprpg:block/interactables/titanium_cache_front",
+    "top": "smprpg:block/interactables/titanium_cache_back",
+    "side": "smprpg:block/interactables/titanium_cache_side",
+    "particle": "smprpg:block/interactables/titanium_cache_side"
+  }
+}

@@ -1,31 +1,26 @@
 package xyz.devvydont.smprpg.items.blueprints.resources.mining;
 
-import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.CustomItemType;
-import xyz.devvydont.smprpg.items.base.CustomCompressableBlueprint;
+import xyz.devvydont.smprpg.items.ItemClassification;
+import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
+import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
-import xyz.devvydont.smprpg.util.crafting.CompressionRecipeMember;
-import xyz.devvydont.smprpg.util.crafting.MaterialWrapper;
+import xyz.devvydont.smprpg.util.extensions.ItemExtensionsKt;
 
-import java.util.List;
-
-public class DeepslateFamilyBlueprint extends CustomCompressableBlueprint {
-
-
-    public static final List<CompressionRecipeMember> COMPRESSION_FLOW = List.of(
-            new CompressionRecipeMember(new MaterialWrapper(Material.COBBLED_DEEPSLATE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.COMPRESSED_DEEPSLATE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.DOUBLE_COMPRESSED_DEEPSLATE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.ENCHANTED_DEEPSLATE)),
-            new CompressionRecipeMember(new MaterialWrapper(CustomItemType.DEEPSLATE_SINGULARITY))
-    );
+public class DeepslateFamilyBlueprint extends CustomItemBlueprint implements ISellable {
 
     public DeepslateFamilyBlueprint(ItemService itemService, CustomItemType type) {
         super(itemService, type);
     }
 
     @Override
-    public List<CompressionRecipeMember> getCompressionFlow() {
-        return COMPRESSION_FLOW;
+    public ItemClassification getItemClassification() {
+        return ItemClassification.MATERIAL;
+    }
+
+    @Override
+    public int getWorth(ItemStack itemStack) {
+        return ItemExtensionsKt.calculateCompressedWorth(this, itemStack);
     }
 }

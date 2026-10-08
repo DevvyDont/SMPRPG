@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' as'
+- ' ss'
+- 's  '
+ingredients:
+  a: smprpg:enchanted_amethyst
+  s: minecraft:stick
+result:
+  item: smprpg:amethyst_staff
+  amount: 1
+unlocked_by:
+- minecraft:amethyst_shard

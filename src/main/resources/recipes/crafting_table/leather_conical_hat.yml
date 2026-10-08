@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- ' M '
+- ' M '
+- MMM
+ingredients:
+  M: minecraft:leather
+result:
+  item: smprpg:leather_conical_hat
+  amount: 1
+unlocked_by:
+- minecraft:leather

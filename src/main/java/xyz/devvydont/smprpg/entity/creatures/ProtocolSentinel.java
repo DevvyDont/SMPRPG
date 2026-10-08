@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -63,5 +64,13 @@ public class ProtocolSentinel extends CustomEntityInstance<IronGolem> implements
 
         if (!(event.getTarget() instanceof Player))
             event.setCancelled(true);
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.CONSTRUCT);
+
+        super.setup();
     }
 }

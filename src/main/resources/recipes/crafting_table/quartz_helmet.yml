@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:enchanted_quartz
+result:
+  item: smprpg:quartz_helmet
+  amount: 1
+unlocked_by:
+- minecraft:quartz_block

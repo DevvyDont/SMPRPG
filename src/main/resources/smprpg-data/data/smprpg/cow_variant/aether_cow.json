@@ -1,0 +1,13 @@
+{
+  "asset_id": "smprpg:entity/cow/flying_cow",
+  "baby_asset_id": "smprpg:entity/cow/flying_cow",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#smprpg:spawns_aether_variant_farm_animals"
+      },
+      "priority": 2
+    }
+  ]
+}

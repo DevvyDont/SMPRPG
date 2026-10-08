@@ -1,0 +1,12 @@
+{
+	"model": {
+	  "type": "minecraft:model",
+	  "model": "slayer:item/illager_warlock_shield",
+	  "tints": [
+		{
+		  "type": "minecraft:dye",
+		  "default": -6265536
+		}
+	  ]
+	}
+}

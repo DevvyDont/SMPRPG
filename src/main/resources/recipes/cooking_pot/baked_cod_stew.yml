@@ -1,0 +1,11 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:cod"
+  - "minecraft:potato"
+  - "minecraft:egg"
+  - "smprpg:tomato"
+time: 200
+result: "smprpg:baked_cod_stew"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

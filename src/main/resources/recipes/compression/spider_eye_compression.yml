@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:spider_eye
+- item: smprpg:premium_spider_eye
+  amount: 9
+- item: smprpg:enchanted_spider_eye
+  amount: 9

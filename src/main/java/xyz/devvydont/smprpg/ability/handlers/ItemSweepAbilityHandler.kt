@@ -7,11 +7,15 @@ import xyz.devvydont.smprpg.ability.AbilityContext
 import xyz.devvydont.smprpg.ability.AbilityHandler
 import xyz.devvydont.smprpg.services.DropsService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.time.TickTime
 
 /**
  * Admin ability. Used for an admin item. Teleports and untags any nearby items in a 25 block radius.
  */
 class ItemSweepAbilityHandler : AbilityHandler {
+
+    override val cooldown: Long get() = TickTime.seconds(1)
+
     /**
      * Attempts to execute the ability.
      *

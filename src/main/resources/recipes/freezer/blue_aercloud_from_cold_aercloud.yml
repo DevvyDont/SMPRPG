@@ -1,0 +1,4 @@
+type: freezer
+input: "smprpg:cold_aercloud"
+time: 400
+result: "smprpg:blue_aercloud"

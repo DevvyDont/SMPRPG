@@ -29,8 +29,6 @@ import java.util.List;
 public class ProtocolArmorSet extends CustomAttributeItem implements IEquippableAssetOverride, IHeaderDescribable {
 
     public static final int POWER = 45;
-    public static final double CHESTPLATE_DEFENSE = 225;
-    public static final double CHESTPLATE_HEALTH = 50;
 
     public static final double END_DAMAGE_REDUCTION = .15;
 
@@ -40,22 +38,12 @@ public class ProtocolArmorSet extends CustomAttributeItem implements IEquippable
         super(itemService, type);
     }
 
-    private double getHealth() {
-        return switch (this.getCustomItemType()) {
-            case PROTOCOL_HELMET -> CHESTPLATE_HEALTH / 2 + 10;
-            case PROTOCOL_CHESTPLATE -> CHESTPLATE_HEALTH;
-            case PROTOCOL_LEGGINGS -> CHESTPLATE_HEALTH - 10;
-            case PROTOCOL_BOOTS -> CHESTPLATE_HEALTH / 2;
-            default -> 0;
-        };
-    }
-
     private double getDefense() {
         return switch (this.getCustomItemType()) {
-            case PROTOCOL_HELMET -> CHESTPLATE_DEFENSE / 2 + 20;
-            case PROTOCOL_CHESTPLATE -> CHESTPLATE_DEFENSE;
-            case PROTOCOL_LEGGINGS -> CHESTPLATE_DEFENSE - 35;
-            case PROTOCOL_BOOTS -> CHESTPLATE_DEFENSE / 2;
+            case PROTOCOL_HELMET -> 175;
+            case PROTOCOL_CHESTPLATE -> 305;
+            case PROTOCOL_LEGGINGS -> 235;
+            case PROTOCOL_BOOTS -> 125;
             default -> 0;
         };
     }
@@ -71,7 +59,7 @@ public class ProtocolArmorSet extends CustomAttributeItem implements IEquippable
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         return List.of(
-                AbilityUtil.getAbilityComponent("Protocol: Stabilization (Passive)"),
+                AbilityUtil.getAbilityComponent("Protocol: Stabilization", true),
                 ComponentUtils.create("Take ").append(ComponentUtils.create("-" + ((int)(END_DAMAGE_REDUCTION*100)) + "%", NamedTextColor.GREEN)).append(ComponentUtils.create(" damage while in "), ComponentUtils.create("The End", NamedTextColor.LIGHT_PURPLE)),
                 ComponentUtils.create("(stacks!)", NamedTextColor.DARK_GRAY)
         );
@@ -100,7 +88,6 @@ public class ProtocolArmorSet extends CustomAttributeItem implements IEquippable
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                AttributeEntry.additive(AttributeWrapper.HEALTH, this.getHealth()),
                 AttributeEntry.additive(AttributeWrapper.DEFENSE, this.getDefense()),
                 AttributeEntry.scalar(AttributeWrapper.STRENGTH, this.getStrength())
         );

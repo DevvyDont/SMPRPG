@@ -1,7 +1,0 @@
-name: SMPRPG
-version: '${project.version}'
-main: xyz.devvydont.smprpg.SMPRPG
-api-version: '1.20'
-depend:
-  - Vault
-  - ProtocolLib

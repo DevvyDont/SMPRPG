@@ -74,7 +74,7 @@ public class LootTypeChancesMenu extends MenuBase {
                 merge(create("explore the world, and master the art of fishing")),
                 merge(create("to catch and collect the "), create("rarest finds", LIGHT_PURPLE), create("."))
         ), e -> {
-            playInvalidAnimation();
+            playInvalidAnimation(true);
         });
 
         // We need a type selector to tell us what the odds are of stuff.
@@ -158,7 +158,7 @@ public class LootTypeChancesMenu extends MenuBase {
     @Override
     protected void handleInventoryClicked(InventoryClickEvent event) {
         event.setCancelled(true);
-        this.playInvalidAnimation();
+        this.playInvalidAnimation(true);
     }
 
     /**

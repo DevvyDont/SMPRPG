@@ -1,0 +1,12 @@
+type: enchanting
+enchantment: mercy
+levels:
+  '1':
+    power: 60
+    ingredients:
+    - item: minecraft:totem_of_undying
+      amount: 4
+    - item: minecraft:enchanted_golden_apple
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 8

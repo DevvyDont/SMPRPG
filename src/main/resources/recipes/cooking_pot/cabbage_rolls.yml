@@ -1,0 +1,8 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:cabbage"
+  - "minecraft:beef"
+time: 100
+result: "smprpg:cabbage_rolls"
+skill_xp:
+  farming: 20

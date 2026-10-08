@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:shambling_boss"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:shambling_boss"
+      }
+    ]
+  }
+}

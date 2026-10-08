@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:reviled_viscera
+result:
+  item: smprpg:abominable_helmet
+  amount: 1
+unlocked_by:
+- smprpg:reviled_viscera

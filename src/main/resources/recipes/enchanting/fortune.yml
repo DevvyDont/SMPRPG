@@ -1,0 +1,115 @@
+type: enchanting
+enchantment: fortune
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:gold_ingot
+      amount: 8
+    - item: minecraft:diamond
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:gold_ingot
+      amount: 16
+    - item: minecraft:diamond
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 10
+    ingredients:
+    - item: minecraft:gold_ingot
+      amount: 32
+    - item: minecraft:diamond
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:gold_ingot
+      amount: 64
+    - item: minecraft:diamond
+      amount: 32
+    - item: smprpg:mithril_ingot
+      amount: 64
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:gold_block
+      amount: 15
+    - item: minecraft:diamond
+      amount: 64
+    - item: smprpg:mithril_block
+      amount: 15
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: minecraft:gold_block
+      amount: 30
+    - item: minecraft:diamond_block
+      amount: 15
+    - item: smprpg:mithril_block
+      amount: 30
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 50
+    ingredients:
+    - item: minecraft:gold_block
+      amount: 60
+    - item: minecraft:diamond_block
+      amount: 30
+    - item: smprpg:mithril_block
+      amount: 60
+    - item: smprpg:platinum_block
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 60
+    ingredients:
+    - item: smprpg:enchanted_gold
+      amount: 14
+    - item: minecraft:diamond_block
+      amount: 60
+    - item: smprpg:enchanted_mithril
+      amount: 14
+    - item: smprpg:platinum_block
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 70
+    ingredients:
+    - item: smprpg:enchanted_gold
+      amount: 28
+    - item: smprpg:enchanted_diamond
+      amount: 14
+    - item: smprpg:enchanted_mithril
+      amount: 28
+    - item: smprpg:platinum_block
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_gold
+      amount: 56
+    - item: smprpg:enchanted_diamond
+      amount: 28
+    - item: smprpg:enchanted_mithril
+      amount: 56
+    - item: smprpg:platinum_block
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 64

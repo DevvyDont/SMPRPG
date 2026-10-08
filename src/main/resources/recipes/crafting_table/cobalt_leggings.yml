@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:cobalt_ingot
+result:
+  item: smprpg:cobalt_leggings
+  amount: 1
+unlocked_by:
+- smprpg:cobalt_ingot

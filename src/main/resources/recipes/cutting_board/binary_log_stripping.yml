@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:binary_log"
+tool: "axes"
+result:
+  - { item: "smprpg:stripped_binary_log", amount: 1, chance: 1.0 }

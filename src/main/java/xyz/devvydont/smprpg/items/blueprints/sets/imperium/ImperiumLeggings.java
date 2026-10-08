@@ -13,12 +13,12 @@ public class ImperiumLeggings extends ImperiumArmorSet {
 
     @Override
     public int getDefense() {
-        return 350;
+        return 365;
     }
 
     @Override
     public int getHealth() {
-        return 280;
+        return 510;
     }
 
     @Override

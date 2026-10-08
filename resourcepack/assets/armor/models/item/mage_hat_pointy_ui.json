@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "armor:item/mage_hat_icon_template_dyed",
+    "layer1": "armor:item/mage_hat_icon_template"
+  }
+}

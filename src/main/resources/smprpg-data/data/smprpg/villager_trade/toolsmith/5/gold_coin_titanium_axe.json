@@ -1,0 +1,26 @@
+{
+  "wants": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "gold_coin"
+        }
+      }
+    },
+    "count": 1
+  },
+  "gives": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "titanium_axe"
+        }
+      }
+    }
+  },
+  "max_uses": 12,
+  "reputation_discount": 0.2,
+  "xp": 30.0
+}

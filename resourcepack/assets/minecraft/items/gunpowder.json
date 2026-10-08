@@ -1,0 +1,33 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/gunpowder"
+        },
+        "cases": [
+            {
+                "when": "smprpg:sulfur",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/sulfur"
+                }
+            },
+            {
+                "when": "smprpg:enchanted_sulfur",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/sulfur"
+                }
+            },
+            {
+                "when": "smprpg:sulfur_singularity",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/sulfur"
+                }
+            }
+        ]
+    }
+}

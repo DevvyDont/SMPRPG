@@ -2,6 +2,8 @@ package xyz.devvydont.smprpg.services
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
+import io.papermc.paper.datacomponent.DataComponentTypes
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attributable
 import org.bukkit.attribute.AttributeModifier
@@ -319,7 +321,7 @@ class AttributeService : IService, Listener {
             if (customModifiers == null || customModifiers.modifiers.isEmpty())
                 continue
 
-            modifiers.putAll(attribute, customModifiers.modifiers)
+            modifiers.putAll(attribute!!, customModifiers.modifiers)
         }
 
         // Return all the collected modifiers.
@@ -391,8 +393,8 @@ class AttributeService : IService, Listener {
      */
     fun clearAttributeModifiers(item: ItemStack) {
         // All we need to do is remove the vanilla modifiers and clear the persistent data relating to modifiers.
-
-        item.editMeta(Consumer { meta: ItemMeta? -> meta!!.attributeModifiers = null })
+        if (item.hasData(DataComponentTypes.ATTRIBUTE_MODIFIERS))
+            item.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.itemAttributes().build())
         item.editPersistentDataContainer { container: PersistentDataContainer ->
             container.remove(ATTRIBUTE_MODIFIERS_KEY)
         }

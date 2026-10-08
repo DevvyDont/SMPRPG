@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:dandelion"
+tool: "knives"
+result:
+  - { item: "minecraft:yellow_dye", amount: 2, chance: 1.0 }

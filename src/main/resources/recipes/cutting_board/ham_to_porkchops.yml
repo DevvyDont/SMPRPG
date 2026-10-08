@@ -1,0 +1,6 @@
+type: cutting_board
+input: "smprpg:ham"
+tool: "knives"
+result:
+  - { item: "minecraft:porkchop", amount: 2, chance: 1.0 }
+  - { item: "minecraft:bone", amount: 1, chance: 1.0 }

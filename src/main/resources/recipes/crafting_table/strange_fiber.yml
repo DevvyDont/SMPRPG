@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- sss
+- nnn
+- sss
+ingredients:
+  s: smprpg:ethereal_fiber
+  n: smprpg:latticed_xenomatter
+result:
+  item: smprpg:strange_fiber
+  amount: 1
+unlocked_by:
+- smprpg:latticed_xenomatter

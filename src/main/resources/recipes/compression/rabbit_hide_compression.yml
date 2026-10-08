@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:rabbit_hide
+- item: smprpg:premium_rabbit_hide
+  amount: 9
+- item: smprpg:enchanted_rabbit_hide
+  amount: 9

@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: minecraft:string
+  t: smprpg:iron_rod
+  m: smprpg:mithril_ingot
+result:
+  item: smprpg:mithril_rod
+  amount: 1
+unlocked_by:
+- smprpg:mithril_ingot
+upgrade: "t"

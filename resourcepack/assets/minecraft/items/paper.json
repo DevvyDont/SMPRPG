@@ -1,0 +1,62 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/paper"
+        },
+        "cases": [
+            {
+                "when": "smprpg:simple_tome",
+				"model": {
+					"type": "minecraft:select",
+					"cases": [
+					  {
+						"model": {
+						  "type": "minecraft:model",
+						  "model": "tools:item/tome_ui"
+						},
+						"when": [
+						  "gui",
+						  "ground",
+						  "fixed",
+						  "on_shelf"
+						]
+					  }
+					],
+					"fallback": {
+					  "type": "minecraft:model",
+					  "model": "tools:item/tome"
+					},
+					"property": "minecraft:display_context"
+				  }
+            },
+			{
+                "when": "smprpg:necronomicon",
+				"model": {
+					"type": "minecraft:select",
+					"cases": [
+					  {
+						"model": {
+						  "type": "minecraft:model",
+						  "model": "tools:item/necronomicon_ui"
+						},
+						"when": [
+						  "gui",
+						  "ground",
+						  "fixed",
+						  "on_shelf"
+						]
+					  }
+					],
+					"fallback": {
+					  "type": "minecraft:model",
+					  "model": "tools:item/necronomicon"
+					},
+					"property": "minecraft:display_context"
+				  }
+            }
+        ]
+    }
+}

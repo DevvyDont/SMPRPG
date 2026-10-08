@@ -1,0 +1,786 @@
+items:
+  smprpg:holystone_bricks:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_bricks>
+      pdc:
+        smprpg:item-type: holystone_bricks
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/holystone_bricks
+    behavior:
+      type: block_item
+      block: smprpg:holystone_bricks
+  smprpg:aerogel:
+    data:
+      item-name: <!i><lang:item.smprpg.aerogel>
+      pdc:
+        smprpg:item-type: aerogel
+        smprpg:sell-value: 45
+    model:
+      template: smprpg:model/simplified_cube_all
+      arguments:
+        path: smprpg:block/aether/aerogel
+    behavior:
+      type: block_item
+      block: smprpg:aerogel
+  smprpg:ambrosium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.ambrosium_block>
+      pdc:
+        smprpg:item-type: ambrosium_block
+        smprpg:sell-value: 180
+    model: smprpg:block/aether/ambrosium_block
+    behavior:
+      type: block_item
+      block: smprpg:ambrosium_block
+  smprpg:zanite_block:
+    data:
+      item-name: <!i><lang:item.smprpg.zanite_block>
+      pdc:
+        smprpg:item-type: zanite_block
+        smprpg:sell-value: 1800
+    model: smprpg:block/aether/zanite_block
+    behavior:
+      type: block_item
+      block: smprpg:zanite_block
+  smprpg:rainbow_wool:
+    data:
+      item-name: <!i><lang:item.smprpg.zanite_block>
+      pdc:
+        smprpg:item-type: rainbow_wool
+        smprpg:sell-value: 1800
+    model: smprpg:block/aether/rainbow_wool
+    behavior:
+      type: block_item
+      block: smprpg:rainbow_wool
+  smprpg:dungeon_tile:
+    data:
+      item-name: <!i><lang:item.smprpg.dungeon_tile>
+      pdc:
+        #smprpg:item-type: dungeon_tile
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/dungeon_tile
+    behavior:
+      type: block_item
+      block: smprpg:dungeon_tile
+
+items#stairs:
+  smprpg:holystone_brick_stairs_inner_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_brick_stairs_inner_display>
+    model:
+      template: smprpg:model/simplified_inner_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_brick_stairs_inner_display
+        texture: smprpg:block/aether/holystone_bricks
+  smprpg:holystone_brick_stairs_outer_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_brick_stairs_outer_display>
+    model:
+      template: smprpg:model/simplified_outer_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_brick_stairs_outer_display
+        texture: smprpg:block/aether/holystone_bricks
+  smprpg:holystone_brick_stairs_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_brick_stairs_display>
+    model:
+      template: smprpg:model/simplified_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_brick_stairs_display
+        texture: smprpg:block/aether/holystone_bricks
+  smprpg:holystone_brick_stairs:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_brick_stairs>
+      pdc:
+        smprpg:item-type: holystone_brick_stairs
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_brick_stairs_display
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/holystone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:stairs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/entity_render_stairs
+          arguments:
+            base_block: oxidized_cut_copper_stairs
+            item_stairs_inner: smprpg:holystone_brick_stairs_inner_display
+            item_stairs_outer: smprpg:holystone_brick_stairs_outer_display
+            item_stairs: smprpg:holystone_brick_stairs_display
+  smprpg:holystone_stairs_inner_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_stairs_inner_display>
+    model:
+      template: smprpg:model/simplified_inner_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_stairs_inner_display
+        texture: smprpg:block/aether/holystone
+  smprpg:holystone_stairs_outer_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_stairs_outer_display>
+    model:
+      template: smprpg:model/simplified_outer_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_stairs_outer_display
+        texture: smprpg:block/aether/holystone
+  smprpg:holystone_stairs_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_stairs_display>
+    model:
+      template: smprpg:model/simplified_stairs
+      arguments:
+        path: smprpg:block/aether/holystone_stairs_display
+        texture: smprpg:block/aether/holystone
+  smprpg:holystone_stairs:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_stairs>
+      pdc:
+        smprpg:item-type: holystone_stairs
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_stairs_display
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/holystone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:stairs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/entity_render_stairs
+          arguments:
+            base_block: oxidized_cut_copper_stairs
+            item_stairs_inner: smprpg:holystone_stairs_inner_display
+            item_stairs_outer: smprpg:holystone_stairs_outer_display
+            item_stairs: smprpg:holystone_stairs_display
+  smprpg:icestone_stairs_inner_display:
+    data:
+      item-name: <!i><lang:item.default.icestone_stairs_inner_display>
+    model:
+      template: smprpg:model/simplified_inner_stairs
+      arguments:
+        path: smprpg:block/aether/icestone_stairs_inner_display
+        texture: smprpg:block/aether/icestone
+  smprpg:icestone_stairs_outer_display:
+    data:
+      item-name: <!i><lang:item.default.icestone_stairs_outer_display>
+    model:
+      template: smprpg:model/simplified_outer_stairs
+      arguments:
+        path: smprpg:block/aether/icestone_stairs_outer_display
+        texture: smprpg:block/aether/icestone
+  smprpg:icestone_stairs_display:
+    data:
+      item-name: <!i><lang:item.default.icestone_stairs_display>
+    model:
+      template: smprpg:model/simplified_stairs
+      arguments:
+        path: smprpg:block/aether/icestone_stairs_display
+        texture: smprpg:block/aether/icestone
+  smprpg:icestone_stairs:
+    data:
+      item-name: <!i><lang:item.smprpg.icestone_stairs>
+      pdc:
+        smprpg:item-type: icestone_stairs
+        smprpg:freeze-time: 400
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/icestone_stairs_display
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/icestone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:stairs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/entity_render_stairs
+          arguments:
+            base_block: oxidized_cut_copper_stairs
+            item_stairs_inner: smprpg:icestone_stairs_inner_display
+            item_stairs_outer: smprpg:icestone_stairs_outer_display
+            item_stairs: smprpg:icestone_stairs_display
+
+items#slabs:
+  smprpg:holystone_brick_slab_bottom_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_brick_slab_bottom>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/holystone_brick_slab_bottom
+        texture: smprpg:block/aether/holystone_bricks
+        extension: ""
+  smprpg:holystone_brick_slab_top_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_brick_slab_top>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/holystone_brick_slab_top
+        texture: smprpg:block/aether/holystone_bricks
+        extension: _top
+  smprpg:holystone_brick_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_brick_slab>
+      pdc:
+        smprpg:item-type: holystone_brick_slab
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_brick_slab_bottom
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/holystone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:stairs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+            tags:
+              - minecraft:slabs
+        behaviors:
+          type: slab_block
+        states:
+          template: smprpg:block_state/entity_render_slab
+          arguments:
+            base_block: oxidized_cut_copper_slab
+            item_top_slab: smprpg:holystone_brick_slab_top_display
+            item_bottom_slab: smprpg:holystone_brick_slab_bottom_display
+            item_double_slab: smprpg:holystone_bricks
+  smprpg:holystone_slab_bottom_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_slab_bottom>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/holystone_slab_bottom
+        texture: smprpg:block/aether/holystone
+        extension: ""
+  smprpg:holystone_slab_top_display:
+    data:
+      item-name: <!i><lang:item.default.holystone_slab_top>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/holystone_slab_top
+        texture: smprpg:block/aether/holystone
+        extension: _top
+  smprpg:holystone_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_slab>
+      pdc:
+        smprpg:item-type: holystone_slab
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_slab_bottom
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/holystone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:slabs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+            tags:
+              - minecraft:slabs
+        behaviors:
+          type: slab_block
+        states:
+          template: smprpg:block_state/entity_render_slab
+          arguments:
+            base_block: oxidized_cut_copper_slab
+            item_top_slab: smprpg:holystone_slab_top_display
+            item_bottom_slab: smprpg:holystone_slab_bottom_display
+            item_double_slab: smprpg:holystone
+  smprpg:icestone_slab_bottom_display:
+    data:
+      item-name: <!i><lang:item.default.icestone_slab_bottom>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/icestone_slab_bottom
+        texture: smprpg:block/aether/icestone
+        extension: ""
+  smprpg:icestone_slab_top_display:
+    data:
+      item-name: <!i><lang:item.default.icestone_slab_top>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/icestone_slab_top
+        texture: smprpg:block/aether/icestone
+        extension: _top
+  smprpg:icestone_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.icestone_slab>
+      pdc:
+        smprpg:item-type: icestone_slab
+        smprpg:freeze-time: 200
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/icestone_slab_bottom
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/stone
+            - smprpg:sound/icestone
+          map-color: 22
+          merges:
+            tags:
+              - minecraft:slabs
+          overrides:
+            hardness: 6.0
+            resistance: 0.5
+            tags:
+              - minecraft:slabs
+        behaviors:
+          type: slab_block
+        states:
+          template: smprpg:block_state/entity_render_slab
+          arguments:
+            base_block: oxidized_cut_copper_slab
+            item_top_slab: smprpg:icestone_slab_top_display
+            item_bottom_slab: smprpg:icestone_slab_bottom_display
+            item_double_slab: smprpg:icestone
+
+blocks:
+  smprpg:holystone_bricks:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/holystone_bricks
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/holystone
+      map-color: 22
+      overrides:
+        hardness: 6.0
+        resistance: 0.5
+  smprpg:aerogel:
+    state:
+      state: barrier
+      entity-renderer:
+        - type: item_display
+          item: smprpg:aerogel
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      overrides:
+        map-color: 31
+        hardness: 1.0
+        resistance: 6000.0
+  smprpg:ambrosium_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/ambrosium_block
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/metal_block
+      overrides:
+        map-color: 18
+  smprpg:zanite_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/zanite_block
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/beacon_usable
+      overrides:
+        map-color: 24
+  smprpg:rainbow_wool:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/rainbow_wool
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      overrides:
+        map-color: 31
+        hardness: 1.0
+        resistance: 6000.0
+  smprpg:dungeon_tile:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/dungeon_tile
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/holystone
+      map-color: 56
+      overrides:
+        hardness: 6.0
+        resistance: 0.5
+
+items#redstone:
+  smprpg:holystone_button:
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/holystone_button
+      generation:
+        parent: minecraft:block/button_inventory
+        textures:
+          texture: smprpg:block/aether/holystone
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_button>
+      pdc:
+        smprpg:item-type: holystone_button
+        smprpg:sell-value: 2
+    behavior:
+      type: block_item
+      block: smprpg:holystone_button
+  smprpg:holystone_button_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_button_pressed
+      generation:
+        parent: minecraft:block/button_pressed
+        textures:
+          texture: smprpg:block/aether/holystone
+  smprpg:holystone_button_not_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/holystone_button_not_pressed
+      generation:
+        parent: minecraft:block/button
+        textures:
+          texture: smprpg:block/aether/holystone
+  smprpg:holystone_pressure_plate:
+    model: smprpg:block/aether/holystone_pressure_plate
+    data:
+      item-name: <!i><lang:item.smprpg.holystone_pressure_plate>
+      pdc:
+        smprpg:item-type: holystone_pressure_plate
+        smprpg:sell-value: 4
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/holystone
+          overrides:
+            hardness: 0.5
+            resistance: 0.5
+            burnable: false
+            push-reaction: destroy
+            map-color: 22
+            instrument: basedrum
+            tags:
+              - minecraft:mineable/pickaxe
+              - minecraft:wall_post_override
+              - minecraft:stone_pressure_plates
+              - minecraft:pressure_plates
+        behaviors:
+          type: pressure_plate_block
+          sensitivity: mob
+          pressed-time: 10
+          sounds:
+            on: minecraft:block.stone_pressure_plate.click_on
+            off: minecraft:block.stone_pressure_plate.click_off
+        states:
+          template: smprpg:block_state/pressure_plate
+          arguments:
+            normal_state: light_weighted_pressure_plate:2
+            powered_state: light_weighted_pressure_plate:3
+            model_normal_path: smprpg:block/aether/holystone_pressure_plate
+            model_normal_generation:
+              parent: minecraft:block/pressure_plate_up
+              textures:
+                texture: smprpg:block/aether/holystone
+            model_powered_path: smprpg:block/aether/holystone_pressure_plate_down
+            model_powered_generation:
+              parent: minecraft:block/pressure_plate_down
+              textures:
+                texture: smprpg:block/aether/holystone
+
+blocks#redstone:
+  smprpg:holystone_button:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:sound/holystone
+        - smprpg:hardness/button
+      overrides:
+        burnable: true
+        push-reaction: destroy
+        map-color: 22
+        instrument: basedrum
+        tags:
+          - minecraft:buttons
+          - minecraft:mineable/pickaxe
+          - minecraft:stone_buttons
+    behaviors:
+      - type: liquid_flowable_block
+      - type: face_attached_horizontal_directional_block
+      - type: button_block
+        ticks-to-stay-pressed: 10
+        can-be-activated-by-arrows: false
+        sounds:
+          on: minecraft:block.stone_button.click_on
+          off: minecraft:block.stone_button.click_off
+    states:
+      template: smprpg:block_state/button
+      arguments:
+        base_block: stone_button
+        pressed_item: smprpg:holystone_button_pressed
+        not_pressed_item: smprpg:holystone_button_not_pressed
+
+recipes:
+  smprpg:holystone_bricks:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone
+    pattern:
+      - HH
+      - HH
+    result:
+      id: smprpg:holystone_bricks
+      count: 4
+  smprpg:holystone_slab:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone
+    pattern:
+      - HHH
+    result:
+      id: smprpg:holystone_slab
+      count: 6
+  smprpg:holystone_stairs:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone
+    pattern:
+      - "H  "
+      - "HH "
+      - "HHH"
+    result:
+      id: smprpg:holystone_stairs
+      count: 4
+  smprpg:icestone_slab:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      I: smprpg:icestone
+    pattern:
+      - III
+    result:
+      id: smprpg:icestone_slab
+      count: 6
+  smprpg:icestone_stairs:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      I: smprpg:icestone
+    pattern:
+      - "I  "
+      - "II "
+      - "III"
+    result:
+      id: smprpg:icestone_stairs
+      count: 4
+  smprpg:holystone_brick_slab:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone_bricks
+    pattern:
+      - HHH
+    result:
+      id: smprpg:holystone_brick_slab
+      count: 6
+  smprpg:holystone_brick_stairs:
+    type: shaped
+    category: building
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone_bricks
+    pattern:
+      - "H  "
+      - "HH "
+      - "HHH"
+    result:
+      id: smprpg:holystone_brick_stairs
+      count: 4
+  smprpg:holystone_button:
+    type: shaped
+    category: redstone
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone
+    pattern:
+      - H
+    result:
+      id: smprpg:holystone_button
+      count: 1
+  smprpg:holystone_pressure_plate:
+    type: shaped
+    category: redstone
+    group: holystone
+    unlock_on_ingredient_obtained: true
+    ingredients:
+      H: smprpg:holystone
+    pattern:
+      - HH
+    result:
+      id: smprpg:holystone_pressure_plate
+      count: 1
+
+  # Stonecutter recipes are buggy, since they use the base item for the recipe (Nether Brick)
+  # This means that Nether Brick can be used to get ANY stonecutter recipe, so we are shelving for now.
+  #recipes#stonecutter:
+  #smprpg:holystone_bricks_stonecutter:
+  #  type: stonecutting
+  #  group: holystone
+  #  ingredient: smprpg:holystone
+  #  result:
+  #    id: smprpg:holystone_bricks
+  #    count: 1
+  #smprpg:holystone_brick_slab_stonecutter:
+  #  type: stonecutting
+  #  group: holystone
+  #  ingredient: smprpg:holystone
+  #  result:
+  #    id: smprpg:holystone_brick_slab
+  #    count: 2
+  #smprpg:holystone_brick_stairs_stonecutter:
+  #  type: stonecutting
+  #  group: holystone
+  #  ingredient: smprpg:holystone
+  #  result:
+  #    id: smprpg:holystone_brick_stairs
+  #    count: 1
+  #smprpg:holystone_slab_stonecutter:
+  #  type: stonecutting
+  #  group: holystone
+  #  ingredient: smprpg:holystone
+  #  result:
+  #    id: smprpg:holystone_slab
+  #    count: 2
+  #smprpg:holystone_stairs_stonecutter:
+  #  type: stonecutting
+  #  group: holystone
+  #  ingredient: smprpg:holystone
+  #  result:
+  #    id: smprpg:holystone_stairs
+  #    count: 1
+  #smprpg:icestone_slab_stonecutter:
+  #  type: stonecutting
+  #  group: icestone
+  #  ingredient: smprpg:icestone
+  #  result:
+  #    id: smprpg:icestone_slab
+  #    count: 2
+  #smprpg:icestone_stairs_stonecutter:
+  #  type: stonecutting
+  #  group: icestone
+  #  ingredient: smprpg:icestone
+  #  result:
+  #    id: smprpg:icestone_stairs
+  #    count: 1

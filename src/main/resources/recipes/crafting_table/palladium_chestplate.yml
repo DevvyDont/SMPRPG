@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:palladium_ingot
+result:
+  item: smprpg:palladium_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:palladium_ingot

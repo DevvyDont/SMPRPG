@@ -1,0 +1,119 @@
+type: enchanting
+enchantment: proficient
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: smprpg:mithril_block
+      amount: 4
+    - item: minecraft:diamond_block
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: smprpg:mithril_block
+      amount: 8
+    - item: minecraft:diamond_block
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: smprpg:mithril_block
+      amount: 16
+    - item: minecraft:diamond_block
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: smprpg:mithril_block
+      amount: 32
+    - item: minecraft:diamond_block
+      amount: 16
+    - item: minecraft:book
+      amount: 12
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: smprpg:mithril_block
+      amount: 64
+    - item: minecraft:diamond_block
+      amount: 32
+    - item: minecraft:book
+      amount: 24
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:enchanted_mithril
+      amount: 16
+    - item: minecraft:diamond_block
+      amount: 64
+    - item: minecraft:book
+      amount: 48
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: smprpg:enchanted_mithril
+      amount: 32
+    - item: smprpg:enchanted_diamond
+      amount: 16
+    - item: minecraft:bookshelf
+      amount: 32
+    - item: smprpg:cobalt_ingot
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: smprpg:enchanted_mithril
+      amount: 64
+    - item: smprpg:enchanted_diamond
+      amount: 32
+    - item: minecraft:bookshelf
+      amount: 64
+    - item: smprpg:cobalt_ingot
+      amount: 64
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_mithril_block
+      amount: 16
+    - item: smprpg:enchanted_diamond
+      amount: 64
+    - item: minecraft:bookshelf
+      amount: 64
+    - item: smprpg:cobalt_block
+      amount: 16
+    - item: minecraft:dragon_breath
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_mithril_block
+      amount: 32
+    - item: smprpg:enchanted_diamond_block
+      amount: 16
+    - item: minecraft:bookshelf
+      amount: 64
+    - item: smprpg:cobalt_block
+      amount: 32
+    - item: minecraft:dragon_breath
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 32

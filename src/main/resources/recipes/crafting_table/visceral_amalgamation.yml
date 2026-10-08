@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- fvf
+- vsv
+- fvf
+ingredients:
+  s: smprpg:premium_slime
+  f: smprpg:necrotic_flesh_singularity
+  v: smprpg:reviled_viscera
+result:
+  item: smprpg:visceral_amalgamation
+  amount: 1
+unlocked_by:
+- smprpg:reviled_viscera

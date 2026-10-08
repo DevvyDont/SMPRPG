@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:wheat_dough"
+  - "smprpg:cabbage"
+  - "smprpg:onion"
+  - "minecraft:beef"
+time: 200
+result: { item: "smprpg:dumplings", amount: 2 }
+skill_xp:
+  farming: 50

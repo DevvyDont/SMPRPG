@@ -114,6 +114,7 @@ public class FishingPoolViewerMenu extends MenuBase {
             switch (getFlag()) {
                 case NORMAL -> player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_SPLASH, 1, 1.5f);
                 case LAVA -> player.playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 1, .75f);
+                case AERIAL -> player.playSound(player.getLocation(), Sound.ENTITY_WIND_CHARGE_WIND_BURST, 1, 1.5f);
                 case VOID -> player.playSound(player.getLocation(), Sound.ENTITY_WARDEN_TENDRIL_CLICKS, 1, 1.5f);
             }
 
@@ -296,7 +297,7 @@ public class FishingPoolViewerMenu extends MenuBase {
     @Override
     protected void handleInventoryClicked(InventoryClickEvent event) {
         event.setCancelled(true);
-        playInvalidAnimation();
+        playInvalidAnimation(true);
     }
 
     @Override

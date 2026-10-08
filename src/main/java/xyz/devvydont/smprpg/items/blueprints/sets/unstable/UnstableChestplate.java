@@ -20,6 +20,11 @@ public class UnstableChestplate extends UnstableArmorSet implements IDyeable {
     }
 
     @Override
+    public int getDefenseCenter() {
+        return 235;
+    }
+
+    @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.CHESTPLATE;
     }

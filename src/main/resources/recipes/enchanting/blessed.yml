@@ -1,0 +1,62 @@
+type: enchanting
+enchantment: blessed
+levels:
+  '1':
+    power: 19
+    ingredients:
+    - item: minecraft:glowstone_dust
+      amount: 16
+    - item: smprpg:silver_ingot
+      amount: 2
+    - item: minecraft:blaze_powder
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 34
+    ingredients:
+    - item: minecraft:glowstone_dust
+      amount: 32
+    - item: smprpg:silver_ingot
+      amount: 8
+    - item: minecraft:blaze_rod
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 49
+    ingredients:
+    - item: smprpg:enchanted_glowstone
+      amount: 8
+    - item: smprpg:silver_block
+      amount: 4
+    - item: minecraft:magma_cream
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 65
+    ingredients:
+    - item: smprpg:enchanted_glowstone
+      amount: 16
+    - item: smprpg:enchanted_silver
+      amount: 2
+    - item: smprpg:premium_blaze_rod
+      amount: 8
+    - item: minecraft:ghast_tear
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_glowstone_block
+      amount: 8
+    - item: smprpg:enchanted_silver
+      amount: 8
+    - item: smprpg:enchanted_blaze_rod
+      amount: 8
+    - item: smprpg:inferno_residue
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 16

@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:scorching_string
+  t: smprpg:netherite_rod
+  m: smprpg:boiling_ingot
+result:
+  item: smprpg:spitfire_rod
+  amount: 1
+unlocked_by:
+- smprpg:boiling_ingot
+upgrade: "t"

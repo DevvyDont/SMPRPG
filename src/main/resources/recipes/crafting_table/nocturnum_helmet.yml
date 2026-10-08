@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- btb
+- tht
+ingredients:
+  b: smprpg:lucifugous_binding
+  t: smprpg:lucifugous_thread
+  h: smprpg:ruination_helmet
+result:
+  item: smprpg:nocturnum_helmet
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "h"

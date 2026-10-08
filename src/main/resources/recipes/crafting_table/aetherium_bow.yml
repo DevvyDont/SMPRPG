@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:aetherium_ingot
+result:
+  item: smprpg:aetherium_bow
+  amount: 1
+unlocked_by:
+- smprpg:aetherium_ingot

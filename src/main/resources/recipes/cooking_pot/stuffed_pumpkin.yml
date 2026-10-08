@@ -1,0 +1,13 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:rice"
+  - "smprpg:onion"
+  - "minecraft:brown_mushroom"
+  - "minecraft:potato"
+  - "minecraft:sweet_berries"
+  - "smprpg:tomato"
+time: 400
+result: "smprpg:stuffed_pumpkin"
+plating: "minecraft:pumpkin"
+skill_xp:
+  farming: 100

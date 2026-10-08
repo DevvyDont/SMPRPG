@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:iron_ingot
+- item: minecraft:iron_block
+  amount: 9
+- item: smprpg:enchanted_iron
+  amount: 9
+- item: smprpg:enchanted_iron_block
+  amount: 9
+- item: smprpg:iron_singularity
+  amount: 9

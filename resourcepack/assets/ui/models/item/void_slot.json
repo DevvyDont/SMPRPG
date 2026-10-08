@@ -1,0 +1,13 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "ui:item/void_slot"
+	},
+	"display": {
+		"gui": {
+			"scale": [1.125, 1.125, 1.125]
+		}
+	}
+}

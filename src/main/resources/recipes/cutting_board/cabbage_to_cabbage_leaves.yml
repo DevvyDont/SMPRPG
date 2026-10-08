@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:cabbage"
+tool: "knives"
+result:
+  - { item: "smprpg:cabbage_leaf", amount: 2, chance: 1.0 }

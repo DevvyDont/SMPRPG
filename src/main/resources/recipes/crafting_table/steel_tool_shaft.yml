@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- s
+- l
+- s
+ingredients:
+  s: smprpg:steel_ingot
+  l: smprpg:premium_leather
+result:
+  item: smprpg:steel_tool_shaft
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot
+- minecraft:leather

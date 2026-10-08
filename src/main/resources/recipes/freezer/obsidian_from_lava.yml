@@ -1,0 +1,4 @@
+type: freezer
+input: "minecraft:lava_bucket"
+time: 200
+result: "minecraft:obsidian"

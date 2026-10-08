@@ -1,0 +1,28 @@
+{
+  "parent": "smprpg:aether/root",
+  "criteria": {
+    "use_lava_bucket": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.make_aerogel.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:aerogel"
+      },
+      "count": 1,
+      "id": "minecraft:nether_brick"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.make_aerogel.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_lava_bucket"
+    ]
+  ]
+}

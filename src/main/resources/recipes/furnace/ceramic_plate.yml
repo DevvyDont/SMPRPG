@@ -1,0 +1,6 @@
+type: smelting
+input: "smprpg:unfired_ceramic_plate"
+cook: furnace
+time: 200
+experience: 5.0
+result: "smprpg:ceramic_plate"

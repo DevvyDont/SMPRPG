@@ -2,6 +2,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 
 import org.bukkit.entity.Villager;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 
@@ -25,5 +26,12 @@ public class LeveledVillager extends VanillaEntity<Villager> {
             return MinecraftStringUtils.getTitledString(profession.key().value());
 
         return super.getEntityName();
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.HUMANOID);
+
+        super.setup();
     }
 }

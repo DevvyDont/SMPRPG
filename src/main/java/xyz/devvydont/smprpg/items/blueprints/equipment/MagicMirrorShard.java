@@ -2,27 +2,18 @@ package xyz.devvydont.smprpg.items.blueprints.equipment;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 
-import java.util.Collection;
-import java.util.List;
-
-public class MagicMirrorShard extends CustomItemBlueprint implements ISellable, ICraftable, Listener {
+public class MagicMirrorShard extends CustomItemBlueprint implements ISellable, Listener {
 
     public MagicMirrorShard(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -40,11 +31,6 @@ public class MagicMirrorShard extends CustomItemBlueprint implements ISellable, 
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.ITEM;
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
     }
 
     public MagicMirror.MagicMirrorMode getMode() {
@@ -66,27 +52,6 @@ public class MagicMirrorShard extends CustomItemBlueprint implements ISellable, 
         };
     }
 
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape(" g ", "gcg", " g ");
-        recipe.setIngredient('g', ItemService.generate(CustomItemType.WARP_CATALYST));
-        recipe.setIngredient('c', ItemService.generate(getMaterial()));
-        recipe.setCategory(CraftingBookCategory.MISC);
-        return recipe;
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     *
-     * @return
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.MAGIC_MIRROR));
-    }
-
     /**
      * Given this item stack, how much should it be able to sell for?
      * Keep in mind that the size of the stack needs to considered as well!
@@ -99,43 +64,4 @@ public class MagicMirrorShard extends CustomItemBlueprint implements ISellable, 
         return 20_000;
     }
 
-    /**
-     * Listen for when we combine this item with a mirror. We need to apply the mode.
-     */
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onCombineInAnvil(PrepareAnvilEvent event) {
-
-        var first = event.getInventory().getFirstItem();
-        var second = event.getInventory().getSecondItem();
-
-        // We only care if there are two items involved.
-        if (first == null || second == null)
-            return;
-
-        if (first.getType().equals(Material.AIR) || second.getType().equals(Material.AIR))
-            return;
-
-        if (!isItemOfType(second))
-            return;
-
-        // We only care if we have a mirror and shard.
-        var firstBlueprint = ItemService.blueprint(first);
-        var secondBlueprint = ItemService.blueprint(second);
-        if (!(firstBlueprint instanceof MagicMirror mirror))
-            return;
-
-        if (!(secondBlueprint instanceof MagicMirrorShard mirrorShard))
-            return;
-
-        // We only care if the mirror already doesn't have the mode.
-        var mode = mirrorShard.getMode();
-        if (mirror.hasModeUnlocked(first, mode))
-            return;
-
-        // Awesome! Continue.
-        var result = first.clone();
-        mirror.withModeUnlocked(result, mode);
-        event.setResult(result);
-        event.getView().setRepairCost(30);
-    }
 }

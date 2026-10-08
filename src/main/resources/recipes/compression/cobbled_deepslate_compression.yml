@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:cobbled_deepslate
+- item: smprpg:compressed_deepslate
+  amount: 9
+- item: smprpg:double_compressed_deepslate
+  amount: 9
+- item: smprpg:enchanted_deepslate
+  amount: 9
+- item: smprpg:deepslate_singularity
+  amount: 9

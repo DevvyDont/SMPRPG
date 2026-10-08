@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "all": "smprpg:block/runes/rune_basic"
+  }
+}

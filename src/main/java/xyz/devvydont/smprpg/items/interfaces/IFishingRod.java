@@ -16,6 +16,7 @@ public interface IFishingRod {
     enum FishingFlag {
         NORMAL("Water", SeaCreature.NAME_COLOR),
         LAVA("Lava", TextColor.color(255, 100, 28)),
+        AERIAL("Aerial", TextColor.color(255, 255, 240)),
         VOID("Void", TextColor.color(69, 56, 94)),
         ;
 
@@ -85,6 +86,7 @@ public interface IFishingRod {
             return switch (this) {
                 case NORMAL -> Material.WATER_BUCKET;
                 case LAVA -> Material.LAVA_BUCKET;
+                case AERIAL -> Material.WIND_CHARGE;
                 case VOID -> Material.SCULK;
             };
         }

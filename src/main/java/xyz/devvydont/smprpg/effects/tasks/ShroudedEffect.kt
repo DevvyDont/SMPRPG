@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityTargetEvent
 import org.bukkit.event.world.LootGenerateEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import xyz.devvydont.smprpg.events.ContainerLootGeneratedEvent
 import xyz.devvydont.smprpg.services.SpecialEffectService
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
@@ -28,13 +29,22 @@ class ShroudedEffect(service: SpecialEffectService, player: Player, seconds: Int
     override val timerColor: TextColor
         get() = NamedTextColor.GREEN
 
+    var flightAllowed = false
+
 
     override fun tick() {
         player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 50, 2, true, true))
         player.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 50, 1, true, true))
         player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 50, 0, true, true))
         player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 50, 0, true, true))
-        player.allowFlight = true
+
+        // We have to check for this effect otherwise the damage popup manager will spam absorption gain #s every tick
+        if (!player.hasPotionEffect(PotionEffectType.ABSORPTION))
+            player.addPotionEffect(PotionEffect(PotionEffectType.ABSORPTION, 600, 4, true, true))
+
+        if (flightAllowed)
+            player.allowFlight = true
+
         player.foodLevel = 20
         player.saturation = 20f
         // If we are flying, subtract a second depending on the tick. This will make it appear like it's draining.
@@ -106,17 +116,11 @@ class ShroudedEffect(service: SpecialEffectService, player: Player, seconds: Int
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
-    private fun onOpenLootChest(event: LootGenerateEvent) {
-        // Ignore non players
-
-        if (event.entity !is Player)
-            return
-        val eventPlayer = event.entity as Player
-
+    private fun onOpenLootChest(event: ContainerLootGeneratedEvent) {
         // Ignore players that aren't our player
-        if (event.entity != player)
+        if (event.player != player)
             return
 
-        service.removeEffect(eventPlayer)
+        service.removeEffect(player)
     }
 }

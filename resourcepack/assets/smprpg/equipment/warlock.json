@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:warlock"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:warlock"
+      }
+    ]
+  }
+}

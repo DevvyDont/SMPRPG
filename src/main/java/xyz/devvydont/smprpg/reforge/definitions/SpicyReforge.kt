@@ -12,7 +12,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class SpicyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             MultiplicativeAttributeEntry(AttributeWrapper.STRENGTH, getDamageBonus(rarity).toDouble()),
             MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .05),
             AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, getCriticalBonus(rarity).toDouble())
@@ -25,9 +25,7 @@ class SpicyReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("damage output stats")
         )
 
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 
     companion object {
         fun getDamageBonus(rarity: ItemRarity): Float {

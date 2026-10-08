@@ -6,6 +6,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Bogged;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -18,6 +19,9 @@ public class LeveledBogged extends VanillaEntity<Bogged> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.AQUATIC);
+        mobTypes.add(MobType.UNDEAD);
+
         super.setup();
         var attr = SMPRPG.getService(AttributeService.class).getAttribute(_entity, AttributeWrapper.STRENGTH);
 

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:aetherium_ingot
+result:
+  item: smprpg:aetherium_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:aetherium_ingot

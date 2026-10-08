@@ -18,12 +18,12 @@ public class ReaverLeggings extends ReaverArmorSet implements ITrimmable {
 
     @Override
     public int getDefense() {
-        return ItemArmor.getDefenseFromMaterial(Material.NETHERITE_LEGGINGS)+5;
+        return 120;
     }
 
     @Override
     public int getHealth() {
-        return 15;
+        return 0;
     }
 
     @Override

@@ -12,18 +12,15 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 class HastyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
         return listOf<AttributeEntry>(
-            AdditiveAttributeEntry(AttributeWrapper.MINING_SPEED, rarity.ordinal * .03 + .07),
-            AdditiveAttributeEntry(AttributeWrapper.MINING_EFFICIENCY, rarity.ordinal * .04 + .1)
+            AdditiveAttributeEntry(AttributeWrapper.MINING_SPEED, (rarity.ordinal + 1) * 100.0),
         )
     }
 
     override val description: List<Component>
         get() = listOf<Component>(
-            ComponentUtils.create("Moderately increases mining"),
+            ComponentUtils.create("Moderately increases harvest"),
             ComponentUtils.create("speed and efficiency")
         )
 
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 }

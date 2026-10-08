@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": {
+	  "sprite": "smprpg:block/aether/blue_aercloud",
+	  "force_translucent": true
+	}
+  }
+}

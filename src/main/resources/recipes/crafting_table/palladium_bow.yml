@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:palladium_ingot
+result:
+  item: smprpg:palladium_bow
+  amount: 1
+unlocked_by:
+- smprpg:palladium_ingot

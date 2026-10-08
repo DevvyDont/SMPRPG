@@ -20,12 +20,12 @@ public class ReaverChestplate extends ReaverArmorSet implements IDyeable, ITrimm
 
     @Override
     public int getDefense() {
-        return ItemArmor.getDefenseFromMaterial(Material.NETHERITE_CHESTPLATE)+5;
+        return 155;
     }
 
     @Override
     public int getHealth() {
-        return 20;
+        return 0;
     }
 
     @Override

@@ -12,7 +12,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class PlunderingReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.additive(AttributeWrapper.LUCK, (2 + rarity.ordinal * 2).toDouble()),
             AttributeEntry.additive(AttributeWrapper.FISHING_RATING, (50 + rarity.ordinal * 10).toDouble()),
             AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, (1 + rarity.ordinal).toDouble())
@@ -38,7 +38,5 @@ class PlunderingReforge(type: ReforgeType) : ReforgeBase(type) {
      *
      * @return
      */
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 }

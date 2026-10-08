@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionType
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer
+import xyz.devvydont.smprpg.events.CustomEnchantItemEvent
 import xyz.devvydont.smprpg.events.skills.SkillExperienceGainEvent.ExperienceSource
 import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemEnchantedBook
 import xyz.devvydont.smprpg.items.interfaces.IAttributeItem
@@ -118,16 +119,15 @@ class MagicExperienceListener : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     @Suppress("unused")
-    private fun onEnchant(event: EnchantItemEvent) {
+    private fun onEnchant(event: CustomEnchantItemEvent) {
         if (event.isCancelled)
             return
 
         // Set a base experience earning for this enchant. At the start it is just the level of enchant we are performing.
-        var exp = event.expLevelCost + 10
-
-        // Loop through every enchant and see how much magic experience it gives.
-        for (enchantment in SMPRPG.getService(EnchantmentService::class.java).getCustomEnchantments(event.enchantsToAdd))
-            exp += enchantment.getMagicExperience()
+        var exp = 100
+        val customEnchant = SMPRPG.getService(EnchantmentService::class.java).getEnchantment(event.enchant)!!
+        customEnchant.level = event.level
+        exp += customEnchant.magicExperience
 
         // Magic multiplier if the item has a power rating
         var multiplier = 1.0
@@ -135,7 +135,7 @@ class MagicExperienceListener : Listener {
         if (blueprint is IAttributeItem)
             multiplier += blueprint.getPowerRating() / 20.0
 
-        val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(event.enchanter)
+        val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(event.player)
         player.magicSkill.addExperience((exp * multiplier).toInt(), ExperienceSource.ENCHANT)
     }
 

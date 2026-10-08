@@ -14,12 +14,16 @@ import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.entity.base.LeveledEntity;
 import xyz.devvydont.smprpg.entity.bosses.BlazeBoss;
 import xyz.devvydont.smprpg.entity.creatures.*;
+import xyz.devvydont.smprpg.entity.farming.*;
 import xyz.devvydont.smprpg.entity.fishing.*;
 import xyz.devvydont.smprpg.entity.npc.ReforgeNPC;
+import xyz.devvydont.smprpg.entity.slayer.illager.*;
+import xyz.devvydont.smprpg.entity.slayer.shambling.*;
 import xyz.devvydont.smprpg.entity.spawning.EntitySpawnCondition;
 import xyz.devvydont.smprpg.entity.spawning.EntitySpawner;
 import xyz.devvydont.smprpg.gui.base.IMenuDisplayable;
 import xyz.devvydont.smprpg.services.EntityService;
+import xyz.devvydont.smprpg.util.persistence.KeyStore;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
@@ -29,10 +33,26 @@ public enum CustomEntityType implements IMenuDisplayable {
 
     // Mobs that spawn in castles.
     CASTLE_DWELLER(EntityType.ZOMBIE_VILLAGER, "Castle Dweller",
-            15, 400, 40, CastleDweller::new),
+            15, 400, 40,
+            CastleDweller::new,
+            EntitySpawnCondition.ComplexSpawnCondition
+                    .withConditions(
+                            EntitySpawnCondition.StructureSpawnCondition
+                                    .structure(KeyStore.CASTLE_DWELLING)
+                                    .withChance(1f)  // All zombie villagers spawn as dwellers in the structure
+                    )
+            ),
 
     UNDEAD_ARCHER(EntityType.SKELETON, "Undead Archer",
-            15, 350, 25, UndeadArcher::new),
+            15, 350, 25,
+            UndeadArcher::new,
+            EntitySpawnCondition.ComplexSpawnCondition
+                    .withConditions(
+                            EntitySpawnCondition.StructureSpawnCondition
+                                    .structure(KeyStore.CASTLE_DWELLING)
+                                    .withChance(1f)  // All skeletons spawn as undead archers in the structure
+                    )
+            ),
 
     // Mobs that spawn in woodland mansions.
     MANSION_SPIDER(EntityType.SPIDER, "Mansion Spider",
@@ -40,7 +60,7 @@ public enum CustomEntityType implements IMenuDisplayable {
             MansionSpider::new,
             EntitySpawnCondition.StructureSpawnCondition
                     .structure(Structure.MANSION)
-                    .withChance(.20f)),
+                    .withChance(1.00f)),
 
     WOODLAND_EXILE(EntityType.PILLAGER, "Woodland Exile",
             25, 1_100, 120,
@@ -84,6 +104,16 @@ public enum CustomEntityType implements IMenuDisplayable {
     INFERNAL_PHOENIX(EntityType.BLAZE, "Infernal Phoenix",
             40, 750_000, 600, BlazeBoss::new),
 
+    FLYING_COW(EntityType.COW, "Flying Cow",
+            25, 1_000, 10,
+            FlyingCow::new,
+            EntitySpawnCondition.DimensionSpawnCondition.dimension(KeyStore.DIM_AETHER).withChance(1.0f)),
+
+    ZEPHYR(EntityType.GHAST, "Zephyr",
+            25, 1_500, 10,
+            Zephyr::new,
+            EntitySpawnCondition.DimensionSpawnCondition.dimension(KeyStore.DIM_AETHER).withChance(1.0f)),
+
     // Wither skeletons that spawn on the end island
     WITHERED_SERAPH(EntityType.WITHER_SKELETON, "Withered Seraph",
             45, 6_000, 550,
@@ -105,9 +135,13 @@ public enum CustomEntityType implements IMenuDisplayable {
     // Water fishing creatures.
     MINNOW(EntityType.SILVERFISH, "Minnow",
             5, 500, 10, Minnow::new),
+    CUTTLEFISH(EntityType.SQUID, "Cuttlefish",
+            5, 500, 10, Cuttlefish::new),
+    DROWNLING(EntityType.DROWNED, "Drownling",
+            5, 500, 10, Drownling::new),
     SNAPPING_TURTLE(EntityType.TURTLE, "Snapping Turtle",
             10, 1_250, 25, SnappingTurtle::new),
-    SHARK(EntityType.DOLPHIN, "Shark",
+    SHARK(EntityType.AXOLOTL, "Shark",
             15, 2_250, 45, Shark::new),
     SEA_HAG(EntityType.WITCH, "Sea Hag",
             20, 3_000, 65, SeaHag::new),
@@ -159,11 +193,56 @@ public enum CustomEntityType implements IMenuDisplayable {
     NIDHOGG(EntityType.PHANTOM, "Níðhöggr",
             100, 1_000_000_000, 90_000, Nidhogg::new),
 
+    // Crop Critters
+    MITE(EntityType.SPIDER, "Mite",
+            20, 2_500, 50, Mite::new),
+
+    EARTHWORM(EntityType.SILVERFISH, "Earthworm",
+            20, 2_500, 50, Earthworm::new),
+
+    OGRELING(EntityType.ZOMBIE, "Ogreling",
+            20, 2_500, 50, Ogreling::new),
+
+    CARROT_CANNIBAL(EntityType.RABBIT, "Carrot Cannibal",
+            20, 2_500, 50, CarrotCannibal::new),
+
+    MELON_MASHER(EntityType.ENDERMITE, "Melon Masher",
+            20, 2_500, 50, MelonMasher::new),
+
+    // Test Monsters
     TEST_ZOMBIE(EntityType.ZOMBIE, "Test Zombie",
             5, 120, 15,
             TestZombie::new),
 
     TEST_SKELETON(EntityType.SKELETON, "Test Skeleton", 5, 100, 10),
+
+    // SLAYER
+
+    // SHAMBLING ABOMINATION
+    SHAMBLING_ABOMINATION_1(EntityType.ZOMBIE, "Shambling Abomination", 10, 1_000, 10, ShamblingAbominationBasic::new),
+    SHAMBLING_ABOMINATION_2(EntityType.ZOMBIE, "Shambling Abomination", 20, 25_000, 50, ShamblingAbominationIntermediate::new),
+    SHAMBLING_ABOMINATION_3(EntityType.ZOMBIE, "Shambling Abomination", 30, 300_000, 150, ShamblingAbominationAdvanced::new),
+    SHAMBLING_ABOMINATION_4(EntityType.ZOMBIE, "Shambling Abomination", 40, 1_500_000, 500, ShamblingAbominationExpert::new),
+    SHAMBLING_ABOMINATION_5(EntityType.ZOMBIE, "Shambling Abomination", 50, 10_000_000, 1_500, ShamblingAbominationBrutal::new),
+
+    SINFUL_SHAMBLER(EntityType.ZOMBIE, "Sinful Shambler", 25, 20_000, 50, SinfulShambler::new),
+    REMORSELESS_ABOMINATION(EntityType.ZOMBIE, "Remorseless Abomination", 32, 250_000, 250, RemorselessAbomination::new),
+    WRETCHED_ABOMINATION(EntityType.ZOMBIE, "Wretched Abomination", 36, 500_000, 400, WretchedAbomination::new),
+    SHAMBLING_MALFEASANT(EntityType.ZOMBIE, "Shambling Malfeasant", 42, 1_000_000, 800, ShamblingMalfeasant::new),
+    REMORSEFUL_ABOMINATION(EntityType.ZOMBIE, "Remorseful Abomination", 48, 2_400_000, 1_200, RemorsefulAbomination::new),
+
+    // ILLAGER WARLOCK
+    ILLAGER_WARLOCK_1(EntityType.EVOKER, "Illager Warlock", 20, 10_000, 100, IllagerWarlockBasic::new),
+    ILLAGER_WARLOCK_2(EntityType.EVOKER, "Illager Warlock", 30, 100_000, 200, IllagerWarlockIntermediate::new),
+    ILLAGER_WARLOCK_3(EntityType.EVOKER, "Illager Warlock", 40, 600_000, 500, IllagerWarlockAdvanced::new),
+    ILLAGER_WARLOCK_4(EntityType.EVOKER, "Illager Warlock", 50, 2_000_000, 1_000, IllagerWarlockExpert::new),
+    ILLAGER_WARLOCK_5(EntityType.EVOKER, "Illager Warlock", 60, 7_500_000, 2_000, IllagerWarlockBrutal::new),
+
+    ILLAGER_POPPET(EntityType.PILLAGER, "Illager Poppet", 35, 250_000, 0, IllagerPoppet::new),
+    RAVAGER_FAMILIAR(EntityType.RAVAGER, "Ravager Familiar", 42, 250_000, 350, RavagerFamiliar::new),
+    HEXED_VEX(EntityType.VEX, "Hexed Vex", 46, 250_000, 400, HexedVex::new),
+    WARLOCK_APPRENTICE(EntityType.EVOKER, "Warlock Apprentice", 52, 250_000, 1250, WarlockApprentice::new),
+    WARLOCK_SHADOW(EntityType.EVOKER, "Warlock Shadow", 58, 250_000, 1500, WarlockShadow::new),
 
     // NPCs
     REFORGE_NPC(EntityType.VILLAGER, "Tool Reforger", ReforgeNPC::new),
@@ -320,6 +399,8 @@ public enum CustomEntityType implements IMenuDisplayable {
             case SNAPPING_TURTLE -> Material.TURTLE_SCUTE;
             case SEA_BEAR -> Material.SALMON;
             case MINNOW -> Material.COD;
+            case CUTTLEFISH -> Material.INK_SAC;
+            case DROWNLING -> Material.NAUTILUS_SHELL;
             case PROTOCOL_SENTINEL -> Material.IRON_INGOT;
             case PHANTOM_THIEF -> Material.STRAY_SPAWN_EGG;
             case CINDERLING -> Material.MAGMA_CREAM;

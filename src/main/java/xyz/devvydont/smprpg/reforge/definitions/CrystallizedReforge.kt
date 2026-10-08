@@ -58,7 +58,7 @@ class CrystallizedReforge(type: ReforgeType) : ReforgeBase(type), Listener {
         )
 
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             ScalarAttributeEntry(AttributeWrapper.STRENGTH, SpicyReforge.Companion.getDamageBonus(rarity) + .2),
             AttributeEntry.additive(
                 AttributeWrapper.CRITICAL_DAMAGE,
@@ -69,9 +69,7 @@ class CrystallizedReforge(type: ReforgeType) : ReforgeBase(type), Listener {
         )
     }
 
-    override fun getPowerRating(): Int {
-        return 5
-    }
+    override val powerRating: Int get() = 5
 
     @EventHandler
     @Suppress("unused")

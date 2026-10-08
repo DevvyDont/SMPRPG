@@ -1,0 +1,60 @@
+type: enchanting
+enchantment: treasure_hunter
+levels:
+  '1':
+    power: 10
+    ingredients:
+    - item: smprpg:common_fish_essence
+      amount: 16
+    - item: minecraft:gold_ingot
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 27
+    ingredients:
+    - item: smprpg:uncommon_fish_essence
+      amount: 16
+    - item: minecraft:gold_ingot
+      amount: 32
+    - item: minecraft:nautilus_shell
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 45
+    ingredients:
+    - item: smprpg:rare_fish_essence
+      amount: 16
+    - item: smprpg:enchanted_gold
+      amount: 4
+    - item: smprpg:caviar
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 62
+    ingredients:
+    - item: smprpg:epic_fish_essence
+      amount: 16
+    - item: smprpg:enchanted_gold
+      amount: 8
+    - item: smprpg:premium_nautilus_shell
+      amount: 4
+    - item: smprpg:caviar
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:legendary_fish_essence
+      amount: 8
+    - item: smprpg:enchanted_gold_block
+      amount: 4
+    - item: minecraft:heart_of_the_sea
+      amount: 2
+    - item: smprpg:heart_of_the_void
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 16

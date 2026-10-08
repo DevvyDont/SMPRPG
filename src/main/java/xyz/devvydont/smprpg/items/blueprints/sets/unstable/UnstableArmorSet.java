@@ -37,9 +37,11 @@ public abstract class UnstableArmorSet extends CustomAttributeItem implements IT
 
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
+        // Defense randomizes around a per-piece center with roughly +/-30% variance.
+        int defenseCenter = getDefenseCenter();
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, (int)(randomInt(-100, 500) * getStatMultiplier())),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, (int)(randomInt(-100, 500) * getStatMultiplier())),
+                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, randomInt((int)(defenseCenter * .7), (int)(defenseCenter * 1.3))),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, randomInt(-50, 50)),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, randomFloat(-.1f, .75f) * getStatMultiplier()),
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, randomFloat(-.2f, .3f) * getStatMultiplier())
         );
@@ -51,6 +53,9 @@ public abstract class UnstableArmorSet extends CustomAttributeItem implements IT
     }
 
     public abstract double getStatMultiplier();
+
+    // Per-piece average defense value that the randomized defense centers around.
+    public abstract int getDefenseCenter();
 
     @Override
     public List<Component> getFooter(ItemStack item) {

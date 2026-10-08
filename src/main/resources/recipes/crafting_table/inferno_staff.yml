@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- " ib"
+- " bb"
+- "b  "
+ingredients:
+  i: smprpg:inferno_remnant
+  b: smprpg:enchanted_blaze_rod
+result:
+  item: smprpg:inferno_staff
+  amount: 1
+unlocked_by:
+- smprpg:inferno_remnant

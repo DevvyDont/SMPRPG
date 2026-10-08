@@ -20,11 +20,12 @@ import xyz.devvydont.smprpg.reforge.ReforgeBase
 import xyz.devvydont.smprpg.reforge.ReforgeType
 import xyz.devvydont.smprpg.services.EntityService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.particles.ParticleUtil
 
 
 class SirenicReforge(type: ReforgeType) : ReforgeBase(type), Listener {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 30.0),
             AttributeEntry.additive(
                 AttributeWrapper.FISHING_CREATURE_CHANCE,
@@ -56,7 +57,7 @@ class SirenicReforge(type: ReforgeType) : ReforgeBase(type), Listener {
             ),
             ComponentUtils.merge(
                 ComponentUtils.create("have a "),
-                ComponentUtils.create(DODGE_CHANCE.toString() + "%", NamedTextColor.GREEN),
+                ComponentUtils.create("$DODGE_CHANCE%", NamedTextColor.GREEN),
                 ComponentUtils.create(" chance to dodge the attack!")
             ),
             ComponentUtils.create("Apply to multiple pieces", NamedTextColor.DARK_GRAY),
@@ -68,9 +69,7 @@ class SirenicReforge(type: ReforgeType) : ReforgeBase(type), Listener {
      *
      * @return
      */
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 
     /**
      * When an entity receives damage, work out how many stacks of the reforge they have. If the attacker is a sea
@@ -115,7 +114,7 @@ class SirenicReforge(type: ReforgeType) : ReforgeBase(type), Listener {
         event.isCancelled = true
         entity.noDamageTicks = 20
         event.getEntity().world.playSound(event.getEntity().location, Sound.ENTITY_BREEZE_DEATH, 1f, 1.5f)
-        ParticleBuilder(Particle.FLASH)
+        ParticleUtil.withDefaultData(ParticleBuilder(Particle.FLASH))
             .location(event.getEntity().location.add(0.0, 1.0, 0.0))
             .spawn()
     }

@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- cdc
+- djd
+- cdc
+ingredients:
+  c: smprpg:enchanted_prismarine_crystal
+  d: smprpg:enchanted_diamond
+  j: smprpg:jupiters_artifact
+result:
+  item: smprpg:iridescent_lens
+  amount: 1
+unlocked_by:
+- smprpg:jupiter_crystal

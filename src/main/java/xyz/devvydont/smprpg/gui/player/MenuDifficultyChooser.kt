@@ -237,11 +237,12 @@ class MenuDifficultyChooser : MenuBase {
             )
             ProfileDifficulty.HARD -> listOf(
                 ComponentUtils.create("* Permanent +100 Luck (Drop rates)", NamedTextColor.GREEN),
-                ComponentUtils.create("* +50% Vanilla Experience from Orbs", NamedTextColor.GREEN),
                 ComponentUtils.create("* x2 Incoming Damage", NamedTextColor.RED),
-                ComponentUtils.create("* -50% Base Stats", NamedTextColor.RED),
-                ComponentUtils.create("* -50% Stats from Skills", NamedTextColor.RED),
-                ComponentUtils.create("* -25% Skill Experience", NamedTextColor.RED)
+                ComponentUtils.create("* -50% (Combat) Base Stats", NamedTextColor.RED),
+                ComponentUtils.create("* -50% (Combat) Stats from Skills", NamedTextColor.RED),
+                ComponentUtils.create("* -25% Skill Experience", NamedTextColor.RED),
+                ComponentUtils.create("* Effects of Shrouded are decreased", NamedTextColor.RED),
+                ComponentUtils.create("* Death Certificates cannot be converted into compasses", NamedTextColor.RED),
             )
             else -> listOf()
         }

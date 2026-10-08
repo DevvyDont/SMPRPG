@@ -14,7 +14,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class HeftyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AdditiveAttributeEntry(AttributeWrapper.KNOCKBACK_RESISTANCE, getKnockbackResist(rarity).toDouble()),
             AdditiveAttributeEntry(
                 AttributeWrapper.EXPLOSION_KNOCKBACK_RESISTANCE,
@@ -33,9 +33,7 @@ class HeftyReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("at the cost of general speed")
         )
 
-    override fun getPowerRating(): Int {
-        return 2
-    }
+    override val powerRating: Int get() = 2
 
     companion object {
         fun getKnockbackResist(rarity: ItemRarity): Float {

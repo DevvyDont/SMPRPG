@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:salmon"
+  - "smprpg:tomato_sauce"
+  - "smprpg:onion"
+time: 200
+result: "smprpg:fish_stew"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

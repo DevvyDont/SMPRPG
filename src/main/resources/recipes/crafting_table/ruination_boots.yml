@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mbm
+- m m
+ingredients:
+  b: smprpg:holomoku_boots
+  m: smprpg:tridentite
+result:
+  item: smprpg:ruination_boots
+  amount: 1
+unlocked_by:
+- smprpg:raw_tridentite_chunk
+upgrade: "b"

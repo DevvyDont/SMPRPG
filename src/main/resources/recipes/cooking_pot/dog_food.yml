@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:rotten_flesh"
+  - "minecraft:bone_meal"
+  - "minecraft:beef"
+  - "smprpg:rice"
+time: 200
+result: "smprpg:dog_food"
+skill_xp:
+  farming: 50

@@ -16,21 +16,6 @@
         },
         "cases": [
             {
-                "when": "smprpg:iron_rod",
-                "model": {
-                    "type": "minecraft:condition",
-                    "on_false": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/iron_rod"
-                    },
-                    "on_true": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/iron_rod_cast"
-                    },
-                    "property": "minecraft:fishing_rod/cast"
-                }
-            },
-            {
                 "when": "smprpg:gold_rod",
                 "model": {
                     "type": "minecraft:condition",
@@ -41,36 +26,6 @@
                     "on_true": {
                         "type": "minecraft:model",
                         "model": "tools:item/gold_rod_cast"
-                    },
-                    "property": "minecraft:fishing_rod/cast"
-                }
-            },
-            {
-                "when": "smprpg:diamond_rod",
-                "model": {
-                    "type": "minecraft:condition",
-                    "on_false": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/diamond_rod"
-                    },
-                    "on_true": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/diamond_rod_cast"
-                    },
-                    "property": "minecraft:fishing_rod/cast"
-                }
-            },
-            {
-                "when": "smprpg:prismarine_rod",
-                "model": {
-                    "type": "minecraft:condition",
-                    "on_false": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/prismarine_rod"
-                    },
-                    "on_true": {
-                        "type": "minecraft:model",
-                        "model": "tools:item/prismarine_rod_cast"
                     },
                     "property": "minecraft:fishing_rod/cast"
                 }

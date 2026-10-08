@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:tin_ingot
+- item: smprpg:tin_block
+  amount: 9
+- item: smprpg:enchanted_tin
+  amount: 9
+- item: smprpg:enchanted_tin_block
+  amount: 9
+- item: smprpg:tin_singularity
+  amount: 9

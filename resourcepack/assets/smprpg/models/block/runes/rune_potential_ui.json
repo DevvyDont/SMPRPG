@@ -1,0 +1,6 @@
+{
+  "parent": "smprpg:block/runes/rune_emissive_ui",
+  "textures": {
+    "rune": "smprpg:block/runes/rune_potential"
+  }
+}

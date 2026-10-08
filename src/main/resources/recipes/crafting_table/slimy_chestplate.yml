@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:premium_slime
+result:
+  item: smprpg:slimy_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:slime_ball

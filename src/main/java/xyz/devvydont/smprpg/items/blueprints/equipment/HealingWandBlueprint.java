@@ -1,13 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.equipment;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.ability.Ability;
 import xyz.devvydont.smprpg.ability.AbilityActivationMethod;
 import xyz.devvydont.smprpg.ability.AbilityCost;
@@ -15,14 +9,13 @@ import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.IAbilityCaster;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.Collection;
 import java.util.List;
 
-public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilityCaster, ICraftable {
+public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilityCaster {
 
     public HealingWandBlueprint(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -112,49 +105,5 @@ public class HealingWandBlueprint extends CustomItemBlueprint implements IAbilit
     @Override
     public long getCooldown(ItemStack item) {
         return TickTime.seconds(3);
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-
-        if (this.getCustomItemType() == CustomItemType.HEALING_WAND) {
-            var recipe = new ShapedRecipe(getRecipeKey(), generate());
-            recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-            recipe.shape(
-                    " m ",
-                    " d ",
-                    " d "
-            );
-            recipe.setIngredient('d', ItemService.generate(Material.DIAMOND));
-            recipe.setIngredient('m', ItemService.generate(Material.MELON));
-            return recipe;
-        }
-
-        var recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        recipe.shape(
-                "mmm",
-                "mrm",
-                "mmm"
-        );
-        recipe.setIngredient('m', ItemService.generate(getUpgradeMaterial()));
-        recipe.setIngredient('r', ItemService.generate(getPredecessor()));
-        return recipe;
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     *
-     * @return
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(Material.MELON_SLICE));
     }
 }

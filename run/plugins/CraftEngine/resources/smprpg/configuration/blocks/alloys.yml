@@ -1,0 +1,146 @@
+items:
+  smprpg:bronze_block:
+    data:
+      item-name: <!i><lang:item.smprpg.bronze_block>
+    model: smprpg:block/overworld/bronze_block
+    behavior:
+      type: block_item
+      block: smprpg:bronze_block
+  smprpg:steel_block:
+    data:
+      item-name: <!i><lang:item.smprpg.steel_block>
+    model: smprpg:block/overworld/steel_block
+    behavior:
+      type: block_item
+      block: smprpg:steel_block
+  smprpg:rose_gold_block:
+    data:
+      item-name: <!i><lang:item.smprpg.rose_gold_block>
+    model: smprpg:block/overworld/rose_gold_block
+    behavior:
+      type: block_item
+      block: smprpg:rose_gold_block
+  smprpg:dragonsteel_block:
+    data:
+      item-name: <!i><lang:item.smprpg.dragonsteel_block>
+    model: smprpg:block/end/dragonsteel_block
+    behavior:
+      type: block_item
+      block: smprpg:dragonsteel_block
+  smprpg:bronze_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.bronze_ingot>
+      pdc:
+        smprpg:item-type: bronze_ingot
+        smprpg:sell-value: 50
+    model: smprpg:item/materials/bronze_ingot
+  smprpg:steel_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.steel_ingot>
+      pdc:
+        smprpg:item-type: steel_ingot
+        smprpg:sell-value: 50
+    model: smprpg:item/materials/steel_ingot
+  smprpg:rose_gold_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.rose_gold_ingot>
+      pdc:
+        smprpg:item-type: rose_gold_ingot
+        smprpg:sell-value: 350
+    model: smprpg:item/materials/rose_gold_ingot
+  smprpg:dragonsteel_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.dragonsteel_ingot>
+      pdc:
+        smprpg:item-type: dragonsteel_ingot
+        smprpg:sell-value: 200000
+    model: smprpg:item/materials/dragonsteel_ingot
+
+
+blocks:
+  smprpg:bronze_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/bronze_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_3
+        - smprpg:data/beacon_usable
+      overrides:
+        template:
+          - smprpg:sound/copper
+      merges:
+        tags: [ "minecraft:mineable/pickaxe", "smprpg:custom_instrument" ]
+    loot:
+      template:
+        - smprpg:loot_table/self
+
+  smprpg:rose_gold_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/rose_gold_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_3
+        - smprpg:data/beacon_usable
+    loot:
+      template:
+        - smprpg:loot_table/self
+
+  smprpg:steel_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/steel_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_4
+        - smprpg:data/beacon_usable
+      overrides:
+        template:
+          - smprpg:sound/iron
+      merges:
+        tags: ["minecraft:mineable/pickaxe", "smprpg:custom_instrument"]
+    loot:
+      template:
+        - smprpg:loot_table/self
+
+  smprpg:dragonsteel_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/end/dragonsteel_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_8
+        - smprpg:data/beacon_usable
+        - smprpg:sound/anvil
+    loot:
+      template:
+        - smprpg:loot_table/self
+
+recipes:
+  smprpg:steel_from_blasting_iron:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: steel
+    time: 800
+    ingredient: minecraft:iron_ingot
+    result:
+      id: smprpg:steel_ingot
+      count: 1

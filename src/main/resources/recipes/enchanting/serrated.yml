@@ -1,0 +1,74 @@
+type: enchanting
+enchantment: serrated
+levels:
+  '1':
+    power: 11
+    ingredients:
+    - item: minecraft:flint
+      amount: 16
+    - item: minecraft:iron_ingot
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 23
+    ingredients:
+    - item: minecraft:flint
+      amount: 32
+    - item: minecraft:iron_ingot
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 34
+    ingredients:
+    - item: smprpg:compressed_flint
+      amount: 16
+    - item: minecraft:cactus
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 46
+    ingredients:
+    - item: smprpg:compressed_flint
+      amount: 32
+    - item: smprpg:enchanted_iron
+      amount: 4
+    - item: minecraft:cactus
+      amount: 64
+    - item: minecraft:lapis_block
+      amount: 8
+  '5':
+    power: 57
+    ingredients:
+    - item: smprpg:enchanted_flint
+      amount: 8
+    - item: smprpg:enchanted_iron
+      amount: 8
+    - item: smprpg:steel_ingot
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 69
+    ingredients:
+    - item: smprpg:enchanted_flint
+      amount: 16
+    - item: smprpg:enchanted_iron
+      amount: 16
+    - item: smprpg:steel_block
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 8
+  '7':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_flint
+      amount: 32
+    - item: smprpg:enchanted_iron
+      amount: 32
+    - item: smprpg:enchanted_steel
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 16

@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ffs
+- 'fs '
+- 's  '
+ingredients:
+  s: minecraft:stick
+  f: smprpg:premium_necrotic_flesh
+result:
+  item: smprpg:abominable_cleaver
+  amount: 1
+unlocked_by:
+- smprpg:necrotic_flesh

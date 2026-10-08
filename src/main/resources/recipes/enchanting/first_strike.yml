@@ -1,0 +1,52 @@
+type: enchanting
+enchantment: first_strike
+levels:
+  '1':
+    power: 2
+    ingredients:
+    - item: minecraft:flint
+      amount: 32
+    - item: minecraft:feather
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 25
+    ingredients:
+    - item: minecraft:flint
+      amount: 64
+    - item: smprpg:premium_feather
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 43
+    ingredients:
+    - item: smprpg:compressed_flint
+      amount: 16
+    - item: smprpg:premium_feather
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 61
+    ingredients:
+    - item: smprpg:enchanted_flint
+      amount: 8
+    - item: smprpg:enchanted_feather
+      amount: 16
+    - item: smprpg:onyx
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_flint
+      amount: 16
+    - item: smprpg:enchanted_feather
+      amount: 32
+    - item: smprpg:onyx
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 16

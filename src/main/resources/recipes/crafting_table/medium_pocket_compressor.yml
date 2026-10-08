@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- rrr
+- rbr
+- rrr
+ingredients:
+  r: minecraft:redstone_block
+  b: smprpg:small_pocket_compressor
+result:
+  item: smprpg:medium_pocket_compressor
+  amount: 1
+unlocked_by:
+- minecraft:redstone
+upgrade: "b"

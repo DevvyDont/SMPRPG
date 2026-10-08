@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Stray;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -26,6 +27,10 @@ public class PhantomThief extends CustomEntityInstance<Stray> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.HUMANOID);
+
         super.setup();
         _entity.getEquipment().setItemInMainHand(ItemService.generate(Material.BOW));
     }
@@ -40,7 +45,9 @@ public class PhantomThief extends CustomEntityInstance<Stray> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.SHADOW_BREW), 15, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PHANTOM_CURRY), 4, this),
 
-                new ChancedItemDrop(ItemService.generate(Material.BONE), 2, this)
+                new ChancedItemDrop(ItemService.generate(Material.BONE), 2, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_BONE), 50, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_BONE), 650, this)
         );
     }
 }

@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mcm
+- mmm
+- mmm
+ingredients:
+  c: smprpg:minnow_chestplate
+  m: smprpg:holomoku_crest
+result:
+  item: smprpg:holomoku_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:holomoku_crest
+upgrade: "c"

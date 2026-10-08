@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/coal"
+        },
+        "cases": [
+            {
+                "when": "smprpg:onyx",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/onyx"
+                }
+            }
+        ]
+    }
+}

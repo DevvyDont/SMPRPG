@@ -13,7 +13,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class SaltyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.additive(AttributeWrapper.FISHING_RATING, (-20 + rarity.ordinal * 5).toDouble()),
             AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, .4 + rarity.ordinal * .2),
             AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, .2 + rarity.ordinal * .1),
@@ -42,7 +42,5 @@ class SaltyReforge(type: ReforgeType) : ReforgeBase(type) {
      *
      * @return
      */
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 }

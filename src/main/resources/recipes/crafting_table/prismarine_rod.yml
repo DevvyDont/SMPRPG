@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:premium_string
+  t: smprpg:mithril_rod
+  m: smprpg:enchanted_prismarine_crystal
+result:
+  item: smprpg:prismarine_rod
+  amount: 1
+unlocked_by:
+- smprpg:enchanted_prismarine_crystal
+upgrade: "t"

@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "smprpg:block/runes/rune_memorization"
+        },
+        "cases": [
+			{
+                "when": "smprpg:rune_memorization_ui",
+                "model": {
+                    "type": "model",
+                    "model": "smprpg:block/runes/rune_memorization_ui"
+                }
+            }
+        ]
+    }
+}

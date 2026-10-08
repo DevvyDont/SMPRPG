@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: minecraft:string
+  t: minecraft:fishing_rod
+  m: minecraft:iron_ingot
+result:
+  item: smprpg:iron_rod
+  amount: 1
+unlocked_by:
+- minecraft:iron_ingot

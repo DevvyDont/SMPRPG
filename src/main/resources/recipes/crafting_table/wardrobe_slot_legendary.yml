@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- sns
+- ntn
+- sns
+ingredients:
+  s: minecraft:netherite_ingot
+  t: smprpg:wardrobe_slot_epic
+  n: minecraft:nether_star
+result:
+  item: smprpg:wardrobe_slot_legendary
+  amount: 1
+unlocked_by:
+- smprpg:wardrobe_slot_epic
+upgrade: "t"

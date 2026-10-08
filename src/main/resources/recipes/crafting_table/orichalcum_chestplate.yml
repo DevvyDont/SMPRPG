@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:orichalcum_ingot
+result:
+  item: smprpg:orichalcum_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:orichalcum_ingot

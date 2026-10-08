@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:adamantium_ingot
+- item: smprpg:adamantium_block
+  amount: 9

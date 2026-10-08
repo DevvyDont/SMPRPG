@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:enchanted_membrane
+result:
+  item: smprpg:evori_dreamwings
+  amount: 1
+unlocked_by:
+- minecraft:phantom_membrane

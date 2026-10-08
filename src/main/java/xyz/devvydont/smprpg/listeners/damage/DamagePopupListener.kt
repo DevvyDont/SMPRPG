@@ -1,60 +1,31 @@
 package xyz.devvydont.smprpg.listeners.damage
 
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.TextColor
-import org.bukkit.Color
-import org.bukkit.Location
-import org.bukkit.entity.Display
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.TextDisplay
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityPotionEffectEvent
 import org.bukkit.event.entity.EntityRegainHealthEvent
 import org.bukkit.potion.PotionEffectType
-import org.bukkit.scheduler.BukkitRunnable
 import xyz.devvydont.smprpg.SMPRPG
-import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent
 import xyz.devvydont.smprpg.events.damage.AbsorptionDamageDealtEvent
+import xyz.devvydont.smprpg.listeners.damage.popup.DamagePopup
+import xyz.devvydont.smprpg.listeners.damage.popup.PopupStyleResolver
 import xyz.devvydont.smprpg.services.EntityService
-import xyz.devvydont.smprpg.util.formatting.ComponentDecorator
-import xyz.devvydont.smprpg.util.formatting.Symbols
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
-import xyz.devvydont.smprpg.util.time.TickTime
-import java.text.DecimalFormat
-import java.util.function.Consumer
-import kotlin.math.max
-import kotlin.math.roundToLong
 
 /**
- * This listener is in charge of the "damage popups" you see in the world when entities take damage.
- * All these listeners are responsible for listening to any relevant events to spawn in damage popups.
+ * Listens to every health-related event and delegates the "damage popup" you see floating in the
+ * world to the popup subsystem. This class only gathers context and hands it off — the styling
+ * lives in [PopupStyleResolver] and the spawning/animation/merging lives in [DamagePopup].
  */
 class DamagePopupListener : ToggleableListener() {
-    /**
-     * The sole purpose of the popup type is to assign behavior to specific popups.
-     */
-    enum class PopupType(val decorator: ComponentDecorator) {
-        DAMAGE_ARMOR(ComponentDecorator.color(NamedTextColor.GOLD)),
-        GENERIC(ComponentDecorator.color(NamedTextColor.GRAY)),
-        DAMAGE(ComponentDecorator.color(TextColor.color(180, 100, 100))),
-        CRITICAL(
-            ComponentDecorator.symbolizedGradient(
-                Symbols.POWER,
-                TextColor.color(255, 0, 60),
-                TextColor.color(255, 138, 0)
-            )
-        ),
-        GAIN_ARMOR(ComponentDecorator.color(NamedTextColor.YELLOW)),
-        HEAL(ComponentDecorator.color(NamedTextColor.GREEN))
-    }
 
     /**
-     * Hook into the custom damage event. We need to use this one to determine if it was a critical or not.
-     * It must be noted however that this event will not hook into self-inflicted damage, such as fall damage etc.
-     * This is explicitly entity vs. entity damage.
+     * Entity-vs-entity damage. This is the only path that knows about criticals and their tier, and
+     * it is what makes magic/fire/poison/ability crits render distinctly instead of flat red.
+     * Self-inflicted damage (fall, drowning, etc.) is handled by [onEntityTakeGenericDamage].
      * @param event The [CustomEntityDamageByEntityEvent] that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -68,21 +39,24 @@ class DamagePopupListener : ToggleableListener() {
         // Only worry about living entities.
         if (event.damaged !is LivingEntity)
             return
-        val living = event.damaged as LivingEntity
+        val living = event.damaged
 
         if (living.maximumNoDamageTicks > 0 && living.noDamageTicks * 2 > living.maximumNoDamageTicks)
             return
 
-        // First, determine the type. We only care about two here, with that being damage and critical.
-        val type = if (event.isCritical) PopupType.CRITICAL else PopupType.DAMAGE
-
-        // We can spawn the popup. The final damage will essentially be what displays.
-        spawnTextPopup(living.eyeLocation, event.finalDamage, type)
+        val style = PopupStyleResolver.resolveDamage(
+            event.originalEvent.damageSource.damageType,
+            event.vanillaCause,
+            event.isCritical,
+            event.criticalTier
+        )
+        DamagePopup.spawn(living, event.finalDamage, style)
     }
 
     /**
-     * Hook into damage events only where the entity wasn't involved with another entity. This will include things such
-     * as drowning, fall damage, cactus, etc. This paired with the handler above should handle all cases.
+     * Damage that did not involve another entity (drowning, fall damage, cactus, poison, fire, etc).
+     * The resolver buckets these by cause so poison ticks, fire, and fall damage each read
+     * distinctly instead of all being generic gray.
      * @param event The [EntityDamageEvent] that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -90,32 +64,32 @@ class DamagePopupListener : ToggleableListener() {
     private fun onEntityTakeGenericDamage(event: EntityDamageEvent) {
 
         // Only worry about living entities.
-        if (event.getEntity() !is LivingEntity)
+        if (event.entity !is LivingEntity)
             return
-        val living = event.getEntity() as LivingEntity
+        val living = event.entity as LivingEntity
 
-        // Analyze the cause. This needs to be harm that is not from an entity.
+        // Entity-caused damage is handled by onEntityTakeDamage.
         if (event.damageSource.causingEntity != null)
             return
 
-        // Should be good to spawn a popup!
-        spawnTextPopup(living.eyeLocation, event.getFinalDamage(), PopupType.GENERIC)
+        val style = PopupStyleResolver.resolveDamage(event.damageSource.damageType, event.cause, false, 0)
+        DamagePopup.spawn(living, event.finalDamage, style)
     }
 
     /**
-     * Hook into when entities take absorption damage. Our plugin handles absorption in a strange way, by setting the
-     * actual event damage to 0 then subtracting absorption. This means we have to spawn absorption popups differently.
+     * Absorption damage. Our plugin handles absorption by zeroing the event damage and subtracting
+     * from the absorption pool separately, so it surfaces as its own event.
      * @param event The [AbsorptionDamageDealtEvent] event that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
     private fun onEntityTakeAbsorptionDamage(event: AbsorptionDamageDealtEvent) {
-        // This event already handles all the relevant checking. Simply spawn the popup.
-        spawnTextPopup(event.victim.eyeLocation, event.damage, PopupType.DAMAGE_ARMOR)
+        DamagePopup.spawn(event.victim, event.damage, PopupStyleResolver.absorptionLoss())
     }
 
     /**
-     * Let's display popups for when entities heal. This is really simple, when an entity gains health, show it.
+     * Healing. The style is chosen from the regain reason so natural regen and ability lifesteal
+     * read differently.
      * @param event The [EntityRegainHealthEvent] that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -123,80 +97,43 @@ class DamagePopupListener : ToggleableListener() {
     private fun onRegenerate(event: EntityRegainHealthEvent) {
 
         // We only care about living entities.
-        if (event.getEntity() !is LivingEntity)
+        if (event.entity !is LivingEntity)
             return
-        val living = event.getEntity() as LivingEntity
-        spawnTextPopup(living.eyeLocation, event.amount, PopupType.HEAL)
+        val living = event.entity as LivingEntity
+
+        DamagePopup.spawn(living, event.amount, PopupStyleResolver.resolveHeal(event.regainReason))
     }
 
     /**
-     * Let's display a popup when a user gains absorption hearts. Our plugin treats this as a "temporary armor" mechanic,
-     * which scales with their health which contributes to their health pool.
+     * Gaining absorption hearts, which our plugin treats as a "temporary armor" mechanic that scales
+     * with health.
      * @param event The [EntityPotionEffectEvent] event that provides us with relevant context.
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
     private fun onPotionEffectUpdate(event: EntityPotionEffectEvent) {
-        // We are only concerned with the absorption potion effect.
 
-        if (event.newEffect == null || event.newEffect!!.type != PotionEffectType.ABSORPTION)
+        // We are only concerned with the absorption potion effect.
+        val newEffect = event.newEffect
+        if (newEffect == null || newEffect.type != PotionEffectType.ABSORPTION)
             return
 
         // Only worry about living entities. We need information about their max health.
-        if (event.getEntity() !is LivingEntity)
+        if (event.entity !is LivingEntity)
             return
-        val living = event.getEntity() as LivingEntity
+        val living = event.entity as LivingEntity
 
         // Retrieve the wrapper so we can easily extract health information.
         val leveled = SMPRPG.getService(EntityService::class.java).getEntityInstance(living)
 
-        // We need to calculate how much absorption health they gained. This may need to be standardized later...
-        // The idea is that their absorption hearts are equal in health as their normal hearts.
-        val amount = (event.newEffect!!.amplifier + 1.0) * leveled.halfHeartValue * 4
+        // The idea is that their absorption hearts are equal in health to their normal hearts.
+        val amount = (newEffect.amplifier + 1.0) * leveled.halfHeartValue * ABSORPTION_HEARTS_PER_LEVEL
 
-        // Spawn the popup!
-        spawnTextPopup(living.eyeLocation, amount, PopupType.GAIN_ARMOR)
+        DamagePopup.spawn(living, amount, PopupStyleResolver.absorptionGain())
     }
 
     companion object {
-        // Number formatter to make popups prettier.
-        private val NUMBER_FORMATTER = DecimalFormat("#,###,###")
-
-        /**
-         * This is a helper method to spawn a simple text popup that cleans itself up later.
-         * @param location The location to spawn the text popup.
-         * @param amount The 'amount' to display within the popup. It will automatically be formatted.
-         * @param type The popup type. This affects how to display it.
-         */
-        fun spawnTextPopup(location: Location, amount: Double, type: PopupType) {
-            // It's pointless to display nothing...
-            val rounded = amount.roundToLong()
-            if (rounded == 0L)
-                return
-
-            // Format the amount. We want to make sure we are at least displaying 1. We also want to make this more readable.
-            val finalAmount = max(1, rounded).toDouble()
-            val text: String = NUMBER_FORMATTER.format(finalAmount)
-
-            // Retrieve the component based on the popup type.
-            val component = type.decorator.decorate(text)
-
-            // Now actually spawn the text display entity.
-            val spawnLoc = location.add(Math.random() - .5, Math.random() + .3, Math.random() - .5)
-            val display =
-                location.getWorld().spawn(spawnLoc, TextDisplay::class.java, Consumer { e: TextDisplay ->
-                    e.isPersistent = false
-                    e.text(component)
-                    e.billboard = Display.Billboard.CENTER
-                    e.isShadowed = true
-                    e.isSeeThrough = false
-                    e.backgroundColor = Color.fromARGB(0, 0, 0, 0)
-                })
-            object : BukkitRunnable() {
-                override fun run() {
-                    display.remove()
-                }
-            }.runTaskLater(plugin, TickTime.seconds(2))
-        }
+        // How many half-hearts of absorption health each level of the absorption effect grants.
+        private const val ABSORPTION_HEARTS_PER_LEVEL = 4
     }
 }

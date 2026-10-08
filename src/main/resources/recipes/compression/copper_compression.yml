@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:copper_ingot
+- item: minecraft:copper_block
+  amount: 9
+- item: smprpg:enchanted_copper
+  amount: 9
+- item: smprpg:enchanted_copper_block
+  amount: 9
+- item: smprpg:copper_singularity
+  amount: 9

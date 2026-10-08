@@ -7,6 +7,7 @@ import org.bukkit.entity.Enderman;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.EntityGlobals;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
 import xyz.devvydont.smprpg.items.CustomItemType;
@@ -70,5 +71,12 @@ public class LeveledEnderman extends VanillaEntity<Enderman> implements Listener
         }
 
         return drops;
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.ENDER);
+
+        super.setup();
     }
 }

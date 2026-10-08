@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- faf
+- fmf
+- faf
+ingredients:
+  a: smprpg:visceral_amalgamation
+  f: smprpg:necrotic_flesh_singularity
+  m: smprpg:abominable_machete
+result:
+  item: smprpg:abominable_halberd
+  amount: 1
+unlocked_by:
+- smprpg:reviled_viscera
+upgrade: "m"

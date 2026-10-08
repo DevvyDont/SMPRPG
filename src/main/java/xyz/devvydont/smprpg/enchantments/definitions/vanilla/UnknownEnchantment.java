@@ -33,11 +33,6 @@ public class UnknownEnchantment extends VanillaEnchantment {
     }
 
     @Override
-    public int getAnvilCost() {
-        return getVanillaEnchantment().getAnvilCost();
-    }
-
-    @Override
     public int getMaxLevel() {
         return getVanillaEnchantment().getMaxLevel();
     }

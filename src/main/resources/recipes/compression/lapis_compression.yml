@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:lapis_lazuli
+- item: minecraft:lapis_block
+  amount: 9
+- item: smprpg:enchanted_lapis
+  amount: 9
+- item: smprpg:enchanted_lapis_block
+  amount: 9
+- item: smprpg:lapis_singularity
+  amount: 9

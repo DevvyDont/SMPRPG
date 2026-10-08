@@ -1,0 +1,6 @@
+type: smelting
+input: "smprpg:enchanted_string"
+cook: furnace
+time: 6000
+experience: 5.0
+result: "smprpg:scorching_string"

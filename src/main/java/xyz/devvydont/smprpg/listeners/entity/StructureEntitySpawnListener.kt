@@ -13,12 +13,14 @@ import org.bukkit.generator.structure.Structure
 import org.bukkit.scheduler.BukkitRunnable
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
+import xyz.devvydont.smprpg.entity.player.settings.StructureWarningMode
 import xyz.devvydont.smprpg.events.LeveledEntitySpawnEvent
 import xyz.devvydont.smprpg.services.ActionBarService
 import xyz.devvydont.smprpg.services.EntityService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
+import xyz.devvydont.smprpg.util.persistence.KeyStore
 import kotlin.math.max
 
 /**
@@ -38,27 +40,23 @@ class StructureEntitySpawnListener : ToggleableListener() {
         }.runTaskTimerAsynchronously(plugin, 1, (2 * 50).toLong())
     }
 
-    private fun getStructureComponent(player: Player, structure: GeneratedStructure, power: Int): Component {
+    private fun getStructureComponent(structure: GeneratedStructure, power: Int, underleveled: Boolean): Component {
 
         val key: NamespacedKey? = RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE).getKey(structure.structure)
         var name: String? = "???"
         if (key != null)
-            name = MinecraftStringUtils.getTitledString(key.asMinimalString())
+            name = MinecraftStringUtils.getTitledString(key.value())
 
         // Create the base message.
-        var send = ComponentUtils.merge(
+        val send = ComponentUtils.merge(
             ComponentUtils.create("Currently in "),
             ComponentUtils.create("$name ", NamedTextColor.AQUA),
             ComponentUtils.powerLevelPrefix(power)
         )
 
         // If the player is underleveled, add a warning label.
-        val entityService: EntityService = SMPRPG.getService(EntityService::class.java)
-        if (!entityService.isTracking(player))
-            return send
-
-        if (power > entityService.getPlayerInstance(player).getLevel()) send =
-            ComponentUtils.create("WARNING! ", NamedTextColor.RED).append(send)
+        if (underleveled)
+            return ComponentUtils.create("WARNING! ", NamedTextColor.RED).append(send)
 
         return send
     }
@@ -85,11 +83,24 @@ class StructureEntitySpawnListener : ToggleableListener() {
         // Don't do anything if we aren't in a structure
         if (mostDangerousStructure == null || highestLevel < 1) return
 
+        val entityService: EntityService = SMPRPG.getService(EntityService::class.java)
+        if (!entityService.isTracking(player)) return
+
+        val leveledPlayer = entityService.getPlayerInstance(player)
+        val underleveled = highestLevel > leveledPlayer.getLevel()
+
+        // Respect the player's structure notice preference.
+        when (leveledPlayer.settings.structureWarningMode) {
+            StructureWarningMode.HIDDEN -> return
+            StructureWarningMode.UNDERLEVELED -> if (!underleveled) return
+            StructureWarningMode.ALWAYS -> {}
+        }
+
         SMPRPG.getService(ActionBarService::class.java)
             .addActionBarComponent(
                 player,
                 ActionBarService.ActionBarSource.STRUCTURE,
-                getStructureComponent(player, mostDangerousStructure, highestLevel),
+                getStructureComponent(mostDangerousStructure, highestLevel, underleveled),
                 5
             )
     }
@@ -139,6 +150,7 @@ class StructureEntitySpawnListener : ToggleableListener() {
             minimumStructureLevels.put(Structure.MANSION, 25) // Pillagers are 15-25
             minimumStructureLevels.put(Structure.PILLAGER_OUTPOST, 20) // Pillagers are 15-25
             minimumStructureLevels.put(Structure.MONUMENT, 18) // Midgame boss
+            minimumStructureLevels.put(KeyStore.CASTLE_DWELLING, 15) // Early game slayer structure
             minimumStructureLevels.put(Structure.MINESHAFT, 10) // Early game structure
             minimumStructureLevels.put(Structure.MINESHAFT_MESA, 10) // Early game structure
             minimumStructureLevels.put(Structure.VILLAGE_DESERT, 15) // Early game structure

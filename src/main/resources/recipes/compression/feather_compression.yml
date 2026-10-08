@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:feather
+- item: smprpg:premium_feather
+  amount: 9
+- item: smprpg:enchanted_feather
+  amount: 9

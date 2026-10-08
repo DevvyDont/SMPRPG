@@ -1,0 +1,36 @@
+type: enchanting
+enchantment: miners_fervor
+levels:
+  '1':
+    power: 30
+    ingredients:
+    - item: minecraft:copper_block
+      amount: 16
+    - item: smprpg:tin_block
+      amount: 16
+    - item: smprpg:silver_block
+      amount: 16
+    - item: smprpg:mithril_block
+      amount: 16
+  '2':
+    power: 30
+    ingredients:
+    - item: minecraft:iron_block
+      amount: 16
+    - item: minecraft:gold_block
+      amount: 16
+    - item: minecraft:diamond_block
+      amount: 16
+    - item: smprpg:enchanted_mithril
+      amount: 16
+  '3':
+    power: 50
+    ingredients:
+    - item: smprpg:steel_block
+      amount: 16
+    - item: smprpg:titanium_block
+      amount: 16
+    - item: smprpg:adamantium_block
+      amount: 16
+    - item: smprpg:enchanted_mithril_block
+      amount: 16

@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- ' p '
+- lcl
+- ' l '
+ingredients:
+  p: smprpg:enchanted_ender_pearl
+  c: minecraft:ender_chest
+  l: smprpg:enchanted_leather
+result:
+  item: smprpg:ender_pack
+  amount: 1
+unlocked_by:
+- minecraft:ender_chest

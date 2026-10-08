@@ -1,0 +1,4 @@
+type: freezer
+input: "smprpg:melon_juice"
+time: 200
+result: "smprpg:melon_popsicle"

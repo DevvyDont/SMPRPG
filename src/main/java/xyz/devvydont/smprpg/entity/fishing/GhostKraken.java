@@ -7,10 +7,12 @@ import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
+import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +31,15 @@ public class GhostKraken extends SeaCreature<Ghast> {
     }
 
     @Override
+    public void setup() {
+        mobTypes.add(MobType.SEA_CREATURE);
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.ANIMAL);
+
+        super.setup();
+    }
+
+    @Override
     public void updateAttributes() {
         super.updateAttributes();
         updateBaseAttribute(AttributeWrapper.SCALE, 2);
@@ -44,7 +55,12 @@ public class GhostKraken extends SeaCreature<Ghast> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.SPOOKY_TENDRIL), 1, this)
+                new QuantityLootDrop(ItemService.generate(CustomItemType.SPOOKY_TENDRIL), 1, 2, this),
+                new ChancedItemDrop(lureScroll, 600, this),
+                new ChancedItemDrop(abyssalInstinctScroll, 600, this),
+                new ChancedItemDrop(impalingScroll, 600, this),
+                new ChancedItemDrop(luckOfTheSeaScroll, 600, this),
+                new ChancedItemDrop(treasureHunterScroll, 600, this)
         );
     }
 }

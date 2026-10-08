@@ -34,11 +34,10 @@ class WoodcuttingSkillRewards : SkillRewardContainer() {
 
 
         // Typical HP every level
-        this.addScalingAttributeRewardEveryXLevels(
+        this.addFlatAttributeRewardEveryLevel(
             AttributeWrapper.HEALTH,
             AttributeModifier.Operation.ADD_NUMBER,
-            SkillGlobals.HP_PER_5_LEVELS,
-            SkillGlobals.HP_LEVEL_FREQUENCY
+            SkillGlobals.HP_PER_LEVEL
         )
 
 

@@ -8,18 +8,19 @@ import xyz.devvydont.smprpg.items.attribute.AttributeEntry
 import xyz.devvydont.smprpg.reforge.ReforgeBase
 import xyz.devvydont.smprpg.reforge.ReforgeType
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import kotlin.math.roundToInt
 
 
 class OverheatingReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.scalar(
                 AttributeWrapper.STRENGTH,
                 (SpicyReforge.Companion.getDamageBonus(rarity) / 2).toDouble()
             ),
             AttributeEntry.additive(
                 AttributeWrapper.CRITICAL_DAMAGE,
-                Math.round(SpicyReforge.Companion.getCriticalBonus(rarity) / 4.0).toDouble()
+                (SpicyReforge.Companion.getCriticalBonus(rarity) / 4.0).roundToInt().toDouble()
             ),
             AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, (5 + rarity.ordinal).toDouble()),
             AttributeEntry.scalar(
@@ -41,7 +42,5 @@ class OverheatingReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("with a moderate strength buff")
         )
 
-    override fun getPowerRating(): Int {
-        return 5
-    }
+    override val powerRating: Int get() = 5
 }

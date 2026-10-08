@@ -1,0 +1,9 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:milk_bottle"
+  - "minecraft:sugar"
+  - { item: "minecraft:cocoa_beans", amount: 2 }
+time: 200
+result: "smprpg:hot_cocoa"
+skill_xp:
+  farming: 50

@@ -16,6 +16,9 @@ import xyz.devvydont.smprpg.util.time.TickTime
 import java.util.*
 
 class HealingHandler(val healingPerHalfSecond: Int, val secondsActive: Int) : AbilityHandler {
+
+    override val cooldown : Long get() = COOLDOWN
+
     /**
      * Attempts to execute the ability.
      *
@@ -79,6 +82,7 @@ class HealingHandler(val healingPerHalfSecond: Int, val secondsActive: Int) : Ab
         var SMALL_HEAL_SECONDS: Int = 3
         var NORMAL_HEAL_SECONDS: Int = 5
         var BIG_HEAL_SECONDS: Int = 8
+        val COOLDOWN: Long = TickTime.seconds(3)
 
         private val entityIdToHealingTask = HashMap<UUID?, Runnable?>()
     }

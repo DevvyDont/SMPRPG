@@ -1,0 +1,77 @@
+{
+  "downfall": 0.0,
+  "attributes": {
+	  "minecraft:visual/sky_color": "#c0c0ff",
+	  "minecraft:visual/water_fog_color": "#050533",
+	  "minecraft:visual/fog_color": "#9393bc"
+  },
+  "carvers": [
+    "smprpg:aether_cave"
+  ],
+  "effects": {
+    "foliage_color": 5242761,
+    "grass_color": 5242761,
+    "water_color": 4159204
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["smprpg:aerclouds_bottom"],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "minecraft:cow",
+        "weight": 1,
+        "minCount": 3,
+        "maxCount": 7
+      },
+      {
+        "type": "minecraft:pig",
+        "weight": 1,
+        "minCount": 3,
+        "maxCount": 7
+      },
+      {
+        "type": "minecraft:sheep",
+        "weight": 1,
+        "minCount": 3,
+        "maxCount": 7
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:breeze",
+        "weight": 20,
+        "minCount": 3,
+        "maxCount": 7
+      },
+      {
+        "type": "minecraft:enderman",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "minecraft:ghast",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ]
+  },
+  "temperature": 0.7
+}

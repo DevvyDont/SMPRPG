@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.charms;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
@@ -29,8 +30,8 @@ public class StrengthCharm extends CustomAttributeItem implements IModelOverridd
     }
 
     @Override
-    public Material getDisplayMaterial() {
-        return Material.TOTEM_OF_UNDYING;
+    public Key getDisplayKey() {
+        return IModelOverridden.ofMaterial(Material.TOTEM_OF_UNDYING);
     }
 
     @Override

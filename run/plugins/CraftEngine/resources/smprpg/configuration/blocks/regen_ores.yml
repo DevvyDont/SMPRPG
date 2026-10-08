@@ -1,0 +1,16 @@
+blocks:
+  smprpg:regenerating_iron_ore:
+    state:
+      auto-state: note_block
+      model: minecraft:block/iron_ore
+    settings:
+      template:
+        - smprpg:settings/ore
+        - smprpg:data/breaking_power_3
+      overrides:
+        resistance: 3600000
+    events:
+      template: smprpg:events/regen_ore
+      arguments:
+        regen_ore: smprpg:regenerating_iron_ore
+        regen_sound: minecraft:block.stone.place

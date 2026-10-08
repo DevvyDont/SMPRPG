@@ -13,6 +13,275 @@
                     "type": "model",
                     "model": "materials:item/pluto_fragment"
                 }
+            },
+			{
+				"when": "smprpg:drill",
+				"model": {
+					"type": "minecraft:composite",
+					"models": [
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_head": "steel_drill_head"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/steel_drill_head"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_base": "steel_drill_base"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/steel_drill_base"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_head": "rose_gold_drill_head"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/rose_gold_drill_head"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_base": "rose_gold_drill_base"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/rose_gold_drill_base"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_head": "mithril_drill_head"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/mithril_drill_head"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_base": "mithril_drill_base"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/mithril_drill_base"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_head": "titanium_drill_head"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/titanium_drill_head"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_base": "titanium_drill_base"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/titanium_drill_base"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_head": "adamantium_drill_head"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/adamantium_drill_head"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						},
+						{
+							"type": "minecraft:condition",
+							"property": "minecraft:component",
+							"predicate": "minecraft:custom_data",
+							"value": {
+								"PublicBukkitValues": {
+									"smprpg:drill_base": "adamantium_drill_base"
+								}
+							},
+							"on_true": {
+								"type": "minecraft:model",
+								"model": "tools:item/drills/adamantium_drill_base"
+							},
+							"on_false": {
+								"type": "minecraft:empty"
+							}
+						}
+					]
+				}
+			},
+            {
+                "when": "smprpg:adamantium_drill_base",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/adamantium_drill_base"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_drill_head",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/adamantium_drill_head"
+                }
+            },
+            {
+                "when": "smprpg:mithril_drill_base",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/mithril_drill_base"
+                }
+            },
+            {
+                "when": "smprpg:mithril_drill_head",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/mithril_drill_head"
+                }
+            },
+            {
+                "when": "smprpg:rose_gold_drill_base",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/rose_gold_drill_base"
+                }
+            },
+            {
+                "when": "smprpg:rose_gold_drill_head",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/rose_gold_drill_head"
+                }
+            },
+            {
+                "when": "smprpg:steel_drill_base",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/steel_drill_base"
+                }
+            },
+            {
+                "when": "smprpg:steel_drill_head",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/steel_drill_head"
+                }
+            },
+            {
+                "when": "smprpg:titanium_drill_base",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/titanium_drill_base"
+                }
+            },
+            {
+                "when": "smprpg:titanium_drill_head",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/titanium_drill_head"
+                }
+            },
+            {
+                "when": "smprpg:small_fuel_tank",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/small_fuel_tank"
+                }
+            },
+            {
+                "when": "smprpg:medium_fuel_tank",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/medium_fuel_tank"
+                }
+            },
+            {
+                "when": "smprpg:large_fuel_tank",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/drills/components/large_fuel_tank"
+                }
             }
         ]
     }

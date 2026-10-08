@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 34355411,
+    "separation": 8,
+    "spacing": 32,
+    "frequency": 0.75
+  },
+  "structures": [
+    {
+      "structure": "smprpg:large_fishing_boat",
+      "weight": 1
+    }
+  ]
+}

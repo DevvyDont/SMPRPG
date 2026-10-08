@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:compressed_cobblestone
+result:
+  item: smprpg:cobblestone_boots
+  amount: 1
+unlocked_by:
+- minecraft:cobblestone

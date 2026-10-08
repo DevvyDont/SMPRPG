@@ -1,0 +1,9 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:ground_beef"
+  - "smprpg:raw_pasta"
+  - "smprpg:tomato_sauce"
+time: 200
+result: "smprpg:pasta_with_meatballs"
+skill_xp:
+  farming: 50

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:minnow_scale
+result:
+  item: smprpg:minnow_leggings
+  amount: 1
+unlocked_by:
+- smprpg:minnow_scale

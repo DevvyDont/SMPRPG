@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:sulfur
+- item: smprpg:sulfur_block
+  amount: 9
+- item: smprpg:enchanted_sulfur
+  amount: 9
+- item: smprpg:enchanted_sulfur_block
+  amount: 9
+- item: smprpg:sulfur_singularity
+  amount: 9

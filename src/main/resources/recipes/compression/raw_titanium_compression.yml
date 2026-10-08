@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:raw_titanium
+- item: smprpg:raw_titanium_block
+  amount: 9

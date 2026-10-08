@@ -27,8 +27,7 @@ public class FoodUtil {
             case BAKED_POTATO -> 5;
             case BEETROOT -> 1;
             case BEETROOT_SOUP -> 6;
-            case BREAD -> 5;
-            case CARROT -> 3;
+            case BREAD -> 6;
             case CHORUS_FRUIT -> 4;
             case COOKED_CHICKEN -> 6;
             case COOKED_COD -> 5;
@@ -38,10 +37,8 @@ public class FoodUtil {
             case COOKED_SALMON -> 6;
             case COOKIE -> 2;
             case DRIED_KELP -> 1;
-            case ENCHANTED_GOLDEN_APPLE -> 4;
-            case GOLDEN_APPLE -> 4;
-            case GLOW_BERRIES -> 2;
-            case GOLDEN_CARROT -> 6;
+            case ENCHANTED_GOLDEN_APPLE -> 10;
+            case GOLDEN_APPLE -> 6;
             case HONEY_BOTTLE -> 6;
             case MELON_SLICE -> 2;
             case MUSHROOM_STEM -> 6;
@@ -70,56 +67,19 @@ public class FoodUtil {
     public static float getSaturation(Material material) {
 
         return switch (material) {
-            case APPLE -> 2.4f;
-            case BAKED_POTATO -> 6;
-            case BEETROOT -> 1.2f;
-            case BEETROOT_SOUP -> 7.2f;
-            case BREAD -> 6;
-            case CARROT -> 3.6f;
-            case CHORUS_FRUIT -> 2.4f;
-            case COOKED_CHICKEN -> 7.2f;
-            case COOKED_COD -> 6f;
-            case COOKED_MUTTON -> 9.6f;
-            case COOKED_PORKCHOP -> 12.8f;
-            case COOKED_RABBIT -> 6f;
-            case COOKED_SALMON -> 9.6f;
-            case COOKIE -> 0.4f;
-            case DRIED_KELP -> 0.6f;
-            case ENCHANTED_GOLDEN_APPLE -> 9.6f;
-            case GOLDEN_APPLE -> 9.6f;
-            case GLOW_BERRIES -> 0.4f;
-            case GOLDEN_CARROT -> 14.4f;
-            case HONEY_BOTTLE -> 1.2f;
-            case MELON_SLICE -> 1.2f;
-            case MUSHROOM_STEM -> 7.2f;
-            case POISONOUS_POTATO -> 1.2f;
-            case POTATO -> 0.6f;
-            case PUFFERFISH -> 0.2f;
-            case PUMPKIN_PIE -> 4.8f;
-            case RABBIT_STEW -> 12f;
-            case BEEF -> 1.8f;
-            case CHICKEN -> 1.2f;
-            case COD -> 0.4f;
-            case MUTTON -> 1.2f;
-            case PORKCHOP -> 1.8f;
-            case RABBIT -> 1.8f;
-            case SALMON -> 0.4f;
-            case ROTTEN_FLESH -> 0.8f;
-            case SPIDER_EYE -> 3.2f;
-            case COOKED_BEEF -> 12.8f;
-            case SUSPICIOUS_STEW -> 7.2f;
-            case SWEET_BERRIES -> 0.4f;
-            case TROPICAL_FISH -> 0.2f;
+            case CARROT -> 20;
+            case CHORUS_FRUIT -> 10;
+            case ENCHANTED_GOLDEN_APPLE -> 50;
+            case GOLDEN_APPLE -> 10;
+            case GLOW_BERRIES -> 10;
+            case GOLDEN_CARROT -> 80;
             default -> 0;
         };
 
     }
 
     public static boolean canEatAlways(Material material) {
-        return switch (material) {
-            case GOLDEN_APPLE, ENCHANTED_GOLDEN_APPLE -> true;
-            default -> false;
-        };
+        return true;
     }
 
     public record FoodEffectWrapper (PotionEffect effect, float probability){ }
@@ -146,17 +106,17 @@ public class FoodUtil {
                 break;
 
             case PUFFERFISH:
-                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.HUNGER, 15*20, 2), 1.0f));
+                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.WEAKNESS, 15*20, 2), 1.0f));
                 effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.NAUSEA, 15*20, 0), 1.0f));
                 effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.POISON, 60*20, 1), 1.0f));
                 break;
 
             case CHICKEN:
-                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.HUNGER, 30*20, 0), 0.3f));
+                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.WEAKNESS, 30*20, 0), 0.3f));
                 break;
 
             case ROTTEN_FLESH:
-                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.HUNGER, 30*20, 0), 0.8f));
+                effects.add(new FoodEffectWrapper(new PotionEffect(PotionEffectType.WEAKNESS, 30*20, 0), 0.8f));
                 break;
 
             case SPIDER_EYE:

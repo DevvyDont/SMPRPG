@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ggg
+- gsg
+- ggg
+ingredients:
+  s: smprpg:mossy_skull
+  g: smprpg:enchanted_gold
+result:
+  item: smprpg:gilded_skull
+  amount: 1
+unlocked_by:
+- smprpg:mossy_skull

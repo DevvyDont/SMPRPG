@@ -147,8 +147,10 @@ public class FishingBehaviorListeners extends ToggleableListener {
         hook = FishHookBehaviorTask.create(event.getHook(), rodBlueprint.getFishingFlags());
 
         // Customize the hook's behavior to suit the fishing rod depending on the flags present.
-        if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.LAVA) && rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))
+        if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.LAVA) && rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.AERIAL) && rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))
             hook.setOptions(FishHookBehaviorTask.COMPLEX_OPTIONS);
+        else if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.AERIAL))
+            hook.setOptions(FishHookBehaviorTask.AERIAL_OPTIONS);
         else if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.LAVA))
             hook.setOptions(FishHookBehaviorTask.LAVA_OPTIONS);
         else if (rodBlueprint.getFishingFlags().contains(IFishingRod.FishingFlag.VOID))

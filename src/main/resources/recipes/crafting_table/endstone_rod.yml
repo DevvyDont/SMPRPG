@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:premium_string
+  t: minecraft:end_stone
+  m: minecraft:end_stone
+result:
+  item: smprpg:endstone_rod
+  amount: 1
+unlocked_by:
+- minecraft:end_stone

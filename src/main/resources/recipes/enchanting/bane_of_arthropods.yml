@@ -1,0 +1,107 @@
+type: enchanting
+enchantment: bane_of_arthropods
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 5
+    - item: minecraft:spider_eye
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 10
+    - item: minecraft:string
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 20
+    - item: minecraft:spider_eye
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 40
+    - item: minecraft:string
+      amount: 16
+    - item: minecraft:spider_eye
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:copper_ingot
+      amount: 80
+    - item: minecraft:spider_eye
+      amount: 32
+    - item: minecraft:string
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: minecraft:copper_block
+      amount: 18
+    - item: minecraft:string
+      amount: 64
+    - item: minecraft:spider_eye
+      amount: 64
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: minecraft:copper_block
+      amount: 36
+    - item: smprpg:premium_spider_eye
+      amount: 15
+    - item: smprpg:premium_string
+      amount: 15
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: minecraft:copper_block
+      amount: 72
+    - item: smprpg:premium_string
+      amount: 30
+    - item: smprpg:premium_spider_eye
+      amount: 30
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_copper
+      amount: 8
+    - item: smprpg:premium_spider_eye
+      amount: 45
+    - item: smprpg:premium_string
+      amount: 45
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_copper
+      amount: 16
+    - item: smprpg:premium_string
+      amount: 60
+    - item: smprpg:premium_spider_eye
+      amount: 60
+    - item: smprpg:enchanted_lapis
+      amount: 64

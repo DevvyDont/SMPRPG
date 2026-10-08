@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:silver_ingot
+- item: smprpg:silver_block
+  amount: 9
+- item: smprpg:enchanted_silver
+  amount: 9
+- item: smprpg:enchanted_silver_block
+  amount: 9
+- item: smprpg:silver_singularity
+  amount: 9

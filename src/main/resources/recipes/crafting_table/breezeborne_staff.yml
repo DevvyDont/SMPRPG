@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' hb'
+- ' bb'
+- 'b  '
+ingredients:
+  b: minecraft:breeze_rod
+  h: minecraft:heavy_core
+result:
+  item: smprpg:breezeborne_staff
+  amount: 1
+unlocked_by:
+- minecraft:breeze_rod

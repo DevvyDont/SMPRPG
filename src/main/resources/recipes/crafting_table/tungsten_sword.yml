@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' M '
+- ' H '
+ingredients:
+  H: smprpg:sulfur_treated_tool_shaft
+  M: smprpg:tungsten_ingot
+result:
+  item: smprpg:tungsten_sword
+  amount: 1
+unlocked_by:
+- smprpg:tungsten_ingot

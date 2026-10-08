@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- h h
+- sss
+- s s
+ingredients:
+  s: smprpg:spellbound_cloth
+  h: smprpg:horn_of_warlock
+result:
+  item: smprpg:warlock_hood
+  amount: 1
+unlocked_by:
+- smprpg:spellbound_cloth

@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- smprpg:necrotic_flesh
+- item: smprpg:premium_necrotic_flesh
+  amount: 9
+- item: smprpg:enchanted_necrotic_flesh
+  amount: 9
+- item: smprpg:necrotic_flesh_singularity
+  amount: 9

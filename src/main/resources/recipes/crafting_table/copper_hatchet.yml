@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'M  '
+- 'MH '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: minecraft:copper_ingot
+result:
+  item: smprpg:copper_hatchet
+  amount: 1
+unlocked_by:
+- minecraft:copper_ingot

@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:crimson_stem
+- item: smprpg:premium_crimson_stem
+  amount: 9
+- item: smprpg:enchanted_crimson_stem
+  amount: 9
+- item: smprpg:crimson_stem_singularity
+  amount: 9

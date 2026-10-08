@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:platinum_ingot
+result:
+  item: smprpg:platinum_leggings
+  amount: 1
+unlocked_by:
+- smprpg:platinum_ingot

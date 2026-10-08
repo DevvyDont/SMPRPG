@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:quartz
+- item: minecraft:quartz_block
+  amount: 4
+- item: smprpg:enchanted_quartz
+  amount: 9
+- item: smprpg:enchanted_quartz_block
+  amount: 9
+- item: smprpg:quartz_singularity
+  amount: 9

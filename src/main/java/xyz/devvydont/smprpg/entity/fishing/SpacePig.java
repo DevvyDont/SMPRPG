@@ -1,10 +1,17 @@
 package xyz.devvydont.smprpg.entity.fishing;
 
+import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
+import xyz.devvydont.smprpg.entity.fishing.goals.SpacePigAttackGoal;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -31,12 +38,21 @@ public class SpacePig extends SeaCreature<Pig> {
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new ChancedItemDrop(ItemService.generate(CustomItemType.SPACE_HELMET), 1000, this)
+                new ChancedItemDrop(ItemService.generate(CustomItemType.SPACE_HELMET), 1000, this),
+                new ChancedItemDrop(lureScroll, 300, this),
+                new ChancedItemDrop(abyssalInstinctScroll, 300, this),
+                new ChancedItemDrop(impalingScroll, 300, this),
+                new ChancedItemDrop(luckOfTheSeaScroll, 300, this),
+                new ChancedItemDrop(treasureHunterScroll, 300, this)
         );
     }
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.SEA_CREATURE);
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.ANIMAL);
+
         super.setup();
 
         // Add space helmet and void striding boots to the pig.
@@ -44,6 +60,10 @@ public class SpacePig extends SeaCreature<Pig> {
         var boots = ItemService.generate(Material.LEATHER_BOOTS);
         boots.addUnsafeEnchantment(EnchantmentService.VOIDSTRIDING_BLESSING.getEnchantment(), 1);
         _entity.getEquipment().setBoots(boots);
+
+        var mobGoals = Bukkit.getMobGoals();
+        mobGoals.removeAllGoals(_entity);
+        mobGoals.addGoal(_entity, 3, new SpacePigAttackGoal(_entity));
     }
 
     @Override

@@ -23,7 +23,5 @@ class ReachingReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("Slightly increases reach distance")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

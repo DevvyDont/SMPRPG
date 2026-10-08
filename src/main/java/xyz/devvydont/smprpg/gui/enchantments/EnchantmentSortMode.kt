@@ -37,7 +37,7 @@ enum class EnchantmentSortMode {
             REQUIREMENT -> {
                 enchantments.sortWith(Comparator { e1: CustomEnchantment, e2: CustomEnchantment ->
                                     Comparator.comparingInt(
-                                        ToIntFunction { obj: CustomEnchantment -> obj.getSkillRequirement() }).compare(e1, e2)
+                                        ToIntFunction { obj: CustomEnchantment -> obj.skillRequirement }).compare(e1, e2)
                 })
                 return enchantments
             }
@@ -45,9 +45,9 @@ enum class EnchantmentSortMode {
             ALPHABETICAL -> {
                 val comparator = Comparator { e1: CustomEnchantment, e2: CustomEnchantment ->
                     val str1 = PlainTextComponentSerializer.plainText().serialize(
-                        e1.getDisplayName()
+                        e1.displayName
                     )
-                    val str2 = PlainTextComponentSerializer.plainText().serialize(e2.getDisplayName())
+                    val str2 = PlainTextComponentSerializer.plainText().serialize(e2.displayName)
                     var res = String.CASE_INSENSITIVE_ORDER.compare(str1, str2)
                     if (res == 0) res = str1.compareTo(str2)
                     res

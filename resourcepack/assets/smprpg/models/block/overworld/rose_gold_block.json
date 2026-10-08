@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "smprpg:block/overworld/rose_gold_block"
+  }
+}

@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.services.EconomyService
 import xyz.devvydont.smprpg.services.EconomyService.Companion.formatMoney
 import xyz.devvydont.smprpg.services.ItemService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.formatting.Symbols
 import kotlin.math.min
 
 class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
@@ -31,7 +32,7 @@ class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
 
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
         // Prepare the inventory
-        event.titleOverride(ComponentUtils.create("Withdraw Coins", NamedTextColor.BLACK))
+        event.titleOverride(ComponentUtils.create("Withdraw Coins", Symbols.INVENTORY_TITLE_COLOR))
 
         // Render the UI
         this.renderMenu()
@@ -121,7 +122,7 @@ class MenuWithdraw(owner: Player) : MenuBase(owner, 3) {
         // Ensure the player has enough money.
         if (amountOfCoinsToGive == 0L || currentBalance < totalCost) {
             this.playInvalidAnimation()
-            this.player.sendMessage(ComponentUtils.error("You cannot afford to withdrawal this coin."))
+            this.player.sendMessage(ComponentUtils.error("You cannot afford to withdraw this coin."))
             return
         }
 

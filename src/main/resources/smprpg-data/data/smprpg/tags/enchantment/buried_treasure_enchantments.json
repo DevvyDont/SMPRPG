@@ -1,0 +1,23 @@
+{
+  "values": [
+    "minecraft:aqua_affinity",
+    "minecraft:impaling",
+    "minecraft:luck_of_the_sea",
+    "minecraft:lure",
+    "minecraft:loyalty",
+    "minecraft:channeling",
+    "minecraft:depth_strider",
+    "minecraft:respiration",
+    "minecraft:riptide",
+    "minecraft:unbreaking",
+
+    "smprpg:abyssal_instinct",
+    "smprpg:treasure_hunter",
+    "smprpg:fortuity",
+    "smprpg:proficient",
+
+    "smprpg:amplification",
+    "smprpg:telekinesis",
+    "smprpg:keeping"
+  ]
+}

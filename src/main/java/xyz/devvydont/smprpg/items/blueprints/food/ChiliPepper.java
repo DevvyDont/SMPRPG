@@ -5,6 +5,7 @@ import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -27,12 +28,12 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
 
     @Override
     public int getNutrition(ItemStack item) {
-        return 2;
+        return 0;
     }
 
     @Override
     public float getSaturation(ItemStack item) {
-        return 6;
+        return 100;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(.8f)
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*45, 0, true, true)), .2f))
@@ -50,6 +51,6 @@ public class ChiliPepper extends CustomItemBlueprint implements IEdible, ISellab
 
     @Override
     public boolean canAlwaysEat(ItemStack item) {
-        return false;
+        return true;
     }
 }

@@ -27,6 +27,13 @@
                     "type": "model",
                     "model": "swords:item/dragonsteel_sword"
                 }
+            },
+            {
+                "when": "smprpg:abominable_halberd",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/abominable_halberd"
+                }
             }
         ]
     }

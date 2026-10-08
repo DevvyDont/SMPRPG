@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:cobalt_ingot
+result:
+  item: smprpg:cobalt_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:cobalt_ingot

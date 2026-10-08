@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:raw_tin
+- item: smprpg:raw_tin_block
+  amount: 9

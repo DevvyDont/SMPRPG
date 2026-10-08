@@ -25,12 +25,12 @@ public class ReaverHelmet extends ReaverArmorSet implements IHeaderDescribable, 
 
     @Override
     public int getDefense() {
-        return ItemArmor.getDefenseFromMaterial(Material.NETHERITE_HELMET)+5;
+        return 90;
     }
 
     @Override
     public int getHealth() {
-        return 12;
+        return 0;
     }
 
     @Override

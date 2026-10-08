@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:cake"
+tool: "knives"
+result:
+  - { item: "smprpg:cake_slice", amount: 7, chance: 1.0 }

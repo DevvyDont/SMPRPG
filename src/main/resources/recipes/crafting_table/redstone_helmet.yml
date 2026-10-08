@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:enchanted_redstone
+result:
+  item: smprpg:redstone_helmet
+  amount: 1
+unlocked_by:
+- minecraft:redstone

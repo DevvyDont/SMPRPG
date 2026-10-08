@@ -102,6 +102,15 @@ public class DeathCertificate extends CustomItemBlueprint implements Listener, I
                 ComponentUtils.create(playerName, NamedTextColor.AQUA).append(ComponentUtils.create(" died in ")).append(getEnvironmentComponent(environment)),
                 ComponentUtils.create("Coordinates: ").append(getCoordinatesComponent(location)),
                 ComponentUtils.EMPTY,
+                ComponentUtils.merge(
+                        ComponentUtils.create("Right click to forge into a ", NamedTextColor.YELLOW),
+                        ComponentUtils.create("Death Compass", NamedTextColor.GOLD),
+                        ComponentUtils.create(" for ", NamedTextColor.YELLOW),
+                        ComponentUtils.money((int) DeathCompass.CONVERSION_COST),
+                        ComponentUtils.create(".", NamedTextColor.YELLOW)
+                ),
+                ComponentUtils.create("It will point you back to this spot.", NamedTextColor.GRAY),
+                ComponentUtils.EMPTY,
                 ComponentUtils.create("Death occurred at: " + dateString + "EST", NamedTextColor.DARK_GRAY)
         );
     }

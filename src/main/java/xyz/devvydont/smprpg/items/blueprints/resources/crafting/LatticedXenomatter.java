@@ -4,21 +4,18 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
 import xyz.devvydont.smprpg.entity.fishing.SeaCreature;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
-import xyz.devvydont.smprpg.items.interfaces.ISmeltable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
-import xyz.devvydont.smprpg.util.time.TickTime;
 
 import java.util.List;
 
-public class LatticedXenomatter extends CustomItemBlueprint implements IHeaderDescribable, ISellable, ISmeltable {
+public class LatticedXenomatter extends CustomItemBlueprint implements IHeaderDescribable, ISellable {
 
     public LatticedXenomatter(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -54,45 +51,5 @@ public class LatticedXenomatter extends CustomItemBlueprint implements IHeaderDe
     @Override
     public int getWorth(ItemStack item) {
         return 300_000 * item.getAmount();
-    }
-
-    /**
-     * Get the ingredient that is used to smelt this item.
-     *
-     * @return The {@link RecipeChoice} that will turn into this item when cooked.
-     */
-    @Override
-    public RecipeChoice getIngredient() {
-        return new RecipeChoice.ExactChoice(ItemService.generate(CustomItemType.XENOMATTER));
-    }
-
-    /**
-     * The vanilla Minecraft experience that is awarded as a result for cooking this item.
-     *
-     * @return The vanilla Minecraft experience.
-     */
-    @Override
-    public float getExperience() {
-        return 100;
-    }
-
-    /**
-     * The cooking time in ticks in order to cook this item.
-     *
-     * @return The time in ticks.
-     */
-    @Override
-    public long getCookingTime() {
-        return TickTime.minutes(15);
-    }
-
-    /**
-     * Gets the recipe type for this furnace.
-     *
-     * @return The type of smelting recipe.
-     */
-    @Override
-    public RecipeType getRecipeType() {
-        return RecipeType.CAMPFIRE;
     }
 }

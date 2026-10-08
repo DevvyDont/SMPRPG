@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -26,6 +27,10 @@ public class PalaceThug<T extends LivingEntity> extends CustomEntityInstance<T> 
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.HUMANOID);
+
         super.setup();
         removeEquipment();
         setNoDropEquipment();

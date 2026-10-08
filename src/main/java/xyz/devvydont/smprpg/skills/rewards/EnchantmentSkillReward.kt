@@ -14,16 +14,16 @@ class EnchantmentSkillReward(private val enchantment: CustomEnchantment) : ISkil
     private val hoverComponent: Component
         get() {
             val clone = enchantment.build(1)
-            val max = enchantment.build(clone.getMaxLevel())
-            var ret = clone.getDisplayName().color(NamedTextColor.LIGHT_PURPLE)
+            val max = enchantment.build(clone.maxLevel)
+            var ret = clone.displayName.color(NamedTextColor.LIGHT_PURPLE)
                 .append(
                     ComponentUtils.create("\n")
-                        .append(clone.getDescription())
+                        .append(clone.description)
                         .append(ComponentUtils.create(" (Lv. 1)", NamedTextColor.DARK_GRAY))
                 )
-            if (clone.getMaxLevel() > 1) ret = ret.append(
-                ComponentUtils.create("\n").append(max.getDescription())
-                    .append(ComponentUtils.create(" (Lv. " + clone.getMaxLevel() + ")", NamedTextColor.DARK_GRAY))
+            if (clone.maxLevel > 1) ret = ret.append(
+                ComponentUtils.create("\n").append(max.description)
+                    .append(ComponentUtils.create(" (Lv. " + clone.maxLevel + ")", NamedTextColor.DARK_GRAY))
             )
 
             ret = ret.append(ComponentUtils.create("\n\n"))
@@ -31,7 +31,7 @@ class EnchantmentSkillReward(private val enchantment: CustomEnchantment) : ISkil
                 ComponentUtils.create("Item Type: ").append(
                     ComponentUtils.create(
                         MinecraftStringUtils.getTitledString(
-                            clone.getItemTypeTag().key().asMinimalString().replace("/", " ")
+                            clone.itemTypeTag.key().asMinimalString().replace("/", " ")
                         ), NamedTextColor.GOLD
                     )
                 )
@@ -49,7 +49,7 @@ class EnchantmentSkillReward(private val enchantment: CustomEnchantment) : ISkil
         return ComponentUtils.merge(
             ComponentUtils.create("Unlocked ").decoration(TextDecoration.BOLD, false),
             ComponentUtils.create(Symbols.SPARKLES, NamedTextColor.LIGHT_PURPLE),
-            enchantment.getDisplayName().color(NamedTextColor.LIGHT_PURPLE).decoration(TextDecoration.BOLD, true)
+            enchantment.displayName.color(NamedTextColor.LIGHT_PURPLE).decoration(TextDecoration.BOLD, true)
                 .hoverEvent(
                     this.hoverComponent
                 ),

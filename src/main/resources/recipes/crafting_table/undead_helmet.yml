@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: minecraft:rotten_flesh
+result:
+  item: smprpg:undead_helmet
+  amount: 1
+unlocked_by:
+- minecraft:rotten_flesh

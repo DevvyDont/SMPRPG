@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:cherry_log
+- item: smprpg:premium_cherry_log
+  amount: 9
+- item: smprpg:enchanted_cherry_log
+  amount: 9
+- item: smprpg:cherry_log_singularity
+  amount: 9

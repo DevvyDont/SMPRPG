@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:minnow_scale
+result:
+  item: smprpg:minnow_boots
+  amount: 1
+unlocked_by:
+- smprpg:minnow_scale

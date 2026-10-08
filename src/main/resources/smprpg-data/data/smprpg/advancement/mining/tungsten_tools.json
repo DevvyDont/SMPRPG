@@ -1,0 +1,43 @@
+{
+  "parent": "smprpg:mining/titanium_tools",
+  "criteria": {
+    "tungsten_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "tungsten_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.tungsten_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:material_sets/tungsten/tungsten_pickaxe"
+      },
+      "count": 1,
+      "id": "minecraft:diamond_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.tungsten_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "tungsten_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

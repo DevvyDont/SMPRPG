@@ -16,6 +16,7 @@ import xyz.devvydont.smprpg.entity.CustomEntityType;
 import xyz.devvydont.smprpg.entity.components.DamageTracker;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
 import xyz.devvydont.smprpg.entity.interfaces.IDamageTrackable;
+import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.EntityService;
 import xyz.devvydont.smprpg.services.ItemService;
 
@@ -105,6 +106,18 @@ public class CustomEntityInstance<T extends Entity> extends LeveledEntity<T> imp
 
     protected ItemStack getAttributelessItem(Material material) {
         ItemStack item = new ItemStack(material);
+        item.editMeta(meta -> {
+            meta.setAttributeModifiers(null);
+            meta.addAttributeModifier(Attribute.ARMOR, new AttributeModifier(new NamespacedKey("smprpg", "dummy-attribute"), 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
+            meta.addAttributeModifier(Attribute.ATTACK_DAMAGE, new AttributeModifier(new NamespacedKey("smprpg", "dummy-attribute"), 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));
+        });
+        SMPRPG.getService(ItemService.class).setIgnoreMetaUpdate(item);
+        return item;
+    }
+
+    protected ItemStack getAttributelessItem(CustomItemType itemType) {
+        // TODO: Figure out why items generated with custom item type retain their attributes even when cleared.
+        ItemStack item = ItemService.generate(itemType);
         item.editMeta(meta -> {
             meta.setAttributeModifiers(null);
             meta.addAttributeModifier(Attribute.ARMOR, new AttributeModifier(new NamespacedKey("smprpg", "dummy-attribute"), 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ANY));

@@ -22,9 +22,17 @@ class CustomEntityDamageByEntityEvent(
 
     var isCritical: Boolean = false
 
+    /**
+     * The Warframe-style "tier" of this critical hit, populated during critical damage calculation.
+     * A value of 0 means this hit was not critical. A value of 1 is a standard critical, and higher
+     * values represent additional critical rolls earned from excess critical chance (e.g. 250% crit
+     * chance yields at least tier 2). Read by the damage popup system to escalate the visuals.
+     */
+    var criticalTier: Int = 0
+
     val audience: Audience = Audience.audience(damaged, dealer)
 
-    val originalDamage: Double = originalEvent.damage
+    var originalDamage: Double = originalEvent.damage
 
     private var additiveDamage = 0.0
     private var scalarDamage = 1.0
@@ -71,6 +79,16 @@ class CustomEntityDamageByEntityEvent(
 
     fun multiplyDamage(multiplier: Double) {
         multiplicativeDamage *= multiplier
+    }
+
+    /**
+     * Completely overrides any sort of modifications done so far and sets the damage to an explicit value.
+     */
+    fun setDamage(damage: Double) {
+        additiveDamage = 0.0
+        scalarDamage = 1.0
+        multiplicativeDamage = 1.0
+        originalDamage = damage
     }
 
     val finalDamage: Double

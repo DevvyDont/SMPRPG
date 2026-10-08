@@ -1,0 +1,4 @@
+type: freezer
+input: "smprpg:scorching_string"
+time: 1600
+result: "smprpg:enchanted_string"

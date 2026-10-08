@@ -1,0 +1,47 @@
+{
+  "parent": "smprpg:mining/wooden_tools",
+  "criteria": {
+    "tin_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "tin_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.tin_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:custom_model_data": {
+          "strings": [
+            "smprpg:tin_pickaxe"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "minecraft:iron_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.tin_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "tin_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

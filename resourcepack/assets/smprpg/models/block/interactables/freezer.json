@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "smprpg:block/interactables/freezer_bottom",
+    "east": "smprpg:block/interactables/freezer_side",
+    "north": "smprpg:block/interactables/freezer_side",
+    "particle": "smprpg:block/interactables/freezer_side",
+    "south": "smprpg:block/interactables/freezer_side",
+    "up": "smprpg:block/interactables/freezer_top",
+    "west": "smprpg:block/interactables/freezer_side"
+  }
+}

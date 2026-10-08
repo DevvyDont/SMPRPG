@@ -2,6 +2,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 
 import org.bukkit.entity.Creeper;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -27,5 +28,14 @@ public class LeveledCreeper extends VanillaEntity<Creeper> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_GUNPOWDER), 50, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ENCHANTED_GUNPOWDER), 1000, this)
         );
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.CUBIC);
+        mobTypes.add(MobType.PLANT);
+        mobTypes.add(MobType.ELEMENTAL);
+
+        super.setup();
     }
 }

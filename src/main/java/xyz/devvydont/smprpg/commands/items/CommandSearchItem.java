@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.commands.CommandSimplePlayer;
 import xyz.devvydont.smprpg.gui.items.MenuItemBrowser;
+import xyz.devvydont.smprpg.gui.items.search.ItemBrowserCache;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
@@ -22,8 +23,15 @@ public class CommandSearchItem extends CommandSimplePlayer {
 
     @Override
     protected void playerInvoked(@NotNull Player player, @NotNull CommandSourceStack ctx, @NotNull String @NotNull [] args) {
+        // The item registry is still being indexed in the background after server boot; withhold the browser until
+        // it's ready so the player never opens an empty or partially-built menu.
+        if (!ItemBrowserCache.isReady()) {
+            player.sendMessage(ItemBrowserCache.notReadyMessage());
+            return;
+        }
+
         String query = String.join(" ", args).replace("_", " ").trim();
-        new MenuItemBrowser(player, query).openMenu();
+        new MenuItemBrowser(null, player, query).openMenu();
         if (query.equalsIgnoreCase(""))
             query = "ALL ITEMS";
 

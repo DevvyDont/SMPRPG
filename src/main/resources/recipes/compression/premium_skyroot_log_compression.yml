@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:premium_skyroot_log
+- item: smprpg:enchanted_skyroot_log
+  amount: 9
+- item: smprpg:skyroot_log_singularity
+  amount: 9

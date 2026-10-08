@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:lily_of_the_valley"
+tool: "knives"
+result:
+  - { item: "minecraft:white_dye", amount: 2, chance: 1.0 }

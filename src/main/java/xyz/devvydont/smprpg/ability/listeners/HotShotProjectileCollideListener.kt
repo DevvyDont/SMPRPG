@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.ability.listeners
 
 import com.destroystokyo.paper.ParticleBuilder
+import org.bukkit.ExplosionResult
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.damage.DamageSource
@@ -11,7 +12,9 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityExplodeEvent
+import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.ability.handlers.HotShotAbilityHandler
+import xyz.devvydont.smprpg.services.EntityDamageCalculatorService
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 
 /**
@@ -22,7 +25,7 @@ class HotShotProjectileCollideListener : ToggleableListener() {
      * When the fireball explodes, we need to ensure that it does not damage terrain and also damage nearby entities
      * at a penalty (for missing)
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     @Suppress("unused")
     private fun onFireballExplode(event: EntityExplodeEvent) {
         // If this isn't an inferno projectile we don't care
@@ -40,19 +43,35 @@ class HotShotProjectileCollideListener : ToggleableListener() {
 
             if (living is Player) continue
 
-            var falloff: Double =
-                HotShotAbilityHandler.Companion.EXPLOSION_RADIUS - event.location.distance(living.location)
-            falloff /= HotShotAbilityHandler.Companion.EXPLOSION_RADIUS
-            val damage: Double = HotShotAbilityHandler.Companion.DAMAGE * falloff
+            var com =  living.location.add(living.eyeLocation).multiply(0.5)  // center of mass, so we aren't favoriting head/feet
+            var falloff: Double = event.location.distance(com)
+            if (falloff <= HotShotAbilityHandler.FALLOFF_GRACE)
+                falloff = 0.0
+            else {
+                falloff /= HotShotAbilityHandler.Companion.EXPLOSION_RADIUS
+                falloff /= 2  // Reduce by half so that falloff isn't all the way to 0
+            }
+            var damage = SMPRPG.getService(EntityDamageCalculatorService::class.java).getBaseProjectileDamage(event.entity as Projectile)
+            damage = damage - (damage * falloff)
 
             if (falloff < 0) continue
 
-            if (source != null) living.killer = source
-
-            living.damage(
-                damage,
-                DamageSource.builder(DamageType.MAGIC).build()
-            )
+            if (source != null) {
+                living.killer = source
+                living.damage(
+                    damage,
+                    DamageSource.builder(DamageType.MAGIC)
+                        .withDirectEntity(source)
+                        .withCausingEntity(source)
+                        .build()
+                )
+            }
+            else {
+                living.damage(
+                    damage,
+                    DamageSource.builder(DamageType.MAGIC).build()
+                )
+            }
         }
         ParticleBuilder(Particle.EXPLOSION)
             .location(event.location)

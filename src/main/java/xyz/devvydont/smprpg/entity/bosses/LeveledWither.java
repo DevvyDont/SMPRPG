@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
@@ -31,6 +32,11 @@ public class LeveledWither extends BossInstance<Wither> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.BOSS);
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.CONSTRUCT);
+
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
         this.updateBaseAttribute(AttributeWrapper.REGENERATION, 1);
@@ -90,6 +96,7 @@ public class LeveledWither extends BossInstance<Wither> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.FORSAKEN_CUTLASS), 125, this),
 
                 new ChancedItemDrop(ItemService.generate(CustomItemType.DESOLATED_STONE), 100, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.RECOMBOBULATOR), 1000, this),
 
                 new ChancedItemDrop(ItemService.generate(Material.NETHERITE_INGOT), 70, this),
                 new ChancedItemDrop(ItemService.generate(Material.NETHERITE_BLOCK), 900, this),

@@ -21,6 +21,7 @@ import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.services.SpecialEffectService
 import xyz.devvydont.smprpg.services.EntityService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.particles.ParticleUtil
 
 class DisintegratingEffect(service: SpecialEffectService, player: Player, seconds: Int) :
     SpecialEffectTask(service, player, seconds), Listener {
@@ -102,7 +103,7 @@ class DisintegratingEffect(service: SpecialEffectService, player: Player, second
 
         if (ticks == TIER_3_TICK_THRESHOLD || ticks == TIER_2_TICK_THRESHOLD) {
             player.world.playSound(player.location, Sound.BLOCK_GLASS_BREAK, 1f, .5f)
-            ParticleBuilder(Particle.FLASH)
+            ParticleUtil.withDefaultData(ParticleBuilder(Particle.FLASH))
                 .location(player.eyeLocation)
                 .spawn()
         }
@@ -125,6 +126,7 @@ class DisintegratingEffect(service: SpecialEffectService, player: Player, second
             .location(player.eyeLocation)
             .offset(.1, .1, .1)
             .count(5)
+            .data(1.0f)  // DRAGON_BREATH now requires a Float ("power of the breath") in newer MC
             .spawn()
         ses.giveEffect(player, HollowedEffect(ses, player, 10))
     }

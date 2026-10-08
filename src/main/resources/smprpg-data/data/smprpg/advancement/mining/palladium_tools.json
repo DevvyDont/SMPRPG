@@ -1,0 +1,43 @@
+{
+  "parent": "smprpg:mining/tungsten_tools",
+  "criteria": {
+    "palladium_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "palladium_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.palladium_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:material_sets/palladium/palladium_pickaxe"
+      },
+      "count": 1,
+      "id": "minecraft:diamond_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.palladium_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "palladium_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

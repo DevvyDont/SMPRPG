@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mbm
+- m m
+ingredients:
+  b: smprpg:minnow_boots
+  m: smprpg:holomoku_crest
+result:
+  item: smprpg:holomoku_boots
+  amount: 1
+unlocked_by:
+- smprpg:holomoku_crest
+upgrade: "b"

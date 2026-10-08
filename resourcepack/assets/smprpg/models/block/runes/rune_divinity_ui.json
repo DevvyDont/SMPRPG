@@ -1,0 +1,7 @@
+{
+  "parent": "smprpg:block/runes/rune_emissive_ui",
+  "textures": {
+	"base": "smprpg:block/runes/rune_ascended",
+    "rune": "smprpg:block/runes/rune_divinity"
+  }
+}

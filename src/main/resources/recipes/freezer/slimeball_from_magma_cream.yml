@@ -1,0 +1,4 @@
+type: freezer
+input: "minecraft:magma_cream"
+time: 100
+result: "minecraft:slime_ball"

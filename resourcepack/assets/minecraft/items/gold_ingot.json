@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "materials:item/boiling_ingot"
                 }
+            },
+            {
+                "when": "smprpg:rose_gold_ingot",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/rose_gold_ingot"
+                }
             }
         ]
     }

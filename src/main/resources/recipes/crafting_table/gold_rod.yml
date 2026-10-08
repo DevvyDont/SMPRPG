@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: minecraft:string
+  t: minecraft:gold_ingot
+  m: minecraft:gold_ingot
+result:
+  item: smprpg:gold_rod
+  amount: 1
+unlocked_by:
+- minecraft:gold_ingot

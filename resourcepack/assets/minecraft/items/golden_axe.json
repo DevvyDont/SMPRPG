@@ -13,6 +13,20 @@
                     "type": "model",
                     "model": "tools:item/golden_hatchet"
                 }
+            },
+            {
+                "when": "smprpg:rose_gold_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/rose_gold_axe"
+                }
+            },
+            {
+                "when": "smprpg:rose_gold_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/rose_gold_hatchet"
+                }
             }
         ]
     }

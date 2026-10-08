@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:wither_rose"
+tool: "knives"
+result:
+  - { item: "minecraft:black_dye", amount: 2, chance: 1.0 }

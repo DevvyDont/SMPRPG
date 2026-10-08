@@ -1,0 +1,41 @@
+{
+  "parent": "smprpg:aether/find_fountain",
+  "criteria": {
+    "golden_oak": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "smprpg:golden_oak_island"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.find_golden_oak_island.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:golden_oak_sapling"
+      },
+      "count": 1,
+      "id": "minecraft:nether_brick"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.find_golden_oak_island.title"
+    }
+  },
+  "requirements": [
+    [
+      "golden_oak"
+    ]
+  ]
+}

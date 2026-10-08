@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:enchanted_string
+  t: smprpg:steel_rod
+  m: minecraft:netherite_ingot
+result:
+  item: smprpg:netherite_rod
+  amount: 1
+unlocked_by:
+- minecraft:netherite_ingot
+upgrade: "t"

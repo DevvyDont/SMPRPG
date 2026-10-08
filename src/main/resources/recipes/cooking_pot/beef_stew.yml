@@ -1,0 +1,11 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:carrot"
+  - "minecraft:potato"
+  - "smprpg:onion"
+  - "minecraft:beef"
+time: 200
+result: "smprpg:beef_stew"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

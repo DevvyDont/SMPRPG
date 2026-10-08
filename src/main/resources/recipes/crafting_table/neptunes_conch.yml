@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- csc
+- sds
+- csc
+ingredients:
+  c: smprpg:enchanted_prismarine_crystal
+  s: smprpg:enchanted_prismarine_shard
+  d: minecraft:diamond
+result:
+  item: smprpg:neptunes_conch
+  amount: 1
+unlocked_by:
+- minecraft:prismarine_crystals
+- minecraft:prismarine_shard

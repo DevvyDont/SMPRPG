@@ -1,0 +1,12 @@
+type: enchanting
+enchantment: keeping
+levels:
+  '1':
+    power: 20
+    ingredients:
+    - item: smprpg:premium_slime
+      amount: 4
+    - item: smprpg:displacement_matrix
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 8

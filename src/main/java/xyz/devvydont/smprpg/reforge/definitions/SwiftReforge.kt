@@ -13,7 +13,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class SwiftReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, getMovementSpeedBuff(rarity).toDouble()),
             MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, getAttackSpeedBuff(rarity).toDouble())
         )
@@ -25,9 +25,7 @@ class SwiftReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("with a small boost in attack speed")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 
     companion object {
         fun getMovementSpeedBuff(rarity: ItemRarity): Float {

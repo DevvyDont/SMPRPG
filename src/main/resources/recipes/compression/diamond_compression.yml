@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:diamond
+- item: minecraft:diamond_block
+  amount: 9
+- item: smprpg:enchanted_diamond
+  amount: 9
+- item: smprpg:enchanted_diamond_block
+  amount: 9
+- item: smprpg:diamond_singularity
+  amount: 9

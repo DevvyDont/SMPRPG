@@ -1,0 +1,16 @@
+type: shapeless
+ingredients:
+- smprpg:steel_ingot
+- smprpg:steel_ingot
+- smprpg:steel_ingot
+- smprpg:steel_ingot
+- smprpg:dragon_scales
+- smprpg:dragon_scales
+- smprpg:dragon_scales
+- smprpg:dragon_scales
+result:
+  item: smprpg:dragonsteel_ingot
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot
+- smprpg:dragon_scales

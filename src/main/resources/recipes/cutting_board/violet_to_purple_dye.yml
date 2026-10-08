@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:violet"
+tool: "knives"
+result:
+  - { item: "minecraft:purple_dye", amount: 2, chance: 1.0 }

@@ -1,0 +1,6 @@
+type: smelting
+input: "smprpg:enchanted_iron"
+cook: blasting
+time: 12000
+experience: 5.0
+result: "smprpg:boiling_ingot"

@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' m '
+- ' m '
+- ' s '
+ingredients:
+  s: smprpg:obsidian_tool_rod
+  m: smprpg:draconic_crystal
+result:
+  item: smprpg:elderflame_dagger
+  amount: 1
+unlocked_by:
+- smprpg:draconic_crystal

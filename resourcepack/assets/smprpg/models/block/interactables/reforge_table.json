@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "smprpg:block/interactables/reforge_table_bottom",
+    "east": "smprpg:block/interactables/reforge_table_side",
+    "north": "smprpg:block/interactables/reforge_table_front",
+    "particle": "smprpg:block/interactables/reforge_table_side",
+    "south": "smprpg:block/interactables/reforge_table_front",
+    "up": "smprpg:block/interactables/reforge_table_top",
+    "west": "smprpg:block/interactables/reforge_table_side"
+  }
+}

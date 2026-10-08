@@ -1,0 +1,16 @@
+type: enchanting
+enchantment: replenishing
+levels:
+  '1':
+    power: 30
+    ingredients:
+    - item: smprpg:premium_hay_block
+      amount: 1
+    - item: smprpg:enchanted_potato
+      amount: 1
+    - item: smprpg:enchanted_carrot
+      amount: 1
+    - item: minecraft:bone_block
+      amount: 64
+    - item: smprpg:enchanted_lapis
+      amount: 16

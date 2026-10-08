@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:tungsten"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:tungsten"
+      }
+    ]
+  }
+}

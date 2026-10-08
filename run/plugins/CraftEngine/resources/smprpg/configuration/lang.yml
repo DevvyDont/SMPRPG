@@ -1,0 +1,77 @@
+lang#items:
+  en_us:
+    item.smprpg.tin_ingot: Tin Ingot
+    item.smprpg.silver_ingot: Silver Ingot
+    item.smprpg.bronze_ingot: Bronze Ingot
+    item.smprpg.rose_gold_ingot: Rose Gold Ingot
+    item.smprpg.mithril_ingot: Mithril Ingot
+    item.smprpg.steel_ingot: Steel Ingot
+    item.smprpg.titanium_ingot: Titanium Ingot
+    item.smprpg.adamantium_ingot: Adamantium Ingot
+
+    item.smprpg.tungsten_ingot: Tungsten Ingot
+    item.smprpg.cobalt_ingot: Cobalt Ingot
+    item.smprpg.orichalcum_ingot: Orichalcum Ingot
+
+    item.smprpg.platinum_ingot: Platinum Ingot
+    item.smprpg.palladium_ingot: Palladium Ingot
+    item.smprpg.aetherium_ingot: Aetherium Ingot
+
+    item.smprpg.holystone: Holystone
+    item.smprpg.holystone_bricks: Holystone Bricks
+    item.smprpg.holystone_brick_slab: Holystone Brick Slab
+    item.smprpg.holystone_brick_stairs: Holystone Brick Stairs
+    item.smprpg.holystone_slab: Holystone Slab
+    item.smprpg.holystone_stairs: Holystone Stairs
+
+    item.smprpg.golden_oak_log: Golden Oak Log
+    item.smprpg.stripped_golden_oak_log: Stripped Golden Oak Log
+    item.smprpg.golden_oak_wood: Golden Oak Wood
+    item.smprpg.stripped_golden_oak_wood: Stripped Golden Oak Wood
+    item.smprpg.golden_oak_planks: Golden Oak Planks
+    item.smprpg.golden_oak_stairs: Golden Oak Stairs
+    item.smprpg.golden_oak_slab: Golden Oak Slab
+    item.smprpg.golden_oak_button: Golden Oak Button
+    item.smprpg.golden_oak_pressure_plate: Golden Oak Pressure Plate
+    item.smprpg.golden_oak_door: Golden Oak Door
+    item.smprpg.golden_oak_trapdoor: Golden Oak Trapdoor
+    item.smprpg.golden_oak_fence: Golden Oak Fence
+    item.smprpg.golden_oak_fence_gate: Golden Oak Fence Gate
+    item.smprpg.golden_oak_leaves: Golden Oak Leaves
+
+    item.smprpg.skyroot_log: Skyroot Log
+    item.smprpg.stripped_skyroot_log: Stripped Skyroot Log
+    item.smprpg.skyroot_wood: Skyroot Wood
+    item.smprpg.stripped_skyroot_wood: Stripped Skyroot Wood
+    item.smprpg.skyroot_planks: Skyroot Planks
+    item.smprpg.skyroot_stairs: Skyroot Stairs
+    item.smprpg.skyroot_slab: Skyroot Slab
+    item.smprpg.skyroot_button: Skyroot Button
+    item.smprpg.skyroot_pressure_plate: Skyroot Pressure Plate
+    item.smprpg.skyroot_door: Skyroot Door
+    item.smprpg.skyroot_trapdoor: Skyroot Trapdoor
+    item.smprpg.skyroot_fence: Skyroot Fence
+    item.smprpg.skyroot_fence_gate: Skyroot Fence Gate
+    item.smprpg.skyroot_leaves: Skyroot Leaves
+
+    item.smprpg.ground_beef: Ground Beef
+    item.smprpg.cooked_ground_beef: Cooked Ground Beef
+    item.smprpg.beef_patty: Beef Patty
+    item.smprpg.cooked_beef_patty: Cooked Beef Patty
+    item.smprpg.steak_strips: Steak Strips
+  fr_fr:
+    item.smprpg.silver_ingot: Lingot d'argent
+    item.smprpg.holystone: Pierre sacrée
+    item.smprpg.holystone_bricks: Pierre sacrée taillée
+    item.smprpg.holystone_brick_slab: Dalle de pierre sacrée taillée
+    item.smprpg.holystone_brick_stairs: Escalier de pierre sacrée taillée
+    item.smprpg.holystone_slab: Dalle de pierre sacrée
+    item.smprpg.holystone_stairs: Escalier de pierre sacrée
+  fr_ca:
+    item.smprpg.silver_ingot: Lingot d'argent
+    item.smprpg.holystone: Pierre sacrée
+    item.smprpg.holystone_bricks: Pierre sacrée taillée
+    item.smprpg.holystone_brick_slab: Dalle de pierre sacrée taillée
+    item.smprpg.holystone_brick_stairs: Escalier de pierre sacrée taillée
+    item.smprpg.holystone_slab: Dalle de pierre sacrée
+    item.smprpg.holystone_stairs: Escalier de pierre sacrée

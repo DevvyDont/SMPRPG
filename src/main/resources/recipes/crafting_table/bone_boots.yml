@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: minecraft:bone
+result:
+  item: smprpg:bone_boots
+  amount: 1
+unlocked_by:
+- minecraft:bone

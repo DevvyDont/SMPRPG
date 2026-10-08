@@ -1,10 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum;
 
 import org.bukkit.Color;
-import org.bukkit.inventory.CraftingRecipe;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.interfaces.IDyeable;
@@ -18,12 +15,12 @@ public class NocturnumBoots extends NocturnumSet implements IDyeable {
 
     @Override
     public int getHealth() {
-        return NocturnumChestplate.HEALTH / 2;
+        return 115;
     }
 
     @Override
     public int getDefense() {
-        return NocturnumChestplate.DEFENSE / 2;
+        return 145;
     }
 
     /**
@@ -42,19 +39,5 @@ public class NocturnumBoots extends NocturnumSet implements IDyeable {
     @Override
     public Color getColor() {
         return Color.BLACK;
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape(
-                "bxb",
-                "t t"
-        );
-        recipe.setIngredient('t', ItemService.generate(NocturnumSet.UPGRADE_MATERIAL));
-        recipe.setIngredient('b', ItemService.generate(NocturnumSet.UPGRADE_BINDING));
-        recipe.setIngredient('x', ItemService.generate(CustomItemType.RUINATION_BOOTS));
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        return recipe;
     }
 }

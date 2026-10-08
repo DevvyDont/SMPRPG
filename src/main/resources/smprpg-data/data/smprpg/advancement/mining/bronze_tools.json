@@ -1,0 +1,47 @@
+{
+  "parent": "smprpg:mining/tin_tools",
+  "criteria": {
+    "bronze_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:wooden_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "bronze_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.bronze_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:custom_model_data": {
+          "strings": [
+            "smprpg:bronze_pickaxe"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "minecraft:wooden_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.bronze_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "bronze_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

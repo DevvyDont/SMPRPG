@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 import org.bukkit.Material;
 import org.bukkit.entity.Blaze;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -27,7 +28,6 @@ public class LeveledBlaze extends VanillaEntity<Blaze> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_LEGGINGS), 10_000, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOOTS), 10_000, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CYRAX_BOW), 10_000, this),
-                new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_PICKAXE), 5_000, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.BOILING_INGOT), 2_500, this),
 
                 new ChancedItemDrop(ItemService.generate(Material.BLAZE_ROD), 2, this),
@@ -41,5 +41,12 @@ public class LeveledBlaze extends VanillaEntity<Blaze> {
     @Override
     public boolean hasVanillaDrops() {
         return false;
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.ELEMENTAL);
     }
 }

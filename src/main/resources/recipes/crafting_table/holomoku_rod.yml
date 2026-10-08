@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  r'
+- ' ts'
+- r s
+ingredients:
+  r: smprpg:holomoku_crest
+  s: smprpg:premium_string
+  t: smprpg:minnow_rod
+result:
+  item: smprpg:holomoku_rod
+  amount: 1
+unlocked_by:
+- smprpg:holomoku_crest
+upgrade: "t"

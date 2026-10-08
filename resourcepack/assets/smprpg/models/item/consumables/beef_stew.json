@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "smprpg:item/consumables/beef_stew"
+    }
+}

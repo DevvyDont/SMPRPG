@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ui:item/pot_burn_flame/flame_on"
+  }
+}

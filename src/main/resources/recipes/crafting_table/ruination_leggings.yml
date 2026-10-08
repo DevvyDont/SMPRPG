@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mlm
+- m m
+ingredients:
+  l: smprpg:holomoku_leggings
+  m: smprpg:tridentite
+result:
+  item: smprpg:ruination_leggings
+  amount: 1
+unlocked_by:
+- smprpg:raw_tridentite_chunk
+upgrade: "l"

@@ -7,8 +7,10 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
+import org.bukkit.inventory.ItemStack
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.gui.base.MenuBase
+import xyz.devvydont.smprpg.items.blueprints.equipment.WalletBlueprint
 import xyz.devvydont.smprpg.items.interfaces.ISellable
 import xyz.devvydont.smprpg.services.EconomyService
 import xyz.devvydont.smprpg.services.EconomyService.Companion.formatMoney
@@ -18,6 +20,11 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 class MenuDeposit(owner: Player) : MenuBase(owner, 5) {
     private val itemService: ItemService = SMPRPG.getService(ItemService::class.java)
     private val economyService: EconomyService = SMPRPG.getService(EconomyService::class.java)
+
+    private fun isSellable(item: ItemStack): Boolean {
+        val blueprint = ItemService.blueprint(item)
+        return blueprint is ISellable || blueprint is WalletBlueprint
+    }
 
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
         // Prepare the inventory
@@ -36,14 +43,22 @@ class MenuDeposit(owner: Player) : MenuBase(owner, 5) {
         }
 
         // No item involved, don't allow it
-        if (event.getCurrentItem() == null) {
+        val item = event.currentItem
+        if (item == null) {
             event.isCancelled = true
             return
         }
 
         // If the item clicked is not sellable, we can't do anything with it.
         val itemBlueprint = this.itemService.getBlueprint(event.getCurrentItem()!!)
-        event.isCancelled = itemBlueprint !is ISellable
+        event.isCancelled = !isSellable(item)
+
+        // If the item is sellable, but not worth anything, don't let them sell it.
+        // This is usually the case with some CraftEngine items, as they use a universal parent blueprint.
+        if (itemBlueprint is ISellable) {
+            if ((itemBlueprint as ISellable).getWorth(event.currentItem) == 0)
+                event.isCancelled = true
+        }
 
         // If the item clicked is enchanted or reforged, we should prevent the item from being shift clicked.
         if (event.isShiftClick && (!event.getCurrentItem()!!.enchantments.isEmpty() || itemBlueprint.isReforged(
@@ -70,6 +85,16 @@ class MenuDeposit(owner: Player) : MenuBase(owner, 5) {
             }
 
             val itemBlueprint = this.itemService.getBlueprint(depositedItem)
+
+            if (itemBlueprint is WalletBlueprint) {
+                amountToCredit += itemBlueprint.getBalance(depositedItem)
+                quantitySold++
+                itemBlueprint.setBalance(depositedItem, 0)
+                itemBlueprint.updateItemData(depositedItem)
+                giveItemToPlayer(depositedItem)
+                continue
+            }
+
             if (itemBlueprint is ISellable) {
                 quantitySold += depositedItem.amount
                 amountToCredit += itemBlueprint.getWorth(depositedItem)

@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/golden_pickaxe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:rose_gold_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/rose_gold_pickaxe"
+                }
+            }
+        ]
+    }
+}

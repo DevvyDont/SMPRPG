@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:inferno_remnant
+result:
+  item: smprpg:inferno_helmet
+  amount: 1
+unlocked_by:
+- smprpg:inferno_remnant

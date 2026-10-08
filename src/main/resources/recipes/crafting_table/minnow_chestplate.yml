@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:minnow_scale
+result:
+  item: smprpg:minnow_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:minnow_scale

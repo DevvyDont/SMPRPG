@@ -1,0 +1,1497 @@
+items:
+  smprpg:aether_portal:
+    data:
+      item-name: <!i><lang:item.smprpg.aether_portal>
+    model: smprpg:block/aether/aether_portal_ns
+    behavior:
+      type: block_item
+      block:
+        states:
+          properties:
+            facing:
+              type: 4-direction
+              default: north
+            placed:
+              type: boolean
+              default: false
+          appearances:
+            north:
+              state: cave_air
+              entity-renderer:
+                item: smprpg:aether_portal
+            south:
+              state: cave_air
+              entity-renderer:
+                item: smprpg:aether_portal
+            east:
+              state: cave_air
+              entity-renderer:
+                item: smprpg:aether_portal
+                yaw: 90
+            west:
+              state: cave_air
+              entity-renderer:
+                item: smprpg:aether_portal
+                yaw: 90
+          variants:
+            facing=north:
+              appearance: north
+            facing=north,placed=false:
+              appearance: north
+            facing=south:
+              appearance: south
+            facing=south,placed=false:
+              appearance: south
+            facing=east:
+              appearance: east
+            facing=east,placed=false:
+              appearance: east
+            facing=west:
+              appearance: west
+            facing=west,placed=false:
+              appearance: west
+        settings:
+          template:
+            - smprpg:sound/glass
+          push-reaction: block
+          hardness: -1
+          resistance: 3600000
+          block-light: 0
+          propagate-skylight: true
+          map-color: 17
+          is-randomly-ticking: true
+          luminance: 15
+          tags:
+            - minecraft:portals
+        behavior:
+          - type: smprpg:portal
+            dimension: smprpg:the_aether
+            sounds:
+              ambient-sound: smprpg:block.aether_portal.portal
+              transition-sound: smprpg:block.aether_portal.trigger
+              travel-sound: smprpg:block.aether_portal.travel
+  smprpg:blue_aercloud:
+    data:
+      item-name: <!i><lang:item.smprpg.blue_aercloud>
+      pdc:
+        smprpg:item-type: blue_aercloud
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/blue_aercloud
+    behavior:
+      type: block_item
+      block: smprpg:blue_aercloud
+  smprpg:cold_aercloud:
+    data:
+      item-name: <!i><lang:item.smprpg.cold_aercloud>
+      pdc:
+        smprpg:item-type: cold_aercloud
+        smprpg:sell-value: 1
+    model: smprpg:block/aether/cold_aercloud
+    behavior:
+      type: block_item
+      block: smprpg:cold_aercloud
+  smprpg:gold_aercloud:
+    data:
+      item-name: <!i><lang:item.smprpg.gold_aercloud>
+      pdc:
+        smprpg:item-type: gold_aercloud
+        smprpg:sell-value: 5
+    model: smprpg:block/aether/gold_aercloud
+    behavior:
+      type: block_item
+      block: smprpg:gold_aercloud
+  smprpg:wispy_aercloud:
+    data:
+      item-name: <!i><lang:item.smprpg.wispy_aercloud>
+      pdc:
+        smprpg:item-type: wispy_aercloud
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/wispy_aercloud
+    behavior:
+      type: block_item
+      block: smprpg:wispy_aercloud
+  smprpg:aether_dirt:
+    data:
+      item-name: <!i><lang:item.smprpg.aether_dirt>
+      pdc:
+        smprpg:item-type: aether_dirt
+        smprpg:sell-value: 1
+    model: smprpg:block/aether/aether_dirt
+    behavior:
+      type: block_item
+      block: smprpg:aether_dirt
+  smprpg:aether_grass_block:
+    data:
+      item-name: <!i><lang:item.smprpg.aether_grass_block>
+      pdc:
+        smprpg:item-type: aether_grass_block
+        smprpg:sell-value: 2
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/aether_grass_block
+      generation:
+        parent: smprpg:block/aether/aether_grass_block
+      tints:
+        - type: minecraft:constant
+          value: [0.69, 1.0, 0.8]
+    behavior:
+      type: block_item
+      block: smprpg:aether_grass_block
+  smprpg:enchanted_aether_grass_block:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_aether_grass_block>
+      pdc:
+        smprpg:item-type: enchanted_aether_grass_block
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/enchanted_aether_grass_block
+    behavior:
+      type: block_item
+      block: smprpg:enchanted_aether_grass_block
+  smprpg:holystone:
+    data:
+      item-name: <!i><lang:item.smprpg.holystone>
+      pdc:
+        smprpg:item-type: holystone
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/holystone
+    behavior:
+      type: block_item
+      block: smprpg:holystone
+  smprpg:icestone:
+    data:
+      item-name: <!i><lang:item.smprpg.icestone>
+      pdc:
+        smprpg:item-type: icestone
+        smprpg:sell-value: 4
+        smprpg:freeze-time: 400
+    model: smprpg:block/aether/icestone
+    behavior:
+      type: block_item
+      block: smprpg:icestone
+  smprpg:quicksoil:
+    data:
+      item-name: <!i><lang:item.smprpg.quicksoil>
+      pdc:
+        smprpg:item-type: quicksoil
+        smprpg:sell-value: 4
+    model: smprpg:block/aether/quicksoil
+    behavior:
+      type: block_item
+      block: smprpg:quicksoil
+  smprpg:aether_silver_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.aether_silver_ore>
+      pdc:
+        smprpg:item-type: aether_silver_ore
+        smprpg:sell-value: 15
+    model: smprpg:block/aether/aether_silver_ore
+    behavior:
+      type: block_item
+      block: smprpg:aether_silver_ore
+  smprpg:gravitite_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.gravitite_ore>
+      pdc:
+        smprpg:item-type: gravitite_ore
+        smprpg:sell-value: 1200
+    model: smprpg:block/aether/gravitite_ore
+    behavior:
+      type: block_item
+      block: smprpg:gravitite_ore
+  smprpg:zanite_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.zanite_ore>
+      pdc:
+        smprpg:item-type: zanite_ore
+        smprpg:sell-value: 200
+    model: smprpg:block/aether/zanite_ore
+    behavior:
+      type: block_item
+      block: smprpg:zanite_ore
+  smprpg:ambrosium_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.ambrosium_ore>
+      pdc:
+        smprpg:item-type: ambrosium_ore
+        smprpg:sell-value: 20
+    model: smprpg:block/aether/ambrosium_ore
+    behavior:
+      type: block_item
+      block: smprpg:ambrosium_ore
+  smprpg:platinum_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.platinum_ore>
+      pdc:
+        smprpg:item-type: platinum_ore
+        smprpg:sell-value: 300
+    model: smprpg:block/aether/platinum_ore
+    behavior:
+      type: block_item
+      block: smprpg:platinum_ore
+  smprpg:palladium_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.palladium_ore>
+      pdc:
+        smprpg:item-type: palladium_ore
+        smprpg:sell-value: 300
+    model: smprpg:block/aether/palladium_ore
+    behavior:
+      type: block_item
+      block: smprpg:palladium_ore
+  smprpg:puffbloom:
+    data:
+      item-name: <!i><lang:item.smprpg.puffbloom>
+      pdc:
+        smprpg:item-type: puffbloom
+        smprpg:sell-value: 5
+    texture: smprpg:block/aether/puffbloom
+    behavior:
+      type: block_item
+      block: smprpg:puffbloom
+  smprpg:violet:
+    data:
+      item-name: <!i><lang:item.smprpg.violet>
+      pdc:
+        smprpg:item-type: violet
+        smprpg:sell-value: 5
+    texture: smprpg:block/aether/violet
+    behavior:
+      type: block_item
+      block: smprpg:violet
+  smprpg:rainbow_lily:
+    data:
+      item-name: <!i><lang:item.smprpg.rainbow_lily>
+      pdc:
+        smprpg:item-type: rainbow_lily
+        smprpg:sell-value: 50
+    texture: smprpg:block/aether/rainbow_lily
+    behavior:
+      type: block_item
+      block: smprpg:rainbow_lily
+  smprpg:ambrosium:
+    data:
+      item-name: <!i><lang:item.smprpg.ambrosium>
+      pdc:
+        smprpg:item-type: ambrosium
+        smprpg:sell-value: 20
+    texture: smprpg:item/aether/ambrosium
+  smprpg:zanite:
+    data:
+      item-name: <!i><lang:item.smprpg.zanite>
+      pdc:
+        smprpg:item-type: zanite
+        smprpg:sell-value: 200
+    texture: smprpg:item/aether/zanite
+  smprpg:gravitite_shards:
+    data:
+      item-name: <!i><lang:item.smprpg.gravitite_shards>
+      pdc:
+        smprpg:item-type: gravitite_shards
+        smprpg:sell-value: 1200
+    texture: smprpg:item/aether/gravitite_shards
+  smprpg:raw_platinum:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_platinum>
+      pdc:
+        smprpg:item-type: raw_platinum
+        smprpg:sell-value: 300
+    texture: smprpg:item/aether/raw_platinum
+  smprpg:platinum_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.platinum_ingot>
+      pdc:
+        smprpg:item-type: platinum_ingot
+        smprpg:sell-value: 450
+    texture: smprpg:item/aether/platinum_ingot
+  smprpg:platinum_block:
+    data:
+      item-name: <!i><lang:item.smprpg.platinum_block>
+      pdc:
+        smprpg:item-type: platinum_block
+        smprpg:sell-value: 4050
+    model: smprpg:block/aether/platinum_block
+    behavior:
+      type: block_item
+      block: smprpg:platinum_block
+  smprpg:enchanted_platinum:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_platinum_ingot>
+      pdc:
+        smprpg:item-type: enchanted_platinum
+        smprpg:sell-value: 36450
+    texture: smprpg:item/aether/platinum_ingot
+  smprpg:enchanted_platinum_block_display:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_platinum_block_display>
+    model: smprpg:block/compact/enchanted_platinum_block
+  smprpg:enchanted_platinum_block:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_platinum_block>
+      pdc:
+        smprpg:item-type: enchanted_platinum_block
+        smprpg:sell-value: 328050
+    model: smprpg:block/aether/platinum_block
+    behavior:
+      type: block_item
+      block: smprpg:enchanted_platinum_block
+  smprpg:platinum_singularity:
+    data:
+      item-name: <!i><lang:item.smprpg.platinum_singularity>
+      pdc:
+        smprpg:item-type: platinum_singularity
+        smprpg:sell-value: 2952450
+    texture: smprpg:item/aether/platinum_ingot
+  smprpg:raw_palladium:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_palladium>
+      pdc:
+        smprpg:item-type: raw_palladium
+        smprpg:sell-value: 300
+    texture: smprpg:item/aether/raw_palladium
+  smprpg:palladium_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.palladium_ingot>
+      pdc:
+        smprpg:item-type: palladium_ingot
+        smprpg:sell-value: 450
+    texture: smprpg:item/aether/palladium_ingot
+
+blocks:
+  smprpg:blue_aercloud:
+    state:
+      id: 59
+      auto-state: no_tint_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/blue_aercloud
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      block-light: 0
+      propagate-skylight: true
+      map-color: 17
+    behavior:
+      - type: bouncing_block
+        bounce-height: 0.5
+        sync-player-position: true
+        fall-damage-multiplier: 0.0
+      - type: smprpg:launch_block
+        launch-power: 2.0
+        bubble-boosted: true
+        want-particles: true
+  smprpg:cold_aercloud:
+    state:
+      auto-state: no_tint_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/cold_aercloud
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      block-light: 0
+      propagate-skylight: true
+      map-color: 3
+    behavior:
+      - type: bouncing_block
+        bounce-height: 0.9
+        sync-player-position: true
+        fall-damage-multiplier: 0.0
+  smprpg:gold_aercloud:
+    state:
+      auto-state: no_tint_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/gold_aercloud
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      block-light: 0
+      propagate-skylight: true
+      map-color: 30
+    behavior:
+      - type: bouncing_block
+        bounce-height: 0.0
+        sync-player-position: true
+        fall-damage-multiplier: 0.0
+  smprpg:wispy_aercloud:
+    state:
+      auto-state: sugar_cane
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/wispy_aercloud
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aercloud
+      block-light: 0
+      propagate-skylight: true
+      map-color: 31
+      merges:
+        tags:
+          - smprpg:aerial_fishing_block
+    behavior:
+    - type: smprpg:zero_gravity_block
+  smprpg:aether_dirt:
+    state:
+      id: 64
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/aether_dirt
+    settings:
+      template:
+        - smprpg:settings/dirt
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      map-color: 23
+      merges:
+        tags: [ "minecraft:dirt", "smprpg:aether_dirt", "minecraft:supports_vegetation" ]
+    behavior:
+      - type: smprpg:tillable_block
+        tilled-block: smprpg:aether_farmland
+  smprpg:aether_grass_block:
+    state:
+      id: 67
+      auto-state: tintable_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/aether_grass_block
+    settings:
+      template:
+        - smprpg:settings/dirt
+        - smprpg:sound/grass
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      map-color: 61
+      is-randomly-ticking: true
+      support-shape: minecraft:grass_block
+      merges:
+        tags:
+          - "minecraft:dirt"
+          - "smprpg:aether_dirt"
+          - "minecraft:animals_spawnable_on"
+          - "minecraft:grass_blocks"
+          - "minecraft:supports_vegetation"
+          - "smprpg:quicksoil_shelf_replaceables"
+      overrides:
+        propagate-skylight: false
+        can-occlude: true
+        block-light: 15
+    behavior:
+      - type: surface_spreading_block
+        required-light: 9
+        base-block: smprpg:aether_dirt
+      - type: grass_block
+        feature: minecraft:grass_bonemeal
+      - type: smprpg:tillable_block
+        tilled-block: smprpg:aether_farmland
+    properties:
+      snowy:
+        type: boolean
+        default: false
+    events:
+      - on: right_click
+        functions:
+          - type: transform_block
+            block: smprpg:enchanted_aether_grass_block
+          - type: clear_item
+            id: smprpg:ambrosium
+            count: 1
+          - type: particle
+            particle: minecraft:totem_of_undying
+            x: <arg:position.x> + 0.5
+            y: <arg:position.y> + 1.0
+            z: <arg:position.z> + 0.5
+            count: 10
+            speed: 0.2
+          - type: play_sound
+            sound: minecraft:block.amethyst_block.resonate
+            target: self
+            pitch: 2
+            volume: 1
+            source: block
+        conditions:
+          - type: match_item
+            id: smprpg:ambrosium
+  smprpg:enchanted_aether_grass_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/cube
+        arguments:
+          model: smprpg:block/aether/enchanted_aether_grass_block
+          particle_texture: smprpg:block/aether/aether_dirt
+          down_texture: smprpg:block/aether/aether_dirt
+          east_texture: smprpg:block/aether/enchanted_aether_grass_block_side
+          west_texture: smprpg:block/aether/enchanted_aether_grass_block_side
+          north_texture: smprpg:block/aether/enchanted_aether_grass_block_side
+          south_texture: smprpg:block/aether/enchanted_aether_grass_block_side
+          up_texture: smprpg:block/aether/enchanted_aether_grass_block_top
+    settings:
+      template:
+        - smprpg:settings/dirt
+        - smprpg:sound/grass
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      map-color: 18
+      is-randomly-ticking: true
+      support-shape: minecraft:grass_block
+      merges:
+        tags:
+          - "minecraft:dirt"
+          - "smprpg:aether_dirt"
+          - "smprpg:enchanted_dirt"
+          - "minecraft:grass_blocks"
+    behavior:
+      - type: grass_block
+        feature: minecraft:grass_bonemeal
+      - type: smprpg:tillable_block
+        tilled-block: smprpg:aether_farmland
+    properties:
+      snowy:
+        type: boolean
+        default: false
+  smprpg:aether_farmland:
+    settings:
+      template:
+        - smprpg:settings/dirt
+        - smprpg:settings/transparent_1x1x1
+      require-correct-tools: false
+      map-color: 23
+      is-randomly-ticking: true
+      support-shape: minecraft:farmland
+      merges:
+        tags:
+          - "minecraft:dirt"
+          - "smprpg:aether_dirt"
+    behavior:
+      - type: smprpg:farmland
+        reverted-block: smprpg:aether_dirt
+        hydration-blocks:
+          - minecraft:water
+    states:
+      properties:
+        moisture:
+          type: int
+          default: 0
+          range: 0~7
+      appearances:
+        dry:
+          auto-state: no_tint_leaves
+          models:
+            - path: smprpg:block/aether/aether_farmland
+              generation:
+                parent: minecraft:block/farmland
+                textures:
+                  dirt: smprpg:block/aether/aether_dirt
+                  top: smprpg:block/aether/aether_farmland
+        wet:
+          auto-state: no_tint_leaves
+          models:
+            - path: smprpg:block/aether/aether_farmland_moist
+              generation:
+                parent: minecraft:block/farmland
+                textures:
+                  dirt: smprpg:block/aether/aether_dirt
+                  top: smprpg:block/aether/aether_farmland_moist
+      variants:
+        moisture=0:
+          appearance: dry
+        moisture=1:
+          appearance: wet
+        moisture=2:
+          appearance: wet
+        moisture=3:
+          appearance: wet
+        moisture=4:
+          appearance: wet
+        moisture=5:
+          appearance: wet
+        moisture=6:
+          appearance: wet
+        moisture=7:
+          appearance: wet
+  smprpg:holystone:
+    state:
+      id: 66
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/holystone
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/holystone
+      overrides:
+        hardness: 6.0
+        resistance: 0.5
+        instrument: basedrum
+        map-color: 22
+      merges:
+        tags: [ "smprpg:holystone_ore_replaceables", "smprpg:base_stone_aether" ]
+  smprpg:quicksoil:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/quicksoil
+    settings:
+      template:
+        - smprpg:settings/dirt
+        - smprpg:settings/solid_1x1x1
+      require-correct-tools: false
+      map-color: 18
+      merges:
+        tags: [ "minecraft:dirt", "smprpg:aether_dirt" ]
+    behavior:
+      type: smprpg:accelerator
+      acceleration: 0.35
+  smprpg:icestone:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/icestone
+    settings:
+      template:
+        - smprpg:settings/stone
+        - smprpg:sound/icestone
+      overrides:
+        hardness: 6.0
+        resistance: 0.5
+        instrument: chime
+        map-color: 22
+      merges:
+        tags: [ "smprpg:holystone_ore_replaceables", "smprpg:base_stone_aether" ]
+  smprpg:aether_silver_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/aether_silver_ore
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+  smprpg:gravitite_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/gravitite_ore
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+        - smprpg:data/breaking_power_7
+      overrides:
+        hardness: 75.0
+        resistance: 50.0
+    behavior:
+      type: smprpg:ascending_block
+  smprpg:zanite_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/zanite_ore
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+        - smprpg:data/breaking_power_6
+      map-color: 22
+      overrides:
+        hardness: 25.0
+        resistance: 15.0
+  smprpg:ambrosium_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/ambrosium_ore
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+        - smprpg:data/breaking_power_5
+      overrides:
+        hardness: 10.0
+        resistance: 10.0
+  smprpg:platinum_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/platinum_ore
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+        - smprpg:data/breaking_power_6
+      overrides:
+        hardness: 35.0
+        resistance: 25.0
+  smprpg:platinum_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/platinum_block
+    settings:
+      template:
+        - smprpg:sound/metal
+        - smprpg:data/breaking_power_6
+        - smprpg:data/beacon_usable
+      overrides:
+        hardness: 35.0
+        resistance: 25.0
+  smprpg:enchanted_platinum_block:
+    state:
+      state: barrier
+      entity-renderer:
+        - type: item_display
+          item: smprpg:enchanted_platinum_block_display
+    settings:
+      template:
+        - smprpg:sound/metal
+        - smprpg:data/breaking_power_6
+        - smprpg:data/beacon_usable
+      overrides:
+        hardness: 35.0
+        resistance: 25.0
+  smprpg:palladium_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/aether/palladium_ore
+    settings:
+      template:
+        - smprpg:settings/aether_ore
+        - smprpg:data/breaking_power_6
+      overrides:
+        hardness: 45.0
+        resistance: 25.0
+  smprpg:puffbloom:
+    state:
+      id: 421
+      auto-state: higher_tripwire
+      model:
+        template: smprpg:model/simplified_cross
+        arguments:
+          path: smprpg:block/aether/puffbloom
+    settings:
+      template:
+        - smprpg:settings/flower
+      overrides:
+        map-color: 8
+        tags: [ "minecraft:flowers", "minecraft:small_flowers"]
+    loot:
+      template: smprpg:loot_table/self
+    behaviors:
+      - type: liquid_flowable_block
+      - type: bush_block
+        bottom-block-tags:
+          - smprpg:aether_dirt
+  smprpg:violet:
+    id: 422
+    state:
+      auto-state: higher_tripwire
+      model:
+        template: smprpg:model/simplified_cross
+        arguments:
+          path: smprpg:block/aether/violet
+    settings:
+      template:
+        - smprpg:settings/flower
+      overrides:
+        map-color: 24
+        tags: [ "minecraft:flowers", "minecraft:small_flowers"]
+    loot:
+      template: smprpg:loot_table/self
+    behaviors:
+      - type: liquid_flowable_block
+      - type: bush_block
+        bottom-block-tags:
+          - smprpg:aether_dirt
+  smprpg:rainbow_lily:
+    state:
+      id: 423
+      auto-state: higher_tripwire
+      model:
+        template: smprpg:model/simplified_cross
+        arguments:
+          path: smprpg:block/aether/rainbow_lily
+    settings:
+      template:
+        - smprpg:settings/flower
+      overrides:
+        map-color: 7
+        luminance: 15
+        tags: [ "minecraft:flowers", "minecraft:small_flowers"]
+    loot:
+      template: smprpg:loot_table/self
+    behaviors:
+      - type: liquid_flowable_block
+      - type: bush_block
+        bottom-block-tags:
+          - smprpg:aether_dirt
+
+placed-features:
+  smprpg:blue_aercloud:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 32
+        targets:
+          - state:
+              Name: smprpg:blue_aercloud
+            target:
+              predicate_type: minecraft:block_match
+              block: minecraft:air
+    placement:
+      - type: minecraft:count
+        count: 1
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 96
+          min_inclusive:
+            absolute: -32
+  smprpg:cold_aercloud_lower:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 48
+        targets:
+          - state:
+              Name: smprpg:cold_aercloud
+            target:
+              predicate_type: minecraft:block_match
+              block: minecraft:air
+    placement:
+      - type: minecraft:count
+        count: 1
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 256
+          min_inclusive:
+            absolute: -64
+  smprpg:wispy_aercloud_higher:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 24
+        targets:
+          - state:
+              Name: smprpg:wispy_aercloud
+            target:
+              predicate_type: minecraft:block_match
+              block: minecraft:air
+    placement:
+      - type: minecraft:count
+        count: 1
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 96
+  smprpg:disk_quicksoil_shelves:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:disk
+      config:
+        half_height: 1
+        radius:
+          type: uniform
+          max_inclusive: 5
+          min_inclusive: 3
+        state_provider:
+          type: minecraft:rule_based_state_provider
+          rules:
+            - if_true:
+                type: minecraft:matching_block_tag
+                tag: smprpg:quicksoil_shelf_replaceables
+              then:
+                type: minecraft:simple_state_provider
+                state:
+                  Name: smprpg:quicksoil
+        target:
+          type: minecraft:any_of
+          predicates:
+            - type: all_of
+              predicates:
+                - type: any_of
+                  predicates:
+                    - type: matching_blocks
+                      blocks:
+                        smprpg:quicksoil
+                      offset: [-1, 0, 0]
+                    - type: matching_blocks
+                      blocks:
+                        smprpg:quicksoil
+                      offset: [1, 0, 0]
+                    - type: matching_blocks
+                      blocks:
+                        smprpg:quicksoil
+                      offset: [0, 0, -1]
+                    - type: matching_blocks
+                      blocks:
+                        smprpg:quicksoil
+                      offset: [0, 0, 1]
+                - type: matching_block_tag
+                  tag: smprpg:quicksoil_shelf_replaceables
+            - type: all_of
+              predicates:
+                - type: matching_blocks
+                  blocks:
+                    - smprpg:aether_grass_block
+                - type: matching_block_tag
+                  tag: smprpg:quicksoil_shelf_valid
+                  offset: [0, -1, 0]
+    placement:
+      - type: minecraft:count
+        count: 12
+      - type: minecraft:heightmap
+        heightmap: WORLD_SURFACE_WG
+      - type: minecraft:biome
+  smprpg:ore_silver_aether:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 10
+        targets:
+          - state:
+              Name: smprpg:aether_silver_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 10
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 22
+  smprpg:ore_gravitite:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 8
+        targets:
+          - state:
+              Name: smprpg:gravitite_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 1
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 52
+          min_inclusive:
+            absolute: 22
+  smprpg:ore_zanite:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 12
+        targets:
+          - state:
+              Name: smprpg:zanite_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 8
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 22
+  smprpg:ore_ambrosium:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 20
+        targets:
+          - state:
+              Name: smprpg:ambrosium_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 12
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 22
+  smprpg:ore_platinum:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 8
+        targets:
+          - state:
+              Name: smprpg:platinum_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 6
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 64
+          min_inclusive:
+            absolute: 22
+  smprpg:ore_palladium:
+    dimension_type:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 8
+        targets:
+          - state:
+              Name: smprpg:palladium_ore
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 6
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 48
+  smprpg:ore_aether_dirt:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 33
+        targets:
+          - state:
+              Name: smprpg:aether_dirt
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 20
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 0
+  smprpg:ore_icestone:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 32
+        targets:
+          - state:
+              Name: smprpg:icestone
+            target:
+              predicate_type: minecraft:tag_match
+              tag: smprpg:holystone_ore_replaceables
+    placement:
+      - type: minecraft:count
+        count: 20
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 0
+  smprpg:aether_springs:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:spring_feature
+      config:
+        requires_block_below: true
+        state:
+          Name: minecraft:water
+          Properties:
+            falling: true
+        valid_blocks: "#smprpg:holystone_ore_replaceables"
+    placement:
+      - type: minecraft:count
+        count: 20
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 128
+          min_inclusive:
+            absolute: 0
+  smprpg:aether_surface_lakes:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: minecraft:lake
+      config:
+        fluid:
+          type: minecraft:simple_state_provider
+          state:
+            Name: minecraft:water
+        barrier:
+          type: minecraft:simple_state_provider
+          state:
+            Name: smprpg:holystone
+    placement:
+      - type: minecraft:rarity_filter
+        chance: 15
+      - type: minecraft:heightmap
+        heightmap: WORLD_SURFACE_WG
+      - type: minecraft:biome
+  smprpg:flower_aether_meadow:
+    dimension:
+      - smprpg:the_aether
+    biome:
+      - smprpg:skyroot_meadow
+    feature:
+      type: 'minecraft:simple_block'
+      config:
+        to_place:
+          type: 'minecraft:noise_threshold_provider'
+          default_state:
+            Name: 'smprpg:puffbloom'
+          high_chance: 0.95
+          high_states:
+          - "Name": 'smprpg:puffbloom'
+          - "Name": 'smprpg:violet'
+          low_states:
+          - "Name": 'smprpg:rainbow_lily'
+          noise:
+            amplitudes: [1.0]
+            firstOctave: 0
+          scale: 0.005
+          seed: 2345
+          threshold: -0.8
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 10
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: MOTION_BLOCKING
+      - type: 'minecraft:count'
+        count: 192
+      - type: 'minecraft:random_offset'
+        xz_spread:
+          type: 'minecraft:trapezoid'
+          max: 7
+          min: -7
+          plateau: 0
+        y_spread:
+          type: 'minecraft:trapezoid'
+          max: 3
+          min: -3
+          plateau: 0
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:all_of'
+          predicates:
+            - type: 'minecraft:matching_block_tag'
+              tag: minecraft:air
+            - type: 'minecraft:matching_blocks'
+              blocks: smprpg:aether_grass_block
+              offset: [0, -1, 0]
+  smprpg:flower_aether_normal:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: 'minecraft:simple_block'
+      config:
+        to_place:
+          type: 'minecraft:noise_threshold_provider'
+          default_state:
+            Name: 'smprpg:puffbloom'
+          high_chance: 0.99
+          high_states:
+            - "Name": 'smprpg:puffbloom'
+            - "Name": 'smprpg:violet'
+          low_states:
+            - "Name": 'smprpg:rainbow_lily'
+          noise:
+            amplitudes: [1.0]
+            firstOctave: 0
+          scale: 0.005
+          seed: 2345
+          threshold: -0.8
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 30
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: MOTION_BLOCKING
+      - type: 'minecraft:count'
+        count: 96
+      - type: 'minecraft:random_offset'
+        xz_spread:
+          type: 'minecraft:trapezoid'
+          max: 7
+          min: -7
+          plateau: 0
+        y_spread:
+          type: 'minecraft:trapezoid'
+          max: 3
+          min: -3
+          plateau: 0
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:all_of'
+          predicates:
+            - type: 'minecraft:matching_block_tag'
+              tag: minecraft:air
+            - type: 'minecraft:matching_blocks'
+              blocks: smprpg:aether_grass_block
+              offset: [0, -1, 0]
+  smprpg:patch_sky_berry:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: 'minecraft:simple_block'
+      config:
+        to_place:
+          type: 'minecraft:rule_based_state_provider'
+          rules:
+            - if_true:
+                type: 'minecraft:all_of'
+                predicates:
+                  - type: 'minecraft:replaceable'
+                  - type: 'minecraft:matching_fluids'
+                    fluids: 'minecraft:empty'
+                  - type: 'minecraft:matching_blocks'
+                    offset:
+                      - 0
+                      - -1
+                      - 0
+                    blocks: 'smprpg:aether_grass_block'
+              then:
+                type: 'minecraft:simple_state_provider'
+                state:
+                  Name: 'smprpg:sky_berry_bush'
+                  Properties:
+                    age: 3
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 100
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: MOTION_BLOCKING
+      - type: 'minecraft:count'
+        count: 64
+      - type: 'minecraft:random_offset'
+        xz_spread:
+          type: 'minecraft:trapezoid'
+          max: 7
+          min: -7
+          plateau: 0
+        y_spread:
+          type: 'minecraft:trapezoid'
+          max: 3
+          min: -3
+          plateau: 0
+  smprpg:tall_grass_aether:
+    dimension:
+      - smprpg:the_aether
+    feature:
+      type: 'minecraft:simple_block'
+      config:
+        to_place:
+          type: 'minecraft:noise_threshold_provider'
+          default_state:
+            Name: 'smprpg:puffbloom'
+          high_chance: 0.5
+          high_states:
+            - "Name": 'minecraft:bush'
+            - "Name": 'minecraft:short_grass'
+          low_states:
+            - "Name": 'minecraft:tall_grass'
+          noise:
+            amplitudes: [1.0]
+            firstOctave: 0
+          scale: 0.005
+          seed: 2345
+          threshold: -0.4
+    placement:
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: MOTION_BLOCKING
+      - type: 'minecraft:count'
+        count: 132
+      - type: 'minecraft:random_offset'
+        xz_spread:
+          type: 'minecraft:trapezoid'
+          max: 12
+          min: -12
+          plateau: 0
+        y_spread:
+          type: 'minecraft:trapezoid'
+          max: 3
+          min: -3
+          plateau: 0
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:all_of'
+          predicates:
+            - type: 'minecraft:matching_block_tag'
+              tag: minecraft:air
+            - type: 'minecraft:matching_blocks'
+              blocks: smprpg:aether_grass_block
+              offset: [0, -1, 0]
+
+recipes:
+  smprpg:violet_to_purple_dye:
+    type: shapeless
+    category: building
+    group: purple_dye
+    ingredients:
+      - smprpg:violet
+    result:
+      id: minecraft:purple_dye
+      count: 1
+  smprpg:puffbloom_to_white_dye:
+    type: shapeless
+    category: building
+    group: white_dye
+    ingredients:
+      - smprpg:puffbloom
+    result:
+      id: minecraft:white_dye
+      count: 1
+
+recipes#smelting:
+  smprpg:palladium_from_blasting_raw_palladium:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: palladium
+    time: 1600
+    ingredient: smprpg:raw_palladium
+    result:
+      id: smprpg:palladium_ingot
+      count: 1
+  smprpg:palladium_from_blasting_palladium_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 1600
+    ingredient: smprpg:palladium_ore
+    result:
+      id: smprpg:palladium_ingot
+      count: 1
+  smprpg:platinum_from_blasting_raw_platinum:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: platinum
+    time: 1600
+    ingredient: smprpg:raw_platinum
+    result:
+      id: smprpg:platinum_ingot
+      count: 1
+  smprpg:platinum_from_blasting_platinum_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 1600
+    ingredient: smprpg:platinum_ore
+    result:
+      id: smprpg:platinum_ingot
+      count: 1

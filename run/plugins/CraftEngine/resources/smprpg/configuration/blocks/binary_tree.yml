@@ -1,0 +1,931 @@
+items:
+  smprpg:binary_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:binary_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.binary_log>
+      pdc:
+        smprpg:item-type: binary_log
+        smprpg:sell-value: 8
+    model: smprpg:block/end/binary_log
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_binary_log
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+           - smprpg:settings/wood
+           - smprpg:sound/cherry_wood
+           - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/end/binary_log_top
+            texture_side_path: smprpg:block/end/binary_log
+            model_vertical_path: smprpg:block/end/binary_log
+            model_horizontal_path: smprpg:block/end/binary_log_horizontal
+  smprpg:stripped_binary_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:binary_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_binary_log>
+      pdc:
+        smprpg:item-type: stripped_binary_log
+        smprpg:sell-value: 8
+    model: smprpg:block/end/stripped_binary_log
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/end/stripped_binary_log_top
+            texture_side_path: smprpg:block/end/stripped_binary_log
+            model_vertical_path: smprpg:block/end/stripped_binary_log
+            model_horizontal_path: smprpg:block/end/stripped_binary_log_horizontal
+  smprpg:binary_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:binary_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.binary_wood>
+      pdc:
+        smprpg:item-type: binary_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/end/binary_wood
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_binary_wood
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/end/binary_log
+            texture_side_path: smprpg:block/end/binary_log
+            model_vertical_path: smprpg:block/end/binary_wood
+            model_horizontal_path: smprpg:block/end/binary_wood_horizontal
+  smprpg:stripped_binary_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:binary_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_binary_wood>
+      pdc:
+        smprpg:item-type: binary_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/end/stripped_binary_wood
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/end/stripped_binary_log
+            texture_side_path: smprpg:block/end/stripped_binary_log
+            model_vertical_path: smprpg:block/end/stripped_binary_wood
+            model_horizontal_path: smprpg:block/end/stripped_binary_wood_horizontal
+  smprpg:binary_planks:
+    settings:
+      fuel-time: 300
+      tags:
+        - minecraft:planks
+        - minecraft:wooden_tool_materials
+    data:
+      item-name: <!i><lang:item.smprpg.binary_planks>
+    model: smprpg:block/end/binary_planks
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template:
+            - smprpg:settings/planks
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+        loot:
+          template: smprpg:loot_table/self
+        state:
+          model:
+            template: smprpg:model/simplified_cube_all
+            arguments:
+              path: smprpg:block/end/binary_planks
+          auto-state: solid
+  smprpg:binary_sapling:
+    settings:
+      fuel-time: 100
+    data:
+      item-name: <!i><lang:item.smprpg.binary_sapling>
+      pdc:
+        smprpg:item-type: binary_sapling
+        smprpg:sell-value: 2
+    texture: smprpg:block/end/binary_sapling
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template:
+            - smprpg:settings/sapling
+        behaviors:
+          - type: liquid_flowable_block
+          - type: bush_block
+            bottom-block-tags:
+              - smprpg:supports_end_vegetation
+          - type: sapling_block
+            feature: smprpg:binary_tree
+            bone-meal-success-chance: 0.25
+            grow-speed: 0.0
+        loot:
+          template: smprpg:loot_table/self
+        states:
+          properties:
+            stage:
+              type: int
+              smprpg-value: 0
+              range: 0~1
+          appearances:
+            default:
+              auto-state: sapling
+              model:
+                path: smprpg:block/end/binary_sapling
+                generation:
+                  parent: minecraft:block/cross
+                  textures:
+                    cross: smprpg:block/end/binary_sapling
+  smprpg:binary_leaves:
+    material: oak_leaves
+    data:
+      item-name: <!i><lang:item.smprpg.binary_leaves>
+      block-state: smprpg:binary_leaves[persistent=true,waterlogged=false,distance=7]
+      pdc:
+        smprpg:item-type: binary_leaves
+    model:
+      type: minecraft:model
+      path: smprpg:item/aether/binary_leaves
+      generation:
+        parent: smprpg:block/end/binary_leaves
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: leaves_block
+        loot:
+          template: smprpg:loot_table/leaves
+          arguments:
+            leaves_namespace: smprpg
+            leaves_id: binary_leaves
+            sapling_namespace: smprpg
+            sapling_id: binary_sapling
+        settings:
+          template:
+           - smprpg:settings/leaves
+           - smprpg:sound/cherry_leaves
+          overrides:
+            hardness: 1.0
+        states:
+          template: smprpg:block_state/non_tintable_leaves
+          arguments:
+            model_path: smprpg:block/end/binary_leaves
+            texture_path: smprpg:block/end/binary_leaves
+  smprpg:binary_trapdoor:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_trapdoor>
+      pdc:
+        smprpg:item-type: binary_trapdoor
+    settings:
+      fuel-time: 300
+    model: smprpg:block/end/binary_trapdoor_bottom
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: trapdoor_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_trapdoor.open
+            close: minecraft:block.wooden_trapdoor.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:trapdoors
+        states:
+          template: smprpg:block_state/trapdoor
+          arguments:
+            base_block: birch_trapdoor
+            model_bottom_path: smprpg:block/end/binary_trapdoor_bottom
+            model_bottom_generation:
+              parent: minecraft:block/template_orientable_trapdoor_bottom
+              textures:
+                texture: smprpg:block/end/binary_trapdoor
+            model_open_path: smprpg:block/end/binary_trapdoor_open
+            model_open_generation:
+              parent: minecraft:block/template_orientable_trapdoor_open
+              textures:
+                texture: smprpg:block/end/binary_trapdoor
+            model_top_path: smprpg:block/end/binary_trapdoor_top
+            model_top_generation:
+              parent: minecraft:block/template_orientable_trapdoor_top
+              textures:
+                texture: smprpg:block/end/binary_trapdoor
+  smprpg:binary_door:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_door>
+      pdc:
+        smprpg:item-type: binary_door
+    settings:
+      fuel-time: 200
+    texture: smprpg:item/end/binary_door
+    behavior:
+      type: double_high_block_item
+      block:
+        behavior:
+          type: door_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_door.open
+            close: minecraft:block.wooden_door.close
+        loot:
+          template: smprpg:loot_table/door
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_6
+          overrides:
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:wooden_doors
+              - minecraft:doors
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/door
+          arguments:
+            base_block: birch_door
+            model_top_left_path: smprpg:block/end/binary_door_top_left
+            model_top_left_generation:
+              parent: minecraft:block/door_top_left
+              textures: &textures
+                bottom: smprpg:block/end/binary_door_bottom
+                top: smprpg:block/end/binary_door_top
+            model_top_right_path: smprpg:block/end/binary_door_top_right
+            model_top_right_generation:
+              parent: minecraft:block/door_top_right
+              textures: *textures
+            model_top_left_open_path: smprpg:block/end/binary_door_top_left_open
+            model_top_left_open_generation:
+              parent: minecraft:block/door_top_left_open
+              textures: *textures
+            model_top_right_open_path: smprpg:block/end/binary_door_top_right_open
+            model_top_right_open_generation:
+              parent: minecraft:block/door_top_right_open
+              textures: *textures
+            model_bottom_left_path: smprpg:block/end/binary_door_bottom_left
+            model_bottom_left_generation:
+              parent: minecraft:block/door_bottom_left
+              textures: *textures
+            model_bottom_right_path: smprpg:block/end/binary_door_bottom_right
+            model_bottom_right_generation:
+              parent: minecraft:block/door_bottom_right
+              textures: *textures
+            model_bottom_left_open_path: smprpg:block/end/binary_door_bottom_left_open
+            model_bottom_left_open_generation:
+              parent: minecraft:block/door_bottom_left_open
+              textures: *textures
+            model_bottom_right_open_path: smprpg:block/end/binary_door_bottom_right_open
+            model_bottom_right_open_generation:
+              parent: minecraft:block/door_bottom_right_open
+              textures: *textures
+  smprpg:binary_fence_gate:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_fence_gate>
+      pdc:
+        smprpg:item-type: binary_fence_gate
+    settings:
+      fuel-time: 300
+    model: smprpg:block/end/binary_fence_gate
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: fence_gate_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.fence_gate.open
+            close: minecraft:block.fence_gate.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_6
+          overrides:
+            map-color: 22
+            hardness: 10.0
+            instrument: bass
+            burnable: true
+            tags:
+              - minecraft:fence_gates
+              - minecraft:mineable/axe
+              - minecraft:unstable_bottom_center
+        states:
+          template: smprpg:block_state/fence_gate
+          arguments:
+            base_block: birch_fence_gate
+            model_fence_gate_path: smprpg:block/end/binary_fence_gate
+            model_fence_gate_generation:
+              parent: minecraft:block/template_fence_gate
+              textures: &textures
+                texture: smprpg:block/end/binary_planks
+            model_fence_gate_open_path: smprpg:block/end/binary_fence_gate_open
+            model_fence_gate_open_generation:
+              parent: minecraft:block/template_fence_gate_open
+              textures: *textures
+            model_fence_gate_wall_path: smprpg:block/end/binary_fence_gate_wall
+            model_fence_gate_wall_generation:
+              parent: minecraft:block/template_fence_gate_wall
+              textures: *textures
+            model_fence_gate_wall_open_path: smprpg:block/end/binary_fence_gate_wall_open
+            model_fence_gate_wall_open_generation:
+              parent: minecraft:block/template_fence_gate_wall_open
+              textures: *textures
+  smprpg:binary_slab_bottom_display:
+    data:
+      item-name: <!i><lang:item.default.binary_slab_bottom>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/end/binary_slab_bottom
+        texture: smprpg:block/end/binary_planks
+        extension: ""
+  smprpg:binary_slab_top_display:
+    data:
+      item-name: <!i><lang:item.default.binary_slab_top>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/end/binary_slab_top
+        texture: smprpg:block/end/binary_planks
+        extension: _top
+  smprpg:binary_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_slab>
+      pdc:
+        smprpg:item-type: binary_slab
+        smprpg:sell-value: 1
+    settings:
+      fuel-time: 150
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/end/binary_slab_bottom
+        texture: smprpg:block/end/binary_planks
+        extension: ""
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: slab_block
+        loot:
+          template: smprpg:loot_table/slab
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:burn_data/planks
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:wooden_slabs
+              - minecraft:slabs
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/entity_render_slab
+          arguments:
+            base_block: oxidized_cut_copper_slab
+            item_top_slab: smprpg:binary_slab_top_display
+            item_bottom_slab: smprpg:binary_slab_bottom_display
+            item_double_slab: smprpg:binary_planks
+  smprpg:binary_stairs_inner_display:
+    data:
+      item-name: <!i><lang:item.default.binary_stairs_inner_display>
+    model:
+      template: smprpg:model/simplified_inner_stairs
+      arguments:
+        path: smprpg:block/end/binary_stairs_inner_display
+        texture: smprpg:block/end/binary_planks
+  smprpg:binary_stairs_outer_display:
+    data:
+      item-name: <!i><lang:item.default.binary_stairs_outer_display>
+    model:
+      template: smprpg:model/simplified_outer_stairs
+      arguments:
+        path: smprpg:block/end/binary_stairs_outer_display
+        texture: smprpg:block/end/binary_planks
+  smprpg:binary_stairs_display:
+    data:
+      item-name: <!i><lang:item.default.binary_stairs_display>
+    model:
+      template: smprpg:model/simplified_stairs
+      arguments:
+        path: smprpg:block/end/binary_stairs_display
+        texture: smprpg:block/end/binary_planks
+  smprpg:binary_stairs:
+    model: smprpg:block/end/binary_stairs_display
+    data:
+      item-name: <!i><lang:item.smprpg.binary_stairs>
+      pdc:
+        smprpg:item-type: binary_stairs
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:burn_data/planks
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:stairs
+              - minecraft:wooden_stairs
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/entity_render_stairs
+          arguments:
+            base_block: oxidized_cut_copper_stairs
+            item_stairs_inner: smprpg:binary_stairs_inner_display
+            item_stairs_outer: smprpg:binary_stairs_outer_display
+            item_stairs: smprpg:binary_stairs_display
+  smprpg:binary_pressure_plate:
+    model: smprpg:block/end/binary_pressure_plate
+    data:
+      item-name: <!i><lang:item.smprpg.binary_pressure_plate>
+      pdc:
+        smprpg:item-type: binary_pressure_plate
+        smprpg:sell-value: 4
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_6
+          overrides:
+            hardness: 2.5
+            burnable: true
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:wall_post_override
+              - minecraft:wooden_pressure_plates
+              - minecraft:pressure_plates
+        behaviors:
+          type: pressure_plate_block
+          sensitivity: all
+          pressed-time: 20
+          sounds:
+            on: minecraft:block.wooden_pressure_plate.click_on
+            off: minecraft:block.wooden_pressure_plate.click_off
+        states:
+          template: smprpg:block_state/pressure_plate
+          arguments:
+            normal_state: light_weighted_pressure_plate:6
+            powered_state: light_weighted_pressure_plate:7
+            model_normal_path: smprpg:block/end/binary_pressure_plate
+            model_normal_generation:
+              parent: minecraft:block/pressure_plate_up
+              textures:
+                texture: smprpg:block/end/binary_planks
+            model_powered_path: smprpg:block/end/binary_pressure_plate_down
+            model_powered_generation:
+              parent: minecraft:block/pressure_plate_down
+              textures:
+                texture: smprpg:block/end/binary_planks
+
+items#fence:
+  smprpg:binary_fence:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/binary_fence_inventory
+      generation:
+        parent: minecraft:block/fence_inventory
+        textures:
+          texture: smprpg:block/end/binary_planks
+    behavior:
+      type: block_item
+      block: smprpg:binary_fence
+  smprpg:binary_fence_post:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/end/binary_fence_post
+      generation:
+        parent: minecraft:block/fence_post
+        textures:
+          texture: smprpg:block/end/binary_planks
+  smprpg:binary_fence_side:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/end/binary_fence_side
+      generation:
+        parent: minecraft:block/fence_side
+        textures:
+          texture: smprpg:block/end/binary_planks
+blocks#fence:
+  smprpg:binary_fence:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:hardness/planks
+        - smprpg:sound/cherry_wood
+        - smprpg:data/breaking_power_6
+      overrides:
+        burn-chance: 5
+        fire-spread-chance: 20
+        hardness: 10.0
+        burnable: true
+        is-suffocating: false
+        is-redstone-conductor: false
+        push-reaction: NORMAL
+        instrument: BASS
+        map-color: 22
+        tags:
+          - minecraft:fences
+          - minecraft:mineable/axe
+          - minecraft:wooden_fences
+    behavior:
+      type: fence_block
+      connectable-block-tag: minecraft:wooden_fences
+      can-leash: true
+    states:
+      template: smprpg:block_state/fence
+      arguments:
+        base_block: oak_fence
+        fence_post_item: smprpg:binary_fence_post
+        fence_side_item: smprpg:binary_fence_side
+
+items#button:
+  smprpg:binary_button:
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/binary_button
+      generation:
+        parent: minecraft:block/button_inventory
+        textures:
+          texture: smprpg:block/end/binary_planks
+    data:
+      item-name: <!i><lang:item.smprpg.binary_button>
+    settings:
+      fuel-time: 100
+    behavior:
+      type: block_item
+      block: smprpg:binary_button
+  smprpg:binary_button_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/end/binary_button_pressed
+      generation:
+        parent: minecraft:block/button_pressed
+        textures:
+          texture: smprpg:block/end/binary_planks
+  smprpg:binary_button_not_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.binary_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/end/binary_button_not_pressed
+      generation:
+        parent: minecraft:block/button
+        textures:
+          texture: smprpg:block/end/binary_planks
+blocks#button:
+  smprpg:binary_button:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:sound/cherry_wood
+        - smprpg:hardness/button
+        - smprpg:data/breaking_power_6
+      overrides:
+        hardness: 2.5
+        burnable: true
+        push-reaction: destroy
+        map-color: 22
+        instrument: harp
+        tags:
+          - minecraft:buttons
+          - minecraft:mineable/axe
+          - minecraft:wooden_buttons
+    behaviors:
+      - type: liquid_flowable_block
+      - type: face_attached_horizontal_directional_block
+      - type: button_block
+        ticks-to-stay-pressed: 30
+        can-be-activated-by-arrows: true
+        sounds:
+          on: minecraft:block.wooden_button.click_on
+          off: minecraft:block.wooden_button.click_off
+    states:
+      template: smprpg:block_state/button
+      arguments:
+        base_block: birch_button
+        pressed_item: smprpg:binary_button_pressed
+        not_pressed_item: smprpg:binary_button_not_pressed
+
+recipes:
+  smprpg:binary_planks:
+    template: smprpg:recipe/planks
+    arguments:
+      wood_type: smprpg:binary
+  smprpg:binary_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:binary
+  smprpg:stripped_binary_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:stripped_binary
+  smprpg:binary_trapdoor:
+    type: shaped
+    pattern:
+      - AAA
+      - AAA
+    ingredients:
+      A: smprpg:binary_planks
+    result:
+      id: smprpg:binary_trapdoor
+      count: 2
+  smprpg:binary_door:
+    type: shaped
+    pattern:
+      - AA
+      - AA
+      - AA
+    ingredients:
+      A: smprpg:binary_planks
+    result:
+      id: smprpg:binary_door
+      count: 3
+  smprpg:binary_fence_gate:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: minecraft:stick
+      B: smprpg:binary_planks
+    result:
+      id: smprpg:binary_fence_gate
+      count: 1
+  smprpg:binary_slab:
+    type: shaped
+    pattern:
+      - AAA
+    ingredients:
+      A: smprpg:binary_planks
+    result:
+      id: smprpg:binary_slab
+      count: 6
+  smprpg:binary_pressure_plate:
+    type: shaped
+    pattern:
+      - AA
+    ingredients:
+      A: smprpg:binary_planks
+    result:
+      id: smprpg:binary_pressure_plate
+      count: 1
+  $$>=1.20.3#binary_stairs:
+    smprpg:binary_stairs:
+      type: shaped
+      pattern:
+        - "A  "
+        - "AA "
+        - "AAA"
+      ingredients:
+        A: smprpg:binary_planks
+      result:
+        id: smprpg:binary_stairs
+        count: 4
+  smprpg:binary_button:
+    type: shapeless
+    ingredients:
+      - smprpg:binary_planks
+    result:
+      id: smprpg:binary_button
+      count: 1
+  smprpg:binary_fence:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: smprpg:binary_planks
+      B: minecraft:stick
+    result:
+      id: smprpg:binary_fence
+      count: 3
+
+configured-feature:
+  smprpg:binary_tree:
+    type: 'minecraft:tree'
+    config:
+      ignore_vines: true
+      force_dirt: false
+      minimum_size:
+        type: 'minecraft:two_layers_feature_size'
+        min_clipped_height: 10
+        limit: 1
+        lower_size: 4
+        upper_size: 2
+      dirt_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:nullyium'
+      below_trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:nullyium'
+      trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:binary_log'
+          Properties:
+            axis: 'y'
+      foliage_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:binary_leaves'
+          Properties:
+            distance: '7'
+            persistent: 'false'
+            waterlogged: 'false'
+      root_placer:
+        type: 'minecraft:mangrove_root_placer'
+        root_provider:
+          type: 'minecraft:simple_state_provider'
+          state:
+            Name: 'smprpg:binary_wood'
+          above_root_placement:
+            above_root_provider:
+              type: 'minecraft:simple_state_provider'
+              state:
+                Name: "smprpg:binary_wood"
+            above_root_placement_chance: 0.5
+        trunk_offset_y: 0
+        mangrove_root_placement:
+          max_root_width: 3
+          max_root_length: 20
+          random_skew_chance: 1
+          can_grow_through: '#minecraft:replaceable'
+          muddy_roots_in: minecraft:mud
+          muddy_roots_provider:
+            type: 'minecraft:simple_state_provider'
+            state:
+              Name: 'smprpg:binary_wood'
+      trunk_placer:
+        type: 'minecraft:cherry_trunk_placer'
+        base_height: 3
+        height_rand_a: 2
+        height_rand_b: 6
+        branch_count: 2
+        branch_horizontal_length: 5
+        branch_start_offset_from_top:
+          min_inclusive: -4
+          max_inclusive: -3
+        branch_end_offset_from_top: 4
+      foliage_placer:
+        type: 'minecraft:bush_foliage_placer'
+        radius: 2
+        offset: 2
+        height: 4
+      decorators: []
+placed-features:
+  smprpg:binary_tree:
+    biome:
+      - minecraft:end_midlands
+    environment:
+      - minecraft:the_end
+    feature: smprpg:binary_tree
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 2
+      - type: 'minecraft:count'
+        count:
+          type: 'minecraft:weighted_list'
+          distribution:
+            - weight: 10
+              data: 1
+            - weight: 3
+              data: 2
+            - weight: 1
+              data: 3
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: WORLD_SURFACE
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:air'
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_block_tag'
+          tag: 'smprpg:supports_end_vegetation'
+          offset: [0,-1,0]
+      - type: 'minecraft:biome'

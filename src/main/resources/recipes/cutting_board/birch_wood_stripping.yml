@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:birch_wood"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_birch_wood", amount: 1, chance: 1.0 }

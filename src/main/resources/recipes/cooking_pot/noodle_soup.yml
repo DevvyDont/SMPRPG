@@ -1,0 +1,11 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:raw_pasta"
+  - "minecraft:egg"
+  - "minecraft:dried_kelp"
+  - "minecraft:porkchop"
+time: 200
+result: "smprpg:noodle_soup"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

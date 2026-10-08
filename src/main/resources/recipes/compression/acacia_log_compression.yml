@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:acacia_log
+- item: smprpg:premium_acacia_log
+  amount: 9
+- item: smprpg:enchanted_acacia_log
+  amount: 9
+- item: smprpg:acacia_log_singularity
+  amount: 9

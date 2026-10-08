@@ -55,6 +55,13 @@
           "type": "model",
           "model": "coins:item/enchanted_coin"
         }
+      },
+      {
+        "when": "smprpg:impossible_geometry",
+        "model": {
+          "type": "model",
+          "model": "blocks:block/impossible_geometry"
+        }
       }
     ]
   }

@@ -1,0 +1,19 @@
+type: shaped
+pattern:
+- imc
+- phg
+- ems
+ingredients:
+  p: smprpg:flamebroiled_porkchop
+  c: smprpg:draconic_crystal
+  s: smprpg:dissipating_sea_shell
+  e: smprpg:erratic_slime
+  g: smprpg:impossible_geometry
+  h: smprpg:heart_of_the_void
+  i: smprpg:inferno_remnant
+  m: smprpg:legendary_fish_essence
+result:
+  item: smprpg:xenomatter
+  amount: 1
+unlocked_by:
+- smprpg:heart_of_the_void

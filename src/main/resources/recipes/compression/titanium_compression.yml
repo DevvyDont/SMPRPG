@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:titanium_ingot
+- item: smprpg:titanium_block
+  amount: 9
+- item: smprpg:enchanted_titanium
+  amount: 9
+- item: smprpg:enchanted_titanium_block
+  amount: 9
+- item: smprpg:titanium_singularity
+  amount: 9

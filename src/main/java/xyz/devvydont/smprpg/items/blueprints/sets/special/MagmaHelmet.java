@@ -3,18 +3,14 @@ package xyz.devvydont.smprpg.items.blueprints.sets.special;
 import io.papermc.paper.datacomponent.item.Equippable;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
@@ -22,12 +18,10 @@ import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IEquippableOverride;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.ICustomTextured;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
-import xyz.devvydont.smprpg.util.crafting.builders.HelmetRecipe;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 import xyz.devvydont.smprpg.util.items.AbilityUtil;
@@ -36,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MagmaHelmet extends CustomAttributeItem implements ICraftable, IHeaderDescribable, IBreakableEquipment, ICustomTextured, IEquippableOverride, Listener {
+public class MagmaHelmet extends CustomAttributeItem implements IHeaderDescribable, IBreakableEquipment, ICustomTextured, IEquippableOverride, Listener {
 
     public MagmaHelmet(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -72,7 +66,7 @@ public class MagmaHelmet extends CustomAttributeItem implements ICraftable, IHea
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         List<Component> components = new ArrayList<>();
-        components.add(AbilityUtil.getAbilityComponent("Heat Proof (Passive)"));
+        components.add(AbilityUtil.getAbilityComponent("Heat Proof", true));
         components.add(ComponentUtils.create("Grants immunity to ").append(ComponentUtils.create(Symbols.FIRE + "fire based", NamedTextColor.RED)).append(ComponentUtils.create(" damage")));
         return components;
     }
@@ -80,23 +74,6 @@ public class MagmaHelmet extends CustomAttributeItem implements ICraftable, IHea
     @Override
     public int getPowerRating() {
         return 10;
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        return new HelmetRecipe(this, itemService.getCustomItem(CustomItemType.PREMIUM_MAGMA_CREAM), generate()).build();
-    }
-
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(
-                itemService.getCustomItem(Material.MAGMA_CREAM)
-        );
     }
 
     @Override

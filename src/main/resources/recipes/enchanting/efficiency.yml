@@ -1,0 +1,115 @@
+type: enchanting
+enchantment: efficiency
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:sugar
+      amount: 20
+    - item: minecraft:redstone
+      amount: 10
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:sugar
+      amount: 40
+    - item: minecraft:redstone
+      amount: 20
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 10
+    ingredients:
+    - item: minecraft:sugar
+      amount: 80
+    - item: minecraft:redstone
+      amount: 40
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: smprpg:premium_sugar
+      amount: 18
+    - item: minecraft:redstone
+      amount: 80
+    - item: minecraft:glowstone_dust
+      amount: 10
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: smprpg:premium_sugar
+      amount: 36
+    - item: minecraft:redstone_block
+      amount: 18
+    - item: minecraft:glowstone_dust
+      amount: 20
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:premium_sugar
+      amount: 72
+    - item: minecraft:redstone_block
+      amount: 36
+    - item: minecraft:glowstone_dust
+      amount: 40
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 50
+    ingredients:
+    - item: smprpg:enchanted_sugar
+      amount: 16
+    - item: minecraft:redstone_block
+      amount: 72
+    - item: minecraft:glowstone_dust
+      amount: 80
+    - item: smprpg:gravitite_shards
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 60
+    ingredients:
+    - item: smprpg:enchanted_sugar
+      amount: 32
+    - item: smprpg:enchanted_redstone
+      amount: 16
+    - item: minecraft:glowstone
+      amount: 40
+    - item: smprpg:gravitite_shards
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 70
+    ingredients:
+    - item: smprpg:enchanted_sugar
+      amount: 64
+    - item: smprpg:enchanted_redstone
+      amount: 32
+    - item: minecraft:glowstone
+      amount: 80
+    - item: smprpg:gravitite_shards
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_sugar_cane
+      amount: 15
+    - item: smprpg:enchanted_redstone
+      amount: 32
+    - item: smprpg:enchanted_glowstone
+      amount: 18
+    - item: smprpg:gravitite_shards
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 64

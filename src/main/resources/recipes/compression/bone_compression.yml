@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:bone
+- item: smprpg:premium_bone
+  amount: 9
+- item: smprpg:enchanted_bone
+  amount: 9

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- l
+- b
+ingredients:
+  b: minecraft:glass_bottle
+  l: smprpg:lapis_singularity
+result:
+  item: smprpg:colossal_experience_bottle
+  amount: 1
+unlocked_by:
+- minecraft:lapis_lazuli

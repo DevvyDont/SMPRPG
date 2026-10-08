@@ -1,0 +1,10 @@
+type: shaped
+pattern:
+- ccc
+ingredients:
+  c: minecraft:clay_ball
+result:
+  item: smprpg:unfired_ceramic_plate
+  amount: 1
+unlocked_by:
+- minecraft:clay_ball

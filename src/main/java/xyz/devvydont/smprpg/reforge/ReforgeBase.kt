@@ -25,22 +25,11 @@ abstract class ReforgeBase(@JvmField val type: ReforgeType) : Keyed, IAttributeC
     protected val itemService: ItemService
         get() = SMPRPG.getService(ItemService::class.java)
 
-    override fun getAttributeModifierType(): AttributeModifierType {
-        return AttributeModifierType.REFORGE
-    }
+    override val attributeModifierType: AttributeModifierType get() = AttributeModifierType.REFORGE
+    override fun getHeldAttributes() : MutableCollection<AttributeEntry?>? { return getAttributeModifiersWithRarity(ItemRarity.COMMON).toMutableList() }
 
     override fun getKey(): NamespacedKey {
         return NamespacedKey(plugin, this.type.key())
-    }
-
-    /**
-     * Returns attribute modifiers using default rarity. Might be worth looking into figuring out a better way
-     * around this because we have to consider item rarity
-     *
-     * @return
-     */
-    override fun getHeldAttributes(): List<AttributeEntry> {
-        return getAttributeModifiersWithRarity(ItemRarity.COMMON)
     }
 
     abstract fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry>
@@ -48,20 +37,20 @@ abstract class ReforgeBase(@JvmField val type: ReforgeType) : Keyed, IAttributeC
     fun formatAttributeModifiersWithRarity(rarity: ItemRarity): List<Component> {
         val lines: MutableList<Component> = ArrayList()
         for (entry in this.getAttributeModifiersWithRarity(rarity)) {
-            val sign = if (entry.getAmount() > 0) "+" else ""
+            val sign = if (entry.amount > 0) "+" else ""
             // The number is unchanged if this is an additive operation. If it isn't, x100 to make it show as a percentage.
-            val option = AttributeUtil.getAttributeFormat(entry.getAttribute())
+            val option = AttributeUtil.getAttributeFormat(entry.attribute)
             val number =
-                if (entry.getOperation() == AttributeModifier.Operation.ADD_NUMBER) option.format(entry.getAmount()) else option.format(
-                    entry.getAmount() * 100
+                if (entry.operation == AttributeModifier.Operation.ADD_NUMBER) option.format(entry.amount) else option.format(
+                    entry.amount * 100
                 )
             // If this is a multiplicative operation, or we need to force the attribute to show as a percent, use percents.
             val numberSection = String.format("%s%s", sign, number)
-            val wrapper = entry.getAttribute()
+            val wrapper = entry.attribute!!
             val numberColor =
                 if (wrapper.Type == AttributeType.SPECIAL)
                     NamedTextColor.LIGHT_PURPLE
-                else if (wrapper.Type == AttributeType.HELPFUL && entry.getAmount() > 0)
+                else if (wrapper.Type == AttributeType.HELPFUL && entry.amount > 0)
                     NamedTextColor.GREEN else NamedTextColor.RED
 
             val numberComponent: Component = ComponentUtils.create(numberSection, numberColor)

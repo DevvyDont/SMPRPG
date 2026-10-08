@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- ' c '
+- b b
+- lbl
+ingredients:
+  b: smprpg:enchanted_platinum
+  c: smprpg:astral_filament
+  l: smprpg:premium_membrane
+result:
+  item: smprpg:gigantic_coin_purse
+  amount: 1
+unlocked_by:
+- minecraft:leather

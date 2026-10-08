@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:orichalcum_ingot
+result:
+  item: smprpg:orichalcum_bow
+  amount: 1
+unlocked_by:
+- smprpg:orichalcum_ingot

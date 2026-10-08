@@ -1,0 +1,8 @@
+type: cooking_pot
+ingredients:
+  - { item: "minecraft:beetroot", amount: 3 }
+time: 200
+result: "minecraft:beetroot_soup"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

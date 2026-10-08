@@ -1,0 +1,6 @@
+{
+	"model": {
+	  "type": "minecraft:model",
+	  "model": "smprpg:item/spells/healing_aura_spell"
+	}
+}

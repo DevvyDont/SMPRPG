@@ -1,0 +1,21 @@
+type: enchanting
+enchantment: fire_aspect
+levels:
+  '1':
+    power: 15
+    ingredients:
+    - item: smprpg:premium_blaze_rod
+      amount: 30
+    - item: minecraft:magma_cream
+      amount: 80
+    - item: minecraft:lapis_block
+      amount: 12
+  '2':
+    power: 25
+    ingredients:
+    - item: smprpg:enchanted_blaze_rod
+      amount: 8
+    - item: smprpg:inferno_residue
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 32

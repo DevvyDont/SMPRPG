@@ -25,10 +25,11 @@ import xyz.devvydont.smprpg.services.EconomyService.Companion.formatMoney
 import xyz.devvydont.smprpg.services.EntityService
 import xyz.devvydont.smprpg.services.ItemService
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.formatting.Symbols
 import java.util.function.Consumer
 
 class MenuReforge(player: Player) : MenuBase(player, ROWS) {
-    fun getReforgeCost(rarity: ItemRarity): Long {
+    fun getReforgeCost(rarity: ItemRarity): Int {
         return when (rarity) {
             ItemRarity.COMMON -> 250
             ItemRarity.UNCOMMON -> 500
@@ -41,32 +42,35 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
         }
     }
 
-    val balance: Long
+    val balance: Int
         /**
          * Shortcut method to get the balance of the player who owns this inventory.
          * @return The balance of the player
          */
-        get() = SMPRPG.getService(EconomyService::class.java).getMoney(player)
+        get() = Math.toIntExact(
+            SMPRPG.getService(EconomyService::class.java).getMoney(player)
+        )
 
     /**
      * Generates the button to be displayed in the anvil click slot. Updates based on the state of the interface.
-     *
+     * 
      * @return an ItemStack to be used as an item display.
      */
     fun generateAnvilButton(): ItemStack {
         val input = getItem(INPUT_SLOT)
         val anvil = getNamedItem(
-            Material.ANVIL,
+            Material.BLACK_STAINED_GLASS_PANE,
             ComponentUtils.create("Roll Random Reforge!", NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false)
         )
-        val lore: MutableList<Component> = ArrayList()
+        markItemNoRender(anvil)
+        val lore: MutableList<Component?> = ArrayList<Component?>()
 
         // Has nothing been input yet?
         if (input == null || input.type == Material.AIR) {
             lore.add(ComponentUtils.EMPTY)
             lore.add(ComponentUtils.create("Input an item to reforge!", NamedTextColor.WHITE))
-            anvil.editMeta(Consumer { meta: ItemMeta ->
-                meta.lore(ComponentUtils.cleanItalics(lore))
+            anvil.editMeta(Consumer { meta: ItemMeta? ->
+                meta!!.lore(ComponentUtils.cleanItalics(lore))
             })
             return anvil
         }
@@ -75,14 +79,14 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
 
         // Is this item not able to receive a reforge?
         if (getRandomReforge(
-                blueprint.getItemClassification(),
+                blueprint.itemClassification,
                 blueprint.getReforgeType(input)
             ).type == ReforgeType.ERROR
         ) {
             lore.add(ComponentUtils.EMPTY)
             lore.add(ComponentUtils.create("This item cannot be reforged!", NamedTextColor.RED))
-            anvil.editMeta(Consumer { meta: ItemMeta ->
-                meta.lore(ComponentUtils.cleanItalics(lore))
+            anvil.editMeta(Consumer { meta: ItemMeta? ->
+                meta!!.lore(ComponentUtils.cleanItalics(lore))
             })
             return anvil.withType(Material.BARRIER)
         }
@@ -108,8 +112,8 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
             lore.add(ComponentUtils.EMPTY)
             lore.add(ComponentUtils.create("NOTE: Previous reforge will be overwritten!", NamedTextColor.RED))
         }
-        anvil.editMeta(Consumer { meta: ItemMeta ->
-            meta.lore(ComponentUtils.cleanItalics(lore))
+        anvil.editMeta(Consumer { meta: ItemMeta? ->
+            meta!!.lore(ComponentUtils.cleanItalics(lore))
             if (bal >= cost) meta.setEnchantmentGlintOverride(true)
         })
 
@@ -118,7 +122,7 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
 
     /**
      * Randomly rolls a reforge.
-     *
+     * 
      * @param classification The classification of the item that is being reforged.
      * @param exclude The reforge type to exclude when rolling a reforge. Can be null to consider all available reforges.
      * @return An randomly selected instance of a registered ReforgeBase singleton that is compatible with the classification.
@@ -139,11 +143,13 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
             if (!type.isAllowed(classification)) continue
 
             // Valid!
-            choices.add(SMPRPG.getService(ItemService::class.java).getReforge(type)!!)
+            val rfg = SMPRPG.getService(ItemService::class.java).getReforge(type)
+            if (rfg != null) choices.add(rfg)
         }
 
         // If we found no valid reforges, default to the error reforge type. Error reforge type should be handled by caller
-        if (choices.isEmpty()) return SMPRPG.getService(ItemService::class.java)
+        if (choices.isEmpty())
+            return SMPRPG.getService(ItemService::class.java)
             .getReforge(ReforgeType.ERROR)!!
 
         // Return a random choice
@@ -156,22 +162,19 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
     fun reforge() {
         // Check if we have an item in the input
 
-        val item = getItem(INPUT_SLOT)
-        if (item == null) {
-            playInvalidAnimation()
+        val item = getItem(INPUT_SLOT) ?: //playInvalidAnimation();
             return
-        }
 
         // Check if this item is able to store attributes. Reforges can't add attributes to attributeless items!
         val blueprint = SMPRPG.getService(ItemService::class.java).getBlueprint(item)
         if (blueprint !is IAttributeItem) {
-            playInvalidAnimation()
+            //playInvalidAnimation();
             return
         }
 
         // Analyze the current reforge on the gear and determine if we can even roll another reforge without erroring
         val currentReforgeType = blueprint.getReforgeType(item)
-        val newReforge = getRandomReforge(blueprint.getItemClassification(), currentReforgeType)
+        val newReforge = getRandomReforge(blueprint.itemClassification, currentReforgeType)
         var success = newReforge.type != ReforgeType.ERROR
 
         // Determine if we can afford this reforge
@@ -181,19 +184,16 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
         // Apply reforge and take their money if we had no issues
         if (success) {
             newReforge.apply(item)
-            SMPRPG.getService(EconomyService::class.java).spendMoney(player, cost)
+            SMPRPG.getService(EconomyService::class.java).spendMoney(player, cost.toLong())
             val player = SMPRPG.getService(EntityService::class.java).getPlayerInstance(this.player)
             player.magicSkill
                 .addExperience((blueprint.getRarity(item).ordinal + 1) * blueprint.getPowerRating() / 10)
         }
 
-        val soundOrigin = player.location.add(player.location.getDirection().normalize().multiply(2))
+        val soundOrigin = player.location.add(player.location.direction.normalize().multiply(2))
         player.world
             .playSound(soundOrigin, if (success) Sound.BLOCK_ANVIL_USE else Sound.ENTITY_VILLAGER_NO, .5f, .75f)
         blueprint.updateItemData(item)
-
-        if (success) playSuccessAnimation()
-        else playInvalidAnimation()
     }
 
     /**
@@ -202,15 +202,23 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
     fun render() {
         this.setBorderFull()
         this.clearSlot(INPUT_SLOT)
-        this.setButton(BUTTON_SLOT, generateAnvilButton()) { event: InventoryClickEvent ->
-            if (event.action == InventoryAction.PICKUP_ALL) reforge()
+        this.setButton(BUTTON_SLOT, generateAnvilButton()) { event: InventoryClickEvent? ->
+            if (event!!.action == InventoryAction.PICKUP_ALL) reforge()
         }
     }
 
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
         super.handleInventoryOpened(event)
         this.render()
-        event.titleOverride(ComponentUtils.create("Tool Reforging", NamedTextColor.BLACK))
+        event.titleOverride(
+            ComponentUtils.merge(
+                ComponentUtils.create("Tool Reforging", Symbols.INVENTORY_TITLE_COLOR),
+                ComponentUtils.create(
+                    Symbols.OFFSET_NEG_64 + Symbols.OFFSET_NEG_8 + Symbols.OFFSET_NEG_3 + Symbols.REFORGE_BACKGROUND,
+                    NamedTextColor.WHITE
+                ) // Menu BG
+            )
+        )
     }
 
     public override fun handleInventoryClicked(event: InventoryClickEvent) {
@@ -233,17 +241,12 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
         // If we are clicking in the input slot allow it to happen. The user owns this slot.
         if (event.clickedInventory == inventory && event.slot == INPUT_SLOT) {
             event.isCancelled = false
-            return
         }
-
-        // If the event is canceled at this point and we clicked a slot that wasn't something we have control over,
-        // play invalid animation
-        if (event.isCancelled && event.rawSlot != INPUT_SLOT && event.rawSlot != BUTTON_SLOT) playInvalidAnimation()
     }
 
     /**
      * When the inventory closes, make sure the item in the input slot is not lost.
-     *
+     * 
      * @param event The inventory close event.
      */
     public override fun handleInventoryClosed(event: InventoryCloseEvent) {
@@ -252,9 +255,9 @@ class MenuReforge(player: Player) : MenuBase(player, ROWS) {
     }
 
     companion object {
-        const val ROWS: Int = 5
+        const val ROWS: Int = 3
 
         const val INPUT_SLOT: Int = 13
-        const val BUTTON_SLOT: Int = 31
+        const val BUTTON_SLOT: Int = 15
     }
 }

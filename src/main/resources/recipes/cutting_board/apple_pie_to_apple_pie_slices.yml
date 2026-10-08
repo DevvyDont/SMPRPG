@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:apple_pie"
+tool: "knives"
+result:
+  - { item: "smprpg:apple_pie_slice", amount: 4, chance: 1.0 }

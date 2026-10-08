@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- r
+- r
+- r
+ingredients:
+  r: smprpg:inferno_remnant
+result:
+  item: smprpg:inferno_saber
+  amount: 1
+unlocked_by:
+- smprpg:inferno_remnant

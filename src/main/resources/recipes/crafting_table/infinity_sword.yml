@@ -1,0 +1,19 @@
+# The Infinity Sword is an admin-tier item. This recipe exists purely to document the `requirements` block:
+# the Combat level 1000 gate is intentionally unreachable, so the recipe shows as locked and can never be crafted.
+type: shaped
+pattern:
+- ' t '
+- ' v '
+- ' n '
+ingredients:
+  t: { item: "smprpg:netherite_singularity", amount: 64 }
+  v: smprpg:heart_of_the_void
+  n: minecraft:nether_star
+result:
+  item: smprpg:infinity_sword
+  amount: 1
+unlocked_by:
+- smprpg:netherite_singularity
+requirements:
+  skills:
+    combat: 100

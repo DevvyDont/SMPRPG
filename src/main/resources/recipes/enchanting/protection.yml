@@ -1,0 +1,115 @@
+type: enchanting
+enchantment: protection
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:iron_ingot
+      amount: 5
+    - item: smprpg:steel_ingot
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:iron_ingot
+      amount: 10
+    - item: smprpg:steel_ingot
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: minecraft:iron_ingot
+      amount: 20
+    - item: smprpg:steel_ingot
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:iron_ingot
+      amount: 40
+    - item: smprpg:steel_ingot
+      amount: 16
+    - item: smprpg:titanium_ingot
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:iron_ingot
+      amount: 80
+    - item: smprpg:steel_ingot
+      amount: 32
+    - item: smprpg:titanium_ingot
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: minecraft:iron_block
+      amount: 18
+    - item: smprpg:steel_ingot
+      amount: 64
+    - item: smprpg:titanium_ingot
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: minecraft:iron_block
+      amount: 36
+    - item: smprpg:steel_block
+      amount: 15
+    - item: smprpg:titanium_ingot
+      amount: 32
+    - item: smprpg:adamantium_ingot
+      amount: 2
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: minecraft:iron_block
+      amount: 72
+    - item: smprpg:steel_block
+      amount: 30
+    - item: smprpg:titanium_ingot
+      amount: 64
+    - item: smprpg:adamantium_ingot
+      amount: 4
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_iron
+      amount: 16
+    - item: smprpg:steel_block
+      amount: 60
+    - item: smprpg:titanium_block
+      amount: 15
+    - item: smprpg:adamantium_ingot
+      amount: 8
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_iron
+      amount: 32
+    - item: smprpg:enchanted_steel
+      amount: 14
+    - item: smprpg:titanium_block
+      amount: 30
+    - item: smprpg:adamantium_ingot
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 64

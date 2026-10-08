@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ppp
+- pcp
+- ppp
+ingredients:
+  p: smprpg:enchanted_ender_pearl
+  c: smprpg:displacement_matrix
+result:
+  item: smprpg:warp_catalyst
+  amount: 1
+unlocked_by:
+- smprpg:displacement_matrix

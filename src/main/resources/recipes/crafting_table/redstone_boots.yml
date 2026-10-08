@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:enchanted_redstone
+result:
+  item: smprpg:redstone_boots
+  amount: 1
+unlocked_by:
+- minecraft:redstone

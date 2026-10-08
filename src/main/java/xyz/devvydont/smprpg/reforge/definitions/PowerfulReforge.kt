@@ -22,9 +22,7 @@ class PowerfulReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("Provides small damage boost")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 
     companion object {
         fun getDamageBonus(rarity: ItemRarity): Float {

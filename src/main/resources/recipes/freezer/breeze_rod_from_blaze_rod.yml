@@ -1,0 +1,4 @@
+type: freezer
+input: "minecraft:blaze_rod"
+time: 800
+result: "minecraft:breeze_rod"

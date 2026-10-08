@@ -52,6 +52,18 @@ class SpecialEffectService : IService {
     }
 
     /**
+     * Return the active special effect task on a player, if present.
+     *
+     * @param player The player to check for an effect
+     * @return The effect task object if present, otherwise null.
+     */
+    fun getActiveEffectTask(player: Player): SpecialEffectTask? {
+        if (hasEffect(player))
+            return currentTasks[player.uniqueId]
+        return null
+    }
+
+    /**
      * Used to give a player a special effect. This will remove the current effect if they already have one.
      * This method will handle all the processing of starting the tick timer and registering events.
      *

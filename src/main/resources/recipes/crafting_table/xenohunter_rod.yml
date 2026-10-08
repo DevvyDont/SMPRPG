@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  r'
+- ' ts'
+- r s
+ingredients:
+  r: smprpg:strange_binding
+  s: smprpg:strange_fiber
+  t: smprpg:nocturnum_rod
+result:
+  item: smprpg:xenohunter_rod
+  amount: 1
+unlocked_by:
+- smprpg:xenomatter
+upgrade: "t"

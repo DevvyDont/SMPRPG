@@ -1,0 +1,19 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/copper_ingot"
+        },
+        "cases": [
+            {
+                "when": "smprpg:bronze_ingot",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/bronze_ingot"
+                }
+            }
+        ]
+    }
+}

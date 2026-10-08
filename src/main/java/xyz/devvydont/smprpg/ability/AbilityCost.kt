@@ -7,6 +7,7 @@ import org.bukkit.entity.Player
 import xyz.devvydont.smprpg.entity.base.LeveledEntity
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer
 import xyz.devvydont.smprpg.util.formatting.Symbols
+import kotlin.math.roundToInt
 
 /**
  * A cost associated with an ability.
@@ -65,5 +66,9 @@ data class AbilityCost(@JvmField val resource: Resource, @JvmField val amount: I
         fun of(resource: Resource, amount: Int): AbilityCost {
             return AbilityCost(resource, amount)
         }
+    }
+
+    fun reduce(reductionPercentage: Double): AbilityCost {
+        return AbilityCost(resource, (amount * reductionPercentage).roundToInt())
     }
 }

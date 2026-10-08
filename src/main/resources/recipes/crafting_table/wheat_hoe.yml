@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'MM '
+- ' H '
+- ' H '
+ingredients:
+  H: smprpg:steel_tool_shaft
+  M: smprpg:premium_hay_block
+result:
+  item: smprpg:wheat_hoe
+  amount: 1
+unlocked_by:
+- smprpg:premium_hay_block

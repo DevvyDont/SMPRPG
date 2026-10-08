@@ -1,0 +1,66 @@
+type: enchanting
+enchantment: amplification
+levels:
+  '1':
+    power: 20
+    ingredients:
+    - item: minecraft:blaze_powder
+      amount: 64
+    - item: minecraft:nether_wart
+      amount: 64
+    - item: smprpg:enchanted_amethyst_block
+      amount: 1
+    - item: smprpg:mithril_block
+      amount: 8
+  '2':
+    power: 35
+    ingredients:
+    - item: smprpg:premium_blaze_rod
+      amount: 16
+    - item: minecraft:nether_wart_block
+      amount: 64
+    - item: smprpg:enchanted_amethyst_block
+      amount: 2
+    - item: smprpg:premium_spell_powder
+      amount: 16
+    - item: smprpg:mithril_block
+      amount: 32
+  '3':
+    power: 50
+    ingredients:
+    - item: smprpg:premium_blaze_rod
+      amount: 64
+    - item: smprpg:premium_membrane
+      amount: 8
+    - item: smprpg:enchanted_amethyst_block
+      amount: 8
+    - item: smprpg:premium_spell_powder
+      amount: 64
+    - item: smprpg:enchanted_mithril
+      amount: 15
+  '4':
+    power: 65
+    ingredients:
+    - item: minecraft:echo_shard
+      amount: 1
+    - item: smprpg:premium_membrane
+      amount: 32
+    - item: smprpg:enchanted_amethyst_block
+      amount: 32
+    - item: smprpg:enchanted_spell_powder
+      amount: 16
+    - item: smprpg:enchanted_mithril
+      amount: 60
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:premium_echo_shard
+      amount: 8
+    - item: smprpg:enchanted_membrane
+      amount: 16
+    - item: smprpg:dragonsteel_block
+      amount: 4
+    - item: smprpg:enchanted_spell_powder
+      amount: 64
+    - item: smprpg:enchanted_mithril_block
+      amount: 15

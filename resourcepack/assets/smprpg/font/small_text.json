@@ -1,0 +1,10 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "smprpg:seven.ttf",
+      "size": 6,
+      "oversample": 6
+    }
+  ]
+}

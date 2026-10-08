@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:astral_filament
+  t: smprpg:ender_rod
+  m: smprpg:obsidian_tool_rod
+result:
+  item: smprpg:comet_rod
+  amount: 1
+unlocked_by:
+- smprpg:obsidian_tool_rod
+upgrade: "t"

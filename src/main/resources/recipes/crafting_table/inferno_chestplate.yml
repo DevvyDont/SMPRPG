@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:inferno_remnant
+result:
+  item: smprpg:inferno_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:inferno_remnant

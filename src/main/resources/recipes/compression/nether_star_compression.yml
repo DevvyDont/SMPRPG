@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:nether_star
+- item: smprpg:premium_nether_star
+  amount: 9
+- item: smprpg:enchanted_nether_star
+  amount: 9

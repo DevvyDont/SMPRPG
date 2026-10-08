@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' s '
+- ' s '
+- ' r '
+ingredients:
+  r: smprpg:obsidian_tool_rod
+  s: smprpg:premium_nether_star
+result:
+  item: smprpg:forsaken_cutlass
+  amount: 1
+unlocked_by:
+- minecraft:nether_star

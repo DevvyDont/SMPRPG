@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "tools:item/copper_pickaxe"
                 }
+            },
+            {
+                "when": "smprpg:bronze_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/bronze_pickaxe"
+                }
             }
         ]
     }

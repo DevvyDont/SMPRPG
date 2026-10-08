@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:netherite_ingot
+- item: minecraft:netherite_block
+  amount: 9
+- item: smprpg:enchanted_netherite
+  amount: 9
+- item: smprpg:enchanted_netherite_block
+  amount: 9
+- item: smprpg:netherite_singularity
+  amount: 9

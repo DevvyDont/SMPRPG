@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "smprpg:item/tools/hoes/carrot_hoe"
+  }
+}

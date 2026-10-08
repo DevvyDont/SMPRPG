@@ -1,0 +1,29 @@
+{
+  "values": [
+    "minecraft:feather_falling",
+    "minecraft:protection",
+    "minecraft:fire_aspect",
+    "minecraft:fire_protection",
+    "minecraft:blast_protection",
+    "minecraft:projectile_protection",
+    "minecraft:bane_of_arthropods",
+    "minecraft:looting",
+    "minecraft:mending",
+    "minecraft:sweeping_edge",
+    "minecraft:knockback",
+    "minecraft:thorns",
+
+    "smprpg:calamity",
+    "smprpg:execute",
+    "smprpg:first_strike",
+    "smprpg:double_tap",
+    "smprpg:blessed",
+    "smprpg:genesis",
+    "smprpg:leech",
+    "smprpg:burden",
+
+    "smprpg:amplification",
+    "smprpg:telekinesis",
+    "smprpg:keeping"
+  ]
+}

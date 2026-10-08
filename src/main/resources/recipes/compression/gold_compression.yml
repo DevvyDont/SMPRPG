@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:gold_ingot
+- item: minecraft:gold_block
+  amount: 9
+- item: smprpg:enchanted_gold
+  amount: 9
+- item: smprpg:enchanted_gold_block
+  amount: 9
+- item: smprpg:gold_singularity
+  amount: 9

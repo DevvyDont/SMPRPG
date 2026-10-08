@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:draconic_crystal
+result:
+  item: smprpg:elderflame_boots
+  amount: 1
+unlocked_by:
+- smprpg:dragon_scales

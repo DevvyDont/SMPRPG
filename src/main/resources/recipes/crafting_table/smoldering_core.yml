@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- ono
+- nsn
+- ono
+ingredients:
+  s: smprpg:inferno_remnant
+  n: smprpg:boiling_ingot
+  o: smprpg:enchanted_blaze_rod
+result:
+  item: smprpg:smoldering_core
+  amount: 1
+unlocked_by:
+- smprpg:inferno_remnant

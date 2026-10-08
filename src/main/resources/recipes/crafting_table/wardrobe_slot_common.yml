@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- lwl
+- waw
+- lwl
+ingredients:
+  a: minecraft:armor_stand
+  w: minecraft:white_wool
+  l: minecraft:leather
+result:
+  item: smprpg:wardrobe_slot_common
+  amount: 1
+unlocked_by:
+- minecraft:leather

@@ -1,0 +1,52 @@
+type: enchanting
+enchantment: insight
+levels:
+  '1':
+    power: 4
+    ingredients:
+    - item: smprpg:spell_powder
+      amount: 16
+    - item: minecraft:amethyst_shard
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 23
+    ingredients:
+    - item: smprpg:spell_powder
+      amount: 32
+    - item: minecraft:amethyst_shard
+      amount: 64
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 42
+    ingredients:
+    - item: smprpg:premium_spell_powder
+      amount: 16
+    - item: smprpg:enchanted_amethyst
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 62
+    ingredients:
+    - item: smprpg:premium_spell_powder
+      amount: 32
+    - item: smprpg:enchanted_amethyst_block
+      amount: 4
+    - item: smprpg:enchanted_quartz
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_spell_powder
+      amount: 16
+    - item: smprpg:enchanted_amethyst_block
+      amount: 16
+    - item: smprpg:enchanted_quartz
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 16

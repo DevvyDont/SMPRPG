@@ -1,0 +1,8 @@
+type: cooking_pot
+ingredients:
+  - { item: "minecraft:apple", amount: 2 }
+  - "minecraft:sugar"
+time: 200
+result: "smprpg:apple_cider"
+skill_xp:
+  farming: 50

@@ -1,0 +1,6 @@
+type: smelting
+input: "smprpg:xenomatter"
+cook: campfire
+time: 18000
+experience: 100.0
+result: "smprpg:latticed_xenomatter"

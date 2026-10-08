@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "armor:item/bronze_helmet",
+    "layer1": "minecraft:trims/items/boots_trim_diamond"
+  }
+}

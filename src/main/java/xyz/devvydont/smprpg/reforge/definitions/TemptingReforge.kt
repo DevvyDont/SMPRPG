@@ -12,7 +12,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class TemptingReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.additive(AttributeWrapper.FISHING_RATING, (10 + rarity.ordinal * 5).toDouble()),
             AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, rarity.ordinal.toDouble()),
             AttributeEntry.additive(AttributeWrapper.FISHING_TREASURE_CHANCE, -.25 + rarity.ordinal * .05)
@@ -38,7 +38,5 @@ class TemptingReforge(type: ReforgeType) : ReforgeBase(type) {
      *
      * @return
      */
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

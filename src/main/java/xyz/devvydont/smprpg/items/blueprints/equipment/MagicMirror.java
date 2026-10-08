@@ -13,17 +13,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
 import org.bukkit.persistence.PersistentDataType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
 import xyz.devvydont.smprpg.items.interfaces.IConsumable;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.EntityService;
@@ -33,10 +30,9 @@ import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
 import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class MagicMirror extends CustomItemBlueprint implements IConsumable, Listener, ICraftable, ISellable, IHeaderDescribable {
+public class MagicMirror extends CustomItemBlueprint implements IConsumable, Listener, ISellable, IHeaderDescribable {
 
     public enum MagicMirrorMode {
         PLAYER_SPAWN("Your spawn", NamedTextColor.AQUA),
@@ -101,7 +97,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(7)
                 .animation(ItemUseAnimation.BLOCK)
@@ -111,37 +107,10 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
     }
 
     @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType().getKey() + "_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.shape("pip", "ici", "pip");
-        recipe.setIngredient('p', ItemService.generate(CustomItemType.ENCHANTED_AMETHYST_BLOCK));
-        recipe.setIngredient('i', ItemService.generate(CustomItemType.ENCHANTED_IRON_BLOCK));
-        recipe.setIngredient('c', ItemService.generate(CustomItemType.WARP_CATALYST));
-        recipe.setCategory(CraftingBookCategory.MISC);
-        return recipe;
-    }
-
-    @Override
     public void updateItemData(ItemStack itemStack) {
         super.updateItemData(itemStack);
         if (!hasModeUnlocked(itemStack, MagicMirrorMode.OVERWORLD_SPAWN))
             withModeUnlocked(itemStack, MagicMirrorMode.OVERWORLD_SPAWN);
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     *
-     * @return
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(Material.ENDER_PEARL));
     }
 
     /**
@@ -342,6 +311,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
                 .offset(.75, .1, .75)
                 .count(25)
                 .extra(0)
+                .data(1.0f)  // DRAGON_BREATH now requires a Float ("power of the breath") in newer MC
                 .spawn();
         event.getPlayer().teleport(getLocation(event.getPlayer(), mirror.getMode(event.getItem())));
         event.getPlayer().getWorld().playSound(event.getPlayer().getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 2f);
@@ -350,6 +320,7 @@ public class MagicMirror extends CustomItemBlueprint implements IConsumable, Lis
                 .offset(.75, .1, .75)
                 .count(25)
                 .extra(0)
+                .data(1.0f)  // DRAGON_BREATH now requires a Float ("power of the breath") in newer MC
                 .spawn();
         player = SMPRPG.getService(EntityService.class).getPlayerInstance(event.getPlayer());
         player.useMana((int) player.getMana());

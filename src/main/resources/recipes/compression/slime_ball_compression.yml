@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:slime_ball
+- item: minecraft:slime_block
+  amount: 9
+- item: smprpg:premium_slime
+  amount: 9
+- item: smprpg:enchanted_slime
+  amount: 9

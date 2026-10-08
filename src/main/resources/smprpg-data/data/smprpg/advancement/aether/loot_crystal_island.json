@@ -1,0 +1,29 @@
+{
+  "parent": "smprpg:aether/find_crystal_island",
+  "criteria": {
+    "loot_crystal_island": {
+      "conditions": {
+        "loot_table": "smprpg:chests/aether/crystal_tree"
+      },
+      "trigger": "minecraft:player_generates_container_loot"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.loot_crystal_island.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:chest"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.loot_crystal_island.title"
+    }
+  },
+  "requirements": [
+    [
+      "loot_crystal_island"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

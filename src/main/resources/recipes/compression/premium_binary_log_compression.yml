@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:premium_binary_log
+- item: smprpg:enchanted_binary_log
+  amount: 9
+- item: smprpg:binary_log_singularity
+  amount: 9

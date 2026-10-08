@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'M  '
+- 'MH '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:rose_gold_ingot
+result:
+  item: smprpg:rose_gold_hatchet
+  amount: 1
+unlocked_by:
+- smprpg:rose_gold_ingot

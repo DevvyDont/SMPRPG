@@ -1,0 +1,27 @@
+{
+  "values": [
+    "minecraft:smite",
+    "minecraft:fire_aspect",
+    "minecraft:fire_protection",
+    "minecraft:protection",
+    "minecraft:sweeping_edge",
+
+    "smprpg:first_strike",
+    "smprpg:double_tap",
+    "smprpg:blessed",
+    "smprpg:damned",
+    "smprpg:syphon",
+    "smprpg:burden",
+    "smprpg:execute",
+    "smprpg:prosecute",
+    "smprpg:hearty",
+    "smprpg:leech",
+    "smprpg:opportunist",
+    "smprpg:proficient",
+    "smprpg:serrated",
+    "smprpg:vitality",
+
+    "smprpg:amplification",
+    "smprpg:telekinesis"
+  ]
+}

@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- sss
+- nnn
+- sss
+ingredients:
+  s: smprpg:scorching_string
+  n: smprpg:necroplasm
+result:
+  item: smprpg:lucifugous_thread
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm

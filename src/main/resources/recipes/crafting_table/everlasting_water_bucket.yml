@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- pjp
+- jwj
+- pjp
+ingredients:
+  p: smprpg:plutos_artifact
+  w: minecraft:water_bucket
+  j: smprpg:jupiters_artifact
+result:
+  item: smprpg:everlasting_water_bucket
+  amount: 1
+unlocked_by:
+- smprpg:plutos_artifact
+- smprpg:jupiters_artifact

@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mrm
+- mmm
+ingredients:
+  r: smprpg:alleviation_wand
+  m: smprpg:enchanted_melon_slice
+result:
+  item: smprpg:curing_rod
+  amount: 1
+unlocked_by:
+- minecraft:melon_slice
+upgrade: "r"

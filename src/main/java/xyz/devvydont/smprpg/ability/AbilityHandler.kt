@@ -10,4 +10,5 @@ interface AbilityHandler {
      * @return True if the ability succeeded and should have cost reduced, false otherwise.
      */
     fun execute(ctx: AbilityContext): Boolean
+    val cooldown : Long
 }

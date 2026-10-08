@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:acacia_log"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_acacia_log", amount: 1, chance: 1.0 }

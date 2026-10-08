@@ -1,0 +1,48 @@
+{
+  "parent": "smprpg:mining/netherite_tools",
+  "criteria": {
+    "dragonsteel_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:netherite_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "dragonsteel_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.dragonsteel_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:custom_model_data": {
+          "strings": [
+            "smprpg:dragonsteel_pickaxe"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "minecraft:netherite_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.dragonsteel_tools.title"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "dragonsteel_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

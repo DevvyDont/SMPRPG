@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:aetherium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:aetherium"
+      }
+    ]
+  }
+}

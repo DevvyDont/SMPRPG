@@ -5,15 +5,19 @@ import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ZombieVillager;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
+import xyz.devvydont.smprpg.entity.slayer.shambling.ShamblingAbominationParent;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
+import xyz.devvydont.smprpg.util.persistence.KeyStore;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +37,9 @@ public class CastleDweller extends CustomEntityInstance<ZombieVillager> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.HUMANOID);
+
         super.setup();
         var professions = new java.util.ArrayList<>(RegistryAccess.registryAccess().getRegistry(RegistryKey.VILLAGER_PROFESSION).stream().toList());
         Collections.shuffle(professions);
@@ -56,6 +63,8 @@ public class CastleDweller extends CustomEntityInstance<ZombieVillager> {
         var hp = AttributeService.getInstance().getAttribute(_entity, AttributeWrapper.HEALTH);
         if (hp != null)
             hp.clearModifiers();
+
+        _entity.getPersistentDataContainer().set(KeyStore.SLAYER_SPAWN_TYPE, PersistentDataType.STRING, ShamblingAbominationParent.SPAWN_MOB_FLAG);
         hp.save(_entity, AttributeWrapper.HEALTH);
     }
 

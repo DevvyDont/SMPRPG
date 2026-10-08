@@ -6,6 +6,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.services.DropsService;
+import xyz.devvydont.smprpg.util.persistence.KeyStore;
 
 /**
  * Implements simple logic to prevent certain items from falling in the void and perishing.
@@ -23,18 +24,23 @@ public class VoidProtectionTask extends BukkitRunnable {
             return;
 
         // If this item spawned in the void in the end, lets make them float at y=1
-        if (item.getLocation().getY() < -5) {
+        if (item.getLocation().getY() < (item.getWorld().getMinHeight() - 5)) {
             // Turn off gravity, teleport it to y=1, give it no y velocity
             item.setGravity(false);
-            item.teleport(item.getLocation().set(item.getLocation().getX(), 0, item.getLocation().getZ()));
+            item.teleport(item.getLocation().set(item.getLocation().getX(), item.getWorld().getMinHeight(), item.getLocation().getZ()));
             item.setVelocity(item.getVelocity().setY(0));
         }
+    }
+
+    public static boolean hasVoidProtection(World world) {
+        return world.getEnvironment() == World.Environment.THE_END
+                || world.getKey().equals(KeyStore.DIM_AETHER);
     }
 
     @Override
     public void run() {
         for (World world : Bukkit.getWorlds())
-            if (world.getEnvironment().equals(World.Environment.THE_END))
+            if (hasVoidProtection(world))
                 for (Item item : world.getEntitiesByClass(Item.class))
                     if (item.hasGravity())
                         checkAndFloatAboveVoid(item);

@@ -1,15 +1,13 @@
 package xyz.devvydont.smprpg.items.blueprints.resources.crafting;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
-import xyz.devvydont.smprpg.items.interfaces.IModelOverridden;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 
-public class ImpossibleGeometry extends CustomItemBlueprint implements ISellable, IModelOverridden {
+public class ImpossibleGeometry extends CustomItemBlueprint implements ISellable {
 
     public ImpossibleGeometry(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -21,17 +19,6 @@ public class ImpossibleGeometry extends CustomItemBlueprint implements ISellable
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.ITEM;
-    }
-
-    /**
-     * Get the material that this item should display as, regardless of what it actually is internally.
-     * This allows you to change how an item looks without affecting its behavior.
-     *
-     * @return The material this item should render as.
-     */
-    @Override
-    public Material getDisplayMaterial() {
-        return Material.STRUCTURE_VOID;
     }
 
     /**

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: minecraft:emerald_block
+result:
+  item: smprpg:emerald_leggings
+  amount: 1
+unlocked_by:
+- minecraft:emerald

@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:beetroot
+- item: smprpg:premium_beetroot
+  amount: 9
+- item: smprpg:enchanted_beetroot
+  amount: 9
+- item: smprpg:beetroot_singularity
+  amount: 9

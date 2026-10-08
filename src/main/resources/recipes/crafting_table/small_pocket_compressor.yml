@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- rrr
+- rbr
+- rrr
+ingredients:
+  r: minecraft:redstone
+  b: minecraft:piston
+result:
+  item: smprpg:small_pocket_compressor
+  amount: 1
+unlocked_by:
+- minecraft:redstone

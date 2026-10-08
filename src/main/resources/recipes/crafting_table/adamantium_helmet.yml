@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:adamantium_ingot
+result:
+  item: smprpg:adamantium_helmet
+  amount: 1
+unlocked_by:
+- smprpg:adamantium_ingot

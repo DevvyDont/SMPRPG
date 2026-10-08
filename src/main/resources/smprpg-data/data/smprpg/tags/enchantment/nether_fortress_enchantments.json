@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:smite",
+    "minecraft:fire_aspect",
+    "minecraft:fire_protection",
+    "minecraft:protection",
+
+    "#smprpg:melee_loot_generic_enchantments",
+    "#smprpg:archery_loot_generic_enchantments",
+
+    "smprpg:blessed",
+    "smprpg:damned",
+    "smprpg:proficient",
+    "smprpg:fortuity",
+    "smprpg:speedster",
+    "smprpg:vigorous",
+
+    "smprpg:telekinesis",
+    "smprpg:amplification"
+  ]
+}

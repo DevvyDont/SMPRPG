@@ -14,7 +14,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class PolishedReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AdditiveAttributeEntry(AttributeWrapper.DEFENSE, getDefenseBonus(rarity).toDouble()),
             AdditiveAttributeEntry(AttributeWrapper.HEALTH, getDefenseBonus(rarity).toDouble()),
             AdditiveAttributeEntry(
@@ -35,9 +35,7 @@ class PolishedReforge(type: ReforgeType) : ReforgeBase(type) {
 
         )
 
-    override fun getPowerRating(): Int {
-        return 2
-    }
+    override val powerRating: Int get() = 2
 
     companion object {
         fun getDefenseBonus(rarity: ItemRarity): Int {

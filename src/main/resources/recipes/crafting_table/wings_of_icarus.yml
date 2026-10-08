@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- f f
+- fwf
+- www
+ingredients:
+  f: minecraft:feather
+  w: minecraft:honeycomb
+result:
+  item: smprpg:wings_of_icarus
+  amount: 1
+unlocked_by:
+- minecraft:feather

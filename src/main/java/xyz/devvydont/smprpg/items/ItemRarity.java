@@ -16,7 +16,8 @@ public enum ItemRarity {
     MYTHIC(NamedTextColor.LIGHT_PURPLE),
     DIVINE(NamedTextColor.AQUA),
     TRANSCENDENT(NamedTextColor.RED),
-    SPECIAL(NamedTextColor.DARK_RED)
+    SPECIAL(NamedTextColor.DARK_RED),
+    ARTIFICE(NamedTextColor.YELLOW)
     ;
 
     public final NamedTextColor color;
@@ -43,14 +44,14 @@ public enum ItemRarity {
                  DRAGON_BREATH, EXPERIENCE_BOTTLE, ENCHANTED_BOOK,
                  TRIAL_KEY, BREEZE_ROD, POTION, SPLASH_POTION -> UNCOMMON;
 
-            case DIAMOND_SWORD, DIAMOND_HOE, DIAMOND_PICKAXE, DIAMOND_SHOVEL, DIAMOND_AXE,
+            case DIAMOND_SWORD, DIAMOND_SPEAR, DIAMOND_HOE, DIAMOND_PICKAXE, DIAMOND_SHOVEL, DIAMOND_AXE,
                  DIAMOND_BOOTS, DIAMOND_CHESTPLATE, DIAMOND_HELMET, DIAMOND_LEGGINGS,
                  NETHERITE_INGOT, DIAMOND_BLOCK, EMERALD_BLOCK,
                  TOTEM_OF_UNDYING, ELYTRA, TRIDENT, ENCHANTED_GOLDEN_APPLE, WITHER_SKELETON_SKULL,
                  CONDUIT, LINGERING_POTION,
                  ECHO_SHARD, OMINOUS_BOTTLE, OMINOUS_TRIAL_KEY, END_CRYSTAL -> RARE;
 
-            case NETHERITE_SWORD, NETHERITE_HOE, NETHERITE_PICKAXE, NETHERITE_SHOVEL, NETHERITE_AXE,
+            case NETHERITE_SWORD, NETHERITE_SPEAR, NETHERITE_HOE, NETHERITE_PICKAXE, NETHERITE_SHOVEL, NETHERITE_AXE,
                  NETHERITE_BOOTS, NETHERITE_CHESTPLATE, NETHERITE_HELMET, NETHERITE_LEGGINGS,
                  NETHERITE_BLOCK, NETHER_STAR, HEAVY_CORE, NETHERITE_UPGRADE_SMITHING_TEMPLATE -> EPIC;
 
@@ -72,11 +73,11 @@ public enum ItemRarity {
 
     public Component applyDecoration(Component component) {
 
-        // Legendary and lower only has a color
-        if (this.ordinal() <= LEGENDARY.ordinal())
+        // Artifice and lower only has a color
+        if (this.ordinal() <= ARTIFICE.ordinal())
             return component.color(this.color);
 
-        // > Legendary adds the magic text on both sides, and then whole component is wrapped in the color.
+        // > Artifice adds the magic text on both sides, and then whole component is wrapped in the color.
         return ComponentUtils.merge(
             ComponentUtils.create("o ", this.color).decoration(TextDecoration.OBFUSCATED, true),
             component.decoration(TextDecoration.OBFUSCATED, false).color(this.color),

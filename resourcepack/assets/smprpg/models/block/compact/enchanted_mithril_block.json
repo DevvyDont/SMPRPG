@@ -1,0 +1,7 @@
+{
+  "parent": "smprpg:block/template/enchanted_block",
+  "textures": {
+    "0": "smprpg:block/overworld/mithril_block",
+    "particle": "smprpg:block/overworld/mithril_block"
+  }
+}

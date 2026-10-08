@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -33,6 +34,10 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.HUMANOID);
+
         super.setup();
 
         if (_entity.getEquipment() == null)
@@ -56,7 +61,7 @@ public class WitheredSeraph<T extends LivingEntity> extends CustomEntityInstance
                 new ChancedItemDrop(ItemService.generate(CustomItemType.CHARRED_CRISP), 4, this),
                 new ChancedItemDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.OBSIDIAN), 5, this),
                 new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.BONE), 1, 2, this),
-                new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.ARROW), 1, 2, this)
+                new QuantityLootDrop(SMPRPG.getService(ItemService.class).getCustomItem(Material.ARROW), 2, 5, this)
         );
     }
 

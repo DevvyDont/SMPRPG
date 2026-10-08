@@ -1,0 +1,43 @@
+{
+  "parent": "smprpg:mining/tungsten_tools",
+  "criteria": {
+    "orichalcum_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "orichalcum_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.orichalcum_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:orichalcum_pickaxe"
+      },
+      "count": 1,
+      "id": "minecraft:diamond_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.orichalcum_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "orichalcum_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

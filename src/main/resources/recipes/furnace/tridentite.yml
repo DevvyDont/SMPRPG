@@ -1,0 +1,6 @@
+type: smelting
+input: "smprpg:raw_tridentite_chunk"
+cook: blasting
+time: 600
+experience: 5.0
+result: "smprpg:tridentite"

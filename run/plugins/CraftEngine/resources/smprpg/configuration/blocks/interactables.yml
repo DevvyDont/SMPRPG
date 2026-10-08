@@ -1,0 +1,231 @@
+items:
+  smprpg:reforge_table:
+    data:
+      item-name: <!i><lang:item.smprpg.reforge_table>
+    model: smprpg:block/interactables/reforge_table_item
+    behavior:
+      type: block_item
+      block: smprpg:reforge_table
+  smprpg:freezer:
+    data:
+      item-name: <!i><lang:item.smprpg.freezer>
+      pdc:
+        smprpg:item-type: freezer
+    model: smprpg:block/interactables/freezer
+    behavior:
+      type: block_item
+      block: smprpg:freezer
+  smprpg:netherite_anvil:
+    data:
+      item-name: <!i><lang:item.smprpg.netherite_anvil>
+      pdc:
+        smprpg:item-type: netherite_anvil
+    model: smprpg:block/interactables/netherite_anvil
+    behavior:
+      type: block_item
+      block: smprpg:netherite_anvil
+  smprpg:titanium_cache:
+    data:
+      item-name: <!i><lang:item.smprpg.titanium_cache>
+      pdc:
+        smprpg:item-type: titanium_cache
+    model: smprpg:block/interactables/titanium_cache
+    behavior:
+      type: block_item
+      block: smprpg:titanium_cache
+
+
+blocks:
+  smprpg:reforge_table:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      state: snow[layers=6]
+      entity-renderer:
+        type: better_model
+        model: reforge_table
+        position: 0.5,0.0,0.5
+        sight-trace: true
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_4
+    behavior:
+      - type: smprpg:reforge_table
+  smprpg:freezer:
+    loot:
+      template: smprpg:loot_table/self
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/interactables/freezer
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_4
+    behavior:
+      - type: smprpg:freezer
+  smprpg:netherite_anvil:
+    loot:
+      template: smprpg:loot_table/self
+    states:
+      properties:
+        facing_clockwise:
+          type: 4-direction
+          default: north
+      appearances:
+        axisX:
+          state: minecraft:anvil[facing=east]
+          model:
+            path: smprpg:block/interactables/netherite_anvil
+            y: 90
+            generation:
+              parent: minecraft:block/anvil
+              textures:
+                top: smprpg:block/interactables/netherite_anvil_top
+                body: smprpg:block/interactables/netherite_anvil
+                particle: smprpg:block/interactables/netherite_anvil
+        axisZ:
+          state: minecraft:anvil[facing=north]
+          model:
+            path: smprpg:block/interactables/netherite_anvil
+      variants:
+        facing_clockwise=east:
+          appearance: axisX
+        facing_clockwise=west:
+          appearance: axisX
+        facing_clockwise=north:
+          appearance: axisZ
+        facing_clockwise=south:
+          appearance: axisZ
+    settings:
+      template:
+        - smprpg:data/breaking_power_7
+      sounds:
+        break: minecraft:block.anvil.break
+        step: minecraft:block.anvil.step
+        place: minecraft:block.anvil.place
+        hit: minecraft:block.anvil.hit
+        fall: minecraft:block.anvil.fall
+      map-color: 29
+      hardness: 50
+      resistance: 1200
+      push-reaction: block
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+    behavior:
+      type: falling_block
+      hurt-amount: 4
+      max-hurt: 80
+      sounds:
+        land: minecraft:block.anvil.land
+        destroy: minecraft:block.anvil.destroy
+    events:
+      - on: right_click
+        functions:
+          - type: open_window
+            gui-type: anvil
+          - type: cancel_event
+        conditions:
+          - type: expression
+            expression: "!<arg:player.is_sneaking>"
+  smprpg:titanium_cache:
+    loot:
+      template: smprpg:loot_table/self
+    states:
+      properties:
+        facing:
+          type: horizontal_direction
+      appearances:
+        north:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:titanium_cache
+              yaw: 180
+        south:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:titanium_cache
+        east:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:titanium_cache
+              yaw: 270
+        west:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:titanium_cache
+              yaw: 90
+      variants:
+        facing=north:
+          appearance: north
+        facing=east:
+          appearance: east
+        facing=west:
+          appearance: west
+        facing=south:
+          appearance: south
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_5
+        - smprpg:data/beacon_usable
+      overrides:
+        hardness: 25.0
+        resistance: 10.0
+        instrument: guitar
+        map-color: 16
+    behavior:
+      type: drawer_block
+      item_position: 0,0,-0.4575
+      text_position: 0,0.35,-0.52
+      item_scale: 0.6,0.6,0.6
+      text_scale: 0.5,0.5,0.5
+      max_stacks: 128
+      sounds:
+        put:
+          id: minecraft:block.decorated_pot.insert
+          pitch: 0.5
+          volume: 1.0
+        take:
+          id: minecraft:block.decorated_pot.insert_fail
+          pitch: 0.5
+          volume: 1.0
+      has_signal: true
+      allow_input: true
+      allow_output: true
+      data_key: "smprpg:titanium_cache"
+      compatible_mode: false
+
+recipes:
+  smprpg:netherite_anvil:
+    type: shaped
+    ingredients:
+      B: minecraft:netherite_block
+      N: minecraft:netherite_ingot
+    pattern:
+      - "BBB"
+      - " N "
+      - "NNN"
+    result:
+      id: smprpg:netherite_anvil
+      count: 1
+  smprpg:titanium_cache:
+    type: shaped
+    ingredients:
+      t: smprpg:titanium_ingot
+      s: smprpg:steel_ingot
+      c: minecraft:chest
+    pattern:
+      - "sts"
+      - "tct"
+      - "sts"
+    result:
+      id: smprpg:titanium_cache
+      count: 1

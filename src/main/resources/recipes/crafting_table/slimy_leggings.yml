@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:premium_slime
+result:
+  item: smprpg:slimy_leggings
+  amount: 1
+unlocked_by:
+- minecraft:slime_ball

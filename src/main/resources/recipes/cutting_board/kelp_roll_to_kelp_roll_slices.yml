@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:kelp_roll"
+tool: "knives"
+result:
+  - { item: "smprpg:kelp_roll_slice", amount: 3, chance: 1.0 }

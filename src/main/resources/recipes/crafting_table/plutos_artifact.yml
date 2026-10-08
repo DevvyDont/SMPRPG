@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- fff
+- fdf
+- fff
+ingredients:
+  d: minecraft:diamond
+  f: smprpg:pluto_fragment
+result:
+  item: smprpg:plutos_artifact
+  amount: 1
+unlocked_by:
+- smprpg:pluto_fragment

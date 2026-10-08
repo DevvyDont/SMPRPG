@@ -16,7 +16,7 @@ class StrongReforge(type: ReforgeType) : ReforgeBase(type) {
     }
 
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBoost(rarity).toDouble()),
             AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, (20 + rarity.ordinal * 5).toDouble())
         )
@@ -25,7 +25,5 @@ class StrongReforge(type: ReforgeType) : ReforgeBase(type) {
     override val description: List<Component>
         get() = listOf<Component>(ComponentUtils.create("Provides a small damage boost"))
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

@@ -176,5 +176,19 @@ class DifficultyService : IService, Listener {
                 else -> 0
             }
         }
+
+        fun getShroudedMinutes(difficulty: ProfileDifficulty): Int {
+            return when (difficulty) {
+                ProfileDifficulty.EASY -> 20
+                ProfileDifficulty.HARD -> 5
+                else -> 10
+            }
+        }
+
+        fun allowedToFlyInShrouded(difficulty: ProfileDifficulty): Boolean {
+            // commented out for now, was way too punishing
+//            return difficulty != ProfileDifficulty.HARD
+            return true
+        }
     }
 }

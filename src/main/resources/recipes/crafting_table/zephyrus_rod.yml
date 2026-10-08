@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:ethereal_fiber
+  t: smprpg:mercurial_rod
+  m: smprpg:enchanted_breeze_rod
+result:
+  item: smprpg:zephyrus_rod
+  amount: 1
+unlocked_by:
+- smprpg:enchanted_breeze_rod
+upgrade: "t"

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: minecraft:emerald_block
+result:
+  item: smprpg:emerald_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:emerald

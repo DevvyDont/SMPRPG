@@ -1,0 +1,9 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:bone"
+  - "minecraft:brown_mushroom"
+time: 200
+result: "smprpg:bone_broth"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 20

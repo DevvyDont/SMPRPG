@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:titanium_ingot
+result:
+  item: smprpg:titanium_helmet
+  amount: 1
+unlocked_by:
+- smprpg:titanium_ingot

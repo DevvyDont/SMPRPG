@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' ns'
+- n s
+- ' ns'
+ingredients:
+  s: minecraft:string
+  n: minecraft:netherite_ingot
+result:
+  item: smprpg:netherite_bow
+  amount: 1
+unlocked_by:
+- minecraft:netherite_ingot

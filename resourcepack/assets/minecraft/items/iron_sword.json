@@ -8,6 +8,13 @@
         },
         "cases": [
             {
+                "when": "smprpg:silver_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/silver_sword"
+                }
+            },
+            {
                 "when": "smprpg:mystbloom_kunai",
                 "model": {
                     "type": "model",
@@ -19,6 +26,13 @@
                 "model": {
                     "type": "model",
                     "model": "swords:item/steel_sword"
+                }
+            },
+            {
+                "when": "smprpg:tin_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/tin_sword"
                 }
             }
         ]

@@ -5,11 +5,12 @@ package xyz.devvydont.smprpg.enchantments;
  */
 public enum EnchantmentRarity {
 
-    COMMON(5),
-    UNCOMMON(4),
-    RARE(3),
+    COMMON(6),
+    UNCOMMON(5),
+    RARE(4),
 
-    CURSE(2),     // Bad enchants, kinda rare kinda not usually disappear after certain levels anyway
+    CURSE(3),     // Bad enchants, kinda rare kinda not usually disappear after certain levels anyway
+    ARTIFICE(2),  // Gambit enchantments, have a really good upside, but with a downside attached
     BLESSING(1),  // Rarest enchants to get
     ARTIFACT(0);  // Unobtainable
 

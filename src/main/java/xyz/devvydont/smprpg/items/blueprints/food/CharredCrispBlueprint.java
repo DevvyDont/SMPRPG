@@ -5,6 +5,7 @@ import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.CustomItemBlueprint;
@@ -33,7 +34,7 @@ public class CharredCrispBlueprint extends CustomItemBlueprint implements IEdibl
 
     @Override
     public float getSaturation(ItemStack item) {
-        return 2;
+        return 0;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class CharredCrispBlueprint extends CustomItemBlueprint implements IEdibl
     }
 
     @Override
-    public Consumable getConsumableComponent(ItemStack item) {
+    public @NonNull Consumable getConsumableComponent(ItemStack item) {
         return Consumable.consumable()
                 .consumeSeconds(.3f)
                 .addEffect(ConsumeEffect.applyStatusEffects(List.of(new PotionEffect(PotionEffectType.WITHER, (int) TickTime.seconds(10), 0, true, true)), .1f))
@@ -51,7 +52,7 @@ public class CharredCrispBlueprint extends CustomItemBlueprint implements IEdibl
 
     @Override
     public boolean canAlwaysEat(ItemStack item) {
-        return false;
+        return true;
     }
 
 }

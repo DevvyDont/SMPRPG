@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:cobalt_ingot
+- item: smprpg:cobalt_block
+  amount: 9

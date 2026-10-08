@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- btb
+- tlt
+- b b
+ingredients:
+  b: smprpg:lucifugous_binding
+  t: smprpg:lucifugous_thread
+  l: smprpg:ruination_leggings
+result:
+  item: smprpg:nocturnum_leggings
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "l"

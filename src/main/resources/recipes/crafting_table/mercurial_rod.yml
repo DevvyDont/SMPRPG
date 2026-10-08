@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:astral_filament
+  t: smprpg:ether_rod
+  m: smprpg:aetherium_ingot
+result:
+  item: smprpg:mercurial_rod
+  amount: 1
+unlocked_by:
+- smprpg:aetherium_ingot
+upgrade: "t"

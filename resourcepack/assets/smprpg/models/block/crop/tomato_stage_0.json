@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "smprpg:block/crop/tomato_stage_0"
+  }
+}

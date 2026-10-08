@@ -20,7 +20,5 @@ class CopiousReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("Moderately boosts luck")
         )
 
-    override fun getPowerRating(): Int {
-        return 2
-    }
+    override val powerRating: Int get() = 2
 }

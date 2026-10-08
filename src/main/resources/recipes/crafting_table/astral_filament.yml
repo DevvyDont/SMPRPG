@@ -1,0 +1,9 @@
+type: shapeless
+ingredients:
+- minecraft:nether_star
+- smprpg:premium_string
+result:
+  item: smprpg:astral_filament
+  amount: 1
+unlocked_by:
+- minecraft:nether_star

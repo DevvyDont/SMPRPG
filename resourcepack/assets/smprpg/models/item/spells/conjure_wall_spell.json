@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "smprpg:item/spells/conjure_wall_spell"
+    }
+}

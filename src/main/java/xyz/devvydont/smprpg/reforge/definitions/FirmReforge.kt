@@ -26,9 +26,7 @@ class FirmReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("to knockback resistance")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 
     companion object {
         fun getKnockbackResist(rarity: ItemRarity): Float {

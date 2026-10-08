@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:premium_string
+  t: smprpg:cold_aercloud
+  m: smprpg:cold_aercloud
+result:
+  item: smprpg:aercloud_rod
+  amount: 1
+unlocked_by:
+- smprpg:cold_aercloud

@@ -6,10 +6,13 @@ import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
 import xyz.devvydont.smprpg.items.CustomItemType;
+import xyz.devvydont.smprpg.items.blueprints.resources.scrolls.DynamicEnchantingScroll;
+import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
@@ -27,6 +30,9 @@ public class LeveledElderGuardian extends BossInstance<ElderGuardian> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.BOSS);
+        mobTypes.add(MobType.AQUATIC);
+
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
@@ -67,6 +73,7 @@ public class LeveledElderGuardian extends BossInstance<ElderGuardian> {
 
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
+        var thornsScroll = DynamicEnchantingScroll.getScrollWithEnchantment(EnchantmentService.THORNS);
         return List.of(
 
                 // Drop pool from the normal guardians
@@ -75,6 +82,8 @@ public class LeveledElderGuardian extends BossInstance<ElderGuardian> {
                 new QuantityLootDrop(ItemService.generate(Material.PRISMARINE_SHARD), 1, 2, this),
                 new QuantityLootDrop(ItemService.generate(Material.PRISMARINE_CRYSTALS), 1, 2, this),
                 new ChancedItemDrop(ItemService.generate(Material.DIAMOND), 5, this),
+
+                new ChancedItemDrop(thornsScroll, 50, this),
 
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_SHARD), 7, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.PREMIUM_PRISMARINE_CRYSTAL), 7, this),

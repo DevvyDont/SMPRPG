@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: minecraft:copper_ingot
+result:
+  item: smprpg:copper_bow
+  amount: 1
+unlocked_by:
+- minecraft:copper_ingot

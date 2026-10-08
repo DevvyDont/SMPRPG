@@ -13,7 +13,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class AncientReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AdditiveAttributeEntry(AttributeWrapper.DEFENSE, getDefenseBonus(rarity).toDouble()),
             AdditiveAttributeEntry(AttributeWrapper.HEALTH, getDefenseBonus(rarity).toDouble()),
             AdditiveAttributeEntry(
@@ -34,9 +34,7 @@ class AncientReforge(type: ReforgeType) : ReforgeBase(type) {
 
         )
 
-    override fun getPowerRating(): Int {
-        return 4
-    }
+    override val powerRating: Int get() = 4
 
     companion object {
         fun getDefenseBonus(rarity: ItemRarity): Int {

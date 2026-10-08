@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:premium_hay_block
+result:
+  item: smprpg:cultivator_shirt
+  amount: 1
+unlocked_by:
+- smprpg:premium_hay_block

@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:blaze_rod
+- item: smprpg:premium_blaze_rod
+  amount: 9
+- item: smprpg:enchanted_blaze_rod
+  amount: 9

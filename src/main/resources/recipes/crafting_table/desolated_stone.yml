@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- ono
+- nsn
+- ono
+ingredients:
+  s: smprpg:premium_nether_star
+  n: minecraft:netherite_ingot
+  o: smprpg:enchanted_obsidian
+result:
+  item: smprpg:desolated_stone
+  amount: 1
+unlocked_by:
+- minecraft:nether_star

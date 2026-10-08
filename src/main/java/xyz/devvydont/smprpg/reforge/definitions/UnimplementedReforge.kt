@@ -26,7 +26,5 @@ class UnimplementedReforge(type: ReforgeType) : ReforgeBase(type) {
         )
     }
 
-    override fun getPowerRating(): Int {
-        return 0
-    }
+    override val powerRating: Int get() = 0
 }

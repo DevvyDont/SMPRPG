@@ -1,0 +1,58 @@
+type: enchanting
+enchantment: ignorance
+levels:
+  '1':
+    power: 25
+    ingredients:
+    - item: smprpg:premium_spell_powder
+      amount: 16
+    - item: smprpg:enchanted_amethyst_block
+      amount: 1
+    - item: smprpg:spellbound_cloth
+      amount: 2
+    - item: minecraft:lapis_block
+      amount: 8
+  '2':
+    power: 40
+    ingredients:
+    - item: smprpg:premium_spell_powder
+      amount: 64
+    - item: smprpg:enchanted_amethyst_block
+      amount: 4
+    - item: smprpg:spellbound_cloth
+      amount: 4
+    - item: smprpg:enchanted_lapis
+      amount: 8
+  '3':
+    power: 55
+    ingredients:
+    - item: smprpg:enchanted_spell_powder
+      amount: 16
+    - item: smprpg:enchanted_amethyst_block
+      amount: 16
+    - item: smprpg:premium_ender_pearl
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '4':
+    power: 70
+    ingredients:
+    - item: smprpg:enchanted_spell_powder
+      amount: 64
+    - item: smprpg:amethyst_singularity
+      amount: 2
+    - item: smprpg:enchanted_ender_pearl
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '5':
+    power: 85
+    ingredients:
+    - item: smprpg:spell_powder_singularity
+      amount: 2
+    - item: smprpg:amethyst_singularity
+      amount: 8
+    - item: smprpg:enchanted_ender_pearl
+      amount: 64
+    - item: smprpg:enchanted_lapis_block
+      amount: 8

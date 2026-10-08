@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- MMM
+- ' H '
+- ' H '
+ingredients:
+  H: smprpg:sulfur_treated_tool_shaft
+  M: smprpg:cobalt_ingot
+result:
+  item: smprpg:cobalt_pickaxe
+  amount: 1
+unlocked_by:
+- smprpg:cobalt_ingot

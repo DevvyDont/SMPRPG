@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:raw_silver
+- item: smprpg:raw_silver_block
+  amount: 9
+- item: smprpg:enchanted_raw_silver
+  amount: 9

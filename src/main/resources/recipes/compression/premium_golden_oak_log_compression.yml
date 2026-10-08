@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:premium_golden_oak_log
+- item: smprpg:enchanted_golden_oak_log
+  amount: 9
+- item: smprpg:golden_oak_log_singularity
+  amount: 9

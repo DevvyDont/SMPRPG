@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:titanium_ingot
+result:
+  item: smprpg:titanium_leggings
+  amount: 1
+unlocked_by:
+- smprpg:titanium_ingot

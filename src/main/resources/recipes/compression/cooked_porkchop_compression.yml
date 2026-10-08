@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:cooked_porkchop
+- item: smprpg:premium_porkchop
+  amount: 9
+- item: smprpg:enchanted_porkchop
+  amount: 9

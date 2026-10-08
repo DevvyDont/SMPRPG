@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:mangrove_log
+- item: smprpg:premium_mangrove_log
+  amount: 9
+- item: smprpg:enchanted_mangrove_log
+  amount: 9
+- item: smprpg:mangrove_log_singularity
+  amount: 9

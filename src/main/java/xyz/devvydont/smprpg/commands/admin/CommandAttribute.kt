@@ -83,11 +83,18 @@ class CommandAttribute : ICommand {
      * Build the suggestions when filling out the attribute parameter.
      */
     private fun getAttributeSuggestions(ctx: CommandContext<CommandSourceStack>, builder: SuggestionsBuilder): CompletableFuture<Suggestions> {
+        // Brigadier does not filter suggestions automatically, so only suggest attributes that match what has
+        // been typed so far for this argument.
+        val typed = builder.remainingLowerCase
         for (attribute in AttributeWrapper.entries) {
+            val name = attribute.name.lowercase()
+            if (!name.startsWith(typed))
+                continue
+
             var description = attribute.Description
             if (description == null)
                 description = ComponentUtils.create("Unknown attribute description", NamedTextColor.RED)
-            builder.suggest(attribute.name.lowercase(), MessageComponentSerializer.message().serialize(
+            builder.suggest(name, MessageComponentSerializer.message().serialize(
                 description
             ))
         }

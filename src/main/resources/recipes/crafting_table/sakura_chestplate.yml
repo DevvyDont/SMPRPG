@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: minecraft:cherry_log
+result:
+  item: smprpg:sakura_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:cherry_log
+- minecraft:cherry_leaves

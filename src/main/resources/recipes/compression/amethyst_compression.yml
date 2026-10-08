@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:amethyst_shard
+- item: minecraft:amethyst_block
+  amount: 4
+- item: smprpg:enchanted_amethyst
+  amount: 9
+- item: smprpg:enchanted_amethyst_block
+  amount: 9
+- item: smprpg:amethyst_singularity
+  amount: 9

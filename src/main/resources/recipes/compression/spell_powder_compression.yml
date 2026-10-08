@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- smprpg:spell_powder
+- item: smprpg:premium_spell_powder
+  amount: 9
+- item: smprpg:enchanted_spell_powder
+  amount: 9
+- item: smprpg:spell_powder_singularity
+  amount: 9

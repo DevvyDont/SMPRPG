@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "tools:item/copper_shovel"
                 }
+            },
+            {
+                "when": "smprpg:bronze_shovel",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/bronze_shovel"
+                }
             }
         ]
     }

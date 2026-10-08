@@ -17,6 +17,11 @@ public class UnstableLeggings extends UnstableArmorSet {
     }
 
     @Override
+    public int getDefenseCenter() {
+        return 185;
+    }
+
+    @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.LEGGINGS;
     }

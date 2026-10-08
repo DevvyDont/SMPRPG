@@ -1,0 +1,119 @@
+type: enchanting
+enchantment: genesis
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: smprpg:silver_ingot
+      amount: 5
+    - item: minecraft:rotten_flesh
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: smprpg:silver_ingot
+      amount: 10
+    - item: minecraft:rotten_flesh
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: smprpg:silver_ingot
+      amount: 20
+    - item: minecraft:rotten_flesh
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: smprpg:silver_ingot
+      amount: 40
+    - item: minecraft:rotten_flesh
+      amount: 16
+    - item: smprpg:premium_necrotic_flesh
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: smprpg:silver_ingot
+      amount: 80
+    - item: minecraft:rotten_flesh
+      amount: 32
+    - item: smprpg:premium_necrotic_flesh
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:silver_block
+      amount: 18
+    - item: minecraft:rotten_flesh
+      amount: 64
+    - item: smprpg:premium_necrotic_flesh
+      amount: 64
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: smprpg:silver_block
+      amount: 36
+    - item: smprpg:premium_flesh
+      amount: 15
+    - item: smprpg:enchanted_necrotic_flesh
+      amount: 15
+    - item: smprpg:reviled_viscera
+      amount: 1
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: smprpg:silver_block
+      amount: 72
+    - item: smprpg:premium_flesh
+      amount: 30
+    - item: smprpg:enchanted_necrotic_flesh
+      amount: 30
+    - item: smprpg:reviled_viscera
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_silver
+      amount: 8
+    - item: smprpg:premium_flesh
+      amount: 45
+    - item: smprpg:enchanted_necrotic_flesh
+      amount: 45
+    - item: smprpg:reviled_viscera
+      amount: 3
+    - item: smprpg:visceral_amalgamation
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_silver
+      amount: 16
+    - item: smprpg:premium_flesh
+      amount: 60
+    - item: smprpg:enchanted_necrotic_flesh
+      amount: 60
+    - item: smprpg:reviled_viscera
+      amount: 4
+    - item: smprpg:visceral_amalgamation
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 64

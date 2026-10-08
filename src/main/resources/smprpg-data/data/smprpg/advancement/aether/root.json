@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "entered_aether": {
+      "conditions": {
+        "to": "smprpg:the_aether"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "smprpg:block/aether/dungeon_tile",
+    "description": {
+      "translate": "advancements.smprpg.aether.root.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:aether_grass_block"
+      },
+      "count": 1,
+      "id": "minecraft:nether_brick"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.smprpg.aether.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_aether"
+    ]
+  ]
+}

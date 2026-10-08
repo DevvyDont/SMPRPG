@@ -1,0 +1,43 @@
+{
+  "parent": "smprpg:mining/tungsten_tools",
+  "criteria": {
+    "platinum_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_pickaxe",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "platinum_pickaxe"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.platinum_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:material_sets/platinum/platinum_pickaxe"
+      },
+      "count": 1,
+      "id": "minecraft:iron_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.platinum_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "platinum_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

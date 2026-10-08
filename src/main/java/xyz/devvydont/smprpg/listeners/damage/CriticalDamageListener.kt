@@ -1,19 +1,28 @@
 package xyz.devvydont.smprpg.listeners.damage
 
+import org.bukkit.Bukkit
+import org.bukkit.NamespacedKey
 import org.bukkit.Particle
 import org.bukkit.Sound
+import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.AbstractArrow
-import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause
 import org.bukkit.event.entity.EntityShootBowEvent
+import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.attribute.AttributeWrapper
 import xyz.devvydont.smprpg.events.CustomEntityDamageByEntityEvent
+import xyz.devvydont.smprpg.items.interfaces.ICantCrit
 import xyz.devvydont.smprpg.services.AttributeService.Companion.instance
 import xyz.devvydont.smprpg.services.EntityDamageCalculatorService
+import xyz.devvydont.smprpg.services.ItemService
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
+import xyz.devvydont.smprpg.util.time.TickTime
+import kotlin.math.floor
 
 /**
  * When this listener is initialized, the plugin will listen for "critical" damage events, and set the event to be
@@ -86,6 +95,13 @@ class CriticalDamageListener : ToggleableListener() {
         if (event.vanillaCause != DamageCause.ENTITY_ATTACK)
             return
 
+        if (event.dealer is LivingEntity) {
+            val equipment = event.dealer.equipment;
+            if (equipment != null && ItemService.blueprint(equipment.itemInMainHand) is ICantCrit) {
+                return;
+            }
+        }
+
         // If the entity is not airborne, this can't be a crit.
         if (event.dealer.isOnGround)
             return
@@ -94,8 +110,9 @@ class CriticalDamageListener : ToggleableListener() {
         if (event.dealer.velocity.getY() >= 0)
             return
 
-        // If this isn't a fully charged attack, it can't be a crit.
-        if (event.dealer is HumanEntity && (event.dealer as HumanEntity).attackCooldown < EntityDamageCalculatorService.COOLDOWN_FORGIVENESS_THRESHOLD)
+        // If this isn't a fully charged attack, it can't be a crit. Players use the charge captured
+        // at swing time, since the live cooldown is reset before this event fires.
+        if (event.dealer is Player && EntityDamageCalculatorService.getMeleeAttackCharge(event.dealer as Player) < EntityDamageCalculatorService.COOLDOWN_FORGIVENESS_THRESHOLD)
             return
 
         // We have met all the conditions for a crit.
@@ -115,14 +132,22 @@ class CriticalDamageListener : ToggleableListener() {
         if (event.vanillaCause != DamageCause.ENTITY_ATTACK)
             return
 
-        // If this isn't a fully charged attack, it can't be a crit.
-        if (event.dealer is HumanEntity && (event.dealer as HumanEntity).attackCooldown < EntityDamageCalculatorService.COOLDOWN_FORGIVENESS_THRESHOLD)
+        // If this isn't a fully charged attack, it can't be a crit. Players use the charge captured
+        // at swing time, since the live cooldown is reset before this event fires.
+        if (event.dealer is Player && EntityDamageCalculatorService.getMeleeAttackCharge(event.dealer as Player) < EntityDamageCalculatorService.COOLDOWN_FORGIVENESS_THRESHOLD)
             return
 
         // No point on continuing unless the dealer can have attributes.
         if (event.dealer !is LivingEntity)
             return
         val living = event.dealer as LivingEntity
+
+        // If the dealer does not have a critable item, ignore any calculations.
+        val equipment = living.equipment;
+        if (equipment != null) {
+            if (ItemService.blueprint(equipment.itemInMainHand) is ICantCrit)
+                return;
+        }
 
         // Check the entity for their auto crit chance.
         var chance = 0.0
@@ -171,12 +196,42 @@ class CriticalDamageListener : ToggleableListener() {
 
         // Only living entities can be attribute checked.
         if (event.dealer is LivingEntity) {
-            val living = event.dealer as LivingEntity
+            val living = event.dealer
+            val critChance = instance.getAttribute(living, AttributeWrapper.CRITICAL_CHANCE)
             val crit = instance.getAttribute(living, AttributeWrapper.CRITICAL_DAMAGE)
+
+            var bonusRolls = 1.0
+            if (critChance != null) {
+                bonusRolls = floor(critChance.value / 100)
+                if (Math.random() < ((critChance.value / 100.0) - bonusRolls))
+                    bonusRolls += 1.0
+            }
+
+            // Communicate the crit "tier" to the popup system so it can escalate the visuals.
+            event.criticalTier = bonusRolls.toInt()
 
             // Only update if they have the attribute, and remember it is an unformatted percentage **boost**.
             if (crit != null)
-                multiplier = 1.0 + crit.getValue() / 100
+                multiplier = 1.0 + ((crit.getValue() / 100.0) * bonusRolls)
+
+            // Add a transient attack cooldown modifier if the entity is airborne when attacking, and multiply the multiplier by 1.15x
+            if (!living.isOnGround) {
+                multiplier *= JUMP_ATTACK_MULTIPLIER
+
+                // Reduce their attack speed by 25% for 1 second
+                val atkSpeed = living.getAttribute(Attribute.ATTACK_SPEED)
+                if (atkSpeed != null) {
+                    atkSpeed.removeModifier(ATTACK_SPEED_DEBUFF_KEY)
+                    atkSpeed.addTransientModifier(AttributeModifier(
+                        ATTACK_SPEED_DEBUFF_KEY,
+                        -0.25,
+                        AttributeModifier.Operation.MULTIPLY_SCALAR_1
+                    ))
+                    Bukkit.getScheduler().runTaskLater(SMPRPG.plugin, Runnable {
+                        atkSpeed.removeModifier(ATTACK_SPEED_DEBUFF_KEY)
+                    }, TickTime.seconds(1))
+                }
+            }
         }
 
         event.multiplyDamage(multiplier)
@@ -218,5 +273,15 @@ class CriticalDamageListener : ToggleableListener() {
          * The default "critical rating" to use for an entity if they don't have the Critical Rating attribute.
          */
         const val DEFAULT_CRITICAL_RATING: Float = .5f
+
+        /**
+         * The amount that crits are multiplied by on jump attacks
+         */
+        const val JUMP_ATTACK_MULTIPLIER: Float = 1.15f
+
+        /**
+         * The NamespacedKey that the transient attack speed modifier is stored in.
+         */
+        val ATTACK_SPEED_DEBUFF_KEY = NamespacedKey(SMPRPG.plugin, "jump_crit_attack_speed_debuff")
     }
 }

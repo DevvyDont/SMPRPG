@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mmm
+- mhm
+ingredients:
+  h: smprpg:holomoku_helmet
+  m: smprpg:tridentite
+result:
+  item: smprpg:ruination_helmet
+  amount: 1
+unlocked_by:
+- smprpg:raw_tridentite_chunk
+upgrade: "h"

@@ -7,11 +7,25 @@
             "model": "item/iron_hoe"
         },
         "cases": [
+			{
+                "when": "smprpg:silver_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/silver_hoe"
+                }
+            },
             {
                 "when": "smprpg:steel_hoe",
                 "model": {
                     "type": "model",
                     "model": "tools:item/steel_hoe"
+                }
+            },
+            {
+                "when": "smprpg:tin_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/tin_hoe"
                 }
             }
         ]

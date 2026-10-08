@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:mithril_ingot
+- item: smprpg:mithril_block
+  amount: 9
+- item: smprpg:enchanted_mithril
+  amount: 9
+- item: smprpg:enchanted_mithril_block
+  amount: 9
+- item: smprpg:mithril_singularity
+  amount: 9

@@ -1,0 +1,25 @@
+{
+  "parent": "smprpg:aether/root",
+  "criteria": {
+    "fall_from_aether": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.fall_from_aether.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:anvil"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.fall_from_aether.title"
+    }
+  },
+  "requirements": [
+    [
+      "fall_from_aether"
+    ]
+  ]
+}

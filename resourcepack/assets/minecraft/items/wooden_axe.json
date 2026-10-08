@@ -27,6 +27,20 @@
                     "type": "model",
                     "model": "tools:item/copper_hatchet"
                 }
+            },
+            {
+                "when": "smprpg:bronze_axe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/bronze_axe"
+                }
+            },
+            {
+                "when": "smprpg:bronze_hatchet",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/bronze_hatchet"
+                }
             }
         ]
     }

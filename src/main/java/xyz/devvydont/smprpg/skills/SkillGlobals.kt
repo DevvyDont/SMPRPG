@@ -145,39 +145,49 @@ object SkillGlobals {
     // Typically, we give HP for every skill, every certain amount of levels. Define that here.
     const val HP_LEVEL_FREQUENCY: Int = 5
     const val HP_PER_5_LEVELS: Double = 2.0
+    const val HP_PER_LEVEL: Double = 2.0
 
     // The combat skill improves some damage related attributes.
     const val STR_PER_LEVEL: Double = 5.0
-    const val CRITICAL_CHANCE_PER_LEVEL: Double = 0.5
+    const val CRITICAL_CHANCE_PER_LEVEL: Double = 3.0
     const val CRITICAL_RATING_PER_4_LEVELS: Double = 4.0
     const val CRITICAL_RATING_LEVEL_FREQUENCY: Int = 4
 
     // All foraging skills give fortune for their respective attribute.
     const val FORTUNE_PER_LEVEL: Double = 3.0
 
-    // Farming gives regeneration every 2 levels.
+    // Farming gives regeneration every 2 levels, and critter chance every 10 levels.
     const val REGENERATION_PER_2_LEVELS: Double = 2.0
     const val REGENERATION_LEVEL_FREQUENCY: Int = 2
+    const val CRITTER_CHANCE_PER_10_LEVELS: Double = 10.0
+    const val CRITTER_CHANCE_LEVEL_FREQUENCY: Int = 10
 
     // Fishing skill gives fishing chances every 4 levels.
-    const val FISHING_CHANCE_PER_4_LEVEL: Double = 0.8
+    const val FISHING_CHANCE_PER_4_LEVEL: Double = 1.0
     const val FISHING_CHANCE_FREQUENCY: Int = 4
     const val FISHING_SPEED_PER_LEVEL: Int = 1
 
     // The magic skill gives intelligence and luck.
     const val INT_PER_LEVEL: Double = 5.0
-    const val LUCK_PER_4_LEVELS: Double = 4.0
-    const val LUCK_LEVEL_FREQUENCY: Int = 4
+    const val ARCANE_RATING_PER_4_LEVELS: Double = 2.0
+    const val ARCANE_RATING_FREQUENCY : Int = 4
+    const val LUCK_PER_10_LEVELS: Double = 10.0
+    const val LUCK_LEVEL_FREQUENCY: Int = 10
 
     // The mining skill awards mining efficiency every 4 levels.
-    const val MINING_EFF_LEVEL_FREQUENCY: Int = 4
-    const val MINING_EFF_PER_4_LEVELS: Double = 5.0
+    const val MINING_SPEED_LEVEL_FREQUENCY = 4;
+    const val MINING_SPEED_PER_4_LEVELS = 40;
 
     // Woodcutting gives a small defense and critical rating boost.
     const val DEFENSE_LEVEL_FREQUENCY: Int = 2
     const val DEFENSE_PER_2_LEVELS: Double = 4.0
     const val LUMBERING_LEVEL_FREQUENCY: Int = 10
     const val LUMBERING_PER_10_LEVELS: Int = 1
+
+    // Slayer gives a tiny amount of global proficiency, and average luck
+    const val PROFICIENCY_PER_LEVEL : Double = 0.5
+    const val SLAYER_LUCK_PER_10_LEVELS : Double = 5.0
+    const val SLAYER_LUCK_LEVEL_FREQUENCY : Int = 10
 
 
     /**

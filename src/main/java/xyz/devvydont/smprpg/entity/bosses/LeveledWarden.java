@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Warden;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.entity.components.EntityConfiguration;
@@ -28,6 +29,9 @@ public class LeveledWarden extends BossInstance<Warden> {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.BOSS);
+        mobTypes.add(MobType.SCULK);
+
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }

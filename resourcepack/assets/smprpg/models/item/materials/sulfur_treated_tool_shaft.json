@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "smprpg:item/materials/sulfur_treated_tool_shaft"
+    }
+}

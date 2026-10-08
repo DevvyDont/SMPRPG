@@ -1,0 +1,250 @@
+items:
+  smprpg:halved_squash:
+    material: nether_brick
+    texture: smprpg:item/crop/halved_squash
+    data:
+      item-name: <!i><lang:item.smprpg.halved_squash>
+      pdc:
+        smprpg:item-type: halved_squash
+        smprpg:sell-value: 5
+  smprpg:squash:
+    data:
+      item-name: <!i><lang:item.smprpg.squash>
+      pdc:
+        smprpg:item-type: squash
+        smprpg:sell-value: 10
+    model: smprpg:block/crop/squash
+    behavior:
+      type: block_item
+      block: smprpg:squash
+  smprpg:squash_seeds:
+    data:
+      item-name: <!i><lang:item.smprpg.squash_seeds>
+      pdc:
+        smprpg:item-type: squash_seeds
+    texture: smprpg:item/crop/squash_seeds
+    behavior:
+      type: block_item
+      block: smprpg:squash_stem
+blocks:
+  smprpg:squash:
+    loot:
+      pools:
+        - rolls: 1
+          entries:
+            - type: alternatives
+              children:
+                - type: item
+                  item: smprpg:squash
+                  conditions:
+                    - type: enchantment
+                      predicate: minecraft:silk_touch>=1
+                - type: item
+                  item: smprpg:halved_squash
+                  functions:
+                    - type: set_count
+                      add: false
+                      count: 1~2
+                    - type: apply_bonus
+                      enchantment: smprpg:harvesting
+                      formula:
+                        type: ore_drops
+                    - type: limit_count
+                      max: 2
+                    - type: explosion_decay
+    settings:
+      template:
+        - smprpg:sound/wood
+        - smprpg:hardness/melon
+      overrides:
+        map-color: 2
+        push-reaction: DESTROY
+        is-suffocating: true
+        is-redstone-conductor: true
+        tags:
+          - minecraft:mineable/axe
+          - minecraft:sword_efficient
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/cube
+        arguments:
+          model: smprpg:block/crop/squash
+          particle_texture: smprpg:block/crop/squash
+          down_texture: smprpg:block/crop/squash_bottom
+          up_texture: smprpg:block/crop/squash_top
+          north_texture: smprpg:block/crop/squash
+          east_texture: smprpg:block/crop/squash
+          south_texture: smprpg:block/crop/squash
+          west_texture: smprpg:block/crop/squash
+  smprpg:squash_stem:
+    settings:
+      template:
+        - smprpg:sound/stem_crop
+        - smprpg:hardness/none
+      overrides:
+        map-color: 7
+        push-reaction: DESTROY
+        is-suffocating: false
+        is-redstone-conductor: false
+        item: smprpg:squash_seeds
+        is-randomly-ticking: true
+        tags:
+          - minecraft:bee_growables
+          - minecraft:crops
+          - minecraft:maintains_farmland
+    behaviors:
+      - type: liquid_flowable_block
+      - type: stem_block
+        fruit: smprpg:squash
+        attached-stem: smprpg:attached_squash_stem
+        fruit-bottom-block-tags: []
+        fruit-bottom-blocks:
+          - smprpg:aether_farmland
+          - smprpg:aether_dirt
+          - smprpg:aether_grass_block
+      - type: bush_block
+        bottom-blocks:
+          - smprpg:aether_farmland
+    states:
+      properties:
+        age:
+          type: int
+          default: 0
+          range: 0~7
+      appearances:
+        age=0:
+          state: pumpkin_stem[age=0]
+        age=1:
+          state: pumpkin_stem[age=1]
+        age=2:
+          state: pumpkin_stem[age=2]
+        age=3:
+          state: pumpkin_stem[age=3]
+        age=4:
+          state: pumpkin_stem[age=4]
+        age=5:
+          state: pumpkin_stem[age=5]
+        age=6:
+          state: pumpkin_stem[age=6]
+        age=7:
+          state: pumpkin_stem[age=7]
+      variants:
+        age=0:
+          appearance: age=0
+        age=1:
+          appearance: age=1
+        age=2:
+          appearance: age=2
+        age=3:
+          appearance: age=3
+        age=4:
+          appearance: age=4
+        age=5:
+          appearance: age=5
+        age=6:
+          appearance: age=6
+        age=7:
+          appearance: age=7
+  smprpg:attached_squash_stem:
+    settings:
+      template:
+        - smprpg:sound/stem_crop
+        - smprpg:hardness/none
+      overrides:
+        map-color: 7
+        push-reaction: DESTROY
+        is-suffocating: false
+        is-redstone-conductor: false
+        item: smprpg:squash_seeds
+        is-randomly-ticking: true
+        tags:
+          - minecraft:maintains_farmland
+    behaviors:
+      - type: liquid_flowable_block
+      - type: attached_stem_block
+        fruit: smprpg:squash
+        stem: smprpg:squash_stem
+      - type: bush_block
+        blacklist: false
+        bottom-blocks:
+          - smprpg:aether_farmland
+    states:
+      properties:
+        facing:
+          type: horizontal_direction
+          default: north
+      appearances:
+        facing=east:
+          state: attached_pumpkin_stem[facing=east]
+        facing=south:
+          state: attached_pumpkin_stem[facing=south]
+        facing=west:
+          state: attached_pumpkin_stem[facing=west]
+        facing=north:
+          state: attached_pumpkin_stem[facing=north]
+      variants:
+        facing=east:
+          appearance: facing=east
+        facing=south:
+          appearance: facing=south
+        facing=west:
+          appearance: facing=west
+        facing=north:
+          appearance: facing=north
+recipes:
+  smprpg:squash:
+    type: shaped
+    pattern:
+      - AA
+    ingredients:
+      A: smprpg:halved_squash
+    result:
+      id: smprpg:squash
+      count: 1
+  smprpg:squash_seeds:
+    type: shapeless
+    ingredients:
+      - smprpg:halved_squash
+    result:
+      id: smprpg:squash_seeds
+      count: 1
+placed-features:
+  smprpg:squash:
+    world:
+      - smprpg:the_aether
+    feature:
+      type: 'minecraft:simple_block'
+      config:
+        to_place:
+          type: 'minecraft:simple_state_provider'
+          state:
+            Name: 'smprpg:squash'
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 300
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: MOTION_BLOCKING
+      - type: 'minecraft:count'
+        count: 96
+      - type: 'minecraft:random_offset'
+        xz_spread:
+          type: 'minecraft:trapezoid'
+          max: 7
+          min: -7
+          plateau: 0
+        y_spread:
+          type: 'minecraft:trapezoid'
+          max: 3
+          min: -3
+          plateau: 0
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:all_of'
+          predicates:
+          - type: 'minecraft:matching_block_tag'
+            tag: minecraft:air
+          - type: 'minecraft:matching_block_tag'
+            tag: smprpg:aether_dirt
+            offset: [0, -1, 0]

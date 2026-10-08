@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- efe
+- shs
+- efe
+ingredients:
+  s: minecraft:nautilus_shell
+  e: smprpg:uncommon_fish_essence
+  f: smprpg:shark_fin
+  h: minecraft:heart_of_the_sea
+result:
+  item: smprpg:holomoku_crest
+  amount: 1
+unlocked_by:
+- minecraft:heart_of_the_sea

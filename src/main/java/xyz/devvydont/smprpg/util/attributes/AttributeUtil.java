@@ -5,9 +5,11 @@ import com.google.common.collect.Multimap;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeType;
@@ -15,15 +17,20 @@ import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.enchantments.CustomEnchantment;
 import xyz.devvydont.smprpg.enchantments.base.AttributeEnchantment;
 import xyz.devvydont.smprpg.items.ItemRarity;
+import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.items.attribute.IAttributeContainer;
 import xyz.devvydont.smprpg.items.base.SMPItemBlueprint;
+import xyz.devvydont.smprpg.items.blueprints.augment.BookOfBounties;
+import xyz.devvydont.smprpg.items.blueprints.augment.HotPotatoBook;
 import xyz.devvydont.smprpg.items.interfaces.IAttributeItem;
 import xyz.devvydont.smprpg.reforge.ReforgeBase;
 import xyz.devvydont.smprpg.services.AttributeService;
 import xyz.devvydont.smprpg.services.EnchantmentService;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.formatting.BreakingPowerFormatting;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
+import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -40,6 +47,7 @@ public class AttributeUtil {
         DEFAULT,
         PERCENTAGE,
         SCALE_PERCENTAGE,
+        FLAT
         ;
 
         public String format(double value) {
@@ -78,7 +86,14 @@ public class AttributeUtil {
             color = NamedTextColor.LIGHT_PURPLE;
 
         // Some attributes are weird and are always percents
-        return ComponentUtils.create(result.formatTotal(option), color);
+        String formattedResult = result.formatTotal(option);
+
+        // Breaking Power is colored by its tier so it reads consistently everywhere it's shown.
+        if (wrapper.key().equals(new NamespacedKey("smprpg", "mining_power"))) {
+            formattedResult = Symbols.PICKAXE + formattedResult;
+            color = BreakingPowerFormatting.color(result.getTotal());
+        }
+        return ComponentUtils.create(formattedResult, color);
     }
 
     public static Component formatAttribute(AttributeWrapper wrapper, AttributeUtil.AttributeCalculationResult result, AttributeFormattingOption option) {
@@ -97,10 +112,27 @@ public class AttributeUtil {
      */
     public static AttributeFormattingOption getAttributeFormat(AttributeWrapper wrapper) {
         return switch (wrapper) {
-            case KNOCKBACK_RESISTANCE, EXPLOSION_KNOCKBACK_RESISTANCE, SWEEPING, UNDERWATER_MINING, FALL_DAMAGE_MULTIPLIER, BURNING_TIME -> AttributeFormattingOption.SCALE_PERCENTAGE;
+            case KNOCKBACK_RESISTANCE, EXPLOSION_KNOCKBACK_RESISTANCE, SWEEPING, UNDERWATER_MINING, AIRBORNE_MINING, FALL_DAMAGE_MULTIPLIER, BURNING_TIME -> AttributeFormattingOption.SCALE_PERCENTAGE;
             case FISHING_CREATURE_CHANCE, FISHING_TREASURE_CHANCE -> AttributeFormattingOption.PERCENTAGE;
+            case MINING_POWER -> AttributeFormattingOption.FLAT;
             default -> AttributeFormattingOption.DEFAULT;
         };
+    }
+
+    /*
+     * Some attributes will display a special character next to their value, rather than a positive/negative sign.
+     */
+    public static String getSpecialAttributeCharacter(AttributeWrapper wrapper, int ctx)
+    {
+        switch (wrapper) {
+            case MINING_POWER -> {
+                if (ctx == 1)
+                    return Symbols.AXE;
+                else
+                    return Symbols.PICKAXE;
+            }
+        }
+        return "";
     }
 
     /**
@@ -124,9 +156,13 @@ public class AttributeUtil {
 
         // Query base attributes...
         for (var baseAttribute : attributeItem.getAttributeModifiers(item)) {
-            var key = AttributeModifierType.BASE.keyForItem(nameKey);
+            NamespacedKey key;
+            if (baseAttribute.key == null)
+                key = AttributeModifierType.BASE.keyForItem(nameKey);
+            else
+                key = new NamespacedKey("smprpg", baseAttribute.key);
             modifiers.put(
-                    baseAttribute.getAttribute(),
+                    baseAttribute.attribute,
                     new SourcedAttributeModifier(baseAttribute.asModifier(key, attributeItem.getActiveSlot()), AttributeModifierType.BASE)
             );
         }
@@ -137,7 +173,7 @@ public class AttributeUtil {
         if (reforge != null)
             for (var reforgeAttribute : reforge.getAttributeModifiersWithRarity(rarity))
                 modifiers.put(
-                        reforgeAttribute.getAttribute(),
+                        reforgeAttribute.attribute,
                         new SourcedAttributeModifier(reforgeAttribute.asModifier(AttributeModifierType.REFORGE.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.REFORGE)
                 );
 
@@ -151,9 +187,59 @@ public class AttributeUtil {
             // Add the modifiers.
             for (var enchantmentAttribute : attributeContainer.getHeldAttributes())
                 modifiers.put(
-                        enchantmentAttribute.getAttribute(),
+                        enchantmentAttribute.attribute,
                         new SourcedAttributeModifier(enchantmentAttribute.asModifier(AttributeModifierType.ENCHANTMENT.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.ENCHANTMENT)
                 );
+        }
+
+        // Then augments
+
+        // Hot potato books
+        int potatoBooks = item.getPersistentDataContainer().getOrDefault(HotPotatoBook.Companion.getHOT_POTATO_BOOK_KEY(), PersistentDataType.INTEGER, 0);
+        if (potatoBooks > 0) {
+            switch (blueprint.getItemClassification()) {
+                case HELMET, CHESTPLATE, LEGGINGS, BOOTS: {
+                    var defEntry = AttributeEntry.additive(AttributeWrapper.DEFENSE, HotPotatoBook.DEFENSE_BONUS * potatoBooks);
+                    var hpEntry = AttributeEntry.additive(AttributeWrapper.HEALTH, HotPotatoBook.HEALTH_BONUS * potatoBooks);
+                    modifiers.put(
+                            AttributeWrapper.DEFENSE,
+                            new SourcedAttributeModifier(defEntry.asModifier(AttributeModifierType.AUGMENT.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.AUGMENT)
+                    );
+                    modifiers.put(
+                            AttributeWrapper.HEALTH,
+                            new SourcedAttributeModifier(hpEntry.asModifier(AttributeModifierType.AUGMENT.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.AUGMENT)
+                    );
+                    break;
+                }
+                default: {
+                    var strEntry = AttributeEntry.additive(AttributeWrapper.STRENGTH, HotPotatoBook.STRENGTH_BONUS * potatoBooks);
+                    modifiers.put(
+                            AttributeWrapper.STRENGTH,
+                            new SourcedAttributeModifier(strEntry.asModifier(AttributeModifierType.AUGMENT.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.AUGMENT)
+                    );
+                }
+            }
+        }
+
+        // Bounty Books
+        int bountyBooks = item.getPersistentDataContainer().getOrDefault(BookOfBounties.Companion.getBOUNTY_BOOK_KEY(), PersistentDataType.INTEGER, 0);
+        if (bountyBooks > 0) {
+            AttributeWrapper wrapper;
+            var bonus = 5.0;
+            switch (blueprint.getItemClassification()) {
+                case PICKAXE, DRILL: { wrapper = AttributeWrapper.MINING_FORTUNE; break; }
+                case HOE: { wrapper = AttributeWrapper.FARMING_FORTUNE; break; }
+                case AXE, HATCHET: { wrapper = AttributeWrapper.WOODCUTTING_FORTUNE; break; }
+                default: {
+                    wrapper = AttributeWrapper.LUCK;
+                    bonus = 2.0;
+                }
+            }
+            var bountyEntry = AttributeEntry.additive(wrapper, bonus * bountyBooks);
+            modifiers.put(
+                    wrapper,
+                    new SourcedAttributeModifier(bountyEntry.asModifier(AttributeModifierType.AUGMENT.keyForItem(nameKey), attributeItem.getActiveSlot()), AttributeModifierType.AUGMENT)
+            );
         }
 
         return modifiers;
@@ -221,6 +307,12 @@ public class AttributeUtil {
             if (!enchantResult.empty())
                 line = line.append(formatBonus(NamedTextColor.LIGHT_PURPLE, enchantResult, displayOption));
 
+            // Augments only...
+            var modifiersForAugment = modifiersForAttribute.stream().filter(m -> m.getSource().equals(AttributeModifierType.AUGMENT)).toList();
+            var augmentResult = calculateAttributeBonus(modifiersForAugment, 0);
+            if (!augmentResult.empty())
+                line = line.append(formatBonus(NamedTextColor.DARK_GREEN, augmentResult, displayOption));
+
             // Done! Add the line :)
             lines.add(line);
         }
@@ -276,6 +368,9 @@ public class AttributeUtil {
          * @return
          */
         public String formatTotal(AttributeFormattingOption option) {
+
+            if (option == AttributeFormattingOption.FLAT)
+                return option.format(getTotal());
 
             // If normal addition operations occurred, This should just be a flat number.
             if (!percentage())

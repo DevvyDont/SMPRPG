@@ -1,0 +1,33 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/diamond_pickaxe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:mithril_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/mithril_pickaxe"
+                }
+            },
+			{
+                "when": "smprpg:titanium_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/titanium_pickaxe"
+                }
+            },
+			{
+                "when": "smprpg:adamantium_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/adamantium_pickaxe"
+                }
+            }
+        ]
+    }
+}

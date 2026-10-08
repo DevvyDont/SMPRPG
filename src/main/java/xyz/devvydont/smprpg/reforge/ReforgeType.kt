@@ -2,9 +2,12 @@ package xyz.devvydont.smprpg.reforge
 
 import org.apache.commons.lang3.StringUtils
 import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
+import xyz.devvydont.smprpg.items.CustomItemType
 import xyz.devvydont.smprpg.items.ItemClassification
 import xyz.devvydont.smprpg.reforge.definitions.*
+import xyz.devvydont.smprpg.services.ItemService
 import java.lang.reflect.InvocationTargetException
 import java.util.*
 import java.util.List
@@ -24,6 +27,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     // HP oriented
     HEALTHY(
         HealthyReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -32,6 +36,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     HEARTY(
         HeartyReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -60,6 +65,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     // KNOCKBACK oriented
     FIRM(
         FirmReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -68,6 +74,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     HEAVY(
         HeavyReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -76,6 +83,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     HEFTY(
         HeftyReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -101,6 +109,26 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.CHARM
     ),
 
+    // Magic focused for armor
+    SMART(
+        SmartReforge::class.java,
+        ItemClassification.HELMET,
+        ItemClassification.CHESTPLATE,
+        ItemClassification.LEGGINGS,
+        ItemClassification.BOOTS,
+        ItemClassification.CHARM,
+        ItemClassification.TOME
+    ),
+    WISE(
+        WiseReforge::class.java,
+        ItemClassification.HELMET,
+        ItemClassification.CHESTPLATE,
+        ItemClassification.LEGGINGS,
+        ItemClassification.BOOTS,
+        ItemClassification.CHARM,
+        ItemClassification.TOME
+    ),
+
     // ALL AROUND ARMOR
     POLISHED(
         PolishedReforge::class.java,
@@ -122,6 +150,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     // Movement Speed oriented
     LIGHT(
         LightReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -133,6 +162,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     SWIFT(
         SwiftReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -141,6 +171,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     AGILE(
         AgileReforge::class.java,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -155,8 +186,10 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.CHARM,
         ItemClassification.AXE,
         ItemClassification.PICKAXE,
+        ItemClassification.SHOVEL,
         ItemClassification.HOE,
-        ItemClassification.HATCHET
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
     ),
     HASTY(
         HastyReforge::class.java,
@@ -164,7 +197,43 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.CHARM,
         ItemClassification.AXE,
         ItemClassification.PICKAXE,
+        ItemClassification.SHOVEL,
         ItemClassification.HOE,
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
+    ),
+    PROSPECTING(
+        ProspectingReforge::class.java,
+        ItemClassification.PICKAXE,
+        ItemClassification.DRILL,
+    ),
+    SURVEYING(
+        SurveyingReforge::class.java,
+        ItemClassification.PICKAXE,
+        ItemClassification.DRILL,
+    ),
+
+    // Farming oriented
+    GLEANING(
+        GleaningReforge::class.java,
+        ItemClassification.HOE,
+        ItemClassification.HATCHET
+    ),
+    CULTIVATING(
+        CultivatingReforge::class.java,
+        ItemClassification.HOE,
+        ItemClassification.HATCHET
+    ),
+
+    // Wooductting oriented
+    CANADIAN(
+        CanadianReforge::class.java,
+        ItemClassification.AXE,
+        ItemClassification.HATCHET
+    ),
+    ARBOR(
+        ArborReforge::class.java,
+        ItemClassification.AXE,
         ItemClassification.HATCHET
     ),
 
@@ -189,6 +258,8 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     // Luck oriented
     LUCKY(
         LuckyReforge::class.java,
+        ItemClassification.STAFF,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -197,6 +268,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.TOOL,
         ItemClassification.CHARM,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.BOW,
         ItemClassification.SHORTBOW,
         ItemClassification.CROSSBOW,
@@ -205,10 +277,13 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.MACE,
         ItemClassification.PICKAXE,
         ItemClassification.HOE,
-        ItemClassification.HATCHET
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
     ),
     COPIOUS(
         CopiousReforge::class.java,
+        ItemClassification.STAFF,
+        ItemClassification.TOME,
         ItemClassification.HELMET,
         ItemClassification.CHESTPLATE,
         ItemClassification.LEGGINGS,
@@ -217,6 +292,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.TOOL,
         ItemClassification.CHARM,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.BOW,
         ItemClassification.SHORTBOW,
         ItemClassification.CROSSBOW,
@@ -225,13 +301,16 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.MACE,
         ItemClassification.PICKAXE,
         ItemClassification.HOE,
-        ItemClassification.HATCHET
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
     ),
 
     // DAMAGE (melee)
     SPICY(
         SpicyReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -244,6 +323,7 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     SHARP(
         SharpReforge::class.java,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -251,22 +331,27 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.TOOL,
         ItemClassification.CHARM,
         ItemClassification.PICKAXE,
-        ItemClassification.HOE
+        ItemClassification.HOE,
+        ItemClassification.DRILL
     ),
     POWERFUL(
         PowerfulReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.BOW,
         ItemClassification.SHORTBOW,
         ItemClassification.CROSSBOW,
         ItemClassification.TOOL,
         ItemClassification.CHARM,
         ItemClassification.PICKAXE,
-        ItemClassification.HOE
+        ItemClassification.HOE,
+        ItemClassification.DRILL
     ),
-    DULL(DullReforge::class.java, ItemClassification.SWORD, ItemClassification.CHARM),
+    DULL(DullReforge::class.java, ItemClassification.SWORD, ItemClassification.SPEAR, ItemClassification.CHARM),
     SLUGGISH(
         SluggishReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -276,7 +361,9 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),
     STINGING(
         StingingReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -289,7 +376,9 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
 
     RAPID(
         RapidReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -301,8 +390,10 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     // REACH
     REACHING(
         ReachingReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.TOOL,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -310,12 +401,15 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.CHARM,
         ItemClassification.PICKAXE,
         ItemClassification.HOE,
-        ItemClassification.HATCHET
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
     ),
     EXTENDED(
         ExtendedReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.TOOL,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.TRIDENT,
         ItemClassification.WEAPON,
         ItemClassification.AXE,
@@ -323,7 +417,8 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.CHARM,
         ItemClassification.PICKAXE,
         ItemClassification.HOE,
-        ItemClassification.HATCHET
+        ItemClassification.HATCHET,
+        ItemClassification.DRILL
     ),
 
     // META reforges, only dropped from rare drops
@@ -337,7 +432,9 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
     ),  // MAX Movement Speed
     WITHERED(
         WitheredReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.AXE,
         ItemClassification.BOW,
         ItemClassification.CROSSBOW,
@@ -355,9 +452,25 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
         ItemClassification.BOOTS,
         ItemClassification.CHARM
     ),
+    CRYPTIC(
+        CrypticReforge::class.java,
+        ItemClassification.STAFF,
+        ItemClassification.SWORD,
+        ItemClassification.SPEAR,
+        ItemClassification.AXE,
+        ItemClassification.BOW,
+        ItemClassification.CROSSBOW,
+        ItemClassification.SHORTBOW,
+        ItemClassification.TRIDENT,
+        ItemClassification.MACE,
+        ItemClassification.TOOL,
+        ItemClassification.CHARM
+    ),
     CRYSTALLIZED(
         CrystallizedReforge::class.java,
+        ItemClassification.STAFF,
         ItemClassification.SWORD,
+        ItemClassification.SPEAR,
         ItemClassification.AXE,
         ItemClassification.BOW,
         ItemClassification.CROSSBOW,
@@ -407,52 +520,61 @@ enum class ReforgeType(val handler: Class<out ReforgeBase>, vararg whitelist: It
          * @return
          */
         get() = when (this) {
-            ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING, CRYSTALLIZED, SIRENIC -> false
+            ERROR, ACCELERATED, WITHERED, OVERHEATING, ALLURING, PRISMATIC, PLUNDERING, CRYPTIC, CRYSTALLIZED, SIRENIC -> false
             else -> true
         }
 
-    val displayMaterial: Material
+    val displayItem: ItemStack
         get() = when (this) {
-            OVERHEATING -> Material.BLAZE_POWDER
-            DULL -> Material.STONE_SWORD
-            FIRM -> Material.IRON_SWORD
-            SLUGGISH -> Material.STONE_AXE
-            STINGING -> Material.DIAMOND_AXE
-            HASTY -> Material.GOLDEN_PICKAXE
-            HEAVY -> Material.IRON_CHESTPLATE
-            HEFTY -> Material.DIAMOND_CHESTPLATE
-            LIGHT -> Material.SUGAR
-            LUCKY -> Material.EMERALD
-            RAPID -> Material.RABBIT_FOOT
-            SPICY -> Material.GOLDEN_SWORD
-            QUICK -> Material.IRON_BOOTS
-            SWIFT -> Material.CHAINMAIL_BOOTS
-            SHARP -> Material.DIAMOND_AXE
-            STRONG -> Material.CHAINMAIL_CHESTPLATE
-            COPIOUS -> Material.DIAMOND
-            HEALTHY -> Material.APPLE
-            HEARTY -> Material.GOLDEN_APPLE
-            DURABLE -> Material.IRON_INGOT
-            POLISHED -> Material.DIAMOND_BLOCK
-            EXTENDED -> Material.SPYGLASS
-            REACHING -> Material.SPYGLASS
-            SAVAGE -> Material.FIRE_CHARGE
-            ACCELERATED -> Material.DIAMOND_PICKAXE
-            POWERFUL -> Material.STONE_AXE
-            WITHERED -> Material.WITHER_ROSE
-            FORTIFIED -> Material.NETHERITE_CHESTPLATE
-            AGILE -> Material.LEATHER_BOOTS
-            ANCIENT -> Material.LEATHER_CHESTPLATE
-            PLUNDERING -> Material.GOLD_BLOCK
-            PRISMATIC -> Material.PRISMARINE_CRYSTALS
-            SALTY -> Material.SUGAR
-            TEMPTING -> Material.ROTTEN_FLESH
-            ALLURING -> Material.PORKCHOP
-            SIRENIC -> Material.HEART_OF_THE_SEA
-            MAGNETIC -> Material.IRON_BLOCK
-            CRYSTALLIZED -> Material.END_CRYSTAL
-            else -> Material.BARRIER
-        }
+                OVERHEATING -> ItemService.generate(CustomItemType.SMOLDERING_CORE)
+                DULL -> ItemService.generate(Material.STONE_SWORD)
+                FIRM -> ItemService.generate(Material.IRON_SWORD)
+                SLUGGISH -> ItemService.generate(Material.STONE_AXE)
+                STINGING -> ItemService.generate(Material.DIAMOND_AXE)
+                HASTY -> ItemService.generate(Material.GOLDEN_PICKAXE)
+                HEAVY -> ItemService.generate(Material.IRON_CHESTPLATE)
+                HEFTY -> ItemService.generate(Material.DIAMOND_CHESTPLATE)
+                LIGHT -> ItemService.generate(Material.SUGAR)
+                LUCKY -> ItemService.generate(Material.EMERALD)
+                RAPID -> ItemService.generate(Material.RABBIT_FOOT)
+                SPICY -> ItemService.generate(Material.GOLDEN_SWORD)
+                QUICK -> ItemService.generate(Material.IRON_BOOTS)
+                SWIFT -> ItemService.generate(Material.CHAINMAIL_BOOTS)
+                SHARP -> ItemService.generate(Material.DIAMOND_AXE)
+                STRONG -> ItemService.generate(Material.CHAINMAIL_CHESTPLATE)
+                COPIOUS -> ItemService.generate(Material.DIAMOND)
+                HEALTHY -> ItemService.generate(Material.APPLE)
+                HEARTY -> ItemService.generate(Material.GOLDEN_APPLE)
+                DURABLE -> ItemService.generate(Material.IRON_INGOT)
+                POLISHED -> ItemService.generate(Material.DIAMOND_BLOCK)
+                EXTENDED -> ItemService.generate(Material.SPYGLASS)
+                REACHING -> ItemService.generate(Material.SPYGLASS)
+                SAVAGE -> ItemService.generate(Material.FIRE_CHARGE)
+                SMART -> ItemService.generate(Material.BOOK)
+                WISE -> ItemService.generate(Material.ENCHANTED_BOOK)
+                PROSPECTING -> ItemService.generate(Material.IRON_PICKAXE)
+                SURVEYING -> ItemService.generate(Material.STONE_PICKAXE)
+                GLEANING -> ItemService.generate(Material.GOLDEN_HOE)
+                CULTIVATING -> ItemService.generate(Material.DIAMOND_HOE)
+                CANADIAN -> ItemService.generate(Material.RED_DYE)
+                ARBOR -> ItemService.generate(Material.OAK_LOG)
+                ACCELERATED -> ItemService.generate(Material.DIAMOND_PICKAXE)
+                POWERFUL -> ItemService.generate(Material.STONE_AXE)
+                WITHERED -> ItemService.generate(CustomItemType.DESOLATED_STONE)
+                FORTIFIED -> ItemService.generate(Material.NETHERITE_CHESTPLATE)
+                AGILE -> ItemService.generate(Material.LEATHER_BOOTS)
+                ANCIENT -> ItemService.generate(Material.LEATHER_CHESTPLATE)
+                PLUNDERING -> ItemService.generate(Material.GOLD_BLOCK)
+                PRISMATIC -> ItemService.generate(CustomItemType.IRIDESCENT_LENS)
+                SALTY -> ItemService.generate(Material.SUGAR)
+                TEMPTING -> ItemService.generate(Material.ROTTEN_FLESH)
+                ALLURING -> ItemService.generate(CustomItemType.PREDATOR_TOOTH)
+                SIRENIC -> ItemService.generate(CustomItemType.HYPNOTIC_EYE)
+                MAGNETIC -> ItemService.generate(Material.IRON_BLOCK)
+                CRYSTALLIZED -> ItemService.generate(CustomItemType.VOID_RELIC)
+                CRYPTIC -> ItemService.generate(CustomItemType.CRYSTAL_BALL)
+                else -> ItemService.generate(Material.BARRIER)
+            }
 
     /**
      * To be called once during manager instantiation. Used as a "helper" to create the singleton instance responsible

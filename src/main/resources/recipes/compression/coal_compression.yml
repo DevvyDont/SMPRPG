@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:coal
+- item: minecraft:coal_block
+  amount: 9
+- item: smprpg:enchanted_coal
+  amount: 9
+- item: smprpg:enchanted_coal_block
+  amount: 9
+- item: smprpg:coal_singularity
+  amount: 9

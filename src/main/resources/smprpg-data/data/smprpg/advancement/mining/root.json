@@ -1,0 +1,35 @@
+{
+  "criteria": {
+    "crafting_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:crafting_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:block/deepslate",
+    "description": {
+      "translate": "advancements.smprpg.mining.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.smprpg.mining.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafting_table"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

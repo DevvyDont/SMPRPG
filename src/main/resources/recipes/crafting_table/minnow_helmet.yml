@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:minnow_scale
+result:
+  item: smprpg:minnow_helmet
+  amount: 1
+unlocked_by:
+- smprpg:minnow_scale

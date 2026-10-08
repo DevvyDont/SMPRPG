@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- szs
+- SSS
+ingredients:
+  s: smprpg:steel_ingot
+  S: minecraft:stone
+  z: smprpg:zanite
+result:
+  item: smprpg:reforge_table
+  amount: 1
+unlocked_by:
+- smprpg:zanite

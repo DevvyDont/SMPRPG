@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:aqua_affinity",
+    "minecraft:efficiency",
+    "minecraft:fire_aspect",
+    "minecraft:unbreaking",
+    "smprpg:aerial_affinity",
+    "smprpg:chopping",
+    "smprpg:harvesting",
+    "smprpg:proficient"
+  ]
+}

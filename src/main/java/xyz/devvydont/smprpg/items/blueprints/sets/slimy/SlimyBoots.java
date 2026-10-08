@@ -1,7 +1,6 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.slimy;
 
 import org.bukkit.Color;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
@@ -14,7 +13,6 @@ import xyz.devvydont.smprpg.items.interfaces.IDyeable;
 import xyz.devvydont.smprpg.items.interfaces.ITrimmable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
-import xyz.devvydont.smprpg.util.crafting.builders.BootsRecipe;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,18 +33,13 @@ public class SlimyBoots extends SlimyArmorSet implements IDyeable, ITrimmable {
     }
 
     @Override
-    public int getHealth() {
-        return 30;
+    public int getDefense() {
+        return 40;
     }
 
     @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.BOOTS;
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        return new BootsRecipe(this, itemService.getCustomItem(CustomItemType.PREMIUM_SLIME), generate()).build();
     }
 
     @Override

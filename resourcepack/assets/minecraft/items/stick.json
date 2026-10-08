@@ -48,6 +48,34 @@
                     "type": "model",
                     "model": "materials:item/obsidian_tool_rod"
                 }
+            },
+            {
+                "when": "smprpg:steel_tool_shaft",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/steel_tool_shaft"
+                }
+            },
+            {
+                "when": "smprpg:wooden_staff",
+                "model": {
+                    "type": "model",
+                    "model": "staffs:item/wooden_staff"
+                }
+            },
+            {
+                "when": "smprpg:amethyst_staff",
+                "model": {
+                    "type": "model",
+                    "model": "staffs:item/amethyst_staff"
+                }
+            },
+            {
+                "when": "smprpg:mithril_staff",
+                "model": {
+                    "type": "model",
+                    "model": "staffs:item/mithril_staff"
+                }
             }
         ]
     }

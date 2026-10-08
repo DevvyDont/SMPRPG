@@ -1,21 +1,14 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing.ruination;
 
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.ability.Passive;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
-import xyz.devvydont.smprpg.items.blueprints.sets.fishing.nocturnum.RuinationSet;
 import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
 import xyz.devvydont.smprpg.items.interfaces.IPassiveProvider;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -28,7 +21,7 @@ import java.util.Set;
 /**
  * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
  */
-public class RuinationRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable, IPassiveProvider {
+public class RuinationRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, IPassiveProvider {
 
     public RuinationRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -54,7 +47,7 @@ public class RuinationRod extends CustomAttributeItem implements IBreakableEquip
                 AttributeEntry.additive(AttributeWrapper.FISHING_RATING, 75),
                 AttributeEntry.additive(AttributeWrapper.FISHING_CREATURE_CHANCE, 7),
                 AttributeEntry.multiplicative(AttributeWrapper.ATTACK_SPEED, ToolGlobals.FISHING_ROD_COOLDOWN),
-                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 15)
+                AttributeEntry.additive(AttributeWrapper.FISHING_SPEED, 40)
         );
     }
 
@@ -77,35 +70,6 @@ public class RuinationRod extends CustomAttributeItem implements IBreakableEquip
     @Override
     public int getMaxDurability() {
         return 40_000;
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType() + "_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape(
-                "  r",
-                " ts",
-                "r s"
-        );
-        recipe.setIngredient('t', ItemService.generate(CustomItemType.HOLOMOKU_ROD));
-        recipe.setIngredient('r', ItemService.generate(RuinationSet.UPGRADE_MATERIAL));
-        recipe.setIngredient('s', ItemService.generate(CustomItemType.ENCHANTED_STRING));
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        return recipe;
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.RAW_TRIDENTITE_CHUNK));
     }
 
     /**

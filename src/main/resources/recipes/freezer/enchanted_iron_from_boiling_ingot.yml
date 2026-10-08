@@ -1,0 +1,4 @@
+type: freezer
+input: "smprpg:boiling_ingot"
+time: 1600
+result: "smprpg:enchanted_iron"

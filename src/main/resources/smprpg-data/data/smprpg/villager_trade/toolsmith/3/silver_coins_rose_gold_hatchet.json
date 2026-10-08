@@ -1,0 +1,26 @@
+{
+  "wants": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "silver_coin"
+        }
+      }
+    },
+    "count": 60
+  },
+  "gives": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "rose_gold_hatchet"
+        }
+      }
+    }
+  },
+  "max_uses": 12,
+  "reputation_discount": 0.2,
+  "xp": 20.0
+}

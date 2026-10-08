@@ -20,7 +20,5 @@ class RapidReforge(type: ReforgeType) : ReforgeBase(type) {
     override val description: List<Component>
         get() = listOf<Component>(ComponentUtils.create("Greatly improves attack speed"))
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

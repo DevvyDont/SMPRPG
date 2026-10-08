@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:phantom_membrane
+- item: smprpg:premium_membrane
+  amount: 9
+- item: smprpg:enchanted_membrane
+  amount: 9

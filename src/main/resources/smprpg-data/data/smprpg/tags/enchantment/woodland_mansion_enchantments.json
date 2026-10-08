@@ -1,0 +1,19 @@
+{
+  "values": [
+    "minecraft:smite",
+    "minecraft:protection",
+    "minecraft:projectile_protection",
+    "minecraft:feather_falling",
+
+    "#smprpg:archery_loot_generic_enchantments",
+    "#smprpg:melee_loot_generic_enchantments",
+    "#smprpg:armor_loot_generic_enchantments",
+
+    "smprpg:chopping",
+    "smprpg:felling",
+    "smprpg:vigilante",
+
+    "smprpg:amplification",
+    "smprpg:telekinesis"
+  ]
+}

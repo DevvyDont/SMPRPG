@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class StingingReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.multiplicative(AttributeWrapper.STRENGTH, getDamageBonus(rarity).toDouble()),
             AttributeEntry.additive(AttributeWrapper.CRITICAL_DAMAGE, (50 + rarity.ordinal * 10).toDouble()),
             AttributeEntry.additive(AttributeWrapper.CRITICAL_CHANCE, (20 + rarity.ordinal * 5).toDouble())
@@ -23,9 +23,7 @@ class StingingReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("Provides a moderate damage boost")
         )
 
-    override fun getPowerRating(): Int {
-        return 2
-    }
+    override val powerRating: Int get() = 2
 
     companion object {
         fun getDamageBonus(rarity: ItemRarity): Float {

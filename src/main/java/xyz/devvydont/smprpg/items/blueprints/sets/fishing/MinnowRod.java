@@ -1,23 +1,15 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.fishing;
 
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
-import xyz.devvydont.smprpg.SMPRPG;
+import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.ability.Passive;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
-import xyz.devvydont.smprpg.items.interfaces.IBreakableEquipment;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
-import xyz.devvydont.smprpg.items.interfaces.IFishingRod;
-import xyz.devvydont.smprpg.items.interfaces.IPassiveProvider;
+import xyz.devvydont.smprpg.items.interfaces.*;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.items.ToolGlobals;
 
@@ -28,7 +20,7 @@ import java.util.Set;
 /**
  * The end game sea creature rod. Can fish everywhere, and has the ceiling for base sea creature rod stats.
  */
-public class MinnowRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, ICraftable, IPassiveProvider {
+public class MinnowRod extends CustomAttributeItem implements IBreakableEquipment, IFishingRod, IPassiveProvider, IRepairable {
 
     public MinnowRod(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -78,34 +70,6 @@ public class MinnowRod extends CustomAttributeItem implements IBreakableEquipmen
         return 15_000;
     }
 
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), this.getCustomItemType() + "_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.shape(
-                "  r",
-                " rs",
-                "r s"
-        );
-        recipe.setIngredient('r', ItemService.generate(CustomItemType.MINNOW_SCALE));
-        recipe.setIngredient('s', ItemService.generate(Material.STRING));
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        return recipe;
-    }
-
-    /**
-     * A collection of items that will unlock the recipe for this item. Typically, will be one of the components
-     * of the recipe itself, but can be set to whatever is desired
-     */
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.MINNOW_SCALE));
-    }
-
     /**
      * Check what contexts this fishing rod is allowed to fish in. for example, if this rod can catch things in the
      * void then it will contain FishingFlag.VOID.
@@ -138,5 +102,10 @@ public class MinnowRod extends CustomAttributeItem implements IBreakableEquipmen
     @Override
     public int getWorth(ItemStack item) {
         return super.getWorth(item) + (5_000 * item.getAmount());
+    }
+
+    @Override
+    public @NotNull Collection<@NotNull ItemStack> getRepairMaterial() {
+        return List.of(itemService.getCustomItem(CustomItemType.MINNOW_SCALE));
     }
 }

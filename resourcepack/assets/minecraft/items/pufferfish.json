@@ -11,7 +11,7 @@
                 "when": "smprpg:voidfin",
                 "model": {
                     "type": "model",
-                    "model": "materials:item/voidfin"
+                    "model": "smprpg:item/fish/voidfin"
                 }
             }
         ]

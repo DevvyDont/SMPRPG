@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- aaa
+- asa
+- aaa
+ingredients:
+  a: smprpg:enchanted_amethyst
+  s: smprpg:enchanted_sugar
+result:
+  item: smprpg:crystallized_sugar
+  amount: 1
+unlocked_by:
+- minecraft:sugar
+- minecraft:sugar_cane

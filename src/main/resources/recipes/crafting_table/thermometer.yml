@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- iri
+- ihi
+- igi
+ingredients:
+  r: smprpg:enchanted_redstone
+  g: minecraft:glass
+  h: minecraft:heart_of_the_sea
+  i: minecraft:iron_block
+result:
+  item: smprpg:thermometer
+  amount: 1
+unlocked_by:
+- minecraft:heart_of_the_sea

@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- ene
+- ntn
+- ene
+ingredients:
+  t: smprpg:wardrobe_slot_rare
+  e: minecraft:emerald
+  n: minecraft:netherite_ingot
+result:
+  item: smprpg:wardrobe_slot_epic
+  amount: 1
+unlocked_by:
+- smprpg:wardrobe_slot_rare
+upgrade: "t"

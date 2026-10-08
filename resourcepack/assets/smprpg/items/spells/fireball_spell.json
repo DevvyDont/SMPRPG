@@ -1,0 +1,6 @@
+{
+	"model": {
+	  "type": "minecraft:model",
+	  "model": "smprpg:item/spells/fireball_spell"
+	}
+}

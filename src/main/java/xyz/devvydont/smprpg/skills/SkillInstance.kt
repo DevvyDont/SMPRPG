@@ -154,6 +154,7 @@ class SkillInstance(@JvmField val owner: Player, @JvmField val type: SkillType) 
 
     fun getProficiencyStacks(): Double {
         val proficiencyInstance = AttributeService.instance.getOrCreateAttribute(owner, AttributeWrapper.PROFICIENCY);
-        return proficiencyInstance.getValue();
+        val skillProficiencyInstance = AttributeService.instance.getOrCreateAttribute(owner, type.proficiencyAttribute);
+        return proficiencyInstance.value + skillProficiencyInstance.value;
     }
 }

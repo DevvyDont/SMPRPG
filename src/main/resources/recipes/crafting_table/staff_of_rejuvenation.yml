@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mrm
+- mmm
+ingredients:
+  r: smprpg:staff_of_regeneration
+  m: smprpg:melon_slice_singularity
+result:
+  item: smprpg:staff_of_rejuvenation
+  amount: 1
+unlocked_by:
+- minecraft:melon_slice
+upgrade: "r"

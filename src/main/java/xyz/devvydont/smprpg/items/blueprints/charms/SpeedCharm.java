@@ -1,6 +1,7 @@
 package xyz.devvydont.smprpg.items.blueprints.charms;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -31,8 +32,8 @@ public class SpeedCharm extends CustomAttributeItem implements IModelOverridden 
     }
 
     @Override
-    public Material getDisplayMaterial() {
-        return Material.TOTEM_OF_UNDYING;
+    public Key getDisplayKey() {
+        return IModelOverridden.ofMaterial(Material.TOTEM_OF_UNDYING);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class SpeedCharm extends CustomAttributeItem implements IModelOverridden 
         return List.of(
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, .3),
                 new MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, .3),
-                new ScalarAttributeEntry(AttributeWrapper.MINING_SPEED, .3)
+                new ScalarAttributeEntry(AttributeWrapper.MINING_SPEED, 0.2)
         );
     }
 

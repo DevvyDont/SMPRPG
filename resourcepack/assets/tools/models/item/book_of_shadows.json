@@ -1,0 +1,7 @@
+{
+  "parent": "tools:item/tome",
+  "textures": {
+    "0": "tools:item/book_of_shadows",
+    "particle": "tools:item/book_of_shadows"
+  }
+}

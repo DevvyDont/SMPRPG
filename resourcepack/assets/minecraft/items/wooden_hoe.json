@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "tools:item/copper_hoe"
                 }
+            },
+            {
+                "when": "smprpg:bronze_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/bronze_hoe"
+                }
             }
         ]
     }

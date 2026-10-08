@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/air"
+    },
+    "type=double": {
+      "model": "minecraft:block/air"
+    },
+    "type=top": {
+      "model": "minecraft:block/air"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: minecraft:lily_pad
+result:
+  item: smprpg:murky_boots
+  amount: 1
+unlocked_by:
+- minecraft:lily_pad

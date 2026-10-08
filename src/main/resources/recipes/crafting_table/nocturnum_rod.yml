@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  r'
+- ' ts'
+- r s
+ingredients:
+  r: smprpg:lucifugous_binding
+  s: smprpg:lucifugous_thread
+  t: smprpg:ruination_rod
+result:
+  item: smprpg:nocturnum_rod
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "t"

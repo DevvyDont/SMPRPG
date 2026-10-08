@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- bfb
+- fdf
+- bfb
+ingredients:
+  b: smprpg:premium_bone
+  d: smprpg:compressed_dirt
+  f: smprpg:premium_flesh
+result:
+  item: smprpg:super_soil
+  amount: 2
+unlocked_by:
+- smprpg:compressed_dirt

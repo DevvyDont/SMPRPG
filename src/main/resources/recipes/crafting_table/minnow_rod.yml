@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- '  r'
+- ' rs'
+- r s
+ingredients:
+  r: smprpg:minnow_scale
+  s: minecraft:string
+result:
+  item: smprpg:minnow_rod
+  amount: 1
+unlocked_by:
+- smprpg:minnow_scale

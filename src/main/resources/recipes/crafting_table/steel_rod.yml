@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:premium_string
+  t: smprpg:gold_rod
+  m: smprpg:steel_ingot
+result:
+  item: smprpg:steel_rod
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot
+upgrade: "t"

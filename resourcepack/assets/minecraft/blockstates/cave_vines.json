@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/cave_vines"
+    },
+	"age=25,berries=false": {
+	  "model": "smprpg:block/decoration/rope"
+	}
+  }
+}

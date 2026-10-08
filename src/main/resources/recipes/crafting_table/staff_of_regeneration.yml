@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mrm
+- mmm
+ingredients:
+  r: smprpg:curing_rod
+  m: smprpg:enchanted_melon
+result:
+  item: smprpg:staff_of_regeneration
+  amount: 1
+unlocked_by:
+- minecraft:melon_slice
+upgrade: "r"

@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: minecraft:emerald_block
+result:
+  item: smprpg:emerald_boots
+  amount: 1
+unlocked_by:
+- minecraft:emerald

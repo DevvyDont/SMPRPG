@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:mangrove_log"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_mangrove_log", amount: 1, chance: 1.0 }

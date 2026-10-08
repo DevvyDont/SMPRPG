@@ -1,0 +1,19 @@
+{
+  "wants": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "silver_coin"
+        }
+      }
+    },
+    "count": 10
+  },
+  "gives": {
+    "id": "minecraft:copper_axe"
+  },
+  "max_uses": 12,
+  "reputation_discount": 0.2,
+  "xp": 2.0
+}

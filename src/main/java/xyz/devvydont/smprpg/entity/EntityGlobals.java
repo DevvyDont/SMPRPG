@@ -3,8 +3,10 @@ package xyz.devvydont.smprpg.entity;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.*;
+import xyz.devvydont.smprpg.util.persistence.KeyStore;
 
 public class EntityGlobals {
 
@@ -194,12 +196,15 @@ public class EntityGlobals {
         };
     }
 
-    public static int getMinimumEnvironmentLevel(World.Environment environment) {
-        return switch (environment) {
-            case NETHER -> 20;
-            case THE_END -> 40;
-            default -> 1;
-        };
+    public static int getMinimumEnvironmentLevel(NamespacedKey dimKey) {
+        // TODO: Convert this to switch when kotlin ported.
+
+        if (dimKey == KeyStore.DIM_NETHER || dimKey == KeyStore.DIM_AETHER)
+            return 20;
+        else if (dimKey == KeyStore.DIM_END)
+            return 40;
+        else
+            return 1;
     }
 
     /**
@@ -209,11 +214,14 @@ public class EntityGlobals {
      */
     public static int getLevelDepthBoost(Location location) {
 
-        if (location.getY() >= 64)
+        var seaLevel = location.getWorld().getSeaLevel();
+        var maxDepth = location.getWorld().getMinHeight();
+        if (location.getY() >= seaLevel)
             return 0;
 
-        double x = Math.abs(64.0 - location.getY());
-        return (int) (x / 20);
+        double depthRange = seaLevel - maxDepth;
+        double currentY = seaLevel - location.getY();
+        return (int) (20 * (currentY / depthRange));
     }
 
 
@@ -235,7 +243,7 @@ public class EntityGlobals {
     public static int determineLocationLevel(Location location) {
 
         // Determine the level of the environment and location this entity is at.
-        var level = Math.max(1, getMinimumEnvironmentLevel(location.getWorld().getEnvironment()));
+        var level = Math.max(1, getMinimumEnvironmentLevel(location.getWorld().getKey()));
         level += getLevelDistanceBoost(location);
         level += getLevelDepthBoost(location);
 

@@ -1,0 +1,15 @@
+type: compression
+tiers:
+- minecraft:melon_slice
+- item: minecraft:melon
+  amount: 9
+- item: smprpg:premium_melon_slice
+  amount: 9
+- item: smprpg:premium_melon
+  amount: 9
+- item: smprpg:enchanted_melon_slice
+  amount: 9
+- item: smprpg:enchanted_melon
+  amount: 9
+- item: smprpg:melon_slice_singularity
+  amount: 9

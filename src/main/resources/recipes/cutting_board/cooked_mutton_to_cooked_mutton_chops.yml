@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:cooked_mutton"
+tool: "knives"
+result:
+  - { item: "smprpg:cooked_mutton_chops", amount: 2, chance: 1.0 }

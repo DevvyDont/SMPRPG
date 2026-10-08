@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- fvf
+- fcf
+- fvf
+ingredients:
+  c: smprpg:abominable_cleaver
+  f: smprpg:enchanted_necrotic_flesh
+  v: smprpg:reviled_viscera
+result:
+  item: smprpg:abominable_machete
+  amount: 1
+unlocked_by:
+- smprpg:reviled_viscera
+upgrade: "c"

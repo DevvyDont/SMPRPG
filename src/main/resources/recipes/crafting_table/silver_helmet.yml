@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:silver_ingot
+result:
+  item: smprpg:silver_helmet
+  amount: 1
+unlocked_by:
+- smprpg:silver_ingot

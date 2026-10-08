@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:glowstone_dust
+- item: minecraft:glowstone
+  amount: 4
+- item: smprpg:enchanted_glowstone
+  amount: 9
+- item: smprpg:enchanted_glowstone_block
+  amount: 9
+- item: smprpg:glowstone_singularity
+  amount: 9

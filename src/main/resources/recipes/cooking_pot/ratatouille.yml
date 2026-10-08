@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "smprpg:tomato"
+  - "smprpg:onion"
+  - "minecraft:beetroot"
+  - "smprpg:cabbage_leaf"
+time: 200
+result: "smprpg:ratatouille"
+skill_xp:
+  farming: 50

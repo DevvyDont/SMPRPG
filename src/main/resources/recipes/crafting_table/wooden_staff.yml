@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- '  s'
+- ' ss'
+- 's  '
+ingredients:
+  s: minecraft:stick
+result:
+  item: smprpg:wooden_staff
+  amount: 1
+unlocked_by:
+- minecraft:stick

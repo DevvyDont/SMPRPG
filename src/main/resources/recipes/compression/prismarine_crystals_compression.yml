@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:prismarine_crystals
+- item: smprpg:premium_prismarine_crystal
+  amount: 9
+- item: smprpg:enchanted_prismarine_crystal
+  amount: 9

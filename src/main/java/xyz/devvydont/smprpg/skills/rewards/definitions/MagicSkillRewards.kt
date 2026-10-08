@@ -12,8 +12,8 @@ class MagicSkillRewards : SkillRewardContainer() {
     init {
         // Loop through all the enchantments in the game. Add the enchantment unlock to the rewards
         for (enchantment in SMPRPG.getService(EnchantmentService::class.java).customEnchantments)
-            if (enchantment.getSkillRequirement() > 0)
-                addReward(enchantment.getSkillRequirement(), EnchantmentSkillReward(enchantment))
+            if (enchantment.skillRequirement > 0)
+                addReward(enchantment.skillRequirement, EnchantmentSkillReward(enchantment))
 
         // Add intelligence to every level.
         this.addAttributeRewardEveryLevel(
@@ -22,20 +22,27 @@ class MagicSkillRewards : SkillRewardContainer() {
             SkillGlobals.INT_PER_LEVEL
         )
 
-        // Add luck every 4 levels. Ideally, this doesn't get out of control.
+        // Add arcane rating every 4 levels.
+        this.addAttributeRewardEveryXLevels(
+            AttributeWrapper.ARCANE_RATING,
+            AttributeModifier.Operation.ADD_NUMBER,
+            SkillGlobals.ARCANE_RATING_PER_4_LEVELS,
+            SkillGlobals.ARCANE_RATING_FREQUENCY
+        )
+
+        // Add luck every 10 levels. Ideally, this doesn't get out of control.
         this.addAttributeRewardEveryXLevels(
             AttributeWrapper.LUCK,
             AttributeModifier.Operation.ADD_NUMBER,
-            SkillGlobals.LUCK_PER_4_LEVELS,
+            SkillGlobals.LUCK_PER_10_LEVELS,
             SkillGlobals.LUCK_LEVEL_FREQUENCY
         )
 
         // Typical HP every level
-        this.addScalingAttributeRewardEveryXLevels(
+        this.addFlatAttributeRewardEveryLevel(
             AttributeWrapper.HEALTH,
             AttributeModifier.Operation.ADD_NUMBER,
-            SkillGlobals.HP_PER_5_LEVELS,
-            SkillGlobals.HP_LEVEL_FREQUENCY
+            SkillGlobals.HP_PER_LEVEL
         )
 
         // Give coins for every level.

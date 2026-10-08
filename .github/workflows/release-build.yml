@@ -10,14 +10,41 @@ jobs:
     permissions:
       contents: write
     steps:
+      # The `release` event intermittently reports github.ref_name as the
+      # default branch instead of the tag (a known GitHub quirk when the
+      # tag + release are created together). The release payload's tag_name
+      # is the reliable source, so resolve and validate it up front.
+      - name: Resolve and validate release tag
+        id: tag
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          if [ -z "$TAG" ]; then
+            echo "::error::Release published with no tag_name in the payload. Aborting build."
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Resolved release tag: $TAG"
+
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
+          fetch-depth: 0
 
-      - name: Set up JDK 21
+      - name: Verify tag exists in repository
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "::error::Tag '$TAG' does not exist in the repository. Aborting build."
+            exit 1
+          fi
+          echo "Verified tag '$TAG' -> $(git rev-parse "refs/tags/$TAG")"
+
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 21
+          java-version: 25
 
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
@@ -25,28 +52,16 @@ jobs:
       - name: Build plugin
         run: ./gradlew build
         env:
-          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
 
-      - name: Zip resource pack
-        run: |
-          cd resourcepack
-          zip -r ../resourcepack.zip ./
+      - name: Package server data
+        run: zip -r server-data.zip resourcepack run
 
-      - name: Upload plugin jar and resource pack to release
+      - name: Upload plugin jar and server data to release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             ./build/libs/*.jar
-            ./resourcepack.zip
+            ./server-data.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload resource pack to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_SSH_HOST }}
-          username: ${{ secrets.VPS_SSH_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: "./resourcepack.zip"
-          target: "/home/${{ secrets.VPS_SSH_USER }}/${{ secrets.VPS_SERVER_DIRECTORY }}/resourcepack/"
-        continue-on-error: true  # This step is optional, this is just QoL to manually update resource pack

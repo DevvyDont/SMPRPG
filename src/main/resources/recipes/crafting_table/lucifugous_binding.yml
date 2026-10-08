@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' bn'
+- bnb
+- 'nb '
+ingredients:
+  b: smprpg:boiling_ingot
+  n: smprpg:necroplasm
+result:
+  item: smprpg:lucifugous_binding
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm

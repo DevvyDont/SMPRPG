@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:tin_ingot
+result:
+  item: smprpg:tin_helmet
+  amount: 1
+unlocked_by:
+- smprpg:tin_ingot

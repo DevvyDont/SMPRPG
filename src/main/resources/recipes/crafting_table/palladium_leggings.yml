@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:palladium_ingot
+result:
+  item: smprpg:palladium_leggings
+  amount: 1
+unlocked_by:
+- smprpg:palladium_ingot

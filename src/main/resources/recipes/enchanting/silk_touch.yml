@@ -1,0 +1,14 @@
+type: enchanting
+enchantment: silk_touch
+levels:
+  '1':
+    power: 25
+    ingredients:
+    - item: smprpg:enchanted_string
+      amount: 4
+    - item: minecraft:honeycomb
+      amount: 32
+    - item: smprpg:onyx
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 16

@@ -24,9 +24,7 @@ class DullReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("effectiveness of sweeping attacks")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 
     companion object {
         fun getSweepBoost(rarity: ItemRarity): Float {

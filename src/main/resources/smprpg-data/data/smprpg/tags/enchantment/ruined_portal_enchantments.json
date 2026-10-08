@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:bane_of_arthropods",
+    "minecraft:knockback",
+    "minecraft:smite",
+    "minecraft:protection",
+    "minecraft:fire_protection",
+    "minecraft:fire_aspect",
+    "minecraft:looting",
+
+    "smprpg:leech",
+    "smprpg:syphon",
+    "smprpg:burden",
+    "smprpg:blessed",
+    "smprpg:vigilante",
+
+    "smprpg:amplification",
+    "smprpg:telekinesis",
+    "smprpg:keeping"
+  ]
+}

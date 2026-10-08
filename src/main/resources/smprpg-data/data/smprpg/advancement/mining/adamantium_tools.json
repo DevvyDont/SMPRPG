@@ -1,0 +1,44 @@
+{
+  "parent": "smprpg:mining/titanium_tools",
+  "criteria": {
+    "raw_adamantium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:nether_brick",
+            "predicates": {
+              "minecraft:custom_data": {
+                "PublicBukkitValues": {
+                  "smprpg:item-type": "raw_adamantium"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.mining.adamantium_tools.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:materials/raw_adamantium"
+      },
+      "count": 1,
+      "id": "minecraft:nether_brick"
+    },
+    "title": {
+      "translate": "advancements.smprpg.mining.adamantium_tools.title"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "raw_adamantium"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

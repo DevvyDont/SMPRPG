@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:enchanted_string
+  t: smprpg:aercloud_rod
+  m: smprpg:gold_aercloud
+result:
+  item: smprpg:ether_rod
+  amount: 1
+unlocked_by:
+- smprpg:gold_aercloud
+upgrade: "t"

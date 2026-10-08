@@ -15,6 +15,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.services.SpecialEffectService;
 import xyz.devvydont.smprpg.effects.tasks.DisintegratingEffect;
 import xyz.devvydont.smprpg.entity.base.BossInstance;
@@ -52,6 +53,11 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.BOSS);
+        mobTypes.add(MobType.DRACONIC);
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.AIRBORNE);
+
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
         this.updateBaseAttribute(AttributeWrapper.KNOCKBACK_RESISTANCE, 100);
@@ -175,6 +181,8 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_BOOTS), 850, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ELDERFLAME_DAGGER), 1000, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.VOID_RELIC), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.BOOK_OF_SHADOWS), 1000, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.RECOMBOBULATOR), 500, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.TRANSMISSION_WAND), 1000, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL), 400, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.DRAGON_SCALES), 4, this),
@@ -188,14 +196,29 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
 
     @Override
     public void wipe() {
-
-        var battle = _entity.getWorld().getEnderDragonBattle();
-        if (battle != null) {
-            battle.generateEndPortal(true);
-            battle.resetCrystals();
-        }
-
         super.wipe();
+        // Kill the dragon the way a legitimate combat death does. We previously set the DYING phase, but that only
+        // plays the death animation while the dragon stays at full health, so the vanilla EnderDragonBattle never
+        // registers the kill and would randomly respawn the dragon afterwards.
+        killWithoutCredit();
+    }
+
+    /**
+     * Forcibly kills the dragon so the vanilla dragon battle treats it as a real death. All damage contribution is
+     * cleared first so the kill credits nobody and {@code DropsService} awards no loot.
+     *
+     * <p>Note we cannot use {@code Entity#damage()} here: the dragon's main hitbox ignores direct damage (only its
+     * body-part entities route damage in vanilla), so a damage call is a silent no-op and the dragon flies on.
+     * Setting health to 0 invokes the dragon's genuine death (die() -> the vanilla death animation ->
+     * {@code EnderDragonBattle#setDragonKilled}), which registers the kill, generates the exit portal, and prevents
+     * any respawn, all without the problematic {@code Entity#remove()} on a dragon.
+     */
+    private void killWithoutCredit() {
+        if (!_entity.isValid())
+            return;
+
+        getDamageTracker().clear();
+        _entity.setHealth(0);
     }
 
     /**
@@ -307,7 +330,9 @@ public class LeveledDragon extends BossInstance<EnderDragon> implements Listener
         var cloud = event.getEntity().getWorld().spawn(event.getLocation(), AreaEffectCloud.class);
         cloud.setColor(Color.PURPLE);
         cloud.setSource(_entity);
-        cloud.setParticle(Particle.DRAGON_BREATH);
+        // Newer MC versions require the DRAGON_BREATH particle to carry a Float ("power of the breath"); without it
+        // CraftParticle throws "missing required data class java.lang.Float".
+        cloud.setParticle(Particle.DRAGON_BREATH, 1.0f);
         cloud.setBasePotionType(PotionType.HARMING);
         cloud.setOwnerUniqueId(_entity.getUniqueId());
         cloud.setDuration((int) TickTime.seconds(30));

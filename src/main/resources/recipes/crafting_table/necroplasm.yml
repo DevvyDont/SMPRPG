@@ -1,0 +1,19 @@
+type: shapeless
+ingredients:
+- smprpg:midnight_hide
+- smprpg:midnight_hide
+- smprpg:deep_sea_barnacle
+- smprpg:deep_sea_barnacle
+- smprpg:epic_fish_essence
+- smprpg:spooky_tendril
+- smprpg:spooky_tendril
+- smprpg:brimstone_resin
+- smprpg:brimstone_resin
+result:
+  item: smprpg:necroplasm
+  amount: 1
+unlocked_by:
+- smprpg:midnight_hide
+- smprpg:deep_sea_barnacle
+- smprpg:spooky_tendril
+- smprpg:brimstone_resin

@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' H '
+- ' H '
+ingredients:
+  H: smprpg:ambrosium_encrusted_shaft
+  M: smprpg:aetherium_ingot
+result:
+  item: smprpg:aetherium_shovel
+  amount: 1
+unlocked_by:
+- smprpg:aetherium_ingot

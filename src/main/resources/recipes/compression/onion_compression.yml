@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- smprpg:onion
+- item: smprpg:premium_onion
+  amount: 9
+- item: smprpg:enchanted_onion
+  amount: 9
+- item: smprpg:onion_singularity
+  amount: 9

@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mmm
+- mhm
+ingredients:
+  h: smprpg:minnow_helmet
+  m: smprpg:holomoku_crest
+result:
+  item: smprpg:holomoku_helmet
+  amount: 1
+unlocked_by:
+- smprpg:holomoku_crest
+upgrade: "h"

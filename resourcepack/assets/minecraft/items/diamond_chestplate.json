@@ -179,6 +179,366 @@
 					},
 					"property": "minecraft:trim_material"
                 }
+            },
+            {
+                "when": "smprpg:mithril_chestplate",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_emerald_trim"
+							},
+							"when": "minecraft:mithril"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_chestplate_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/mithril/mithril_chestplate"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:titanium_chestplate",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_emerald_trim"
+							},
+							"when": "minecraft:titanium"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_chestplate_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/titanium/titanium_chestplate"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_chestplate",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_emerald_trim"
+							},
+							"when": "minecraft:adamantium"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_chestplate_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/adamantium/adamantium_chestplate"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:abominable_chestplate",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_emerald_trim"
+							},
+							"when": "minecraft:abomination"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_chestplate_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/abomination/abomination_chestplate"
+					},
+					"property": "minecraft:trim_material"
+                }
             }
         ]
     }

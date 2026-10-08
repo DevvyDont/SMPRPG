@@ -1,0 +1,41 @@
+{
+  "parent": "smprpg:aether/find_fountain",
+  "criteria": {
+    "crystal_island": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "smprpg:crystal_island"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.smprpg.aether.find_crystal_island.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:item_model": "smprpg:crystal_fruit"
+      },
+      "count": 1,
+      "id": "minecraft:nether_brick"
+    },
+    "title": {
+      "translate": "advancements.smprpg.aether.find_crystal_island.title"
+    }
+  },
+  "requirements": [
+    [
+      "crystal_island"
+    ]
+  ]
+}

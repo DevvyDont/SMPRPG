@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.UnchangedEnchantment;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
+/**
+ * Deprecated. Fire Aspect now fulfills both roles.
+ */
+
+@Deprecated
 public class FlameEnchantment extends UnchangedEnchantment {
 
     public FlameEnchantment(TypedKey<Enchantment> key) {

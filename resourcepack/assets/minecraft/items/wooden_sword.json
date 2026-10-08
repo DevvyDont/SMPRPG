@@ -13,6 +13,13 @@
                     "type": "model",
                     "model": "swords:item/copper_sword"
                 }
+            },
+            {
+                "when": "smprpg:bronze_sword",
+                "model": {
+                    "type": "model",
+                    "model": "swords:item/bronze_sword"
+                }
             }
         ]
     }

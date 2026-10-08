@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:bane_of_arthropods",
+    "minecraft:smite",
+
+    "smprpg:aptitude",
+    "smprpg:burden",
+    "smprpg:fortuity",
+    "smprpg:insight",
+    "smprpg:proficient",
+    "smprpg:vigilante",
+
+    "smprpg:ignorance"
+  ]
+}

@@ -1,17 +1,22 @@
 package xyz.devvydont.smprpg.listeners.block
 
 import net.kyori.adventure.text.format.NamedTextColor
+import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
 import org.bukkit.GameMode
+import org.bukkit.Material
 import org.bukkit.PortalType
+import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityPortalEnterEvent
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
+import xyz.devvydont.smprpg.block.CraftEngineBlockEnums
 import xyz.devvydont.smprpg.entity.player.LeveledPlayer
 import xyz.devvydont.smprpg.entity.player.ProfileDifficulty
 import xyz.devvydont.smprpg.services.EntityService
+import xyz.devvydont.smprpg.util.craftengine.CraftEngineHelpers
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import java.time.Duration
@@ -53,8 +58,10 @@ class DimensionPortalLockingListener : ToggleableListener() {
 
         // Read the sections from the config we care about.
         val netherLvl = cfg.getInt("world_skill_unlocks.nether")
+        val aetherLvl = cfg.getInt("world_skill_unlocks.aether")
         val endLvl = cfg.getInt("world_skill_unlocks.end")
         val netherTime = cfg.getString("world_time_unlocks.nether")
+        val aetherTime = cfg.getString("world_time_unlocks.aether")
         val endTime = cfg.getString("world_time_unlocks.end")
 
         // Check if anything went wrong.
@@ -63,6 +70,7 @@ class DimensionPortalLockingListener : ToggleableListener() {
 
         // Update.
         NETHER_LOCK = DimensionLock(Instant.parse(netherTime), netherLvl)
+        AETHER_LOCK = DimensionLock(Instant.parse(aetherTime), aetherLvl)
         END_LOCK = DimensionLock(Instant.parse(endTime), endLvl)
         plugin.logger.info("Reloaded dimension locks from config")
     }
@@ -84,7 +92,8 @@ class DimensionPortalLockingListener : ToggleableListener() {
         }
 
         // Retrieve the lock. If there isn't one, we don't care.
-        val lock: DimensionLock? = fromPortal(event.portalType)
+        val block = event.location.world.getBlockAt(event.location)
+        val lock: DimensionLock? = fromPortal(block)
         if (lock == null)
             return
 
@@ -205,6 +214,9 @@ class DimensionPortalLockingListener : ToggleableListener() {
         // The requirements to enter the nether.
         var NETHER_LOCK: DimensionLock = DimensionLock(Instant.now(), 0)
 
+        // The requirements to enter the aether.
+        var AETHER_LOCK: DimensionLock = DimensionLock(Instant.now(), 0)
+
         // The requirements to enter the end.
         var END_LOCK: DimensionLock = DimensionLock(Instant.now(), 0)
 
@@ -213,11 +225,19 @@ class DimensionPortalLockingListener : ToggleableListener() {
          * @param portal The portal that is being used.
          * @return The lock that is associated with it. Returns null if it is always unlocked.
          */
-        fun fromPortal(portal: PortalType): DimensionLock? {
-            return when (portal) {
-                PortalType.NETHER -> NETHER_LOCK
-                PortalType.ENDER -> END_LOCK
-                else -> null
+        fun fromPortal(portalBlock: Block): DimensionLock? {
+            if (CraftEngineBlocks.isCustomBlock(portalBlock)) {
+                return when (CraftEngineHelpers.getBlockKey(portalBlock)) {
+                    CraftEngineBlockEnums.AETHER_PORTAL.key -> AETHER_LOCK
+                    else -> null
+                }
+            }
+            else {
+                return when (portalBlock.type) {
+                    Material.NETHER_PORTAL -> NETHER_LOCK
+                    Material.END_PORTAL -> END_LOCK
+                    else -> null
+                }
             }
         }
     }

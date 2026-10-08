@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:breeze_rod
+- item: smprpg:premium_breeze_rod
+  amount: 9
+- item: smprpg:enchanted_breeze_rod
+  amount: 9

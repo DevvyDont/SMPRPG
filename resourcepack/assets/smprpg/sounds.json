@@ -1,0 +1,634 @@
+{
+  "food.breadboard.eat": {
+    "sounds": [
+      "smprpg:random/breadboard_eat1",
+      "smprpg:random/breadboard_eat2",
+      "smprpg:random/breadboard_eat3"
+    ],
+    "subtitle": "subtitles.breadboard.eat"
+  },
+  "tools.drill.break": {
+	  "sounds": [
+		"smprpg:tools/drill"
+	  ],
+	  "subtitle": "Drill whirring"
+  },
+  "events.drops.rare": {
+    "sounds": [
+      "smprpg:events/rare_drop"
+    ],
+    "subtitle": "Rare drop found"
+  },
+  "events.drops.epic": {
+    "sounds": [
+      "smprpg:events/epic_drop"
+    ],
+    "subtitle": "Epic drop found!"
+  },
+  "events.drops.legendary": {
+    "sounds": [
+      "smprpg:events/legendary_drop"
+    ],
+    "subtitle": "Legendary drop found!!!"
+  },
+  "events.advancement.aether": {
+	  "sounds": [
+		"smprpg:events/aether_advancement"
+	  ],
+	  "subtitle": "General Aether advancement acquired"
+  },
+  "block.wood_custom.hit": {
+    "sounds": [
+      "step/wood1",
+      "step/wood2",
+      "step/wood3",
+      "step/wood4",
+      "step/wood5",
+      "step/wood6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.wood_custom.place": {
+    "sounds": [
+      "dig/wood1",
+      "dig/wood2",
+      "dig/wood3",
+      "dig/wood4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.wood_custom.break": {
+    "sounds": [
+      "dig/wood1",
+      "dig/wood2",
+      "dig/wood3",
+      "dig/wood4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.rune.break": {
+    "sounds": [
+      "smprpg:block/rune/place1",
+      "smprpg:block/rune/place2",
+      "smprpg:block/rune/place3"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.rune.fall": {
+    "sounds": [
+      "block/basalt/step1",
+      "block/basalt/step2",
+      "block/basalt/step3",
+      "block/basalt/step4",
+      "block/basalt/step5",
+      "block/basalt/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.rune.hit": {
+    "sounds": [
+      "block/basalt/step1",
+      "block/basalt/step2",
+      "block/basalt/step3",
+      "block/basalt/step4",
+      "block/basalt/step5",
+      "block/basalt/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.rune.place": {
+    "sounds": [
+      "smprpg:block/rune/place1",
+      "smprpg:block/rune/place2",
+      "smprpg:block/rune/place3"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.rune.step": {
+    "sounds": [
+      "block/basalt/step1",
+      "block/basalt/step2",
+      "block/basalt/step3",
+      "block/basalt/step4",
+      "block/basalt/step5",
+      "block/basalt/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.adamantium_ore.break": {
+    "sounds": [
+      "smprpg:block/adamantium_ore/dig1",
+      "smprpg:block/adamantium_ore/dig2",
+      "smprpg:block/adamantium_ore/dig3",
+      "smprpg:block/adamantium_ore/dig4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.adamantium_ore.fall": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.adamantium_ore.hit": {
+    "sounds": [
+      "smprpg:block/adamantium_ore/dig1",
+      "smprpg:block/adamantium_ore/dig2",
+      "smprpg:block/adamantium_ore/dig3",
+      "smprpg:block/adamantium_ore/dig4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.adamantium_ore.place": {
+    "sounds": [
+      "smprpg:block/adamantium_ore/dig1",
+      "smprpg:block/adamantium_ore/dig2",
+      "smprpg:block/adamantium_ore/dig3",
+      "smprpg:block/adamantium_ore/dig4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.adamantium_ore.step": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.cobalt.break": {
+    "sounds": [
+      "smprpg:block/cobalt/break1",
+      "smprpg:block/cobalt/break2"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.cobalt.fall": {
+    "sounds": [
+      "smprpg:block/cobalt/step1",
+      "smprpg:block/cobalt/step2",
+      "smprpg:block/cobalt/step3",
+      "smprpg:block/cobalt/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.cobalt.hit": {
+    "sounds": [
+      "smprpg:block/cobalt/step1",
+      "smprpg:block/cobalt/step2",
+      "smprpg:block/cobalt/step3",
+      "smprpg:block/cobalt/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.cobalt.place": {
+    "sounds": [
+      "smprpg:block/cobalt/step1",
+      "smprpg:block/cobalt/step2",
+      "smprpg:block/cobalt/step3",
+      "smprpg:block/cobalt/step4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.cobalt.step": {
+    "sounds": [
+      "smprpg:block/cobalt/step1",
+      "smprpg:block/cobalt/step2",
+      "smprpg:block/cobalt/step3",
+      "smprpg:block/cobalt/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.holystone.break": {
+    "sounds": [
+      "smprpg:block/holystone/break1",
+      "smprpg:block/holystone/break2"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.holystone.fall": {
+    "sounds": [
+      "smprpg:block/holystone/step1",
+      "smprpg:block/holystone/step2",
+      "smprpg:block/holystone/step3",
+      "smprpg:block/holystone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.holystone.hit": {
+    "sounds": [
+      "smprpg:block/holystone/step1",
+      "smprpg:block/holystone/step2",
+      "smprpg:block/holystone/step3",
+      "smprpg:block/holystone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.holystone.place": {
+    "sounds": [
+      "smprpg:block/holystone/step1",
+      "smprpg:block/holystone/step2",
+      "smprpg:block/holystone/step3",
+      "smprpg:block/holystone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.holystone.step": {
+    "sounds": [
+      "smprpg:block/holystone/step1",
+      "smprpg:block/holystone/step2",
+      "smprpg:block/holystone/step3",
+      "smprpg:block/holystone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.aercloud.break": {
+    "sounds": [
+      "smprpg:block/aercloud/break1",
+      "smprpg:block/aercloud/break2"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.aercloud.fall": {
+    "sounds": [
+      "smprpg:block/aercloud/step1",
+      "smprpg:block/aercloud/step2",
+      "smprpg:block/aercloud/step3",
+      "smprpg:block/aercloud/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.aercloud.hit": {
+    "sounds": [
+      "smprpg:block/aercloud/step1",
+      "smprpg:block/aercloud/step2",
+      "smprpg:block/aercloud/step3",
+      "smprpg:block/aercloud/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.aercloud.place": {
+    "sounds": [
+      "smprpg:block/aercloud/step1",
+      "smprpg:block/aercloud/step2",
+      "smprpg:block/aercloud/step3",
+      "smprpg:block/aercloud/step4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.aercloud.step": {
+    "sounds": [
+      "smprpg:block/aercloud/step1",
+      "smprpg:block/aercloud/step2",
+      "smprpg:block/aercloud/step3",
+      "smprpg:block/aercloud/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.crystal_leaves.break": {
+    "sounds": [
+      "smprpg:block/crystal_leaves/break1",
+      "smprpg:block/crystal_leaves/break2",
+      "smprpg:block/crystal_leaves/break3"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.crystal_leaves.fall": {
+    "sounds": [
+      "smprpg:block/crystal_leaves/step1",
+      "smprpg:block/crystal_leaves/step2",
+      "smprpg:block/crystal_leaves/step3",
+      "smprpg:block/crystal_leaves/step4",
+      "smprpg:block/crystal_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.crystal_leaves.hit": {
+    "sounds": [
+      "smprpg:block/crystal_leaves/step1",
+      "smprpg:block/crystal_leaves/step2",
+      "smprpg:block/crystal_leaves/step3",
+      "smprpg:block/crystal_leaves/step4",
+      "smprpg:block/crystal_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.crystal_leaves.place": {
+    "sounds": [
+      "smprpg:block/crystal_leaves/step1",
+      "smprpg:block/crystal_leaves/step2",
+      "smprpg:block/crystal_leaves/step3",
+      "smprpg:block/crystal_leaves/step4",
+      "smprpg:block/crystal_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.crystal_leaves.step": {
+    "sounds": [
+      "smprpg:block/crystal_leaves/step1",
+      "smprpg:block/crystal_leaves/step2",
+      "smprpg:block/crystal_leaves/step3",
+      "smprpg:block/crystal_leaves/step4",
+      "smprpg:block/crystal_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.icestone.break": {
+    "sounds": [
+      "smprpg:block/icestone/break1",
+      "smprpg:block/icestone/break2"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.icestone.fall": {
+    "sounds": [
+      "smprpg:block/icestone/step1",
+      "smprpg:block/icestone/step2",
+      "smprpg:block/icestone/step3",
+      "smprpg:block/icestone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.icestone.hit": {
+    "sounds": [
+      "smprpg:block/icestone/step1",
+      "smprpg:block/icestone/step2",
+      "smprpg:block/icestone/step3",
+      "smprpg:block/icestone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.icestone.place": {
+    "sounds": [
+      "smprpg:block/icestone/step1",
+      "smprpg:block/icestone/step2",
+      "smprpg:block/icestone/step3",
+      "smprpg:block/icestone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.icestone.step": {
+    "sounds": [
+      "smprpg:block/icestone/step1",
+      "smprpg:block/icestone/step2",
+      "smprpg:block/icestone/step3",
+      "smprpg:block/icestone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.blue_aercloud.bounce": {
+    "sounds": [
+      "smprpg:block/blue_aercloud/bounce"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.aether_portal.portal": {
+    "sounds": [
+      {
+        "attenuation_distance": 10,
+        "name": "smprpg:block/aether_portal/portal"
+      }
+    ],
+    "subtitle": "subtitles.block.portal.ambient"
+  },
+  "block.aether_portal.trigger": {
+    "sounds": [
+      "smprpg:block/aether_portal/trigger"
+    ],
+    "subtitle": "subtitles.block.portal.trigger"
+  },
+  "block.aether_portal.travel": {
+    "sounds": [
+      "smprpg:block/aether_portal/travel"
+    ],
+    "subtitle": "subtitles.block.portal.travel"
+  },
+  "music.aether": {
+    "sounds": [
+      {
+        "name": "smprpg:music/aether/aether1",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "smprpg:music/aether/aether2",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "smprpg:music/aether/aether3",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "smprpg:music/aether/aether4",
+        "stream": true,
+        "volume": 0.4
+      },
+      {
+        "name": "smprpg:music/aether/aether5",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
+  "block.endstone.break": {
+    "sounds": [
+      "smprpg:block/endstone/break1",
+      "smprpg:block/endstone/break2",
+      "smprpg:block/endstone/break3",
+      "smprpg:block/endstone/break4",
+      "smprpg:block/endstone/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.endstone.fall": {
+    "sounds": [
+      "smprpg:block/endstone/step1",
+      "smprpg:block/endstone/step2",
+      "smprpg:block/endstone/step3",
+      "smprpg:block/endstone/step4",
+      "smprpg:block/endstone/step5",
+      "smprpg:block/endstone/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.endstone.hit": {
+    "sounds": [
+      "smprpg:block/endstone/step1",
+      "smprpg:block/endstone/step2",
+      "smprpg:block/endstone/step3",
+      "smprpg:block/endstone/step4",
+      "smprpg:block/endstone/step5",
+      "smprpg:block/endstone/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.endstone.place": {
+    "sounds": [
+      "smprpg:block/endstone/step1",
+      "smprpg:block/endstone/step2",
+      "smprpg:block/endstone/step3",
+      "smprpg:block/endstone/step4",
+      "smprpg:block/endstone/step5",
+      "smprpg:block/endstone/step6"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.endstone.step": {
+    "sounds": [
+      "smprpg:block/endstone/step1",
+      "smprpg:block/endstone/step2",
+      "smprpg:block/endstone/step3",
+      "smprpg:block/endstone/step4",
+      "smprpg:block/endstone/step5",
+      "smprpg:block/endstone/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.cutting_board.cut": {
+    "sounds": [
+      "smprpg:block/cutting_board/cut1",
+      "smprpg:block/cutting_board/cut2"
+    ],
+    "subtitle": "Chopping items."
+  },
+  "block.note_block.sawtooth": {
+	  "sounds": [
+		"smprpg:note/tin"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.snes_piano": {
+	  "sounds": [
+		"smprpg:note/silver"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.steel_drum": {
+	  "sounds": [
+		"smprpg:note/steel"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.orchestra_hit": {
+	  "sounds": [
+		"smprpg:note/bronze"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.doo_high": {
+	  "sounds": [
+		"smprpg:note/doo_high"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.doo_low": {
+	  "sounds": [
+		"smprpg:note/doo_low"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.doo_bass": {
+	  "sounds": [
+		"smprpg:note/doo_bass"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.pah": {
+	  "sounds": [
+		"smprpg:note/pah"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.drum": {
+	  "sounds": [
+		"smprpg:note/cobalt"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.ocarina": {
+	  "sounds": [
+		"smprpg:note/mithril"
+	  ],
+	  "subtitle": "subtitles.block.note_block.note"
+  },
+  "entity.illager_warlock.cast_toss": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_toss"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+  "entity.illager_warlock.cast_toss_vo": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_toss_vo"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+    "entity.illager_warlock.cast_fireball": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_fireball"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+    "entity.illager_warlock.cast_teleport": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_teleport"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+    "entity.illager_warlock.cast_vex": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_vex"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+    "entity.illager_warlock.cast_fangs": {
+    "sounds": [
+      "smprpg:entity/illager_warlock/cast_fangs"
+    ],
+    "subtitle": "subtitles.entity.evoker.cast_spell"
+  },
+  "entity.zephyr.call": {
+    "sounds": [
+      {
+        "name": "smprpg:entity/zephyr/call",
+        "attenuation_distance": 64
+      },
+      {
+        "name": "smprpg:entity/zephyr/call2",
+        "attenuation_distance": 64
+      }
+    ],
+    "subtitle": "subtitles.entity.zephyr.call"
+  },
+  "entity.zephyr.shoot": {
+    "sounds": [
+      {
+        "attenuation_distance": 64,
+        "name": "smprpg:entity/zephyr/shoot"
+      }
+    ],
+    "subtitle": "subtitles.entity.zephyr.shoot"
+  },
+  "entity.zephyr.hurt": {
+    "sounds": [
+      "smprpg:entity/zephyr/hurt"
+    ],
+    "subtitle": "subtitles.entity.zephyr.hurt"
+  },
+  "entity.zephyr.death": {
+    "sounds": [
+      "smprpg:entity/zephyr/death"
+    ],
+    "subtitle": "subtitles.entity.zephyr.death"
+  }
+}

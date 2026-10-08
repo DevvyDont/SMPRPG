@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:rotten_flesh
+- item: smprpg:premium_flesh
+  amount: 9
+- item: smprpg:enchanted_flesh
+  amount: 9

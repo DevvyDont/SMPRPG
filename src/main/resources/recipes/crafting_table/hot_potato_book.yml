@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- pp
+- pP
+ingredients:
+  p: minecraft:paper
+  P: smprpg:enchanted_baked_potato
+result:
+  item: smprpg:hot_potato_book
+  amount: 1
+unlocked_by:
+- minecraft:potato

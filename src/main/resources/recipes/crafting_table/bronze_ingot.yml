@@ -1,0 +1,12 @@
+type: shapeless
+ingredients:
+- minecraft:copper_ingot
+- minecraft:copper_ingot
+- minecraft:copper_ingot
+- smprpg:tin_ingot
+result:
+  item: smprpg:bronze_ingot
+  amount: 1
+unlocked_by:
+- minecraft:copper_ingot
+- smprpg:tin_ingot

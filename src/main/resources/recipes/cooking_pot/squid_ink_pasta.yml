@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:salmon"
+  - "smprpg:raw_pasta"
+  - "smprpg:tomato"
+  - "minecraft:ink_sac"
+time: 200
+result: "smprpg:squid_ink_pasta"
+skill_xp:
+  farming: 50

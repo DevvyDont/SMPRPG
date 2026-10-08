@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' M '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:tin_ingot
+result:
+  item: smprpg:tin_sword
+  amount: 1
+unlocked_by:
+- smprpg:tin_ingot

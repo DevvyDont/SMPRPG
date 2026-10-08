@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' M '
+- ' H '
+- ' H '
+ingredients:
+  H: smprpg:obsidian_tool_rod
+  M: smprpg:dragonsteel_ingot
+result:
+  item: smprpg:dragonsteel_shovel
+  amount: 1
+unlocked_by:
+- smprpg:dragonsteel_ingot

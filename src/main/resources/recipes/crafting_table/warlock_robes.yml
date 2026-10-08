@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:spellbound_cloth
+result:
+  item: smprpg:warlock_robes
+  amount: 1
+unlocked_by:
+- smprpg:spellbound_cloth

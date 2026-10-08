@@ -5,8 +5,10 @@ import io.papermc.paper.datacomponent.item.FoodProperties;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
-import xyz.devvydont.smprpg.util.formatting.MinecraftStringUtils;
+import xyz.devvydont.smprpg.util.formatting.Symbols;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,28 @@ public interface IEdible extends IConsumable {
     int getNutrition(ItemStack item);
     float getSaturation(ItemStack item);
     boolean canAlwaysEat(ItemStack item);
+    float DEFAULT_EAT_SPEED = 1.6f;
+
+    static String generateShankComponent(int fill, boolean isSaturation) {
+        String comp = "";
+        boolean isOdd = fill % 2 == 1;
+        if (isOdd)
+            fill -= 1;
+
+        for (int i = 0; i < fill; i += 2) {
+            if (isSaturation)
+                comp += Symbols.SATURATION_FULL;
+            else
+                comp += Symbols.NUTRITION_FULL;
+        }
+
+        if (isOdd)
+            if (isSaturation)
+                comp += Symbols.SATURATION_HALF;
+            else
+                comp += Symbols.NUTRITION_HALF;
+        return comp;
+    }
 
     /**
      * Generates a section that is suitable to use for a chat/lore component for an item that implements this.
@@ -34,16 +58,20 @@ public interface IEdible extends IConsumable {
         ));
 
         // Now, nutrition and saturation.
+        String nutritionComp = generateShankComponent(edible.getNutrition(item), false);
+
+        // Nutrition value is used for item healing
         if (edible.getNutrition(item) != 0)
             lore.add(ComponentUtils.merge(
-                ComponentUtils.create("* Nutrition: "),
-                ComponentUtils.create("+" + edible.getNutrition(item), NamedTextColor.GOLD)
+                ComponentUtils.create("* Healing: "),
+                ComponentUtils.create("+" + edible.getNutrition(item) + "%", NamedTextColor.RED)
             ));
 
+        // Saturation value is used for mana regain, though is a flat value, not percentage based.
         if (edible.getSaturation(item) != 0)
             lore.add(ComponentUtils.merge(
-                ComponentUtils.create("* Saturation: "),
-                ComponentUtils.create("+" + MinecraftStringUtils.formatFloat(edible.getSaturation(item)), NamedTextColor.YELLOW)
+                    ComponentUtils.create("* Mana: "),
+                    ComponentUtils.create("+" + Math.round(edible.getSaturation(item)), NamedTextColor.AQUA)
             ));
 
         // Effects if they are present.
@@ -54,12 +82,10 @@ public interface IEdible extends IConsumable {
             for (var effect : edible.getConsumableComponent(item).consumeEffects())
                 lore.addAll(IConsumable.generateEffectComponent(effect));
         }
-
-        lore.add(ComponentUtils.create(edible.canAlwaysEat(item) ? "Can be eaten any time" : "Can only eat when hungry", NamedTextColor.DARK_GRAY));
         return lore;
     }
 
-    static IEdible fromVanillaData(FoodProperties foodProperties, Consumable consumable) {
+    static IEdible fromVanillaData(@NotNull FoodProperties foodProperties, @NotNull Consumable consumable) {
         return new IEdible() {
             @Override
             public int getNutrition(ItemStack item) {
@@ -77,7 +103,7 @@ public interface IEdible extends IConsumable {
             }
 
             @Override
-            public Consumable getConsumableComponent(ItemStack item) {
+            public @NonNull Consumable getConsumableComponent(ItemStack item) {
                 return consumable;
             }
         };

@@ -12,6 +12,9 @@ import xyz.devvydont.smprpg.ability.AbilityHandler
 import xyz.devvydont.smprpg.util.time.TickTime
 
 class SugarRushAbilityHandler : AbilityHandler {
+
+    override val cooldown: Long get() = TickTime.seconds(COOLDOWN)
+
     override fun execute(ctx: AbilityContext): Boolean {
         // Adds a speed boost to the player, and removes it 30s later.
         val speed = ctx.caster.getAttribute(Attribute.MOVEMENT_SPEED)
@@ -38,6 +41,7 @@ class SugarRushAbilityHandler : AbilityHandler {
     }
 
     companion object {
+        const val COOLDOWN: Long = 1
         const val BOOST: Int = 50
         const val DURATION: Int = 30
         val ATTRIBUTE_KEY: NamespacedKey = NamespacedKey("smprpg", "speed_boost_ability")

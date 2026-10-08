@@ -1,0 +1,33 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/diamond_hoe"
+        },
+        "cases": [
+            {
+                "when": "smprpg:mithril_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/mithril_hoe"
+                }
+            },
+            {
+                "when": "smprpg:titanium_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/titanium_hoe"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_hoe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/adamantium_hoe"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+type: shaped
+pattern:
+- hsh
+- pcj
+- hsh
+ingredients:
+  p: smprpg:pluto_fragment
+  s: smprpg:rare_fish_essence
+  c: smprpg:enchanted_prismarine_crystal
+  h: smprpg:hexed_cloth
+  j: smprpg:jupiter_crystal
+result:
+  item: smprpg:raw_tridentite_chunk
+  amount: 1
+unlocked_by:
+- smprpg:hexed_cloth

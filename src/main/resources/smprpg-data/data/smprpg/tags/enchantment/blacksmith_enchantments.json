@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:protection",
+    "minecraft:blast_protection",
+    "minecraft:fire_protection",
+    "minecraft:feather_falling",
+    "minecraft:mending",
+    "minecraft:sweeping_edge",
+    "minecraft:unbreaking",
+
+    "smprpg:double_tap",
+    "smprpg:execute",
+    "smprpg:first_strike",
+    "smprpg:hearty",
+    "smprpg:opportunist",
+    "smprpg:prosecute",
+    "smprpg:serrated",
+
+    "smprpg:amplification"
+  ]
+}

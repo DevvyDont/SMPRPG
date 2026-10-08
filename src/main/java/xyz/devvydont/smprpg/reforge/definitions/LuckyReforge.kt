@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class LuckyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AttributeEntry.additive(AttributeWrapper.LUCK, ((rarity.ordinal / 2) + 1).toDouble())
         )
     }
@@ -21,7 +21,5 @@ class LuckyReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("Slightly boosts luck")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

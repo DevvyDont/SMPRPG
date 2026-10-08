@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'p '
+- ps
+- ' s'
+ingredients:
+  p: minecraft:oak_planks
+  s: minecraft:stick
+result:
+  item: smprpg:wooden_hatchet
+  amount: 1
+unlocked_by:
+- minecraft:oak_planks

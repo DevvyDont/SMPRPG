@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mmm
+- mbm
+- mmm
+ingredients:
+  b: minecraft:chest
+  m: minecraft:leather
+result:
+  item: smprpg:small_backpack
+  amount: 1
+unlocked_by:
+- minecraft:leather

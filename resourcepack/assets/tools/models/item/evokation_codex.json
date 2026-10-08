@@ -1,0 +1,7 @@
+{
+  "parent": "tools:item/tome",
+  "textures": {
+    "0": "tools:item/evokation_codex",
+    "particle": "tools:item/evokation_codex"
+  }
+}

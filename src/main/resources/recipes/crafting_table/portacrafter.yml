@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- ltl
+- ' l '
+ingredients:
+  t: minecraft:crafting_table
+  l: smprpg:premium_leather
+result:
+  item: smprpg:portacrafter
+  amount: 1
+unlocked_by:
+- minecraft:crafting_table

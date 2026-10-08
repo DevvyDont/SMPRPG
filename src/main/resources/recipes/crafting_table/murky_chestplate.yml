@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: minecraft:lily_pad
+result:
+  item: smprpg:murky_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:lily_pad

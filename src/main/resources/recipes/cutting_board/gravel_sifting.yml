@@ -1,0 +1,6 @@
+type: cutting_board
+input: "minecraft:gravel"
+tool: "shovels"
+result:
+  - { item: "minecraft:gravel", amount: 1, chance: 1.0 }
+  - { item: "minecraft:flint", amount: 1, chance: 0.1 }

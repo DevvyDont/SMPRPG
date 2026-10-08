@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:cooked_beef"
+tool: "knives"
+result:
+  - { item: "smprpg:steak_strips", amount: 2, chance: 1.0 }

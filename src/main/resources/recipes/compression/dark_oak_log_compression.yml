@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:dark_oak_log
+- item: smprpg:premium_dark_oak_log
+  amount: 9
+- item: smprpg:enchanted_dark_oak_log
+  amount: 9
+- item: smprpg:dark_oak_log_singularity
+  amount: 9

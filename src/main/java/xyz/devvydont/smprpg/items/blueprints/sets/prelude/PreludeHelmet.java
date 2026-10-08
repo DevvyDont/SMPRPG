@@ -23,8 +23,8 @@ public class PreludeHelmet extends PreludeArmorSet {
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 700),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 365),
+                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 405),
+                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, 600),
                 new AdditiveAttributeEntry(AttributeWrapper.ARMOR, 4),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .65),
                 new ScalarAttributeEntry(AttributeWrapper.MOVEMENT_SPEED, .2),

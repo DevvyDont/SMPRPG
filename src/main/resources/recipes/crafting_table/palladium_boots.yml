@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:palladium_ingot
+result:
+  item: smprpg:palladium_boots
+  amount: 1
+unlocked_by:
+- smprpg:palladium_ingot

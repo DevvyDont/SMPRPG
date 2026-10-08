@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- bxb
+- t t
+ingredients:
+  b: smprpg:lucifugous_binding
+  t: smprpg:lucifugous_thread
+  x: smprpg:ruination_boots
+result:
+  item: smprpg:nocturnum_boots
+  amount: 1
+unlocked_by:
+- smprpg:necroplasm
+upgrade: "x"

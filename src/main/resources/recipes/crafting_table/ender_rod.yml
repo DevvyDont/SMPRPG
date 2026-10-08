@@ -1,0 +1,15 @@
+type: shaped
+pattern:
+- '  m'
+- ' ts'
+- m s
+ingredients:
+  s: smprpg:enchanted_string
+  t: smprpg:endstone_rod
+  m: smprpg:premium_ender_pearl
+result:
+  item: smprpg:ender_rod
+  amount: 1
+unlocked_by:
+- smprpg:premium_ender_pearl
+upgrade: "t"

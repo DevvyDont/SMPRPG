@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: minecraft:bone
+result:
+  item: smprpg:bone_leggings
+  amount: 1
+unlocked_by:
+- minecraft:bone

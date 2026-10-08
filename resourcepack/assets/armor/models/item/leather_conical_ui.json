@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "armor:item/leather_conical",
+    "layer1": "armor:item/leather_conical_overlay"
+  }
+}

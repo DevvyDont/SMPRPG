@@ -1,0 +1,6 @@
+{
+  "parent": "tools:item/drills/drill_base_model",
+  "textures": {
+    "layer0": "tools:item/drills/mithril_drill_base"
+  }
+}

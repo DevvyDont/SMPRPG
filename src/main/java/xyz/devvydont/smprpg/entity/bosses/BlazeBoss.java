@@ -22,6 +22,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.services.SpecialEffectService;
 import xyz.devvydont.smprpg.effects.tasks.OverheatingEffect;
 import xyz.devvydont.smprpg.effects.tasks.TetheredEffect;
@@ -81,10 +82,11 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
         tick++;
 
         // Check on all the minions. If they are either too far or not alive, clear them
-        for (var entry : minions.entrySet()) {
+        for (var uuid : minions.keySet().stream().toList()) {
 
-            var uuid = entry.getKey();
-            var minion = entry.getValue();
+            var minion = minions.get(uuid);
+            if (minion == null)
+                continue;
 
             if (!minion.getEntity().isValid()) {
                 minions.remove(uuid);
@@ -170,6 +172,10 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
 
     @Override
     public void setup() {
+        mobTypes.add(MobType.BOSS);
+        mobTypes.add(MobType.NETHER);
+        mobTypes.add(MobType.ELEMENTAL);
+
         super.setup();
         this.updateBaseAttribute(AttributeWrapper.ARMOR, 0);
     }
@@ -215,9 +221,11 @@ public class BlazeBoss extends CustomBossInstance<Blaze> implements Listener {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_LEGGINGS), 110, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_BOOTS), 100, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_SABER), 120, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_STAFF), 120, this),
                 new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_SHORTBOW), 120, this),
 
                 new ChancedItemDrop(ItemService.generate(CustomItemType.SMOLDERING_CORE), 100, this),
+                new ChancedItemDrop(ItemService.generate(CustomItemType.RECOMBOBULATOR), 750, this),
 
                 // Chance to summon again
                 new ChancedItemDrop(ItemService.generate(CustomItemType.INFERNO_ARROW), 20, this)

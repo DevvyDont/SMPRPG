@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: smprpg:plutos_artifact
+  M: smprpg:diamond_tool_rod
+result:
+  item: smprpg:neptune_bow
+  amount: 1
+unlocked_by:
+- smprpg:pluto_fragment

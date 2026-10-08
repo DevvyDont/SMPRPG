@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:spruce_log
+- item: smprpg:premium_spruce_log
+  amount: 9
+- item: smprpg:enchanted_spruce_log
+  amount: 9
+- item: smprpg:spruce_log_singularity
+  amount: 9

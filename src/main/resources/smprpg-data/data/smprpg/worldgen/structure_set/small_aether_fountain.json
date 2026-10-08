@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 12657649,
+    "separation": 8,
+    "spacing": 16,
+    "frequency": 0.75
+  },
+  "structures": [
+    {
+      "structure": "smprpg:small_aether_fountain",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+author: devvydont & CheezedFish
+version: 0.0.1
+description: The official craftengine pack for the SMPRPG plugin
+namespace: smprpg
+enable: true

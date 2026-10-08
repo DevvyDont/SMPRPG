@@ -27,9 +27,12 @@ class SkillExperienceGainEvent(
         ENCHANT,
         BREW,
         FORGE,
+        ANVIL,
         XP,
         COMMANDS,
-        UNKNOWN
+        COOK,
+        UNKNOWN,
+        CRAFTENGINE_FUNCTION
     }
 
     private var cancelled = false

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:fossil",
+  "config": {
+    "fossil_processors": "smprpg:aercloud_offset",
+    "fossil_structures": [
+      "smprpg:aerclouds/cold_aercloud_1",
+      "smprpg:aerclouds/cold_aercloud_2"
+    ],
+    "max_empty_corners_allowed": 7,
+    "overlay_processors": "smprpg:aercloud_offset",
+    "overlay_structures": [
+      "smprpg:aerclouds/cold_aercloud_1",
+      "smprpg:aerclouds/cold_aercloud_2"
+    ]
+  }
+}

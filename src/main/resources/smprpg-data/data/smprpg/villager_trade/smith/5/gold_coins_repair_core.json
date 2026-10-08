@@ -1,0 +1,26 @@
+{
+  "wants": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "gold_coin"
+        }
+      }
+    },
+    "count": 10
+  },
+  "gives": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_data": {
+        "PublicBukkitValues": {
+          "smprpg:item-type": "rare_repair_core"
+        }
+      }
+    }
+  },
+  "max_uses": 2,
+  "reputation_discount": 0.05,
+  "xp": 30.0
+}

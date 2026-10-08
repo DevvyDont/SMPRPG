@@ -1,0 +1,6 @@
+type: cutting_board
+input: "minecraft:bamboo_block"
+tool: "axes"
+result:
+  - { item: "minecraft:stripped_bamboo_block", amount: 1, chance: 1.0 }
+  - { item: "smprpg:straw", amount: 1, chance: 1.0 }

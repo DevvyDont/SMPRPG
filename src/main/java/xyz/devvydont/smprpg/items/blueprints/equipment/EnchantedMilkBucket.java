@@ -2,29 +2,22 @@ package xyz.devvydont.smprpg.items.blueprints.equipment;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
 import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.base.ChargedItemBlueprint;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IHeaderDescribable;
 import xyz.devvydont.smprpg.services.ActionBarService;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils;
 
-import java.util.Collection;
 import java.util.List;
 
-public class EnchantedMilkBucket extends ChargedItemBlueprint implements IHeaderDescribable, Listener, ICraftable {
+public class EnchantedMilkBucket extends ChargedItemBlueprint implements IHeaderDescribable, Listener {
 
     public EnchantedMilkBucket(ItemService itemService, CustomItemType type) {
         super(itemService, type);
@@ -60,26 +53,5 @@ public class EnchantedMilkBucket extends ChargedItemBlueprint implements IHeader
         event.setCancelled(true);
         event.getPlayer().clearActivePotionEffects();
         SMPRPG.getService(ActionBarService.class).addActionBarComponent(event.getPlayer(), ActionBarService.ActionBarSource.MISC, ComponentUtils.create("CLEANSED!", NamedTextColor.GREEN), 2);
-    }
-
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), getCustomItemType().getKey() + "-recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeKey(), generate());
-        recipe.shape("mmm", "mmm", "mmm");
-        recipe.setIngredient('m', itemService.getCustomItem(Material.MILK_BUCKET));
-        recipe.setCategory(CraftingBookCategory.MISC);
-        return recipe;
-    }
-
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(
-                itemService.getCustomItem(Material.BUCKET)
-        );
     }
 }

@@ -1,0 +1,37 @@
+package xyz.devvydont.smprpg.items.listeners;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerInteractEvent;
+import xyz.devvydont.smprpg.gui.items.MenuContainer;
+import xyz.devvydont.smprpg.gui.items.MenuModularToolModify;
+import xyz.devvydont.smprpg.items.interfaces.IItemContainer;
+import xyz.devvydont.smprpg.items.tools.ItemDrill;
+import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.listeners.ToggleableListener;
+
+public class DrillInteractionListener extends ToggleableListener {
+
+    @EventHandler(priority = EventPriority.LOW)
+    private void __onInteractWithBackpack(final PlayerInteractEvent event) {
+        // This is all super TEMPORARY until we have a proper UI
+
+        var item = event.getItem();
+        if (item == null)
+            return;
+
+        if (!event.getAction().isRightClick())
+            return;
+
+        if (!event.getPlayer().isSneaking())
+            return;
+
+        var blueprint = ItemService.blueprint(item);
+        if (!(blueprint instanceof ItemDrill drill))
+            return;
+
+        event.setCancelled(true);
+        new MenuModularToolModify(event.getPlayer(), drill, item).openMenu();
+    }
+
+}

@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- smprpg:platinum_ingot
+- item: smprpg:platinum_block
+  amount: 9
+- item: smprpg:enchanted_platinum
+  amount: 9
+- item: smprpg:enchanted_platinum_block
+  amount: 9
+- item: smprpg:platinum_singularity
+  amount: 9

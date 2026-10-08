@@ -1,13 +1,10 @@
 package xyz.devvydont.smprpg.items.blueprints.equipment;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.*;
-import org.bukkit.inventory.CraftingRecipe;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.recipe.CraftingBookCategory;
-import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.ability.Ability;
 import xyz.devvydont.smprpg.ability.AbilityActivationMethod;
 import xyz.devvydont.smprpg.ability.AbilityCost;
@@ -18,14 +15,13 @@ import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.base.CustomAttributeItem;
 import xyz.devvydont.smprpg.items.interfaces.IAbilityCaster;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.IModelOverridden;
 import xyz.devvydont.smprpg.services.ItemService;
 
 import java.util.Collection;
 import java.util.List;
 
-public class TransmissionWand extends CustomAttributeItem implements ICraftable, IModelOverridden, IAbilityCaster {
+public class TransmissionWand extends CustomAttributeItem implements IModelOverridden, IAbilityCaster {
 
     // The mana cost to use this item.
     public static final int COST = 50;
@@ -62,26 +58,6 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
         return EquipmentSlotGroup.MAINHAND;
     }
 
-    @Override
-    public NamespacedKey getRecipeKey() {
-        return new NamespacedKey(SMPRPG.getPlugin(), "transmission_wand_recipe");
-    }
-
-    @Override
-    public CraftingRecipe getCustomRecipe() {
-        var recipe = new ShapedRecipe(this.getRecipeKey(), generate());
-        recipe.setCategory(CraftingBookCategory.EQUIPMENT);
-        recipe.shape(" m ", " r ", " r ");
-        recipe.setIngredient('m', ItemService.generate(CustomItemType.WARP_CATALYST));
-        recipe.setIngredient('r', ItemService.generate(CustomItemType.DRACONIC_CRYSTAL));
-        return recipe;
-    }
-
-    @Override
-    public Collection<ItemStack> unlockedBy() {
-        return List.of(ItemService.generate(CustomItemType.DRACONIC_CRYSTAL));
-    }
-
     /**
      * Get the abilities this item has, and how they can be cast.
      *
@@ -113,8 +89,8 @@ public class TransmissionWand extends CustomAttributeItem implements ICraftable,
     }
 
     @Override
-    public Material getDisplayMaterial() {
-        return Material.DIAMOND_SHOVEL;
+    public Key getDisplayKey() {
+        return IModelOverridden.ofMaterial(Material.DIAMOND_SHOVEL);
     }
 
 }

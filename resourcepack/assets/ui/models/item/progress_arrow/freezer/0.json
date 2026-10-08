@@ -1,0 +1,6 @@
+{
+  "parent": "ui:item/progress_arrow/progress_arrow",
+  "textures": {
+    "0": "ui:item/progress_arrow/freezer/arrow_0"
+  }
+}

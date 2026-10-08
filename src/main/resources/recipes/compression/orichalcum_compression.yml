@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:orichalcum_ingot
+- item: smprpg:orichalcum_block
+  amount: 9

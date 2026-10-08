@@ -5,6 +5,7 @@ import com.comphenix.protocol.ProtocolLibrary
 import com.comphenix.protocol.events.ListenerPriority
 import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
+import com.comphenix.protocol.reflect.FieldAccessException
 import org.bukkit.Particle
 import xyz.devvydont.smprpg.SMPRPG.Companion.plugin
 
@@ -38,8 +39,17 @@ class DamageParticleRemover {
                 if (event.packetType !== PacketType.Play.Server.WORLD_PARTICLES)
                     return
 
-                // Only listen for damage particle packets
-                if (packet.newParticles.read(0).particle != Particle.DAMAGE_INDICATOR)
+                // Only listen for damage particle packets. Reading the particle wrapper forces
+                // ProtocolLib to fully deserialize the particle's data, which can throw a
+                // FieldAccessException for types it cannot decode on this server version (e.g. ITEM
+                // particles). Such particles are never damage indicators, so skip them safely.
+                val particle = try {
+                    packet.newParticles.read(0).particle
+                } catch (exception: FieldAccessException) {
+                    return
+                }
+
+                if (particle != Particle.DAMAGE_INDICATOR)
                     return
 
                 // Cap off the amount of particles in this packet

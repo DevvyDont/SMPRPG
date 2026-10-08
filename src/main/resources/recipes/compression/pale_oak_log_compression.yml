@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:pale_oak_log
+- item: smprpg:premium_pale_oak_log
+  amount: 9
+- item: smprpg:enchanted_pale_oak_log
+  amount: 9
+- item: smprpg:pale_oak_log_singularity
+  amount: 9

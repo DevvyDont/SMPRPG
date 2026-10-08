@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:tungsten_ingot
+result:
+  item: smprpg:tungsten_boots
+  amount: 1
+unlocked_by:
+- smprpg:tungsten_ingot

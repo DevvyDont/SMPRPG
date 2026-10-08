@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:ender_pearl
+- item: smprpg:premium_ender_pearl
+  amount: 9
+- item: smprpg:enchanted_ender_pearl
+  amount: 9

@@ -8,10 +8,24 @@
         },
         "cases": [
             {
+                "when": "smprpg:silver_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/silver_pickaxe"
+                }
+            },
+            {
                 "when": "smprpg:steel_pickaxe",
                 "model": {
                     "type": "model",
                     "model": "tools:item/steel_pickaxe"
+                }
+            },
+            {
+                "when": "smprpg:tin_pickaxe",
+                "model": {
+                    "type": "model",
+                    "model": "tools:item/tin_pickaxe"
                 }
             }
         ]

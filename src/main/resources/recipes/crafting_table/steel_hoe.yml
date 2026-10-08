@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'MM '
+- ' H '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:steel_ingot
+result:
+  item: smprpg:steel_hoe
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot

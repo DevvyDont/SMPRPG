@@ -2,7 +2,7 @@ name: SMPRPG
 version: '${version}'
 main: xyz.devvydont.smprpg.SMPRPG
 bootstrapper: xyz.devvydont.smprpg.SMPRPGBootstrapper
-api-version: '1.21'
+api-version: '26.1.2'
 
 dependencies:
   server:
@@ -12,3 +12,14 @@ dependencies:
     ProtocolLib:
       load: BEFORE
       required: true
+    CraftEngine:
+      load: BEFORE
+      required: true
+      join-classpath: true
+    BetterModel:
+      load: BEFORE
+      required: true
+      join-classpath: true
+    WorldGuard:
+      load: BEFORE
+      required: false

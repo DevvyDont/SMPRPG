@@ -1,0 +1,7 @@
+type: cooking_pot
+ingredients:
+  - { item: "smprpg:tomato", amount: 2 }
+time: 100
+result: "smprpg:tomato_sauce"
+skill_xp:
+  farming: 20

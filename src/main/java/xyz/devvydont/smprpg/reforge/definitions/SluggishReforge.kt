@@ -13,7 +13,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class SluggishReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             ScalarAttributeEntry(AttributeWrapper.STRENGTH, getDamageBonus(rarity).toDouble()),
             MultiplicativeAttributeEntry(AttributeWrapper.ATTACK_SPEED, -.5)
         )
@@ -25,9 +25,7 @@ class SluggishReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("for a moderate boost in damage")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 
     companion object {
         fun getDamageBonus(rarity: ItemRarity): Float {

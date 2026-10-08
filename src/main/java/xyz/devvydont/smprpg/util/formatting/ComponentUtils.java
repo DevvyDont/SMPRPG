@@ -1,12 +1,16 @@
 package xyz.devvydont.smprpg.util.formatting;
 
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ObjectComponent;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.object.ObjectContents;
+import xyz.devvydont.smprpg.services.EconomyService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +27,16 @@ public final class ComponentUtils {
     public static final TextComponent SYMBOL_BRACKET_LEFT = create("[");
     public static final TextComponent SYMBOL_BRACKET_RIGHT = create("]");
     public static final TextComponent SYMBOL_EXCLAMATION = create("!");
+
+    /**
+     * Creates a clean component with a message. This should be used when you don't want to apply the default coloring
+     * to a text component, so that the default styling options are used.
+     * @param message The message to turn into a component.
+     * @return The text component.
+     */
+    public static TextComponent clean(final String message) {
+        return Component.text(message);
+    }
 
     /**
      * Creates a text component with the default styling.
@@ -266,6 +280,25 @@ public final class ComponentUtils {
     }
 
     /**
+     * Creates a text component that displays colored formatted money w/ the symbol.
+     * @param cost The amount.
+     * @return A text component.
+     */
+    public static Component money(int cost) {
+        return money(cost, NamedTextColor.GOLD);
+    }
+
+    /**
+     * Creates a text component that displays colored formatted money w/ the symbol.
+     * @param cost The amount.
+     * @param color The color to use.
+     * @return A text component.
+     */
+    public static Component money(int cost, TextColor color) {
+        return create(EconomyService.formatMoney(cost), color);
+    }
+
+    /**
      * Creates a text component that displays a power level.
      *
      * @param level The level to display.
@@ -286,6 +319,17 @@ public final class ComponentUtils {
     }
 
     /**
+     * Creates an object component that displays an atlas sprite, given the atlas and sprite path
+     *
+     * @param atlas The resource key for the atlas to use in the sprite lookup (e.g. "minecraft:items")
+     * @param spritePath The resource key for the direct path to the sprite to use. Returns a null sprite if the path is invalid.
+     * @return The styled object component
+     */
+    public static ObjectComponent atlasSprite(Key atlas, Key spritePath) {
+        return Component.object().contents(ObjectContents.sprite(atlas, spritePath)).build().color(NamedTextColor.WHITE);
+    }
+
+    /**
      * Inserts components at the beginning of an already defined list of components. Useful for adding components
      * at the beginning of item lore.
      *
@@ -299,4 +343,6 @@ public final class ComponentUtils {
         components.addAll(original);
         return components;
     }
+
+
 }

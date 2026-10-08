@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' dm'
+- ' mm'
+- 'm  '
+ingredients:
+  d: minecraft:diamond_block
+  m: smprpg:mithril_ingot
+result:
+  item: smprpg:mithril_staff
+  amount: 1
+unlocked_by:
+- smprpg:mithril_ingot

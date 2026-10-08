@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:melon"
+tool: "knives"
+result:
+  - { item: "minecraft:melon_slice", amount: 9, chance: 1.0 }

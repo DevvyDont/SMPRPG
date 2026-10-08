@@ -1,5 +1,7 @@
 package xyz.devvydont.smprpg.gui.player
 
+import io.papermc.paper.datacomponent.DataComponentTypes
+import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -12,19 +14,24 @@ import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import xyz.devvydont.smprpg.SMPRPG
+import xyz.devvydont.smprpg.attribute.AttributeCategory
 import xyz.devvydont.smprpg.attribute.AttributeWrapper
 import xyz.devvydont.smprpg.gui.base.MenuBase
+import xyz.devvydont.smprpg.items.CustomItemType
 import xyz.devvydont.smprpg.services.AttributeService.Companion.instance
 import xyz.devvydont.smprpg.services.EntityDamageCalculatorService.Companion.calculateEffectiveHealth
 import xyz.devvydont.smprpg.services.EntityDamageCalculatorService.Companion.calculateResistancePercentage
 import xyz.devvydont.smprpg.services.EntityService
+import xyz.devvydont.smprpg.services.ItemService
+import xyz.devvydont.smprpg.util.formatting.BreakingPowerFormatting
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 import xyz.devvydont.smprpg.util.formatting.Symbols
+import xyz.devvydont.smprpg.util.formatting.TooltipStyle
 import java.text.DecimalFormat
 import java.util.*
 import java.util.function.Consumer
 
-class SubmenuStatOverview(player: Player, private val target: LivingEntity, parentMenu: MenuBase?) :
+class SubmenuStatOverview(player: Player, private val target: LivingEntity, val category : AttributeCategory, parentMenu: MenuBase?) :
     MenuBase(player, 6, parentMenu) {
     private val df = DecimalFormat("#.##")
 
@@ -42,28 +49,29 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
     }
 
     fun render() {
-        this.setBorderBottom()
+        this.setBorderEdge()
         this.setBackButton(49)
 
         var index = -1
         for (attribute in AttributeWrapper.entries) {
-            val attributeInstance = instance.getAttribute<LivingEntity>(this.target, attribute)
-            if (attributeInstance == null) continue
+            if (attribute.Category == category) {
+                val attributeInstance = instance.getAttribute<LivingEntity>(this.target, attribute) ?: continue
 
-            index = findNextEmpty(index)
-            if (index == -1) return
+                index = findNextEmpty(index)
+                if (index == -1) return
 
-            this.setButton(
-                index,
-                generateItemDisplay(attribute)
-            ) { e: InventoryClickEvent -> handleClick(attribute) }
+                this.setButton(
+                    index,
+                    generateItemDisplay(attribute)
+                ) { _: InventoryClickEvent -> handleClick(attribute) }
+            }
         }
 
         this.setSlot(45, this.help)
     }
 
     private fun generateItemDisplay(attribute: AttributeWrapper): ItemStack {
-        val item = ItemStack.of(resolveAttributeDisplay(attribute))
+        val item = resolveAttributeDisplay(attribute)
         val attributeInstance = instance.getAttribute<LivingEntity>(this.target, attribute)
 
         item.editMeta(Consumer editMeta@{ meta: ItemMeta ->
@@ -92,9 +100,10 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
             }
             val modifiers = sortModifiers(attributeInstance.modifiers)
             for (modifier in modifiers) {
+                val sanitizedName = getSanitizedName(modifier.name)
                 lore.add(
                     ComponentUtils.merge(
-                        ComponentUtils.create(modifier.name, NamedTextColor.WHITE), ComponentUtils.SPACE,
+                        sanitizedName, ComponentUtils.SPACE,
                         resolveOperation(modifier.operation, modifier.amount), ComponentUtils.SPACE,
                         ComponentUtils.create(
                             "(" + modifier.slotGroup.toString().lowercase(Locale.getDefault()) + ")",
@@ -104,10 +113,16 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
                 )
             }
             lore.add(ComponentUtils.EMPTY)
+            val finalValue = attributeInstance.getValue()
+            // Breaking Power is colored by its tier so it matches how it's shown in item lore and popups.
+            val finalColor = if (attribute == AttributeWrapper.MINING_POWER)
+                BreakingPowerFormatting.color(finalValue)
+            else
+                NamedTextColor.GREEN
             lore.add(
                 ComponentUtils.merge(
                     ComponentUtils.create("Final: "),
-                    ComponentUtils.create(df.format(attributeInstance.getValue()), NamedTextColor.GREEN)
+                    ComponentUtils.create(df.format(finalValue), finalColor)
                 )
             )
 
@@ -143,6 +158,7 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
     private val help: ItemStack
         get() {
             val paper = ItemStack(Material.PAPER)
+            paper.setData(DataComponentTypes.TOOLTIP_STYLE, TooltipStyle.INFO.key)
             val meta = paper.itemMeta
 
             meta.displayName(
@@ -169,7 +185,7 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
                     ),
                     ComponentUtils.merge(
                         ComponentUtils.create(Symbols.POINT + " Equipping "),
-                        ComponentUtils.create("armor", NamedTextColor.WHITE)
+                        ComponentUtils.create("armor", NamedTextColor.BLACK)
                     ),
                     ComponentUtils.merge(
                         ComponentUtils.create(Symbols.POINT + " Holding "),
@@ -285,66 +301,109 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
     }
 
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
-        event.titleOverride(
-            ComponentUtils.merge(
-                ComponentUtils.create("Stat Overview"),
-                ComponentUtils.create(" WORK IN PROGRESS", NamedTextColor.RED, TextDecoration.BOLD)
+        event.titleOverride(ComponentUtils.merge(
+            ComponentUtils.create(Symbols.OFFSET_NEG_1 + Symbols.STAT_SUB_MENU, NamedTextColor.WHITE),
+            ComponentUtils.create(
+                Symbols.OVERLAY_BG_OFFSET_STANDARD + "${category.DisplayName} Stats",
+                Symbols.INVENTORY_TITLE_COLOR
             )
-        )
+        ))
     }
 
     override fun handleInventoryClicked(event: InventoryClickEvent) {
-        this.playInvalidAnimation()
         event.isCancelled = true
     }
 
-    private fun resolveAttributeDisplay(attribute: AttributeWrapper): Material {
+    private fun resolveAttributeDisplay(attribute: AttributeWrapper): ItemStack {
         return when (attribute) {
-            AttributeWrapper.LUCK -> Material.EMERALD
-            AttributeWrapper.ARMOR -> Material.NETHERITE_CHESTPLATE
-            AttributeWrapper.STRENGTH -> Material.DIAMOND_SWORD
-            AttributeWrapper.MINING_EFFICIENCY -> Material.IRON_PICKAXE
-            AttributeWrapper.MINING_SPEED -> Material.GOLDEN_PICKAXE
-            AttributeWrapper.SCALE -> Material.LADDER
-            AttributeWrapper.HEALTH -> Material.APPLE
-            AttributeWrapper.DEFENSE -> Material.IRON_CHESTPLATE
-            AttributeWrapper.SAFE_FALL -> Material.FEATHER
-            AttributeWrapper.BURNING_TIME -> Material.BLAZE_POWDER
-            AttributeWrapper.OXYGEN_BONUS -> Material.GLASS_BOTTLE
-            AttributeWrapper.INTELLIGENCE -> Material.POTION
-            AttributeWrapper.ABSORPTION -> Material.GOLDEN_APPLE
-            AttributeWrapper.SNEAKING_SPEED -> Material.CHAINMAIL_LEGGINGS
-            AttributeWrapper.ATTACK_SPEED -> Material.CLOCK
-            AttributeWrapper.MOVEMENT_SPEED -> Material.SUGAR
-            AttributeWrapper.JUMP_HEIGHT -> Material.RABBIT_FOOT
-            AttributeWrapper.GRAVITY -> Material.WIND_CHARGE
-            AttributeWrapper.SWEEPING -> Material.NETHERITE_HOE
-            AttributeWrapper.COMBAT_REACH -> Material.SPYGLASS
-            AttributeWrapper.MINING_REACH -> Material.BRUSH
-            AttributeWrapper.MINING_FORTUNE -> Material.DIAMOND
-            AttributeWrapper.FARMING_FORTUNE -> Material.WHEAT
-            AttributeWrapper.LUMBERING -> Material.IRON_AXE
-            AttributeWrapper.WOODCUTTING_FORTUNE -> Material.OAK_LOG
-            AttributeWrapper.FISHING_SPEED -> Material.PRISMARINE
-            AttributeWrapper.FISHING_RATING -> Material.FISHING_ROD
-            AttributeWrapper.FISHING_CREATURE_CHANCE -> Material.DROWNED_SPAWN_EGG
-            AttributeWrapper.FISHING_TREASURE_CHANCE -> Material.GOLD_BLOCK
-            AttributeWrapper.STEP -> Material.QUARTZ_SLAB
-            AttributeWrapper.UNDERWATER_MINING -> Material.TURTLE_HELMET
-            AttributeWrapper.WATER_MOVEMENT -> Material.LEATHER_BOOTS
-            AttributeWrapper.REGENERATION -> Material.GLISTERING_MELON_SLICE
-            AttributeWrapper.FALL_DAMAGE_MULTIPLIER -> Material.SLIME_BLOCK
-            AttributeWrapper.EXPLOSION_KNOCKBACK_RESISTANCE -> Material.GUNPOWDER
-            AttributeWrapper.FOLLOW_RANGE -> Material.SPYGLASS
-            AttributeWrapper.FLYING_SPEED -> Material.ELYTRA
-            AttributeWrapper.MOVEMENT_EFFICIENCY -> Material.SOUL_SAND
-            AttributeWrapper.ATTACK_KNOCKBACK -> Material.STICK
-            AttributeWrapper.ZOMBIE_REINFORCEMENTS -> Material.ZOMBIE_HEAD
-            AttributeWrapper.KNOCKBACK_RESISTANCE -> Material.SHIELD
-            AttributeWrapper.CRITICAL_CHANCE -> Material.GOLDEN_AXE
-            AttributeWrapper.CRITICAL_DAMAGE -> Material.DIAMOND_AXE
-            AttributeWrapper.PROFICIENCY -> Material.EXPERIENCE_BOTTLE
-            else -> Material.BARRIER
+            AttributeWrapper.LUCK -> ItemStack.of(Material.EMERALD)
+            AttributeWrapper.ARMOR -> ItemStack.of(Material.NETHERITE_CHESTPLATE)
+            AttributeWrapper.STRENGTH -> ItemStack.of(Material.DIAMOND_SWORD)
+            AttributeWrapper.MINING_POWER -> ItemStack.of(Material.IRON_PICKAXE)
+            AttributeWrapper.MINING_SPEED -> ItemStack.of(Material.GOLDEN_PICKAXE)
+            AttributeWrapper.SCALE -> ItemStack.of(Material.LADDER)
+            AttributeWrapper.HEALTH -> ItemStack.of(Material.APPLE)
+            AttributeWrapper.DEFENSE -> ItemStack.of(Material.IRON_CHESTPLATE)
+            AttributeWrapper.SAFE_FALL -> ItemStack.of(Material.FEATHER)
+            AttributeWrapper.BURNING_TIME -> ItemStack.of(Material.BLAZE_POWDER)
+            AttributeWrapper.OXYGEN_BONUS -> ItemStack.of(Material.GLASS_BOTTLE)
+            AttributeWrapper.INTELLIGENCE -> ItemStack.of(Material.POTION)
+            AttributeWrapper.ARCANE_RATING -> ItemStack.of(Material.FIREWORK_STAR)
+            AttributeWrapper.ABSORPTION -> ItemStack.of(Material.GOLDEN_APPLE)
+            AttributeWrapper.SNEAKING_SPEED -> ItemStack.of(Material.CHAINMAIL_LEGGINGS)
+            AttributeWrapper.ATTACK_SPEED -> ItemStack.of(Material.CLOCK)
+            AttributeWrapper.MOVEMENT_SPEED -> ItemStack.of(Material.SUGAR)
+            AttributeWrapper.JUMP_HEIGHT -> ItemStack.of(Material.RABBIT_FOOT)
+            AttributeWrapper.GRAVITY -> ItemStack.of(Material.WIND_CHARGE)
+            AttributeWrapper.SWEEPING -> ItemStack.of(Material.NETHERITE_HOE)
+            AttributeWrapper.COMBAT_REACH -> ItemStack.of(Material.SPYGLASS)
+            AttributeWrapper.MINING_REACH -> ItemStack.of(Material.BRUSH)
+            AttributeWrapper.MINING_FORTUNE -> ItemStack.of(Material.DIAMOND)
+            AttributeWrapper.FARMING_FORTUNE -> ItemStack.of(Material.WHEAT)
+            AttributeWrapper.CRITTER_CHANCE -> ItemStack.of(Material.ROOTED_DIRT)
+            AttributeWrapper.WHEAT_FORTUNE -> ItemStack.of(Material.WHEAT)
+            AttributeWrapper.POTATO_FORTUNE -> ItemStack.of(Material.POTATO)
+            AttributeWrapper.ONION_FORTUNE -> ItemService.generate(CustomItemType.ONION)
+            AttributeWrapper.CARROT_FORTUNE -> ItemService.generate(Material.CARROT)
+            AttributeWrapper.MELON_FORTUNE -> ItemService.generate(Material.MELON_SLICE)
+            AttributeWrapper.LUMBERING -> ItemStack.of(Material.IRON_AXE)
+            AttributeWrapper.WOODCUTTING_FORTUNE -> ItemStack.of(Material.OAK_LOG)
+            AttributeWrapper.FISHING_SPEED -> ItemStack.of(Material.PRISMARINE)
+            AttributeWrapper.FISHING_RATING -> ItemStack.of(Material.FISHING_ROD)
+            AttributeWrapper.FISHING_CREATURE_CHANCE -> ItemStack.of(Material.DROWNED_SPAWN_EGG)
+            AttributeWrapper.FISHING_TREASURE_CHANCE -> ItemStack.of(Material.GOLD_BLOCK)
+            AttributeWrapper.STEP -> ItemStack.of(Material.QUARTZ_SLAB)
+            AttributeWrapper.AIRBORNE_MINING -> ItemStack.of(Material.FEATHER)
+            AttributeWrapper.UNDERWATER_MINING -> ItemStack.of(Material.TURTLE_HELMET)
+            AttributeWrapper.WATER_MOVEMENT -> ItemStack.of(Material.LEATHER_BOOTS)
+            AttributeWrapper.REGENERATION -> ItemStack.of(Material.GLISTERING_MELON_SLICE)
+            AttributeWrapper.FALL_DAMAGE_MULTIPLIER -> ItemStack.of(Material.SLIME_BLOCK)
+            AttributeWrapper.EXPLOSION_KNOCKBACK_RESISTANCE -> ItemStack.of(Material.GUNPOWDER)
+            AttributeWrapper.FOLLOW_RANGE -> ItemStack.of(Material.SPYGLASS)
+            AttributeWrapper.FLYING_SPEED -> ItemStack.of(Material.ELYTRA)
+            AttributeWrapper.MOVEMENT_EFFICIENCY -> ItemStack.of(Material.SOUL_SAND)
+            AttributeWrapper.ATTACK_KNOCKBACK -> ItemStack.of(Material.STICK)
+            AttributeWrapper.ZOMBIE_REINFORCEMENTS -> ItemStack.of(Material.ZOMBIE_HEAD)
+            AttributeWrapper.KNOCKBACK_RESISTANCE -> ItemStack.of(Material.SHIELD)
+            AttributeWrapper.CRITICAL_CHANCE -> ItemStack.of(Material.GOLDEN_AXE)
+            AttributeWrapper.CRITICAL_DAMAGE -> ItemStack.of(Material.DIAMOND_AXE)
+            AttributeWrapper.PROFICIENCY -> ItemStack.of(Material.EXPERIENCE_BOTTLE)
+            AttributeWrapper.COMBAT_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/combat_proficiency"))
+                return item
+            }
+            AttributeWrapper.MINING_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/mining_proficiency"))
+                return item
+            }
+            AttributeWrapper.FISHING_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/fishing_proficiency"))
+                return item
+            }
+            AttributeWrapper.FARMING_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/farming_proficiency"))
+                return item
+            }
+            AttributeWrapper.WOODCUTTING_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/woodcutting_proficiency"))
+                return item
+            }
+            AttributeWrapper.MAGIC_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/magic_proficiency"))
+                return item
+            }
+            AttributeWrapper.SLAYER_PROFICIENCY -> {
+                val item = ItemStack.of(Material.PAPER)
+                item.setData(DataComponentTypes.ITEM_MODEL, Key.key("smprpg:ui/slayer_proficiency"))
+                return item
+            }
+            else -> ItemStack.of(Material.BARRIER)
         }
     }
 
@@ -390,5 +449,18 @@ class SubmenuStatOverview(player: Player, private val target: LivingEntity, pare
                 .filter { m: AttributeModifier? -> m!!.operation == AttributeModifier.Operation.MULTIPLY_SCALAR_1 }
                 .toList())
         return result
+    }
+
+    private fun getSanitizedName(name : String) : Component {
+        var newName = name.removeSuffix("base")
+        newName = newName.removeSuffix("bonus")
+        val stringParts = newName.split("_")
+        var retName = ""
+        for (part in stringParts) {
+            retName += part.capitalize()
+            if (part != stringParts.last())
+                retName += " "
+        }
+        return ComponentUtils.create(retName, NamedTextColor.WHITE)
     }
 }

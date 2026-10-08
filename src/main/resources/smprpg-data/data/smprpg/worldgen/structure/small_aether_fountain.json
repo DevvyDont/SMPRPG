@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#smprpg:has_structure/small_aether_fountain",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin",
+  "start_pool": "smprpg:small_aether_fountain",
+  "size": 1,
+  "start_height": {
+    "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE",
+  "dimension_padding": {
+    "bottom": 16
+  },
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+}

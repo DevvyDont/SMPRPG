@@ -1,0 +1,9 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:mutton"
+  - "smprpg:raw_pasta"
+  - "smprpg:tomato_sauce"
+time: 200
+result: "smprpg:pasta_with_mutton_chop"
+skill_xp:
+  farming: 50

@@ -1,13 +1,11 @@
 package xyz.devvydont.smprpg.items.blueprints.sets.mystbloom;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.items.ItemClassification;
 import xyz.devvydont.smprpg.items.attribute.AdditiveAttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.AttributeEntry;
 import xyz.devvydont.smprpg.items.attribute.ScalarAttributeEntry;
-import xyz.devvydont.smprpg.items.blueprints.vanilla.ItemArmor;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 
@@ -28,8 +26,7 @@ public class MystbloomHelmet extends MystbloomArmorSet {
     @Override
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
-                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, ItemArmor.getDefenseFromMaterial(Material.DIAMOND_HELMET)+5),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, ItemArmor.getHealthFromMaterial(Material.DIAMOND_HELMET)+5),
+                new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, 60),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, .1),
                 new AdditiveAttributeEntry(AttributeWrapper.INTELLIGENCE, 30)
         );

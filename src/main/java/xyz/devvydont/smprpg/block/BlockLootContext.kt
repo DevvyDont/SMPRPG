@@ -7,5 +7,6 @@ enum class BlockLootContext {
     CORRECT_TOOL,
     SILK_TOUCH,
     AUTO_SMELT,
-    INCORRECT_TOOL
+    INCORRECT_TOOL,
+    IMMATURE_AGEABLE
 }

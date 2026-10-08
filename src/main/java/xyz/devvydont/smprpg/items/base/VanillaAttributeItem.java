@@ -2,10 +2,8 @@ package xyz.devvydont.smprpg.items.base;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.w3c.dom.Attr;
 import xyz.devvydont.smprpg.items.attribute.AttributeModifierType;
 import xyz.devvydont.smprpg.items.interfaces.IAttributeItem;
-import xyz.devvydont.smprpg.items.interfaces.ICraftable;
 import xyz.devvydont.smprpg.items.interfaces.ISellable;
 import xyz.devvydont.smprpg.services.ItemService;
 import xyz.devvydont.smprpg.util.attributes.AttributeUtil;

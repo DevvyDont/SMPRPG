@@ -1,0 +1,105 @@
+items:
+  smprpg:rotten_flesh_block:
+    data:
+      item-name: <!i><lang:item.smprpg.rotten_flesh_block>
+    model: smprpg:block/compact/rotten_flesh_block
+    behavior:
+      type: block_item
+      block: smprpg:rotten_flesh_block
+  smprpg:gunpowder_block:
+    data:
+      item-name: <!i><lang:item.smprpg.gunpowder_block>
+    model: smprpg:block/compact/gunpowder_block
+    behavior:
+      type: block_item
+      block: smprpg:gunpowder_block
+  smprpg:string_spool:
+    data:
+      item-name: <!i><lang:item.smprpg.string_spool>
+    model: smprpg:block/compact/string_spool
+    behavior:
+      type: block_item
+      block: smprpg:string_spool
+  smprpg:ender_pearl_block:
+    data:
+      item-name: <!i><lang:item.smprpg.ender_pearl_block>
+    model: smprpg:block/compact/ender_pearl_block
+    behavior:
+      type: block_item
+      block: smprpg:ender_pearl_block
+
+blocks:
+  smprpg:rotten_flesh_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/compact/rotten_flesh_block
+    settings:
+      hardness: 0.5
+      resistance: 2.0
+      template:
+        - smprpg:sound/slime
+        - smprpg:settings/solid_1x1x1
+      overrides:
+        instrument: harp
+        map-color: 37
+        require-correct-tools: false
+      merges:
+        tags: ["minecraft:mineable/hoe"]
+  smprpg:gunpowder_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/compact/gunpowder_block
+    behavior:
+      type: falling_block
+    settings:
+      hardness: 0.5
+      resistance: 0.5
+      burnable: true
+      burn-chance: 30
+      fire-spread-chance: 100
+      template:
+        - smprpg:sound/sand
+        - smprpg:settings/solid_1x1x1
+      overrides:
+        instrument: harp
+        map-color: 21
+        require-correct-tools: false
+      merges:
+        tags: ["minecraft:mineable/shovel"]
+  smprpg:string_spool:
+    state:
+      auto-state: cactus
+      model:
+        path: smprpg:block/compact/string_spool
+        generation:
+          parent: smprpg:block/compact/string_spool
+    settings:
+      template:
+        - smprpg:settings/planks
+      overrides:
+        map-color: 3
+  smprpg:ender_pearl_block:
+    state:
+      auto-state: no_tint_leaves
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/compact/ender_pearl_block
+    settings:
+      hardness: 6.0
+      resistance: 5.0
+      template:
+        - smprpg:sound/bone
+        - smprpg:settings/transparent_1x1x1
+      overrides:
+        instrument: chime
+        map-color: 55
+        require-correct-tools: true
+      merges:
+        tags: ["minecraft:mineable/pickaxe"]

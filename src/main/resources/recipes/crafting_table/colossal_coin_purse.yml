@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- ' c '
+- b b
+- lbl
+ingredients:
+  b: smprpg:dragonsteel_block
+  c: smprpg:strange_fiber
+  l: smprpg:enchanted_membrane
+result:
+  item: smprpg:colossal_coin_purse
+  amount: 1
+unlocked_by:
+- minecraft:leather

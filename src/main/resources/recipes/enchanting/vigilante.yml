@@ -1,0 +1,119 @@
+type: enchanting
+enchantment: vigilante
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:emerald
+      amount: 5
+    - item: minecraft:dark_oak_log
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:emerald
+      amount: 10
+    - item: minecraft:dark_oak_log
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 15
+    ingredients:
+    - item: minecraft:emerald
+      amount: 20
+    - item: minecraft:dark_oak_log
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:emerald
+      amount: 40
+    - item: minecraft:dark_oak_log
+      amount: 16
+    - item: smprpg:premium_spell_powder
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: minecraft:emerald
+      amount: 80
+    - item: minecraft:dark_oak_log
+      amount: 32
+    - item: smprpg:premium_spell_powder
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 18
+    - item: minecraft:dark_oak_log
+      amount: 64
+    - item: smprpg:premium_spell_powder
+      amount: 64
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 60
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 36
+    - item: smprpg:premium_dark_oak_log
+      amount: 15
+    - item: smprpg:enchanted_spell_powder
+      amount: 15
+    - item: smprpg:reviled_viscera
+      amount: 1
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 70
+    ingredients:
+    - item: minecraft:emerald_block
+      amount: 72
+    - item: smprpg:premium_dark_oak_log
+      amount: 30
+    - item: smprpg:enchanted_spell_powder
+      amount: 30
+    - item: smprpg:horn_of_warlock
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 80
+    ingredients:
+    - item: smprpg:enchanted_emerald
+      amount: 8
+    - item: smprpg:premium_dark_oak_log
+      amount: 45
+    - item: smprpg:enchanted_spell_powder
+      amount: 45
+    - item: smprpg:horn_of_warlock
+      amount: 3
+    - item: smprpg:crystal_ball
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 90
+    ingredients:
+    - item: smprpg:enchanted_emerald
+      amount: 16
+    - item: smprpg:premium_dark_oak_log
+      amount: 60
+    - item: smprpg:enchanted_spell_powder
+      amount: 60
+    - item: smprpg:horn_of_warlock
+      amount: 4
+    - item: smprpg:crystal_ball
+      amount: 2
+    - item: smprpg:enchanted_lapis
+      amount: 64

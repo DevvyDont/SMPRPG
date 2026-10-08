@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "armor:adamantium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "armor:adamantium"
+      }
+    ]
+  }
+}

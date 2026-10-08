@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "#smprpg:base_stone_aether",
+    "#minecraft:dirt",
+    "#minecraft:nylium",
+    "#minecraft:wart_blocks",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil"
+  ]
+}

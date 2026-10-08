@@ -1,0 +1,124 @@
+items:
+  smprpg:sulfur_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.sulfur_ore>
+    model: smprpg:block/nether/sulfur_ore
+    behavior:
+      type: block_item
+      block: smprpg:sulfur_ore
+
+  smprpg:sulfur_block:
+    data:
+      item-name: <!i><lang:item.smprpg.sulfur_block>
+    model: smprpg:block/nether/sulfur_block
+    behavior:
+      type: block_item
+      block: smprpg:sulfur_block
+
+
+blocks:
+  smprpg:sulfur_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/nether/sulfur_ore
+    settings:
+      template:
+      - smprpg:settings/nether_ore
+      - smprpg:data/breaking_power_4
+    events:
+    - on: break
+      conditions:
+        type: distance
+        min: 0
+        max: 3
+      functions:
+        - type: potion_effect
+          potion-effect: minecraft:nausea
+          duration: 100
+          amplifier: 1
+          ambient: true
+          particles: false
+        - type: particle
+          particle: minecraft:dust
+          count: 20
+          offset_x: 0.5
+          offset_y: 2.0
+          offset_z: 0.5
+          speed: 0.8
+          color: 252,209,0
+          scale: 3.5
+
+  smprpg:sulfur_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/nether/sulfur_block
+    behavior:
+      type: falling_block
+    events:
+      - on: break
+        conditions:
+          type: distance
+          min: 0
+          max: 3
+        functions:
+          - type: potion_effect
+            potion-effect: minecraft:nausea
+            duration: 100
+            amplifier: 1
+            ambient: true
+            particles: false
+          - type: particle
+            particle: minecraft:dust
+            count: 20
+            offset_x: 0.5
+            offset_y: 2.0
+            offset_z: 0.5
+            speed: 0.8
+            color: 252,209,0
+            scale: 3.5
+    loot:
+      template:
+      - smprpg:loot_table/self
+
+    settings:
+      template:
+      - smprpg:sound/sand
+      - smprpg:data/breaking_power_4
+      overrides:
+        hardness: 6.0
+        resistance: 3.0
+      merges:
+        tags: [ "mineable/shovel" ]
+
+placed-features:
+  smprpg:ore_sulfur:
+    environment:
+      - minecraft:the_nether
+    feature:
+      type: minecraft:ore
+      config:
+        discard_chance_on_air_exposure: 0.0
+        size: 16
+        targets:
+          - state:
+              Name: smprpg:sulfur_ore
+            target:
+              predicate_type: minecraft:block_match
+              block: minecraft:netherrack
+    placement:
+      - type: minecraft:count
+        count: 12
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:trapezoid
+          max_inclusive:
+            absolute: 96
+          min_inclusive:
+            absolute: 16

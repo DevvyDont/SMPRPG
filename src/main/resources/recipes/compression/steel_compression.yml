@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:steel_ingot
+- item: smprpg:steel_block
+  amount: 9

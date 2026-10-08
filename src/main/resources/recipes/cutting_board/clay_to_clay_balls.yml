@@ -1,0 +1,5 @@
+type: cutting_board
+input: "minecraft:clay"
+tool: "shovels"
+result:
+  - { item: "minecraft:clay_ball", amount: 4, chance: 1.0 }

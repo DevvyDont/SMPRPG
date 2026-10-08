@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 16327327,
+    "separation": 8,
+    "spacing": 32,
+    "frequency": 0.75
+  },
+  "structures": [
+    {
+      "structure": "smprpg:wizard_tower",
+      "weight": 1
+    }
+  ]
+}

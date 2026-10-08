@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:enchanted_blaze_rod
+result:
+  item: smprpg:cyrax_helmet
+  amount: 1
+unlocked_by:
+- minecraft:blaze_rod

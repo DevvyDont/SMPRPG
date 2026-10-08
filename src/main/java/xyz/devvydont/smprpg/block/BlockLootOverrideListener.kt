@@ -1,20 +1,25 @@
 package xyz.devvydont.smprpg.block
 
+import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks
+import net.momirealms.craftengine.bukkit.api.event.CustomBlockBreakEvent
+import org.bukkit.ExplosionResult
+import org.bukkit.GameMode
 import org.bukkit.block.data.Ageable
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Item
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockDropItemEvent
+import org.bukkit.event.entity.EntityExplodeEvent
 import xyz.devvydont.smprpg.SMPRPG
 import xyz.devvydont.smprpg.attribute.AttributeWrapper
 import xyz.devvydont.smprpg.block.BlockLootRegistry.get
 import xyz.devvydont.smprpg.items.ItemClassification
-import xyz.devvydont.smprpg.items.blueprints.sets.emberclad.BoilingPickaxe
 import xyz.devvydont.smprpg.services.AttributeService.Companion.instance
 import xyz.devvydont.smprpg.services.DropsService
-import xyz.devvydont.smprpg.services.ItemService.Companion.blueprint
+import xyz.devvydont.smprpg.services.ItemService
+import xyz.devvydont.smprpg.skills.listeners.FarmingExperienceListener
+import xyz.devvydont.smprpg.util.craftengine.CraftEngineHelpers
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import xyz.devvydont.smprpg.util.world.ChunkUtil
 import java.util.function.Consumer
@@ -30,11 +35,55 @@ class BlockLootOverrideListener : ToggleableListener() {
      */
     private fun predictDesiredFortuneAttribute(tool: ItemClassification): AttributeWrapper? {
         return when (tool) {
-            ItemClassification.PICKAXE -> AttributeWrapper.MINING_FORTUNE
+            ItemClassification.PICKAXE, ItemClassification.DRILL -> AttributeWrapper.MINING_FORTUNE
             ItemClassification.HOE -> AttributeWrapper.FARMING_FORTUNE
             ItemClassification.AXE -> AttributeWrapper.WOODCUTTING_FORTUNE
             else -> null
         }
+    }
+
+    /**
+     * This method will handle exploded block loot from CraftEngine custom blocks.
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    private fun onCraftEngineBlockExplode(event: EntityExplodeEvent) {
+
+        if (event.explosionResult == ExplosionResult.KEEP || event.explosionResult == ExplosionResult.TRIGGER_BLOCK) return
+
+        for (block in event.blockList()) {
+            if (CraftEngineBlocks.isCustomBlock(block)) {
+                val entry = get(block.state) ?: continue
+                val ctx = BlockLootContext.CORRECT_TOOL
+                val loot: Collection<BlockLoot> = entry.getLootForContext(ctx)
+
+                for (drop in loot) {
+                    var amount = drop.chance * event.yield
+
+                    val leftover = amount - floor(amount)
+                    if (Math.random() < leftover) amount++
+
+                    val item = drop.getLoot()
+                    item.amount = amount.toInt()
+                    event.entity.world.dropItemNaturally(block.location, item)
+                }
+            }
+        }
+    }
+
+    /**
+     * This specific method handles block loot for CraftEngine blocks. It filters out if we
+     * have already defined a loot override, then sends a new event over to handle the block break.
+     */
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @Suppress("UnstableApiUsage")
+    private fun onCraftEngineBlockBreak(event: CustomBlockBreakEvent) {
+        val entry = get(event.bukkitBlock().state)
+        if (entry == null) return
+
+        // We are overriding drops at this point.
+        event.setDropItems(false)
+
+        BlockDropItemEvent(event.bukkitBlock(), event.bukkitBlock().state, event.player, mutableListOf()).callEvent()
     }
 
     /**
@@ -43,31 +92,65 @@ class BlockLootOverrideListener : ToggleableListener() {
      * If it does, we need to determine what fortune attribute to use based on the context (the tool!)
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    @Suppress("unused")
     private fun onBlockBreak(event: BlockDropItemEvent) {
+        // If we are in creative, we aren't dropping anything.
+        if (event.player.gameMode == GameMode.CREATIVE)
+            return
 
         // If this block is ageable, then it needs to be at its max age before we consider custom logic.
-        if (event.blockState.blockData is Ageable){
-            val ageable = event.blockState.blockData as Ageable
-            if (ageable.age != ageable.maximumAge)
-                return
-        }
 
-        // If this block was placed by a player in some way use vanilla logic.
-        if (ChunkUtil.isBlockSkillInvalid(event.blockState))
-            return
+        val blockData = event.blockState.blockData
 
         // Check if this block is flagged. If it isn't, let vanilla handle the logic.
-        val entry = get(event.blockState.type)
-        if (entry == null)
-            return
+        val entry = get(event.blockState) ?: return
+
+        if (CraftEngineBlocks.isCustomBlock(event.block)) {
+            val age = CraftEngineBlocks.getCustomBlockState(event.block)!!.customBlockState().getProperty<Int>("age")
+            if (age != null) {
+                val blockKey = CraftEngineHelpers.getBlockKey(event.block)
+                val maxAge = FarmingExperienceListener.getCustomCropMaxAge(blockKey)
+                if (age != maxAge) {
+                    val loot: Collection<BlockLoot> = entry.getLootForContext(BlockLootContext.IMMATURE_AGEABLE)
+                    for (drop in loot) {
+                        event.items.clear()
+                        val item = drop.getLoot()
+                        item.amount = drop.chance.toInt()
+
+                        val ent = event.getBlock().world
+                            .dropItem(event.getBlock().location.toCenterLocation(), item, Consumer { entity: Item? ->
+                                SMPRPG.getService(DropsService::class.java)
+                                    .addDefaultLootFlags(item, event.player)
+                                entity!!.itemStack = item
+                                SMPRPG.getService(DropsService::class.java).transferLootFlags(entity)
+                            })
+
+                        event.items.add(ent)
+                    }
+                    return
+                }
+                else ChunkUtil.markBlockSkillValid(event.block)
+            }
+        }
+        else {
+            if (blockData is Ageable)
+                if (blockData.age != blockData.maximumAge)
+                    return
+        }
+
+        // If this block was placed by a player invalidate their fortune.
+        var fortuneActive = true
+        if (ChunkUtil.isBlockSkillInvalid(event.blockState)) fortuneActive = false
+
+        // Check if this block is flagged to never trigger fortune.
+        if (entry.dontUseFortune)
+            fortuneActive = false
 
         // The block is flagged. We need context. Essentially, we have manual checks that determine this.
         var ctx = BlockLootContext.INCORRECT_TOOL
-        val toolPreferences = entry.preferredTools
+        val toolPreferences: MutableSet<ItemClassification> = entry.preferredTools
         val itemUsedToBreak = event.player.inventory.itemInMainHand
-        val itemUsedToBreakBlueprint = blueprint(itemUsedToBreak)
-        val usedTool = itemUsedToBreakBlueprint.getItemClassification()
+        val itemUsedToBreakBlueprint = ItemService.blueprint(itemUsedToBreak)
+        val usedTool = itemUsedToBreakBlueprint.itemClassification
 
         // If there's no tool preference for the block or there's a tool preference match, then we are using correct tool.
         if (toolPreferences.isEmpty()) ctx = BlockLootContext.CORRECT_TOOL
@@ -76,28 +159,35 @@ class BlockLootOverrideListener : ToggleableListener() {
         // If we are using silk touch on our tool because of the enchantment...
         if (itemUsedToBreak.containsEnchantment(Enchantment.SILK_TOUCH)) ctx = BlockLootContext.SILK_TOUCH
 
-        // todo: turn boiling pick maybe into enchant? It is more sustainable that way.
-        // If we are using boiling touch... (auto smelt)
-        if (itemUsedToBreakBlueprint is BoilingPickaxe) ctx = BlockLootContext.AUTO_SMELT
+        // If we are using fire aspect... (auto smelt)
+        if (itemUsedToBreak.containsEnchantment(Enchantment.FIRE_ASPECT)) ctx = BlockLootContext.AUTO_SMELT
 
         // We now have context. If the block doesn't define the given context, we can let vanilla take over.
-        val loot = entry.getLootForContext(ctx)
-        if (loot.isEmpty())
-            return;
+        val loot: Collection<BlockLoot> = entry.getLootForContext(ctx)
 
         // Given the preferred tool, we can actually work out which fortune stat is ideal. No preferred tool
         // means that no fortune is applicable to this drop.
         var fortune = 0.0
-        var attribute = this.predictDesiredFortuneAttribute(usedTool)
-        if (entry.fortuneOverride != null)
-            attribute = entry.fortuneOverride
+        if (fortuneActive) {
+            var attribute = this.predictDesiredFortuneAttribute(usedTool)
+            if (entry.fortuneOverride != null) attribute = entry.fortuneOverride
 
-        // If we found one, increment the fortune to use in drop calculation.
-        // The idea here is that base fortune is 0, and 100 fortune would yield 2x drops (scalarly scales).
-        if (attribute != null) {
-            val attrInstance = instance.getAttribute<Player>(event.player, attribute)
-            if (attrInstance != null) {
-                fortune += attrInstance.getValue() / 100
+            // If we found one, increment the fortune to use in drop calculation.
+            // The idea here is that base fortune is 0, and 100 fortune would yield 2x drops (scalarly scales).
+            if (attribute != null) {
+                val attrInstance = instance.getAttribute(event.player, attribute)
+                if (attrInstance != null) {
+                    fortune += attrInstance.value / 100
+                }
+            }
+
+            // Add any special fortune if we have it.
+            val specialFortuneWrapper =  entry.specialFortune
+            if (specialFortuneWrapper != null) {
+                val specialFortuneInstance = instance.getAttribute(event.player, specialFortuneWrapper)
+                if (specialFortuneInstance != null) {
+                    fortune += specialFortuneInstance.value / 100
+                }
             }
         }
 

@@ -1,0 +1,16 @@
+type: shapeless
+ingredients:
+- smprpg:gravitite_shards
+- smprpg:gravitite_shards
+- smprpg:gravitite_shards
+- smprpg:gravitite_shards
+- smprpg:silver_ingot
+- smprpg:silver_ingot
+- smprpg:silver_ingot
+- smprpg:silver_ingot
+result:
+  item: smprpg:aetherium_ingot
+  amount: 1
+unlocked_by:
+- smprpg:silver_ingot
+- smprpg:gravitite_shards

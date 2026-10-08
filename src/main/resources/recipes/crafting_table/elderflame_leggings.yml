@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- MMM
+- M M
+- M M
+ingredients:
+  M: smprpg:draconic_crystal
+result:
+  item: smprpg:elderflame_leggings
+  amount: 1
+unlocked_by:
+- smprpg:dragon_scales

@@ -5,8 +5,13 @@ import org.bukkit.Sound
 import xyz.devvydont.smprpg.ability.AbilityContext
 import xyz.devvydont.smprpg.ability.AbilityHandler
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
+import xyz.devvydont.smprpg.util.time.TickTime
 
 class InstantTransmissionAbilityHandler : AbilityHandler {
+
+    override val cooldown: Long
+        get() = COOLDOWN
+
     /**
      * Attempts to execute the ability.
      *
@@ -43,6 +48,11 @@ class InstantTransmissionAbilityHandler : AbilityHandler {
     }
 
     companion object {
+        /**
+         * How long between teleports?
+         */
+        val COOLDOWN: Long = TickTime.seconds(1)
+
         /**
          * How far to teleport.
          */

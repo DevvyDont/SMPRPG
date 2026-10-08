@@ -1,0 +1,103 @@
+type: enchanting
+enchantment: feather_falling
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:feather
+      amount: 4
+    - item: minecraft:white_wool
+      amount: 2
+    - item: minecraft:lapis_lazuli
+      amount: 4
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:feather
+      amount: 8
+    - item: minecraft:white_wool
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '3':
+    power: 10
+    ingredients:
+    - item: minecraft:feather
+      amount: 16
+    - item: minecraft:white_wool
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '4':
+    power: 15
+    ingredients:
+    - item: minecraft:feather
+      amount: 32
+    - item: minecraft:white_wool
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '5':
+    power: 20
+    ingredients:
+    - item: minecraft:feather
+      amount: 64
+    - item: minecraft:white_wool
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '6':
+    power: 25
+    ingredients:
+    - item: smprpg:premium_feather
+      amount: 15
+    - item: minecraft:white_wool
+      amount: 64
+    - item: smprpg:cold_aercloud
+      amount: 4
+    - item: minecraft:lapis_block
+      amount: 16
+  '7':
+    power: 30
+    ingredients:
+    - item: smprpg:premium_feather
+      amount: 15
+    - item: minecraft:phantom_membrane
+      amount: 5
+    - item: smprpg:cold_aercloud
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 32
+  '8':
+    power: 35
+    ingredients:
+    - item: smprpg:premium_feather
+      amount: 30
+    - item: minecraft:phantom_membrane
+      amount: 10
+    - item: smprpg:cold_aercloud
+      amount: 16
+    - item: minecraft:lapis_block
+      amount: 64
+  '9':
+    power: 40
+    ingredients:
+    - item: smprpg:premium_feather
+      amount: 30
+    - item: minecraft:phantom_membrane
+      amount: 20
+    - item: smprpg:cold_aercloud
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '10':
+    power: 50
+    ingredients:
+    - item: smprpg:premium_feather
+      amount: 60
+    - item: minecraft:phantom_membrane
+      amount: 40
+    - item: smprpg:cold_aercloud
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 32

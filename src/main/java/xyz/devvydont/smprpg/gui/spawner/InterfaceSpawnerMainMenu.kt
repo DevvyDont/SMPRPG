@@ -164,7 +164,7 @@ class InterfaceSpawnerMainMenu(owner: Player, val spawner: EntitySpawner) : Menu
             )
         )
         for (entry in this.spawner.options.getEntries()) lore.add(
-            ComponentUtils.create("- Entity: ").append(ComponentUtils.create(entry.type.Name, NamedTextColor.RED))
+            ComponentUtils.create("- Entity: ").append(ComponentUtils.create(entry.entity.displayName(), NamedTextColor.RED))
                 .append(
                     ComponentUtils.create(" Weight: ")
                         .append(ComponentUtils.create("" + entry.weight, NamedTextColor.GREEN))

@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:cobblestone
+- item: smprpg:compressed_cobblestone
+  amount: 9
+- item: smprpg:double_compressed_cobblestone
+  amount: 9
+- item: smprpg:enchanted_cobblestone
+  amount: 9
+- item: smprpg:cobblestone_singularity
+  amount: 9

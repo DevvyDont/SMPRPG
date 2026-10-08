@@ -1,0 +1,11 @@
+type: compression
+tiers:
+- minecraft:emerald
+- item: minecraft:emerald_block
+  amount: 9
+- item: smprpg:enchanted_emerald
+  amount: 9
+- item: smprpg:enchanted_emerald_block
+  amount: 9
+- item: smprpg:emerald_singularity
+  amount: 9

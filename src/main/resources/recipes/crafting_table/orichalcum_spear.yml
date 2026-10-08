@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- '  M'
+- ' H '
+- 'H  '
+ingredients:
+  H: smprpg:sulfur_treated_tool_shaft
+  M: smprpg:orichalcum_ingot
+result:
+  item: smprpg:orichalcum_spear
+  amount: 1
+unlocked_by:
+- smprpg:orichalcum_ingot

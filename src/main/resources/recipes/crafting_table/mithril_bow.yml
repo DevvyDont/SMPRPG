@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:mithril_ingot
+result:
+  item: smprpg:mithril_bow
+  amount: 1
+unlocked_by:
+- smprpg:mithril_ingot

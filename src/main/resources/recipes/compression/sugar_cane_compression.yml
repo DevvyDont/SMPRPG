@@ -1,0 +1,13 @@
+type: compression
+tiers:
+- minecraft:sugar_cane
+- item: smprpg:premium_sugar
+  amount: 9
+- item: smprpg:premium_sugar_cane
+  amount: 9
+- item: smprpg:enchanted_sugar
+  amount: 9
+- item: smprpg:enchanted_sugar_cane
+  amount: 9
+- item: smprpg:sugar_singularity
+  amount: 9

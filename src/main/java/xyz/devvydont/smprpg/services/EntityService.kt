@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent
 import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
+import io.papermc.paper.scoreboard.numbers.NumberFormat
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -42,7 +43,6 @@ import xyz.devvydont.smprpg.listeners.damage.ShulkerDefenseModeFix
 import xyz.devvydont.smprpg.listeners.entity.EntityTamingAttributeFix
 import xyz.devvydont.smprpg.listeners.entity.TamedEntityFeedFix
 import xyz.devvydont.smprpg.util.formatting.ComponentUtils
-import xyz.devvydont.smprpg.util.formatting.Symbols
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
 import xyz.devvydont.smprpg.util.tasks.PlaytimeTracker
 import xyz.devvydont.smprpg.util.time.TickTime
@@ -51,6 +51,11 @@ import java.util.function.Consumer
 
 const val ENTITY_CLASS_KEY: String = "entity-class"
 const val LEVEL_KEY_STRING: String = "level"
+
+// The radius at which custom entities will be considered when deciding if there are too many already present for natural spawning of custom mobs.
+const val CUSTOM_ENTITY_PROXIMITY_SPAWN_RADIUS = 200
+// How many entities of the same type that must be near each other to effectively abort natural spawning of a custom mob.
+const val CUSTOM_ENTITY_PROXIMITY_SPAWN_LIMIT = 10
 
 class EntityService : IService, Listener {
     private val entityInstances: MutableMap<UUID, LeveledEntity<*>> = HashMap<UUID, LeveledEntity<*>>()
@@ -72,19 +77,79 @@ class EntityService : IService, Listener {
 
         plugin.logger.info(String.format("Registered %s custom entity types", entityResolver.size))
 
+        vanillaEntityHandlers.put(EntityType.BAT, LeveledBat::class.java)
+        vanillaEntityHandlers.put(EntityType.CHICKEN, LeveledChicken::class.java)
+        vanillaEntityHandlers.put(EntityType.COW, LeveledCow::class.java)
+        vanillaEntityHandlers.put(EntityType.PIG, LeveledPig::class.java)
+        vanillaEntityHandlers.put(EntityType.SHEEP, LeveledSheep::class.java)
+        vanillaEntityHandlers.put(EntityType.CAMEL, LeveledCamel::class.java)
+        vanillaEntityHandlers.put(EntityType.DONKEY, LeveledDonkey::class.java)
+        vanillaEntityHandlers.put(EntityType.HORSE, LeveledHorse::class.java)
+        vanillaEntityHandlers.put(EntityType.MULE, LeveledMule::class.java)
+        vanillaEntityHandlers.put(EntityType.CAT, LeveledCat::class.java)
+        vanillaEntityHandlers.put(EntityType.PARROT, LeveledParrot::class.java)
+        vanillaEntityHandlers.put(EntityType.WOLF, LeveledWolf::class.java)
+        vanillaEntityHandlers.put(EntityType.ARMADILLO, LeveledArmadillo::class.java)
+        vanillaEntityHandlers.put(EntityType.BEE, LeveledBee::class.java)
+        vanillaEntityHandlers.put(EntityType.FOX, LeveledFox::class.java)
+        vanillaEntityHandlers.put(EntityType.GOAT, LeveledGoat::class.java)
+        vanillaEntityHandlers.put(EntityType.LLAMA, LeveledLlama::class.java)
+        vanillaEntityHandlers.put(EntityType.OCELOT, LeveledOcelot::class.java)
+        vanillaEntityHandlers.put(EntityType.PANDA, LeveledPanda::class.java)
+        vanillaEntityHandlers.put(EntityType.POLAR_BEAR, LeveledPolarBear::class.java)
+        vanillaEntityHandlers.put(EntityType.RABBIT, LeveledRabbit::class.java)
+
+        vanillaEntityHandlers.put(EntityType.AXOLOTL, LeveledAxolotl::class.java)
+        vanillaEntityHandlers.put(EntityType.COD, LeveledCod::class.java)
+        vanillaEntityHandlers.put(EntityType.DOLPHIN, LeveledDolphin::class.java)
+        vanillaEntityHandlers.put(EntityType.FROG, LeveledFrog::class.java)
+        vanillaEntityHandlers.put(EntityType.GLOW_SQUID, LeveledGlowSquid::class.java)
+        vanillaEntityHandlers.put(EntityType.NAUTILUS, LeveledNautilus::class.java)
+        vanillaEntityHandlers.put(EntityType.PUFFERFISH, LeveledPufferfish::class.java)
+        vanillaEntityHandlers.put(EntityType.SALMON, LeveledSalmon::class.java)
+        vanillaEntityHandlers.put(EntityType.SQUID, LeveledSquid::class.java)
+        vanillaEntityHandlers.put(EntityType.TADPOLE, LeveledTadpole::class.java)
+        vanillaEntityHandlers.put(EntityType.TROPICAL_FISH, LeveledTropicalFish::class.java)
+        vanillaEntityHandlers.put(EntityType.TURTLE, LeveledTurtle::class.java)
+
+        vanillaEntityHandlers.put(EntityType.MOOSHROOM, LeveledMushroomCow::class.java)
+        vanillaEntityHandlers.put(EntityType.SNIFFER, LeveledSniffer::class.java)
+        vanillaEntityHandlers.put(EntityType.CREAKING, LeveledCreaking::class.java)
+
+        vanillaEntityHandlers.put(EntityType.IRON_GOLEM, LeveledIronGolem::class.java)
+        vanillaEntityHandlers.put(EntityType.COPPER_GOLEM, LeveledCopperGolem::class.java)
+        vanillaEntityHandlers.put(EntityType.SNOW_GOLEM, LeveledSnowGolem::class.java)
+
         vanillaEntityHandlers.put(EntityType.ZOMBIE, LeveledZombie::class.java)
         vanillaEntityHandlers.put(EntityType.SKELETON, LeveledSkeleton::class.java)
+        vanillaEntityHandlers.put(EntityType.PARCHED, LeveledParched::class.java)
         vanillaEntityHandlers.put(EntityType.STRAY, LeveledStray::class.java)
         vanillaEntityHandlers.put(EntityType.BOGGED, LeveledBogged::class.java)
+        vanillaEntityHandlers.put(EntityType.DROWNED, LeveledDrowned::class.java)
         vanillaEntityHandlers.put(EntityType.SPIDER, LeveledSpider::class.java)
         vanillaEntityHandlers.put(EntityType.CAVE_SPIDER, LeveledSpider::class.java)
         vanillaEntityHandlers.put(EntityType.CREEPER, LeveledCreeper::class.java)
+        vanillaEntityHandlers.put(EntityType.HUSK, LeveledHusk::class.java)
+        vanillaEntityHandlers.put(EntityType.GHAST, LeveledGhast::class.java)
+        vanillaEntityHandlers.put(EntityType.HAPPY_GHAST, LeveledHappyGhast::class.java)
+        vanillaEntityHandlers.put(EntityType.HOGLIN, LeveledHoglin::class.java)
+        vanillaEntityHandlers.put(EntityType.ZOGLIN, LeveledZoglin::class.java)
+        vanillaEntityHandlers.put(EntityType.PIGLIN, LeveledPiglin::class.java)
+        vanillaEntityHandlers.put(EntityType.PIGLIN_BRUTE, LeveledPiglinBrute::class.java)
+        vanillaEntityHandlers.put(EntityType.ZOMBIFIED_PIGLIN, LeveledZombifiedPiglin::class.java)
+        vanillaEntityHandlers.put(EntityType.STRIDER, LeveledStrider::class.java)
         vanillaEntityHandlers.put(EntityType.ENDERMAN, LeveledEnderman::class.java)
+        vanillaEntityHandlers.put(EntityType.PHANTOM, LeveledPhantom::class.java)
         vanillaEntityHandlers.put(EntityType.ENDER_DRAGON, LeveledDragon::class.java)
         vanillaEntityHandlers.put(EntityType.WITHER, LeveledWither::class.java)
         vanillaEntityHandlers.put(EntityType.GUARDIAN, LeveledGuardian::class.java)
         vanillaEntityHandlers.put(EntityType.ELDER_GUARDIAN, LeveledElderGuardian::class.java)
         vanillaEntityHandlers.put(EntityType.WARDEN, LeveledWarden::class.java)
+
+        vanillaEntityHandlers.put(EntityType.SKELETON_HORSE, LeveledSkeletonHorse::class.java)
+        vanillaEntityHandlers.put(EntityType.ZOMBIE_HORSE, LeveledZombieHorse::class.java)
+        vanillaEntityHandlers.put(EntityType.CAMEL_HUSK, LeveledCamelHusk::class.java)
+        vanillaEntityHandlers.put(EntityType.ZOMBIE_NAUTILUS, LeveledZombieNautilus::class.java)
 
         vanillaEntityHandlers.put(EntityType.SLIME, LeveledSizedCube::class.java)
         vanillaEntityHandlers.put(EntityType.MAGMA_CUBE, LeveledSizedCube::class.java)
@@ -92,30 +157,62 @@ class EntityService : IService, Listener {
         vanillaEntityHandlers.put(EntityType.BLAZE, LeveledBlaze::class.java)
         vanillaEntityHandlers.put(EntityType.WITHER_SKELETON, LeveledWitherSkeleton::class.java)
 
+        vanillaEntityHandlers.put(EntityType.BREEZE, LeveledBreeze::class.java)
+
         vanillaEntityHandlers.put(EntityType.VILLAGER, LeveledVillager::class.java)
+        vanillaEntityHandlers.put(EntityType.ZOMBIE_VILLAGER, LeveledZombieVillager::class.java)
+        vanillaEntityHandlers.put(EntityType.WANDERING_TRADER, LeveledWanderingTrader::class.java)
+        vanillaEntityHandlers.put(EntityType.TRADER_LLAMA, LeveledTraderLlama::class.java)
+        vanillaEntityHandlers.put(EntityType.ALLAY, LeveledAllay::class.java)
+        vanillaEntityHandlers.put(EntityType.VINDICATOR, LeveledVindicator::class.java)
+        vanillaEntityHandlers.put(EntityType.ILLUSIONER, LeveledIllusioner::class.java)
+        vanillaEntityHandlers.put(EntityType.WITCH, LeveledWitch::class.java)
+        vanillaEntityHandlers.put(EntityType.EVOKER, LeveledEvoker::class.java)
+        vanillaEntityHandlers.put(EntityType.VEX, LeveledVex::class.java)
+        vanillaEntityHandlers.put(EntityType.RAVAGER, LeveledRavager::class.java)
         vanillaEntityHandlers.put(EntityType.PILLAGER, LeveledPillager::class.java)
 
         vanillaEntityHandlers.put(EntityType.ARMOR_STAND, LeveledArmorStand::class.java)
 
+        vanillaEntityHandlers.put(EntityType.MANNEQUIN, LeveledMannequin::class.java)
         vanillaEntityHandlers.put(EntityType.BLOCK_DISPLAY, LeveledDisplay::class.java)
         vanillaEntityHandlers.put(EntityType.ITEM_DISPLAY, LeveledDisplay::class.java)
         vanillaEntityHandlers.put(EntityType.TEXT_DISPLAY, LeveledDisplay::class.java)
 
         plugin.logger.info("Associated ${vanillaEntityHandlers.size} vanilla entities with custom handlers")
 
-        // Setting up default scoreboard options
+        // --- Below-name HP display ---
+        // We pin a scoreboard objective to the BELOW_NAME slot so HP renders under player names.
+        //
+        // This used to use the vanilla `health` criteria. The server auto-tracks a health score for every
+        // entity, but on MC 1.21 and earlier the client only *rendered* below-name scores under players,
+        // so in practice it was player-only. Minecraft 26.1 "fixed" MC-99647 and now renders below-name
+        // scores under EVERY entity that has a custom name -- which is all of our mobs, and it leaks onto
+        // displays/items too -- spamming a stray heart number on everything.
+        //
+        // Workaround while we're on 26.1.x: use a DUMMY objective (no auto-tracking) and write a styled
+        // score for players only (see LeveledPlayer#updateBelowNameHealthDisplay), so non-players have no
+        // score and render nothing. 26.2 reverts the client behavior and adds the `below_name_distance`
+        // attribute to control it, so this can go back to a plain `health` objective once we update past
+        // 26.1. We unregister any pre-existing objective first to migrate old `health` objectives in
+        // already-generated worlds over to the dummy.
         val scoreboard = Bukkit.getScoreboardManager().mainScoreboard
-        var hpObjective = scoreboard.getObjective("hp_objective")
-        if (hpObjective == null) hpObjective = scoreboard.registerNewObjective(
-            "hp_objective",
-            Criteria.HEALTH,
-            ComponentUtils.create(Symbols.HEART, NamedTextColor.RED)
+        scoreboard.getObjective(BELOW_NAME_HEALTH_OBJECTIVE)?.unregister()
+        val hpObjective = scoreboard.registerNewObjective(
+            BELOW_NAME_HEALTH_OBJECTIVE,
+            Criteria.DUMMY,
+            ComponentUtils.create("", NamedTextColor.WHITE)
         )
         hpObjective.displaySlot = DisplaySlot.BELOW_NAME
-        hpObjective.setAutoUpdateDisplay(true)
 
         // Initialize entities that are already loaded
         for (world in Bukkit.getWorlds()) for (entity in world.entities) {
+
+            // Ensures that this entity does not display any sort of information under their name unless
+            // we explicitly say so in our class.
+            val obj = Bukkit.getScoreboardManager().mainScoreboard.getObjective(BELOW_NAME_HEALTH_OBJECTIVE)
+            obj?.getScoreFor(entity)?.numberFormat(NumberFormat.blank())
+
             // Ignore non living/displays
             if (entity !is LivingEntity && entity !is Display)
                 continue
@@ -268,7 +365,7 @@ class EntityService : IService, Listener {
     /**
      * Spawns a custom entity into the world. This is guaranteed to be successful.
      */
-    fun spawnCustomEntity(type: CustomEntityType, location: Location): LeveledEntity<*>? {
+    fun spawnCustomEntity(type: CustomEntityType, location: Location): LeveledEntity<*> {
         val entity = location.getWorld().spawnEntity(location, type.Type, CreatureSpawnEvent.SpawnReason.CUSTOM, Consumer { e: Entity ->
                 if (e is LivingEntity) {
                     e.equipment?.setItemInMainHand(null)
@@ -328,8 +425,6 @@ class EntityService : IService, Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private fun onEntitySpawnForTheFirstTime(event: CreatureSpawnEvent) {
         val entity = getEntityInstance(event.getEntity())
-        entity.setup()
-        trackEntity(entity)
         entity.resetLevel()
 
         val leveledSpawnEvent = LeveledEntitySpawnEvent(entity)
@@ -359,6 +454,12 @@ class EntityService : IService, Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
     private fun onEntitySpawn(event: EntityAddToWorldEvent) {
+
+        // Ensures that this entity does not display any sort of information under their name unless
+        // we explicitly say so in our class.
+        val obj = Bukkit.getScoreboardManager().mainScoreboard.getObjective(BELOW_NAME_HEALTH_OBJECTIVE)
+        obj?.getScoreFor(event.entity)?.numberFormat(NumberFormat.blank())
+
         if (event.getEntity() !is LivingEntity && event.getEntity() !is Display)
             return
 
@@ -508,50 +609,49 @@ class EntityService : IService, Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     @Suppress("unused")
     private fun onSpawn(event: CreatureSpawnEvent) {
-        // Ignore non natural spawns
 
+        // Ignore non natural spawns
         val naturalReasons = listOf<CreatureSpawnEvent.SpawnReason?>(
             CreatureSpawnEvent.SpawnReason.NATURAL,
             CreatureSpawnEvent.SpawnReason.DEFAULT
         )
+
         if (!naturalReasons.contains(event.spawnReason))
             return
 
         // DO NOT do this with bosses. This will break ender dragons.
-        if (event.getEntity() is Boss)
+        if (event.entity is Boss)
             return
 
         // Determine eligible creatures that can spawn in its place
         val choices: MutableList<CustomEntityType> = ArrayList<CustomEntityType>()
         for (type in CustomEntityType.entries)
-            if (type.testNaturalSpawn(event.location)) choices.add(type)
+            if (type.testNaturalSpawn(event.location))
+                choices.add(type)
 
-        // Filter this enemy so it doesn't flood the world. Ensure there already aren't more than 10 present.
-        // The main reason for this existing, is to prevent 1000 iron golems from spawning on the end island since
-        // it is not considered a hostile mob.
-        for (choice in choices.stream().toList()) {
-            var count = 0
-            for (nearby in event.location.getNearbyLivingEntities(500.toDouble())) {
-                val custom = getEntityInstance(nearby)
-                if (custom is CustomEntityInstance<*> && custom.entityType.equals(choice))
-                    count++
-            }
-            if (count > 25)
-                choices.remove(choice)
-        }
-
-        // Did we find a custom entity type?
+        // If no choices were found, that means this should be a vanilla mob.
         if (choices.isEmpty())
             return
 
+        // We are making a new entity, so we no longer need to spawn the original one.
+        event.isCancelled = true
+
         // Pick a random entity to make
         val newEntity = choices[(Math.random() * choices.size).toInt()]
-        val entity = this.spawnCustomEntity(newEntity, event.location)
-        if (entity == null)
+        // Filter this enemy so it doesn't flood the world. Ensure there already aren't more than 10 present.
+        // The main reason for this existing, is to prevent 1000 iron golems from spawning on the end island since
+        // it is not considered a hostile mob.
+        var count = 0
+        for (nearby in event.location.getNearbyLivingEntities(CUSTOM_ENTITY_PROXIMITY_SPAWN_RADIUS.toDouble())) {
+            val custom = getEntityInstance(nearby)
+            if (custom is CustomEntityInstance<*> && custom.entityType.equals(newEntity))
+                count++
+        }
+        if (count >= CUSTOM_ENTITY_PROXIMITY_SPAWN_LIMIT)
             return
 
+        val entity = this.spawnCustomEntity(newEntity, event.location)
         entity.setup()
-        event.isCancelled = true
     }
 
     /**
@@ -565,6 +665,10 @@ class EntityService : IService, Listener {
     }
 
     companion object {
+
+        // Scoreboard objective used to render HP under player names in the BELOW_NAME slot. See the
+        // setup code for why this is a DUMMY objective populated only for players.
+        const val BELOW_NAME_HEALTH_OBJECTIVE: String = "hp_objective"
 
         @JvmStatic
         val classNamespacedKey: NamespacedKey

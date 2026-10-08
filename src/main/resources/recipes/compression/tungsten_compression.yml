@@ -1,0 +1,5 @@
+type: compression
+tiers:
+- smprpg:tungsten_ingot
+- item: smprpg:tungsten_block
+  amount: 9

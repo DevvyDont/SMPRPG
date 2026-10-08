@@ -3,6 +3,7 @@ package xyz.devvydont.smprpg.entity.vanilla;
 import org.bukkit.Material;
 import org.bukkit.entity.WitherSkeleton;
 import org.jetbrains.annotations.Nullable;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.VanillaEntity;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -49,5 +50,14 @@ public class LeveledWitherSkeleton extends VanillaEntity<WitherSkeleton> {
     @Override
     public boolean hasVanillaDrops() {
         return false;
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.UNDEAD);
+        mobTypes.add(MobType.HUMANOID);
+        mobTypes.add(MobType.NETHER);
+
+        super.setup();
     }
 }

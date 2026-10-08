@@ -38,7 +38,7 @@ public class ReaverKnife extends CustomAttributeItem implements IBreakableEquipm
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         List<Component> components = new ArrayList<>();
-        components.add(AbilityUtil.getAbilityComponent("Decapitator (Passive)"));
+        components.add(AbilityUtil.getAbilityComponent("Decapitator", true));
         components.add(ComponentUtils.create("Wither Skeleton Skull drops are ").append(ComponentUtils.create(WITHER_SKULL_BOOST + "x", NamedTextColor.GREEN)).append(ComponentUtils.create(" more common")));
         components.add(ComponentUtils.create("when killing ").append(ComponentUtils.create("Wither", NamedTextColor.DARK_RED)).append(ComponentUtils.create(" type enemies with this weapon")));
         return components;

@@ -1,0 +1,5 @@
+type: cutting_board
+input: "smprpg:wheat_dough"
+tool: "knives"
+result:
+  - { item: "smprpg:raw_pasta", amount: 1, chance: 1.0 }

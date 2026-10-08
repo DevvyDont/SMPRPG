@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:premium_slime
+result:
+  item: smprpg:slimy_boots
+  amount: 1
+unlocked_by:
+- minecraft:slime_ball

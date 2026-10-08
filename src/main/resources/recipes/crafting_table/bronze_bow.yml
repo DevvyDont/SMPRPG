@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: smprpg:bronze_ingot
+result:
+  item: smprpg:bronze_bow
+  amount: 1
+unlocked_by:
+- smprpg:bronze_ingot

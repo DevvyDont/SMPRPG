@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:nautilus_shell
+- item: smprpg:premium_nautilus_shell
+  amount: 9
+- item: smprpg:enchanted_nautilus_shell
+  amount: 9

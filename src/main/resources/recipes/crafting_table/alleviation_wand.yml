@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- mmm
+- mrm
+- mmm
+ingredients:
+  r: smprpg:healing_wand
+  m: smprpg:premium_melon
+result:
+  item: smprpg:alleviation_wand
+  amount: 1
+unlocked_by:
+- minecraft:melon_slice
+upgrade: "r"

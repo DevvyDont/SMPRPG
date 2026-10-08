@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- sss
+- sds
+- sss
+ingredients:
+  s: smprpg:dragon_scales
+  d: smprpg:enchanted_diamond
+result:
+  item: smprpg:draconic_crystal
+  amount: 1
+unlocked_by:
+- smprpg:dragon_scales

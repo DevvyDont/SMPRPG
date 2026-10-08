@@ -1,0 +1,483 @@
+templates#settings:
+  smprpg:settings/solid_1x1x1:
+    is-suffocating: true
+    replaceable: false
+    is-view-blocking: true
+    is-redstone-conductor: true
+    can-occlude: true
+  smprpg:settings/transparent_1x1x1:
+    is-suffocating: false
+    replaceable: false
+    is-view-blocking: false
+    is-redstone-conductor: false
+    can-occlude: false
+  smprpg:settings/sapling:
+    burnable: false
+    template:
+      - smprpg:hardness/none
+      - smprpg:sound/grass
+    overrides:
+      push-reaction: destroy
+      is-randomly-ticking: true
+      tags:
+        - minecraft:mineable/axe
+        - minecraft:saplings
+        - minecraft:sword_efficient
+  smprpg:settings/leaves:
+    template:
+      - smprpg:sound/grass
+      - smprpg:burn_data/leaves
+      - smprpg:hardness/leaves
+      - smprpg:settings/transparent_1x1x1
+    overrides:
+      hardness: 0.2
+      resistance: 0.2
+      push-reaction: destroy
+      instrument: harp
+      tags:
+        - minecraft:mineable/hoe
+        - minecraft:sword_efficient
+        - minecraft:leaves
+        - minecraft:replaceable_by_trees
+  smprpg:settings/wood:
+    template:
+      - smprpg:sound/wood
+      - smprpg:burn_data/wood
+      - smprpg:hardness/wood
+    overrides:
+      instrument: bass
+      tags:
+        - minecraft:mineable/axe
+        - minecraft:logs_that_burn
+        - minecraft:logs
+        - minecraft:completes_find_tree_tutorial
+  smprpg:settings/planks:
+    template:
+      - smprpg:sound/wood
+      - smprpg:burn_data/planks
+      - smprpg:hardness/planks
+      - smprpg:settings/solid_1x1x1
+    overrides:
+      instrument: bass
+      tags: ["minecraft:mineable/axe"]
+  smprpg:settings/ore:
+    template:
+      - smprpg:sound/stone
+      - smprpg:settings/solid_1x1x1
+    overrides:
+      hardness: 3.0
+      resistance: 3.0
+      instrument: basedrum
+      map-color: 11
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/deepslate_ore:
+    template:
+      - smprpg:sound/deepslate
+      - smprpg:settings/solid_1x1x1
+      - smprpg:hardness/deepslate
+    overrides:
+      hardness: 4.5
+      resistance: 3.0
+      instrument: basedrum
+      map-color: 59
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/grimstone:
+    template:
+      - smprpg:sound/blackstone
+      - smprpg:settings/solid_1x1x1
+      - smprpg:hardness/deepslate
+    overrides:
+      hardness: 6.0
+      resistance: 6.0
+      instrument: basedrum
+      map-color: 29
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/grimstone_ore:
+    template:
+      - smprpg:sound/blackstone
+      - smprpg:settings/solid_1x1x1
+      - smprpg:hardness/deepslate
+    overrides:
+      hardness: 7.5
+      resistance: 6.0
+      instrument: basedrum
+      map-color: 29
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/nether_ore:
+    template:
+      - smprpg:sound/stone
+      - smprpg:settings/solid_1x1x1
+    overrides:
+      hardness: 9.0
+      resistance: 3.0
+      instrument: basedrum
+      map-color: 35
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/aether_ore:
+    template:
+      - smprpg:sound/holystone
+      - smprpg:settings/solid_1x1x1
+    overrides:
+      hardness: 9.0
+      resistance: 3.0
+      instrument: basedrum
+      map-color: 22
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/metal_block:
+    template:
+      - smprpg:sound/metal
+      - smprpg:settings/solid_1x1x1
+      - smprpg:hardness/metal
+    overrides:
+      hardness: 6.0
+      resistance: 5.0
+      instrument: iron_xylophone
+      map-color: 59
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/raw_metal_block:
+    template:
+      - smprpg:sound/stone
+      - smprpg:settings/solid_1x1x1
+      - smprpg:hardness/metal
+    overrides:
+      hardness: 6.0
+      resistance: 5.0
+      instrument: basedrum
+      map-color: 59
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/rune:
+    template:
+      - smprpg:sound/rune
+      - smprpg:settings/solid_1x1x1
+    overrides:
+      hardness: 6.0
+      resistance: 6.0
+      instrument: chime
+      map-color: 39
+      require-correct-tools: true
+      tags: ["minecraft:mineable/pickaxe"]
+  smprpg:settings/crop:
+    template:
+      - smprpg:sound/crop
+      - smprpg:hardness/none
+    overrides:
+      push-reaction: destroy
+      is-randomly-ticking: true
+      tags:
+        - minecraft:mineable/hoe
+        - minecraft:crops
+        - minecraft:maintains_farmland
+  smprpg:settings/flower:
+    template:
+      - smprpg:sound/grass
+      - smprpg:hardness/none
+    require-correct-tools: false
+    overrides:
+      push-reaction: destroy
+      tags:
+        - minecraft:mineable/hoe
+  smprpg:settings/aercloud:
+    template:
+      - smprpg:sound/aercloud
+      - smprpg:hardness/wool
+      - smprpg:settings/transparent_1x1x1
+    require-correct-tools: false
+    merges:
+      tags:
+        - smprpg:quicksoil_shelf_valid
+    overrides:
+      push-reaction: block
+  smprpg:settings/dirt:
+    template:
+      - smprpg:sound/gravel
+      - smprpg:settings/solid_1x1x1
+    hardness: 0.5
+    resistance: 0.5
+    require-correct-tools: false
+    tags: [ "minecraft:mineable/shovel" ]
+  smprpg:settings/grass:
+    template:
+      - smprpg:sound/grass
+      - smprpg:settings/solid_1x1x1
+    hardness: 0.6
+    resistance: 0.5
+    require-correct-tools: false
+    tags: [ "minecraft:mineable/shovel" ]
+  smprpg:settings/stone:
+    template:
+      - smprpg:sound/stone
+      - smprpg:settings/solid_1x1x1
+    hardness: 1.5
+    resistance: 6
+    require-correct-tools: true
+    tags: [ "minecraft:mineable/pickaxe" ]
+
+
+templates#hardness:
+  smprpg:hardness/none:
+    hardness: 0
+    resistance: 0
+  smprpg:hardness/leaves:
+    hardness: 0.2
+    resistance: 0.2
+  smprpg:hardness/glass:
+    hardness: 0.3
+    resistance: 0.3
+  smprpg:hardness/stone:
+    hardness: 1.5
+    resistance: 6.0
+  smprpg:hardness/deepslate:
+    hardness: 3.0
+    resistance: 6.0
+  smprpg:hardness/obsidian:
+    hardness: 50.0
+    resistance: 1200.0
+  smprpg:hardness/wool:
+    hardness: 0.8
+    resistance: 0.8
+  smprpg:hardness/wood:
+    hardness: 2.0
+    resistance: 2.0
+  smprpg:hardness/planks:
+    hardness: 2.0
+    resistance: 3.0
+  smprpg:hardness/button:
+    hardness: 0.5
+    resistance: 0.5
+  smprpg:hardness/melon:
+    hardness: 1.0
+    resistance: 1.0
+  smprpg:hardness/metal:
+    hardness: 5.0
+    resistance: 6.0
+  smprpg:hardness/grimstone:
+    hardness: 6.0
+    resistance: 6.0
+
+templates#burn_data:
+  smprpg:burn_data/leaves:
+    burnable: true
+    burn-chance: 30
+    fire-spread-chance: 60
+  smprpg:burn_data/wood:
+    burnable: true
+    burn-chance: 5
+    fire-spread-chance: 5
+  smprpg:burn_data/planks:
+    burnable: true
+    burn-chance: 5
+    fire-spread-chance: 20
+  smprpg:burn_data/wool:
+    burnable: true
+    burn-chance: 30
+    fire-spread-chance: 60
+  smprpg:burn_data/vine:
+    burnable: true
+    burn-chance: 15
+    fire-spread-chance: 100
+  smprpg:burn_data/carpet:
+    burnable: true
+    burn-chance: 60
+    fire-spread-chance: 20
+  smprpg:burn_data/coal:
+    burnable: true
+    burn-chance: 5
+    fire-spread-chance: 5
+  smprpg:burn_data/grass:
+    burnable: true
+    burn-chance: 60
+    fire-spread-chance: 100
+
+templates#sounds:
+  smprpg:sound/block_template:
+    sounds:
+      break: minecraft:block.${block_type}.break
+      step: minecraft:block.${block_type}.step
+      place: minecraft:block.${block_type}.place
+      hit: minecraft:block.${block_type}.hit
+      fall: minecraft:block.${block_type}.fall
+  smprpg:sound/smprpg_namespace_block_template:
+    sounds:
+      break: smprpg:block.${block_type}.break
+      step: smprpg:block.${block_type}.step
+      place: smprpg:block.${block_type}.place
+      hit: smprpg:block.${block_type}.hit
+      fall: smprpg:block.${block_type}.fall
+  smprpg:sound/blackstone:
+    template: smprpg:sound/block_template
+    arguments::block_type: gilded_blackstone
+  smprpg:sound/adamantium_ore:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: adamantium_ore
+  smprpg:sound/rune:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: rune
+  smprpg:sound/cobalt:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: cobalt
+  smprpg:sound/anvil:
+    template: smprpg:sound/block_template
+    arguments::block_type: anvil
+  smprpg:sound/bone:
+    template: smprpg:sound/block_template
+    arguments::block_type: bone_block
+  smprpg:sound/wool:
+    template: smprpg:sound/block_template
+    arguments::block_type: wool
+  smprpg:sound/holystone:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: holystone
+  smprpg:sound/aercloud:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: aercloud
+  smprpg:sound/crystal_leaves:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: crystal_leaves
+  smprpg:sound/icestone:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: icestone
+  smprpg:sound/endstone:
+    template: smprpg:sound/smprpg_namespace_block_template
+    arguments::block_type: endstone
+  smprpg:sound/crop:
+    sounds:
+      break: minecraft:block.crop.break
+      step: minecraft:block.grass.step
+      place: minecraft:item.crop.plant
+      hit: minecraft:block.grass.hit
+      fall: minecraft:block.grass.fall
+  smprpg:sound/bush_crop:
+    sounds:
+      break: minecraft:block.sweet_berry_bush.break
+      step: minecraft:block.grass.step
+      place: minecraft:block.sweet_berry_bush.place
+      hit: minecraft:block.grass.hit
+      fall: minecraft:block.grass.fall
+  smprpg:sound/stem_crop:
+    sounds:
+      break: minecraft:block.crop.break
+      step: minecraft:block.wood.step
+      place: minecraft:item.crop.plant
+      hit: minecraft:block.wood.hit
+      fall: minecraft:block.wood.fall
+  smprpg:sound/grass:
+    template: smprpg:sound/block_template
+    arguments::block_type: grass
+  smprpg:sound/wood:
+    template: smprpg:sound/block_template
+    arguments::block_type: wood
+  smprpg:sound/stone:
+    template: smprpg:sound/block_template
+    arguments::block_type: stone
+  smprpg:sound/deepslate:
+    template: smprpg:sound/block_template
+    arguments::block_type: deepslate
+  smprpg:sound/glass:
+    template: smprpg:sound/block_template
+    arguments::block_type: glass
+  smprpg:sound/sand:
+    template: smprpg:sound/block_template
+    arguments::block_type: sand
+  smprpg:sound/gravel:
+    template: smprpg:sound/block_template
+    arguments::block_type: gravel
+  smprpg:sound/metal:
+    template: smprpg:sound/block_template
+    arguments::block_type: metal
+  smprpg:sound/iron:
+    template: smprpg:sound/block_template
+    arguments::block_type: iron
+  smprpg:sound/copper:
+    template: smprpg:sound/block_template
+    arguments::block_type: copper
+  smprpg:sound/snow:
+    template: smprpg:sound/block_template
+    arguments::block_type: snow
+  smprpg:sound/bamboo:
+    template: smprpg:sound/block_template
+    arguments::block_type: bamboo
+  smprpg:sound/vine:
+    template: smprpg:sound/block_template
+    arguments::block_type: vine
+  smprpg:sound/lantern:
+    template: smprpg:sound/block_template
+    arguments::block_type: lantern
+  smprpg:sound/amethyst_block:
+    template: smprpg:sound/block_template
+    arguments::block_type: amethyst_block
+  smprpg:sound/slime:
+    template: smprpg:sound/block_template
+    arguments::block_type: slime_block
+  smprpg:sound/cherry_wood:
+    template: smprpg:sound/block_template
+    arguments::block_type: cherry_wood
+  smprpg:sound/cherry_leaves:
+    template: smprpg:sound/block_template
+    arguments::block_type: cherry_leaves
+
+templates#events:
+  smprpg:events/rune_step:
+    - on: step
+      functions:
+        - type: particle
+          particle: minecraft:end_rod
+          count: 5
+          offset_x: 0.1
+          offset_z: 0.1
+          speed: 0.02
+  smprpg:events/regen_ore:
+    - on: break
+      functions:
+        - type: run
+          delay: 1
+          functions:
+            - type: place_block
+              block-state: "minecraft:bedrock"
+        - type: run
+          delay: 60
+          functions:
+            - type: place_block
+              block-state: ${regen_ore}
+            - type: play_sound
+              sound: ${regen_sound}
+              pitch: 0.5
+              source: block
+  smprpg:events/swing_main_hand:
+    - on: right_click
+      functions:
+        - type: swing_hand
+          hand: main_hand
+
+
+
+templates#data:
+  smprpg:data/breaking_power_1:
+    tags: [ "smprpg:breaking_power_1" ]
+  smprpg:data/breaking_power_2:
+    tags: [ "smprpg:breaking_power_2" ]
+  smprpg:data/breaking_power_3:
+    tags: [ "smprpg:breaking_power_3" ]
+  smprpg:data/breaking_power_4:
+    tags: [ "smprpg:breaking_power_4" ]
+  smprpg:data/breaking_power_5:
+    tags: [ "smprpg:breaking_power_5" ]
+  smprpg:data/breaking_power_6:
+    tags: [ "smprpg:breaking_power_6" ]
+  smprpg:data/breaking_power_7:
+    tags: [ "smprpg:breaking_power_7" ]
+  smprpg:data/breaking_power_8:
+    tags: [ "smprpg:breaking_power_8" ]
+  smprpg:data/breaking_power_9:
+    tags: [ "smprpg:breaking_power_9" ]
+  smprpg:data/beacon_usable:
+    tags: [ "minecraft:beacon_base_blocks" ]
+  smprpg:data/climbable:
+    tags: [ "minecraft:climbable" ]

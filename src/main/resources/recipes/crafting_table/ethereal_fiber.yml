@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- mmm
+- mfm
+- mmm
+ingredients:
+  f: smprpg:astral_filament
+  m: smprpg:echo_membrane
+result:
+  item: smprpg:ethereal_fiber
+  amount: 1
+unlocked_by:
+- smprpg:astral_filament

@@ -11,7 +11,7 @@ import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class HealthyReforge(type: ReforgeType) : ReforgeBase(type) {
     override fun getAttributeModifiersWithRarity(rarity: ItemRarity): List<AttributeEntry> {
-        return listOf<AttributeEntry>(
+        return listOf(
             AdditiveAttributeEntry(AttributeWrapper.HEALTH, ((rarity.ordinal + 1) * 5).toDouble()),
             AttributeEntry.additive(AttributeWrapper.REGENERATION, ((rarity.ordinal + 1) * 5).toDouble())
         )
@@ -23,7 +23,5 @@ class HealthyReforge(type: ReforgeType) : ReforgeBase(type) {
             ComponentUtils.create("to maximum health")
         )
 
-    override fun getPowerRating(): Int {
-        return 1
-    }
+    override val powerRating: Int get() = 1
 }

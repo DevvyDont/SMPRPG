@@ -1,0 +1,68 @@
+{
+    "model": {
+        "type": "select",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "item/raw_iron"
+        },
+        "cases": [
+            {
+                "when": "smprpg:raw_silver",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_silver"
+                }
+            },
+            {
+                "when": "smprpg:raw_tin",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_tin"
+                }
+            },
+			            {
+                "when": "smprpg:raw_mithril",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_mithril"
+                }
+            },
+			{
+                "when": "smprpg:raw_titanium",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_titanium"
+                }
+            },
+			{
+                "when": "smprpg:raw_adamantium",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_adamantium"
+                }
+            },
+			{
+                "when": "smprpg:raw_tungsten",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_tungsten"
+                }
+            },
+			{
+                "when": "smprpg:raw_cobalt",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_cobalt"
+                }
+            },
+			{
+                "when": "smprpg:raw_orichalcum",
+                "model": {
+                    "type": "model",
+                    "model": "materials:item/raw_orichalcum"
+                }
+            }
+        ]
+    }
+}

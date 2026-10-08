@@ -1,17 +1,22 @@
 package xyz.devvydont.smprpg.entity.fishing;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Turtle;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
+import xyz.devvydont.smprpg.entity.fishing.goals.SnappingTurtleAttackGoal;
 import xyz.devvydont.smprpg.services.ItemService;
+import xyz.devvydont.smprpg.util.items.ChancedItemDrop;
 import xyz.devvydont.smprpg.util.items.LootDrop;
 import xyz.devvydont.smprpg.util.items.QuantityLootDrop;
 
 import java.util.Collection;
 import java.util.List;
 
-public class SnappingTurtle extends SeaCreature<LivingEntity> {
+public class SnappingTurtle extends SeaCreature<Turtle> {
 
     /**
      * The catch quality requirement to catch this.
@@ -27,13 +32,28 @@ public class SnappingTurtle extends SeaCreature<LivingEntity> {
      * @param entityType The entity type.
      */
     public SnappingTurtle(LivingEntity entity, CustomEntityType entityType) {
-        super(entity, entityType);
+        super((Turtle) entity, entityType);
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.SEA_CREATURE);
+        mobTypes.add(MobType.AQUATIC);
+        mobTypes.add(MobType.ANIMAL);
+
+        super.setup();
+
+        var mobGoals = Bukkit.getMobGoals();
+        mobGoals.removeAllGoals(_entity);
+        mobGoals.addGoal(_entity, 3, new SnappingTurtleAttackGoal(_entity));
     }
 
     @Override
     public @Nullable Collection<LootDrop> getItemDrops() {
         return List.of(
-                new QuantityLootDrop(ItemService.generate(Material.TURTLE_SCUTE), 1, 2, this)
+                new QuantityLootDrop(ItemService.generate(Material.TURTLE_SCUTE), 1, 2, this),
+                new ChancedItemDrop(lureScroll, 900, this),
+                new ChancedItemDrop(abyssalInstinctScroll, 900, this)
         );
     }
 }

@@ -1,0 +1,464 @@
+items:
+  smprpg:sparse_mithril_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.sparse_mithril_ore>
+    model: smprpg:block/overworld/sparse_mithril_ore
+    behavior:
+      type: block_item
+      block: smprpg:sparse_mithril_ore
+  smprpg:mithril_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.mithril_ore>
+    model: smprpg:block/overworld/mithril_ore
+    behavior:
+      type: block_item
+      block: smprpg:mithril_ore
+  smprpg:dense_mithril_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.dense_mithril_ore>
+    model: smprpg:block/overworld/dense_mithril_ore
+    behavior:
+      type: block_item
+      block: smprpg:dense_mithril_ore
+  smprpg:raw_mithril_block:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_mithril_block>
+    model: smprpg:block/overworld/raw_mithril_block
+    behavior:
+      type: block_item
+      block: smprpg:raw_mithril_block
+
+  smprpg:titanium_ore:
+    data:
+      item-name: <!i><lang:item.smprpg.titanium_ore>
+    model: smprpg:block/overworld/titanium_ore
+    behavior:
+      type: block_item
+      block: smprpg:titanium_ore
+  smprpg:raw_titanium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_titanium_block>
+    model: smprpg:block/overworld/raw_titanium_block
+    behavior:
+      type: block_item
+      block: smprpg:raw_titanium_block
+
+  smprpg:raw_mithril:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_mithril>
+      pdc:
+        smprpg:item-type: raw_mithril
+        smprpg:sell-value: 75
+    model: smprpg:item/materials/raw_mithril
+  smprpg:raw_titanium:
+    data:
+      item-name: <!i><lang:item.smprpg.raw_titanium>
+      pdc:
+        smprpg:item-type: raw_titanium
+    model: smprpg:item/materials/raw_titanium
+
+blocks:
+  smprpg:sparse_mithril_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/sparse_mithril_ore
+    settings:
+      template:
+      - smprpg:settings/solid_1x1x1
+      - smprpg:data/breaking_power_4
+      - smprpg:sound/blackstone
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        require-correct-tools: true
+        hardness: 6.25
+        resistance: 10.0
+        instrument: basedrum
+        map-color: 39
+  smprpg:mithril_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/mithril_ore
+    settings:
+      template:
+        - smprpg:settings/solid_1x1x1
+        - smprpg:data/breaking_power_4
+        - smprpg:sound/blackstone
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        require-correct-tools: true
+        hardness: 12.5
+        resistance: 10.0
+        instrument: basedrum
+        map-color: 32
+  smprpg:dense_mithril_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/dense_mithril_ore
+    settings:
+      template:
+        - smprpg:settings/solid_1x1x1
+        - smprpg:data/breaking_power_5
+        - smprpg:sound/blackstone
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        require-correct-tools: true
+        hardness: 25.0
+        resistance: 10.0
+        instrument: basedrum
+        map-color: 32
+  smprpg:raw_mithril_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/raw_mithril_block
+    settings:
+      template:
+        - smprpg:settings/raw_metal_block
+        - smprpg:data/breaking_power_4
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        require-correct-tools: true
+        hardness: 8.0
+        resistance: 6.0
+        map-color: 32
+  smprpg:mithril_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/mithril_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_4
+        - smprpg:data/beacon_usable
+      merges:
+        tags:
+          - "minecraft:mineable/pickaxe"
+          - "smprpg:custom_instrument"
+      overrides:
+        require-correct-tools: true
+        hardness: 8.0
+        resistance: 6.0
+        instrument: bass
+        map-color: 32
+
+  smprpg:titanium_ore:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/titanium_ore
+    settings:
+      template:
+        - smprpg:settings/solid_1x1x1
+        - smprpg:data/breaking_power_4
+        - smprpg:sound/blackstone
+      merges:
+        tags: ["minecraft:mineable/pickaxe"]
+      overrides:
+        require-correct-tools: true
+        hardness: 75.0
+        resistance: 20.0
+        instrument: basedrum
+        map-color: 16
+  smprpg:raw_titanium_block:
+    state:
+      auto-state: solid
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/raw_titanium_block
+    settings:
+      template:
+        - smprpg:settings/raw_metal_block
+        - smprpg:data/breaking_power_5
+      require-correct-tools: true
+      overrides:
+        hardness: 25.0
+        resistance: 10.0
+        map-color: 16
+  smprpg:titanium_block:
+    state:
+      auto-state: note_block
+      model:
+        template: smprpg:model/simplified_cube_all
+        arguments:
+          path: smprpg:block/overworld/titanium_block
+    settings:
+      template:
+        - smprpg:settings/metal_block
+        - smprpg:data/breaking_power_4
+        - smprpg:data/beacon_usable
+      merges:
+        tags: [ "minecraft:mineable/pickaxe" ]
+      overrides:
+        require-correct-tools: true
+        hardness: 25.0
+        resistance: 10.0
+        instrument: guitar
+        map-color: 16
+
+items#mithril_compression:
+  smprpg:mithril_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.mithril_ingot>
+      pdc:
+        smprpg:item-type: mithril_ingot
+    model: smprpg:item/materials/mithril_ingot
+  smprpg:mithril_block:
+    data:
+      item-name: <!i><lang:item.smprpg.mithril_block>
+      pdc:
+        smprpg:item-type: mithril_block
+    model: smprpg:block/overworld/mithril_block
+    behavior:
+      type: block_item
+      block: smprpg:mithril_block
+  smprpg:enchanted_mithril:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_mithril>
+      pdc:
+        smprpg:item-type: enchanted_mithril
+    model: smprpg:item/materials/mithril_ingot
+  smprpg:enchanted_mithril_block_display:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_mithril_block_display>
+    model: smprpg:block/compact/enchanted_mithril_block
+  smprpg:enchanted_mithril_block:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_mithril_block>
+      pdc:
+        smprpg:item-type: enchanted_mithril_block
+    model: smprpg:block/overworld/mithril_block
+    behavior:
+      type: block_item
+      block:
+        state:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:enchanted_mithril_block_display
+        settings:
+          template:
+            - smprpg:settings/metal_block
+            - smprpg:data/breaking_power_4
+            - smprpg:data/beacon_usable
+          merges:
+            tags:
+              - "minecraft:mineable/pickaxe"
+              - "smprpg:custom_instrument"
+          overrides:
+            require-correct-tools: true
+            hardness: 8.0
+            resistance: 6.0
+            instrument: bass
+            map-color: 32
+  smprpg:mithril_singularity:
+    data:
+      item-name: <!i><lang:item.smprpg.mithril_singularity>
+      pdc:
+        smprpg:item-type: mithril_singularity
+    model: smprpg:item/materials/mithril_ingot
+
+items#titanium_compression:
+  smprpg:titanium_ingot:
+    data:
+      item-name: <!i><lang:item.smprpg.titanium_ingot>
+      pdc:
+        smprpg:item-type: titanium_ingot
+    model: smprpg:item/materials/titanium_ingot
+  smprpg:titanium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.titanium_block>
+      pdc:
+        smprpg:item-type: titanium_block
+    model: smprpg:block/overworld/titanium_block
+    behavior:
+      type: block_item
+      block: smprpg:titanium_block
+  smprpg:enchanted_titanium:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_titanium>
+      pdc:
+        smprpg:item-type: enchanted_titanium
+    model: smprpg:item/materials/titanium_ingot
+  smprpg:enchanted_titanium_block_display:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_titanium_block_display>
+    model: smprpg:block/compact/enchanted_titanium_block
+  smprpg:enchanted_titanium_block:
+    data:
+      item-name: <!i><lang:item.smprpg.enchanted_titanium_block>
+      pdc:
+        smprpg:item-type: enchanted_titanium_block
+    model: smprpg:block/overworld/titanium_block
+    behavior:
+      type: block_item
+      block:
+        state:
+          state: barrier
+          entity-renderer:
+            - type: item_display
+              item: smprpg:enchanted_titanium_block_display
+        settings:
+          template:
+            - smprpg:settings/metal_block
+            - smprpg:data/breaking_power_4
+            - smprpg:data/beacon_usable
+          overrides:
+            hardness: 25.0
+            resistance: 10.0
+            instrument: guitar
+            map-color: 16
+            require-correct-tools: true
+  smprpg:titanium_singularity:
+    data:
+      item-name: <!i><lang:item.smprpg.titanium_singularity>
+      pdc:
+        smprpg:item-type: titanium_singularity
+    model: smprpg:item/materials/titanium_ingot
+
+placed-features:
+  smprpg:ore_mithril:
+    environment:
+      - minecraft:overworld
+    feature:
+      type: minecraft:geode
+      config:
+        blocks:
+          filling_provider:
+            type: minecraft:weighted_state_provider
+            entries:
+              - weight: 80
+                data:
+                  Name: smprpg:dense_mithril_ore
+              - weight: 7
+                data:
+                  Name: smprpg:titanium_ore
+          inner_layer_provider:
+            type: minecraft:simple_state_provider
+            state:
+              Name: smprpg:mithril_ore
+          alternate_inner_layer_provider:
+            type: minecraft:simple_state_provider
+            state:
+              Name: smprpg:mithril_ore
+          middle_layer_provider:
+            type: minecraft:simple_state_provider
+            state:
+              Name: smprpg:mithril_ore
+          outer_layer_provider:
+            type: minecraft:simple_state_provider
+            state:
+              Name: smprpg:sparse_mithril_ore
+          inner_placements:
+            - Name: smprpg:dense_mithril_ore
+          cannot_replace: '#minecraft:features_cannot_replace'
+          invalid_blocks: '#smprpg:geode_invalid_blocks'
+        invalid_blocks_threshold: 1
+        layers:
+          filling: 1.7
+          inner_layer: 1
+          middle_layer: 2
+          outer_layer: 3
+        crack:
+          generate_crack_chance: 0
+          base_crack_size: 0
+          crack_point_offset: 0
+        use_potential_placements_chance: 0.2
+        use_alternate_layer0_chance: 0
+        min_gen_offset: -16
+        max_gen_offset: 16
+    placement:
+      - type: minecraft:rarity_filter
+        chance: 12
+      - type: minecraft:in_square
+      - type: minecraft:height_range
+        height:
+          type: minecraft:uniform
+          max_inclusive:
+            absolute: 64
+          min_inclusive:
+            above_bottom: 6
+      - type: minecraft:biome
+
+recipes:
+  # Smelting/Blasting
+  smprpg:mithril_from_blasting_raw_mithril:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: mithril
+    time: 400
+    ingredient: smprpg:raw_mithril
+    result:
+      id: smprpg:mithril_ingot
+      count: 1
+  smprpg:mithril_from_blasting_sparse_mithril_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 400
+    ingredient: smprpg:sparse_mithril_ore
+    result:
+      id: smprpg:mithril_ingot
+      count: 1
+  smprpg:mithril_from_blasting_mithril_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 400
+    ingredient: smprpg:mithril_ore
+    result:
+      id: smprpg:mithril_ingot
+      count: 2
+  smprpg:mithril_from_blasting_dense_mithril_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 400
+    ingredient: smprpg:dense_mithril_ore
+    result:
+      id: smprpg:mithril_ingot
+      count: 3
+  smprpg:titanium_from_blasting_raw_titanium:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: titanium
+    time: 400
+    ingredient: smprpg:raw_titanium
+    result:
+      id: smprpg:titanium_ingot
+      count: 1
+  smprpg:titanium_from_blasting_titanium_ore:
+    type: blasting
+    experience: 0.0
+    category: misc
+    group: tin
+    time: 400
+    ingredient: smprpg:titanium_ore
+    result:
+      id: smprpg:titanium_ingot
+      count: 1

@@ -1,0 +1,9 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:brown_mushroom"
+  - "minecraft:red_mushroom"
+time: 200
+result: "minecraft:mushroom_stew"
+plating: "minecraft:bowl"
+skill_xp:
+  farming: 50

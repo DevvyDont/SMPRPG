@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' MH'
+- M H
+- ' MH'
+ingredients:
+  H: minecraft:string
+  M: minecraft:iron_ingot
+result:
+  item: smprpg:iron_bow
+  amount: 1
+unlocked_by:
+- minecraft:iron_ingot

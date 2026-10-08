@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- MMM
+- ' H '
+- ' H '
+ingredients:
+  H: minecraft:stick
+  M: smprpg:silver_ingot
+result:
+  item: smprpg:silver_pickaxe
+  amount: 1
+unlocked_by:
+- smprpg:silver_ingot

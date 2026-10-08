@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- smprpg:enchanted_adamantium
+- item: smprpg:enchanted_adamantium_block
+  amount: 9
+- item: smprpg:adamantium_singularity
+  amount: 9

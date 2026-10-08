@@ -1,0 +1,940 @@
+items:
+  smprpg:golden_oak_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:golden_oak_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_log>
+      pdc:
+        smprpg:item-type: golden_oak_log
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/golden_oak_log
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_golden_oak_log
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+           - smprpg:settings/wood
+           - smprpg:sound/cherry_wood
+           - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/golden_oak_log_top
+            texture_side_path: smprpg:block/aether/golden_oak_log
+            model_vertical_path: smprpg:block/aether/golden_oak_log
+            model_horizontal_path: smprpg:block/aether/golden_oak_log_horizontal
+  smprpg:stripped_golden_oak_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:golden_oak_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_golden_oak_log>
+      pdc:
+        smprpg:item-type: stripped_golden_oak_log
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/stripped_golden_oak_log
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/stripped_golden_oak_log_top
+            texture_side_path: smprpg:block/aether/stripped_golden_oak_log
+            model_vertical_path: smprpg:block/aether/stripped_golden_oak_log
+            model_horizontal_path: smprpg:block/aether/stripped_golden_oak_log_horizontal
+  smprpg:golden_oak_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:golden_oak_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_wood>
+      pdc:
+        smprpg:item-type: golden_oak_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/golden_oak_wood
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_golden_oak_wood
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/golden_oak_log
+            texture_side_path: smprpg:block/aether/golden_oak_log
+            model_vertical_path: smprpg:block/aether/golden_oak_wood
+            model_horizontal_path: smprpg:block/aether/golden_oak_wood_horizontal
+  smprpg:stripped_golden_oak_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:golden_oak_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_golden_oak_wood>
+      pdc:
+        smprpg:item-type: golden_oak_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/stripped_golden_oak_wood
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/stripped_golden_oak_log
+            texture_side_path: smprpg:block/aether/stripped_golden_oak_log
+            model_vertical_path: smprpg:block/aether/stripped_golden_oak_wood
+            model_horizontal_path: smprpg:block/aether/stripped_golden_oak_wood_horizontal
+  smprpg:golden_oak_planks:
+    settings:
+      fuel-time: 300
+      tags:
+        - minecraft:planks
+        - minecraft:wooden_tool_materials
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_planks>
+      pdc:
+        smprpg:item-type: golden_oak_planks
+    model: smprpg:block/aether/golden_oak_planks
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template:
+            - smprpg:settings/planks
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        loot:
+          template: smprpg:loot_table/self
+        state:
+          model:
+            template: smprpg:model/simplified_cube_all
+            arguments:
+              path: smprpg:block/aether/golden_oak_planks
+          auto-state: solid
+  smprpg:golden_oak_sapling:
+    settings:
+      fuel-time: 100
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_sapling>
+      pdc:
+        smprpg:item-type: golden_oak_sapling
+        smprpg:sell-value: 2
+    texture: smprpg:block/aether/golden_oak_sapling
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template:
+            - smprpg:settings/sapling
+        behaviors:
+          - type: liquid_flowable_block
+          - type: bush_block
+            bottom-blocks:
+              - smprpg:enchanted_aether_grass_block
+          - type: sapling_block
+            feature: smprpg:golden_oak_tree
+            bone-meal-success-chance: 0.45
+        loot:
+          template: smprpg:loot_table/self
+        states:
+          properties:
+            stage:
+              type: int
+              smprpg-value: 0
+              range: 0~3
+          appearances:
+            default:
+              auto-state: sapling
+              model:
+                path: smprpg:block/aether/golden_oak_sapling
+                generation:
+                  parent: minecraft:block/cross
+                  textures:
+                    cross: smprpg:block/aether/golden_oak_sapling
+  smprpg:golden_oak_leaves:
+    material: oak_leaves
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_leaves>
+      block-state: smprpg:golden_oak_leaves[persistent=true,waterlogged=false,distance=7]
+      pdc:
+        smprpg:item-type: golden_oak_leaves
+    model:
+      type: minecraft:model
+      path: smprpg:item/aether/golden_oak_leaves
+      generation:
+        parent: smprpg:block/aether/golden_oak_leaves
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: leaves_block
+        loot:
+          template: smprpg:loot_table/leaves
+          arguments:
+            leaves_namespace: smprpg
+            leaves_id: golden_oak_leaves
+            sapling_namespace: smprpg
+            sapling_id: golden_oak_sapling
+        settings:
+          template:
+           - smprpg:settings/leaves
+           - smprpg:sound/cherry_leaves
+          overrides:
+            hardness: 1.0
+        states:
+          template: smprpg:block_state/non_tintable_leaves
+          arguments:
+            model_path: smprpg:block/aether/golden_oak_leaves
+            texture_path: smprpg:block/aether/golden_oak_leaves
+  smprpg:golden_oak_trapdoor:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_trapdoor>
+      pdc:
+        smprpg:item-type: golden_oak_trapdoor
+    settings:
+      fuel-time: 300
+    model: smprpg:block/aether/golden_oak_trapdoor_bottom
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: trapdoor_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_trapdoor.open
+            close: minecraft:block.wooden_trapdoor.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:trapdoors
+        states:
+          template: smprpg:block_state/trapdoor
+          arguments:
+            base_block: bamboo_trapdoor
+            model_bottom_path: smprpg:block/aether/golden_oak_trapdoor_bottom
+            model_bottom_generation:
+              parent: minecraft:block/template_orientable_trapdoor_bottom
+              textures:
+                texture: smprpg:block/aether/golden_oak_trapdoor
+            model_open_path: smprpg:block/aether/golden_oak_trapdoor_open
+            model_open_generation:
+              parent: minecraft:block/template_orientable_trapdoor_open
+              textures:
+                texture: smprpg:block/aether/golden_oak_trapdoor
+            model_top_path: smprpg:block/aether/golden_oak_trapdoor_top
+            model_top_generation:
+              parent: minecraft:block/template_orientable_trapdoor_top
+              textures:
+                texture: smprpg:block/aether/golden_oak_trapdoor
+  smprpg:golden_oak_door:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_door>
+      pdc:
+        smprpg:item-type: golden_oak_door
+    settings:
+      fuel-time: 200
+    texture: smprpg:item/aether/golden_oak_door
+    behavior:
+      type: double_high_block_item
+      block:
+        behavior:
+          type: door_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_door.open
+            close: minecraft:block.wooden_door.close
+        loot:
+          template: smprpg:loot_table/door
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:wooden_doors
+              - minecraft:doors
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/door
+          arguments:
+            base_block: bamboo_door
+            model_top_left_path: smprpg:block/aether/golden_oak_door_top_left
+            model_top_left_generation:
+              parent: minecraft:block/door_top_left
+              textures: &textures
+                bottom: smprpg:block/aether/golden_oak_door_bottom
+                top: smprpg:block/aether/golden_oak_door_top
+            model_top_right_path: smprpg:block/aether/golden_oak_door_top_right
+            model_top_right_generation:
+              parent: minecraft:block/door_top_right
+              textures: *textures
+            model_top_left_open_path: smprpg:block/aether/golden_oak_door_top_left_open
+            model_top_left_open_generation:
+              parent: minecraft:block/door_top_left_open
+              textures: *textures
+            model_top_right_open_path: smprpg:block/aether/golden_oak_door_top_right_open
+            model_top_right_open_generation:
+              parent: minecraft:block/door_top_right_open
+              textures: *textures
+            model_bottom_left_path: smprpg:block/aether/golden_oak_door_bottom_left
+            model_bottom_left_generation:
+              parent: minecraft:block/door_bottom_left
+              textures: *textures
+            model_bottom_right_path: smprpg:block/aether/golden_oak_door_bottom_right
+            model_bottom_right_generation:
+              parent: minecraft:block/door_bottom_right
+              textures: *textures
+            model_bottom_left_open_path: smprpg:block/aether/golden_oak_door_bottom_left_open
+            model_bottom_left_open_generation:
+              parent: minecraft:block/door_bottom_left_open
+              textures: *textures
+            model_bottom_right_open_path: smprpg:block/aether/golden_oak_door_bottom_right_open
+            model_bottom_right_open_generation:
+              parent: minecraft:block/door_bottom_right_open
+              textures: *textures
+  smprpg:golden_oak_fence_gate:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_fence_gate>
+      pdc:
+        smprpg:item-type: golden_oak_fence_gate
+    settings:
+      fuel-time: 300
+    model: smprpg:block/aether/golden_oak_fence_gate
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: fence_gate_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.fence_gate.open
+            close: minecraft:block.fence_gate.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            map-color: 22
+            hardness: 10.0
+            instrument: bass
+            burnable: true
+            tags:
+              - minecraft:fence_gates
+              - minecraft:mineable/axe
+              - minecraft:unstable_bottom_center
+        states:
+          template: smprpg:block_state/fence_gate
+          arguments:
+            base_block: bamboo_fence_gate
+            model_fence_gate_path: smprpg:block/aether/golden_oak_fence_gate
+            model_fence_gate_generation:
+              parent: minecraft:block/template_fence_gate
+              textures: &textures
+                texture: smprpg:block/aether/golden_oak_planks
+            model_fence_gate_open_path: smprpg:block/aether/golden_oak_fence_gate_open
+            model_fence_gate_open_generation:
+              parent: minecraft:block/template_fence_gate_open
+              textures: *textures
+            model_fence_gate_wall_path: smprpg:block/aether/golden_oak_fence_gate_wall
+            model_fence_gate_wall_generation:
+              parent: minecraft:block/template_fence_gate_wall
+              textures: *textures
+            model_fence_gate_wall_open_path: smprpg:block/aether/golden_oak_fence_gate_wall_open
+            model_fence_gate_wall_open_generation:
+              parent: minecraft:block/template_fence_gate_wall_open
+              textures: *textures
+  smprpg:golden_oak_slab_bottom_display:
+    data:
+      item-name: <!i><lang:item.default.golden_oak_slab_bottom>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/golden_oak_slab_bottom
+        texture: smprpg:block/aether/golden_oak_planks
+        extension: ""
+  smprpg:golden_oak_slab_top_display:
+    data:
+      item-name: <!i><lang:item.default.golden_oak_slab_top>
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/golden_oak_slab_top
+        texture: smprpg:block/aether/golden_oak_planks
+        extension: _top
+  smprpg:golden_oak_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_slab>
+      pdc:
+        smprpg:item-type: golden_oak_slab
+        smprpg:sell-value: 1
+    settings:
+      fuel-time: 150
+    model:
+      template: smprpg:model/simplified_slab
+      arguments:
+        path: smprpg:block/aether/golden_oak_slab_bottom
+        texture: smprpg:block/aether/golden_oak_planks
+        extension: ""
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: slab_block
+        loot:
+          template: smprpg:loot_table/slab
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:burn_data/planks
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:wooden_slabs
+              - minecraft:slabs
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/entity_render_slab
+          arguments:
+            base_block: oxidized_cut_copper_slab
+            item_top_slab: smprpg:golden_oak_slab_top_display
+            item_bottom_slab: smprpg:golden_oak_slab_bottom_display
+            item_double_slab: smprpg:golden_oak_planks
+  smprpg:golden_oak_stairs_inner_display:
+    data:
+      item-name: <!i><lang:item.default.golden_oak_stairs_inner_display>
+    model:
+      template: smprpg:model/simplified_inner_stairs
+      arguments:
+        path: smprpg:block/aether/golden_oak_stairs_inner_display
+        texture: smprpg:block/aether/golden_oak_planks
+  smprpg:golden_oak_stairs_outer_display:
+    data:
+      item-name: <!i><lang:item.default.golden_oak_stairs_outer_display>
+    model:
+      template: smprpg:model/simplified_outer_stairs
+      arguments:
+        path: smprpg:block/aether/golden_oak_stairs_outer_display
+        texture: smprpg:block/aether/golden_oak_planks
+  smprpg:golden_oak_stairs_display:
+    data:
+      item-name: <!i><lang:item.default.golden_oak_stairs_display>
+    model:
+      template: smprpg:model/simplified_stairs
+      arguments:
+        path: smprpg:block/aether/golden_oak_stairs_display
+        texture: smprpg:block/aether/golden_oak_planks
+  smprpg:golden_oak_stairs:
+    model: smprpg:block/aether/golden_oak_stairs_display
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_stairs>
+      pdc:
+        smprpg:item-type: golden_oak_stairs
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:burn_data/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:stairs
+              - minecraft:wooden_stairs
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/entity_render_stairs
+          arguments:
+            base_block: oxidized_cut_copper_stairs
+            item_stairs_inner: smprpg:golden_oak_stairs_inner_display
+            item_stairs_outer: smprpg:golden_oak_stairs_outer_display
+            item_stairs: smprpg:golden_oak_stairs_display
+  smprpg:golden_oak_pressure_plate:
+    model: smprpg:block/aether/golden_oak_pressure_plate
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_pressure_plate>
+      pdc:
+        smprpg:item-type: golden_oak_pressure_plate
+        smprpg:sell-value: 4
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 2.5
+            burnable: true
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:wall_post_override
+              - minecraft:wooden_pressure_plates
+              - minecraft:pressure_plates
+        behaviors:
+          type: pressure_plate_block
+          sensitivity: all
+          pressed-time: 20
+          sounds:
+            on: minecraft:block.wooden_pressure_plate.click_on
+            off: minecraft:block.wooden_pressure_plate.click_off
+        states:
+          template: smprpg:block_state/pressure_plate
+          arguments:
+            normal_state: light_weighted_pressure_plate:4
+            powered_state: light_weighted_pressure_plate:5
+            model_normal_path: smprpg:block/aether/golden_oak_pressure_plate
+            model_normal_generation:
+              parent: minecraft:block/pressure_plate_up
+              textures:
+                texture: smprpg:block/aether/golden_oak_planks
+            model_powered_path: smprpg:block/aether/golden_oak_pressure_plate_down
+            model_powered_generation:
+              parent: minecraft:block/pressure_plate_down
+              textures:
+                texture: smprpg:block/aether/golden_oak_planks
+
+items#fence:
+  smprpg:golden_oak_fence:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/golden_oak_fence_inventory
+      generation:
+        parent: minecraft:block/fence_inventory
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+    behavior:
+      type: block_item
+      block: smprpg:golden_oak_fence
+  smprpg:golden_oak_fence_post:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/golden_oak_fence_post
+      generation:
+        parent: minecraft:block/fence_post
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+  smprpg:golden_oak_fence_side:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/golden_oak_fence_side
+      generation:
+        parent: minecraft:block/fence_side
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+blocks#fence:
+  smprpg:golden_oak_fence:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:hardness/planks
+        - smprpg:sound/cherry_wood
+        - smprpg:data/breaking_power_5
+      overrides:
+        burn-chance: 5
+        fire-spread-chance: 20
+        hardness: 10.0
+        burnable: true
+        is-suffocating: false
+        is-redstone-conductor: false
+        push-reaction: NORMAL
+        instrument: BASS
+        map-color: 22
+        tags:
+          - minecraft:fences
+          - minecraft:mineable/axe
+          - minecraft:wooden_fences
+    behavior:
+      type: fence_block
+      connectable-block-tag: minecraft:wooden_fences
+      can-leash: true
+    states:
+      template: smprpg:block_state/fence
+      arguments:
+        base_block: oak_fence
+        fence_post_item: smprpg:golden_oak_fence_post
+        fence_side_item: smprpg:golden_oak_fence_side
+
+items#button:
+  smprpg:golden_oak_button:
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/golden_oak_button
+      generation:
+        parent: minecraft:block/button_inventory
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_button>
+    settings:
+      fuel-time: 100
+    behavior:
+      type: block_item
+      block: smprpg:golden_oak_button
+  smprpg:golden_oak_button_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/golden_oak_button_pressed
+      generation:
+        parent: minecraft:block/button_pressed
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+  smprpg:golden_oak_button_not_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.golden_oak_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/golden_oak_button_not_pressed
+      generation:
+        parent: minecraft:block/button
+        textures:
+          texture: smprpg:block/aether/golden_oak_planks
+blocks#button:
+  smprpg:golden_oak_button:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:sound/cherry_wood
+        - smprpg:hardness/button
+        - smprpg:data/breaking_power_5
+      overrides:
+        hardness: 2.5
+        burnable: true
+        push-reaction: destroy
+        map-color: 22
+        instrument: harp
+        tags:
+          - minecraft:buttons
+          - minecraft:mineable/axe
+          - minecraft:wooden_buttons
+    behaviors:
+      - type: liquid_flowable_block
+      - type: face_attached_horizontal_directional_block
+      - type: button_block
+        ticks-to-stay-pressed: 30
+        can-be-activated-by-arrows: true
+        sounds:
+          on: minecraft:block.wooden_button.click_on
+          off: minecraft:block.wooden_button.click_off
+    states:
+      template: smprpg:block_state/button
+      arguments:
+        base_block: birch_button
+        pressed_item: smprpg:golden_oak_button_pressed
+        not_pressed_item: smprpg:golden_oak_button_not_pressed
+
+recipes:
+  smprpg:golden_oak_planks:
+    template: smprpg:recipe/planks
+    arguments:
+      wood_type: smprpg:golden_oak
+  smprpg:golden_oak_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:golden_oak
+  smprpg:stripped_golden_oak_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:stripped_golden_oak
+  smprpg:golden_oak_trapdoor:
+    type: shaped
+    pattern:
+      - AAA
+      - AAA
+    ingredients:
+      A: smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_trapdoor
+      count: 2
+  smprpg:golden_oak_door:
+    type: shaped
+    pattern:
+      - AA
+      - AA
+      - AA
+    ingredients:
+      A: smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_door
+      count: 3
+  smprpg:golden_oak_fence_gate:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: minecraft:stick
+      B: smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_fence_gate
+      count: 1
+  smprpg:golden_oak_slab:
+    type: shaped
+    pattern:
+      - AAA
+    ingredients:
+      A: smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_slab
+      count: 6
+  smprpg:golden_oak_pressure_plate:
+    type: shaped
+    pattern:
+      - AA
+    ingredients:
+      A: smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_pressure_plate
+      count: 1
+  $$>=1.20.3#golden_oak_stairs:
+    smprpg:golden_oak_stairs:
+      type: shaped
+      pattern:
+        - "A  "
+        - "AA "
+        - "AAA"
+      ingredients:
+        A: smprpg:golden_oak_planks
+      result:
+        id: smprpg:golden_oak_stairs
+        count: 4
+  smprpg:golden_oak_button:
+    type: shapeless
+    ingredients:
+      - smprpg:golden_oak_planks
+    result:
+      id: smprpg:golden_oak_button
+      count: 1
+  smprpg:golden_oak_fence:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: smprpg:golden_oak_planks
+      B: minecraft:stick
+    result:
+      id: smprpg:golden_oak_fence
+      count: 3
+
+configured-feature:
+  smprpg:golden_oak_tree:
+    type: 'minecraft:tree'
+    config:
+      ignore_vines: true
+      force_dirt: false
+      minimum_size:
+        type: 'minecraft:two_layers_feature_size'
+        min_clipped_height: 10
+        limit: 1
+        lower_size: 4
+        upper_size: 2
+      dirt_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      below_trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:golden_oak_log'
+          Properties:
+            axis: 'y'
+      foliage_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:golden_oak_leaves'
+          Properties:
+            distance: '7'
+            persistent: 'false'
+            waterlogged: 'false'
+      root_placer:
+        type: 'minecraft:mangrove_root_placer'
+        root_provider:
+          type: 'minecraft:simple_state_provider'
+          state:
+            Name: 'smprpg:golden_oak_wood'
+          above_root_placement:
+            above_root_provider:
+              type: 'minecraft:simple_state_provider'
+              state:
+                Name: "smprpg:golden_oak_wood"
+            above_root_placement_chance: 0.5
+        trunk_offset_y: 0
+        mangrove_root_placement:
+          max_root_width: 3
+          max_root_length: 20
+          random_skew_chance: 1
+          can_grow_through: '#minecraft:replaceable'
+          muddy_roots_in: minecraft:mud
+          muddy_roots_provider:
+            type: 'minecraft:simple_state_provider'
+            state:
+              Name: 'smprpg:golden_oak_wood'
+      trunk_placer:
+        type: 'minecraft:dark_oak_trunk_placer'
+        base_height: 5
+        height_rand_a: 2
+        height_rand_b: 6
+      foliage_placer:
+        type: 'minecraft:fancy_foliage_placer'
+        radius: 3
+        offset: 3
+        height: 4
+      decorators:
+        - type: attached_to_leaves
+          probability: 0.1
+          exclusion_radius_xz: 0
+          exclusion_radius_y: 0
+          required_empty_blocks: 2
+          block_provider:
+            type: minecraft:simple_state_provider
+            state:
+              Name: smprpg:golden_apple_crop
+          directions:
+            - down
+placed-features:
+  smprpg:golden_oak_tree:
+    biome:
+      - smprpg:skyroot_forest
+      - smprpg:skyroot_grove
+      - smprpg:skyroot_meadow
+      - smprpg:skyroot_woodland
+    environment:
+      - smprpg:the_aether
+    feature: smprpg:golden_oak_tree
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 2
+      - type: 'minecraft:count'
+        count:
+          type: 'minecraft:weighted_list'
+          distribution:
+            - weight: 10
+              data: 1
+            - weight: 3
+              data: 2
+            - weight: 1
+              data: 3
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: WORLD_SURFACE
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:air'
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_block_tag'
+          tag: 'smprpg:enchanted_dirt'
+          offset: [0,-1,0]
+      - type: 'minecraft:biome'

@@ -179,6 +179,366 @@
 					},
 					"property": "minecraft:trim_material"
                 }
+            },
+            {
+                "when": "smprpg:mithril_helmet",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_emerald_trim"
+							},
+							"when": "minecraft:mithril"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/mithril/mithril_helmet_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/mithril/mithril_helmet"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:titanium_helmet",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_emerald_trim"
+							},
+							"when": "minecraft:titanium"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/titanium/titanium_helmet_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/titanium/titanium_helmet"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:adamantium_helmet",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_emerald_trim"
+							},
+							"when": "minecraft:adamantium"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/adamantium/adamantium_helmet_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/adamantium/adamantium_helmet"
+					},
+					"property": "minecraft:trim_material"
+                }
+            },
+            {
+                "when": "smprpg:abominable_helmet",
+                "model": {
+                    "type": "select",
+					"cases": [
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_quartz_trim"
+							},
+							"when": "minecraft:quartz"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_iron_trim"
+							},
+							"when": "minecraft:iron"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_netherite_trim"
+							},
+							"when": "minecraft:netherite"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_redstone_trim"
+							},
+							"when": "minecraft:redstone"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_copper_trim"
+							},
+							"when": "minecraft:copper"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_gold_trim"
+							},
+							"when": "minecraft:gold"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_emerald_trim"
+							},
+							"when": "minecraft:abomination"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_diamond_trim"
+							},
+							"when": "minecraft:diamond"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_lapis_trim"
+							},
+							"when": "minecraft:lapis"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_amethyst_trim"
+							},
+							"when": "minecraft:amethyst"
+						},
+						{
+							"model": {
+								"type": "minecraft:model",
+								"model": "armor:item/abomination/abomination_helmet_resin_trim"
+							},
+							"when": "minecraft:resin"
+						}
+					],
+					"fallback": {
+						"type": "minecraft:model",
+						"model": "armor:item/abomination/abomination_helmet"
+					},
+					"property": "minecraft:trim_material"
+                }
             }
         ]
     }

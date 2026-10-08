@@ -1,10 +1,9 @@
 package xyz.devvydont.smprpg.listeners.crafting
 
-import org.bukkit.NamespacedKey
+import net.momirealms.craftengine.bukkit.api.BukkitAdaptor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.inventory.FurnaceBurnEvent
-import org.bukkit.event.inventory.FurnaceStartSmeltEvent
 import xyz.devvydont.smprpg.items.interfaces.IFurnaceFuel
 import xyz.devvydont.smprpg.services.ItemService.Companion.blueprint
 import xyz.devvydont.smprpg.util.listeners.ToggleableListener
@@ -24,31 +23,27 @@ class CustomItemFurnacePreventions : ToggleableListener() {
         // Vanilla items will function normally.
 
         val blueprint = blueprint(event.fuel)
-        if (!blueprint.isCustom()) return
+        if (!blueprint.isCustom) return
 
         // If the item is custom and NOT fuel, don't allow this to happen!
-        if (blueprint !is IFurnaceFuel) {
-            event.isCancelled = true
-            return
+
+        // Check if it's a craft engine item with a fuel value first.
+        val ceItem = BukkitAdaptor.adapt((event.fuel))
+        val def = ceItem.definition.orElse(null)
+        if (ceItem.isCustomItem() && def != null) {
+            if (def.settings().fuelTime() == 0) {
+                event.isCancelled = true
+                return
+            }
         }
+        else {
+            if (blueprint !is IFurnaceFuel) {
+                event.isCancelled = true
+                return
+            }
 
-        event.burnTime = blueprint.getBurnTime().toInt()
-    }
-
-    /*
-     * Never allow custom items to cook vanilla recipes. This shouldn't really ever happen.
-     * This could be improved by instead listening to a click event, but this works too.
-     */
-    @EventHandler
-    @Suppress("unused")
-    private fun onSmeltCustomItem(event: FurnaceStartSmeltEvent) {
-        if (event.recipe.key.namespace != NamespacedKey.MINECRAFT)
-            return
-
-        if (!blueprint(event.getSource()).isCustom())
-            return
-
-        event.totalCookTime = 999999
+            event.burnTime = blueprint.getBurnTime().toInt()
+        }
     }
 }
 

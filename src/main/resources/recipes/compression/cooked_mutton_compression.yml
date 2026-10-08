@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:cooked_mutton
+- item: smprpg:premium_mutton
+  amount: 9
+- item: smprpg:enchanted_mutton
+  amount: 9

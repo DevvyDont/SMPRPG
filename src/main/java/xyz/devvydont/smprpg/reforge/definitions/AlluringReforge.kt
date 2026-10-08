@@ -38,9 +38,7 @@ class AlluringReforge(type: ReforgeType) : ReforgeBase(type) {
      *
      * @return
      */
-    override fun getPowerRating(): Int {
-        return 3
-    }
+    override val powerRating: Int get() = 3
 
     companion object {
         fun getChance(rarity: ItemRarity): Double {

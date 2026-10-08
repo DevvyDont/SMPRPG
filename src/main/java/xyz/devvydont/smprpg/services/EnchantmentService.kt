@@ -5,7 +5,9 @@ import io.papermc.paper.registry.RegistryKey
 import io.papermc.paper.registry.TypedKey
 import io.papermc.paper.registry.keys.EnchantmentKeys
 import org.bukkit.GameMode
+import org.bukkit.Material
 import org.bukkit.Registry
+import org.bukkit.block.EnchantingTable
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.enchantments.EnchantmentOffer
 import org.bukkit.event.EventHandler
@@ -15,8 +17,8 @@ import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
-import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EnchantingInventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ItemType
@@ -30,6 +32,7 @@ import xyz.devvydont.smprpg.enchantments.definitions.*
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.UnknownEnchantment
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.overrides.*
 import xyz.devvydont.smprpg.enchantments.definitions.vanilla.unchanged.*
+import xyz.devvydont.smprpg.gui.enchantments.MenuEnchantingTable
 import java.util.*
 
 class EnchantmentService : IService, Listener {
@@ -69,7 +72,7 @@ class EnchantmentService : IService, Listener {
      * @return A vanilla enchantment instance.
      */
     fun getEnchantment(enchantment: CustomEnchantment): Enchantment {
-        return getEnchantment(TypedKey.create(RegistryKey.ENCHANTMENT, enchantment.getKey()))
+        return getEnchantment(TypedKey.create(RegistryKey.ENCHANTMENT, enchantment.key))
     }
 
     /**
@@ -146,13 +149,19 @@ class EnchantmentService : IService, Listener {
      */
     @EventHandler
     @Suppress("unused")
-    private fun onOpenEnchantInterface(event: InventoryOpenEvent) {
+    private fun onInteractEnchantingTable(event: PlayerInteractEvent) {
+        if (event.action.isRightClick) {
+            if (event.clickedBlock?.type == Material.ENCHANTING_TABLE && !event.player.isSneaking) {
+                event.isCancelled = true
+                val table = event.clickedBlock?.state as EnchantingTable
 
-        if (event.inventory !is EnchantingInventory)
-            return
+                // TODO: Table upgrades
 
-        val enchanting = event.inventory as EnchantingInventory
-        enchanting.secondary = ItemType.LAPIS_LAZULI.createItemStack(64)
+                // table.persistentDataContainer
+
+                MenuEnchantingTable(event.player, table).openMenu();
+            }
+        }
     }
 
     /**
@@ -316,6 +325,9 @@ class EnchantmentService : IService, Listener {
         val LUCK_OF_THE_SEA: CustomEnchantment = LuckOfTheSeaEnchantment(EnchantmentKeys.LUCK_OF_THE_SEA)
 
         @JvmField
+        val LUNGE: CustomEnchantment = LungeEnchantment(EnchantmentKeys.LUNGE)
+
+        @JvmField
         val LURE: CustomEnchantment = LureEnchantment(EnchantmentKeys.LURE)
 
         @JvmField
@@ -327,8 +339,8 @@ class EnchantmentService : IService, Listener {
         @JvmField
         val PIERCING: CustomEnchantment = PiercingEnchantment(EnchantmentKeys.PIERCING)
 
-        @JvmField
-        val POWER: CustomEnchantment = PowerEnchantment(EnchantmentKeys.POWER)
+        //@JvmField
+        //val POWER: CustomEnchantment = PowerEnchantment(EnchantmentKeys.POWER)
 
         @JvmField
         val PROJECTILE_PROTECTION: CustomEnchantment = ProjectileProtectionEnchantment(EnchantmentKeys.PROJECTILE_PROTECTION)
@@ -348,8 +360,8 @@ class EnchantmentService : IService, Listener {
         @JvmField
         val RIPTIDE: CustomEnchantment = RiptideEnchantment(EnchantmentKeys.RIPTIDE)
 
-        @JvmField
-        val SHARPNESS: CustomEnchantment = SharpnessEnchantment(EnchantmentKeys.SHARPNESS)
+        //@JvmField
+        //val SHARPNESS: CustomEnchantment = SharpnessEnchantment(EnchantmentKeys.SHARPNESS)
 
         @JvmField
         val SILK_TOUCH: CustomEnchantment = SilkTouchEnchantment(EnchantmentKeys.SILK_TOUCH)
@@ -389,6 +401,15 @@ class EnchantmentService : IService, Listener {
         val VOIDSTRIDING_BLESSING: CustomEnchantment = VoidstridingBlessing("voidstriding")
 
         @JvmField
+        val IGNORANCE_BLESSING: CustomEnchantment = IgnoranceBlessing("ignorance")
+
+        @JvmField
+        val AMPLIFICATION_BLESSING: CustomEnchantment = AmplificationBlessing("amplification")
+
+        @JvmField
+        val AERIAL_AFFINITY: CustomEnchantment = AerialAffinityEnchantment("aerial_affinity")
+
+        @JvmField
         val FORTUITY: CustomEnchantment = FortuityEnchantment("fortuity")
 
         @JvmField
@@ -401,13 +422,16 @@ class EnchantmentService : IService, Listener {
         val LEECH: CustomEnchantment = LeechEnchantment("leech")
 
         @JvmField
+        val BURDEN: CustomEnchantment = BurdenEnchantment("burden")
+
+        @JvmField
         val TRACING: CustomEnchantment = BossTracingEnchantment("tracing")
 
         @JvmField
         val BLESSED: CustomEnchantment = BlessedEnchantment("blessed")
 
         @JvmField
-        val STABILIZED: CustomEnchantment = StabilizedEnchantment("stabilized")
+        val DAMNED: CustomEnchantment = DamnedEnchantment("damned")
 
         @JvmField
         val PROFICIENT: CustomEnchantment = ProficientEnchantment("proficient")
@@ -431,10 +455,19 @@ class EnchantmentService : IService, Listener {
         val FIRST_STRIKE: CustomEnchantment = FirstStrikeEnchantment("first_strike")
 
         @JvmField
+        val GENESIS: CustomEnchantment = GenesisEnchantment("genesis")
+
+        @JvmField
+        val MUFFLE: CustomEnchantment = MuffleEnchantment("muffle")
+
+        @JvmField
         val DOUBLE_TAP: CustomEnchantment = DoubleTapEnchantment("double_tap")
 
         @JvmField
         val EXECUTE: CustomEnchantment = ExecuteEnchantment("execute")
+
+        @JvmField
+        val PROSECUTE: CustomEnchantment = ProsecuteEnchantment("prosecute")
 
         @JvmField
         val SYPHON: CustomEnchantment = SyphonEnchantment("syphon")
@@ -443,7 +476,7 @@ class EnchantmentService : IService, Listener {
         val CALAMITY: CustomEnchantment = CalamityEnchantment("calamity")
 
         @JvmField
-        val WISDOM: CustomEnchantment = WisdomEnchantment("wisdom")
+        val VIGILANTE: CustomEnchantment = VigilanteEnchantment("vigilante")
 
         @JvmField
         val VITALITY: CustomEnchantment = VitalityEnchantment("vitality")
@@ -472,6 +505,16 @@ class EnchantmentService : IService, Listener {
         @JvmField
         val REPLENISHING: CustomEnchantment = ReplenishingBlessing("replenishing")
 
+        @JvmField
+        val APTITUDE: CustomEnchantment = AptitudeEnchantment("aptitude")
+
+        @JvmField
+        val MINERS_FERVOR: CustomEnchantment = MinersFervorArtificeEnchantment("miners_fervor")
+
+        @JvmField
+        val ONE_FOR_ALL: CustomEnchantment = OneForAllArtificeEnchantment("one_for_all")
+
+
 
         /**
          * Enchantments to register on the server. The order you define them here will affect the order that they
@@ -483,18 +526,25 @@ class EnchantmentService : IService, Listener {
             TELEKINESIS_BLESSING,
             MERCY_BLESSING,
             VOIDSTRIDING_BLESSING,
-            REPLENISHING,  // Curses
+            REPLENISHING,
+            IGNORANCE_BLESSING,
+            AMPLIFICATION_BLESSING,
 
+            // Curses
             BINDING_CURSE,
             VANISHING_CURSE,  // Important enchantments (display first)
 
-            SHARPNESS,
-            POWER,
+            // Artifice Enchantments
+            MINERS_FERVOR,
+            ONE_FOR_ALL,
+
             SMITE,
             BANE_OF_ARTHROPODS,
-
+            VIGILANTE,
             BLESSED,
-            STABILIZED,
+            DAMNED,
+            GENESIS,
+            MUFFLE,
 
             SERRATED,
             OPPORTUNIST,
@@ -502,6 +552,7 @@ class EnchantmentService : IService, Listener {
             FIRST_STRIKE,
             DOUBLE_TAP,
             EXECUTE,
+            PROSECUTE,
 
             INFINITY,
 
@@ -513,7 +564,7 @@ class EnchantmentService : IService, Listener {
             INSIGHT,
             VITALITY,
             CALAMITY,
-            WISDOM,
+            APTITUDE,
 
             AQUA_AFFINITY,
             BREACH,
@@ -533,6 +584,7 @@ class EnchantmentService : IService, Listener {
             LOOTING,
             LOYALTY,
             LUCK_OF_THE_SEA,
+            LUNGE,
             LURE,
             ABYSSAL_INSTINCT,
             TREASURE_HUNTER,
@@ -551,10 +603,12 @@ class EnchantmentService : IService, Listener {
             WIND_BURST,
             MENDING,
 
+            AERIAL_AFFINITY,
             CLIMBING,
             VIGOROUS,
             FORTUITY,
             LEECH,
+            BURDEN,
             SYPHON,
             PROFICIENT,
             SPEEDSTER,

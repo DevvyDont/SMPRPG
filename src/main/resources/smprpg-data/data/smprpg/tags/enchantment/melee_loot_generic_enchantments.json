@@ -1,0 +1,18 @@
+{
+  "values": [
+    "minecraft:sweeping_edge",
+    "minecraft:knockback",
+    "minecraft:looting",
+    "minecraft:lunge",
+
+    "smprpg:burden",
+    "smprpg:double_tap",
+    "smprpg:execute",
+    "smprpg:first_strike",
+    "smprpg:insight",
+    "smprpg:leech",
+    "smprpg:opportunist",
+    "smprpg:prosecute",
+    "smprpg:serrated"
+  ]
+}

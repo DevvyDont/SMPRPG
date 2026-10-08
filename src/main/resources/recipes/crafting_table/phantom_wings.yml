@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:premium_membrane
+result:
+  item: smprpg:phantom_wings
+  amount: 1
+unlocked_by:
+- minecraft:phantom_membrane

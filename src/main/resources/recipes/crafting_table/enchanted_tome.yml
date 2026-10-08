@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- lll
+- lbl
+- lll
+ingredients:
+  b: minecraft:book
+  l: smprpg:enchanted_lapis
+result:
+  item: smprpg:enchanted_tome
+  amount: 1
+unlocked_by:
+- minecraft:lapis_lazuli

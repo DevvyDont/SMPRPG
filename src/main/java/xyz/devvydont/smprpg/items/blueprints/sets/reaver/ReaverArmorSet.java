@@ -49,7 +49,7 @@ public abstract class ReaverArmorSet extends CustomAttributeItem implements IHea
     @Override
     public List<Component> getHeader(ItemStack itemStack) {
         return List.of(
-                AbilityUtil.getAbilityComponent("Necrotic (Passive)"),
+                AbilityUtil.getAbilityComponent("Necrotic", true),
                 ComponentUtils.create("Resists ").append(ComponentUtils.create("-" + getWitherResistance() + "%", NamedTextColor.GREEN)).append(ComponentUtils.create(" of wither damage")),
                 ComponentUtils.create("(stacks multiplicatively)", NamedTextColor.DARK_GRAY)
         );
@@ -59,7 +59,6 @@ public abstract class ReaverArmorSet extends CustomAttributeItem implements IHea
     public Collection<AttributeEntry> getAttributeModifiers(ItemStack item) {
         return List.of(
                 new AdditiveAttributeEntry(AttributeWrapper.DEFENSE, getDefense()),
-                new AdditiveAttributeEntry(AttributeWrapper.HEALTH, getHealth()),
                 new ScalarAttributeEntry(AttributeWrapper.STRENGTH, getStrength()),
                 new AdditiveAttributeEntry(AttributeWrapper.KNOCKBACK_RESISTANCE, .15),
                 new AdditiveAttributeEntry(AttributeWrapper.CRITICAL_DAMAGE, 12)

@@ -1,0 +1,9 @@
+type: compression
+tiers:
+- minecraft:birch_log
+- item: smprpg:premium_birch_log
+  amount: 9
+- item: smprpg:enchanted_birch_log
+  amount: 9
+- item: smprpg:birch_log_singularity
+  amount: 9

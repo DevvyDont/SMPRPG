@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- MMM
+- M M
+ingredients:
+  M: smprpg:compressed_cobblestone
+result:
+  item: smprpg:cobblestone_helmet
+  amount: 1
+unlocked_by:
+- minecraft:cobblestone

@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:bronze_ingot
+result:
+  item: smprpg:bronze_chestplate
+  amount: 1
+unlocked_by:
+- smprpg:bronze_ingot

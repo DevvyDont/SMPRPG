@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- 'M  '
+- 'MH '
+- ' H '
+ingredients:
+  H: smprpg:ambrosium_encrusted_shaft
+  M: smprpg:platinum_ingot
+result:
+  item: smprpg:platinum_hatchet
+  amount: 1
+unlocked_by:
+- smprpg:platinum_ingot

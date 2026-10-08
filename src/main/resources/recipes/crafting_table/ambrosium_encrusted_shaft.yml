@@ -1,0 +1,14 @@
+type: shaped
+pattern:
+- z
+- a
+- z
+ingredients:
+  a: smprpg:ambrosium
+  z: smprpg:zanite_block
+result:
+  item: smprpg:ambrosium_encrusted_shaft
+  amount: 1
+unlocked_by:
+- smprpg:ambrosium
+- smprpg:zanite

@@ -1,6 +1,8 @@
 package xyz.devvydont.smprpg.items.blueprints.debug;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import xyz.devvydont.smprpg.SMPRPG;
 import xyz.devvydont.smprpg.ability.Ability;
 import xyz.devvydont.smprpg.ability.AbilityActivationMethod;
 import xyz.devvydont.smprpg.ability.AbilityCost;

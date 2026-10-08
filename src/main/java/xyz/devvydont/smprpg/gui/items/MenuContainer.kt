@@ -1,31 +1,34 @@
 package xyz.devvydont.smprpg.gui.items
 
+import net.kyori.adventure.sound.Sound as AdventureSound
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.util.TriState
 import org.bukkit.Material
-import org.bukkit.Sound
+import org.bukkit.Sound as BukkitSound
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.inventory.ItemStack
 import xyz.devvydont.smprpg.gui.base.MenuBase
-import xyz.devvydont.smprpg.gui.base.MenuButtonClickHandler
 import xyz.devvydont.smprpg.items.interfaces.IItemContainer
 import xyz.devvydont.smprpg.services.ItemService.Companion.blueprint
+import xyz.devvydont.smprpg.util.formatting.ComponentUtils
 
 class MenuContainer(player: Player, private val blueprint: IItemContainer, private val backpack: ItemStack) :
     MenuBase(player, 6) {
     private var currentPage = 0
 
     init {
-        this.sounds.setMenuOpen(Sound.ITEM_ARMOR_EQUIP_LEATHER, 1f, .5f)
-        this.sounds.setMenuClose(Sound.ITEM_ARMOR_EQUIP_GENERIC, 1f, .5f)
-        this.sounds.setPageNext(Sound.ITEM_ARMOR_EQUIP_LEATHER, 1f, .8f)
-        this.sounds.setPageNext(Sound.ITEM_ARMOR_EQUIP_LEATHER, 1f, 1.3f)
+        this.sounds.setMenuOpen(BukkitSound.ITEM_ARMOR_EQUIP_LEATHER, 1f, .5f)
+        this.sounds.setMenuClose(BukkitSound.ITEM_ARMOR_EQUIP_GENERIC, 1f, .5f)
+        this.sounds.setPageNext(BukkitSound.ITEM_ARMOR_EQUIP_LEATHER, 1f, .8f)
+        this.sounds.setPageNext(BukkitSound.ITEM_ARMOR_EQUIP_LEATHER, 1f, 1.3f)
         render()
     }
 
     fun render() {
-        this.setBorderFull()
+        this.setSlots(BORDER_VOID)
 
         // Clone all the items stored in the meta to this inventory.
         // Once we do this, this inventory becomes the source of truth!
@@ -60,11 +63,11 @@ class MenuContainer(player: Player, private val blueprint: IItemContainer, priva
         this.setButton(
             53,
             createNamedItem(Material.ARROW, "Next Page $page")
-        ) { e: InventoryClickEvent -> changePage(1) }
+        ) { changePage(1) }
         this.setButton(
             45,
             createNamedItem(Material.ARROW, "Previous Page $page")
-        ) { e: InventoryClickEvent -> changePage(-1) }
+        ) { changePage(-1) }
     }
 
     fun savePage() {
@@ -106,19 +109,46 @@ class MenuContainer(player: Player, private val blueprint: IItemContainer, priva
 
     override fun handleInventoryClicked(event: InventoryClickEvent) {
         // Under any circumstances, NEVER let any other backpacks (or gui elements) be clicked or modified.
+        val clicked = event.getCurrentItem() ?:
+            return
 
-        val clicked = event.getCurrentItem()
-        if (clicked == null) return
-
-        if (blueprint(clicked) is IItemContainer
-            || clicked.type == Material.BLACK_STAINED_GLASS_PANE
-            || clicked.type == Material.RED_STAINED_GLASS_PANE
-            || clicked.type == Material.GREEN_STAINED_GLASS_PANE
-        ) {
+        // The decorative border is purely cosmetic. Nobody (not even an admin) is ever meant to move it.
+        if (isBorderDecoration(clicked)) {
             event.isCancelled = true
             this.playInvalidAnimation()
+            return
         }
+
+        // Ordinary items are free to be moved around; only nested storage items are illegal.
+        if (!isIllegalStorageItem(clicked))
+            return
+
+        // If they have a special permission, allow them to bypass the check. This is mainly only meant for admins
+        // to be able to fix people's items if they somehow break. We don't allow bypassing for the backpack itself,
+        // otherwise it could be nested inside of itself.
+        if (event.whoClicked.permissionValue("smprpg.storage.stackbypass") == TriState.TRUE && clicked != backpack) {
+            event.whoClicked.sendMessage(ComponentUtils.merge(
+                ComponentUtils.create("You were permitted to interact with illegal storage item ", NamedTextColor.GREEN),
+                clicked.displayName(),
+                ComponentUtils.create(" because you have the smprpg.storage.stackbypass permission.", NamedTextColor.GREEN)
+            ))
+            event.whoClicked.playSound(AdventureSound.sound(BukkitSound.BLOCK_ANVIL_BREAK, AdventureSound.Source.PLAYER, 1f, 1f))
+            return
+        }
+
+        event.isCancelled = true
+        this.playInvalidAnimation()
     }
+
+    private fun isBorderDecoration(item: ItemStack): Boolean =
+        item.type == Material.BLACK_STAINED_GLASS_PANE
+            || item.type == Material.RED_STAINED_GLASS_PANE
+            || item.type == Material.GREEN_STAINED_GLASS_PANE
+
+    private fun isIllegalStorageItem(item: ItemStack): Boolean =
+        blueprint(item) is IItemContainer
+            || item.type == Material.BUNDLE
+            || item.type.name.lowercase().contains("shulker_box")
 
     override fun handleInventoryOpened(event: InventoryOpenEvent) {
         event.titleOverride(blueprint.getInterfaceTitleComponent())

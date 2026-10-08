@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- ' m '
+- ' d '
+- ' d '
+ingredients:
+  d: minecraft:diamond
+  m: minecraft:melon
+result:
+  item: smprpg:healing_wand
+  amount: 1
+unlocked_by:
+- minecraft:melon_slice

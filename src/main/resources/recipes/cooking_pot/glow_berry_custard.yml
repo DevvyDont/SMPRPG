@@ -1,0 +1,10 @@
+type: cooking_pot
+ingredients:
+  - "minecraft:glow_berries"
+  - "smprpg:milk_bottle"
+  - "minecraft:egg"
+  - "minecraft:sugar"
+time: 200
+result: "smprpg:glow_berry_custard"
+skill_xp:
+  farming: 50

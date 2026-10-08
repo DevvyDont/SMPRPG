@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- M M
+- MMM
+- MMM
+ingredients:
+  M: smprpg:enchanted_blaze_rod
+result:
+  item: smprpg:cyrax_chestplate
+  amount: 1
+unlocked_by:
+- minecraft:blaze_rod

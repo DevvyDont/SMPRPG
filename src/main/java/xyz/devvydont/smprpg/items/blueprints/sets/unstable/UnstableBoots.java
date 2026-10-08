@@ -19,6 +19,11 @@ public class UnstableBoots extends UnstableArmorSet implements IDyeable {
     }
 
     @Override
+    public int getDefenseCenter() {
+        return 100;
+    }
+
+    @Override
     public ItemClassification getItemClassification() {
         return ItemClassification.BOOTS;
     }

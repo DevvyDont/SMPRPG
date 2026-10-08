@@ -1,0 +1,52 @@
+type: enchanting
+enchantment: lure
+levels:
+  '1':
+    power: 13
+    ingredients:
+    - item: smprpg:common_fish_essence
+      amount: 16
+    - item: minecraft:kelp
+      amount: 32
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 30
+    ingredients:
+    - item: smprpg:common_fish_essence
+      amount: 32
+    - item: minecraft:prismarine_shard
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 48
+    ingredients:
+    - item: smprpg:uncommon_fish_essence
+      amount: 16
+    - item: minecraft:prismarine_shard
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 8
+  '4':
+    power: 65
+    ingredients:
+    - item: smprpg:rare_fish_essence
+      amount: 16
+    - item: minecraft:prismarine_crystals
+      amount: 16
+    - item: minecraft:nautilus_shell
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 16
+  '5':
+    power: 82
+    ingredients:
+    - item: smprpg:epic_fish_essence
+      amount: 8
+    - item: minecraft:prismarine_crystals
+      amount: 32
+    - item: minecraft:heart_of_the_sea
+      amount: 1
+    - item: smprpg:enchanted_lapis
+      amount: 16

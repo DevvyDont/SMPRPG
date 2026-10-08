@@ -1,0 +1,115 @@
+type: enchanting
+enchantment: harvesting
+levels:
+  '1':
+    power: 0
+    ingredients:
+    - item: minecraft:hay_block
+      amount: 8
+    - item: smprpg:premium_pumpkin
+      amount: 4
+    - item: minecraft:lapis_lazuli
+      amount: 8
+  '2':
+    power: 5
+    ingredients:
+    - item: minecraft:hay_block
+      amount: 16
+    - item: smprpg:premium_pumpkin
+      amount: 8
+    - item: minecraft:lapis_lazuli
+      amount: 16
+  '3':
+    power: 10
+    ingredients:
+    - item: minecraft:hay_block
+      amount: 32
+    - item: smprpg:premium_pumpkin
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 32
+  '4':
+    power: 20
+    ingredients:
+    - item: minecraft:hay_block
+      amount: 64
+    - item: smprpg:premium_pumpkin
+      amount: 32
+    - item: smprpg:premium_carrot
+      amount: 16
+    - item: minecraft:lapis_lazuli
+      amount: 64
+  '5':
+    power: 30
+    ingredients:
+    - item: smprpg:premium_wheat
+      amount: 16
+    - item: smprpg:premium_pumpkin
+      amount: 64
+    - item: smprpg:premium_carrot
+      amount: 32
+    - item: minecraft:lapis_block
+      amount: 16
+  '6':
+    power: 40
+    ingredients:
+    - item: smprpg:premium_wheat
+      amount: 32
+    - item: smprpg:enchanted_pumpkin
+      amount: 16
+    - item: smprpg:premium_carrot
+      amount: 64
+    - item: minecraft:lapis_block
+      amount: 32
+  '7':
+    power: 50
+    ingredients:
+    - item: smprpg:premium_wheat
+      amount: 64
+    - item: smprpg:enchanted_pumpkin
+      amount: 32
+    - item: smprpg:premium_golden_carrot
+      amount: 16
+    - item: smprpg:squash
+      amount: 8
+    - item: minecraft:lapis_block
+      amount: 64
+  '8':
+    power: 60
+    ingredients:
+    - item: smprpg:premium_hay_block
+      amount: 16
+    - item: smprpg:enchanted_pumpkin
+      amount: 64
+    - item: smprpg:premium_golden_carrot
+      amount: 32
+    - item: smprpg:squash
+      amount: 16
+    - item: smprpg:enchanted_lapis
+      amount: 16
+  '9':
+    power: 70
+    ingredients:
+    - item: smprpg:premium_hay_block
+      amount: 32
+    - item: smprpg:pumpkin_singularity
+      amount: 16
+    - item: smprpg:premium_golden_carrot
+      amount: 64
+    - item: smprpg:squash
+      amount: 32
+    - item: smprpg:enchanted_lapis
+      amount: 32
+  '10':
+    power: 80
+    ingredients:
+    - item: smprpg:premium_hay_block
+      amount: 64
+    - item: smprpg:pumpkin_singularity
+      amount: 32
+    - item: smprpg:enchanted_carrot
+      amount: 16
+    - item: smprpg:squash
+      amount: 64
+    - item: smprpg:enchanted_lapis
+      amount: 64

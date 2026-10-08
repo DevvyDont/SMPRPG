@@ -1,0 +1,13 @@
+type: shaped
+pattern:
+- rrr
+- rir
+- rrr
+ingredients:
+  r: smprpg:inferno_residue
+  i: smprpg:boiling_ingot
+result:
+  item: smprpg:inferno_remnant
+  amount: 1
+unlocked_by:
+- smprpg:inferno_residue

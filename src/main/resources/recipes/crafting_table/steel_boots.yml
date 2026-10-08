@@ -1,0 +1,11 @@
+type: shaped
+pattern:
+- M M
+- M M
+ingredients:
+  M: smprpg:steel_ingot
+result:
+  item: smprpg:steel_boots
+  amount: 1
+unlocked_by:
+- smprpg:steel_ingot

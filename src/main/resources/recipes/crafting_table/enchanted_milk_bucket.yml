@@ -1,0 +1,12 @@
+type: shaped
+pattern:
+- mmm
+- mmm
+- mmm
+ingredients:
+  m: minecraft:milk_bucket
+result:
+  item: smprpg:enchanted_milk_bucket
+  amount: 1
+unlocked_by:
+- minecraft:bucket

@@ -1,0 +1,1145 @@
+items:
+  smprpg:skyroot_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:skyroot_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_log>
+      pdc:
+        smprpg:item-type: skyroot_log
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/skyroot_log
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_skyroot_log
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+           - smprpg:settings/wood
+           - smprpg:sound/cherry_wood
+           - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/skyroot_log_top
+            texture_side_path: smprpg:block/aether/skyroot_log
+            model_vertical_path: smprpg:block/aether/skyroot_log
+            model_horizontal_path: smprpg:block/aether/skyroot_log_horizontal
+  smprpg:stripped_skyroot_log:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:skyroot_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_skyroot_log>
+      pdc:
+        smprpg:item-type: stripped_skyroot_log
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/stripped_skyroot_log
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/stripped_skyroot_log_top
+            texture_side_path: smprpg:block/aether/stripped_skyroot_log
+            model_vertical_path: smprpg:block/aether/stripped_skyroot_log
+            model_horizontal_path: smprpg:block/aether/stripped_skyroot_log_horizontal
+  smprpg:skyroot_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:skyroot_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_wood>
+      pdc:
+        smprpg:item-type: skyroot_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/skyroot_wood
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: strippable_block
+          stripped: smprpg:stripped_skyroot_wood
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/skyroot_log
+            texture_side_path: smprpg:block/aether/skyroot_log
+            model_vertical_path: smprpg:block/aether/skyroot_wood
+            model_horizontal_path: smprpg:block/aether/skyroot_wood_horizontal
+  smprpg:stripped_skyroot_wood:
+    settings:
+      fuel-time: 300
+      tags:
+        - smprpg:skyroot_logs
+        - minecraft:logs
+        - minecraft:logs_that_burn
+    data:
+      item-name: <!i><lang:item.smprpg.stripped_skyroot_wood>
+      pdc:
+        smprpg:item-type: skyroot_wood
+        smprpg:sell-value: 8
+    model: smprpg:block/aether/stripped_skyroot_wood
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:settings/wood
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        states:
+          template: smprpg:block_state/pillar
+          arguments:
+            texture_top_path: smprpg:block/aether/stripped_skyroot_log
+            texture_side_path: smprpg:block/aether/stripped_skyroot_log
+            model_vertical_path: smprpg:block/aether/stripped_skyroot_wood
+            model_horizontal_path: smprpg:block/aether/stripped_skyroot_wood_horizontal
+  smprpg:skyroot_planks:
+    settings:
+      fuel-time: 300
+      tags:
+        - minecraft:planks
+        - minecraft:wooden_tool_materials
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_planks>
+      pdc:
+        smprpg:item-type: skyroot_planks
+        smprpg:sell-value: 2
+    model: smprpg:block/aether/skyroot_planks
+    behavior:
+      type: block_item
+
+      block:
+        settings:
+          template:
+            - smprpg:settings/planks
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+        loot:
+          template: smprpg:loot_table/self
+        state:
+          model:
+            template: smprpg:model/simplified_cube_all
+            arguments:
+              path: smprpg:block/aether/skyroot_planks
+          auto-state: solid
+  smprpg:skyroot_sapling:
+    settings:
+      fuel-time: 100
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_sapling>
+      pdc:
+        smprpg:item-type: skyroot_sapling
+        smprpg:sell-value: 2
+    texture: smprpg:block/aether/skyroot_sapling
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template:
+            - smprpg:settings/sapling
+        behaviors:
+          - type: liquid_flowable_block
+          - type: bush_block
+            bottom-block-tags:
+              - smprpg:aether_dirt
+          - type: sapling_block
+            feature: smprpg:skyroot_wide_tree
+            bone-meal-success-chance: 0.45
+        loot:
+          template: smprpg:loot_table/self
+        states:
+          properties:
+            stage:
+              type: int
+              smprpg-value: 0
+              range: 0~3
+          appearances:
+            default:
+              auto-state: sapling
+              model:
+                path: smprpg:block/aether/skyroot_sapling
+                generation:
+                  parent: minecraft:block/cross
+                  textures:
+                    cross: smprpg:block/aether/skyroot_sapling
+  smprpg:crystal_sapling_display:
+    settings:
+      fuel-time: 150
+    data:
+      item-name: <!i><lang:item.smprpg.crystal_sapling_display>
+    model:
+      path: smprpg:block/aether/crystal_sapling
+      generation:
+        parent: minecraft:block/cross
+        textures:
+          cross: smprpg:block/aether/crystal_sapling
+  smprpg:crystal_sapling:
+    settings:
+      fuel-time: 150
+    data:
+      item-name: <!i><lang:item.smprpg.crystal_sapling>
+      pdc:
+        smprpg:item-type: crystal_sapling
+        smprpg:sell-value: 2
+    texture: smprpg:block/aether/crystal_sapling
+    behavior:
+      type: block_item
+      block:
+        settings:
+          template: smprpg:settings/sapling
+        behaviors:
+          - type: liquid_flowable_block
+          - type: bush_block
+            bottom-block-tags:
+              - smprpg:aether_dirt
+          - type: sapling_block
+            feature: smprpg:crystal_tree
+            bone-meal-success-chance: 0.45
+        loot:
+          template: smprpg:loot_table/self
+        states:
+          properties:
+            stage:
+              type: int
+              smprpg-value: 0
+              range: 0~7
+          appearances:
+            default:
+              state: spruce_sapling[stage=1]
+              entity-renderer:
+                - type: item_display
+                  item: smprpg:crystal_sapling_display
+  smprpg:skyroot_leaves:
+    material: oak_leaves
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_leaves>
+      block-state: smprpg:skyroot_leaves[persistent=true,waterlogged=false,distance=7]
+      pdc:
+        smprpg:item-type: skyroot_leaves
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/skyroot_leaves
+      generation:
+        parent: smprpg:block/aether/skyroot_leaves
+      tints:
+        - type: minecraft:constant
+          value: [0.69, 1.0, 0.8]
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: leaves_block
+        loot:
+          template: smprpg:loot_table/leaves
+          arguments:
+            leaves_namespace: smprpg
+            leaves_id: skyroot_leaves
+            sapling_namespace: smprpg
+            sapling_id: skyroot_sapling
+        settings:
+          template:
+           - smprpg:settings/leaves
+           - smprpg:sound/cherry_leaves
+          overrides:
+            hardness: 1.0
+        states:
+          template: smprpg:block_state/tintable_leaves
+          arguments:
+            model_path: smprpg:block/aether/skyroot_leaves
+            texture_path: smprpg:block/aether/skyroot_leaves
+  smprpg:crystal_leaves:
+    data:
+      item-name: <!i><lang:item.smprpg.crystal_leaves>
+      block-state: smprpg:crystal_leaves[persistent=true,waterlogged=false,distance=7]
+      pdc:
+        smprpg:item-type: crystal_leaves
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/crystal_leaves
+      generation:
+        parent: smprpg:block/aether/crystal_leaves
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: leaves_block
+        loot:
+          template: smprpg:loot_table/leaves
+          arguments:
+            leaves_namespace: smprpg
+            leaves_id: crystal_leaves
+            sapling_namespace: smprpg
+            sapling_id: crystal_sapling
+        settings:
+          template:
+            - smprpg:settings/leaves
+            - smprpg:sound/crystal_leaves
+          overrides:
+            hardness: 1.5
+        states:
+          template: smprpg:block_state/non_tintable_leaves
+          arguments:
+            model_path: smprpg:block/aether/crystal_leaves
+            texture_path: smprpg:block/aether/crystal_leaves
+  smprpg:crystal_fruit_leaves:
+    data:
+      item-name: <!i><lang:item.smprpg.crystal_fruit_leaves>
+      block-state: smprpg:crystal_fruit_leaves[persistent=true,waterlogged=false,distance=7]
+      pdc:
+        smprpg:item-type: crystal_fruit_leaves
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/crystal_fruit_leaves
+      generation:
+        parent: smprpg:block/aether/crystal_fruit_leaves
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: leaves_block
+        loot:
+          template: smprpg:loot_table/fruit_leaves
+          arguments:
+            leaves_namespace: smprpg
+            leaves_id: crystal_fruit_leaves
+            sapling_namespace: smprpg
+            sapling_id: crystal_sapling
+            fruit_namespace: smprpg
+            fruit_id: crystal_fruit
+        settings:
+          template:
+            - smprpg:settings/leaves
+            - smprpg:sound/crystal_leaves
+          overrides:
+            hardness: 1.5
+        states:
+          template: smprpg:block_state/non_tintable_leaves
+          arguments:
+            model_path: smprpg:block/aether/crystal_fruit_leaves
+            texture_path: smprpg:block/aether/crystal_fruit_leaves
+  smprpg:skyroot_trapdoor:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_trapdoor>
+      pdc:
+        smprpg:item-type: skyroot_trapdoor
+    settings:
+      fuel-time: 300
+    model: smprpg:block/aether/skyroot_trapdoor_bottom
+    behavior:
+      type: block_item
+      block:
+        behavior:
+          type: trapdoor_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_trapdoor.open
+            close: minecraft:block.wooden_trapdoor.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:trapdoors
+        states:
+          template: smprpg:block_state/trapdoor
+          arguments:
+            base_block: acacia_trapdoor
+            model_bottom_path: smprpg:block/aether/skyroot_trapdoor_bottom
+            model_bottom_generation:
+              parent: minecraft:block/template_orientable_trapdoor_bottom
+              textures:
+                texture: smprpg:block/aether/skyroot_trapdoor
+            model_open_path: smprpg:block/aether/skyroot_trapdoor_open
+            model_open_generation:
+              parent: minecraft:block/template_orientable_trapdoor_open
+              textures:
+                texture: smprpg:block/aether/skyroot_trapdoor
+            model_top_path: smprpg:block/aether/skyroot_trapdoor_top
+            model_top_generation:
+              parent: minecraft:block/template_orientable_trapdoor_top
+              textures:
+                texture: smprpg:block/aether/skyroot_trapdoor
+  smprpg:skyroot_door:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_door>
+      pdc:
+        smprpg:item-type: skyroot_door
+    settings:
+      fuel-time: 200
+    texture: smprpg:item/aether/skyroot_door
+    behavior:
+      type: double_high_block_item
+      block:
+        behavior:
+          type: door_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.wooden_door.open
+            close: minecraft:block.wooden_door.close
+        loot:
+          template: smprpg:loot_table/door
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:data/breaking_power_5
+          overrides:
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            hardness: 10.0
+            resistance: 3.0
+            burnable: true
+            tags:
+              - minecraft:wooden_doors
+              - minecraft:doors
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/door
+          arguments:
+            base_block: oak_door
+            model_top_left_path: smprpg:block/aether/skyroot_door_top_left
+            model_top_left_generation:
+              parent: minecraft:block/door_top_left
+              textures: &textures
+                bottom: smprpg:block/aether/skyroot_door_bottom
+                top: smprpg:block/aether/skyroot_door_top
+            model_top_right_path: smprpg:block/aether/skyroot_door_top_right
+            model_top_right_generation:
+              parent: minecraft:block/door_top_right
+              textures: *textures
+            model_top_left_open_path: smprpg:block/aether/skyroot_door_top_left_open
+            model_top_left_open_generation:
+              parent: minecraft:block/door_top_left_open
+              textures: *textures
+            model_top_right_open_path: smprpg:block/aether/skyroot_door_top_right_open
+            model_top_right_open_generation:
+              parent: minecraft:block/door_top_right_open
+              textures: *textures
+            model_bottom_left_path: smprpg:block/aether/skyroot_door_bottom_left
+            model_bottom_left_generation:
+              parent: minecraft:block/door_bottom_left
+              textures: *textures
+            model_bottom_right_path: smprpg:block/aether/skyroot_door_bottom_right
+            model_bottom_right_generation:
+              parent: minecraft:block/door_bottom_right
+              textures: *textures
+            model_bottom_left_open_path: smprpg:block/aether/skyroot_door_bottom_left_open
+            model_bottom_left_open_generation:
+              parent: minecraft:block/door_bottom_left_open
+              textures: *textures
+            model_bottom_right_open_path: smprpg:block/aether/skyroot_door_bottom_right_open
+            model_bottom_right_open_generation:
+              parent: minecraft:block/door_bottom_right_open
+              textures: *textures
+  smprpg:skyroot_fence_gate:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_fence_gate>
+      pdc:
+        smprpg:item-type: skyroot_fence_gate
+    settings:
+      fuel-time: 300
+    model: smprpg:block/aether/skyroot_fence_gate
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: fence_gate_block
+          can-open-with-hand: true
+          can-open-by-wind-charge: true
+          sounds:
+            open: minecraft:block.fence_gate.open
+            close: minecraft:block.fence_gate.close
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            map-color: 22
+            hardness: 10.0
+            instrument: bass
+            burnable: true
+            tags:
+              - minecraft:fence_gates
+              - minecraft:mineable/axe
+              - minecraft:unstable_bottom_center
+        states:
+          template: smprpg:block_state/fence_gate
+          arguments:
+            base_block: oak_fence_gate
+            model_fence_gate_path: smprpg:block/aether/skyroot_fence_gate
+            model_fence_gate_generation:
+              parent: minecraft:block/template_fence_gate
+              textures: &textures
+                texture: smprpg:block/aether/skyroot_planks
+            model_fence_gate_open_path: smprpg:block/aether/skyroot_fence_gate_open
+            model_fence_gate_open_generation:
+              parent: minecraft:block/template_fence_gate_open
+              textures: *textures
+            model_fence_gate_wall_path: smprpg:block/aether/skyroot_fence_gate_wall
+            model_fence_gate_wall_generation:
+              parent: minecraft:block/template_fence_gate_wall
+              textures: *textures
+            model_fence_gate_wall_open_path: smprpg:block/aether/skyroot_fence_gate_wall_open
+            model_fence_gate_wall_open_generation:
+              parent: minecraft:block/template_fence_gate_wall_open
+              textures: *textures
+  smprpg:skyroot_slab:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_slab>
+      pdc:
+        smprpg:item-type: skyroot_slab
+        smprpg:sell-value: 1
+    settings:
+      fuel-time: 150
+    model: smprpg:block/aether/skyroot_slab
+    behavior:
+      type: block_item
+      block:
+        behaviors:
+          type: slab_block
+        loot:
+          template: smprpg:loot_table/slab
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:burn_data/planks
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:wooden_slabs
+              - minecraft:slabs
+              - minecraft:mineable/axe
+        states:
+          template: smprpg:block_state/slab
+          arguments:
+            base_block: petrified_oak_slab
+            model_bottom_path: smprpg:block/aether/skyroot_slab
+            model_bottom_generation:
+              parent: minecraft:block/slab
+              textures: &textures
+                bottom: smprpg:block/aether/skyroot_planks
+                side: smprpg:block/aether/skyroot_planks
+                top: smprpg:block/aether/skyroot_planks
+            model_top_path: smprpg:block/aether/skyroot_slab_top
+            model_top_generation:
+              parent: minecraft:block/slab_top
+              textures: *textures
+            model_double_path: smprpg:block/aether/skyroot_planks
+  smprpg:skyroot_stairs:
+    model: smprpg:block/aether/skyroot_stairs
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_stairs>
+      pdc:
+        smprpg:item-type: skyroot_stairs
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:burn_data/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 10.0
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:stairs
+              - minecraft:wooden_stairs
+        behavior:
+          type: stairs_block
+        states:
+          template: smprpg:block_state/stairs
+          arguments:
+            base_block: cut_copper_stairs
+            model_stairs_inner_path: smprpg:block/aether/skyroot_stairs_inner
+            model_stairs_inner_generation:
+              parent: minecraft:block/inner_stairs
+              textures: &textures
+                bottom: &block_texture smprpg:block/aether/skyroot_planks
+                side: *block_texture
+                top: *block_texture
+            model_stairs_outer_path: smprpg:block/aether/skyroot_stairs_outer
+            model_stairs_outer_generation:
+              parent: minecraft:block/outer_stairs
+              textures: *textures
+            model_stairs_path: smprpg:block/aether/skyroot_stairs
+            model_stairs_generation:
+              parent: minecraft:block/stairs
+              textures: *textures
+  smprpg:skyroot_pressure_plate:
+    model: smprpg:block/aether/skyroot_pressure_plate
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_pressure_plate>
+      pdc:
+        smprpg:item-type: skyroot_pressure_plate
+        smprpg:sell-value: 4
+    settings:
+      fuel-time: 300
+    behavior:
+      type: block_item
+      block:
+        loot:
+          template: smprpg:loot_table/self
+        settings:
+          template:
+            - smprpg:sound/cherry_wood
+            - smprpg:hardness/planks
+            - smprpg:data/breaking_power_5
+          overrides:
+            hardness: 2.5
+            burnable: true
+            push-reaction: destroy
+            map-color: 22
+            instrument: bass
+            tags:
+              - minecraft:mineable/axe
+              - minecraft:wall_post_override
+              - minecraft:wooden_pressure_plates
+              - minecraft:pressure_plates
+        behaviors:
+          type: pressure_plate_block
+          sensitivity: all
+          pressed-time: 20
+          sounds:
+            on: minecraft:block.wooden_pressure_plate.click_on
+            off: minecraft:block.wooden_pressure_plate.click_off
+        states:
+          template: smprpg:block_state/pressure_plate
+          arguments:
+            normal_state: light_weighted_pressure_plate:0
+            powered_state: light_weighted_pressure_plate:1
+            model_normal_path: smprpg:block/aether/skyroot_pressure_plate
+            model_normal_generation:
+              parent: minecraft:block/pressure_plate_up
+              textures:
+                texture: smprpg:block/aether/skyroot_planks
+            model_powered_path: smprpg:block/aether/skyroot_pressure_plate_down
+            model_powered_generation:
+              parent: minecraft:block/pressure_plate_down
+              textures:
+                texture: smprpg:block/aether/skyroot_planks
+  smprpg:crystal_fruit:
+    data:
+      item-name: <!i><lang:item.smprpg.crystal_fruit>
+    texture: smprpg:item/crop/crystal_fruit
+    behavior:
+      - type: compostable_item
+        chance: 0.65
+
+items#fence:
+  smprpg:skyroot_fence:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/skyroot_fence_inventory
+      generation:
+        parent: minecraft:block/fence_inventory
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+    behavior:
+      type: block_item
+      block: smprpg:skyroot_fence
+  smprpg:skyroot_fence_post:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/skyroot_fence_post
+      generation:
+        parent: minecraft:block/fence_post
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+  smprpg:skyroot_fence_side:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_fence>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/skyroot_fence_side
+      generation:
+        parent: minecraft:block/fence_side
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+blocks#fence:
+  smprpg:skyroot_fence:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:hardness/planks
+        - smprpg:sound/cherry_wood
+        - smprpg:data/breaking_power_5
+      overrides:
+        burn-chance: 5
+        fire-spread-chance: 20
+        hardness: 10.0
+        burnable: true
+        is-suffocating: false
+        is-redstone-conductor: false
+        push-reaction: NORMAL
+        instrument: BASS
+        map-color: 22
+        tags:
+          - minecraft:fences
+          - minecraft:mineable/axe
+          - minecraft:wooden_fences
+    behavior:
+      type: fence_block
+      connectable-block-tag: minecraft:wooden_fences
+      can-leash: true
+    states:
+      template: smprpg:block_state/fence
+      arguments:
+        base_block: oak_fence
+        fence_post_item: smprpg:skyroot_fence_post
+        fence_side_item: smprpg:skyroot_fence_side
+
+items#button:
+  smprpg:skyroot_button:
+    model:
+      type: minecraft:model
+      path: smprpg:item/custom/skyroot_button
+      generation:
+        parent: minecraft:block/button_inventory
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_button>
+    settings:
+      fuel-time: 100
+    behavior:
+      type: block_item
+      block: smprpg:skyroot_button
+  smprpg:skyroot_button_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/skyroot_button_pressed
+      generation:
+        parent: minecraft:block/button_pressed
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+  smprpg:skyroot_button_not_pressed:
+    data:
+      item-name: <!i><lang:item.smprpg.skyroot_button>
+    model:
+      type: minecraft:model
+      path: smprpg:block/aether/skyroot_button_not_pressed
+      generation:
+        parent: minecraft:block/button
+        textures:
+          texture: smprpg:block/aether/skyroot_planks
+blocks#button:
+  smprpg:skyroot_button:
+    loot:
+      template: smprpg:loot_table/self
+    settings:
+      template:
+        - smprpg:sound/cherry_wood
+        - smprpg:hardness/button
+        - smprpg:data/breaking_power_5
+      overrides:
+        hardness: 2.5
+        burnable: true
+        push-reaction: destroy
+        map-color: 22
+        instrument: harp
+        tags:
+          - minecraft:buttons
+          - minecraft:mineable/axe
+          - minecraft:wooden_buttons
+    behaviors:
+      - type: liquid_flowable_block
+      - type: face_attached_horizontal_directional_block
+      - type: button_block
+        ticks-to-stay-pressed: 30
+        can-be-activated-by-arrows: true
+        sounds:
+          on: minecraft:block.wooden_button.click_on
+          off: minecraft:block.wooden_button.click_off
+    states:
+      template: smprpg:block_state/button
+      arguments:
+        base_block: birch_button
+        pressed_item: smprpg:skyroot_button_pressed
+        not_pressed_item: smprpg:skyroot_button_not_pressed
+
+recipes:
+  smprpg:skyroot_planks:
+    template: smprpg:recipe/planks
+    arguments:
+      wood_type: smprpg:skyroot
+  smprpg:skyroot_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:skyroot
+  smprpg:stripped_skyroot_wood:
+    template: smprpg:recipe/log_2_wood
+    arguments:
+      wood_type: smprpg:stripped_skyroot
+  smprpg:skyroot_trapdoor:
+    type: shaped
+    pattern:
+      - AAA
+      - AAA
+    ingredients:
+      A: smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_trapdoor
+      count: 2
+  smprpg:skyroot_door:
+    type: shaped
+    pattern:
+      - AA
+      - AA
+      - AA
+    ingredients:
+      A: smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_door
+      count: 3
+  smprpg:skyroot_fence_gate:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: minecraft:stick
+      B: smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_fence_gate
+      count: 1
+  smprpg:skyroot_slab:
+    type: shaped
+    pattern:
+      - AAA
+    ingredients:
+      A: smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_slab
+      count: 6
+  smprpg:skyroot_pressure_plate:
+    type: shaped
+    pattern:
+      - AA
+    ingredients:
+      A: smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_pressure_plate
+      count: 1
+  $$>=1.20.3#skyroot_stairs:
+    smprpg:skyroot_stairs:
+      type: shaped
+      pattern:
+        - "A  "
+        - "AA "
+        - "AAA"
+      ingredients:
+        A: smprpg:skyroot_planks
+      result:
+        id: smprpg:skyroot_stairs
+        count: 4
+  smprpg:skyroot_button:
+    type: shapeless
+    ingredients:
+      - smprpg:skyroot_planks
+    result:
+      id: smprpg:skyroot_button
+      count: 1
+  smprpg:skyroot_fence:
+    type: shaped
+    pattern:
+      - ABA
+      - ABA
+    ingredients:
+      A: smprpg:skyroot_planks
+      B: minecraft:stick
+    result:
+      id: smprpg:skyroot_fence
+      count: 3
+
+configured-feature:
+  smprpg:skyroot_wide_tree:
+    type: 'minecraft:tree'
+    config:
+      ignore_vines: true
+      force_dirt: false
+      minimum_size:
+        type: 'minecraft:two_layers_feature_size'
+        min_clipped_height: 10
+        limit: 1
+        lower_size: 0
+        upper_size: 2
+      dirt_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      below_trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:skyroot_log'
+          Properties:
+            axis: 'y'
+      foliage_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:skyroot_leaves'
+          Properties:
+            distance: '7'
+            persistent: 'false'
+            waterlogged: 'false'
+      root_placer:
+        type: 'minecraft:mangrove_root_placer'
+        root_provider:
+          type: 'minecraft:simple_state_provider'
+          state:
+            Name: 'smprpg:skyroot_wood'
+          above_root_placement:
+            above_root_provider:
+              type: 'minecraft:simple_state_provider'
+              state:
+                Name: "smprpg:skyroot_wood"
+            above_root_placement_chance: 0.5
+        trunk_offset_y: 0
+        mangrove_root_placement:
+          max_root_width: 1
+          max_root_length: 20
+          random_skew_chance: 1
+          can_grow_through: '#minecraft:replaceable'
+          muddy_roots_in: minecraft:mud
+          muddy_roots_provider:
+            type: 'minecraft:simple_state_provider'
+            state:
+              Name: 'smprpg:skyroot_wood'
+      trunk_placer:
+        type: 'minecraft:dark_oak_trunk_placer'
+        base_height: 5
+        height_rand_a: 1
+        height_rand_b: 4
+      foliage_placer:
+        type: 'minecraft:cherry_foliage_placer'
+        radius: 3
+        offset: 2
+        height: 4
+        wide_bottom_layer_hole_chance: 0.8
+        corner_hole_chance: 1
+        hanging_leaves_chance: 0.8
+        hanging_leaves_extension_chance: 0.4
+      decorators: []
+  smprpg:crystal_tree:
+    type: 'minecraft:tree'
+    config:
+      ignore_vines: true
+      force_dirt: false
+      minimum_size:
+        type: 'minecraft:two_layers_feature_size'
+        min_clipped_height: 10
+        limit: 1
+        lower_size: 2
+        upper_size: 0
+      dirt_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      below_trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:aether_dirt'
+      trunk_provider:
+        type: 'minecraft:simple_state_provider'
+        state:
+          Name: 'smprpg:skyroot_log'
+          Properties:
+            axis: 'y'
+      foliage_provider:
+        type: minecraft:weighted_state_provider
+        entries:
+          - weight: 20
+            data:
+              Name: smprpg:crystal_leaves
+              Properties:
+                distance: '7'
+                persistent: 'false'
+                waterlogged: 'false'
+          - weight: 5
+            data:
+              Name: smprpg:crystal_fruit_leaves
+              Properties:
+                distance: '7'
+                persistent: 'false'
+                waterlogged: 'false'
+      root_placer:
+        type: 'minecraft:mangrove_root_placer'
+        root_provider:
+          type: 'minecraft:simple_state_provider'
+          state:
+            Name: 'smprpg:skyroot_wood'
+          above_root_placement:
+            above_root_provider:
+              type: 'minecraft:simple_state_provider'
+              state:
+                Name: "smprpg:skyroot_wood"
+            above_root_placement_chance: 0.5
+        trunk_offset_y: 0
+        mangrove_root_placement:
+          max_root_width: 1
+          max_root_length: 20
+          random_skew_chance: 1
+          can_grow_through: '#minecraft:replaceable'
+          muddy_roots_in: minecraft:mud
+          muddy_roots_provider:
+            type: 'minecraft:simple_state_provider'
+            state:
+              Name: 'smprpg:skyroot_wood'
+      trunk_placer:
+        type: 'minecraft:straight_trunk_placer'
+        base_height: 6
+        height_rand_a: 2
+        height_rand_b: 4
+      foliage_placer:
+        type: 'minecraft:mega_pine_foliage_placer'
+        radius: 2
+        offset: 2
+        crown_height: 9
+      decorators: []
+placed-features:
+  smprpg:skyroot_wide_tree:
+    biome:
+      - smprpg:skyroot_forest
+      - smprpg:skyroot_grove
+      - smprpg:skyroot_meadow
+      - smprpg:skyroot_woodland
+    environment:
+      - smprpg:the_aether
+    feature: smprpg:skyroot_wide_tree
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 2
+      - type: 'minecraft:count'
+        count:
+          type: 'minecraft:weighted_list'
+          distribution:
+            - weight: 10
+              data: 1
+            - weight: 3
+              data: 2
+            - weight: 1
+              data: 3
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: WORLD_SURFACE
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:air'
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_block_tag'
+          tag: 'smprpg:aether_dirt'
+          offset: [0,-1,0]
+      - type: 'minecraft:biome'
+  smprpg:skyroot_extra_trees:
+    biome:
+      - smprpg:skyroot_forest
+      - smprpg:skyroot_woodland
+    environment:
+      - smprpg:the_aether
+    feature: smprpg:skyroot_wide_tree
+    placement:
+      - type: 'minecraft:rarity_filter'
+        chance: 1
+      - type: 'minecraft:count'
+        count:
+          type: 'minecraft:weighted_list'
+          distribution:
+            - weight: 10
+              data: 1
+            - weight: 3
+              data: 2
+            - weight: 1
+              data: 3
+      - type: 'minecraft:in_square'
+      - type: 'minecraft:heightmap'
+        heightmap: WORLD_SURFACE
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_blocks'
+          blocks: 'minecraft:air'
+      - type: 'minecraft:block_predicate_filter'
+        predicate:
+          type: 'minecraft:matching_block_tag'
+          tag: 'smprpg:aether_dirt'
+          offset: [0,-1,0]
+      - type: 'minecraft:biome'

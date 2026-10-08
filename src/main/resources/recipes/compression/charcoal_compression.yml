@@ -1,0 +1,7 @@
+type: compression
+tiers:
+- minecraft:charcoal
+- item: smprpg:compressed_charcoal
+  amount: 9
+- item: smprpg:enchanted_charcoal
+  amount: 9

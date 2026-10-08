@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.jetbrains.annotations.Nullable;
 import xyz.devvydont.smprpg.attribute.AttributeWrapper;
 import xyz.devvydont.smprpg.entity.CustomEntityType;
+import xyz.devvydont.smprpg.entity.MobType;
 import xyz.devvydont.smprpg.entity.base.CustomEntityInstance;
 import xyz.devvydont.smprpg.items.CustomItemType;
 import xyz.devvydont.smprpg.services.ItemService;
@@ -46,6 +47,14 @@ public class Voidspinner extends CustomEntityInstance<Spider> {
                 new ChancedItemDrop(ItemService.generate(CustomItemType.ARAXYS_CLAW), 500, this),
                 new QuantityLootDrop(ItemService.generate(Material.STRING), 1, 2, this)
         );
+    }
+
+    @Override
+    public void setup() {
+        mobTypes.add(MobType.ENDER);
+        mobTypes.add(MobType.ARTHROPOD);
+
+        super.setup();
     }
 
 }
